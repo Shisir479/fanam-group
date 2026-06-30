@@ -3,10 +3,10 @@ import Link from "next/link";
 export function WhatsAppButton() {
   return (
     <Link
-      href="https://wa.me/1234567890" // Replace with actual number
+      href="https://wa.me/16760"
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-24 right-8 z-50 flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-lg hover:scale-110 transition-transform duration-300"
+      className="fixed bottom-20 right-4 md:bottom-12 md:right-8 z-[999999] flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-[0_0_15px_rgba(37,211,102,0.5)] hover:scale-110 transition-transform duration-300"
       aria-label="Chat on WhatsApp"
     >
       <svg
