@@ -10,7 +10,6 @@ export function AboutSection() {
   const subBlockRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const blockRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -29,7 +28,6 @@ export function AboutSection() {
       scaleX: 0,
       transformOrigin: "left",
     });
-    gsap.set(contentRef.current, { opacity: 0, y: 30 });
 
     // Animation sequence with sequential overlap
     tl.to(subBlockRef.current, {
@@ -56,13 +54,7 @@ export function AboutSection() {
         transformOrigin: "right",
         duration: 0.5,
         ease: "power3.inOut",
-      })
-
-      .to(
-        contentRef.current,
-        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
-        "-=0.2",
-      );
+      });
   }, []);
 
   return (
@@ -100,10 +92,7 @@ export function AboutSection() {
               />
             </div>
 
-            <div
-              ref={contentRef}
-              className="flex flex-col gap-6 text-gray-700 leading-relaxed text-sm md:text-[14px] text-justify mt-2 font-semibold"
-            >
+            <div className="flex flex-col gap-6 text-gray-700 leading-relaxed text-sm md:text-[14px] text-justify mt-2 font-semibold">
               <p>
                 Edison Group was founded in 2009 with the aim to enhance aspects
                 of life for people by providing powerful brands, reliable
