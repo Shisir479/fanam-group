@@ -4,7 +4,7 @@ import { BlockReveal } from "@/components/ui/BlockReveal";
 export default function Banner() {
   return (
     <div className="w-full">
-       <section className="relative w-full h-[50vh] md:h-[60vh] lg:h-[70vh] flex items-end pb-12 md:pb-20">
+      <section className="relative w-full h-[50vh] md:h-[60vh] lg:h-[70vh] flex items-end pb-12 md:pb-20">
         {/* Background Image */}
         <div className="absolute inset-0 w-full h-full">
           <Image

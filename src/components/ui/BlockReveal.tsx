@@ -11,11 +11,11 @@ interface BlockRevealProps {
   className?: string;
 }
 
-export function BlockReveal({ 
-  children, 
-  color = "#003B6D", 
-  delay = 0, 
-  className = "" 
+export function BlockReveal({
+  children,
+  color = "#003B6D",
+  delay = 0,
+  className = "",
 }: BlockRevealProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const blockRef = useRef<HTMLDivElement>(null);
@@ -61,12 +61,15 @@ export function BlockReveal({
   }, [delay]);
 
   return (
-    <div ref={containerRef} className={`relative inline-block self-start ${className}`}>
+    <div
+      ref={containerRef}
+      className={`relative inline-block self-start ${className}`}
+    >
       {/* Content that gets revealed */}
       <div ref={contentRef} className="w-full h-full">
         {children}
       </div>
-      
+
       {/* The solid block that sweeps across */}
       <div
         ref={blockRef}

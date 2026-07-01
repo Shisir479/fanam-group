@@ -69,12 +69,12 @@ export function TestimonialSection() {
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center select-none">
                     {/* Left: Video Thumbnail */}
                     <div className="flex justify-start">
-                      <div className="w-full max-w-md lg:max-w-[480px] overflow-hidden">
+                      <div className="w-full max-w-md lg:max-w-[480px] overflow-hidden ">
                         <div className="relative w-full aspect-[4/3] md:aspect-[3/2] overflow-hidden group cursor-pointer shadow-lg">
                           <img
                             src={t.image}
                             alt={t.name}
-                            className="absolute inset-0 w-full h-full object-cover "
+                            className="absolute inset-0 w-full h-full"
                           />
 
                           {/* Play Button */}

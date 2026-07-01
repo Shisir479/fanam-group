@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useCallback, useState } from 'react';
-import { useGesture } from '@use-gesture/react';
+import { useEffect, useMemo, useRef, useCallback, useState } from "react";
+import { useGesture } from "@use-gesture/react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
@@ -15,7 +15,7 @@ export type AlbumItem = {
 type DomeGalleryProps = {
   albums?: AlbumItem[];
   fit?: number;
-  fitBasis?: 'auto' | 'min' | 'max' | 'width' | 'height';
+  fitBasis?: "auto" | "min" | "max" | "width" | "height";
   minRadius?: number;
   maxRadius?: number;
   padFactor?: number;
@@ -38,50 +38,55 @@ type ItemDef = {
 
 const DEFAULT_ALBUMS: AlbumItem[] = [
   {
-    id: '1',
-    title: 'Luxury Apartments',
-    cover: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=774&auto=format&fit=crop',
+    id: "1",
+    title: "Luxury Apartments",
+    cover:
+      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=774&auto=format&fit=crop",
     photos: [
-      'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1024&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1024&auto=format&fit=crop'
-    ]
+      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1024&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1024&auto=format&fit=crop",
+    ],
   },
   {
-    id: '2',
-    title: 'Corporate Offices',
-    cover: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=774&auto=format&fit=crop',
+    id: "2",
+    title: "Corporate Offices",
+    cover:
+      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=774&auto=format&fit=crop",
     photos: [
-      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1024&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1024&auto=format&fit=crop'
-    ]
+      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1024&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1024&auto=format&fit=crop",
+    ],
   },
   {
-    id: '3',
-    title: 'Modern Villas',
-    cover: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=774&auto=format&fit=crop',
+    id: "3",
+    title: "Modern Villas",
+    cover:
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=774&auto=format&fit=crop",
     photos: [
-      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1024&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1024&auto=format&fit=crop'
-    ]
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1024&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1024&auto=format&fit=crop",
+    ],
   },
   {
-    id: '4',
-    title: 'Commercial Spaces',
-    cover: 'https://images.unsplash.com/photo-1709281552133-d50b7e710d83?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    id: "4",
+    title: "Commercial Spaces",
+    cover:
+      "https://images.unsplash.com/photo-1709281552133-d50b7e710d83?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     photos: [
-      'https://images.unsplash.com/photo-1556804561-1eb5d4da2882?q=80&w=1024&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=1024&auto=format&fit=crop'
-    ]
-  }
+      "https://images.unsplash.com/photo-1556804561-1eb5d4da2882?q=80&w=1024&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=1024&auto=format&fit=crop",
+    ],
+  },
 ];
 
 const DEFAULTS = {
   maxVerticalRotationDeg: 5,
   dragSensitivity: 20,
-  segments: 35
+  segments: 35,
 };
 
-const clamp = (v: number, min: number, max: number) => Math.min(Math.max(v, min), max);
+const clamp = (v: number, min: number, max: number) =>
+  Math.min(Math.max(v, min), max);
 const normalizeAngle = (d: number) => ((d % 360) + 360) % 360;
 const wrapAngleSigned = (deg: number) => {
   const a = (((deg + 180) % 360) + 360) % 360;
@@ -95,36 +100,42 @@ function buildItems(pool: AlbumItem[], seg: number): ItemDef[] {
 
   const coords = xCols.flatMap((x, c) => {
     const ys = c % 2 === 0 ? evenYs : oddYs;
-    return ys.map(y => ({ x, y, sizeX: 2, sizeY: 2 }));
+    return ys.map((y) => ({ x, y, sizeX: 2, sizeY: 2 }));
   });
 
   const totalSlots = coords.length;
   if (pool.length === 0) {
-    return coords.map(c => ({ ...c, album: { id: '', title: '', cover: '', photos: [] } }));
+    return coords.map((c) => ({
+      ...c,
+      album: { id: "", title: "", cover: "", photos: [] },
+    }));
   }
 
-  const usedAlbums = Array.from({ length: totalSlots }, (_, i) => pool[i % pool.length]);
+  const usedAlbums = Array.from(
+    { length: totalSlots },
+    (_, i) => pool[i % pool.length],
+  );
 
   return coords.map((c, i) => ({
     ...c,
-    album: usedAlbums[i]
+    album: usedAlbums[i],
   }));
 }
 
 export default function DomeGallery({
   albums = DEFAULT_ALBUMS,
   fit = 0.5,
-  fitBasis = 'auto',
+  fitBasis = "auto",
   minRadius = 600,
   maxRadius = Infinity,
   padFactor = 0.25,
-  overlayBlurColor = '#ffffff',
+  overlayBlurColor = "#ffffff",
   maxVerticalRotationDeg = DEFAULTS.maxVerticalRotationDeg,
   dragSensitivity = DEFAULTS.dragSensitivity,
   segments = DEFAULTS.segments,
   dragDampening = 2,
-  imageBorderRadius = '0px',
-  grayscale = false
+  imageBorderRadius = "0px",
+  grayscale = false,
 }: DomeGalleryProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const mainRef = useRef<HTMLDivElement>(null);
@@ -137,7 +148,7 @@ export default function DomeGallery({
   const cancelTapRef = useRef(false);
   const movedRef = useRef(false);
   const inertiaRAF = useRef<number | null>(null);
-  const pointerTypeRef = useRef<'mouse' | 'pen' | 'touch'>('mouse');
+  const pointerTypeRef = useRef<"mouse" | "pen" | "touch">("mouse");
   const lastDragEndAt = useRef(0);
 
   const [openAlbum, setOpenAlbum] = useState<AlbumItem | null>(null);
@@ -156,7 +167,7 @@ export default function DomeGallery({
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
-    const ro = new ResizeObserver(entries => {
+    const ro = new ResizeObserver((entries) => {
       const cr = entries[0].contentRect;
       const w = Math.max(1, cr.width),
         h = Math.max(1, cr.height);
@@ -165,16 +176,16 @@ export default function DomeGallery({
         aspect = w / h;
       let basis: number;
       switch (fitBasis) {
-        case 'min':
+        case "min":
           basis = minDim;
           break;
-        case 'max':
+        case "max":
           basis = maxDim;
           break;
-        case 'width':
+        case "width":
           basis = w;
           break;
-        case 'height':
+        case "height":
           basis = h;
           break;
         default:
@@ -187,16 +198,28 @@ export default function DomeGallery({
       lockedRadiusRef.current = Math.round(radius);
 
       const viewerPad = Math.max(8, Math.round(minDim * padFactor));
-      root.style.setProperty('--radius', `${lockedRadiusRef.current}px`);
-      root.style.setProperty('--viewer-pad', `${viewerPad}px`);
-      root.style.setProperty('--overlay-blur-color', overlayBlurColor);
-      root.style.setProperty('--tile-radius', imageBorderRadius);
-      root.style.setProperty('--image-filter', grayscale ? 'grayscale(1)' : 'none');
+      root.style.setProperty("--radius", `${lockedRadiusRef.current}px`);
+      root.style.setProperty("--viewer-pad", `${viewerPad}px`);
+      root.style.setProperty("--overlay-blur-color", overlayBlurColor);
+      root.style.setProperty("--tile-radius", imageBorderRadius);
+      root.style.setProperty(
+        "--image-filter",
+        grayscale ? "grayscale(1)" : "none",
+      );
       applyTransform(rotationRef.current.x, rotationRef.current.y);
     });
     ro.observe(root);
     return () => ro.disconnect();
-  }, [fit, fitBasis, minRadius, maxRadius, padFactor, overlayBlurColor, grayscale, imageBorderRadius]);
+  }, [
+    fit,
+    fitBasis,
+    minRadius,
+    maxRadius,
+    padFactor,
+    overlayBlurColor,
+    grayscale,
+    imageBorderRadius,
+  ]);
 
   useEffect(() => {
     applyTransform(rotationRef.current.x, rotationRef.current.y);
@@ -230,7 +253,11 @@ export default function DomeGallery({
           inertiaRAF.current = null;
           return;
         }
-        const nextX = clamp(rotationRef.current.x - vY / 200, -maxVerticalRotationDeg, maxVerticalRotationDeg);
+        const nextX = clamp(
+          rotationRef.current.x - vY / 200,
+          -maxVerticalRotationDeg,
+          maxVerticalRotationDeg,
+        );
         const nextY = wrapAngleSigned(rotationRef.current.y + vX / 200);
         rotationRef.current = { x: nextX, y: nextY };
         applyTransform(nextX, nextY);
@@ -239,7 +266,7 @@ export default function DomeGallery({
       stopInertia();
       inertiaRAF.current = requestAnimationFrame(step);
     },
-    [dragDampening, maxVerticalRotationDeg, stopInertia]
+    [dragDampening, maxVerticalRotationDeg, stopInertia],
   );
 
   useGesture(
@@ -247,19 +274,25 @@ export default function DomeGallery({
       onDragStart: ({ event }) => {
         stopInertia();
         const evt = event as PointerEvent;
-        pointerTypeRef.current = (evt.pointerType as any) || 'mouse';
-        if (pointerTypeRef.current === 'touch') evt.preventDefault();
+        pointerTypeRef.current = (evt.pointerType as any) || "mouse";
+        if (pointerTypeRef.current === "touch") evt.preventDefault();
         draggingRef.current = true;
         cancelTapRef.current = false;
         movedRef.current = false;
         startRotRef.current = { ...rotationRef.current };
         startPosRef.current = { x: evt.clientX, y: evt.clientY };
       },
-      onDrag: ({ event, last, velocity: velArr = [0, 0], direction: dirArr = [0, 0], movement }) => {
+      onDrag: ({
+        event,
+        last,
+        velocity: velArr = [0, 0],
+        direction: dirArr = [0, 0],
+        movement,
+      }) => {
         if (!draggingRef.current || !startPosRef.current) return;
 
         const evt = event as PointerEvent;
-        if (pointerTypeRef.current === 'touch') evt.preventDefault();
+        if (pointerTypeRef.current === "touch") evt.preventDefault();
 
         const dxTotal = evt.clientX - startPosRef.current.x;
         const dyTotal = evt.clientY - startPosRef.current.y;
@@ -272,7 +305,7 @@ export default function DomeGallery({
         const nextX = clamp(
           startRotRef.current.x - dyTotal / dragSensitivity,
           -maxVerticalRotationDeg,
-          maxVerticalRotationDeg
+          maxVerticalRotationDeg,
         );
         const nextY = startRotRef.current.y + dxTotal / dragSensitivity;
 
@@ -290,7 +323,7 @@ export default function DomeGallery({
             const dx = evt.clientX - startPosRef.current.x;
             const dy = evt.clientY - startPosRef.current.y;
             const dist2 = dx * dx + dy * dy;
-            const TAP_THRESH_PX = pointerTypeRef.current === 'touch' ? 10 : 6;
+            const TAP_THRESH_PX = pointerTypeRef.current === "touch" ? 10 : 6;
             if (dist2 <= TAP_THRESH_PX * TAP_THRESH_PX) {
               isTap = true;
             }
@@ -301,7 +334,12 @@ export default function DomeGallery({
           let vx = vMagX * dirX;
           let vy = vMagY * dirY;
 
-          if (!isTap && Math.abs(vx) < 0.001 && Math.abs(vy) < 0.001 && Array.isArray(movement)) {
+          if (
+            !isTap &&
+            Math.abs(vx) < 0.001 &&
+            Math.abs(vy) < 0.001 &&
+            Array.isArray(movement)
+          ) {
             const [mx, my] = movement;
             vx = (mx / dragSensitivity) * 0.02;
             vy = (my / dragSensitivity) * 0.02;
@@ -313,13 +351,14 @@ export default function DomeGallery({
           startPosRef.current = null;
           cancelTapRef.current = !isTap;
 
-          if (cancelTapRef.current) setTimeout(() => (cancelTapRef.current = false), 120);
+          if (cancelTapRef.current)
+            setTimeout(() => (cancelTapRef.current = false), 120);
           if (movedRef.current) lastDragEndAt.current = performance.now();
           movedRef.current = false;
         }
-      }
+      },
     },
-    { target: mainRef, eventOptions: { passive: false } }
+    { target: mainRef, eventOptions: { passive: false } },
   );
 
   const cssStyles = `
@@ -390,17 +429,17 @@ export default function DomeGallery({
         className="sphere-root relative w-full h-full py-30"
         style={
           {
-            ['--segments-x' as any]: segments,
-            ['--segments-y' as any]: segments,
-            ['--tile-radius' as any]: imageBorderRadius,
-            ['--image-filter' as any]: grayscale ? 'grayscale(1)' : 'none'
+            ["--segments-x" as any]: segments,
+            ["--segments-y" as any]: segments,
+            ["--tile-radius" as any]: imageBorderRadius,
+            ["--image-filter" as any]: grayscale ? "grayscale(1)" : "none",
           } as React.CSSProperties
         }
       >
         <main
           ref={mainRef}
           className="absolute inset-0 grid place-items-center select-none bg-transparent"
-          style={{ touchAction: 'none', WebkitUserSelect: 'none' }}
+          style={{ touchAction: "none", WebkitUserSelect: "none" }}
         >
           <div className="stage">
             <div ref={sphereRef} className="sphere">
@@ -410,14 +449,14 @@ export default function DomeGallery({
                   className="sphere-item absolute m-auto"
                   style={
                     {
-                      ['--offset-x' as any]: it.x,
-                      ['--offset-y' as any]: it.y,
-                      ['--item-size-x' as any]: it.sizeX,
-                      ['--item-size-y' as any]: it.sizeY,
-                      top: '-999px',
-                      bottom: '-999px',
-                      left: '-999px',
-                      right: '-999px'
+                      ["--offset-x" as any]: it.x,
+                      ["--offset-y" as any]: it.y,
+                      ["--item-size-x" as any]: it.sizeX,
+                      ["--item-size-y" as any]: it.sizeY,
+                      top: "-999px",
+                      bottom: "-999px",
+                      left: "-999px",
+                      right: "-999px",
                     } as React.CSSProperties
                   }
                 >
@@ -426,15 +465,31 @@ export default function DomeGallery({
                     role="button"
                     tabIndex={0}
                     onClick={() => {
-                      if (draggingRef.current || movedRef.current || performance.now() - lastDragEndAt.current < 80) return;
+                      if (
+                        draggingRef.current ||
+                        movedRef.current ||
+                        performance.now() - lastDragEndAt.current < 80
+                      )
+                        return;
                       setOpenAlbum(it.album);
                     }}
                     onPointerUp={(e) => {
-                      if ((e.nativeEvent as PointerEvent).pointerType !== 'touch') return;
-                      if (draggingRef.current || movedRef.current || performance.now() - lastDragEndAt.current < 80) return;
+                      if (
+                        (e.nativeEvent as PointerEvent).pointerType !== "touch"
+                      )
+                        return;
+                      if (
+                        draggingRef.current ||
+                        movedRef.current ||
+                        performance.now() - lastDragEndAt.current < 80
+                      )
+                        return;
                       setOpenAlbum(it.album);
                     }}
-                    style={{ inset: '10px', borderRadius: `var(--tile-radius, ${imageBorderRadius})` }}
+                    style={{
+                      inset: "10px",
+                      borderRadius: `var(--tile-radius, ${imageBorderRadius})`,
+                    }}
                   >
                     <img
                       src={it.album.cover}
@@ -458,7 +513,7 @@ export default function DomeGallery({
       <Lightbox
         open={openAlbum !== null}
         close={() => setOpenAlbum(null)}
-        slides={openAlbum ? openAlbum.photos.map(src => ({ src })) : []}
+        slides={openAlbum ? openAlbum.photos.map((src) => ({ src })) : []}
       />
     </>
   );

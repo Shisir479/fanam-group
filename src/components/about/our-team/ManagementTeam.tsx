@@ -7,23 +7,24 @@ const managementTeam = [
     id: 1,
     name: "AMINUR RASHID",
     designation: "Chairman & CEO",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop",
     exploreLink: "#",
   },
   {
     id: 2,
     name: "FARIZA TASNIM",
     designation: "Managing Director",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop",
     exploreLink: "#",
-  }
+  },
 ];
 
 export function ManagementTeam() {
   return (
     <section className="py-16 md:py-24 bg-white">
       <div className="container mx-auto px-5 md:px-16">
-
         {/* Section Title */}
         <div className="mb-12">
           <BlockReveal color="#003B6D">
@@ -38,7 +39,10 @@ export function ManagementTeam() {
       <div className="px-5">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {managementTeam.map((member) => (
-            <div key={member.id} className="hover:cursor-pointer relative group w-full aspect-[5/6] overflow-hidden">
+            <div
+              key={member.id}
+              className="hover:cursor-pointer relative group w-full aspect-[5/6] overflow-hidden"
+            >
               {/* Member Image */}
               <Image
                 src={member.image}
