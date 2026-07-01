@@ -1,8 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { BlockReveal } from "@/components/ui/BlockReveal";
 
 const projects = [
   {
@@ -95,60 +94,6 @@ export function FeaturedProjects() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isReady, setIsReady] = useState(false);
 
-  const subTitleRef = useRef<HTMLDivElement>(null);
-  const subBlockRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const blockRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    if (sectionRef.current) {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-          once: true,
-        },
-      });
-
-      // Reset initial states
-      gsap.set([subTitleRef.current, titleRef.current], { opacity: 0 });
-      gsap.set([subBlockRef.current, blockRef.current], {
-        scaleX: 0,
-        transformOrigin: "left",
-      });
-
-      // Animation sequence
-      tl.to(subBlockRef.current, {
-        scaleX: 1,
-        duration: 0.5,
-        ease: "power3.inOut",
-      })
-        .set(subTitleRef.current, { opacity: 1 })
-        .to(subBlockRef.current, {
-          scaleX: 0,
-          transformOrigin: "right",
-          duration: 0.5,
-          ease: "power3.inOut",
-        })
-
-        // Overlap the second reveal by starting it 0.4s before the first one finishes retracting
-        .to(
-          blockRef.current,
-          { scaleX: 1, duration: 0.5, ease: "power3.inOut" },
-          "-=0.4",
-        )
-        .set(titleRef.current, { opacity: 1 })
-        .to(blockRef.current, {
-          scaleX: 0,
-          transformOrigin: "right",
-          duration: 0.5,
-          ease: "power3.inOut",
-        });
-    }
-  }, []);
-
   useEffect(() => {
     if (scrollContainerRef.current) {
       const cardWidth =
@@ -195,32 +140,18 @@ export function FeaturedProjects() {
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
           <div className="flex flex-col gap-4">
-            <div className="relative self-start">
-              <div
-                ref={subTitleRef}
-                className="flex items-center text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase"
-              >
+            <BlockReveal color="#003B6D">
+              <div className="flex items-center text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
                 FEATURED PROJECTS
               </div>
-              <div
-                ref={subBlockRef}
-                className="absolute inset-0 bg-[#003B6D] origin-left"
-              ></div>
-            </div>
+            </BlockReveal>
 
-            <div className="relative self-start">
-              <h2
-                ref={titleRef}
-                className="text-2xl md:text-[34px] font-bold tracking-tight text-[#003B6D] leading-[1.3] uppercase max-w-3xl"
-              >
+            <BlockReveal color="#003B6D" delay={0.2}>
+              <h2 className="text-2xl md:text-[34px] font-bold tracking-tight text-[#003B6D] leading-[1.3] uppercase max-w-3xl">
                 BESPOKE ENCLAVES WITH FINESSE <br className="hidden md:block" />{" "}
                 IN ARCHITECTURE AND DESIGN
               </h2>
-              <div
-                ref={blockRef}
-                className="absolute inset-0 bg-[#003B6D] origin-left"
-              ></div>
-            </div>
+            </BlockReveal>
           </div>
 
           {/* Navigation Arrows */}

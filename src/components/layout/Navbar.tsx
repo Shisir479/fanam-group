@@ -47,22 +47,16 @@ export function Navbar() {
                 </Link>
                 <div className="absolute top-full left-0 min-w-[240px] bg-black/80 flex flex-col opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
                   <Link
-                    href="/about/our-team"
+                    href="/our-team"
                     className="px-6 py-5 text-sm font-semibold text-white/70 hover:text-white border-b border-white/10 transition-colors"
                   >
                     Our Team
                   </Link>
                   <Link
-                    href="/about/privacy-policy"
+                    href="/privacy-policy"
                     className="px-6 py-5 text-sm font-semibold text-white/70 hover:text-white border-b border-white/10 transition-colors"
                   >
                     Privacy Policy
-                  </Link>
-                  <Link
-                    href="/about/edison-royal-club"
-                    className="px-6 py-5 text-sm font-semibold text-white/70 hover:text-white transition-colors"
-                  >
-                    Edison Royal Club
                   </Link>
                 </div>
               </div>
@@ -123,13 +117,13 @@ export function Navbar() {
                     Newsletter
                   </Link>
                   <Link
-                    href="/gallery/image"
+                    href="/image-gallery"
                     className="px-6 py-5 text-sm font-semibold text-white/70 hover:text-white border-b border-white/10 transition-colors"
                   >
                     Image Gallery
                   </Link>
                   <Link
-                    href="/gallery/video"
+                    href="/video-gallery"
                     className="px-6 py-5 text-sm font-semibold text-white/70 hover:text-white transition-colors"
                   >
                     Video Gallery
@@ -160,14 +154,6 @@ export function Navbar() {
                   </Link>
                 </div>
               </div>
-
-              <Link
-                href="/landowner"
-                className="relative group h-full flex items-center"
-              >
-                Landowner
-                <span className="absolute left-0 bottom-0 w-full h-[4px] bg-white scale-x-0 origin-left transition-transform duration-600 ease-out group-hover:scale-x-100"></span>
-              </Link>
             </nav>
           </div>
 

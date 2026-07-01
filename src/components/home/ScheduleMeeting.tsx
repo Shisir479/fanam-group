@@ -1,36 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { BlockReveal } from "@/components/ui/BlockReveal";
 
 export function ScheduleMeeting() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const blockRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top 75%",
-        once: true,
-      },
-    });
-
-    tl.to(blockRef.current, { scaleX: 1, duration: 0.5, ease: "power3.inOut" })
-      .set(titleRef.current, { opacity: 1 })
-      .to(blockRef.current, {
-        scaleX: 0,
-        transformOrigin: "right",
-        duration: 0.5,
-        ease: "power3.inOut",
-      });
-  }, []);
-
   return (
-    <section ref={containerRef} className="w-full md:py-20 py-16 bg-gray-50/50">
+    <section className="w-full md:py-20 py-16 bg-gray-50/50">
       <div className="container mx-auto px-5 md:px-16">
         <div className="flex flex-col lg:flex-row bg-white md:shadow-md  overflow-hidden">
           {/* Left Column - Image */}
@@ -45,18 +19,11 @@ export function ScheduleMeeting() {
           {/* Right Column - Form */}
           <div className="w-full lg:w-2/5 p-8 md:p-10 lg:p-14 flex flex-col justify-center">
             <div className="mb-8">
-              <div className="relative inline-block self-start">
-                <h2
-                  ref={titleRef}
-                  className="text-2xl md:text-[28px] font-bold text-gray-900 tracking-wide uppercase opacity-0"
-                >
+              <BlockReveal color="#003B6D">
+                <h2 className="text-2xl md:text-[28px] font-bold text-gray-900 tracking-wide uppercase">
                   SCHEDULE A MEETING
                 </h2>
-                <div
-                  ref={blockRef}
-                  className="absolute inset-0 bg-[#003B6D] origin-left scale-x-0"
-                ></div>
-              </div>
+              </BlockReveal>
             </div>
 
             <form
