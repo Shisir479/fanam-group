@@ -25,13 +25,13 @@ export function Navbar() {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <Image
-                src="/company_logo/Bonedi_logo.png"
+                src="/company_logo/Bonedi_homes_logo.jpg.jpeg"
                 alt="Company Logo"
                 width={160}
                 height={48}
                 priority
                 style={{ width: "auto" }}
-                className="h-10 md:h-12 object-contain brightness-150"
+                className="h-10 md:h-12 object-contain"
               />
             </Link>
 

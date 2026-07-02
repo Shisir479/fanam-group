@@ -19,12 +19,12 @@ export function Footer() {
           <div>
             <Link href="/" className="flex items-center mb-8">
               <Image
-                src="/company_logo/Bonedi_logo.png"
+                src="/company_logo/Bonedi_homes_logo.jpg.jpeg"
                 alt="Company Logo"
                 width={160}
                 height={64}
                 style={{ width: "auto" }}
-                className="h-14 md:h-16 object-contain brightness-150"
+                className="h-14 md:h-16 object-contain"
               />
             </Link>
 
