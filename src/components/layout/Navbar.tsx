@@ -29,7 +29,9 @@ export function Navbar() {
                 alt="Company Logo"
                 width={160}
                 height={48}
-                className="h-10 md:h-12 w-auto object-contain brightness-150"
+                priority
+                style={{ width: "auto" }}
+                className="h-10 md:h-12 object-contain brightness-150"
               />
             </Link>
 

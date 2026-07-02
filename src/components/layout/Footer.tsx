@@ -23,7 +23,8 @@ export function Footer() {
                 alt="Company Logo"
                 width={160}
                 height={64}
-                className="h-14 md:h-16 w-auto object-contain brightness-150"
+                style={{ width: "auto" }}
+                className="h-14 md:h-16 object-contain brightness-150"
               />
             </Link>
 
