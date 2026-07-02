@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
+import Image from "next/image";
 import { BlockReveal } from "@/components/ui/BlockReveal";
 
 const testimonials = [
@@ -71,10 +72,12 @@ export function TestimonialSection() {
                     <div className="flex justify-start">
                       <div className="w-full max-w-md lg:max-w-[480px] overflow-hidden ">
                         <div className="relative w-full aspect-[4/3] md:aspect-[3/2] overflow-hidden group cursor-pointer shadow-lg">
-                          <img
+                          <Image
                             src={t.image}
                             alt={t.name}
-                            className="absolute inset-0 w-full h-full"
+                            fill
+                            sizes="(max-width: 1024px) 100vw, 50vw"
+                            className="object-cover object-top"
                           />
 
                           {/* Play Button */}

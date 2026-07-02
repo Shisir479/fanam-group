@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { BlockReveal } from "@/components/ui/BlockReveal";
 
 export function ScheduleMeeting() {
@@ -9,10 +10,12 @@ export function ScheduleMeeting() {
         <div className="flex flex-col lg:flex-row bg-white md:shadow-md  overflow-hidden">
           {/* Left Column - Image */}
           <div className="w-full lg:w-3/5 h-[200px] lg:h-auto relative">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2000&auto=format&fit=crop"
               alt="Schedule a meeting"
-              className="absolute inset-0 w-full h-full object-cover"
+              fill
+              sizes="(max-width: 1024px) 100vw, 60vw"
+              className="object-cover"
             />
           </div>
 

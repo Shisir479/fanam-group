@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import { useRef, useEffect, useState } from "react";
 import { BlockReveal } from "@/components/ui/BlockReveal";
 
@@ -18,7 +20,7 @@ const projects = [
     description:
       "Edison Verona stands as a beacon of refined living, where the romance of design and the innovation of modern architecture come together to create a space that feels both aspirational and welcoming.",
     image:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1516069429726-51d80d545cbf?q=80&w=901&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     title: "EDISON DESDEMONA",
@@ -26,7 +28,7 @@ const projects = [
     description:
       "A sanctuary of peace and contemporary design, offering a unique blend of comfort and style in an exclusive neighborhood.",
     image:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1633591691478-b238b428223f?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     title: "EDISON MARIGOLD",
@@ -34,7 +36,7 @@ const projects = [
     description:
       "Edison Marigold redefines premium living with state-of-the-art facilities and breathtaking views of the city skyline.",
     image:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1709913492535-56fb1ac85092?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     title: "EDISON VIVIANA",
@@ -42,7 +44,7 @@ const projects = [
     description:
       "A testament to architectural brilliance, Edison Viviana offers an elite living experience tailored for the modern family.",
     image:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1595040398700-85ddd233d6f6?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     title: "EDISON OAK",
@@ -58,7 +60,7 @@ const projects = [
     description:
       "An affordable yet luxurious living space, Edison Pine is designed to cater to all your modern lifestyle needs with convenience.",
     image:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1621645541495-9bbe8b167a43?q=80&w=464&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     title: "EDISON MAPLE",
@@ -66,7 +68,7 @@ const projects = [
     description:
       "Exclusivity meets tranquility. Edison Maple is the ultimate address for those who appreciate the finer things in life.",
     image:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1692210212021-c7e887fc7076?q=80&w=348&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     title: "EDISON WILLOW",
@@ -74,7 +76,7 @@ const projects = [
     description:
       "Strategically located to keep you connected, Edison Willow is the epitome of smart and accessible urban living.",
     image:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1615651885088-3ff35a7e0b5a?q=80&w=420&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     title: "EDISON CEDAR",
@@ -82,7 +84,7 @@ const projects = [
     description:
       "Discover a new standard of community living. Edison Cedar brings people together with thoughtfully designed shared spaces.",
     image:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1667238324671-c2fe726f6084?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
 ];
 
@@ -158,7 +160,7 @@ export function FeaturedProjects() {
           <div className="md:flex items-center gap-4  hidden">
             <button
               onClick={scrollLeftAction}
-              className="w-12 h-12 rounded-full border  flex items-center justify-center text-gray-600 hover:bg-[#003B6D] hover:text-white hover:border-[#003B6D] transition-colors"
+              className="w-12 h-12 rounded-full border  flex items-center justify-center text-gray-600 cursor-pointer transition-colors"
             >
               <svg
                 width="20"
@@ -173,7 +175,7 @@ export function FeaturedProjects() {
             </button>
             <button
               onClick={scrollRightAction}
-              className="w-12 h-12 rounded-full border  flex items-center justify-center text-gray-600 hover:bg-[#003B6D] hover:text-white hover:border-[#003B6D] transition-colors"
+              className="w-12 h-12 rounded-full border  flex items-center justify-center text-gray-600 cursor-pointer transition-colors"
             >
               <svg
                 width="20"
@@ -209,12 +211,12 @@ export function FeaturedProjects() {
               className="relative group/card w-[85vw] sm:w-[45vw] md:w-[40vw] lg:w-[30vw] xl:w-[28vw] h-[500px] md:h-[600px] shrink-0 snap-center overflow-hidden cursor-pointer transform-gpu"
             >
               {/* Background Image that slowly zooms on hover */}
-              <img
+              <Image
                 src={project.image}
                 alt={project.title}
-                loading="lazy"
-                decoding="async"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-[10000ms] ease-out group-hover/card:scale-[1.3] will-change-transform"
+                fill
+                sizes="(max-width: 640px) 85vw, (max-width: 768px) 45vw, (max-width: 1024px) 40vw, 30vw"
+                className="object-cover transition-transform duration-[10000ms] ease-out group-hover/card:scale-[1.3] will-change-transform"
               />
 
               {/* Dark Gradient Overlay for text readability */}

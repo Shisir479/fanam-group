@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 
 export function Navbar() {
@@ -23,10 +24,12 @@ export function Navbar() {
               className="flex items-center"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              <img
-                src="/company_logo/Bonedi_homes_logo.jpg.jpeg"
+              <Image
+                src="/company_logo/Bonedi_logo.png"
                 alt="Company Logo"
-                className="h-10 md:h-12 w-auto object-contain"
+                width={160}
+                height={48}
+                className="h-10 md:h-12 w-auto object-contain brightness-150"
               />
             </Link>
 

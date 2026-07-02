@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import { BlockReveal } from "@/components/ui/BlockReveal";
 
 export function AboutSection() {
@@ -55,10 +57,12 @@ export function AboutSection() {
 
           {/* Right Column (Image with Play Button) */}
           <div className="relative w-full h-[220px] md:h-[350px] overflow-hidden group">
-            <img
-              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
+            <Image
+              src="https://images.unsplash.com/photo-1637909336968-0687e3086c63?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Building Complex"
-              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover transition-transform duration-1000 group-hover:scale-105"
             />
             {/* The Text overlay and Play Button */}
             <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/20 pointer-events-none">

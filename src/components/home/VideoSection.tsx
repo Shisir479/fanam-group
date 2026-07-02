@@ -1,15 +1,19 @@
 "use client";
 
+import Image from "next/image";
+
 export function VideoSection() {
   return (
     <section className="w-full md:py-20 py-16 bg-white">
       <div className="container mx-auto px-5 md:px-16">
-        <div className="relative overflow-hidden w-full h-[30vh] md:h-[80vh] group cursor-pointer shadow-2xl">
+        <div className="relative overflow-hidden w-full aspect-video md:h-[500] group cursor-pointer shadow-2xl">
           {/* Background Image with Slow Zoom on Hover */}
-          <img
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2000&auto=format&fit=crop"
+          <Image
+            src="https://images.unsplash.com/photo-1605071062325-21ef6e703830?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Building Overview Video"
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-[15000ms] ease-out group-hover:scale-115"
+            fill
+            sizes="100vw"
+            className="object-cover transition-transform duration-[15000ms] ease-out group-hover:scale-115"
           />
 
           {/* Dark Overlay for better contrast */}

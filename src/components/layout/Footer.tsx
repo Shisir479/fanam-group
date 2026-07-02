@@ -1,13 +1,16 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export function Footer() {
   return (
     <footer className="relative w-full bg-black text-white overflow-hidden">
       {/* Background Image with Dark Overlay */}
-      <img
+      <Image
         src="https://images.unsplash.com/photo-1501688639626-9804fb1ad475?q=80&w=875&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         alt="Footer Background"
-        className="absolute inset-0 w-full h-full object-cover opacity-40"
+        fill
+        sizes="100vw"
+        className="object-cover opacity-40"
       />
 
       <div className="relative z-10 container mx-auto px-6 md:px-16 pt-20 pb-10">
@@ -15,10 +18,12 @@ export function Footer() {
           {/* Left Side: Logo & Contact */}
           <div>
             <Link href="/" className="flex items-center mb-8">
-              <img
-                src="/company_logo/Bonedi_homes_logo.jpg.jpeg"
+              <Image
+                src="/company_logo/Bonedi_logo.png"
                 alt="Company Logo"
-                className="h-14 md:h-16 w-auto object-contain"
+                width={160}
+                height={64}
+                className="h-14 md:h-16 w-auto object-contain brightness-150"
               />
             </Link>
 

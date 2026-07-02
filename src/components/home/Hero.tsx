@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback, useRef } from "react";
+import Image from "next/image";
 
 const slides = [
   {
@@ -127,10 +128,12 @@ export function Hero() {
         className="absolute inset-0 w-full h-full"
         style={{ zIndex: 0, ...getImageStyle() }}
       >
-        <img
+        <Image
           src={slides[displayImage].image}
           alt={slides[displayImage].title}
-          className="absolute inset-0 w-full h-full object-cover"
+          fill
+          sizes="100vw"
+          className="object-cover"
         />
       </div>
 
@@ -139,10 +142,12 @@ export function Hero() {
         className="absolute inset-0 w-full h-full"
         style={{ zIndex: 10, ...getDarkWipeStyle() }}
       >
-        <img
+        <Image
           src={slides[nextImage].image}
           alt={slides[nextImage].title}
-          className="absolute inset-0 w-full h-full object-cover"
+          fill
+          sizes="100vw"
+          className="object-cover"
         />
         <div className="absolute inset-0 bg-black/60" />
       </div>
@@ -152,10 +157,12 @@ export function Hero() {
         className="absolute inset-0 w-full h-full"
         style={{ zIndex: 12, ...getClearWipeStyle() }}
       >
-        <img
+        <Image
           src={slides[nextImage].image}
           alt={slides[nextImage].title}
-          className="absolute inset-0 w-full h-full object-cover"
+          fill
+          sizes="100vw"
+          className="object-cover"
         />
       </div>
 

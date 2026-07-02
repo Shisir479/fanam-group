@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useCallback, useState } from "react";
+import Image from "next/image";
 import { useGesture } from "@use-gesture/react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
@@ -491,11 +492,13 @@ export default function DomeGallery({
                       borderRadius: `var(--tile-radius, ${imageBorderRadius})`,
                     }}
                   >
-                    <img
+                    <Image
                       src={it.album.cover}
                       draggable={false}
                       alt={it.album.title}
-                      className="w-full h-full object-cover pointer-events-none group-hover:opacity-60 transition-opacity"
+                      fill
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                      className="object-cover pointer-events-none group-hover:opacity-60 transition-opacity"
                     />
                     <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
                       <span className="text-white font-bold text-center px-2 shadow-sm drop-shadow-md">
