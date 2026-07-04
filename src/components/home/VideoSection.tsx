@@ -6,13 +6,12 @@ export function VideoSection() {
   return (
     <section className="w-full md:py-20 py-16 bg-white">
       <div className="container mx-auto px-5 md:px-16">
-        <div className="relative overflow-hidden w-full aspect-video md:h-[500] group cursor-pointer shadow-2xl">
+        <div className="relative overflow-hidden w-full aspect-video md:h-[500px] group cursor-pointer shadow-2xl">
           {/* Background Image with Slow Zoom on Hover */}
           <Image
             src="https://images.unsplash.com/photo-1605071062325-21ef6e703830?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Building Overview Video"
             fill
-            sizes="100vw"
             className="object-cover transition-transform duration-[15000ms] ease-out group-hover:scale-115"
           />
 
@@ -21,7 +20,7 @@ export function VideoSection() {
 
           {/* Play Button */}
           <div className="absolute inset-0 flex items-center justify-center z-10">
-            <div className="relative w-13 h-13 md:w-18 md:h-18 bg-[#FF0000] rounded-full flex items-center justify-center shadow-2xl overflow-hidden">
+            <div className="relative w-13 h-13 md:w-17 md:h-17 bg-[#FF0000] rounded-full flex items-center justify-center shadow-2xl overflow-hidden">
               {/* Expanding White Background Circle */}
               <div className="absolute inset-0 bg-white rounded-full transform scale-0 group-hover:scale-105 transition-transform duration-500 ease-out origin-center"></div>
 

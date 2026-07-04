@@ -4,16 +4,29 @@ import { FeaturedProjects } from "@/components/home/FeaturedProjects";
 import { VideoSection } from "@/components/home/VideoSection";
 import { TestimonialSection } from "@/components/home/TestimonialSection";
 import { ScheduleMeeting } from "@/components/home/ScheduleMeeting";
-
+import { CompanyOverview } from "@/components/home/CompanyOverview";
+import { WhyChooseUs } from "@/components/home/WhyChooseUs";
+import { OurAchievements } from "@/components/home/OurAchievements";
+import { FeaturedServices } from "@/components/home/FeaturedServices";
+import { LatestNews } from "@/components/home/LatestNews";
+import { GalleryPreview } from "@/components/home/GalleryPreview";
+import { ContactInfo } from "@/components/home/ContactInfo";
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       <Hero />
       <AboutSection />
       <FeaturedProjects />
+      <CompanyOverview />
+      <WhyChooseUs />
+      <OurAchievements />
+      <FeaturedServices />
       <TestimonialSection />
+      <GalleryPreview />
+      <LatestNews />
       <VideoSection />
       <ScheduleMeeting />
+      <ContactInfo />
     </div>
   );
 }

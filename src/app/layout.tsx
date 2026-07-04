@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PrimeVista",
+  title: "Bonedi Homes",
   description: "Modern web application",
 };
 
