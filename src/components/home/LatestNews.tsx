@@ -76,13 +76,13 @@ export function LatestNews() {
           {newsItems.map((item, idx) => (
             <div
               key={idx}
-              className="group flex flex-col bg-white overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300"
+              className="group flex flex-col bg-white overflow-hidden  shadow-sm transition-all duration-300"
             >
               <div className="relative h-60 overflow-hidden transform-gpu">
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110 transform-gpu"
+                  className="w-full h-full object-cover "
                 />
                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-sm font-medium text-[#003B6D]">
                   {item.date}

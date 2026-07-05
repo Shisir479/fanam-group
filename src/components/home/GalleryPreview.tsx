@@ -508,7 +508,7 @@ export function GalleryPreview() {
   }, [resizing]);
 
   return (
-    <section className="w-full py-20 md:py-32 bg-white">
+    <section className="w-full py-16 md:py-24 bg-white">
       <div className="container mx-auto px-5 md:px-16">
         {/* Header */}
         <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">

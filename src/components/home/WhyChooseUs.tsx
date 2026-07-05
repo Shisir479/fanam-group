@@ -93,7 +93,7 @@ const features = [
 
 export function WhyChooseUs() {
   return (
-    <section className="w-full py-20 bg-gray-50">
+    <section className="w-full py-16 md:py-24 bg-gray-50">
       <div className="container mx-auto px-5 md:px-16">
         <div className="flex flex-col items-center text-center mb-16">
           <BlockReveal color="#003B6D">

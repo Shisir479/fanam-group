@@ -237,7 +237,7 @@ export function ScrollReelTestimonials({
       tabIndex={0}
       onKeyDown={onKeyDown}
       className={cn(
-        "relative flex w-full  flex-col items-stretch gap-6 overflow-hidden  border border-border bg-white outline-none focus-visible:ring-2 focus-visible:ring-ring md:min-h-[400px] md:flex-row",
+        "relative flex w-full  flex-col items-stretch gap-6 overflow-hidden bg-white outline-none focus-visible:ring-2 focus-visible:ring-ring md:min-h-[400px] md:flex-row",
         className,
       )}
     >

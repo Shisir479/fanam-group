@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export function VideoSection() {
   return (
-    <section className="w-full md:py-20 py-16 bg-white">
+    <section className="w-full py-16 md:py-24 bg-white">
       <div className="container mx-auto px-5 md:px-16">
         <div className="relative overflow-hidden w-full aspect-video md:h-[500px] group cursor-pointer shadow-2xl">
           {/* Background Image with Slow Zoom on Hover */}

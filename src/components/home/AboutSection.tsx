@@ -6,7 +6,7 @@ import { BlockReveal } from "@/components/ui/BlockReveal";
 
 export function AboutSection() {
   return (
-    <section className="w-full md:py-20 py-16 bg-white">
+    <section className="w-full py-16 md:py-24 bg-white">
       <div className="container mx-auto px-5 md:px-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           {/* Left Column (Text content) */}
@@ -50,7 +50,7 @@ export function AboutSection() {
             <div className="md:mt-10 mt-8 self-start">
               <button className="relative group border border-[#4ea24b] hover:border-[#003B6D] px-12 py-3 text-sm font-bold text-[#003B6D] overflow-hidden transition-colors duration-500 hover:text-white">
                 <span className="relative z-10">Learn More</span>
-                <span className="absolute inset-0 bg-[#003B6D] scale-x-0 origin-left transition-transform duration-500 ease-out group-hover:scale-x-100 z-0"></span>
+                <span className="absolute inset-0 bg-[#003B6D] scale-x-0 origin-left transition-transform duration-700 ease-out group-hover:scale-x-100 z-0"></span>
               </button>
             </div>
           </div>

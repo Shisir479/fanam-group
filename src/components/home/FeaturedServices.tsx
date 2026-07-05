@@ -39,7 +39,7 @@ export function FeaturedServices() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(0);
 
   return (
-    <section className="w-full py-24 bg-white text-[#003B6D]">
+    <section className="w-full py-16 md:py-24 bg-white text-[#003B6D]">
       <div className="container mx-auto px-5 md:px-16">
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-16">

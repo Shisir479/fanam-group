@@ -44,7 +44,7 @@ const testimonials = [
 
 export function TestimonialSection() {
   return (
-    <section className="w-full md:py-20 py-16 bg-white">
+    <section className="w-full py-16 md:py-24 bg-white">
       <div className="container mx-auto px-5 md:px-16 overflow-hidden">
         {/* Header */}
         <div className="mb-12 flex flex-col gap-4">

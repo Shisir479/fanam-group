@@ -178,7 +178,7 @@ export function FeaturedProjects() {
   return (
     <section
       ref={sectionRef}
-      className="w-full py-20 bg-gray-50 overflow-hidden"
+      className="w-full py-16 md:py-24 bg-gray-50 overflow-hidden"
     >
       <div className="container mx-auto px-5 md:px-16">
         {/* Tabs Section */}
@@ -309,7 +309,7 @@ export function FeaturedProjects() {
 
                 {/* Description (Fades in and fills the space left by the title) */}
                 <div className="absolute bottom-[90px] left-6 right-6 md:left-8 md:right-8 opacity-0 transform translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover/card:opacity-100 group-hover/card:translate-y-0 pointer-events-auto">
-                  <p className="text-white text-[15px] leading-relaxed font-semibold">
+                  <p className="text-white text-[14px] md:text-[15px] leading-relaxed font-semibold pt-4 line-clamp-3">
                     {project.description}
                   </p>
                 </div>
@@ -318,7 +318,7 @@ export function FeaturedProjects() {
                 <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8 pointer-events-auto">
                   <button className="relative group/btn border hover:border-[#003B6D] px-12 py-3 text-sm font-bold text-white overflow-hidden transition-colors duration-500 hover:text-white">
                     <span className="relative z-10">Explore</span>
-                    <span className="absolute inset-0 bg-[#003B6D] scale-x-0 origin-left transition-transform duration-500 ease-out group-hover/btn:scale-x-100 z-0"></span>
+                    <span className="absolute inset-0 bg-[#003B6D] scale-x-0 origin-left transition-transform duration-700 ease-out group-hover/btn:scale-x-100 z-0"></span>
                   </button>
                 </div>
               </div>

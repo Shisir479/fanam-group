@@ -21,7 +21,7 @@ export function Navbar() {
           <div className="flex items-center gap-20 h-full">
             <Link
               href="/"
-              className="flex items-center"
+              className="flex items-center group"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <Image
@@ -31,7 +31,7 @@ export function Navbar() {
                 height={48}
                 priority
                 style={{ width: "auto" }}
-                className="h-10 md:h-12 object-contain"
+                className="h-10 md:h-12 object-contain group-hover:animate-pulse transition-all duration-300"
               />
             </Link>
 

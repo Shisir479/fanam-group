@@ -5,7 +5,7 @@ import { BlockReveal } from "@/components/ui/BlockReveal";
 
 export function CompanyOverview() {
   return (
-    <section className="w-full py-20 bg-[#001f3f] text-white relative overflow-hidden">
+    <section className="w-full py-16 md:py-24 bg-[#001f3f] text-white relative overflow-hidden">
       {/* Background Graphic */}
       <div className="absolute top-0 right-0 w-1/2 h-full opacity-10 pointer-events-none">
         <svg
