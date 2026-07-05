@@ -8,7 +8,11 @@ export function CompanyOverview() {
     <section className="w-full py-20 bg-[#001f3f] text-white relative overflow-hidden">
       {/* Background Graphic */}
       <div className="absolute top-0 right-0 w-1/2 h-full opacity-10 pointer-events-none">
-        <svg viewBox="0 0 100 100" className="w-full h-full fill-current" preserveAspectRatio="none">
+        <svg
+          viewBox="0 0 100 100"
+          className="w-full h-full fill-current"
+          preserveAspectRatio="none"
+        >
           <polygon points="0,100 100,0 100,100" />
         </svg>
       </div>
@@ -32,14 +36,16 @@ export function CompanyOverview() {
 
             <div className="flex flex-col gap-5 text-gray-300 leading-relaxed text-sm md:text-[14px] text-justify font-semibold mt-4">
               <p>
-                At Edison Real Estate, we believe in building more than just structures; we build enduring legacies. 
-                With a commitment to architectural excellence and sustainable development, we have established ourselves 
-                as a vanguard in the industry.
+                At Edison Real Estate, we believe in building more than just
+                structures; we build enduring legacies. With a commitment to
+                architectural excellence and sustainable development, we have
+                established ourselves as a vanguard in the industry.
               </p>
               <p>
-                Our philosophy centers around the seamless integration of modern aesthetics, environmental consciousness, 
-                and uncompromising quality. Every project we undertake is a testament to our dedication to enriching 
-                communities and elevating lifestyles.
+                Our philosophy centers around the seamless integration of modern
+                aesthetics, environmental consciousness, and uncompromising
+                quality. Every project we undertake is a testament to our
+                dedication to enriching communities and elevating lifestyles.
               </p>
             </div>
           </div>

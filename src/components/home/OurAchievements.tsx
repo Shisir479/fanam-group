@@ -7,7 +7,7 @@ const achievements = [
   { value: "50+", label: "Completed Projects" },
   { value: "2000+", label: "Happy Families" },
   { value: "15+", label: "Years of Excellence" },
-  { value: "100%", label: "On-time Delivery" }
+  { value: "100%", label: "On-time Delivery" },
 ];
 
 export function OurAchievements() {
@@ -21,7 +21,7 @@ export function OurAchievements() {
           setIsVisible(true);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
 
     if (sectionRef.current) {
@@ -36,15 +36,13 @@ export function OurAchievements() {
   }, []);
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="relative w-full py-24 bg-[#003B6D] overflow-hidden"
     >
       {/* Background Image with Overlay */}
-      <div 
-        className="absolute inset-0 z-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1541888081622-3866113ccf3a?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center bg-fixed"
-      ></div>
-      
+      <div className="absolute inset-0 z-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1541888081622-3866113ccf3a?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center bg-fixed"></div>
+
       <div className="absolute inset-0 bg-[#003B6D]/80 z-0"></div>
 
       <div className="container mx-auto px-5 md:px-16 relative z-10">
@@ -54,7 +52,7 @@ export function OurAchievements() {
               Our Legacy
             </div>
           </BlockReveal>
-          
+
           <BlockReveal color="#ffffff" delay={0.2}>
             <h2 className="text-2xl md:text-[34px] font-bold text-white leading-[1.2] uppercase tracking-wider">
               Our Achievements
@@ -64,10 +62,12 @@ export function OurAchievements() {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 divide-x-0 md:divide-x divide-white/20">
           {achievements.map((item, idx) => (
-            <div 
-              key={idx} 
+            <div
+              key={idx}
               className={`flex flex-col items-center justify-center transform transition-all duration-1000 ${
-                isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+                isVisible
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-10 opacity-0"
               }`}
               style={{ transitionDelay: `${idx * 200}ms` }}
             >

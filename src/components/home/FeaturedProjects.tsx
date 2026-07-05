@@ -47,7 +47,7 @@ const projects = [
       "Edison Marigold redefines premium living with state-of-the-art facilities and breathtaking views of the city skyline.",
     image:
       "https://images.unsplash.com/photo-1709913492535-56fb1ac85092?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    status: ["featured"]
+    status: ["featured"],
   },
   {
     id: 5,
@@ -116,34 +116,39 @@ const tabsData = {
     title: "FEATURED PROJECTS",
     subtitle: (
       <>
-        BESPOKE ENCLAVES WITH FINESSE <br className="hidden md:block" /> IN ARCHITECTURE AND DESIGN
+        BESPOKE ENCLAVES WITH FINESSE <br className="hidden md:block" /> IN
+        ARCHITECTURE AND DESIGN
       </>
     ),
-    projects: projects.filter(p => p.status.includes("featured")),
+    projects: projects.filter((p) => p.status.includes("featured")),
   },
   ongoing: {
     title: "ONGOING PROJECTS",
     subtitle: (
       <>
-        SHAPING THE FUTURE OF MODERN LIVING <br className="hidden md:block" /> WITH EXCELLENCE
+        SHAPING THE FUTURE OF MODERN LIVING <br className="hidden md:block" />{" "}
+        WITH EXCELLENCE
       </>
     ),
-    projects: projects.filter(p => p.status.includes("ongoing")),
+    projects: projects.filter((p) => p.status.includes("ongoing")),
   },
   upcoming: {
     title: "UPCOMING PROJECTS",
     subtitle: (
       <>
-        VISIONARY DESIGNS FOR <br className="hidden md:block" /> TOMORROW'S LIFESTYLE
+        VISIONARY DESIGNS FOR <br className="hidden md:block" /> TOMORROW'S
+        LIFESTYLE
       </>
     ),
-    projects: projects.filter(p => p.status.includes("upcoming")),
+    projects: projects.filter((p) => p.status.includes("upcoming")),
   },
 };
 
 export function FeaturedProjects() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [activeTab, setActiveTab] = useState<"featured" | "ongoing" | "upcoming">("featured");
+  const [activeTab, setActiveTab] = useState<
+    "featured" | "ongoing" | "upcoming"
+  >("featured");
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
 
   const currentData = tabsData[activeTab];
@@ -216,7 +221,11 @@ export function FeaturedProjects() {
               </div>
             </BlockReveal>
 
-            <BlockReveal color="#003B6D" delay={0.2} key={`subtitle-${activeTab}`}>
+            <BlockReveal
+              color="#003B6D"
+              delay={0.2}
+              key={`subtitle-${activeTab}`}
+            >
               <h2 className="text-2xl md:text-[34px] font-bold tracking-tight text-[#003B6D] leading-[1.3] uppercase max-w-3xl">
                 {currentData.subtitle}
               </h2>
@@ -270,7 +279,10 @@ export function FeaturedProjects() {
           className="w-full h-[500px] md:h-[600px] flex items-center"
         >
           {extendedProjects.map((project, idx) => (
-            <SwiperSlide key={`${project.id}-${idx}`} className="relative group/card h-full !w-[85vw] sm:!w-[45vw] md:!w-[40vw] lg:!w-[30vw] xl:!w-[28vw] 2xl:!w-[25vw] overflow-hidden cursor-pointer transform-gpu">
+            <SwiperSlide
+              key={`${project.id}-${idx}`}
+              className="relative group/card h-full !w-[85vw] sm:!w-[45vw] md:!w-[40vw] lg:!w-[30vw] xl:!w-[28vw] 2xl:!w-[25vw] overflow-hidden cursor-pointer transform-gpu"
+            >
               {/* Background Image that slowly zooms on hover */}
               <Image
                 src={project.image}

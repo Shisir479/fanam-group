@@ -1,137 +1,154 @@
-"use client"
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import React, { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const SQRT_5000 = Math.sqrt(5000);
 
 const testimonials = [
   {
     tempId: 0,
-    testimonial: "My favorite solution in the market. We work 5x faster with COMPANY.",
+    testimonial:
+      "My favorite solution in the market. We work 5x faster with COMPANY.",
     by: "Alex, CEO at TechCorp",
-    imgSrc: "https://i.pravatar.cc/150?img=1"
+    imgSrc: "https://i.pravatar.cc/150?img=1",
   },
   {
     tempId: 1,
-    testimonial: "I'm confident my data is safe with COMPANY. I can't say that about other providers.",
+    testimonial:
+      "I'm confident my data is safe with COMPANY. I can't say that about other providers.",
     by: "Dan, CTO at SecureNet",
-    imgSrc: "https://i.pravatar.cc/150?img=2"
+    imgSrc: "https://i.pravatar.cc/150?img=2",
   },
   {
     tempId: 2,
-    testimonial: "I know it's cliche, but we were lost before we found COMPANY. Can't thank you guys enough!",
+    testimonial:
+      "I know it's cliche, but we were lost before we found COMPANY. Can't thank you guys enough!",
     by: "Stephanie, COO at InnovateCo",
-    imgSrc: "https://i.pravatar.cc/150?img=3"
+    imgSrc: "https://i.pravatar.cc/150?img=3",
   },
   {
     tempId: 3,
-    testimonial: "COMPANY's products make planning for the future seamless. Can't recommend them enough!",
+    testimonial:
+      "COMPANY's products make planning for the future seamless. Can't recommend them enough!",
     by: "Marie, CFO at FuturePlanning",
-    imgSrc: "https://i.pravatar.cc/150?img=4"
+    imgSrc: "https://i.pravatar.cc/150?img=4",
   },
   {
     tempId: 4,
     testimonial: "If I could give 11 stars, I'd give 12.",
     by: "Andre, Head of Design at CreativeSolutions",
-    imgSrc: "https://i.pravatar.cc/150?img=5"
+    imgSrc: "https://i.pravatar.cc/150?img=5",
   },
   {
     tempId: 5,
-    testimonial: "SO SO SO HAPPY WE FOUND YOU GUYS!!!! I'd bet you've saved me 100 hours so far.",
+    testimonial:
+      "SO SO SO HAPPY WE FOUND YOU GUYS!!!! I'd bet you've saved me 100 hours so far.",
     by: "Jeremy, Product Manager at TimeWise",
-    imgSrc: "https://i.pravatar.cc/150?img=6"
+    imgSrc: "https://i.pravatar.cc/150?img=6",
   },
   {
     tempId: 6,
-    testimonial: "Took some convincing, but now that we're on COMPANY, we're never going back.",
+    testimonial:
+      "Took some convincing, but now that we're on COMPANY, we're never going back.",
     by: "Pam, Marketing Director at BrandBuilders",
-    imgSrc: "https://i.pravatar.cc/150?img=7"
+    imgSrc: "https://i.pravatar.cc/150?img=7",
   },
   {
     tempId: 7,
-    testimonial: "I would be lost without COMPANY's in-depth analytics. The ROI is EASILY 100X for us.",
+    testimonial:
+      "I would be lost without COMPANY's in-depth analytics. The ROI is EASILY 100X for us.",
     by: "Daniel, Data Scientist at AnalyticsPro",
-    imgSrc: "https://i.pravatar.cc/150?img=8"
+    imgSrc: "https://i.pravatar.cc/150?img=8",
   },
   {
     tempId: 8,
     testimonial: "It's just the best. Period.",
     by: "Fernando, UX Designer at UserFirst",
-    imgSrc: "https://i.pravatar.cc/150?img=9"
+    imgSrc: "https://i.pravatar.cc/150?img=9",
   },
   {
     tempId: 9,
     testimonial: "I switched 5 years ago and never looked back.",
     by: "Andy, DevOps Engineer at CloudMasters",
-    imgSrc: "https://i.pravatar.cc/150?img=10"
+    imgSrc: "https://i.pravatar.cc/150?img=10",
   },
   {
     tempId: 10,
-    testimonial: "I've been searching for a solution like COMPANY for YEARS. So glad I finally found one!",
+    testimonial:
+      "I've been searching for a solution like COMPANY for YEARS. So glad I finally found one!",
     by: "Pete, Sales Director at RevenueRockets",
-    imgSrc: "https://i.pravatar.cc/150?img=11"
+    imgSrc: "https://i.pravatar.cc/150?img=11",
   },
   {
     tempId: 11,
-    testimonial: "It's so simple and intuitive, we got the team up to speed in 10 minutes.",
+    testimonial:
+      "It's so simple and intuitive, we got the team up to speed in 10 minutes.",
     by: "Marina, HR Manager at TalentForge",
-    imgSrc: "https://i.pravatar.cc/150?img=12"
+    imgSrc: "https://i.pravatar.cc/150?img=12",
   },
   {
     tempId: 12,
-    testimonial: "COMPANY's customer support is unparalleled. They're always there when we need them.",
+    testimonial:
+      "COMPANY's customer support is unparalleled. They're always there when we need them.",
     by: "Olivia, Customer Success Manager at ClientCare",
-    imgSrc: "https://i.pravatar.cc/150?img=13"
+    imgSrc: "https://i.pravatar.cc/150?img=13",
   },
   {
     tempId: 13,
-    testimonial: "The efficiency gains we've seen since implementing COMPANY are off the charts!",
+    testimonial:
+      "The efficiency gains we've seen since implementing COMPANY are off the charts!",
     by: "Raj, Operations Manager at StreamlineSolutions",
-    imgSrc: "https://i.pravatar.cc/150?img=14"
+    imgSrc: "https://i.pravatar.cc/150?img=14",
   },
   {
     tempId: 14,
-    testimonial: "COMPANY has revolutionized how we handle our workflow. It's a game-changer!",
+    testimonial:
+      "COMPANY has revolutionized how we handle our workflow. It's a game-changer!",
     by: "Lila, Workflow Specialist at ProcessPro",
-    imgSrc: "https://i.pravatar.cc/150?img=15"
+    imgSrc: "https://i.pravatar.cc/150?img=15",
   },
   {
     tempId: 15,
-    testimonial: "The scalability of COMPANY's solution is impressive. It grows with our business seamlessly.",
+    testimonial:
+      "The scalability of COMPANY's solution is impressive. It grows with our business seamlessly.",
     by: "Trevor, Scaling Officer at GrowthGurus",
-    imgSrc: "https://i.pravatar.cc/150?img=16"
+    imgSrc: "https://i.pravatar.cc/150?img=16",
   },
   {
     tempId: 16,
-    testimonial: "I appreciate how COMPANY continually innovates. They're always one step ahead.",
+    testimonial:
+      "I appreciate how COMPANY continually innovates. They're always one step ahead.",
     by: "Naomi, Innovation Lead at FutureTech",
-    imgSrc: "https://i.pravatar.cc/150?img=17"
+    imgSrc: "https://i.pravatar.cc/150?img=17",
   },
   {
     tempId: 17,
-    testimonial: "The ROI we've seen with COMPANY is incredible. It's paid for itself many times over.",
+    testimonial:
+      "The ROI we've seen with COMPANY is incredible. It's paid for itself many times over.",
     by: "Victor, Finance Analyst at ProfitPeak",
-    imgSrc: "https://i.pravatar.cc/150?img=18"
+    imgSrc: "https://i.pravatar.cc/150?img=18",
   },
   {
     tempId: 18,
-    testimonial: "COMPANY's platform is so robust, yet easy to use. It's the perfect balance.",
+    testimonial:
+      "COMPANY's platform is so robust, yet easy to use. It's the perfect balance.",
     by: "Yuki, Tech Lead at BalancedTech",
-    imgSrc: "https://i.pravatar.cc/150?img=19"
+    imgSrc: "https://i.pravatar.cc/150?img=19",
   },
   {
     tempId: 19,
-    testimonial: "We've tried many solutions, but COMPANY stands out in terms of reliability and performance.",
+    testimonial:
+      "We've tried many solutions, but COMPANY stands out in terms of reliability and performance.",
     by: "Zoe, Performance Manager at ReliableSystems",
-    imgSrc: "https://i.pravatar.cc/150?img=20"
-  }
+    imgSrc: "https://i.pravatar.cc/150?img=20",
+  },
 ];
 
 interface TestimonialCardProps {
   position: number;
-  testimonial: typeof testimonials[0];
+  testimonial: (typeof testimonials)[0];
   handleMove: (steps: number) => void;
   cardSize: number;
 }
@@ -140,7 +157,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
   position,
   testimonial,
   handleMove,
-  cardSize
+  cardSize,
 }) => {
   const isCenter = position === 0;
 
@@ -149,9 +166,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
       onClick={() => handleMove(position)}
       className={cn(
         "glass-card absolute left-1/2 top-1/2 cursor-pointer p-8 transition-all duration-500 ease-in-out",
-        isCenter
-          ? "z-10"
-          : "z-0"
+        isCenter ? "z-10" : "z-0",
       )}
       style={{
         width: cardSize,
@@ -161,15 +176,15 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
           translateX(${(cardSize / 1.5) * position}px)
           translateY(${isCenter ? -65 : position % 2 ? 15 : -15}px)
           rotate(${isCenter ? 0 : position % 2 ? 2.5 : -2.5}deg)
-        `
+        `,
       }}
     >
       <img
         src={testimonial.imgSrc}
-        alt={`${testimonial.by.split(',')[0]}`}
+        alt={`${testimonial.by.split(",")[0]}`}
         className="mb-4 h-14 w-12 bg-muted object-cover object-top"
         style={{
-          boxShadow: "3px 3px 0px hsl(var(--background))"
+          boxShadow: "3px 3px 0px hsl(var(--background))",
         }}
       />
       <h3 className="text-base sm:text-xl font-medium text-foreground">
@@ -216,14 +231,12 @@ export const StaggerTestimonials: React.FC = () => {
   }, []);
 
   return (
-    <div
-      className="relative w-full overflow-hidden"
-      style={{ height: 600 }}
-    >
+    <div className="relative w-full overflow-hidden" style={{ height: 600 }}>
       {testimonialsList.map((testimonial, index) => {
-        const position = testimonialsList.length % 2
-          ? index - (testimonialsList.length + 1) / 2
-          : index - testimonialsList.length / 2;
+        const position =
+          testimonialsList.length % 2
+            ? index - (testimonialsList.length + 1) / 2
+            : index - testimonialsList.length / 2;
         return (
           <TestimonialCard
             key={testimonial.tempId}
@@ -240,7 +253,7 @@ export const StaggerTestimonials: React.FC = () => {
           className={cn(
             "flex h-14 w-14 items-center justify-center text-xl transition-colors",
             "bg-background border-2 border-border cursor-pointer ",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
           )}
           aria-label="Previous testimonial"
         >
@@ -251,7 +264,7 @@ export const StaggerTestimonials: React.FC = () => {
           className={cn(
             "flex h-14 w-14 items-center justify-center text-2xl transition-colors",
             "bg-background border-2 border-border cursor-pointer ",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
           )}
           aria-label="Next testimonial"
         >

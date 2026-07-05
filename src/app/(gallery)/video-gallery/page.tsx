@@ -10,16 +10,46 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 
 const heroVideos = [
-  { id: 1, thumbnail: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800&auto=format&fit=crop" },
-  { id: 2, thumbnail: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop" },
-  { id: 3, thumbnail: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=800&auto=format&fit=crop" },
-  { id: 4, thumbnail: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=800&auto=format&fit=crop" },
-  { id: 5, thumbnail: "https://images.unsplash.com/photo-1600585154526-990dced4ea0d?q=80&w=800&auto=format&fit=crop" },
+  {
+    id: 1,
+    thumbnail:
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800&auto=format&fit=crop",
+  },
+  {
+    id: 2,
+    thumbnail:
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop",
+  },
+  {
+    id: 3,
+    thumbnail:
+      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=800&auto=format&fit=crop",
+  },
+  {
+    id: 4,
+    thumbnail:
+      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=800&auto=format&fit=crop",
+  },
+  {
+    id: 5,
+    thumbnail:
+      "https://images.unsplash.com/photo-1600585154526-990dced4ea0d?q=80&w=800&auto=format&fit=crop",
+  },
 ];
 
 const gridVideos = [
-  { id: 1, title: "Homecoming diaries | Edison Apricus", thumbnail: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=800&auto=format&fit=crop" },
-  { id: 2, title: "Homecoming Diaries | Edison Angelo", thumbnail: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=800&auto=format&fit=crop" },
+  {
+    id: 1,
+    title: "Homecoming diaries | Edison Apricus",
+    thumbnail:
+      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=800&auto=format&fit=crop",
+  },
+  {
+    id: 2,
+    title: "Homecoming Diaries | Edison Angelo",
+    thumbnail:
+      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=800&auto=format&fit=crop",
+  },
 ];
 
 const PlayButton = () => (
@@ -46,7 +76,10 @@ export default function VideoGalleryPage() {
         <div className="container mx-auto px-5 md:px-16">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto">
             {gridVideos.map((video) => (
-              <div key={video.id} className="flex flex-col group cursor-pointer">
+              <div
+                key={video.id}
+                className="flex flex-col group cursor-pointer"
+              >
                 <div className="relative w-full aspect-video border-[6px] border-[#0a1128] overflow-hidden mb-4">
                   <Image
                     src={video.thumbnail}
