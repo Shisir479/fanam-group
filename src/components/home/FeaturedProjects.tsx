@@ -271,6 +271,7 @@ export function FeaturedProjects() {
       {/* Projects Carousel - Swiper Infinite Loop */}
       <div className="w-full pb-8">
         <Swiper
+          key={activeTab}
           onSwiper={setSwiperInstance}
           loop={true}
           spaceBetween={16}
