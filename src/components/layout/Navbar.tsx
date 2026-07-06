@@ -47,7 +47,7 @@ export function Navbar() {
               {/* About with Dropdown */}
               <div className="relative group h-full flex items-center">
                 <Link href="/about" className="h-full flex items-center">
-                  About
+                  About Us
                   <span className="absolute left-0 bottom-0 w-full h-[4px] bg-white scale-x-0 origin-left transition-transform duration-600 ease-out group-hover:scale-x-100"></span>
                 </Link>
                 <div className="absolute top-full left-0 min-w-[240px] bg-black/80 flex flex-col opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
@@ -215,13 +215,13 @@ export function Navbar() {
                 className="flex justify-between items-center cursor-pointer"
                 onClick={() => toggleAccordion("about")}
               >
-                <span>About</span>
+                <span>About Us</span>
                 <span className="text-2xl font-light text-white/70 w-8 text-center">
                   {expandedMenu === "about" ? "-" : "+"}
                 </span>
               </div>
               <div
-                className={`flex flex-col gap-4 pl-4 overflow-hidden transition-all duration-300 ${expandedMenu === "about" ? "max-h-40 mt-4" : "max-h-0"}`}
+                className={`flex flex-col gap-4 pl-4 overflow-hidden transition-all duration-300 ${expandedMenu === "about" ? "max-h-52 mt-4" : "max-h-0"}`}
               >
                 <Link
                   href="/about/our-team"

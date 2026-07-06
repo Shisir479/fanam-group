@@ -19,7 +19,7 @@ export function InquiryCTA() {
     };
 
     return (
-        <section className="w-full py-24 bg-gray-50 border-t border-gray-200 relative z-10">
+        <section className="w-full py-24 bg-gray-50  relative z-10">
             <div className="container mx-auto px-5 md:px-16">
                 <div className="mb-12 flex flex-col items-start gap-4">
                     <div className="flex flex-col items-start gap-4">
