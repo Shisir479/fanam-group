@@ -6,9 +6,9 @@ export function BlogHero() {
       {/* Background with overlay */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-black/40 z-10" />
-        <img 
-          src="https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?q=80&w=2070&auto=format&fit=crop" 
-          alt="Bonedi Homes News and Insights" 
+        <img
+          src="https://images.unsplash.com/photo-1585776245991-cf89dd7fc73a?q=80&w=2070&auto=format&fit=crop"
+          alt="Bonedi Homes News and Insights"
           className="w-full h-full object-cover opacity-80"
         />
       </div>

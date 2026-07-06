@@ -18,7 +18,7 @@ export function RelatedPosts({ currentPostId, category }: RelatedPostsProps) {
           Related <span className="font-bold">Articles</span>
         </h3>
       </div>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {related.map((post) => (
           <BlogCard key={post.id} post={post} />

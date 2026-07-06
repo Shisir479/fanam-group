@@ -5,7 +5,6 @@ export function CompanyProfile() {
     <section className="w-full py-16 md:py-24 bg-white">
       <div className="container mx-auto px-5 md:px-16">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
-          
           {/* Left Text Side */}
           <div className="w-full lg:w-1/2 flex flex-col gap-6">
             <div className="flex flex-col gap-4 mb-4">
@@ -20,22 +19,34 @@ export function CompanyProfile() {
                 </h2>
               </BlockReveal>
             </div>
-            
+
             <p className="text-gray-600 text-base leading-relaxed">
-              Bonedi Homes is a premier real estate development company dedicated to creating luxurious, sustainable, and culturally rich living spaces. Established with a vision to redefine urban living, we blend modern architectural brilliance with our deep-rooted heritage.
+              Bonedi Homes is a premier real estate development company
+              dedicated to creating luxurious, sustainable, and culturally rich
+              living spaces. Established with a vision to redefine urban living,
+              we blend modern architectural brilliance with our deep-rooted
+              heritage.
             </p>
             <p className="text-gray-600 text-base leading-relaxed">
-              Our projects span across prime locations, offering unparalleled convenience, state-of-the-art amenities, and a community-centric lifestyle. We pride ourselves on our meticulous attention to detail, uncompromising quality, and a customer-first approach that ensures every Bonedi home is a masterpiece.
+              Our projects span across prime locations, offering unparalleled
+              convenience, state-of-the-art amenities, and a community-centric
+              lifestyle. We pride ourselves on our meticulous attention to
+              detail, uncompromising quality, and a customer-first approach that
+              ensures every Bonedi home is a masterpiece.
             </p>
-            
+
             <div className="grid grid-cols-2 gap-8 mt-6">
               <div className="flex flex-col gap-2">
                 <h4 className="text-4xl font-bold text-[#003B6D]">15+</h4>
-                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Years Experience</p>
+                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+                  Years Experience
+                </p>
               </div>
               <div className="flex flex-col gap-2">
                 <h4 className="text-4xl font-bold text-[#003B6D]">50+</h4>
-                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Projects Completed</p>
+                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+                  Projects Completed
+                </p>
               </div>
             </div>
           </div>
@@ -43,9 +54,9 @@ export function CompanyProfile() {
           {/* Right Image Side */}
           <div className="w-full lg:w-1/2 relative">
             <div className="relative aspect-[4/3] w-full overflow-hidden shadow-lg border border-gray-100">
-              <img 
-                src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2070&auto=format&fit=crop" 
-                alt="Modern Apartment Building" 
+              <img
+                src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2070&auto=format&fit=crop"
+                alt="Modern Apartment Building"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 border-[8px] border-white/20 pointer-events-none"></div>
@@ -53,7 +64,6 @@ export function CompanyProfile() {
             {/* Decorative block */}
             <div className="hidden lg:block absolute -bottom-6 -left-6 w-32 h-32 bg-gray-100 -z-10"></div>
           </div>
-
         </div>
       </div>
     </section>

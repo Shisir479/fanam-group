@@ -5,7 +5,6 @@ export function VisionMission() {
     <section className="w-full py-16 md:py-24 bg-[#003B6D] text-white">
       <div className="container mx-auto px-5 md:px-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 relative">
-          
           {/* Vertical divider on desktop */}
           <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-[1px] bg-white/20 transform -translate-x-1/2"></div>
 
@@ -24,7 +23,11 @@ export function VisionMission() {
               </BlockReveal>
             </div>
             <p className="text-white/80 text-lg leading-relaxed font-light">
-              To be the most trusted and globally recognized real estate developer, setting new benchmarks in architectural innovation, sustainability, and community living. We envision a future where every Bonedi home stands as a symbol of timeless elegance and unmatched quality.
+              To be the most trusted and globally recognized real estate
+              developer, setting new benchmarks in architectural innovation,
+              sustainability, and community living. We envision a future where
+              every Bonedi home stands as a symbol of timeless elegance and
+              unmatched quality.
             </p>
           </div>
 
@@ -43,10 +46,13 @@ export function VisionMission() {
               </BlockReveal>
             </div>
             <p className="text-white/80 text-lg leading-relaxed font-light">
-              To consistently deliver premium real estate projects that exceed customer expectations through meticulous planning, cutting-edge technology, and a commitment to environmental stewardship. We strive to create value for our clients, partners, and the communities we serve.
+              To consistently deliver premium real estate projects that exceed
+              customer expectations through meticulous planning, cutting-edge
+              technology, and a commitment to environmental stewardship. We
+              strive to create value for our clients, partners, and the
+              communities we serve.
             </p>
           </div>
-
         </div>
       </div>
     </section>

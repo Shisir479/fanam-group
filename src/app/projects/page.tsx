@@ -27,7 +27,7 @@ export default function ProjectsPage() {
       result = result.filter(
         (p) =>
           p.title.toLowerCase().includes(query) ||
-          p.location.toLowerCase().includes(query)
+          p.location.toLowerCase().includes(query),
       );
     }
 
@@ -72,9 +72,9 @@ export default function ProjectsPage() {
         {/* Background with overlay */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-black/40 z-10" />
-          <img 
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop" 
-            alt="Bonedi Homes Projects" 
+          <img
+            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
+            alt="Bonedi Homes Projects"
             className="w-full h-full object-cover opacity-80"
           />
         </div>
@@ -101,7 +101,6 @@ export default function ProjectsPage() {
       {/* Filters & Search */}
       <section className="container mx-auto px-5 md:px-16 mb-12">
         <div className="bg-white p-6 border border-gray-200 shadow-sm flex flex-col xl:flex-row gap-6 justify-between items-start xl:items-center">
-          
           {/* Search */}
           <div className="relative w-full xl:w-96">
             <input
@@ -193,8 +192,11 @@ export default function ProjectsPage() {
                   <span className="bg-[#003B6D] text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 shadow-sm">
                     {project.category}
                   </span>
-                  {project.status.map(s => (
-                    <span key={s} className="bg-white/90 backdrop-blur-sm text-[#003B6D] text-[11px] font-bold uppercase tracking-wider px-3 py-1 shadow-sm capitalize">
+                  {project.status.map((s) => (
+                    <span
+                      key={s}
+                      className="bg-white/90 backdrop-blur-sm text-[#003B6D] text-[11px] font-bold uppercase tracking-wider px-3 py-1 shadow-sm capitalize"
+                    >
                       {s}
                     </span>
                   ))}
@@ -232,9 +234,13 @@ export default function ProjectsPage() {
           </div>
         ) : (
           <div className="py-20 text-center">
-            <h3 className="text-2xl font-medium text-gray-500 mb-4">No projects found.</h3>
-            <p className="text-gray-400">Try adjusting your search or filters.</p>
-            <button 
+            <h3 className="text-2xl font-medium text-gray-500 mb-4">
+              No projects found.
+            </h3>
+            <p className="text-gray-400">
+              Try adjusting your search or filters.
+            </p>
+            <button
               onClick={() => {
                 setSearchQuery("");
                 setCategoryFilter("All");

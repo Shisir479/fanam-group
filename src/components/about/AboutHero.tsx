@@ -6,9 +6,9 @@ export function AboutHero() {
       {/* Background with overlay */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-black/40 z-10" />
-        <img 
-          src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop" 
-          alt="Bonedi Office" 
+        <img
+          src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
+          alt="Bonedi Office"
           className="w-full h-full object-cover opacity-80"
         />
       </div>

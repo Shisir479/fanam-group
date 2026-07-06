@@ -5,40 +5,45 @@ const values = [
   {
     icon: <Shield className="w-8 h-8" />,
     title: "Integrity",
-    description: "We uphold the highest standards of honesty and transparency in all our interactions and transactions."
+    description:
+      "We uphold the highest standards of honesty and transparency in all our interactions and transactions.",
   },
   {
     icon: <Gem className="w-8 h-8" />,
     title: "Quality",
-    description: "Uncompromising commitment to excellence in materials, design, and construction."
+    description:
+      "Uncompromising commitment to excellence in materials, design, and construction.",
   },
   {
     icon: <Users className="w-8 h-8" />,
     title: "Customer First",
-    description: "Our clients are at the heart of everything we do. We build relationships, not just buildings."
+    description:
+      "Our clients are at the heart of everything we do. We build relationships, not just buildings.",
   },
   {
     icon: <Leaf className="w-8 h-8" />,
     title: "Sustainability",
-    description: "Dedicated to eco-friendly practices and building sustainable communities for the future."
+    description:
+      "Dedicated to eco-friendly practices and building sustainable communities for the future.",
   },
   {
     icon: <Lightbulb className="w-8 h-8" />,
     title: "Innovation",
-    description: "Continuously adopting new technologies and architectural trends to stay ahead of the curve."
+    description:
+      "Continuously adopting new technologies and architectural trends to stay ahead of the curve.",
   },
   {
     icon: <TrendingUp className="w-8 h-8" />,
     title: "Growth",
-    description: "Fostering an environment of continuous learning and growth for our team and partners."
-  }
+    description:
+      "Fostering an environment of continuous learning and growth for our team and partners.",
+  },
 ];
 
 export function CoreValues() {
   return (
     <section className="w-full py-16 md:py-24 bg-gray-50 border-t border-gray-200">
       <div className="container mx-auto px-5 md:px-16">
-        
         <div className="text-center mb-16 flex flex-col items-center gap-4">
           <BlockReveal color="#003B6D">
             <div className="flex items-center text-[14px] md:text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
@@ -54,7 +59,10 @@ export function CoreValues() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {values.map((value, index) => (
-            <div key={index} className="bg-white p-10 border border-gray-50 shadow-sm transition-shadow group flex flex-col items-start">
+            <div
+              key={index}
+              className="bg-white p-10 border border-gray-50 shadow-sm transition-shadow group flex flex-col items-start"
+            >
               <div className="bg-[#003B6D]/5 text-[#003B6D] p-4 rounded-none mb-6 group-hover:bg-[#003B6D] group-hover:text-white transition-colors duration-300">
                 {value.icon}
               </div>
@@ -67,7 +75,6 @@ export function CoreValues() {
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

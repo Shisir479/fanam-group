@@ -26,7 +26,7 @@ export default function Home() {
       <GalleryPreview />
       <LatestNews />
       <VideoSection />
-      <InquiryCTA/>
+      <InquiryCTA />
       <ContactInfo />
     </div>
   );
