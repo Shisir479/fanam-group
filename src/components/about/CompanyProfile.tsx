@@ -1,4 +1,5 @@
 import { BlockReveal } from "@/components/ui/BlockReveal";
+import { Counter } from "@/components/ui/Counter";
 
 export function CompanyProfile() {
   return (
@@ -7,25 +8,24 @@ export function CompanyProfile() {
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
           {/* Left Text Side */}
           <div className="w-full lg:w-1/2 flex flex-col gap-6">
-            <div className="flex flex-col gap-4 mb-4">
+            <div className="flex flex-col gap-4 mb-2">
               <BlockReveal color="#003B6D">
                 <div className="flex items-center text-[14px] md:text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
                   COMPANY PROFILE
                 </div>
               </BlockReveal>
               <BlockReveal color="#003B6D" delay={0.2}>
-                <h2 className="text-2xl md:text-[34px] font-bold text-[#003B6D] leading-[1.3] uppercase max-w-3xl">
-                  EXCELLENCE IN REAL ESTATE
+                <h2 className="text-2xl md:text-[34px] font-bold text-[#003B6D] leading-[1.3] uppercase">
+                  Pioneering Luxury Real Estate
                 </h2>
               </BlockReveal>
             </div>
 
             <p className="text-gray-600 text-base leading-relaxed">
-              Bonedi Homes is a premier real estate development company
-              dedicated to creating luxurious, sustainable, and culturally rich
-              living spaces. Established with a vision to redefine urban living,
-              we blend modern architectural brilliance with our deep-rooted
-              heritage.
+              At Bonedi Homes, we do more than just build structures; we create
+              legacies. With a deep-rooted commitment to architectural brilliance
+              and uncompromising quality, we have established ourselves as
+              pioneers in the luxury real estate sector.
             </p>
             <p className="text-gray-600 text-base leading-relaxed">
               Our projects span across prime locations, offering unparalleled
@@ -37,13 +37,17 @@ export function CompanyProfile() {
 
             <div className="grid grid-cols-2 gap-8 mt-6">
               <div className="flex flex-col gap-2">
-                <h4 className="text-4xl font-bold text-[#003B6D]">15+</h4>
+                <h4 className="text-4xl font-bold text-[#003B6D]">
+                  <Counter end={15} suffix="+" duration={600} />
+                </h4>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">
                   Years Experience
                 </p>
               </div>
               <div className="flex flex-col gap-2">
-                <h4 className="text-4xl font-bold text-[#003B6D]">50+</h4>
+                <h4 className="text-4xl font-bold text-[#003B6D]">
+                  <Counter end={50} suffix="+" duration={800} />
+                </h4>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">
                   Projects Completed
                 </p>

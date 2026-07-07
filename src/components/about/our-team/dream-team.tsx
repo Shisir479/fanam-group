@@ -3,7 +3,7 @@ import { BlockReveal } from "@/components/ui/BlockReveal";
 
 export default function DreamTeam() {
   return (
-    <section className="bg-white py-12 md:py-16">
+    <section className="bg-white py-16 md:py-24">
       <div className="container mx-auto px-5 md:px-8 lg:px-10">
         {/* Heading */}
         <BlockReveal color="#0F4C81">

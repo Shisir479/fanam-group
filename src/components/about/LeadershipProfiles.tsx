@@ -19,7 +19,7 @@ const leaders = [
 
 export function LeadershipProfiles() {
   return (
-    <section className="w-full py-12 md:py-16 bg-white">
+    <section className="w-full py-16 md:py-24 bg-white">
       <div className="container mx-auto px-5 md:px-16">
         <div className="text-center mb-10 flex flex-col items-center gap-3">
           <BlockReveal color="#003B6D">

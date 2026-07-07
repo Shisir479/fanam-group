@@ -1,4 +1,5 @@
 import { BlockReveal } from "@/components/ui/BlockReveal";
+import Link from "next/link";
 
 const newsItems = [
   {
@@ -45,7 +46,7 @@ export function LatestNews() {
             </BlockReveal>
           </div>
 
-          <button className="hidden md:inline-flex items-center gap-4 text-sm font-bold text-[#003B6D] uppercase tracking-wider group">
+          <Link href="/blog" className="hidden md:inline-flex items-center gap-4 text-sm font-bold text-[#003B6D] uppercase tracking-wider group">
             <span className="relative overflow-hidden">
               <span className="inline-block transition-transform duration-500 group-hover:-translate-y-full">
                 See All News
@@ -69,7 +70,7 @@ export function LatestNews() {
                 />
               </svg>
             </div>
-          </button>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
@@ -120,9 +121,9 @@ export function LatestNews() {
         </div>
 
         {/* Mobile View All Button */}
-        <button className="md:hidden mt-8 w-full flex items-center justify-center gap-2 text-sm font-bold text-[#003B6D] uppercase border border-[#003B6D]/30 py-4 ">
+        <Link href="/blog" className="md:hidden mt-8 w-full flex items-center justify-center gap-2 text-sm font-bold text-[#003B6D] uppercase border border-[#003B6D]/30 py-4 ">
           See All News
-        </button>
+        </Link>
       </div>
     </section>
   );

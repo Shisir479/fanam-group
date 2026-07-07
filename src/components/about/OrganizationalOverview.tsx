@@ -30,53 +30,54 @@ const departments = [
 
 export function OrganizationalOverview() {
   return (
-    <section className="w-full py-16 md:py-24 bg-gray-50 border-t border-gray-200">
+    <section className="w-full py-16 md:py-24 bg-gray-50 ">
       <div className="container mx-auto px-5 md:px-16">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
-          {/* Left Text */}
-          <div className="w-full lg:w-1/3 flex flex-col gap-6">
-            <div className="flex flex-col gap-4 mb-2">
-              <BlockReveal color="#003B6D">
-                <div className="flex items-center text-[14px] md:text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
-                  STRUCTURE
-                </div>
-              </BlockReveal>
-              <BlockReveal color="#003B6D" delay={0.2}>
-                <h2 className="text-2xl md:text-[34px] font-bold text-[#003B6D] leading-[1.3] uppercase">
-                  ORGANIZATIONAL OVERVIEW
-                </h2>
-              </BlockReveal>
-            </div>
-
-            <p className="text-gray-600 text-sm leading-relaxed">
-              Bonedi Homes is structured to deliver end-to-end real estate
-              solutions. From initial architectural conceptualization to final
-              property management, our specialized divisions work in seamless
-              harmony to ensure the flawless execution of every project.
-            </p>
+        
+        {/* Header Section (Left Aligned) */}
+        <div className="flex flex-col items-start text-left max-w-3xl mb-16 gap-6">
+          <div className="flex flex-col items-start gap-4">
+            <BlockReveal color="#003B6D">
+              <div className="flex items-center text-[12px] md:text-[14px] font-semibold tracking-[0.25em] text-gray-400 uppercase">
+                
+                STRUCTURE
+              </div>
+            </BlockReveal>
+            <BlockReveal color="#003B6D" delay={0.2}>
+              <h2 className="text-2xl md:text-[34px] font-bold text-[#003B6D] leading-tight uppercase">
+                Organizational <span className="font-bold">Overview</span>
+              </h2>
+            </BlockReveal>
           </div>
 
-          {/* Right Grid */}
-          <div className="w-full lg:w-2/3">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {departments.map((dept, index) => (
-                <div
-                  key={index}
-                  className="bg-white p-8 border border-gray-200 flex flex-col items-start shadow-sm hover:shadow-md transition-shadow"
-                >
-                  <div className="bg-[#003B6D]/10 p-3 text-[#003B6D] mb-5">
-                    {dept.icon}
-                  </div>
-                  <h3 className="text-[13px] font-bold text-[#003B6D] uppercase tracking-wider mb-2">
-                    {dept.name}
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    {dept.description}
-                  </p>
-                </div>
-              ))}
+          <p className="text-gray-500 text-[15px] leading-relaxed font-light mt-2 max-w-2xl">
+            Bonedi Homes is structured to deliver end-to-end real estate solutions. From initial architectural conceptualization to final property management, our specialized divisions work in seamless harmony to ensure the flawless execution of every project.
+          </p>
+        </div>
+
+        {/* Departments Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {departments.map((dept, index) => (
+            <div 
+              key={index} 
+              className="bg-white shadow-sm p-6 md:p-8  transition-all duration-500 flex flex-col group relative overflow-hidden"
+            >
+              {/* Elegant Animated Top Border */}
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#003B6D]/30 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out"></div>
+              
+              {/* Icon Container */}
+              <div className="w-14 h-14 bg-gray-50 flex items-center justify-center  text-[#003B6D] mb-6 group-hover:bg-[#003B6D] group-hover:text-white transition-colors duration-500">
+                {dept.icon}
+              </div>
+              
+              {/* Content */}
+              <h3 className="text-lg font-medium text-[#003B6D] mb-3 ">
+                {dept.name}
+              </h3>
+              <p className="text-gray-500 text-[14px] leading-relaxed">
+                {dept.description}
+              </p>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

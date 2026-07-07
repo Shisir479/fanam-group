@@ -3,10 +3,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
+  const pathname = usePathname() || "";
 
   const toggleAccordion = (menu: string) => {
     setExpandedMenu(expandedMenu === menu ? null : menu);
@@ -42,58 +44,44 @@ export function Navbar() {
                 className="relative group h-full flex items-center"
               >
                 Home
-                <span className="absolute left-0 bottom-0 w-full h-[4px] bg-white scale-x-0 origin-left transition-transform duration-600 ease-out group-hover:scale-x-100"></span>
+                <span className={`absolute left-0 bottom-0 w-full h-[4px] bg-white origin-left transition-transform duration-600 ease-out ${pathname === '/' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
               </Link>
               {/* About with Dropdown */}
               <div className="relative group h-full flex items-center">
                 <Link href="/about" className="h-full flex items-center">
                   About Us
-                  <span className="absolute left-0 bottom-0 w-full h-[4px] bg-white scale-x-0 origin-left transition-transform duration-600 ease-out group-hover:scale-x-100"></span>
+                  <span className={`absolute left-0 bottom-0 w-full h-[4px] bg-white origin-left transition-transform duration-600 ease-out ${pathname.startsWith('/about') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
                 </Link>
-                <div className="absolute top-full left-0 min-w-[240px] bg-black/80 flex flex-col opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                  <Link
-                    href="/our-team"
-                    className="px-6 py-5 text-sm font-semibold text-white/70 hover:text-white border-b border-white/10 transition-colors"
-                  >
-                    Our Team
-                  </Link>
-                  <Link
-                    href="/privacy-policy"
-                    className="px-6 py-5 text-sm font-semibold text-white/70 hover:text-white border-b border-white/10 transition-colors"
-                  >
-                    Privacy Policy
-                  </Link>
-                </div>
               </div>
 
               {/* Projects with Dropdown */}
               <div className="relative group h-full flex items-center">
                 <Link href="/projects" className="h-full flex items-center">
                   Projects
-                  <span className="absolute left-0 bottom-0 w-full h-[4px] bg-white scale-x-0 origin-left transition-transform duration-600 ease-out group-hover:scale-x-100"></span>
+                  <span className={`absolute left-0 bottom-0 w-full h-[4px] bg-white origin-left transition-transform duration-600 ease-out ${pathname.startsWith('/projects') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
                 </Link>
                 <div className="absolute top-full left-0 min-w-[240px] bg-black/80 flex flex-col opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
                   <Link
                     href="/projects/ongoing"
-                    className="px-6 py-5 text-sm font-semibold text-white/70 hover:text-white border-b border-white/10 transition-colors"
+                    className={`px-6 py-5 text-sm font-semibold hover:text-white border-b border-white/10 transition-colors ${pathname === '/projects/ongoing' ? 'text-white bg-white/10' : 'text-white/70'}`}
                   >
                     Ongoing
                   </Link>
                   <Link
                     href="/projects/upcoming"
-                    className="px-6 py-5 text-sm font-semibold text-white/70 hover:text-white border-b border-white/10 transition-colors"
+                    className={`px-6 py-5 text-sm font-semibold hover:text-white border-b border-white/10 transition-colors ${pathname === '/projects/upcoming' ? 'text-white bg-white/10' : 'text-white/70'}`}
                   >
                     Upcoming
                   </Link>
                   <Link
                     href="/projects/handed-over"
-                    className="px-6 py-5 text-sm font-semibold text-white/70 hover:text-white border-b border-white/10 transition-colors"
+                    className={`px-6 py-5 text-sm font-semibold hover:text-white border-b border-white/10 transition-colors ${pathname === '/projects/handed-over' ? 'text-white bg-white/10' : 'text-white/70'}`}
                   >
                     Handed Over
                   </Link>
                   <Link
                     href="/projects/ready"
-                    className="px-6 py-5 text-sm font-semibold text-white/70 hover:text-white transition-colors"
+                    className={`px-6 py-5 text-sm font-semibold hover:text-white transition-colors ${pathname === '/projects/ready' ? 'text-white bg-white/10' : 'text-white/70'}`}
                   >
                     Ready
                   </Link>
@@ -105,59 +93,37 @@ export function Navbar() {
                 className="relative group h-full flex items-center"
               >
                 Blog
-                <span className="absolute left-0 bottom-0 w-full h-[4px] bg-white scale-x-0 origin-left transition-transform duration-600 ease-out group-hover:scale-x-100"></span>
+                <span className={`absolute left-0 bottom-0 w-full h-[4px] bg-white origin-left transition-transform duration-600 ease-out ${pathname.startsWith('/blog') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
               </Link>
 
               {/* Gallery with Dropdown */}
               <div className="relative group h-full flex items-center">
                 <Link href="/gallery" className="h-full flex items-center">
                   Gallery
-                  <span className="absolute left-0 bottom-0 w-full h-[4px] bg-white scale-x-0 origin-left transition-transform duration-600 ease-out group-hover:scale-x-100"></span>
+                  <span className={`absolute left-0 bottom-0 w-full h-[4px] bg-white origin-left transition-transform duration-600 ease-out ${pathname.startsWith('/gallery') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
                 </Link>
                 <div className="absolute top-full left-0 min-w-[240px] bg-black/80 flex flex-col opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
                   <Link
-                    href="/gallery/newsletter"
-                    className="px-6 py-5 text-sm font-semibold text-white/70 hover:text-white border-b border-white/10 transition-colors"
-                  >
-                    Newsletter
-                  </Link>
-                  <Link
                     href="/image-gallery"
-                    className="px-6 py-5 text-sm font-semibold text-white/70 hover:text-white border-b border-white/10 transition-colors"
+                    className={`px-6 py-5 text-sm font-semibold hover:text-white border-b border-white/10 transition-colors ${pathname === '/image-gallery' ? 'text-white bg-white/10' : 'text-white/70'}`}
                   >
                     Image Gallery
                   </Link>
                   <Link
                     href="/video-gallery"
-                    className="px-6 py-5 text-sm font-semibold text-white/70 hover:text-white transition-colors"
+                    className={`px-6 py-5 text-sm font-semibold hover:text-white transition-colors ${pathname === '/video-gallery' ? 'text-white bg-white/10' : 'text-white/70'}`}
                   >
                     Video Gallery
                   </Link>
                 </div>
               </div>
 
-              <Link
-                href="/career"
-                className="relative group h-full flex items-center"
-              >
-                Career
-                <span className="absolute left-0 bottom-0 w-full h-[4px] bg-white scale-x-0 origin-left transition-transform duration-600 ease-out group-hover:scale-x-100"></span>
-              </Link>
-
               {/* Contact with Dropdown */}
               <div className="relative group h-full flex items-center">
                 <Link href="/contact" className="h-full flex items-center">
                   Contact
-                  <span className="absolute left-0 bottom-0 w-full h-[4px] bg-white scale-x-0 origin-left transition-transform duration-600 ease-out group-hover:scale-x-100"></span>
+                  <span className={`absolute left-0 bottom-0 w-full h-[4px] bg-white origin-left transition-transform duration-600 ease-out ${pathname.startsWith('/contact') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
                 </Link>
-                <div className="absolute top-full left-0 min-w-[200px] bg-black/80 flex flex-col opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                  <Link
-                    href="/contact/suggestion"
-                    className="px-6 py-5 text-sm font-semibold text-white/70 hover:text-white transition-colors"
-                  >
-                    Suggestion
-                  </Link>
-                </div>
               </div>
             </nav>
           </div>
@@ -219,31 +185,6 @@ export function Navbar() {
                 <span className="text-2xl font-light text-white/70 w-8 text-center">
                   {expandedMenu === "about" ? "-" : "+"}
                 </span>
-              </div>
-              <div
-                className={`flex flex-col gap-4 pl-4 overflow-hidden transition-all duration-300 ${expandedMenu === "about" ? "max-h-52 mt-4" : "max-h-0"}`}
-              >
-                <Link
-                  href="/about/our-team"
-                  className="text-[15px] font-normal text-white/80"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Our Team
-                </Link>
-                <Link
-                  href="/about/privacy-policy"
-                  className="text-[15px] font-normal text-white/80"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Privacy Policy
-                </Link>
-                <Link
-                  href="/about/edison-royal-club"
-                  className="text-[15px] font-normal text-white/80"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Edison Royal Club
-                </Link>
               </div>
             </div>
 

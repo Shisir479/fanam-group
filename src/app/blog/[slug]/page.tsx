@@ -55,26 +55,20 @@ const Linkedin = ({ className }: { className?: string }) => (
 );
 import { RelatedPosts } from "@/components/blog/RelatedPosts";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const post = getPostBySlug(params.slug);
-  if (!post) return { title: "Post Not Found" };
-
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
+  const post = getPostBySlug(resolvedParams.slug);
+  if (!post) return { title: 'Post Not Found' };
+  
   return {
     title: `${post.title} - Bonedi Homes`,
     description: post.excerpt,
   };
 }
 
-export default function BlogDetailsPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const post = getPostBySlug(params.slug);
+export default async function BlogDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
+  const post = getPostBySlug(resolvedParams.slug);
 
   if (!post) {
     notFound();
@@ -83,53 +77,47 @@ export default function BlogDetailsPage({
   return (
     <main className="flex min-h-screen flex-col bg-white">
       {/* Article Hero */}
-      <section className="relative w-full h-[60vh] min-h-[500px] flex items-end pb-16 bg-black">
+      <section className="relative w-full h-[70vh] min-h-[600px] flex items-end pb-20 bg-[#003B6D]">
         <div className="absolute inset-0 z-0">
-          <img
-            src={post.image}
-            alt={post.title}
+          <img 
+            src={post.image} 
+            alt={post.title} 
             className="w-full h-full object-cover opacity-60"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
         </div>
 
         <div className="container mx-auto px-5 md:px-16 relative z-20">
           <div className="max-w-4xl mx-auto">
             <BlockReveal color="#ffffff">
-              <span className="inline-block bg-[#D4AF37] text-white text-[11px] font-bold uppercase tracking-widest px-4 py-1.5 mb-6">
+              <span className="inline-block bg-white text-[#003B6D] text-[10px] font-bold uppercase tracking-[0.2em] px-4 py-2 mb-8">
                 {post.category}
               </span>
             </BlockReveal>
-
+            
             <BlockReveal color="#ffffff" delay={0.2}>
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-light text-white leading-tight mb-6">
+              <h1 className="text-4xl md:text-5xl lg:text-7xl font-light text-white leading-[1.1] mb-8">
                 {post.title}
               </h1>
             </BlockReveal>
 
             <BlockReveal color="#ffffff" delay={0.4}>
-              <div className="flex flex-wrap items-center gap-6 text-white/80 text-[13px] font-light">
+              <div className="flex flex-wrap items-center gap-6 text-white/80 text-[13px] font-light tracking-wide uppercase">
                 <div className="flex items-center gap-3">
-                  <img
-                    src={post.authorImage}
-                    alt={post.author}
-                    className="w-10 h-10 rounded-full object-cover border border-white/20"
-                  />
-                  <div className="flex flex-col">
-                    <span className="font-medium text-white">
-                      {post.author}
-                    </span>
-                    <span>{post.authorRole}</span>
+                  <img src={post.authorImage} alt={post.author} className="w-10 h-10 rounded-full object-cover border border-white/20" />
+                  <div className="flex flex-col normal-case">
+                    <span className="font-medium text-white">{post.author}</span>
+                    <span className="text-[12px]">{post.authorRole}</span>
                   </div>
                 </div>
                 <div className="h-6 w-[1px] bg-white/20 hidden md:block"></div>
                 <div className="flex items-center gap-2">
-                  <CalendarDays className="w-4 h-4 text-[#D4AF37]" />
+                  <CalendarDays className="w-4 h-4 text-white/60" />
                   <span>{post.date}</span>
                 </div>
                 <div className="h-6 w-[1px] bg-white/20 hidden md:block"></div>
                 <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-[#D4AF37]" />
+                  <Clock className="w-4 h-4 text-white/60" />
                   <span>{post.readTime}</span>
                 </div>
               </div>
@@ -139,47 +127,39 @@ export default function BlogDetailsPage({
       </section>
 
       {/* Article Body */}
-      <section className="py-16 md:py-24">
+      <section className="py-20 md:py-32">
         <div className="container mx-auto px-5 md:px-16">
           <div className="max-w-4xl mx-auto">
+            
             {/* Social Share (Floating Left on Desktop, Top on Mobile) */}
-            <div className="flex flex-row md:flex-col gap-4 md:absolute md:-ml-20 mb-8 md:mb-0">
-              <button className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:text-[#003B6D] hover:border-[#003B6D] transition-colors">
+            <div className="flex flex-row md:flex-col gap-4 md:absolute md:-ml-24 mb-12 md:mb-0">
+              <button className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-[#003B6D] hover:border-[#003B6D] transition-colors">
                 <Share2 className="w-4 h-4" />
               </button>
-              <button className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:text-[#003B6D] hover:border-[#003B6D] transition-colors">
+              <button className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-[#003B6D] hover:border-[#003B6D] transition-colors">
                 <Facebook className="w-4 h-4" />
               </button>
-              <button className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:text-[#003B6D] hover:border-[#003B6D] transition-colors">
+              <button className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-[#003B6D] hover:border-[#003B6D] transition-colors">
                 <Twitter className="w-4 h-4" />
               </button>
-              <button className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:text-[#003B6D] hover:border-[#003B6D] transition-colors">
+              <button className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-[#003B6D] hover:border-[#003B6D] transition-colors">
                 <Linkedin className="w-4 h-4" />
               </button>
             </div>
 
             {/* Content */}
-            <article className="prose prose-lg max-w-none text-gray-600 font-light leading-loose mb-16">
-              <p className="text-xl md:text-2xl text-[#003B6D] font-light leading-relaxed mb-8">
+            <article className="prose prose-lg md:prose-xl max-w-none text-gray-500 font-light leading-[2.2] mb-20">
+              <p className="text-2xl md:text-3xl text-[#003B6D] font-light leading-relaxed mb-12 border-l-2 border-[#003B6D] pl-8 py-2">
                 {post.excerpt}
               </p>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: post.content.replace(/\n/g, "<br/>"),
-                }}
-              />
+              <div dangerouslySetInnerHTML={{ __html: post.content.replace(/\n/g, '<br/>') }} />
             </article>
 
             {/* Tags */}
-            <div className="flex items-center gap-3 mb-16 pb-16 border-b border-gray-100">
-              <span className="text-[13px] font-bold text-[#003B6D] uppercase tracking-widest mr-2">
-                Tags:
-              </span>
+            <div className="flex items-center gap-3 mb-20 pb-16 border-b border-gray-100">
+              <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mr-2">Tags</span>
               {post.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-4 py-1.5 bg-gray-50 text-gray-600 text-[13px] hover:bg-gray-100 cursor-pointer transition-colors"
-                >
+                <span key={tag} className="px-5 py-2 border border-gray-100 text-gray-500 text-[13px] hover:border-[#003B6D] hover:text-[#003B6D] cursor-pointer transition-colors">
                   {tag}
                 </span>
               ))}
@@ -187,6 +167,7 @@ export default function BlogDetailsPage({
 
             {/* Related Posts */}
             <RelatedPosts currentPostId={post.id} category={post.category} />
+
           </div>
         </div>
       </section>
