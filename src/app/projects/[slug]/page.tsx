@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { projects } from "@/lib/projectData";
 import { BlockReveal } from "@/components/ui/BlockReveal";
+import { SharedButton } from "@/components/ui/SharedButton";
 import { GalleryViewer } from "@/components/ui/GalleryViewer";
 import {
   MapPin,
@@ -129,7 +130,7 @@ export default async function ProjectDetailsPage({
   return (
     <main className="min-h-screen bg-gray-50 pb-0 font-sans">
       {/* 1. Project Banner */}
-      <section className="relative w-full h-[60vh] md:h-[80vh] min-h-[500px] flex items-end bg-[#003B6D] overflow-hidden">
+      <section className="relative w-full h-[60vh] md:h-[80vh] min-h-[500px] flex items-end bg-brand-blue overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10 z-10" />
           <Image
@@ -143,13 +144,13 @@ export default async function ProjectDetailsPage({
         <div className="container mx-auto px-5 md:px-16 relative z-20 pb-20 md:pb-28">
           <div className="max-w-5xl">
             <div className="flex flex-wrap gap-3 mb-6">
-              <span className="bg-[#003B6D] text-white text-[12px] font-bold uppercase tracking-wider px-4 py-1.5 shadow-sm">
+              <span className="bg-brand-blue text-white text-[12px] font-bold uppercase tracking-wider px-4 py-1.5 shadow-sm">
                 {project.category}
               </span>
               {project.status.map((s) => (
                 <span
                   key={s}
-                  className="bg-white text-[#003B6D] text-[12px] font-bold uppercase tracking-wider px-4 py-1.5 shadow-sm capitalize"
+                  className="bg-white text-brand-blue text-[12px] font-bold uppercase tracking-wider px-4 py-1.5 shadow-sm capitalize"
                 >
                   {s}
                 </span>
@@ -170,13 +171,13 @@ export default async function ProjectDetailsPage({
         <div className="bg-white p-6 md:p-8 shadow-xl border border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6 divide-y md:divide-y-0 md:divide-x divide-gray-100 ">
           <div className="flex-1 flex items-center gap-4 w-full md:w-auto pt-4 md:pt-0 first:pt-0">
             <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center flex-shrink-0">
-              <MapPin className="w-5 h-5 text-[#003B6D]" />
+              <MapPin className="w-5 h-5 text-brand-blue" />
             </div>
             <div>
               <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mb-1">
                 Location
               </p>
-              <p className="text-[#003B6D] font-bold text-lg">
+              <p className="text-brand-blue font-bold text-lg">
                 {project.location}
               </p>
             </div>
@@ -184,13 +185,13 @@ export default async function ProjectDetailsPage({
 
           <div className="flex-1 flex items-center gap-4 w-full md:w-auto pt-4 md:pt-0 px-0 md:px-8">
             <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center flex-shrink-0">
-              <CheckCircle2 className="w-5 h-5 text-[#003B6D]" />
+              <CheckCircle2 className="w-5 h-5 text-brand-blue" />
             </div>
             <div>
               <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mb-1">
                 Status
               </p>
-              <p className="text-[#003B6D] font-bold text-lg capitalize">
+              <p className="text-brand-blue font-bold text-lg capitalize">
                 {project.status[0]}
               </p>
             </div>
@@ -198,13 +199,13 @@ export default async function ProjectDetailsPage({
 
           <div className="flex-1 flex items-center gap-4 w-full md:w-auto pt-4 md:pt-0 pl-0 md:pl-8">
             <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center flex-shrink-0">
-              <Building2 className="w-5 h-5 text-[#003B6D]" />
+              <Building2 className="w-5 h-5 text-brand-blue" />
             </div>
             <div>
               <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mb-1">
                 Property Type
               </p>
-              <p className="text-[#003B6D] font-bold text-lg capitalize">
+              <p className="text-brand-blue font-bold text-lg capitalize">
                 {project.category}
               </p>
             </div>
@@ -218,13 +219,13 @@ export default async function ProjectDetailsPage({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
             <div className="lg:col-span-7 xl:col-span-8">
               <div className="flex flex-col gap-3 mb-12">
-                <BlockReveal color="#003B6D">
+                <BlockReveal color="var(--color-brand-blue)">
                   <h2 className="text-[14px] md:text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
                     About The Project
                   </h2>
                 </BlockReveal>
-                <BlockReveal color="#003B6D" delay={0.2}>
-                  <h3 className="text-2xl md:text-[34px] font-bold text-[#003B6D] leading-[1.3] uppercase  inline-block">
+                <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
+                  <h3 className="text-2xl md:text-[34px] font-bold text-brand-blue leading-[1.3] uppercase  inline-block">
                     Project Overview
                   </h3>
                 </BlockReveal>
@@ -237,14 +238,14 @@ export default async function ProjectDetailsPage({
             <div className="lg:col-span-5 xl:col-span-4">
               {project.features && (
                 <div className="bg-gray-50 p-8 md:p-10 border border-gray-100  h-full shadow-sm">
-                  <h3 className="text-xl font-bold text-[#003B6D] mb-6 uppercase tracking-wider">
+                  <h3 className="text-xl font-bold text-brand-blue mb-6 uppercase tracking-wider">
                     Key Features
                   </h3>
                   <ul className="flex flex-col gap-5">
                     {project.features.map((feature, idx) => (
                       <li key={idx} className="flex items-start gap-4">
                         <div className="bg-white p-1 rounded-full shadow-sm mt-0.5">
-                          <CheckCircle2 className="w-4 h-4 text-[#003B6D] flex-shrink-0" />
+                          <CheckCircle2 className="w-4 h-4 text-brand-blue flex-shrink-0" />
                         </div>
                         <span className="text-gray-700 font-medium">
                           {feature}
@@ -267,13 +268,13 @@ export default async function ProjectDetailsPage({
         >
           <div className="container mx-auto px-5 md:px-16 max-w-7xl">
             <div className="mb-12 flex flex-col gap-3">
-              <BlockReveal color="#003B6D">
+              <BlockReveal color="var(--color-brand-blue)">
                 <h2 className="text-[14px] md:text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
                   Lifestyle
                 </h2>
               </BlockReveal>
-              <BlockReveal color="#003B6D" delay={0.2}>
-                <h3 className="text-2xl md:text-[34px] font-bold text-[#003B6D] leading-[1.3] uppercase">
+              <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
+                <h3 className="text-2xl md:text-[34px] font-bold text-brand-blue leading-[1.3] uppercase">
                   World-Class Amenities
                 </h3>
               </BlockReveal>
@@ -285,8 +286,8 @@ export default async function ProjectDetailsPage({
                   key={idx}
                   className="bg-white p-8 border border-gray-100 flex flex-col items-center justify-center text-center gap-4 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group "
                 >
-                  <div className="w-16 h-16 bg-blue-50  flex items-center justify-center group-hover:bg-[#003B6D] transition-colors duration-300">
-                    <div className="text-[#003B6D] group-hover:text-white transition-colors duration-300">
+                  <div className="w-16 h-16 bg-blue-50  flex items-center justify-center group-hover:bg-brand-blue transition-colors duration-300">
+                    <div className="text-brand-blue group-hover:text-white transition-colors duration-300">
                       {getIcon(amenity.icon)}
                     </div>
                   </div>
@@ -305,13 +306,13 @@ export default async function ProjectDetailsPage({
         <section id="floor-plans" className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-5 md:px-16 max-w-7xl">
             <div className="mb-12 flex flex-col gap-3">
-              <BlockReveal color="#003B6D">
+              <BlockReveal color="var(--color-brand-blue)">
                 <h2 className="text-[14px] md:text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
                   Residences
                 </h2>
               </BlockReveal>
-              <BlockReveal color="#003B6D" delay={0.2}>
-                <h3 className="text-2xl md:text-[34px] font-bold text-[#003B6D] leading-[1.3] uppercase">
+              <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
+                <h3 className="text-2xl md:text-[34px] font-bold text-brand-blue leading-[1.3] uppercase">
                   Floor Plans
                 </h3>
               </BlockReveal>
@@ -324,7 +325,7 @@ export default async function ProjectDetailsPage({
                   className="bg-white  shadow-sm transition-all duration-300 overflow-hidden group"
                 >
                   <div className="p-5 text-center border-b border-gray-100 bg-[#f8f9fa]">
-                    <h4 className="text-[16px] font-bold text-[#003B6D] uppercase tracking-wide">
+                    <h4 className="text-[16px] font-bold text-brand-blue uppercase tracking-wide">
                       {plan.name}
                     </h4>
                   </div>
@@ -338,7 +339,7 @@ export default async function ProjectDetailsPage({
                   </div>
                   <div className="grid grid-cols-3 divide-x divide-gray-200 border-t border-gray-200 bg-[#f8f9fa] py-5">
                     <div className="text-center px-2 flex flex-col items-center">
-                      <Maximize className="w-4 h-4 text-[#003B6D] mb-1.5" strokeWidth={1.5} />
+                      <Maximize className="w-4 h-4 text-brand-blue mb-1.5" strokeWidth={1.5} />
                       <span className="block text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">
                         Size
                       </span>
@@ -347,7 +348,7 @@ export default async function ProjectDetailsPage({
                       </span>
                     </div>
                     <div className="text-center px-2 flex flex-col items-center">
-                      <BedDouble className="w-4 h-4 text-[#003B6D] mb-1.5" strokeWidth={1.5} />
+                      <BedDouble className="w-4 h-4 text-brand-blue mb-1.5" strokeWidth={1.5} />
                       <span className="block text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">
                         Beds
                       </span>
@@ -356,7 +357,7 @@ export default async function ProjectDetailsPage({
                       </span>
                     </div>
                     <div className="text-center px-2 flex flex-col items-center">
-                      <Bath className="w-4 h-4 text-[#003B6D] mb-1.5" strokeWidth={1.5} />
+                      <Bath className="w-4 h-4 text-brand-blue mb-1.5" strokeWidth={1.5} />
                       <span className="block text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">
                         Baths
                       </span>
@@ -381,13 +382,13 @@ export default async function ProjectDetailsPage({
           <div className="container mx-auto px-5 md:px-16 max-w-7xl">
             <div className="flex flex-col md:flex-row justify-between items-end mb-12">
               <div className="flex flex-col gap-3">
-                <BlockReveal color="#003B6D">
+                <BlockReveal color="var(--color-brand-blue)">
                   <h2 className="text-[14px] md:text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
                     Visuals
                   </h2>
                 </BlockReveal>
-                <BlockReveal color="#003B6D" delay={0.2}>
-                  <h3 className="text-2xl md:text-[34px] font-bold text-[#003B6D] leading-[1.3] uppercase">
+                <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
+                  <h3 className="text-2xl md:text-[34px] font-bold text-brand-blue leading-[1.3] uppercase">
                     Project Gallery
                   </h3>
                 </BlockReveal>
@@ -407,13 +408,13 @@ export default async function ProjectDetailsPage({
             {project.constructionProgress && (
               <div id="progress" className="flex flex-col h-full">
                 <div className="flex flex-col gap-3 mb-12">
-                  <BlockReveal color="#003B6D">
+                  <BlockReveal color="var(--color-brand-blue)">
                     <h2 className="text-[14px] md:text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
                       Status
                     </h2>
                   </BlockReveal>
-                  <BlockReveal color="#003B6D" delay={0.2}>
-                    <h3 className="text-2xl md:text-[34px] font-bold text-[#003B6D] leading-[1.3] uppercase inline-block">
+                  <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
+                    <h3 className="text-2xl md:text-[34px] font-bold text-brand-blue leading-[1.3] uppercase inline-block">
                       Construction Progress
                     </h3>
                   </BlockReveal>
@@ -430,7 +431,7 @@ export default async function ProjectDetailsPage({
                   </div>
                   <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden mb-6">
                     <div
-                      className="h-full bg-[#003B6D] relative"
+                      className="h-full bg-brand-blue relative"
                       style={{
                         width: `${project.constructionProgress.percentage}%`,
                       }}
@@ -442,7 +443,7 @@ export default async function ProjectDetailsPage({
                     <span className="text-gray-500 font-medium">
                       Overall Completion
                     </span>
-                    <div className="text-4xl font-bold text-[#003B6D]">
+                    <div className="text-4xl font-bold text-brand-blue">
                       {project.constructionProgress.percentage}%
                     </div>
                   </div>
@@ -454,13 +455,13 @@ export default async function ProjectDetailsPage({
             {project.videoTourUrl && (
               <div id="video-tour" className="flex flex-col h-full">
                 <div className="flex flex-col gap-3 mb-12">
-                  <BlockReveal color="#003B6D">
+                  <BlockReveal color="var(--color-brand-blue)">
                     <h2 className="text-[14px] md:text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
                       Experience
                     </h2>
                   </BlockReveal>
-                  <BlockReveal color="#003B6D" delay={0.2}>
-                    <h3 className="text-2xl md:text-[34px] font-bold text-[#003B6D] leading-[1.3] uppercase   inline-block">
+                  <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
+                    <h3 className="text-2xl md:text-[34px] font-bold text-brand-blue leading-[1.3] uppercase   inline-block">
                       Video Tour
                     </h3>
                   </BlockReveal>
@@ -484,13 +485,13 @@ export default async function ProjectDetailsPage({
         <section id="location" className="py-8 md:py-10 bg-gray-50 ">
           <div className="container mx-auto px-5 md:px-16 max-w-7xl">
             <div className="mb-12 flex flex-col gap-3">
-              <BlockReveal color="#003B6D">
+              <BlockReveal color="var(--color-brand-blue)">
                 <h2 className="text-[14px] md:text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
                   Neighborhood
                 </h2>
               </BlockReveal>
-              <BlockReveal color="#003B6D" delay={0.2}>
-                <h3 className="text-2xl md:text-[34px] font-bold text-[#003B6D] leading-[1.3] uppercase">
+              <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
+                <h3 className="text-2xl md:text-[34px] font-bold text-brand-blue leading-[1.3] uppercase">
                   Location Map
                 </h3>
               </BlockReveal>
@@ -509,7 +510,7 @@ export default async function ProjectDetailsPage({
       )}
 
       {/* 8. Inquiry Section */}
-      <section className="w-full bg-[#003B6D] py-10 md:py-16 relative overflow-hidden">
+      <section className="w-full bg-brand-blue py-10 md:py-16 relative overflow-hidden">
         {/* Subtle background decoration */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-white opacity-5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-cyan-400 opacity-5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4"></div>
@@ -531,10 +532,16 @@ export default async function ProjectDetailsPage({
                 availability, pricing details, and private viewings.
               </p>
 
-              <button className="bg-white text-[#003B6D] hover:bg-gray-100 font-bold text-[12px] tracking-widest uppercase py-3 px-6 w-max transition-colors mb-10 flex items-center gap-2">
-                <Download className="w-4 h-4" />
-                Download Brochure
-              </button>
+              <SharedButton 
+                className="text-white mb-10 w-max"
+                hoverBgClass="bg-white"
+                hoverTextClass="hover:text-brand-blue"
+              >
+                <span className="flex items-center gap-2">
+                  <Download className="w-4 h-4" />
+                  Download Brochure
+                </span>
+              </SharedButton>
 
               <div>
                 <span className="block text-[11px] font-bold text-white/50 uppercase tracking-widest mb-4">
@@ -557,8 +564,8 @@ export default async function ProjectDetailsPage({
             {/* Right Side: Inquiry CTA */}
             <div className="bg-white p-8 md:p-12 shadow-2xl flex flex-col items-center justify-center text-center h-full">
               <div className="mb-4">
-                <BlockReveal color="#003B6D">
-                  <h3 className="text-2xl md:text-3xl font-bold text-[#003B6D] uppercase tracking-wide">
+                <BlockReveal color="var(--color-brand-blue)">
+                  <h3 className="text-2xl md:text-3xl font-bold text-brand-blue uppercase tracking-wide">
                     Send an Inquiry
                   </h3>
                 </BlockReveal>
@@ -567,12 +574,12 @@ export default async function ProjectDetailsPage({
                 Ready to take the next step? Click below to fill out our detailed inquiry form and connect with our property consultants.
               </p>
               
-              <Link
+              <SharedButton
                 href="/inquiry"
-                className="inline-block bg-[#003B6D] text-white font-bold text-[13px] tracking-widest uppercase py-3 px-10 hover:bg-[#002f57] transition-colors shadow-md w-full sm:w-auto"
+                className="w-full sm:w-auto"
               >
                 Go to Inquiry Form
-              </Link>
+              </SharedButton>
             </div>
           </div>
         </div>
@@ -583,8 +590,8 @@ export default async function ProjectDetailsPage({
         <section className="bg-gray-50 py-12 md:py-16 border-t border-gray-200">
           <div className="container mx-auto px-5 md:px-16 max-w-7xl">
             <div className="mb-12">
-              <BlockReveal color="#003B6D">
-                <h2 className="text-2xl md:text-[34px] font-bold text-[#003B6D] leading-[1.3] uppercase">
+              <BlockReveal color="var(--color-brand-blue)">
+                <h2 className="text-2xl md:text-[34px] font-bold text-brand-blue leading-[1.3] uppercase">
                   Similar Projects
                 </h2>
               </BlockReveal>
@@ -603,7 +610,7 @@ export default async function ProjectDetailsPage({
                       fill
                       className="object-cover"
                     />
-                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-[10px] font-bold text-[#003B6D] uppercase tracking-wider ">
+                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-[10px] font-bold text-brand-blue uppercase tracking-wider ">
                       {p.category}
                     </div>
                   </div>
@@ -611,7 +618,7 @@ export default async function ProjectDetailsPage({
                     <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-2 block">
                       {p.location}
                     </span>
-                    <h4 className="text-lg font-bold text-[#003B6D] group-hover:text-[#003B6D]/80 transition-colors">
+                    <h4 className="text-lg font-bold text-brand-blue group-hover:text-brand-blue/80 transition-colors">
                       {p.title}
                     </h4>
                   </div>

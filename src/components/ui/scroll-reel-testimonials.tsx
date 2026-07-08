@@ -49,7 +49,7 @@ const SLIDE_MS = 800; // column slide duration + interaction lock
 const EASE_INOUT = "cubic-bezier(0.65,0,0.35,1)";
 
 const TITLE_CLASSES =
-  "m-0 text-xl font-bold leading-[1.3] text-[#003B6D] md:text-2xl ";
+  "m-0 text-xl font-bold leading-[1.3] text-brand-blue md:text-2xl ";
 const QUOTE_CLASSES = "m-0 text-sm font-normal leading-relaxed text-gray-600 ";
 const AUTHOR_CLASSES =
   "m-0 text-sm font-bold leading-[1.3] text-black md:text-[15px]";
@@ -370,7 +370,7 @@ export function ScrollReelTestimonials({
             onClick={() => paginate(-1)}
             disabled={index === 0}
             aria-label="Previous testimonial"
-            className="flex h-10 w-12 cursor-pointer items-center justify-center bg-transparent p-0 text-[#003B6D] transition-[opacity,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:enabled:scale-110 disabled:cursor-default disabled:opacity-40 focus-visible:outline-none"
+            className="flex h-10 w-12 cursor-pointer items-center justify-center bg-transparent p-0 text-brand-blue transition-[opacity,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:enabled:scale-110 disabled:cursor-default disabled:opacity-40 focus-visible:outline-none"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -411,7 +411,7 @@ export function ScrollReelTestimonials({
             onClick={() => paginate(1)}
             disabled={index === count - 1}
             aria-label="Next testimonial"
-            className="flex h-10 w-12 cursor-pointer items-center justify-center bg-transparent p-0 text-[#003B6D] transition-[opacity,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:enabled:scale-110 disabled:cursor-default disabled:opacity-40 focus-visible:outline-none"
+            className="flex h-10 w-12 cursor-pointer items-center justify-center bg-transparent p-0 text-brand-blue transition-[opacity,transform] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:enabled:scale-110 disabled:cursor-default disabled:opacity-40 focus-visible:outline-none"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

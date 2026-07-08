@@ -1,6 +1,8 @@
 "use client";
 
 import { BlockReveal } from "@/components/ui/BlockReveal";
+import { PageBanner } from "@/components/ui/PageBanner";
+import { SharedButton } from "@/components/ui/SharedButton";
 import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
 import { useState } from "react";
 
@@ -53,38 +55,16 @@ export function ContactView() {
     <main className="min-h-screen  bg-[#F8FAFC] pb-0 flex flex-col font-sans">
       
       {/* Hero Section - Matching AboutHero */}
-      <section className="relative w-full h-[50vh] md:h-[60vh] min-h-[400px] flex items-center bg-[#003B6D] overflow-hidden">
-        {/* Background with overlay */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-black/40 z-10" />
-          <img
-            src="https://images.unsplash.com/photo-1653378972306-599af0d77fe4?q=80&w=2069&auto=format&fit=crop"
-            alt="Contact Us"
-            className="w-full h-full object-cover opacity-80"
-          />
-        </div>
-
-        <div className="container mx-auto px-5 md:px-16 relative z-20">
-          <div className="max-w-3xl">
-            <div className="flex flex-col gap-4">
-              <BlockReveal color="#ffffff">
-                <div className="flex items-center text-[12px] md:text-[14px] font-semibold tracking-[0.2em] text-white/80 uppercase">
-                  <span className="w-8 h-[2px] bg-white/80 mr-4"></span>
-                  Let's Talk
-                </div>
-              </BlockReveal>
-              <BlockReveal color="#ffffff" delay={0.2}>
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-[1.2] uppercase">
-                  Contact Us
-                </h1>
-              </BlockReveal>
-              <p className="max-w-2xl text-white/80 mt-2 text-sm md:text-base">
-                We're here to help and answer any question you might have. We look forward to hearing from you.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageBanner
+        title="Contact Us"
+        subtitle="Let's Talk"
+        bgImage="https://images.unsplash.com/photo-1653378972306-599af0d77fe4?q=80&w=2069&auto=format&fit=crop"
+        altText="Contact Us"
+      >
+        <p className="max-w-2xl text-white/80 mt-2 text-sm md:text-base">
+          We're here to help and answer any question you might have. We look forward to hearing from you.
+        </p>
+      </PageBanner>
 
       {/* Contact Section - Map and Form Split */}
       <section className="container mx-auto px-5 md:px-16 py-16 md:py-24  relative z-20 mb-12 mt-4">
@@ -122,10 +102,10 @@ export function ContactView() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-[#003B6D] peer"
+                    className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-brand-blue peer"
                     placeholder=" "
                   />
-                  <label htmlFor="name" className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-[#003B6D] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none">
+                  <label htmlFor="name" className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-brand-blue peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none">
                     Full Name
                   </label>
                 </div>
@@ -138,10 +118,10 @@ export function ContactView() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-[#003B6D] peer"
+                    className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-brand-blue peer"
                     placeholder=" "
                   />
-                  <label htmlFor="email" className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-[#003B6D] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none">
+                  <label htmlFor="email" className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-brand-blue peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none">
                     Email Address
                   </label>
                 </div>
@@ -156,10 +136,10 @@ export function ContactView() {
                     value={formData.phone}
                     onChange={handleChange}
                     required
-                    className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-[#003B6D] peer"
+                    className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-brand-blue peer"
                     placeholder=" "
                   />
-                  <label htmlFor="phone" className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-[#003B6D] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none">
+                  <label htmlFor="phone" className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-brand-blue peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none">
                     Phone Number
                   </label>
                 </div>
@@ -172,10 +152,10 @@ export function ContactView() {
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-[#003B6D] peer"
+                    className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-brand-blue peer"
                     placeholder=" "
                   />
-                  <label htmlFor="subject" className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-[#003B6D] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none">
+                  <label htmlFor="subject" className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-brand-blue peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none">
                     Subject
                   </label>
                 </div>
@@ -189,24 +169,21 @@ export function ContactView() {
                   onChange={handleChange}
                   required
                   rows={4}
-                  className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-[#003B6D] peer resize-none"
+                  className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-brand-blue peer resize-none"
                   placeholder=" "
                 />
-                <label htmlFor="message" className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-[#003B6D] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none">
+                <label htmlFor="message" className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-brand-blue peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none">
                   Your Message
                 </label>
               </div>
 
               <div className="mt-4">
-                <button
-                  type="submit"
-                  className="group relative inline-flex items-center justify-center px-8 py-3.5 font-bold text-white transition-all duration-300 bg-[#003B6D] rounded-none hover:bg-gray-900 hover:shadow-xl overflow-hidden uppercase tracking-widest text-sm"
-                >
-                  <span className="relative z-10 flex items-center gap-2">
+                <SharedButton type="submit">
+                  <span className="flex items-center gap-2">
                     Send Message
                     <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                   </span>
-                </button>
+                </SharedButton>
               </div>
             </form>
           </div>
@@ -215,7 +192,7 @@ export function ContactView() {
 
       {/* Contact Information Section */}
       <section className="container mx-auto px-5 md:px-16 relative z-20 mb-20">
-        <div className="bg-[#003B6D] rounded-none shadow-lg overflow-hidden p-8 text-white relative">
+        <div className="bg-brand-blue rounded-none shadow-lg overflow-hidden p-8 text-white relative">
           {/* Abstract Shapes */}
           <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/3 w-48 h-48 bg-white/5 rounded-none blur-3xl pointer-events-none"></div>
           <div className="absolute bottom-0 left-0 translate-y-1/3 -translate-x-1/3 w-64 h-64 bg-white/5 rounded-none blur-3xl pointer-events-none"></div>
@@ -223,7 +200,7 @@ export function ContactView() {
           <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Office Location */}
             <div className="flex flex-col gap-3 group cursor-default">
-              <div className="w-10 h-10 bg-white/10 rounded-none flex items-center justify-center group-hover:bg-white group-hover:text-[#003B6D] transition-colors duration-300">
+              <div className="w-10 h-10 bg-white/10 rounded-none flex items-center justify-center group-hover:bg-white group-hover:text-brand-blue transition-colors duration-300">
                 <MapPin className="w-5 h-5" />
               </div>
               <div>
@@ -237,7 +214,7 @@ export function ContactView() {
 
             {/* Hotline */}
             <div className="flex flex-col gap-3 group cursor-default">
-              <div className="w-10 h-10 bg-white/10 rounded-none flex items-center justify-center group-hover:bg-white group-hover:text-[#003B6D] transition-colors duration-300">
+              <div className="w-10 h-10 bg-white/10 rounded-none flex items-center justify-center group-hover:bg-white group-hover:text-brand-blue transition-colors duration-300">
                 <Phone className="w-5 h-5" />
               </div>
               <div>
@@ -251,7 +228,7 @@ export function ContactView() {
 
             {/* Email */}
             <div className="flex flex-col gap-3 group cursor-default">
-              <div className="w-10 h-10 bg-white/10 rounded-none flex items-center justify-center group-hover:bg-white group-hover:text-[#003B6D] transition-colors duration-300">
+              <div className="w-10 h-10 bg-white/10 rounded-none flex items-center justify-center group-hover:bg-white group-hover:text-brand-blue transition-colors duration-300">
                 <Mail className="w-5 h-5" />
               </div>
               <div>
@@ -267,7 +244,7 @@ export function ContactView() {
 
             {/* Business Hours & Social */}
             <div className="flex flex-col gap-3 group cursor-default">
-              <div className="w-10 h-10 bg-white/10 rounded-none flex items-center justify-center group-hover:bg-white group-hover:text-[#003B6D] transition-colors duration-300">
+              <div className="w-10 h-10 bg-white/10 rounded-none flex items-center justify-center group-hover:bg-white group-hover:text-brand-blue transition-colors duration-300">
                 <Clock className="w-5 h-5" />
               </div>
               <div>
@@ -278,16 +255,16 @@ export function ContactView() {
                 </p>
                 
                 <div className="flex gap-2">
-                  <a href="#" className="w-8 h-8 rounded-none bg-white/10 flex items-center justify-center hover:bg-white hover:text-[#003B6D] transition-all duration-300">
+                  <a href="#" className="w-8 h-8 rounded-none bg-white/10 flex items-center justify-center hover:bg-white hover:text-brand-blue transition-all duration-300">
                     <Facebook className="w-3.5 h-3.5" />
                   </a>
-                  <a href="#" className="w-8 h-8 rounded-none bg-white/10 flex items-center justify-center hover:bg-white hover:text-[#003B6D] transition-all duration-300">
+                  <a href="#" className="w-8 h-8 rounded-none bg-white/10 flex items-center justify-center hover:bg-white hover:text-brand-blue transition-all duration-300">
                     <Twitter className="w-3.5 h-3.5" />
                   </a>
-                  <a href="#" className="w-8 h-8 rounded-none bg-white/10 flex items-center justify-center hover:bg-white hover:text-[#003B6D] transition-all duration-300">
+                  <a href="#" className="w-8 h-8 rounded-none bg-white/10 flex items-center justify-center hover:bg-white hover:text-brand-blue transition-all duration-300">
                     <Instagram className="w-3.5 h-3.5" />
                   </a>
-                  <a href="#" className="w-8 h-8 rounded-none bg-white/10 flex items-center justify-center hover:bg-white hover:text-[#003B6D] transition-all duration-300">
+                  <a href="#" className="w-8 h-8 rounded-none bg-white/10 flex items-center justify-center hover:bg-white hover:text-brand-blue transition-all duration-300">
                     <Linkedin className="w-3.5 h-3.5" />
                   </a>
                 </div>

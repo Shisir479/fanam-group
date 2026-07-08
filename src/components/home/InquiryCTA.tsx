@@ -23,13 +23,13 @@ export function InquiryCTA() {
       <div className="container mx-auto px-5 md:px-16">
         <div className="mb-12 flex flex-col items-start gap-4">
           <div className="flex flex-col items-start gap-4">
-            <BlockReveal color="#003B6D">
+            <BlockReveal color="var(--color-brand-blue)">
               <div className="flex items-center text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
                 INQUIRY
               </div>
             </BlockReveal>
-            <BlockReveal color="#003B6D" delay={0.2}>
-              <h2 className="text-3xl md:text-[34px] font-bold tracking-tight text-[#003B6D] uppercase">
+            <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
+              <h2 className="text-3xl md:text-[34px] font-bold tracking-tight text-brand-blue uppercase">
                 Find Your Perfect Investment
               </h2>
             </BlockReveal>
@@ -44,7 +44,7 @@ export function InquiryCTA() {
         <div className="max-w-5xl mx-auto bg-white shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] border border-gray-200 p-2 md:p-3 flex flex-col md:flex-row items-center gap-2 md:gap-0">
           {/* Field 1: Property Type */}
           <div className="w-full md:flex-1 px-5 py-3 border-b md:border-b-0 md:border-r border-gray-200">
-            <label className="block text-[11px] font-bold text-[#003B6D] uppercase tracking-wider mb-1">
+            <label className="block text-[11px] font-bold text-brand-blue uppercase tracking-wider mb-1">
               Property Type
             </label>
             <Select>
@@ -61,7 +61,7 @@ export function InquiryCTA() {
 
           {/* Field 2: Location */}
           <div className="w-full md:flex-1 px-5 py-3 border-b md:border-b-0 md:border-r border-gray-200">
-            <label className="block text-[11px] font-bold text-[#003B6D] uppercase tracking-wider mb-1">
+            <label className="block text-[11px] font-bold text-brand-blue uppercase tracking-wider mb-1">
               Preferred Location
             </label>
             <input
@@ -73,7 +73,7 @@ export function InquiryCTA() {
 
           {/* Field 3: Phone */}
           <div className="w-full md:flex-1 px-5 py-3">
-            <label className="block text-[11px] font-bold text-[#003B6D] uppercase tracking-wider mb-1">
+            <label className="block text-[11px] font-bold text-brand-blue uppercase tracking-wider mb-1">
               Phone Number
             </label>
             <input
@@ -86,7 +86,7 @@ export function InquiryCTA() {
           {/* Button */}
           <button
             onClick={handleQuickSubmit}
-            className="w-full md:w-auto mt-2 md:mt-0 relative group/btn  px-8 py-3 font-bold  uppercase tracking-wider overflow-hidden cursor-pointer shrink-0 border border-[#4ea24b] hover:border-[#003B6D] hover:text-white flex items-center justify-center"
+            className="w-full md:w-auto mt-2 md:mt-0 relative group/btn  px-8 py-3 font-bold  uppercase tracking-wider overflow-hidden cursor-pointer shrink-0 border border-[#4ea24b] hover:border-brand-blue hover:text-white flex items-center justify-center"
           >
             <span className="relative z-10">Inquire Now</span>
             <span className="absolute inset-0 bg-[#002f57] scale-x-0 origin-left transition-transform duration-700 ease-out group-hover/btn:scale-x-100 z-0"></span>

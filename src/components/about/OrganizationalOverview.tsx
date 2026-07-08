@@ -36,14 +36,14 @@ export function OrganizationalOverview() {
         {/* Header Section (Left Aligned) */}
         <div className="flex flex-col items-start text-left max-w-3xl mb-16 gap-6">
           <div className="flex flex-col items-start gap-4">
-            <BlockReveal color="#003B6D">
+            <BlockReveal color="var(--color-brand-blue)">
               <div className="flex items-center text-[12px] md:text-[14px] font-semibold tracking-[0.25em] text-gray-400 uppercase">
                 
                 STRUCTURE
               </div>
             </BlockReveal>
-            <BlockReveal color="#003B6D" delay={0.2}>
-              <h2 className="text-2xl md:text-[34px] font-bold text-[#003B6D] leading-tight uppercase">
+            <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
+              <h2 className="text-2xl md:text-[34px] font-bold text-brand-blue leading-tight uppercase">
                 Organizational <span className="font-bold">Overview</span>
               </h2>
             </BlockReveal>
@@ -62,15 +62,15 @@ export function OrganizationalOverview() {
               className="bg-white shadow-sm p-6 md:p-8  transition-all duration-500 flex flex-col group relative overflow-hidden"
             >
               {/* Elegant Animated Top Border */}
-              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#003B6D]/30 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out"></div>
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-brand-blue/30 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out"></div>
               
               {/* Icon Container */}
-              <div className="w-14 h-14 bg-gray-50 flex items-center justify-center  text-[#003B6D] mb-6 group-hover:bg-[#003B6D] group-hover:text-white transition-colors duration-500">
+              <div className="w-14 h-14 bg-gray-50 flex items-center justify-center  text-brand-blue mb-6 group-hover:bg-brand-blue group-hover:text-white transition-colors duration-500">
                 {dept.icon}
               </div>
               
               {/* Content */}
-              <h3 className="text-lg font-medium text-[#003B6D] mb-3 ">
+              <h3 className="text-lg font-medium text-brand-blue mb-3 ">
                 {dept.name}
               </h3>
               <p className="text-gray-500 text-[14px] leading-relaxed">

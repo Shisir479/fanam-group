@@ -32,7 +32,7 @@ const PlayButtonOverlay = () => (
   <div className="absolute inset-0 flex items-center justify-center z-10">
     <div className="w-10 h-10 md:w-12 md:h-12 bg-white/90 rounded-full flex items-center justify-center shadow-lg">
       <svg
-        className="w-5 h-5 md:w-6 md:h-6 text-[#003B6D] ml-1"
+        className="w-5 h-5 md:w-6 md:h-6 text-brand-blue ml-1"
         fill="currentColor"
         viewBox="0 0 24 24"
       >
@@ -106,7 +106,7 @@ export default function VideoGalleryBanner() {
 
       {/* Title */}
       <div className="container mx-auto px-5 md:px-16 relative z-40 pb-12">
-        <BlockReveal color="#003B6D" delay={0.5}>
+        <BlockReveal color="var(--color-brand-blue)" delay={0.5}>
           <h1 className="text-white text-3xl md:text-4xl font-extrabold tracking-wider uppercase drop-shadow-[0_4px_10px_rgba(0,0,0,0.6)]">
             VIDEO GALLERY
           </h1>

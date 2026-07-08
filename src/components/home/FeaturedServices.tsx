@@ -39,25 +39,25 @@ export function FeaturedServices() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(0);
 
   return (
-    <section className="w-full py-16 md:py-24 bg-white text-[#003B6D]">
+    <section className="w-full py-16 md:py-24 bg-white text-brand-blue">
       <div className="container mx-auto px-5 md:px-16">
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-16">
           <div className="flex flex-col gap-4 max-w-2xl">
-            <BlockReveal color="#003B6D">
+            <BlockReveal color="var(--color-brand-blue)">
               <div className="text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
                 What We Do
               </div>
             </BlockReveal>
 
-            <BlockReveal color="#003B6D" delay={0.2}>
-              <h2 className="text-2xl md:text-[34px] font-bold text-[#003B6D] leading-[1.2] uppercase">
+            <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
+              <h2 className="text-2xl md:text-[34px] font-bold text-brand-blue leading-[1.2] uppercase">
                 Featured Services
               </h2>
             </BlockReveal>
           </div>
 
-          <button className="hidden md:inline-flex items-center gap-4 text-sm font-bold text-[#003B6D] uppercase tracking-wider group">
+          <button className="hidden md:inline-flex items-center gap-4 text-sm font-bold text-brand-blue uppercase tracking-wider group">
             <span className="relative overflow-hidden">
               <span className="inline-block transition-transform duration-500 group-hover:-translate-y-full">
                 Explore All
@@ -66,7 +66,7 @@ export function FeaturedServices() {
                 Explore All
               </span>
             </span>
-            <div className="w-10 h-10  border border-[#003B6D]/20 flex items-center justify-center transition-colors duration-500 group-hover:border-[#4ea24b] group-hover:bg-[#4ea24b]">
+            <div className="w-10 h-10  border border-brand-blue/20 flex items-center justify-center transition-colors duration-500 group-hover:border-[#4ea24b] group-hover:bg-[#4ea24b]">
               <svg
                 className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300 group-hover:text-white"
                 fill="none"
@@ -194,7 +194,7 @@ export function FeaturedServices() {
         </div>
 
         {/* Mobile View All Button */}
-        <button className="md:hidden mt-12 w-full flex items-center justify-center gap-2 text-sm font-bold text-[#003B6D] uppercase border border-[#003B6D]/30 py-4 ">
+        <button className="md:hidden mt-12 w-full flex items-center justify-center gap-2 text-sm font-bold text-brand-blue uppercase border border-brand-blue/30 py-4 ">
           Explore All Services
         </button>
       </div>

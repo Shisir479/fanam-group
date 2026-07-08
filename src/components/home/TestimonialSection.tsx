@@ -48,14 +48,14 @@ export function TestimonialSection() {
       <div className="container mx-auto px-5 md:px-16 overflow-hidden">
         {/* Header */}
         <div className="mb-12 flex flex-col gap-4">
-          <BlockReveal color="#003B6D">
+          <BlockReveal color="var(--color-brand-blue)">
             <div className="flex items-center text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
               TESTIMONIAL
             </div>
           </BlockReveal>
 
-          <BlockReveal color="#003B6D" delay={0.2}>
-            <h2 className="text-2xl md:text-[34px] font-bold tracking-tight text-[#003B6D] leading-[1.3] uppercase max-w-2xl">
+          <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
+            <h2 className="text-2xl md:text-[34px] font-bold tracking-tight text-brand-blue leading-[1.3] uppercase max-w-2xl">
               WHAT CUSTOMERS <br className="hidden md:block" /> SAY ABOUT US
             </h2>
           </BlockReveal>

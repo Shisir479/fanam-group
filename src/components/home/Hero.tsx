@@ -211,54 +211,6 @@ export function Hero() {
           </button>
         ))}
       </div>
-
-      {/* Bottom Bar */}
-      <div
-        className="absolute bottom-16 left-0 right-0 h-13 bg-black/70 hidden md:flex items-center"
-        style={{ zIndex: 25 }}
-      >
-        <div className="container mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-start gap-4 md:gap-12 w-full h-full">
-          <div className="flex items-center gap-2 text-white font-bold tracking-wider text-xs cursor-pointer hover:text-white/80 transition h-full px-4 border-l border-white/20">
-            <svg
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <rect x="3" y="3" width="7" height="7" />
-              <rect x="14" y="3" width="7" height="7" />
-              <rect x="14" y="14" width="7" height="7" />
-              <rect x="3" y="14" width="7" height="7" />
-            </svg>
-            EXPLORE PROJECTS
-          </div>
-          <div className="hidden md:block">
-            <svg width="10" height="10" viewBox="0 0 8 12" fill="white">
-              <path d="M0 0L8 6L0 12V0Z" />
-            </svg>
-          </div>
-          <div className="flex items-center gap-14 h-full text-[10px] md:text-[13px] text-white font-semibold tracking-widest mt-1 md:mt-0">
-            <span className="relative group cursor-pointer transition h-full flex items-center">
-              ONGOING
-              <span className="absolute left-0 top-0 w-full h-[1px] bg-white scale-x-0 origin-left transition-transform duration-500 ease-out group-hover:scale-x-100"></span>
-            </span>
-            <span className="relative group cursor-pointer transition h-full flex items-center">
-              HANDED OVER
-              <span className="absolute left-0 top-0 w-full h-[1px] bg-white scale-x-0 origin-left transition-transform duration-500 ease-out group-hover:scale-x-100"></span>
-            </span>
-            <span className="relative group cursor-pointer transition h-full flex items-center">
-              UPCOMING
-              <span className="absolute left-0 top-0 w-full h-[1px] bg-white scale-x-0 origin-left transition-transform duration-500 ease-out group-hover:scale-x-100"></span>
-            </span>
-            <span className="relative group cursor-pointer transition h-full flex items-center">
-              READY
-              <span className="absolute left-0 top-0 w-full h-[1px] bg-white scale-x-0 origin-left transition-transform duration-500 ease-out group-hover:scale-x-100"></span>
-            </span>
-          </div>
-        </div>
-      </div>
     </section>
   );
 }

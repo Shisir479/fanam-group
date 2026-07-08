@@ -116,8 +116,9 @@ const PhotoBar = (props: {
   useEffect(() => {
     const orientation: Orientation =
       size.height > size.width ? "vertical" : "horizontal";
-    const inDuration: number = 4;
-    const sizeDuration: number = gsap.utils.random(2, inDuration, 1);
+    const inDuration: number = 2;
+    const holdTime: number = 2;
+    const sizeDuration: number = gsap.utils.random(1.2, inDuration, 1);
 
     const handleOnComplete = (): void => {
       if (props.index === 0) {
@@ -161,9 +162,9 @@ const PhotoBar = (props: {
             "rgba(0, 0, 0, 0) 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px",
         },
       )
-        .repeatDelay(inDuration - sizeDuration + 4)
+        .repeatDelay(inDuration - sizeDuration + holdTime)
         .yoyo(true)
-        .repeat(1); // Added 4 second hold time
+        .repeat(1); // Adjusted hold time
 
       t2.fromTo(
         ref.current,
@@ -177,9 +178,9 @@ const PhotoBar = (props: {
           y: position.top,
         },
       )
-        .repeatDelay(4)
+        .repeatDelay(holdTime)
         .yoyo(true)
-        .repeat(1); // 4 second hold time
+        .repeat(1); // Adjusted hold time
     } else {
       const getOffsetX = (): number => {
         const signX: number = gsap.utils.random(0, 1, 1);
@@ -211,11 +212,11 @@ const PhotoBar = (props: {
           width: size.width,
           boxShadow:
             "rgba(0, 0, 0, 0) 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px",
-        },
+        }
       )
-        .repeatDelay(inDuration - sizeDuration + 4)
+        .repeatDelay(inDuration - sizeDuration + holdTime)
         .yoyo(true)
-        .repeat(1); // Added 4 second hold time
+        .repeat(1); // Adjusted hold time
 
       t2.fromTo(
         ref.current,
@@ -227,11 +228,11 @@ const PhotoBar = (props: {
           backgroundPosition: `${backgroundPosition.left * -1}px ${backgroundPosition.top * -1}px`,
           duration: inDuration,
           x: position.left,
-        },
+        }
       )
-        .repeatDelay(4)
+        .repeatDelay(holdTime)
         .yoyo(true)
-        .repeat(1); // 4 second hold time
+        .repeat(1); // Adjusted hold time
     }
 
     return () => {
@@ -294,7 +295,7 @@ const CastMember = ({ title, loaded }: { title: string; loaded: boolean }) => {
       className="absolute  left-0 top-[17%] w-full flex items-center justify-center z-[3] pointer-events-none opacity-0 px-4"
     >
       <div className="bg-white/40 backdrop-blur-md border border-white/60 px-6 py-1  shadow-lg">
-        <h3 className="text-[#003B6D] italic text-sm md:text-lg font-extrabold text-center tracking-widest uppercase">
+        <h3 className="text-brand-blue italic text-sm md:text-lg font-extrabold text-center tracking-widest uppercase">
           {title}
         </h3>
       </div>
@@ -513,13 +514,13 @@ export function GalleryPreview() {
         {/* Header */}
         <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="flex flex-col gap-4">
-            <BlockReveal color="#003B6D">
+            <BlockReveal color="var(--color-brand-blue)">
               <div className="flex items-center text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
                 PORTFOLIO
               </div>
             </BlockReveal>
-            <BlockReveal color="#003B6D" delay={0.2}>
-              <h2 className="text-2xl md:text-[34px] font-bold tracking-tight text-[#003B6D] leading-[1.1] uppercase">
+            <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
+              <h2 className="text-2xl md:text-[34px] font-bold tracking-tight text-brand-blue leading-[1.1] uppercase">
                 Discover Our <br className="hidden md:block" /> Signature
                 Projects
               </h2>

@@ -27,8 +27,8 @@ export function ManagementTeam() {
       <div className="container mx-auto px-5 md:px-16">
         {/* Section Title */}
         <div className="mb-12">
-          <BlockReveal color="#003B6D">
-            <h2 className="text-[#003B6D] text-3xl md:text-4xl font-bold uppercase">
+          <BlockReveal color="var(--color-brand-blue)">
+            <h2 className="text-brand-blue text-3xl md:text-4xl font-bold uppercase">
               Management Team
             </h2>
           </BlockReveal>

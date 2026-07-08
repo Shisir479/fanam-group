@@ -4,6 +4,8 @@ import { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BlockReveal } from "@/components/ui/BlockReveal";
+import { PageBanner } from "@/components/ui/PageBanner";
+import { SharedButton } from "@/components/ui/SharedButton";
 import { projects, Project } from "@/lib/projectData";
 import { Search, ChevronDown, Filter } from "lucide-react";
 
@@ -77,35 +79,12 @@ export function ProjectsView({ initialStatus = "All" }: { initialStatus?: string
   return (
     <main className="min-h-screen bg-gray-50 pb-24 flex flex-col">
       {/* Hero Section */}
-      <section className="relative w-full h-[50vh] md:h-[60vh] min-h-[400px] flex items-center bg-[#003B6D] overflow-hidden">
-        {/* Background with overlay */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-black/40 z-10" />
-          <img
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
-            alt="Bonedi Homes Projects"
-            className="w-full h-full object-cover opacity-80"
-          />
-        </div>
-
-        <div className="container mx-auto px-5 md:px-16 relative z-20">
-          <div className="max-w-3xl">
-            <div className="flex flex-col gap-4">
-              <BlockReveal color="#ffffff">
-                <div className="flex items-center text-[12px] md:text-[14px] font-semibold tracking-[0.2em] text-white/80 uppercase">
-                  <span className="w-8 h-[2px] bg-white/80 mr-4"></span>
-                  Portfolio
-                </div>
-              </BlockReveal>
-              <BlockReveal color="#ffffff" delay={0.2}>
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-[1.2] uppercase">
-                  Our <br /> Projects
-                </h1>
-              </BlockReveal>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageBanner
+        title={<>Our <br className="hidden md:block" /> Projects</>}
+        subtitle="Portfolio"
+        bgImage="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
+        altText="Bonedi Homes Projects"
+      />
 
       {/* Filters & Search */}
       <section className="w-full bg-white py-12 mb-12">
@@ -219,7 +198,7 @@ export function ProjectsView({ initialStatus = "All" }: { initialStatus?: string
 
                 {/* Category & Status Badges */}
                 <div className="absolute top-6 left-6 right-6 flex flex-wrap gap-2 pointer-events-auto z-10">
-                  <span className="bg-[#003B6D] text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 shadow-sm">
+                  <span className="bg-brand-blue text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 shadow-sm">
                     {project.category}
                   </span>
                   {project.status
@@ -227,7 +206,7 @@ export function ProjectsView({ initialStatus = "All" }: { initialStatus?: string
                     .map((s) => (
                     <span
                       key={s}
-                      className="bg-white/90 backdrop-blur-sm text-[#003B6D] text-[11px] font-bold uppercase tracking-wider px-3 py-1 shadow-sm capitalize"
+                      className="bg-white/90 backdrop-blur-sm text-brand-blue text-[11px] font-bold uppercase tracking-wider px-3 py-1 shadow-sm capitalize"
                     >
                       {s}
                     </span>
@@ -255,10 +234,9 @@ export function ProjectsView({ initialStatus = "All" }: { initialStatus?: string
 
                   {/* Explore Button */}
                   <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8 pointer-events-auto">
-                    <button className="relative group/btn border border-white/30 hover:border-[#003B6D] px-12 py-3 text-sm font-bold text-white overflow-hidden transition-colors duration-500">
-                      <span className="relative z-10">Explore</span>
-                      <span className="absolute inset-0 bg-[#003B6D] scale-x-0 origin-left transition-transform duration-700 ease-out group-hover/btn:scale-x-100 z-0"></span>
-                    </button>
+                    <SharedButton className="text-white">
+                      Explore
+                    </SharedButton>
                   </div>
                 </div>
               </Link>
@@ -279,7 +257,7 @@ export function ProjectsView({ initialStatus = "All" }: { initialStatus?: string
                 setStatusFilter("All");
                 setSortBy("newest");
               }}
-              className="mt-6 text-[#003B6D] font-bold uppercase text-sm border-b-2 border-[#003B6D] pb-1 hover:text-[#003B6D]/80 hover:border-[#003B6D]/80 transition-colors"
+              className="mt-6 text-brand-blue font-bold uppercase text-sm border-b-2 border-brand-blue pb-1 hover:text-brand-blue/80 hover:border-brand-blue/80 transition-colors"
             >
               Clear all filters
             </button>
@@ -289,12 +267,9 @@ export function ProjectsView({ initialStatus = "All" }: { initialStatus?: string
         {/* Load More Button */}
         {hasMore && (
           <div className="mt-16 flex justify-center">
-            <button
-              onClick={handleLoadMore}
-              className="group flex items-center gap-2 border-2 border-[#003B6D] text-[#003B6D] px-8 py-3 font-bold uppercase tracking-widest text-sm hover:bg-[#003B6D] hover:text-white transition-colors duration-300"
-            >
+            <SharedButton onClick={handleLoadMore}>
               Load More
-            </button>
+            </SharedButton>
           </div>
         )}
       </section>

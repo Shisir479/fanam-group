@@ -38,12 +38,12 @@ export function OurAchievements() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full py-16 md:py-24 bg-[#003B6D] overflow-hidden"
+      className="relative w-full py-16 md:py-24 bg-brand-blue overflow-hidden"
     >
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1541888081622-3866113ccf3a?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center bg-fixed"></div>
 
-      <div className="absolute inset-0 bg-[#003B6D]/80 z-0"></div>
+      <div className="absolute inset-0 bg-brand-blue/80 z-0"></div>
 
       <div className="container mx-auto px-5 md:px-16 relative z-10">
         <div className="flex flex-col items-center text-center mb-16">

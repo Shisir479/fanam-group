@@ -4,7 +4,7 @@ export function PrivacyPolicy() {
       <div className="container mx-auto px-5 md:px-16">
         {/* Header */}
         <div className="mb-12 border-b pb-8">
-          <h1 className="text-4xl font-bold text-[#003B6D] uppercase tracking-tight mb-4">
+          <h1 className="text-4xl font-bold text-brand-blue uppercase tracking-tight mb-4">
             Privacy Policy
           </h1>
           <p className="text-gray-500 text-sm font-medium uppercase tracking-wider">
@@ -15,7 +15,7 @@ export function PrivacyPolicy() {
         {/* Content */}
         <div className="space-y-10 text-[15px] leading-relaxed text-gray-700 text-justify">
           <section>
-            <h2 className="text-xl font-bold text-[#003B6D] mb-4">
+            <h2 className="text-xl font-bold text-brand-blue mb-4">
               1. Introduction
             </h2>
             <p>
@@ -35,7 +35,7 @@ export function PrivacyPolicy() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-[#003B6D] mb-4">
+            <h2 className="text-xl font-bold text-brand-blue mb-4">
               2. Information We Collect
             </h2>
             <p>
@@ -57,7 +57,7 @@ export function PrivacyPolicy() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-[#003B6D] mb-4">
+            <h2 className="text-xl font-bold text-brand-blue mb-4">
               3. How We Use Your Information
             </h2>
             <p>
@@ -86,7 +86,7 @@ export function PrivacyPolicy() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-[#003B6D] mb-4">
+            <h2 className="text-xl font-bold text-brand-blue mb-4">
               4. Sharing Your Information
             </h2>
             <p>
@@ -99,7 +99,7 @@ export function PrivacyPolicy() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-[#003B6D] mb-4">
+            <h2 className="text-xl font-bold text-brand-blue mb-4">
               5. Security of Your Information
             </h2>
             <p>
@@ -114,7 +114,7 @@ export function PrivacyPolicy() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-[#003B6D] mb-4">
+            <h2 className="text-xl font-bold text-brand-blue mb-4">
               6. Contact Us
             </h2>
             <p>

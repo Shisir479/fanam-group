@@ -8,7 +8,7 @@ export function ChairmanMessage() {
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-stretch">
           {/* Left Side: Video Placeholder */}
           <div className="w-full lg:w-1/2 flex items-center justify-center">
-            <div className="relative w-full aspect-video bg-[#003B6D]/5 border border-gray-200 shadow-sm overflow-hidden group cursor-pointer">
+            <div className="relative w-full aspect-video bg-brand-blue/5 border border-gray-200 shadow-sm overflow-hidden group cursor-pointer">
               <img
                 src="https://images.unsplash.com/photo-1700616466971-a4e05aa89e7d?q=80&w=743&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Chairman Video Thumbnail"
@@ -20,7 +20,7 @@ export function ChairmanMessage() {
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-lg group-hover:bg-white group-hover:scale-110 transition-all duration-300">
                   <Play
-                    className="w-6 h-6 text-[#003B6D] ml-1"
+                    className="w-6 h-6 text-brand-blue ml-1"
                     fill="currentColor"
                   />
                 </div>
@@ -31,13 +31,13 @@ export function ChairmanMessage() {
           {/* Right Side: Message Text */}
           <div className="w-full lg:w-1/2 flex flex-col justify-center gap-6">
             <div className="flex flex-col gap-4 mb-2">
-              <BlockReveal color="#003B6D">
+              <BlockReveal color="var(--color-brand-blue)">
                 <div className="flex items-center text-[14px] md:text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
                   MESSAGE FROM THE CHAIRMAN
                 </div>
               </BlockReveal>
-              <BlockReveal color="#003B6D" delay={0.2}>
-                <h2 className="text-2xl md:text-[34px] font-bold text-[#003B6D] leading-[1.3] uppercase max-w-3xl">
+              <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
+                <h2 className="text-2xl md:text-[34px] font-bold text-brand-blue leading-[1.3] uppercase max-w-3xl">
                   VISION FOR THE FUTURE
                 </h2>
               </BlockReveal>
@@ -45,7 +45,7 @@ export function ChairmanMessage() {
 
             <div className="relative">
               <svg
-                className="absolute -top-4 -left-4 w-12 h-12 text-[#003B6D]/10 transform -scale-x-100"
+                className="absolute -top-4 -left-4 w-12 h-12 text-brand-blue/10 transform -scale-x-100"
                 fill="currentColor"
                 viewBox="0 0 32 32"
                 aria-hidden="true"
@@ -62,7 +62,7 @@ export function ChairmanMessage() {
             </div>
 
             <div className="mt-4">
-              <h4 className="text-lg font-bold text-[#003B6D]">
+              <h4 className="text-lg font-bold text-brand-blue">
                 Mr. Rafiqul Islam
               </h4>
               <p className="text-sm font-bold text-gray-400 uppercase tracking-wider mt-1">

@@ -36,7 +36,7 @@ export function GalleryViewer({ images }: GalleryViewerProps) {
               fill
               className="object-cover group-hover:scale-110 transition-transform duration-700"
             />
-            <div className="absolute inset-0 bg-[#003B6D]/0 group-hover:bg-[#003B6D]/20 transition-colors duration-500"></div>
+            <div className="absolute inset-0 bg-brand-blue/0 group-hover:bg-brand-blue/20 transition-colors duration-500"></div>
           </div>
         ))}
       </div>

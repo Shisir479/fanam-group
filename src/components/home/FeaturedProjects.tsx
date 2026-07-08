@@ -4,6 +4,7 @@ import Image from "next/image";
 
 import { useRef, useState } from "react";
 import { BlockReveal } from "@/components/ui/BlockReveal";
+import { SharedButton } from "@/components/ui/SharedButton";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
@@ -84,29 +85,29 @@ export function FeaturedProjects() {
         <div className="flex gap-6 mb-8 border-b border-gray-200">
           <button
             onClick={() => setActiveTab("featured")}
-            className={`pb-3 text-sm md:text-base font-bold uppercase transition-colors relative ${activeTab === "featured" ? "text-[#003B6D]" : "text-gray-400 hover:text-gray-600"}`}
+            className={`pb-3 text-sm md:text-base font-bold uppercase transition-colors relative ${activeTab === "featured" ? "text-brand-blue" : "text-gray-400 hover:text-gray-600"}`}
           >
             Featured Projects
             {activeTab === "featured" && (
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#003B6D]"></span>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-brand-blue"></span>
             )}
           </button>
           <button
             onClick={() => setActiveTab("ongoing")}
-            className={`pb-3 text-sm md:text-base font-bold uppercase transition-colors relative ${activeTab === "ongoing" ? "text-[#003B6D]" : "text-gray-400 hover:text-gray-600"}`}
+            className={`pb-3 text-sm md:text-base font-bold uppercase transition-colors relative ${activeTab === "ongoing" ? "text-brand-blue" : "text-gray-400 hover:text-gray-600"}`}
           >
             Ongoing Projects
             {activeTab === "ongoing" && (
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#003B6D]"></span>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-brand-blue"></span>
             )}
           </button>
           <button
             onClick={() => setActiveTab("upcoming")}
-            className={`pb-3 text-sm md:text-base font-bold uppercase transition-colors relative ${activeTab === "upcoming" ? "text-[#003B6D]" : "text-gray-400 hover:text-gray-600"}`}
+            className={`pb-3 text-sm md:text-base font-bold uppercase transition-colors relative ${activeTab === "upcoming" ? "text-brand-blue" : "text-gray-400 hover:text-gray-600"}`}
           >
             Upcoming Projects
             {activeTab === "upcoming" && (
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#003B6D]"></span>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-brand-blue"></span>
             )}
           </button>
         </div>
@@ -114,18 +115,18 @@ export function FeaturedProjects() {
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
           <div className="flex flex-col gap-4">
-            <BlockReveal color="#003B6D" key={`title-${activeTab}`}>
+            <BlockReveal color="var(--color-brand-blue)" key={`title-${activeTab}`}>
               <div className="flex items-center text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
                 {currentData.title}
               </div>
             </BlockReveal>
 
             <BlockReveal
-              color="#003B6D"
+              color="var(--color-brand-blue)"
               delay={0.2}
               key={`subtitle-${activeTab}`}
             >
-              <h2 className="text-2xl md:text-[34px] font-bold tracking-tight text-[#003B6D] leading-[1.3] uppercase max-w-3xl">
+              <h2 className="text-2xl md:text-[34px] font-bold tracking-tight text-brand-blue leading-[1.3] uppercase max-w-3xl">
                 {currentData.subtitle}
               </h2>
             </BlockReveal>
@@ -216,10 +217,9 @@ export function FeaturedProjects() {
 
                 {/* Always visible Explore Button */}
                 <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8 pointer-events-auto">
-                  <button className="relative group/btn border hover:border-[#003B6D] px-12 py-3 text-sm font-bold text-white overflow-hidden transition-colors duration-500 hover:text-white">
-                    <span className="relative z-10">Explore</span>
-                    <span className="absolute inset-0 bg-[#003B6D] scale-x-0 origin-left transition-transform duration-700 ease-out group-hover/btn:scale-x-100 z-0"></span>
-                  </button>
+                  <SharedButton className="text-white">
+                    Explore
+                  </SharedButton>
                 </div>
               </div>
             </SwiperSlide>

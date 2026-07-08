@@ -3,6 +3,7 @@
 import Image from "next/image";
 
 import { BlockReveal } from "@/components/ui/BlockReveal";
+import { SharedButton } from "@/components/ui/SharedButton";
 
 export function AboutSection() {
   return (
@@ -12,15 +13,15 @@ export function AboutSection() {
           {/* Left Column (Text content) */}
           <div className="flex flex-col gap-5">
             {/* SubTitle with Block Reveal */}
-            <BlockReveal color="#003B6D">
+            <BlockReveal color="var(--color-brand-blue)">
               <div className="flex items-center text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
                 ABOUT US
               </div>
             </BlockReveal>
 
             {/* Title with Block Reveal (delayed slightly so it fires after subtitle) */}
-            <BlockReveal color="#003B6D" delay={0.2}>
-              <h2 className="text-2xl md:text-[34px] font-bold text-[#003B6D] leading-[1.2] uppercase">
+            <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
+              <h2 className="text-2xl md:text-[34px] font-bold text-brand-blue leading-[1.2] uppercase">
                 Redefining your standard of living
               </h2>
             </BlockReveal>
@@ -48,10 +49,9 @@ export function AboutSection() {
 
             {/* Learn More Button */}
             <div className="md:mt-10 mt-8 self-start">
-              <button className="relative group border border-[#4ea24b] hover:border-[#003B6D] px-12 py-3 text-sm font-bold text-[#003B6D] overflow-hidden transition-colors duration-500 hover:text-white">
-                <span className="relative z-10">Learn More</span>
-                <span className="absolute inset-0 bg-[#003B6D] scale-x-0 origin-left transition-transform duration-700 ease-out group-hover:scale-x-100 z-0"></span>
-              </button>
+              <SharedButton>
+                Learn More
+              </SharedButton>
             </div>
           </div>
 

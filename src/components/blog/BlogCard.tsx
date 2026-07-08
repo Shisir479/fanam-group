@@ -13,11 +13,11 @@ export function BlogCard({ post }: { post: BlogPost }) {
           className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
         />
         {/* Subtle overlay on hover */}
-        <div className="absolute inset-0 bg-[#003B6D]/0 group-hover:bg-[#003B6D]/5 transition-colors duration-500"></div>
+        <div className="absolute inset-0 bg-brand-blue/0 group-hover:bg-brand-blue/5 transition-colors duration-500"></div>
         
         {/* Category Label */}
         <div className="absolute top-4 left-4 bg-white/95 px-4 py-2">
-          <span className="text-[10px] font-bold text-[#003B6D] uppercase tracking-[0.2em]">
+          <span className="text-[10px] font-bold text-brand-blue uppercase tracking-[0.2em]">
             {post.category}
           </span>
         </div>
@@ -39,7 +39,7 @@ export function BlogCard({ post }: { post: BlogPost }) {
 
         {/* Title */}
         <Link href={`/blog/${post.slug}`} className="inline-block">
-          <h2 className="text-2xl lg:text-3xl font-light text-[#003B6D] leading-tight mb-5 group-hover:opacity-80 transition-opacity duration-300 line-clamp-2">
+          <h2 className="text-2xl lg:text-3xl font-light text-brand-blue leading-tight mb-5 group-hover:opacity-80 transition-opacity duration-300 line-clamp-2">
             {post.title}
           </h2>
         </Link>
@@ -51,7 +51,7 @@ export function BlogCard({ post }: { post: BlogPost }) {
 
         {/* Read More Link */}
         <div className="mt-auto pt-4 border-t border-gray-100">
-          <Link href={`/blog/${post.slug}`} className="inline-flex items-center gap-2 text-[12px] font-bold text-[#003B6D] uppercase tracking-[0.15em] group/link">
+          <Link href={`/blog/${post.slug}`} className="inline-flex items-center gap-2 text-[12px] font-bold text-brand-blue uppercase tracking-[0.15em] group/link">
             Read Article 
             <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300" />
           </Link>

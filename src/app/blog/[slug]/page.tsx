@@ -77,7 +77,7 @@ export default async function BlogDetailsPage({ params }: { params: Promise<{ sl
   return (
     <main className="flex min-h-screen flex-col bg-white">
       {/* Article Hero */}
-      <section className="relative w-full h-[70vh] min-h-[600px] flex items-end pb-20 bg-[#003B6D]">
+      <section className="relative w-full h-[70vh] min-h-[600px] flex items-end pb-20 bg-brand-blue">
         <div className="absolute inset-0 z-0">
           <img 
             src={post.image} 
@@ -90,7 +90,7 @@ export default async function BlogDetailsPage({ params }: { params: Promise<{ sl
         <div className="container mx-auto px-5 md:px-16 relative z-20">
           <div className="max-w-4xl mx-auto">
             <BlockReveal color="#ffffff">
-              <span className="inline-block bg-white text-[#003B6D] text-[10px] font-bold uppercase tracking-[0.2em] px-4 py-2 mb-8">
+              <span className="inline-block bg-white text-brand-blue text-[10px] font-bold uppercase tracking-[0.2em] px-4 py-2 mb-8">
                 {post.category}
               </span>
             </BlockReveal>
@@ -133,23 +133,23 @@ export default async function BlogDetailsPage({ params }: { params: Promise<{ sl
             
             {/* Social Share (Floating Left on Desktop, Top on Mobile) */}
             <div className="flex flex-row md:flex-col gap-4 md:absolute md:-ml-24 mb-12 md:mb-0">
-              <button className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-[#003B6D] hover:border-[#003B6D] transition-colors">
+              <button className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-colors">
                 <Share2 className="w-4 h-4" />
               </button>
-              <button className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-[#003B6D] hover:border-[#003B6D] transition-colors">
+              <button className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-colors">
                 <Facebook className="w-4 h-4" />
               </button>
-              <button className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-[#003B6D] hover:border-[#003B6D] transition-colors">
+              <button className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-colors">
                 <Twitter className="w-4 h-4" />
               </button>
-              <button className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-[#003B6D] hover:border-[#003B6D] transition-colors">
+              <button className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-colors">
                 <Linkedin className="w-4 h-4" />
               </button>
             </div>
 
             {/* Content */}
             <article className="prose prose-lg md:prose-xl max-w-none text-gray-500 font-light leading-[2.2] mb-20">
-              <p className="text-2xl md:text-3xl text-[#003B6D] font-light leading-relaxed mb-12 border-l-2 border-[#003B6D] pl-8 py-2">
+              <p className="text-2xl md:text-3xl text-brand-blue font-light leading-relaxed mb-12 border-l-2 border-brand-blue pl-8 py-2">
                 {post.excerpt}
               </p>
               <div dangerouslySetInnerHTML={{ __html: post.content.replace(/\n/g, '<br/>') }} />
@@ -159,7 +159,7 @@ export default async function BlogDetailsPage({ params }: { params: Promise<{ sl
             <div className="flex items-center gap-3 mb-20 pb-16 border-b border-gray-100">
               <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mr-2">Tags</span>
               {post.tags.map((tag) => (
-                <span key={tag} className="px-5 py-2 border border-gray-100 text-gray-500 text-[13px] hover:border-[#003B6D] hover:text-[#003B6D] cursor-pointer transition-colors">
+                <span key={tag} className="px-5 py-2 border border-gray-100 text-gray-500 text-[13px] hover:border-brand-blue hover:text-brand-blue cursor-pointer transition-colors">
                   {tag}
                 </span>
               ))}

@@ -22,13 +22,13 @@ export function LeadershipProfiles() {
     <section className="w-full py-16 md:py-24 bg-white">
       <div className="container mx-auto px-5 md:px-16">
         <div className="text-center mb-10 flex flex-col items-center gap-3">
-          <BlockReveal color="#003B6D">
+          <BlockReveal color="var(--color-brand-blue)">
             <div className="flex items-center text-[14px] md:text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
               LEADERSHIP
             </div>
           </BlockReveal>
-          <BlockReveal color="#003B6D" delay={0.2}>
-            <h2 className="text-2xl md:text-[34px] font-bold text-[#003B6D] leading-[1.3] uppercase max-w-3xl text-center">
+          <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
+            <h2 className="text-2xl md:text-[34px] font-bold text-brand-blue leading-[1.3] uppercase max-w-3xl text-center">
               MEET THE BOARD
             </h2>
           </BlockReveal>
@@ -58,11 +58,11 @@ export function LeadershipProfiles() {
                 <p className="text-[12px] md:text-[13px] font-bold text-gray-400 uppercase tracking-[0.25em] mb-3">
                   {leader.designation}
                 </p>
-                <h3 className="text-3xl md:text-4xl lg:text-5xl font-light text-[#003B6D] mb-6 md:mb-8 leading-tight">
+                <h3 className="text-3xl md:text-4xl lg:text-5xl font-light text-brand-blue mb-6 md:mb-8 leading-tight">
                   {leader.name}
                 </h3>
 
-                <div className="w-16 h-[2px] bg-[#003B6D]/20 mb-6 md:mb-8"></div>
+                <div className="w-16 h-[2px] bg-brand-blue/20 mb-6 md:mb-8"></div>
 
                 <p className="text-gray-600 text-[15px] md:text-[16px] leading-loose font-light max-w-2xl">
                   {leader.bio}

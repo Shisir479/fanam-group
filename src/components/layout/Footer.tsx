@@ -19,7 +19,7 @@ export function Footer() {
           <div>
             <Link href="/" className="flex items-center mb-8">
               <Image
-                src="/company_logo/Bonedi_homes_logo.jpg.jpeg"
+                src="/company_logo/Bonedia White Logo File.png"
                 alt="Company Logo"
                 width={160}
                 height={64}

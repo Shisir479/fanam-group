@@ -5,13 +5,13 @@ export function ContactInfo() {
     <section className="w-full py-16 md:py-24">
       <div className="container mx-auto px-5 md:px-16">
         <div className="flex flex-col gap-4 mb-12">
-          <BlockReveal color="#003B6D">
+          <BlockReveal color="var(--color-brand-blue)">
             <div className="flex items-center text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
               CONTACT
             </div>
           </BlockReveal>
-          <BlockReveal color="#003B6D" delay={0.2}>
-            <h2 className="text-2xl md:text-[34px] font-bold text-[#003B6D] leading-[1.3] uppercase max-w-3xl">
+          <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
+            <h2 className="text-2xl md:text-[34px] font-bold text-brand-blue leading-[1.3] uppercase max-w-3xl">
               GET IN TOUCH
             </h2>
           </BlockReveal>
@@ -20,7 +20,7 @@ export function ContactInfo() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Card 1: Address */}
           <div className="bg-white p-10 border border-gray-50 flex flex-col items-center text-center shadow-sm">
-            <div className="bg-[#003B6D]/10 p-4 text-[#003B6D] mb-6">
+            <div className="bg-brand-blue/10 p-4 text-brand-blue mb-6">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -41,7 +41,7 @@ export function ContactInfo() {
                 />
               </svg>
             </div>
-            <h3 className="text-sm font-bold text-[#003B6D] uppercase tracking-wider mb-4">
+            <h3 className="text-sm font-bold text-brand-blue uppercase tracking-wider mb-4">
               Address
             </h3>
             <p className="text-gray-600 text-sm leading-relaxed">
@@ -53,7 +53,7 @@ export function ContactInfo() {
 
           {/* Card 2: Support */}
           <div className="bg-white p-10 border border-gray-50 flex flex-col items-center text-center shadow-sm">
-            <div className="bg-[#003B6D]/10 p-4 text-[#003B6D] mb-6">
+            <div className="bg-brand-blue/10 p-4 text-brand-blue mb-6">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -69,7 +69,7 @@ export function ContactInfo() {
                 />
               </svg>
             </div>
-            <h3 className="text-sm font-bold text-[#003B6D] uppercase tracking-wider mb-4">
+            <h3 className="text-sm font-bold text-brand-blue uppercase tracking-wider mb-4">
               Support
             </h3>
             <p className="text-gray-600 text-sm mb-2">support@bonedi.com</p>
@@ -78,7 +78,7 @@ export function ContactInfo() {
 
           {/* Card 3: Mobile */}
           <div className="bg-white p-10 border border-gray-50 flex flex-col items-center text-center shadow-sm">
-            <div className="bg-[#003B6D]/10 p-4 text-[#003B6D] mb-6">
+            <div className="bg-brand-blue/10 p-4 text-brand-blue mb-6">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -94,7 +94,7 @@ export function ContactInfo() {
                 />
               </svg>
             </div>
-            <h3 className="text-sm font-bold text-[#003B6D] uppercase tracking-wider mb-4">
+            <h3 className="text-sm font-bold text-brand-blue uppercase tracking-wider mb-4">
               Mobile
             </h3>
             <p className="text-gray-600 text-sm mb-2">+880 1712-345678</p>

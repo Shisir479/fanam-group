@@ -48,7 +48,7 @@ export default async function BlogPage({
             {/* Main Content */}
             <div className="w-full lg:w-8/12">
               <div className="flex items-center justify-between mb-12 pb-6 border-b border-gray-200">
-                <h2 className="text-2xl lg:text-3xl font-light text-[#003B6D] tracking-wide">
+                <h2 className="text-2xl lg:text-3xl font-light text-brand-blue tracking-wide">
                   {searchQuery ? (
                     <>Search results for <span className="font-medium">"{searchQuery}"</span></>
                   ) : category !== 'All' ? (
@@ -73,7 +73,7 @@ export default async function BlogPage({
                         className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
                       />
                       <div className="absolute top-6 left-6 bg-white/95 px-5 py-2">
-                        <span className="text-[11px] font-bold text-[#003B6D] uppercase tracking-[0.2em]">
+                        <span className="text-[11px] font-bold text-brand-blue uppercase tracking-[0.2em]">
                           {featuredPost.category}
                         </span>
                       </div>
@@ -82,13 +82,13 @@ export default async function BlogPage({
                       <p className="text-[13px] text-gray-500 font-medium tracking-widest uppercase mb-4">
                         {featuredPost.date} • {featuredPost.readTime}
                       </p>
-                      <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-[#003B6D] leading-tight mb-6 group-hover:opacity-80 transition-opacity">
+                      <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-brand-blue leading-tight mb-6 group-hover:opacity-80 transition-opacity">
                         {featuredPost.title}
                       </h2>
                       <p className="text-gray-500 text-lg leading-relaxed font-light mb-8 line-clamp-3">
                         {featuredPost.excerpt}
                       </p>
-                      <div className="inline-flex items-center gap-3 text-[13px] font-bold text-[#003B6D] uppercase tracking-[0.2em] group/link">
+                      <div className="inline-flex items-center gap-3 text-[13px] font-bold text-brand-blue uppercase tracking-[0.2em] group/link">
                         Read Cover Story 
                         <ArrowRight className="w-5 h-5 opacity-0 -translate-x-4 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-500" />
                       </div>

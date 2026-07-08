@@ -9,13 +9,13 @@ export function CompanyProfile() {
           {/* Left Text Side */}
           <div className="w-full lg:w-1/2 flex flex-col gap-6">
             <div className="flex flex-col gap-4 mb-2">
-              <BlockReveal color="#003B6D">
+              <BlockReveal color="var(--color-brand-blue)">
                 <div className="flex items-center text-[14px] md:text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
                   COMPANY PROFILE
                 </div>
               </BlockReveal>
-              <BlockReveal color="#003B6D" delay={0.2}>
-                <h2 className="text-2xl md:text-[34px] font-bold text-[#003B6D] leading-[1.3] uppercase">
+              <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
+                <h2 className="text-2xl md:text-[34px] font-bold text-brand-blue leading-[1.3] uppercase">
                   Pioneering Luxury Real Estate
                 </h2>
               </BlockReveal>
@@ -37,7 +37,7 @@ export function CompanyProfile() {
 
             <div className="grid grid-cols-2 gap-8 mt-6">
               <div className="flex flex-col gap-2">
-                <h4 className="text-4xl font-bold text-[#003B6D]">
+                <h4 className="text-4xl font-bold text-brand-blue">
                   <Counter end={15} suffix="+" duration={600} />
                 </h4>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">
@@ -45,7 +45,7 @@ export function CompanyProfile() {
                 </p>
               </div>
               <div className="flex flex-col gap-2">
-                <h4 className="text-4xl font-bold text-[#003B6D]">
+                <h4 className="text-4xl font-bold text-brand-blue">
                   <Counter end={50} suffix="+" duration={800} />
                 </h4>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">

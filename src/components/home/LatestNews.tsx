@@ -34,19 +34,19 @@ export function LatestNews() {
       <div className="container mx-auto px-5 md:px-16">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12">
           <div className="flex flex-col gap-4">
-            <BlockReveal color="#003B6D">
+            <BlockReveal color="var(--color-brand-blue)">
               <div className="flex items-center text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
                 INSIGHTS
               </div>
             </BlockReveal>
-            <BlockReveal color="#003B6D" delay={0.2}>
-              <h2 className="text-2xl md:text-[34px] font-bold tracking-tight text-[#003B6D] leading-[1.3] uppercase">
+            <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
+              <h2 className="text-2xl md:text-[34px] font-bold tracking-tight text-brand-blue leading-[1.3] uppercase">
                 Latest News & Blogs
               </h2>
             </BlockReveal>
           </div>
 
-          <Link href="/blog" className="hidden md:inline-flex items-center gap-4 text-sm font-bold text-[#003B6D] uppercase tracking-wider group">
+          <Link href="/blog" className="hidden md:inline-flex items-center gap-4 text-sm font-bold text-brand-blue uppercase tracking-wider group">
             <span className="relative overflow-hidden">
               <span className="inline-block transition-transform duration-500 group-hover:-translate-y-full">
                 See All News
@@ -55,7 +55,7 @@ export function LatestNews() {
                 See All News
               </span>
             </span>
-            <div className="w-10 h-10 border border-[#003B6D]/20 flex items-center justify-center transition-colors duration-500 group-hover:border-[#4ea24b] group-hover:bg-[#4ea24b]">
+            <div className="w-10 h-10 border border-brand-blue/20 flex items-center justify-center transition-colors duration-500 group-hover:border-[#4ea24b] group-hover:bg-[#4ea24b]">
               <svg
                 className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300 group-hover:text-white"
                 fill="none"
@@ -85,12 +85,12 @@ export function LatestNews() {
                   alt={item.title}
                   className="w-full h-full object-cover "
                 />
-                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-sm font-medium text-[#003B6D]">
+                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-sm font-medium text-brand-blue">
                   {item.date}
                 </div>
               </div>
               <div className="p-6 flex flex-col flex-1">
-                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#003B6D] transition-colors">
+                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-brand-blue transition-colors">
                   {item.title}
                 </h3>
                 <p className="text-gray-600 mb-6 flex-1 line-clamp-2">
@@ -98,7 +98,7 @@ export function LatestNews() {
                 </p>
                 <a
                   href="#"
-                  className="inline-flex items-center text-[#003B6D] font-semibold hover:gap-2 transition-all duration-300"
+                  className="inline-flex items-center text-brand-blue font-semibold hover:gap-2 transition-all duration-300"
                 >
                   Read More
                   <svg
@@ -121,7 +121,7 @@ export function LatestNews() {
         </div>
 
         {/* Mobile View All Button */}
-        <Link href="/blog" className="md:hidden mt-8 w-full flex items-center justify-center gap-2 text-sm font-bold text-[#003B6D] uppercase border border-[#003B6D]/30 py-4 ">
+        <Link href="/blog" className="md:hidden mt-8 w-full flex items-center justify-center gap-2 text-sm font-bold text-brand-blue uppercase border border-brand-blue/30 py-4 ">
           See All News
         </Link>
       </div>

@@ -9,7 +9,7 @@ const features = [
       "We source the finest materials and employ top-tier professionals to ensure every detail meets our rigorous standards of excellence.",
     icon: (
       <svg
-        className="w-8 h-8 text-[#003B6D]"
+        className="w-8 h-8 text-brand-blue"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -29,7 +29,7 @@ const features = [
       "Our streamlined processes and dedicated project management ensure that we hand over your dream space exactly when promised.",
     icon: (
       <svg
-        className="w-8 h-8 text-[#003B6D]"
+        className="w-8 h-8 text-brand-blue"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -49,7 +49,7 @@ const features = [
       "We meticulously select the most sought-after neighborhoods to provide our clients with the best accessibility and lifestyle.",
     icon: (
       <svg
-        className="w-8 h-8 text-[#003B6D]"
+        className="w-8 h-8 text-brand-blue"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -75,7 +75,7 @@ const features = [
       "Blending modern aesthetics with functional living spaces, our designs are crafted to inspire and elevate everyday life.",
     icon: (
       <svg
-        className="w-8 h-8 text-[#003B6D]"
+        className="w-8 h-8 text-brand-blue"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -96,14 +96,14 @@ export function WhyChooseUs() {
     <section className="w-full py-16 md:py-24 bg-gray-50">
       <div className="container mx-auto px-5 md:px-16">
         <div className="flex flex-col items-center text-center mb-16">
-          <BlockReveal color="#003B6D">
+          <BlockReveal color="var(--color-brand-blue)">
             <div className="text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase mb-4">
               Our Core Strengths
             </div>
           </BlockReveal>
 
-          <BlockReveal color="#003B6D" delay={0.2}>
-            <h2 className="text-2xl md:text-[34px] font-bold text-[#003B6D] leading-[1.2] uppercase">
+          <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
+            <h2 className="text-2xl md:text-[34px] font-bold text-brand-blue leading-[1.2] uppercase">
               Why Choose Us
             </h2>
           </BlockReveal>
@@ -122,7 +122,7 @@ export function WhyChooseUs() {
                 {feature.icon}
               </div>
 
-              <h3 className="text-lg md:text-[20px] font-bold text-[#003B6D] mb-4 uppercase tracking-wide">
+              <h3 className="text-lg md:text-[20px] font-bold text-brand-blue mb-4 uppercase tracking-wide">
                 {feature.title}
               </h3>
 
