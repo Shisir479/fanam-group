@@ -212,7 +212,7 @@ const PhotoBar = (props: {
           width: size.width,
           boxShadow:
             "rgba(0, 0, 0, 0) 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px",
-        }
+        },
       )
         .repeatDelay(inDuration - sizeDuration + holdTime)
         .yoyo(true)
@@ -228,7 +228,7 @@ const PhotoBar = (props: {
           backgroundPosition: `${backgroundPosition.left * -1}px ${backgroundPosition.top * -1}px`,
           duration: inDuration,
           x: position.left,
-        }
+        },
       )
         .repeatDelay(holdTime)
         .yoyo(true)

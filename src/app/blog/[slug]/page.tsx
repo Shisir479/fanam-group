@@ -55,18 +55,26 @@ const Linkedin = ({ className }: { className?: string }) => (
 );
 import { RelatedPosts } from "@/components/blog/RelatedPosts";
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const resolvedParams = await params;
   const post = getPostBySlug(resolvedParams.slug);
-  if (!post) return { title: 'Post Not Found' };
-  
+  if (!post) return { title: "Post Not Found" };
+
   return {
     title: `${post.title} - Bonedi Homes`,
     description: post.excerpt,
   };
 }
 
-export default async function BlogDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function BlogDetailsPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const resolvedParams = await params;
   const post = getPostBySlug(resolvedParams.slug);
 
@@ -79,9 +87,9 @@ export default async function BlogDetailsPage({ params }: { params: Promise<{ sl
       {/* Article Hero */}
       <section className="relative w-full h-[70vh] min-h-[600px] flex items-end pb-20 bg-brand-blue">
         <div className="absolute inset-0 z-0">
-          <img 
-            src={post.image} 
-            alt={post.title} 
+          <img
+            src={post.image}
+            alt={post.title}
             className="w-full h-full object-cover opacity-60"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
@@ -94,7 +102,7 @@ export default async function BlogDetailsPage({ params }: { params: Promise<{ sl
                 {post.category}
               </span>
             </BlockReveal>
-            
+
             <BlockReveal color="#ffffff" delay={0.2}>
               <h1 className="text-4xl md:text-5xl lg:text-7xl font-light text-white leading-[1.1] mb-8">
                 {post.title}
@@ -104,9 +112,15 @@ export default async function BlogDetailsPage({ params }: { params: Promise<{ sl
             <BlockReveal color="#ffffff" delay={0.4}>
               <div className="flex flex-wrap items-center gap-6 text-white/80 text-[13px] font-light tracking-wide uppercase">
                 <div className="flex items-center gap-3">
-                  <img src={post.authorImage} alt={post.author} className="w-10 h-10 rounded-full object-cover border border-white/20" />
+                  <img
+                    src={post.authorImage}
+                    alt={post.author}
+                    className="w-10 h-10 rounded-full object-cover border border-white/20"
+                  />
                   <div className="flex flex-col normal-case">
-                    <span className="font-medium text-white">{post.author}</span>
+                    <span className="font-medium text-white">
+                      {post.author}
+                    </span>
                     <span className="text-[12px]">{post.authorRole}</span>
                   </div>
                 </div>
@@ -130,7 +144,6 @@ export default async function BlogDetailsPage({ params }: { params: Promise<{ sl
       <section className="py-20 md:py-32">
         <div className="container mx-auto px-5 md:px-16">
           <div className="max-w-4xl mx-auto">
-            
             {/* Social Share (Floating Left on Desktop, Top on Mobile) */}
             <div className="flex flex-row md:flex-col gap-4 md:absolute md:-ml-24 mb-12 md:mb-0">
               <button className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-colors">
@@ -152,14 +165,23 @@ export default async function BlogDetailsPage({ params }: { params: Promise<{ sl
               <p className="text-2xl md:text-3xl text-brand-blue font-light leading-relaxed mb-12 border-l-2 border-brand-blue pl-8 py-2">
                 {post.excerpt}
               </p>
-              <div dangerouslySetInnerHTML={{ __html: post.content.replace(/\n/g, '<br/>') }} />
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: post.content.replace(/\n/g, "<br/>"),
+                }}
+              />
             </article>
 
             {/* Tags */}
             <div className="flex items-center gap-3 mb-20 pb-16 border-b border-gray-100">
-              <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mr-2">Tags</span>
+              <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mr-2">
+                Tags
+              </span>
               {post.tags.map((tag) => (
-                <span key={tag} className="px-5 py-2 border border-gray-100 text-gray-500 text-[13px] hover:border-brand-blue hover:text-brand-blue cursor-pointer transition-colors">
+                <span
+                  key={tag}
+                  className="px-5 py-2 border border-gray-100 text-gray-500 text-[13px] hover:border-brand-blue hover:text-brand-blue cursor-pointer transition-colors"
+                >
                   {tag}
                 </span>
               ))}
@@ -167,7 +189,6 @@ export default async function BlogDetailsPage({ params }: { params: Promise<{ sl
 
             {/* Related Posts */}
             <RelatedPosts currentPostId={post.id} category={post.category} />
-
           </div>
         </div>
       </section>

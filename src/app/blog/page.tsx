@@ -6,8 +6,8 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export const metadata = {
-  title: 'News & Blog - Bonedi Homes',
-  description: 'Latest news, insights, and market trends from Bonedi Homes.',
+  title: "News & Blog - Bonedi Homes",
+  description: "Latest news, insights, and market trends from Bonedi Homes.",
 };
 
 export default async function BlogPage({
@@ -16,12 +16,16 @@ export default async function BlogPage({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const resolvedSearchParams = await searchParams;
-  const searchQuery = typeof resolvedSearchParams.q === 'string' ? resolvedSearchParams.q : '';
-  const category = typeof resolvedSearchParams.category === 'string' ? resolvedSearchParams.category : 'All';
+  const searchQuery =
+    typeof resolvedSearchParams.q === "string" ? resolvedSearchParams.q : "";
+  const category =
+    typeof resolvedSearchParams.category === "string"
+      ? resolvedSearchParams.category
+      : "All";
 
   let filteredPosts = blogPosts;
 
-  if (category && category !== 'All') {
+  if (category && category !== "All") {
     filteredPosts = filteredPosts.filter((post) => post.category === category);
   }
 
@@ -29,47 +33,58 @@ export default async function BlogPage({
     filteredPosts = filteredPosts.filter(
       (post) =>
         post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        post.excerpt.toLowerCase().includes(searchQuery.toLowerCase())
+        post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()),
     );
   }
 
-  const hasFilters = searchQuery || category !== 'All';
-  const featuredPost = !hasFilters && filteredPosts.length > 0 ? filteredPosts[0] : null;
+  const hasFilters = searchQuery || category !== "All";
+  const featuredPost =
+    !hasFilters && filteredPosts.length > 0 ? filteredPosts[0] : null;
   const standardPosts = featuredPost ? filteredPosts.slice(1) : filteredPosts;
 
   return (
     <main className="flex min-h-screen flex-col bg-white">
       <BlogHero />
-      
+
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-5 md:px-16">
           <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
-            
             {/* Main Content */}
             <div className="w-full lg:w-8/12">
               <div className="flex items-center justify-between mb-12 pb-6 border-b border-gray-200">
                 <h2 className="text-2xl lg:text-3xl font-light text-brand-blue tracking-wide">
                   {searchQuery ? (
-                    <>Search results for <span className="font-medium">"{searchQuery}"</span></>
-                  ) : category !== 'All' ? (
-                    <>Category: <span className="font-medium">{category}</span></>
+                    <>
+                      Search results for{" "}
+                      <span className="font-medium">"{searchQuery}"</span>
+                    </>
+                  ) : category !== "All" ? (
+                    <>
+                      Category: <span className="font-medium">{category}</span>
+                    </>
                   ) : (
-                    <>Latest <span className="font-medium">Articles</span></>
+                    <>
+                      Latest <span className="font-medium">Articles</span>
+                    </>
                   )}
                 </h2>
                 <span className="text-gray-400 text-sm tracking-widest uppercase">
-                  {filteredPosts.length} post{filteredPosts.length !== 1 ? 's' : ''}
+                  {filteredPosts.length} post
+                  {filteredPosts.length !== 1 ? "s" : ""}
                 </span>
               </div>
 
               {/* Featured Post (Only on main view) */}
               {featuredPost && (
                 <div className="mb-20">
-                  <Link href={`/blog/${featuredPost.slug}`} className="group block">
+                  <Link
+                    href={`/blog/${featuredPost.slug}`}
+                    className="group block"
+                  >
                     <div className="relative w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden mb-8">
-                      <img 
-                        src={featuredPost.image} 
-                        alt={featuredPost.title} 
+                      <img
+                        src={featuredPost.image}
+                        alt={featuredPost.title}
                         className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
                       />
                       <div className="absolute top-6 left-6 bg-white/95 px-5 py-2">
@@ -89,7 +104,7 @@ export default async function BlogPage({
                         {featuredPost.excerpt}
                       </p>
                       <div className="inline-flex items-center gap-3 text-[13px] font-bold text-brand-blue uppercase tracking-[0.2em] group/link">
-                        Read Cover Story 
+                        Read Cover Story
                         <ArrowRight className="w-5 h-5 opacity-0 -translate-x-4 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-500" />
                       </div>
                     </div>
@@ -106,7 +121,9 @@ export default async function BlogPage({
                 </div>
               ) : !featuredPost ? (
                 <div className="py-20 text-center">
-                  <p className="text-gray-400 text-lg font-light tracking-wide">No articles found matching your criteria.</p>
+                  <p className="text-gray-400 text-lg font-light tracking-wide">
+                    No articles found matching your criteria.
+                  </p>
                 </div>
               ) : null}
             </div>
@@ -117,7 +134,6 @@ export default async function BlogPage({
                 <BlogSidebar />
               </div>
             </aside>
-            
           </div>
         </div>
       </section>

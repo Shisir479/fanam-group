@@ -262,10 +262,7 @@ export default async function ProjectDetailsPage({
 
       {/* 3. Amenities */}
       {project.amenities && (
-        <section
-          id="amenities"
-          className="py-12 md:py-16 bg-gray-50 "
-        >
+        <section id="amenities" className="py-12 md:py-16 bg-gray-50 ">
           <div className="container mx-auto px-5 md:px-16 max-w-7xl">
             <div className="mb-12 flex flex-col gap-3">
               <BlockReveal color="var(--color-brand-blue)">
@@ -339,7 +336,10 @@ export default async function ProjectDetailsPage({
                   </div>
                   <div className="grid grid-cols-3 divide-x divide-gray-200 border-t border-gray-200 bg-[#f8f9fa] py-5">
                     <div className="text-center px-2 flex flex-col items-center">
-                      <Maximize className="w-4 h-4 text-brand-blue mb-1.5" strokeWidth={1.5} />
+                      <Maximize
+                        className="w-4 h-4 text-brand-blue mb-1.5"
+                        strokeWidth={1.5}
+                      />
                       <span className="block text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">
                         Size
                       </span>
@@ -348,7 +348,10 @@ export default async function ProjectDetailsPage({
                       </span>
                     </div>
                     <div className="text-center px-2 flex flex-col items-center">
-                      <BedDouble className="w-4 h-4 text-brand-blue mb-1.5" strokeWidth={1.5} />
+                      <BedDouble
+                        className="w-4 h-4 text-brand-blue mb-1.5"
+                        strokeWidth={1.5}
+                      />
                       <span className="block text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">
                         Beds
                       </span>
@@ -357,7 +360,10 @@ export default async function ProjectDetailsPage({
                       </span>
                     </div>
                     <div className="text-center px-2 flex flex-col items-center">
-                      <Bath className="w-4 h-4 text-brand-blue mb-1.5" strokeWidth={1.5} />
+                      <Bath
+                        className="w-4 h-4 text-brand-blue mb-1.5"
+                        strokeWidth={1.5}
+                      />
                       <span className="block text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">
                         Baths
                       </span>
@@ -375,10 +381,7 @@ export default async function ProjectDetailsPage({
 
       {/* 5. Gallery (Dynamic Grid) */}
       {project.gallery && (
-        <section
-          id="gallery"
-          className="py-16 md:py-24 bg-gray-50 "
-        >
+        <section id="gallery" className="py-16 md:py-24 bg-gray-50 ">
           <div className="container mx-auto px-5 md:px-16 max-w-7xl">
             <div className="flex flex-col md:flex-row justify-between items-end mb-12">
               <div className="flex flex-col gap-3">
@@ -521,8 +524,10 @@ export default async function ProjectDetailsPage({
             <div className="flex flex-col text-white">
               <div className="mb-3">
                 <BlockReveal color="#ffffff">
-                  <h2 className="text-2xl md:text-[34px] Interested in this project?
- font-bold uppercase tracking-wide">
+                  <h2
+                    className="text-2xl md:text-[34px] Interested in this project?
+ font-bold uppercase tracking-wide"
+                  >
                     Interested in this project?
                   </h2>
                 </BlockReveal>
@@ -532,7 +537,7 @@ export default async function ProjectDetailsPage({
                 availability, pricing details, and private viewings.
               </p>
 
-              <SharedButton 
+              <SharedButton
                 className="text-white mb-10 w-max"
                 hoverBgClass="bg-white"
                 hoverTextClass="hover:text-brand-blue"
@@ -571,13 +576,11 @@ export default async function ProjectDetailsPage({
                 </BlockReveal>
               </div>
               <p className="text-gray-600 text-[14px] md:text-[15px] leading-relaxed mb-8 max-w-sm mx-auto">
-                Ready to take the next step? Click below to fill out our detailed inquiry form and connect with our property consultants.
+                Ready to take the next step? Click below to fill out our
+                detailed inquiry form and connect with our property consultants.
               </p>
-              
-              <SharedButton
-                href="/inquiry"
-                className="w-full sm:w-auto"
-              >
+
+              <SharedButton href="/inquiry" className="w-full sm:w-auto">
                 Go to Inquiry Form
               </SharedButton>
             </div>

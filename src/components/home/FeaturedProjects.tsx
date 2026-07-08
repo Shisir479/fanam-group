@@ -115,7 +115,10 @@ export function FeaturedProjects() {
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
           <div className="flex flex-col gap-4">
-            <BlockReveal color="var(--color-brand-blue)" key={`title-${activeTab}`}>
+            <BlockReveal
+              color="var(--color-brand-blue)"
+              key={`title-${activeTab}`}
+            >
               <div className="flex items-center text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
                 {currentData.title}
               </div>
@@ -217,9 +220,7 @@ export function FeaturedProjects() {
 
                 {/* Always visible Explore Button */}
                 <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8 pointer-events-auto">
-                  <SharedButton className="text-white">
-                    Explore
-                  </SharedButton>
+                  <SharedButton className="text-white">Explore</SharedButton>
                 </div>
               </div>
             </SwiperSlide>

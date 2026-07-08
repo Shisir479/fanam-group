@@ -82,7 +82,7 @@ export default function VideoGallery() {
           >
             <X className="w-8 h-8" />
           </button>
-          
+
           <div className="relative w-full max-w-5xl aspect-video rounded-lg overflow-hidden shadow-2xl">
             <iframe
               src={activeVideo}

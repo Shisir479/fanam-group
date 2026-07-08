@@ -49,9 +49,7 @@ export function AboutSection() {
 
             {/* Learn More Button */}
             <div className="md:mt-10 mt-8 self-start">
-              <SharedButton>
-                Learn More
-              </SharedButton>
+              <SharedButton>Learn More</SharedButton>
             </div>
           </div>
 

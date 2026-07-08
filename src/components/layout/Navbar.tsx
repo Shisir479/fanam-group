@@ -44,13 +44,17 @@ export function Navbar() {
                 className="relative group h-full flex items-center"
               >
                 Home
-                <span className={`absolute left-0 bottom-0 w-full h-[4px] bg-white origin-left transition-transform duration-600 ease-out ${pathname === '/' ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
+                <span
+                  className={`absolute left-0 bottom-0 w-full h-[4px] bg-white origin-left transition-transform duration-600 ease-out ${pathname === "/" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                ></span>
               </Link>
               {/* About with Dropdown */}
               <div className="relative group h-full flex items-center">
                 <Link href="/about" className="h-full flex items-center">
                   About Us
-                  <span className={`absolute left-0 bottom-0 w-full h-[4px] bg-white origin-left transition-transform duration-600 ease-out ${pathname.startsWith('/about') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
+                  <span
+                    className={`absolute left-0 bottom-0 w-full h-[4px] bg-white origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/about") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                  ></span>
                 </Link>
               </div>
 
@@ -58,24 +62,26 @@ export function Navbar() {
               <div className="relative group h-full flex items-center">
                 <Link href="/projects" className="h-full flex items-center">
                   Projects
-                  <span className={`absolute left-0 bottom-0 w-full h-[4px] bg-white origin-left transition-transform duration-600 ease-out ${pathname.startsWith('/projects') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
+                  <span
+                    className={`absolute left-0 bottom-0 w-full h-[4px] bg-white origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/projects") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                  ></span>
                 </Link>
                 <div className="absolute top-full left-0 min-w-[240px] bg-black/80 flex flex-col opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
                   <Link
                     href="/projects/ongoing"
-                    className={`px-6 py-5 text-sm font-semibold hover:text-white border-b border-white/10 transition-colors ${pathname === '/projects/ongoing' ? 'text-white bg-white/10' : 'text-white/70'}`}
+                    className={`px-6 py-5 text-sm font-semibold hover:text-white border-b border-white/10 transition-colors ${pathname === "/projects/ongoing" ? "text-white bg-white/10" : "text-white/70"}`}
                   >
                     Ongoing
                   </Link>
                   <Link
                     href="/projects/upcoming"
-                    className={`px-6 py-5 text-sm font-semibold hover:text-white border-b border-white/10 transition-colors ${pathname === '/projects/upcoming' ? 'text-white bg-white/10' : 'text-white/70'}`}
+                    className={`px-6 py-5 text-sm font-semibold hover:text-white border-b border-white/10 transition-colors ${pathname === "/projects/upcoming" ? "text-white bg-white/10" : "text-white/70"}`}
                   >
                     Upcoming
                   </Link>
                   <Link
                     href="/projects/handed-over"
-                    className={`px-6 py-5 text-sm font-semibold hover:text-white border-b border-white/10 transition-colors ${pathname === '/projects/handed-over' ? 'text-white bg-white/10' : 'text-white/70'}`}
+                    className={`px-6 py-5 text-sm font-semibold hover:text-white border-b border-white/10 transition-colors ${pathname === "/projects/handed-over" ? "text-white bg-white/10" : "text-white/70"}`}
                   >
                     Handed Over
                   </Link>
@@ -87,25 +93,29 @@ export function Navbar() {
                 className="relative group h-full flex items-center"
               >
                 Blog
-                <span className={`absolute left-0 bottom-0 w-full h-[4px] bg-white origin-left transition-transform duration-600 ease-out ${pathname.startsWith('/blog') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
+                <span
+                  className={`absolute left-0 bottom-0 w-full h-[4px] bg-white origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/blog") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                ></span>
               </Link>
 
               {/* Gallery with Dropdown */}
               <div className="relative group h-full flex items-center">
                 <Link href="/gallery" className="h-full flex items-center">
                   Gallery
-                  <span className={`absolute left-0 bottom-0 w-full h-[4px] bg-white origin-left transition-transform duration-600 ease-out ${pathname.startsWith('/gallery') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
+                  <span
+                    className={`absolute left-0 bottom-0 w-full h-[4px] bg-white origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/gallery") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                  ></span>
                 </Link>
                 <div className="absolute top-full left-0 min-w-[240px] bg-black/80 flex flex-col opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
                   <Link
                     href="/image-gallery"
-                    className={`px-6 py-5 text-sm font-semibold hover:text-white border-b border-white/10 transition-colors ${pathname === '/image-gallery' ? 'text-white bg-white/10' : 'text-white/70'}`}
+                    className={`px-6 py-5 text-sm font-semibold hover:text-white border-b border-white/10 transition-colors ${pathname === "/image-gallery" ? "text-white bg-white/10" : "text-white/70"}`}
                   >
                     Image Gallery
                   </Link>
                   <Link
                     href="/video-gallery"
-                    className={`px-6 py-5 text-sm font-semibold hover:text-white transition-colors ${pathname === '/video-gallery' ? 'text-white bg-white/10' : 'text-white/70'}`}
+                    className={`px-6 py-5 text-sm font-semibold hover:text-white transition-colors ${pathname === "/video-gallery" ? "text-white bg-white/10" : "text-white/70"}`}
                   >
                     Video Gallery
                   </Link>
@@ -116,26 +126,30 @@ export function Navbar() {
               <div className="relative group h-full flex items-center">
                 <Link href="/contact" className="h-full flex items-center">
                   Contact
-                  <span className={`absolute left-0 bottom-0 w-full h-[4px] bg-white origin-left transition-transform duration-600 ease-out ${pathname.startsWith('/contact') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
+                  <span
+                    className={`absolute left-0 bottom-0 w-full h-[4px] bg-white origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/contact") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                  ></span>
                 </Link>
               </div>
 
               {/* Legal Pages with Dropdown */}
               <div className="relative group h-full flex items-center">
                 <span className="h-full flex items-center cursor-pointer">
-                  Legal 
-                  <span className={`absolute left-0 bottom-0 w-full h-[4px] bg-white origin-left transition-transform duration-600 ease-out ${pathname.startsWith('/legal/privacy-policy') || pathname.startsWith('/legal/terms-conditions') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
+                  Legal
+                  <span
+                    className={`absolute left-0 bottom-0 w-full h-[4px] bg-white origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/legal/privacy-policy") || pathname.startsWith("/legal/terms-conditions") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                  ></span>
                 </span>
                 <div className="absolute top-full left-0 min-w-[240px] bg-black/80 flex flex-col opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
                   <Link
                     href="/legal/privacy-policy"
-                    className={`px-6 py-5 text-sm font-semibold hover:text-white border-b border-white/10 transition-colors ${pathname === '/legal/privacy-policy' ? 'text-white bg-white/10' : 'text-white/70'}`}
+                    className={`px-6 py-5 text-sm font-semibold hover:text-white border-b border-white/10 transition-colors ${pathname === "/legal/privacy-policy" ? "text-white bg-white/10" : "text-white/70"}`}
                   >
                     Privacy Policy
                   </Link>
                   <Link
                     href="/legal/terms-conditions"
-                    className={`px-6 py-5 text-sm font-semibold hover:text-white transition-colors ${pathname === '/legal/terms-conditions' ? 'text-white bg-white/10' : 'text-white/70'}`}
+                    className={`px-6 py-5 text-sm font-semibold hover:text-white transition-colors ${pathname === "/legal/terms-conditions" ? "text-white bg-white/10" : "text-white/70"}`}
                   >
                     Terms & Conditions
                   </Link>

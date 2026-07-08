@@ -7,7 +7,7 @@ export default function GalleryPage() {
     <main className="w-full bg-white min-h-screen">
       <ImageGalleryBanner />
       <AlbumGallery />
-      <VideoGallery/>
+      <VideoGallery />
     </main>
   );
 }

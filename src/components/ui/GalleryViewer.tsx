@@ -24,10 +24,10 @@ export function GalleryViewer({ images }: GalleryViewerProps) {
               idx === 0
                 ? "md:col-span-8 row-span-2"
                 : idx === 1
-                ? "md:col-span-4 row-span-1"
-                : idx === 2
-                ? "md:col-span-4 row-span-1"
-                : "md:col-span-4 row-span-1"
+                  ? "md:col-span-4 row-span-1"
+                  : idx === 2
+                    ? "md:col-span-4 row-span-1"
+                    : "md:col-span-4 row-span-1"
             }`}
           >
             <Image
@@ -54,7 +54,9 @@ export function GalleryViewer({ images }: GalleryViewerProps) {
           <button
             className="absolute left-4 md:left-10 text-white hover:text-gray-300 transition-colors z-50 p-2 bg-black/20 rounded-full"
             onClick={() =>
-              setSelectedIndex((prev) => (prev === null || prev === 0 ? images.length - 1 : prev - 1))
+              setSelectedIndex((prev) =>
+                prev === null || prev === 0 ? images.length - 1 : prev - 1,
+              )
             }
           >
             <ChevronLeft className="w-8 h-8" />
@@ -72,7 +74,9 @@ export function GalleryViewer({ images }: GalleryViewerProps) {
           <button
             className="absolute right-4 md:right-10 text-white hover:text-gray-300 transition-colors z-50 p-2 bg-black/20 rounded-full"
             onClick={() =>
-              setSelectedIndex((prev) => (prev === null || prev === images.length - 1 ? 0 : prev + 1))
+              setSelectedIndex((prev) =>
+                prev === null || prev === images.length - 1 ? 0 : prev + 1,
+              )
             }
           >
             <ChevronRight className="w-8 h-8" />

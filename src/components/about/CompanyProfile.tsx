@@ -23,9 +23,9 @@ export function CompanyProfile() {
 
             <p className="text-gray-600 text-base leading-relaxed">
               At Bonedi Homes, we do more than just build structures; we create
-              legacies. With a deep-rooted commitment to architectural brilliance
-              and uncompromising quality, we have established ourselves as
-              pioneers in the luxury real estate sector.
+              legacies. With a deep-rooted commitment to architectural
+              brilliance and uncompromising quality, we have established
+              ourselves as pioneers in the luxury real estate sector.
             </p>
             <p className="text-gray-600 text-base leading-relaxed">
               Our projects span across prime locations, offering unparalleled

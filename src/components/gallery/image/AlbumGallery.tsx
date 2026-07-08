@@ -15,7 +15,8 @@ const ALBUMS: Album[] = [
   {
     id: "annual-conference-2024",
     title: "Annual Conference 2024",
-    thumbnail: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop",
+    thumbnail:
+      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop",
     images: [
       "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=2070&auto=format&fit=crop",
@@ -25,7 +26,8 @@ const ALBUMS: Album[] = [
   {
     id: "outing-2023",
     title: "Outing 2023",
-    thumbnail: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=2070&auto=format&fit=crop",
+    thumbnail:
+      "https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=2070&auto=format&fit=crop",
     images: [
       "https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=2070&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1473621038520-5c621ffbc412?q=80&w=2070&auto=format&fit=crop",
@@ -35,7 +37,8 @@ const ALBUMS: Album[] = [
   {
     id: "falgun-utshob-2023",
     title: "Falgun Utshob 2023",
-    thumbnail: "https://images.unsplash.com/photo-1604085572504-a392ddf0d86a?q=80&w=2142&auto=format&fit=crop",
+    thumbnail:
+      "https://images.unsplash.com/photo-1604085572504-a392ddf0d86a?q=80&w=2142&auto=format&fit=crop",
     images: [
       "https://images.unsplash.com/photo-1604085572504-a392ddf0d86a?q=80&w=2142&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=2071&auto=format&fit=crop",
@@ -44,7 +47,8 @@ const ALBUMS: Album[] = [
   {
     id: "tree-plantation-2023",
     title: "Tree Plantation 2023",
-    thumbnail: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=2026&auto=format&fit=crop",
+    thumbnail:
+      "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=2026&auto=format&fit=crop",
     images: [
       "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=2026&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?q=80&w=1974&auto=format&fit=crop",
@@ -53,7 +57,8 @@ const ALBUMS: Album[] = [
   {
     id: "corporate-meeting",
     title: "Corporate Meeting",
-    thumbnail: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2070&auto=format&fit=crop",
+    thumbnail:
+      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2070&auto=format&fit=crop",
     images: [
       "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2070&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1556761175-5973dc0f32b7?q=80&w=1932&auto=format&fit=crop",
@@ -62,7 +67,8 @@ const ALBUMS: Album[] = [
   {
     id: "edison-royal-club",
     title: "Edison Royal Club",
-    thumbnail: "https://images.unsplash.com/photo-1561489396-888724a1543d?q=80&w=2070&auto=format&fit=crop",
+    thumbnail:
+      "https://images.unsplash.com/photo-1561489396-888724a1543d?q=80&w=2070&auto=format&fit=crop",
     images: [
       "https://images.unsplash.com/photo-1561489396-888724a1543d?q=80&w=2070&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop",
@@ -86,14 +92,14 @@ export default function AlbumGallery() {
   const nextImage = () => {
     if (!activeAlbum) return;
     setCurrentImageIndex((prev) =>
-      prev === activeAlbum.images.length - 1 ? 0 : prev + 1
+      prev === activeAlbum.images.length - 1 ? 0 : prev + 1,
     );
   };
 
   const prevImage = () => {
     if (!activeAlbum) return;
     setCurrentImageIndex((prev) =>
-      prev === 0 ? activeAlbum.images.length - 1 : prev - 1
+      prev === 0 ? activeAlbum.images.length - 1 : prev - 1,
     );
   };
 

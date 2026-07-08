@@ -46,7 +46,10 @@ export function LatestNews() {
             </BlockReveal>
           </div>
 
-          <Link href="/blog" className="hidden md:inline-flex items-center gap-4 text-sm font-bold text-brand-blue uppercase tracking-wider group">
+          <Link
+            href="/blog"
+            className="hidden md:inline-flex items-center gap-4 text-sm font-bold text-brand-blue uppercase tracking-wider group"
+          >
             <span className="relative overflow-hidden">
               <span className="inline-block transition-transform duration-500 group-hover:-translate-y-full">
                 See All News
@@ -121,7 +124,10 @@ export function LatestNews() {
         </div>
 
         {/* Mobile View All Button */}
-        <Link href="/blog" className="md:hidden mt-8 w-full flex items-center justify-center gap-2 text-sm font-bold text-brand-blue uppercase border border-brand-blue/30 py-4 ">
+        <Link
+          href="/blog"
+          className="md:hidden mt-8 w-full flex items-center justify-center gap-2 text-sm font-bold text-brand-blue uppercase border border-brand-blue/30 py-4 "
+        >
           See All News
         </Link>
       </div>

@@ -6,15 +6,18 @@ export function BlogCard({ post }: { post: BlogPost }) {
   return (
     <article className="group flex flex-col h-full">
       {/* Image Container */}
-      <Link href={`/blog/${post.slug}`} className="relative w-full aspect-[4/3] md:aspect-[3/2] overflow-hidden mb-6 block">
-        <img 
-          src={post.image} 
-          alt={post.title} 
+      <Link
+        href={`/blog/${post.slug}`}
+        className="relative w-full aspect-[4/3] md:aspect-[3/2] overflow-hidden mb-6 block"
+      >
+        <img
+          src={post.image}
+          alt={post.title}
           className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
         />
         {/* Subtle overlay on hover */}
         <div className="absolute inset-0 bg-brand-blue/0 group-hover:bg-brand-blue/5 transition-colors duration-500"></div>
-        
+
         {/* Category Label */}
         <div className="absolute top-4 left-4 bg-white/95 px-4 py-2">
           <span className="text-[10px] font-bold text-brand-blue uppercase tracking-[0.2em]">
@@ -51,8 +54,11 @@ export function BlogCard({ post }: { post: BlogPost }) {
 
         {/* Read More Link */}
         <div className="mt-auto pt-4 border-t border-gray-100">
-          <Link href={`/blog/${post.slug}`} className="inline-flex items-center gap-2 text-[12px] font-bold text-brand-blue uppercase tracking-[0.15em] group/link">
-            Read Article 
+          <Link
+            href={`/blog/${post.slug}`}
+            className="inline-flex items-center gap-2 text-[12px] font-bold text-brand-blue uppercase tracking-[0.15em] group/link"
+          >
+            Read Article
             <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover/link:opacity-100 group-hover/link:translate-x-0 transition-all duration-300" />
           </Link>
         </div>

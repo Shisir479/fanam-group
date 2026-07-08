@@ -7,24 +7,68 @@ import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
 import { useState } from "react";
 
 const Facebook = ({ className }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
     <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
   </svg>
 );
 const Twitter = ({ className }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
     <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
   </svg>
 );
 const Instagram = ({ className }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
     <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
     <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
   </svg>
 );
 const Linkedin = ({ className }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
     <rect width="4" height="12" x="2" y="9"></rect>
     <circle cx="4" cy="4" r="2"></circle>
@@ -37,10 +81,12 @@ export function ContactView() {
     email: "",
     phone: "",
     subject: "",
-    message: ""
+    message: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -53,7 +99,6 @@ export function ContactView() {
 
   return (
     <main className="min-h-screen  bg-[#F8FAFC] pb-0 flex flex-col font-sans">
-      
       {/* Hero Section - Matching AboutHero */}
       <PageBanner
         title="Contact Us"
@@ -62,14 +107,14 @@ export function ContactView() {
         altText="Contact Us"
       >
         <p className="max-w-2xl text-white/80 mt-2 text-sm md:text-base">
-          We're here to help and answer any question you might have. We look forward to hearing from you.
+          We're here to help and answer any question you might have. We look
+          forward to hearing from you.
         </p>
       </PageBanner>
 
       {/* Contact Section - Map and Form Split */}
       <section className="container mx-auto px-5 md:px-16 py-16 md:py-24  relative z-20 mb-12 mt-4">
         <div className="bg-white rounded-none shadow-sm border border-gray-100 overflow-hidden flex flex-col lg:flex-row">
-          
           {/* Left Side: Map */}
           <div className="w-full lg:w-1/2 h-[300px] lg:h-auto relative bg-gray-200">
             <iframe
@@ -89,8 +134,10 @@ export function ContactView() {
 
           {/* Right Side: Contact Form */}
           <div className="w-full lg:w-1/2 p-8 md:p-10 lg:p-12 bg-white flex flex-col justify-center">
-            <h3 className="text-xl font-bold text-gray-900 mb-6 uppercase tracking-wide">Send a Message</h3>
-            
+            <h3 className="text-xl font-bold text-gray-900 mb-6 uppercase tracking-wide">
+              Send a Message
+            </h3>
+
             <form onSubmit={handleSubmit} className="flex flex-col gap-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Form Group */}
@@ -105,7 +152,10 @@ export function ContactView() {
                     className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-brand-blue peer"
                     placeholder=" "
                   />
-                  <label htmlFor="name" className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-brand-blue peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none">
+                  <label
+                    htmlFor="name"
+                    className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-brand-blue peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none"
+                  >
                     Full Name
                   </label>
                 </div>
@@ -121,7 +171,10 @@ export function ContactView() {
                     className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-brand-blue peer"
                     placeholder=" "
                   />
-                  <label htmlFor="email" className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-brand-blue peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none">
+                  <label
+                    htmlFor="email"
+                    className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-brand-blue peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none"
+                  >
                     Email Address
                   </label>
                 </div>
@@ -139,7 +192,10 @@ export function ContactView() {
                     className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-brand-blue peer"
                     placeholder=" "
                   />
-                  <label htmlFor="phone" className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-brand-blue peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none">
+                  <label
+                    htmlFor="phone"
+                    className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-brand-blue peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none"
+                  >
                     Phone Number
                   </label>
                 </div>
@@ -155,7 +211,10 @@ export function ContactView() {
                     className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-brand-blue peer"
                     placeholder=" "
                   />
-                  <label htmlFor="subject" className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-brand-blue peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none">
+                  <label
+                    htmlFor="subject"
+                    className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-brand-blue peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none"
+                  >
                     Subject
                   </label>
                 </div>
@@ -172,7 +231,10 @@ export function ContactView() {
                   className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-brand-blue peer resize-none"
                   placeholder=" "
                 />
-                <label htmlFor="message" className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-brand-blue peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none">
+                <label
+                  htmlFor="message"
+                  className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-brand-blue peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none"
+                >
                   Your Message
                 </label>
               </div>
@@ -196,7 +258,7 @@ export function ContactView() {
           {/* Abstract Shapes */}
           <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/3 w-48 h-48 bg-white/5 rounded-none blur-3xl pointer-events-none"></div>
           <div className="absolute bottom-0 left-0 translate-y-1/3 -translate-x-1/3 w-64 h-64 bg-white/5 rounded-none blur-3xl pointer-events-none"></div>
-          
+
           <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Office Location */}
             <div className="flex flex-col gap-3 group cursor-default">
@@ -204,9 +266,12 @@ export function ContactView() {
                 <MapPin className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="font-semibold text-white/90 text-xs uppercase tracking-wider mb-1">Corporate Office</h4>
+                <h4 className="font-semibold text-white/90 text-xs uppercase tracking-wider mb-1">
+                  Corporate Office
+                </h4>
                 <p className="text-white/70 text-sm leading-relaxed">
-                  House #12, Road #34, Gulshan-2<br />
+                  House #12, Road #34, Gulshan-2
+                  <br />
                   Dhaka-1212, Bangladesh
                 </p>
               </div>
@@ -218,9 +283,12 @@ export function ContactView() {
                 <Phone className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="font-semibold text-white/90 text-xs uppercase tracking-wider mb-1">Hotline</h4>
+                <h4 className="font-semibold text-white/90 text-xs uppercase tracking-wider mb-1">
+                  Hotline
+                </h4>
                 <p className="text-white/70 text-sm">
-                  +880 1711-223344<br />
+                  +880 1711-223344
+                  <br />
                   +880 1811-223344
                 </p>
               </div>
@@ -232,11 +300,19 @@ export function ContactView() {
                 <Mail className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="font-semibold text-white/90 text-xs uppercase tracking-wider mb-1">Email</h4>
-                <a href="mailto:info@bonedihomes.com" className="text-white/70 text-sm hover:text-white block transition-colors mb-0.5">
+                <h4 className="font-semibold text-white/90 text-xs uppercase tracking-wider mb-1">
+                  Email
+                </h4>
+                <a
+                  href="mailto:info@bonedihomes.com"
+                  className="text-white/70 text-sm hover:text-white block transition-colors mb-0.5"
+                >
                   info@bonedihomes.com
                 </a>
-                <a href="mailto:sales@bonedihomes.com" className="text-white/70 text-sm hover:text-white block transition-colors">
+                <a
+                  href="mailto:sales@bonedihomes.com"
+                  className="text-white/70 text-sm hover:text-white block transition-colors"
+                >
                   sales@bonedihomes.com
                 </a>
               </div>
@@ -248,29 +324,43 @@ export function ContactView() {
                 <Clock className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="font-semibold text-white/90 text-xs uppercase tracking-wider mb-1">Business Hours</h4>
+                <h4 className="font-semibold text-white/90 text-xs uppercase tracking-wider mb-1">
+                  Business Hours
+                </h4>
                 <p className="text-white/70 text-sm mb-4">
-                  Sat - Thu: 9:00 AM - 6:00 PM<br />
+                  Sat - Thu: 9:00 AM - 6:00 PM
+                  <br />
                   <span className="text-white/50">Friday: Closed</span>
                 </p>
-                
+
                 <div className="flex gap-2">
-                  <a href="#" className="w-8 h-8 rounded-none bg-white/10 flex items-center justify-center hover:bg-white hover:text-brand-blue transition-all duration-300">
+                  <a
+                    href="#"
+                    className="w-8 h-8 rounded-none bg-white/10 flex items-center justify-center hover:bg-white hover:text-brand-blue transition-all duration-300"
+                  >
                     <Facebook className="w-3.5 h-3.5" />
                   </a>
-                  <a href="#" className="w-8 h-8 rounded-none bg-white/10 flex items-center justify-center hover:bg-white hover:text-brand-blue transition-all duration-300">
+                  <a
+                    href="#"
+                    className="w-8 h-8 rounded-none bg-white/10 flex items-center justify-center hover:bg-white hover:text-brand-blue transition-all duration-300"
+                  >
                     <Twitter className="w-3.5 h-3.5" />
                   </a>
-                  <a href="#" className="w-8 h-8 rounded-none bg-white/10 flex items-center justify-center hover:bg-white hover:text-brand-blue transition-all duration-300">
+                  <a
+                    href="#"
+                    className="w-8 h-8 rounded-none bg-white/10 flex items-center justify-center hover:bg-white hover:text-brand-blue transition-all duration-300"
+                  >
                     <Instagram className="w-3.5 h-3.5" />
                   </a>
-                  <a href="#" className="w-8 h-8 rounded-none bg-white/10 flex items-center justify-center hover:bg-white hover:text-brand-blue transition-all duration-300">
+                  <a
+                    href="#"
+                    className="w-8 h-8 rounded-none bg-white/10 flex items-center justify-center hover:bg-white hover:text-brand-blue transition-all duration-300"
+                  >
                     <Linkedin className="w-3.5 h-3.5" />
                   </a>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </section>
