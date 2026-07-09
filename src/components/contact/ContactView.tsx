@@ -240,8 +240,8 @@ export function ContactView() {
               </div>
 
               <div className="mt-4">
-                <SharedButton type="submit">
-                  <span className="flex items-center gap-2">
+                <SharedButton type="submit" className="cursor-pointer">
+                  <span className="flex items-center gap-2 ">
                     Send Message
                     <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                   </span>

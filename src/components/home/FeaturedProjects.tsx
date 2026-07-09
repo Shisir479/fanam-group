@@ -220,7 +220,7 @@ export function FeaturedProjects() {
 
                 {/* Always visible Explore Button */}
                 <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8 pointer-events-auto">
-                  <SharedButton className="text-white">Explore</SharedButton>
+                  <SharedButton className="text-white cursor-pointer ">Explore</SharedButton>
                 </div>
               </div>
             </SwiperSlide>
