@@ -7,7 +7,7 @@ export function ContactInfo() {
         <div className="flex flex-col gap-4 mb-12">
           <BlockReveal color="var(--color-brand-blue)">
             <div className="flex items-center text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
-              CONTACT
+              CONTACT US
             </div>
           </BlockReveal>
           <BlockReveal color="var(--color-brand-blue)" delay={0.2}>

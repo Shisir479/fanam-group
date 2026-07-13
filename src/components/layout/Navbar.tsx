@@ -32,8 +32,8 @@ export function Navbar() {
                 width={160}
                 height={52}
                 priority
-                style={{ width: "auto" }}
-                className="h-10 md:h-18 object-contain group-hover:animate-pulse transition-all duration-300 "
+                style={{ width: "auto", animation: "sunriseUp 2.2s cubic-bezier(0.22, 1, 0.36, 1) both, logoBlink 2.2s ease-in-out 3.2s infinite" }}
+                className="h-10 md:h-18 object-contain"
               />
             </Link>
 

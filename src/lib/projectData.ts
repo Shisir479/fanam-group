@@ -88,7 +88,7 @@ const defaultExtendedData = {
     "https://images.unsplash.com/photo-1600607687644-aac4c15cecb1?q=80&w=2070&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop",
   ],
-  videoTourUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", // Placeholder
+  videoTourUrl: "https://www.youtube.com/embed/l6EzZafb1Pk?rel=0",
   locationMapUrl:
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14602.700312046467!2d90.4158487!3d23.7856637!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c7000c0f993f%3A0x8e8334812df934f8!2sGulshan%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1700000000000!5m2!1sen!2sbd",
   constructionProgress: {

@@ -46,7 +46,7 @@ export function LeadershipProfiles() {
                   <img
                     src={leader.image}
                     alt={leader.name}
-                    className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-700 ease-out"
+                    className="w-full h-full object-cover object-top"
                   />
                   {/* Subtle border accent */}
                   <div className="absolute inset-0 border border-black/5 z-10"></div>

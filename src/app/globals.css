@@ -134,6 +134,71 @@
   }
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.88);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Sunrise logo animation - নিচ থেকে সূর্যের মতো উঠে আসে */
+@keyframes sunriseUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.7);
+    filter: brightness(0.3) blur(4px);
+  }
+  40% {
+    opacity: 0.6;
+    filter: brightness(0.8) blur(1px);
+  }
+  70% {
+    transform: translateY(-4px) scale(1.04);
+    filter: brightness(1.1) blur(0px);
+  }
+  85% {
+    transform: translateY(2px) scale(0.99);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: brightness(1) blur(0px);
+  }
+}
+
+/* Interactive blink/glow effect - periodic soft pulse */
+@keyframes logoBlink {
+  0%, 100% {
+    opacity: 1;
+    filter: brightness(1) drop-shadow(0 0 0px rgba(255, 255, 255, 0));
+  }
+  30% {
+    opacity: 0.92;
+    filter: brightness(1.25) drop-shadow(0 0 10px rgba(255, 255, 255, 0.55));
+  }
+  50% {
+    opacity: 0.75;
+    filter: brightness(1.5) drop-shadow(0 0 18px rgba(255, 255, 255, 0.8));
+  }
+  70% {
+    opacity: 0.92;
+    filter: brightness(1.25) drop-shadow(0 0 10px rgba(255, 255, 255, 0.55));
+  }
+}
+
+.logo-sunrise {
+  animation: sunriseUp 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 @keyframes slideIn-right {
   from {
     transform: translateX(100%);
@@ -201,13 +266,10 @@
 }
 
 @layer utilities {
-
-  /* Main Background */
   .bg-admin-gradient {
-    background:
-      radial-gradient(circle at top left, rgba(59, 130, 246, .12), transparent 35%),
-      radial-gradient(circle at bottom right, rgba(16, 185, 129, .10), transparent 35%),
-      linear-gradient(135deg, #0b1726 0%, #12344a 50%, #18485f 100%);
+    background-color: #09090f;
+    background-image: radial-gradient(circle at 15% 20%, rgba(168, 85, 247, .28) 0%, transparent 30%), radial-gradient(circle at 85% 15%, rgba(139, 92, 246, .22) 0%, transparent 35%), radial-gradient(circle at 70% 85%, rgba(192, 132, 252, .18) 0%, transparent 30%), radial-gradient(circle at 20% 80%, rgba(255, 255, 255, .05) 0%, transparent 40%), linear-gradient(135deg, #09090f 0%, #18112d 35%, #261944 65%, #0f172a 100%);
+    background-attachment: fixed;
   }
 
   /* Topbar */
@@ -216,9 +278,8 @@
     backdrop-filter: blur(18px) saturate(160%);
     -webkit-backdrop-filter: blur(18px) saturate(160%);
     border: 1px solid rgba(255, 255, 255, .08);
-    box-shadow:
-      inset 0 1px rgba(255, 255, 255, .08),
-      0 10px 30px rgba(0, 0, 0, .18);
+    filter: url(#liquid-glass-filter);
+    box-shadow: inset 0 1px rgba(255, 255, 255, .08), 0 10px 30px rgba(0, 0, 0, .18);
   }
 
   /* Liquid Glass Card */
@@ -226,22 +287,21 @@
     position: relative;
     border-radius: 20px;
     z-index: 1;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, .18);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .18);
     transition: all .25s ease;
   }
 
   .glass-panel::before {
     content: "";
     position: absolute;
-    inset: -15px;
-    /* Oversize to prevent displacement tearing */
+    inset: 0;
     z-index: -1;
-    backdrop-filter: blur(18px) saturate(170%);
-    -webkit-backdrop-filter: blur(18px) saturate(170%);
+    border-radius: inherit;
+    backdrop-filter: blur(50px) saturate(170%);
+    -webkit-backdrop-filter: blur(50px) saturate(170%);
     filter: url(#liquid-glass-filter);
-    clip-path: inset(15px 15px 15px 15px round 20px);
-    /* Clip back to exact size */
-    -webkit-clip-path: inset(15px 15px 15px 15px round 20px);
+    clip-path: inset(0 0 0 0 round 20px);
+    -webkit-clip-path: inset(0 0 0 0 round 20px);
   }
 
   .glass-panel::after {
@@ -250,11 +310,8 @@
     inset: 0;
     z-index: -1;
     border-radius: inherit;
-    background: linear-gradient(180deg, rgba(255, 255, 255, .12), rgba(255, 255, 255, .02));
-    border: 1px solid rgba(255, 255, 255, .15);
-    box-shadow:
-      inset 1px 1px 0px rgba(255, 255, 255, .25),
-      inset -1px -1px 0px rgba(255, 255, 255, .05);
+    border: 0.5px solid rgba(85, 85, 85, 0);
+    box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .35), inset -2px -2px 2px rgba(255, 255, 255, .10);
     pointer-events: none;
     transition: all .25s ease;
   }
@@ -270,4 +327,69 @@
   table {
     width: 100%;
   }
+}
+
+/* ===========================
+    Glass Button (Global Component)
+============================ */
+/* ===========================
+    Glass Button (Global Component)
+============================ */
+.glass-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 2rem;
+  border-radius: 9999px; /* Pill shape */
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  color: #fefefe;
+  font-weight: 500;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  /* Force refresh 1 */
+}
+
+/* Warm golden light radiating from the bottom */
+.glass-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at bottom, rgba(255, 165, 0, 0.3) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* The bright golden glowing border line exactly at the bottom edge */
+.glass-btn::after {
+  content: "";
+  position: absolute;
+  bottom: -1px; /* Align precisely over the bottom border */
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 180, 50, 1) 50%, transparent 100%);
+  box-shadow: 0 -4px 15px 1px rgba(255, 165, 0, 0.5);
+  pointer-events: none;
+}
+
+/* ===========================
+    Custom Scrollbar
+============================ */
+.custom-scrollbar::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
 }

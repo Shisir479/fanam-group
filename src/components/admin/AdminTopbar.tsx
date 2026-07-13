@@ -27,14 +27,14 @@ export function AdminTopbar() {
     >
       <div className="flex items-center gap-4">
         {/* Mobile Menu Button */}
-        <button className="md:hidden p-2 text-gray-400 hover:text-white rounded-lg hover:bg-white/10 transition-colors">
+        <button className="md:hidden p-2 text-gray-300 hover:text-white rounded-lg hover:bg-white/10 transition-colors">
           <Menu className="w-5 h-5" />
         </button>
       </div>
 
       <div className="flex items-center gap-4">
         {/* Notification Bell */}
-        <button className="relative w-10 h-10 flex items-center justify-center rounded-xl glass-panel text-gray-300 hover:text-white transition-all overflow-hidden group">
+        <button className="relative w-10 h-10 flex items-center justify-center rounded-xl glass-panel text-gray-200 hover:text-white transition-all overflow-hidden group">
           <div className="absolute inset-0 bg-yellow-500/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
           <Bell className="w-4 h-4 relative z-10" />
           <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-yellow-500 rounded-full border border-[#120a1c] z-10"></span>
@@ -47,9 +47,9 @@ export function AdminTopbar() {
           </div>
           <div className="hidden md:block text-left">
             <p className="text-sm font-bold text-white leading-tight">Admin User</p>
-            <p className="text-xs text-gray-400">Owner</p>
+            <p className="text-xs text-gray-300">Owner</p>
           </div>
-          <ChevronDown className="w-4 h-4 text-gray-400 ml-1" />
+          <ChevronDown className="w-4 h-4 text-gray-300 ml-1" />
         </button>
       </div>
     </div>
