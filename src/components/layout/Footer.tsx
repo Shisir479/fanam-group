@@ -40,7 +40,16 @@ const socialLinks = [
     border: "rgba(225,48,108,0.35)",
     isInstagram: true,
     icon: (
-      <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+      <svg
+        width="16"
+        height="16"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        viewBox="0 0 24 24"
+      >
         <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
         <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
         <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
@@ -90,10 +99,8 @@ export function Footer() {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
 
       <div className="relative z-10 container mx-auto px-6 md:px-16 pt-20 pb-10">
-
         {/* Main Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-14">
-
           {/* Col 1 — Logo & Contact */}
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center mb-7">
@@ -102,27 +109,49 @@ export function Footer() {
                 alt="Company Logo"
                 width={160}
                 height={64}
-                style={{ width: "auto", animation: "sunriseUp 2.2s cubic-bezier(0.22, 1, 0.36, 1) both, logoBlink 2.2s ease-in-out 3.2s infinite" }}
-                className="h-14 md:h-16 object-contain"
+                style={{
+                  width: "auto",
+                  animation:
+                    "sunriseUp 2.2s cubic-bezier(0.22, 1, 0.36, 1) both, logoBlink 2.2s ease-in-out 3.2s infinite",
+                }}
+                className="h-14 md:h-20 object-contain "
               />
             </Link>
 
             <p className="text-white/55 text-sm leading-relaxed mb-6">
-              Building dreams into reality. Premium residential &amp; commercial projects across Bangladesh.
+              Building dreams into reality. Premium residential &amp; commercial
+              projects across Bangladesh.
             </p>
 
             <div className="space-y-3 text-sm">
               <div className="flex items-center gap-3 text-white/75">
                 <span className="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
-                  <svg width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <svg
+                    width="13"
+                    height="13"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                   </svg>
                 </span>
-                <span>Hotline: <span className="text-white font-semibold">16760</span></span>
+                <span>
+                  Hotline:{" "}
+                  <span className="text-white font-semibold">16760</span>
+                </span>
               </div>
               <div className="flex items-center gap-3 text-white/75">
                 <span className="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
-                  <svg width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <svg
+                    width="13"
+                    height="13"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                     <polyline points="22,6 12,13 2,6" />
                   </svg>
@@ -196,14 +225,20 @@ export function Footer() {
                       boxShadow: `0 0 8px ${s.bg}`,
                     }}
                     onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.filter = "brightness(1.3)";
-                      (e.currentTarget as HTMLElement).style.boxShadow = `0 0 16px ${s.bg}`;
-                      (e.currentTarget as HTMLElement).style.transform = "scale(1.1)";
+                      (e.currentTarget as HTMLElement).style.filter =
+                        "brightness(1.3)";
+                      (e.currentTarget as HTMLElement).style.boxShadow =
+                        `0 0 16px ${s.bg}`;
+                      (e.currentTarget as HTMLElement).style.transform =
+                        "scale(1.1)";
                     }}
                     onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.filter = "brightness(1)";
-                      (e.currentTarget as HTMLElement).style.boxShadow = `0 0 8px ${s.bg}`;
-                      (e.currentTarget as HTMLElement).style.transform = "scale(1)";
+                      (e.currentTarget as HTMLElement).style.filter =
+                        "brightness(1)";
+                      (e.currentTarget as HTMLElement).style.boxShadow =
+                        `0 0 8px ${s.bg}`;
+                      (e.currentTarget as HTMLElement).style.transform =
+                        "scale(1)";
                     }}
                   >
                     {s.icon}
@@ -211,7 +246,9 @@ export function Footer() {
                   <span
                     className="text-sm font-medium transition-all duration-300"
                     style={{ color: s.color }}
-                  >{s.label}</span>
+                  >
+                    {s.label}
+                  </span>
                 </a>
               ))}
             </div>

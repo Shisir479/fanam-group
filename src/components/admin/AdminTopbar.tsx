@@ -1,29 +1,30 @@
 "use client";
 
-import { Bell, Search, Menu, ArrowLeft, ChevronDown, User } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { Bell, Search, Menu, ArrowLeft, ChevronDown, User } from "lucide-react";
+import { useState, useEffect } from "react";
 
 export function AdminTopbar() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const mainScrollElement = document.getElementById('admin-main-scroll');
+    const mainScrollElement = document.getElementById("admin-main-scroll");
     if (!mainScrollElement) return;
 
     const handleScroll = () => {
       setIsScrolled(mainScrollElement.scrollTop > 10);
     };
 
-    mainScrollElement.addEventListener('scroll', handleScroll);
-    return () => mainScrollElement.removeEventListener('scroll', handleScroll);
+    mainScrollElement.addEventListener("scroll", handleScroll);
+    return () => mainScrollElement.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <div
-      className={`h-14 border-b border-x transition-all duration-300 flex items-center justify-between px-6 z-40 ${isScrolled
-          ? 'bg-admin-gradient border-white/10 shadow-2xl rounded-b-2xl'
-          : 'bg-transparent border-transparent'
-        }`}
+      className={`h-14 border-b border-x transition-all duration-300 flex items-center justify-between px-6 z-40 ${
+        isScrolled
+          ? "bg-admin-gradient border-white/10 shadow-2xl rounded-b-2xl"
+          : "bg-transparent border-transparent"
+      }`}
     >
       <div className="flex items-center gap-4">
         {/* Mobile Menu Button */}
@@ -46,7 +47,9 @@ export function AdminTopbar() {
             <User className="w-5 h-5 text-black " />
           </div>
           <div className="hidden md:block text-left">
-            <p className="text-sm font-bold text-white leading-tight">Admin User</p>
+            <p className="text-sm font-bold text-white leading-tight">
+              Admin User
+            </p>
             <p className="text-xs text-gray-300">Owner</p>
           </div>
           <ChevronDown className="w-4 h-4 text-gray-300 ml-1" />

@@ -1,12 +1,12 @@
 "use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { 
-  LayoutDashboard, 
-  Settings, 
-  Users, 
-  Image as ImageIcon, 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import {
+  LayoutDashboard,
+  Settings,
+  Users,
+  Image as ImageIcon,
   MessageSquare,
   Home,
   PanelLeftClose,
@@ -14,35 +14,34 @@ import {
   FileText,
   Info,
   PhoneCall,
-  Shield
-} from 'lucide-react';
+  Shield,
+} from "lucide-react";
 
 export function AdminSidebar() {
   const pathname = usePathname();
 
   const menuItems = [
-    { name: 'Dashboard', icon: LayoutDashboard, href: '/admin', exact: true },
-    
-    { name: 'Core Management', isHeader: true },
-    { name: 'Projects', icon: Building, href: '/admin/projects' },
-    { name: 'Inquiries', icon: MessageSquare, href: '/admin/inquiries' },
-    { name: 'Users', icon: Users, href: '/admin/users' },
-    { name: 'Blog & News', icon: FileText, href: '/admin/blog' },
-    { name: 'Gallery', icon: ImageIcon, href: '/admin/gallery' },
+    { name: "Dashboard", icon: LayoutDashboard, href: "/admin", exact: true },
 
-    { name: 'Content Management', isHeader: true },
-    { name: 'Homepage Content', icon: Home, href: '/admin/content/homepage' },
-    { name: 'About Content', icon: Info, href: '/admin/content/about' },
-    { name: 'Contact Info', icon: PhoneCall, href: '/admin/content/contact' },
-    { name: 'Legal Pages', icon: Shield, href: '/admin/content/legal' },
+    { name: "Core Management", isHeader: true },
+    { name: "Projects", icon: Building, href: "/admin/projects" },
+    { name: "Inquiries", icon: MessageSquare, href: "/admin/inquiries" },
+    { name: "Users", icon: Users, href: "/admin/users" },
+    { name: "Blog & News", icon: FileText, href: "/admin/blog" },
+    { name: "Gallery", icon: ImageIcon, href: "/admin/gallery" },
 
-    { name: 'System', isHeader: true },
-    { name: 'Settings', icon: Settings, href: '/admin/settings' },
+    { name: "Content Management", isHeader: true },
+    { name: "Homepage Content", icon: Home, href: "/admin/content/homepage" },
+    { name: "About Content", icon: Info, href: "/admin/content/about" },
+    { name: "Contact Info", icon: PhoneCall, href: "/admin/content/contact" },
+    { name: "Legal Pages", icon: Shield, href: "/admin/content/legal" },
+
+    { name: "System", isHeader: true },
+    { name: "Settings", icon: Settings, href: "/admin/settings" },
   ];
 
   return (
     <div className="fixed left-6 top-2 bottom-2 w-[240px] mb-2 glass-panel hidden md:flex flex-col z-50 shadow-2xl overflow-hidden">
-      
       {/* Header section */}
       <div className="p-4 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
@@ -50,7 +49,9 @@ export function AdminSidebar() {
             <span className="font-bold text-[#120a1c] text-[10px]">BN</span>
           </div>
           <div>
-            <h1 className="text-[13px] font-bold text-white leading-tight tracking-wide">Bonedi Admin</h1>
+            <h1 className="text-[13px] font-bold text-white leading-tight tracking-wide">
+              Bonedi Admin
+            </h1>
             <p className="text-[10px] text-gray-400">Dashboard</p>
           </div>
         </div>
@@ -63,7 +64,7 @@ export function AdminSidebar() {
       <div className="px-4">
         <div className="border-b border-dashed border-white/10 w-full"></div>
       </div>
-      
+
       {/* Scrollable Menu */}
       <div className="flex-1 overflow-y-auto py-3 px-2 pb-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
         <nav className="space-y-0.5">
@@ -71,26 +72,28 @@ export function AdminSidebar() {
             if (item.isHeader) {
               return (
                 <div key={`header-${index}`} className="pt-4 pb-1 px-3">
-                  <span className="text-[10px] font-bold tracking-wider text-gray-500 uppercase">{item.name}</span>
+                  <span className="text-[10px] font-bold tracking-wider text-gray-500 uppercase">
+                    {item.name}
+                  </span>
                 </div>
               );
             }
 
             const Icon = item.icon as any;
-            
+
             // Check if active (exact match for /admin, prefix match for others)
-            const isActive = item.exact 
-              ? pathname === item.href 
-              : pathname?.startsWith(item.href || '');
+            const isActive = item.exact
+              ? pathname === item.href
+              : pathname?.startsWith(item.href || "");
 
             return (
               <Link
                 key={item.name}
-                href={item.href || '#'}
+                href={item.href || "#"}
                 className={`relative flex items-center justify-between px-3 py-1.5 rounded-lg transition-all outline-none group overflow-hidden ${
-                  isActive 
-                    ? 'bg-white/5 border border-white/10 text-white' 
-                    : 'text-gray-300 hover:text-white hover:bg-white/5 border border-transparent'
+                  isActive
+                    ? "bg-white/5 border border-white/10 text-white"
+                    : "text-gray-300 hover:text-white hover:bg-white/5 border border-transparent"
                 }`}
               >
                 {/* Glassy Bottom Glow (Active State Only) */}
@@ -100,10 +103,14 @@ export function AdminSidebar() {
                     <div className="absolute bottom-0 left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-orange-400 to-transparent shadow-[0_-4px_12px_1px_rgba(255,165,0,0.6)] pointer-events-none"></div>
                   </>
                 )}
-                
+
                 <div className="flex items-center gap-2.5 relative z-10">
-                  <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]' : 'text-gray-400 group-hover:text-white'} transition-colors`} />
-                  <span className="text-[13px] font-medium tracking-wide">{item.name}</span>
+                  <Icon
+                    className={`w-3.5 h-3.5 ${isActive ? "text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]" : "text-gray-400 group-hover:text-white"} transition-colors`}
+                  />
+                  <span className="text-[13px] font-medium tracking-wide">
+                    {item.name}
+                  </span>
                 </div>
               </Link>
             );

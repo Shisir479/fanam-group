@@ -135,8 +135,12 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes scaleIn {
@@ -177,7 +181,8 @@
 
 /* Interactive blink/glow effect - periodic soft pulse */
 @keyframes logoBlink {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
     filter: brightness(1) drop-shadow(0 0 0px rgba(255, 255, 255, 0));
   }
@@ -268,7 +273,34 @@
 @layer utilities {
   .bg-admin-gradient {
     background-color: #09090f;
-    background-image: radial-gradient(circle at 15% 20%, rgba(168, 85, 247, .28) 0%, transparent 30%), radial-gradient(circle at 85% 15%, rgba(139, 92, 246, .22) 0%, transparent 35%), radial-gradient(circle at 70% 85%, rgba(192, 132, 252, .18) 0%, transparent 30%), radial-gradient(circle at 20% 80%, rgba(255, 255, 255, .05) 0%, transparent 40%), linear-gradient(135deg, #09090f 0%, #18112d 35%, #261944 65%, #0f172a 100%);
+    background-image:
+      radial-gradient(
+        circle at 15% 20%,
+        rgba(168, 85, 247, 0.28) 0%,
+        transparent 30%
+      ),
+      radial-gradient(
+        circle at 85% 15%,
+        rgba(139, 92, 246, 0.22) 0%,
+        transparent 35%
+      ),
+      radial-gradient(
+        circle at 70% 85%,
+        rgba(192, 132, 252, 0.18) 0%,
+        transparent 30%
+      ),
+      radial-gradient(
+        circle at 20% 80%,
+        rgba(255, 255, 255, 0.05) 0%,
+        transparent 40%
+      ),
+      linear-gradient(
+        135deg,
+        #09090f 0%,
+        #18112d 35%,
+        #261944 65%,
+        #0f172a 100%
+      );
     background-attachment: fixed;
   }
 
@@ -277,9 +309,11 @@
     background: rgba(20, 42, 65, 0.55);
     backdrop-filter: blur(18px) saturate(160%);
     -webkit-backdrop-filter: blur(18px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     filter: url(#liquid-glass-filter);
-    box-shadow: inset 0 1px rgba(255, 255, 255, .08), 0 10px 30px rgba(0, 0, 0, .18);
+    box-shadow:
+      inset 0 1px rgba(255, 255, 255, 0.08),
+      0 10px 30px rgba(0, 0, 0, 0.18);
   }
 
   /* Liquid Glass Card */
@@ -287,8 +321,8 @@
     position: relative;
     border-radius: 20px;
     z-index: 1;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, .18);
-    transition: all .25s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+    transition: all 0.25s ease;
   }
 
   .glass-panel::before {
@@ -311,9 +345,11 @@
     z-index: -1;
     border-radius: inherit;
     border: 0.5px solid rgba(85, 85, 85, 0);
-    box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .35), inset -2px -2px 2px rgba(255, 255, 255, .10);
+    box-shadow:
+      inset 2px 2px 2px rgba(255, 255, 255, 0.35),
+      inset -2px -2px 2px rgba(255, 255, 255, 0.1);
     pointer-events: none;
-    transition: all .25s ease;
+    transition: all 0.25s ease;
   }
 
   /* Prevent Text Wrapping */
@@ -359,7 +395,11 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at bottom, rgba(255, 165, 0, 0.3) 0%, transparent 60%);
+  background: radial-gradient(
+    ellipse at bottom,
+    rgba(255, 165, 0, 0.3) 0%,
+    transparent 60%
+  );
   pointer-events: none;
 }
 
@@ -371,7 +411,12 @@
   left: 10%;
   right: 10%;
   height: 2px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 180, 50, 1) 50%, transparent 100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 180, 50, 1) 50%,
+    transparent 100%
+  );
   box-shadow: 0 -4px 15px 1px rgba(255, 165, 0, 0.5);
   pointer-events: none;
 }
