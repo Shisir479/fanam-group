@@ -109,11 +109,6 @@ export function Footer() {
                 alt="Company Logo"
                 width={160}
                 height={64}
-                style={{
-                  width: "auto",
-                  animation:
-                    "sunriseUp 2.2s cubic-bezier(0.22, 1, 0.36, 1) both, logoBlink 2.2s ease-in-out 3.2s infinite",
-                }}
                 className="h-14 md:h-20 object-contain "
               />
             </Link>
