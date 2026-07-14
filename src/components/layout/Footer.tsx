@@ -103,13 +103,13 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-14">
           {/* Col 1 — Logo & Contact */}
           <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center mb-7">
+            <Link href="/" className="flex items-center mb-7 h-26">
               <Image
                 src="/company_logo/Bonedia White Logo File.png"
                 alt="Company Logo"
                 width={160}
-                height={64}
-                className="h-14 md:h-20 object-contain "
+                height={0}
+                className="object-cover border border border-white"
               />
             </Link>
 
