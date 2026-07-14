@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { BlockReveal } from "@/components/ui/BlockReveal";
 import { useState } from "react";
 
@@ -11,6 +12,7 @@ const services = [
       "Discover luxury apartments, penthouses, and bespoke villas designed for comfort and modern living.",
     image:
       "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=400&auto=format&fit=crop",
+    href: "/services/residential-properties",
   },
   {
     title: "Commercial\nSpaces",
@@ -18,6 +20,7 @@ const services = [
       "State-of-the-art office buildings and retail spaces tailored for business success and growth.",
     image:
       "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=400&auto=format&fit=crop",
+    href: "/services/commercial-spaces",
   },
   {
     title: "Interior\nDesign",
@@ -25,6 +28,7 @@ const services = [
       "Transforming empty spaces into beautifully curated environments that reflect your personality.",
     image:
       "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=400&auto=format&fit=crop",
+    href: "/services/interior-design",
   },
   {
     title: "Property\nManagement",
@@ -32,6 +36,7 @@ const services = [
       "Comprehensive management services ensuring your investments are maintained and profitable.",
     image:
       "https://images.unsplash.com/photo-1628859250369-c513b3468843?q=80&w=874&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    href: "/services/property-management",
   },
 ];
 
@@ -57,7 +62,10 @@ export function FeaturedServices() {
             </BlockReveal>
           </div>
 
-          <button className="hidden md:inline-flex items-center gap-4 text-sm font-bold text-brand-blue uppercase tracking-wider group">
+          <Link
+            href="/services"
+            className="hidden md:inline-flex items-center gap-4 text-sm font-bold text-brand-blue uppercase tracking-wider group"
+          >
             <span className="relative overflow-hidden">
               <span className="inline-block transition-transform duration-500 group-hover:-translate-y-full">
                 Explore All
@@ -81,7 +89,7 @@ export function FeaturedServices() {
                 />
               </svg>
             </div>
-          </button>
+          </Link>
         </div>
 
         {/* Premium Accordion Gallery */}
@@ -161,7 +169,10 @@ export function FeaturedServices() {
                           {service.description}
                         </p>
 
-                        <button className="mt-6 flex items-center gap-3 text-sm font-bold text-[#4ea24b] uppercase tracking-wider group/btn">
+                        <Link
+                          href={service.href}
+                          className="mt-6 flex items-center gap-3 text-sm font-bold text-[#4ea24b] uppercase tracking-wider group/btn"
+                        >
                           <span className="relative overflow-hidden">
                             <span className="inline-block transition-transform duration-300 group-hover/btn:-translate-y-full">
                               Discover
@@ -183,7 +194,7 @@ export function FeaturedServices() {
                               d="M17 8l4 4m0 0l-4 4m4-4H3"
                             />
                           </svg>
-                        </button>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -194,9 +205,12 @@ export function FeaturedServices() {
         </div>
 
         {/* Mobile View All Button */}
-        <button className="md:hidden mt-12 w-full flex items-center justify-center gap-2 text-sm font-bold text-brand-blue uppercase border border-brand-blue/30 py-4 ">
+        <Link
+          href="/services"
+          className="md:hidden mt-12 w-full flex items-center justify-center gap-2 text-sm font-bold text-brand-blue uppercase border border-brand-blue/30 py-4 "
+        >
           Explore All Services
-        </button>
+        </Link>
       </div>
     </section>
   );
