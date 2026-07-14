@@ -1,9 +1,7 @@
 import { Hero } from "@/components/home/Hero";
 import { AboutSection } from "@/components/home/AboutSection";
 import { FeaturedProjects } from "@/components/home/FeaturedProjects";
-import { VideoSection } from "@/components/home/VideoSection";
 import { TestimonialSection } from "@/components/home/TestimonialSection";
-
 import { CompanyOverview } from "@/components/home/CompanyOverview";
 import { WhyChooseUs } from "@/components/home/WhyChooseUs";
 import { OurAchievements } from "@/components/home/OurAchievements";
@@ -25,7 +23,6 @@ export default function Home() {
       <TestimonialSection />
       <GalleryPreview />
       <LatestNews />
-      <VideoSection />
       <InquiryCTA />
       <ContactInfo />
     </div>
