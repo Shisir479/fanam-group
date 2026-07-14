@@ -92,7 +92,7 @@ export function Footer() {
         alt="Footer Background"
         fill
         sizes="100vw"
-        className="object-cover opacity-30"
+        className="object-cover opacity-10"
       />
 
       {/* Subtle top glow line */}
