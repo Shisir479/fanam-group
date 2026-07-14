@@ -2,13 +2,24 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
   const pathname = usePathname() || "";
+
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
 
   const toggleAccordion = (menu: string) => {
     setExpandedMenu(expandedMenu === menu ? null : menu);
@@ -216,9 +227,6 @@ export function Navbar() {
                 onClick={() => toggleAccordion("about")}
               >
                 <span>About Us</span>
-                <span className="text-2xl font-light text-white/70 w-8 text-center">
-                  {expandedMenu === "about" ? "-" : "+"}
-                </span>
               </div>
             </div>
 
@@ -257,13 +265,6 @@ export function Navbar() {
                 >
                   Handed Over
                 </Link>
-                <Link
-                  href="/projects/ready"
-                  className="text-[15px] font-normal text-white/80"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Ready
-                </Link>
               </div>
             </div>
 
@@ -286,13 +287,6 @@ export function Navbar() {
                 className={`flex flex-col gap-4 pl-4 overflow-hidden transition-all duration-300 ${expandedMenu === "gallery" ? "max-h-40 mt-4" : "max-h-0"}`}
               >
                 <Link
-                  href="/gallery/newsletter"
-                  className="text-[15px] font-normal text-white/80"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Newsletter
-                </Link>
-                <Link
                   href="/gallery/image"
                   className="text-[15px] font-normal text-white/80"
                   onClick={() => setIsMobileMenuOpen(false)}
@@ -309,25 +303,16 @@ export function Navbar() {
               </div>
             </div>
 
-            <Link href="/career" onClick={() => setIsMobileMenuOpen(false)}>
-              Career
-            </Link>
-
             <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
               Contact
             </Link>
-
-            <Link href="/landowner" onClick={() => setIsMobileMenuOpen(false)}>
-              Landowner
-            </Link>
-
             {/* Legal Pages Accordion */}
             <div>
               <div
                 className="flex justify-between items-center cursor-pointer"
                 onClick={() => toggleAccordion("legal")}
               >
-                <span>Legal Pages</span>
+                <span>Legal</span>
                 <span className="text-2xl font-light text-white/70 w-8 text-center">
                   {expandedMenu === "legal" ? "-" : "+"}
                 </span>
