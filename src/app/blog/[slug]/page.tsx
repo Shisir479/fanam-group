@@ -1,7 +1,7 @@
-import { getPostBySlug } from "@/lib/blogData";
 import { notFound } from "next/navigation";
 import { BlockReveal } from "@/components/ui/BlockReveal";
 import { CalendarDays, Clock, Share2 } from "lucide-react";
+import { RelatedPosts } from "@/components/blog/RelatedPosts";
 
 const Facebook = ({ className }: { className?: string }) => (
   <svg
@@ -53,7 +53,23 @@ const Linkedin = ({ className }: { className?: string }) => (
     <circle cx="4" cy="4" r="2" />
   </svg>
 );
-import { RelatedPosts } from "@/components/blog/RelatedPosts";
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
+  ? `${process.env.NEXT_PUBLIC_BASE_URL}/api`
+  : "http://localhost:8003/api";
+
+async function getBlogDetails(slug: string) {
+  try {
+    const res = await fetch(`${BASE_URL}/blogs/${slug}`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data.data || null;
+  } catch (error) {
+    return null;
+  }
+}
 
 export async function generateMetadata({
   params,
@@ -61,12 +77,12 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const resolvedParams = await params;
-  const post = getPostBySlug(resolvedParams.slug);
+  const post = await getBlogDetails(resolvedParams.slug);
   if (!post) return { title: "Post Not Found" };
 
   return {
-    title: `${post.title} - Bonedi Homes`,
-    description: post.excerpt,
+    title: `${post.metaTitle || post.name} - Bonedi Homes`,
+    description: post.metaDescription || post.excerpt,
   };
 }
 
@@ -76,11 +92,34 @@ export default async function BlogDetailsPage({
   params: Promise<{ slug: string }>;
 }) {
   const resolvedParams = await params;
-  const post = getPostBySlug(resolvedParams.slug);
+  const rawPost = await getBlogDetails(resolvedParams.slug);
 
-  if (!post) {
+  if (!rawPost) {
     notFound();
   }
+
+  const post = {
+    id: rawPost._id,
+    title: rawPost.name,
+    category: rawPost.category?.name || "Uncategorized",
+    date: new Date(rawPost.publishedAt || rawPost.createdAt).toLocaleDateString(
+      "en-US",
+      { year: "numeric", month: "long", day: "numeric" },
+    ),
+    readTime: `${rawPost.readingTime || 5} Min Read`,
+    image:
+      rawPost.cover?.url ||
+      "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=2073&auto=format&fit=crop",
+    author: rawPost.author?.firstName
+      ? `${rawPost.author.firstName} ${rawPost.author.lastName || ""}`
+      : "Admin",
+    authorImage:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=150",
+    authorRole: rawPost.author?.role || "Editor",
+    excerpt: rawPost.excerpt,
+    content: rawPost.description,
+    tags: rawPost.tags || [],
+  };
 
   return (
     <main className="flex min-h-screen flex-col bg-white">
@@ -121,7 +160,9 @@ export default async function BlogDetailsPage({
                     <span className="font-medium text-white">
                       {post.author}
                     </span>
-                    <span className="text-[12px]">{post.authorRole}</span>
+                    <span className="text-[12px] capitalize">
+                      {post.authorRole}
+                    </span>
                   </div>
                 </div>
                 <div className="h-6 w-[1px] bg-white/20 hidden md:block"></div>
@@ -162,9 +203,11 @@ export default async function BlogDetailsPage({
 
             {/* Content */}
             <article className="prose prose-lg md:prose-xl max-w-none text-gray-500 font-light leading-[2.2] mb-20">
-              <p className="text-2xl md:text-3xl text-brand-blue font-light leading-relaxed mb-12 border-l-2 border-brand-blue pl-8 py-2">
-                {post.excerpt}
-              </p>
+              {post.excerpt && (
+                <p className="text-2xl md:text-3xl text-brand-blue font-light leading-relaxed mb-12 border-l-2 border-brand-blue pl-8 py-2">
+                  {post.excerpt}
+                </p>
+              )}
               <div
                 dangerouslySetInnerHTML={{
                   __html: post.content.replace(/\n/g, "<br/>"),
@@ -173,19 +216,21 @@ export default async function BlogDetailsPage({
             </article>
 
             {/* Tags */}
-            <div className="flex items-center gap-3 mb-20 pb-16 border-b border-gray-100">
-              <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mr-2">
-                Tags
-              </span>
-              {post.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-5 py-2 border border-gray-100 text-gray-500 text-[13px] hover:border-brand-blue hover:text-brand-blue cursor-pointer transition-colors"
-                >
-                  {tag}
+            {post.tags.length > 0 && (
+              <div className="flex items-center gap-3 mb-20 pb-16 border-b border-gray-100">
+                <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mr-2">
+                  Tags
                 </span>
-              ))}
-            </div>
+                {post.tags.map((tag: string) => (
+                  <span
+                    key={tag}
+                    className="px-5 py-2 border border-gray-100 text-gray-500 text-[13px] hover:border-brand-blue hover:text-brand-blue cursor-pointer transition-colors"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
 
             {/* Related Posts */}
             <RelatedPosts currentPostId={post.id} category={post.category} />

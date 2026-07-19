@@ -10,43 +10,11 @@ export function BlogSidebar() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const currentCategory = searchParams.get("category") || "All";
-  const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "");
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      router.push(`/blog?q=${encodeURIComponent(searchQuery)}`);
-    } else {
-      router.push(`/blog`);
-    }
-  };
 
   const recentPosts = blogPosts.slice(0, 3);
 
   return (
     <div className="flex flex-col gap-16">
-      {/* Search Widget */}
-      <div>
-        <h3 className="text-[13px] font-bold text-brand-blue uppercase tracking-widest mb-6">
-          Search
-        </h3>
-        <form onSubmit={handleSearch} className="relative">
-          <input
-            type="text"
-            placeholder="Search articles..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-transparent border-b border-gray-200 py-3 pl-0 pr-10 text-[15px] focus:outline-none focus:border-brand-blue transition-colors placeholder:text-gray-400"
-          />
-          <button
-            type="submit"
-            className="absolute right-0 top-0 bottom-0 flex items-center justify-center text-gray-400 hover:text-brand-blue transition-colors"
-          >
-            <Search className="w-5 h-5" />
-          </button>
-        </form>
-      </div>
-
       {/* Categories Widget */}
       <div>
         <h3 className="text-[13px] font-bold text-brand-blue uppercase tracking-widest mb-6">

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 
 export default function AdminLogin() {
   const [showPassword, setShowPassword] = useState(false);
@@ -11,14 +12,18 @@ export default function AdminLogin() {
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const { login } = useAuth();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate login delay
-    setTimeout(() => {
+    try {
+      await login({ email, password });
+    } catch (error) {
+      console.error("Login Error:", error);
+    } finally {
       setIsSubmitting(false);
-      // Here you would handle real authentication logic
-    }, 1500);
+    }
   };
 
   return (

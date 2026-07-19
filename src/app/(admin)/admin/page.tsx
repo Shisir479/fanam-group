@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Building,
   Users,
@@ -6,10 +8,18 @@ import {
   TrendingUp,
   Calendar,
   MoreVertical,
+  Settings,
   Plus,
+  LogOut,
+  FileText,
+  Image as ImageIcon,
+  Folder,
 } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 
 export default function AdminDashboard() {
+  const { user, logout } = useAuth();
+
   return (
     <div className="space-y-6 mb-3">
       {/* Page Header */}
@@ -17,13 +27,15 @@ export default function AdminDashboard() {
         <div>
           <h2 className="text-2xl font-bold text-white">Dashboard Overview</h2>
           <p className="text-sm text-gray-200 mt-1">
-            Welcome back, here is what is happening today.
+            Welcome back {user?.firstName}, here is what is happening today.
           </p>
         </div>
-        <button className="glass-btn">
-          <Plus className="w-4 h-4" />
-          Add New Project
-        </button>
+        <div className="flex items-center gap-4">
+          <button className="glass-btn">
+            <Plus className="w-4 h-4" />
+            Add New Project
+          </button>
+        </div>
         {/* Force Refresh */}
       </div>
 
@@ -214,8 +226,6 @@ function InquiryRow({ name, subject, date, status }: any) {
     </tr>
   );
 }
-
-import { FileText, Image as ImageIcon, Folder, Settings } from "lucide-react";
 
 function QuickAction({ title, desc, icon, color }: any) {
   return (

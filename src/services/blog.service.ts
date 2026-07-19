@@ -1,0 +1,87 @@
+import { api } from "@/lib/api";
+import { createCrudService } from "./crud.service";
+
+export interface Blog {
+  _id: string;
+  name: string;
+  slug: string;
+  excerpt: string;
+  description: string;
+  cover?: {
+    _id: string;
+    url: string;
+  };
+  tags: string[];
+  status: "draft" | "active" | "inactive";
+  publishedAt?: string | null;
+  metaTitle: string;
+  metaDescription: string;
+  views: number;
+  readingTime: number;
+  author?: {
+    _id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface BlogResponse {
+  success: boolean;
+  data: Blog[];
+  total: number;
+  count: number;
+  currentPage: number;
+}
+
+export interface SingleBlogResponse {
+  success: boolean;
+  data: Blog;
+}
+
+// ----------------------
+// Admin Methods
+// ----------------------
+
+const adminBlogCrud = createCrudService<Blog, Partial<Blog>, Partial<Blog>>(
+  "/admin/blogs",
+);
+
+export const getBlogsByAdmin = (
+  params?: Record<string, any>,
+): Promise<BlogResponse> =>
+  adminBlogCrud.getAll(params) as Promise<BlogResponse>;
+export const getBlogBySlugByAdmin = (
+  slug: string,
+): Promise<SingleBlogResponse> =>
+  adminBlogCrud.getByIdOrSlug(slug) as Promise<SingleBlogResponse>;
+export const createBlogByAdmin = (
+  data: Partial<Blog>,
+): Promise<{ success: boolean; message: string; id: string }> =>
+  adminBlogCrud.create(data) as Promise<any>;
+export const updateBlogBySlugByAdmin = (
+  slug: string,
+  data: Partial<Blog>,
+): Promise<{ success: boolean; message: string }> =>
+  adminBlogCrud.update(slug, data) as Promise<any>;
+export const deleteBlogBySlugByAdmin = (
+  slug: string,
+): Promise<{ success: boolean; message: string }> =>
+  adminBlogCrud.delete(slug) as Promise<any>;
+
+// ----------------------
+// Public Methods
+// ----------------------
+
+const publicBlogCrud = createCrudService<Blog>("/blogs");
+
+export const getBlogsPublic = (
+  params?: Record<string, any>,
+): Promise<BlogResponse> =>
+  publicBlogCrud.getAll(params) as Promise<BlogResponse>;
+export const getBlogBySlugPublic = (
+  slug: string,
+): Promise<SingleBlogResponse> =>
+  publicBlogCrud.getByIdOrSlug(slug) as Promise<SingleBlogResponse>;

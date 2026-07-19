@@ -1,7 +1,6 @@
 import { BlogHero } from "@/components/blog/BlogHero";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { BlogSidebar } from "@/components/blog/BlogSidebar";
-import { blogPosts } from "@/lib/blogData";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
@@ -9,6 +8,53 @@ export const metadata = {
   title: "News & Blog - Bonedi Homes",
   description: "Latest news, insights, and market trends from Bonedi Homes.",
 };
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
+  ? `${process.env.NEXT_PUBLIC_BASE_URL}/api`
+  : "http://localhost:8003/api";
+
+async function getBlogs(searchParams: any) {
+  const query = new URLSearchParams();
+  if (searchParams.q) query.append("search", searchParams.q);
+  if (searchParams.category && searchParams.category !== "All")
+    query.append("category", searchParams.category);
+
+  try {
+    const res = await fetch(`${BASE_URL}/blogs?${query.toString()}`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.data || [];
+  } catch (error) {
+    return [];
+  }
+}
+
+// Helper to map DB blog to the UI format expected by BlogCard
+function mapBlogToUI(blog: any) {
+  return {
+    id: blog._id,
+    title: blog.name,
+    slug: blog.slug,
+    category: blog.category?.name || "Uncategorized",
+    date: new Date(blog.publishedAt || blog.createdAt).toLocaleDateString(
+      "en-US",
+      {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      },
+    ),
+    readTime: `${blog.readingTime || 5} Min Read`,
+    image:
+      blog.cover?.url ||
+      "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=2073&auto=format&fit=crop",
+    excerpt:
+      blog.excerpt ||
+      blog.description?.replace(/<[^>]+>/g, "").substring(0, 120) + "...",
+  };
+}
 
 export default async function BlogPage({
   searchParams,
@@ -23,24 +69,13 @@ export default async function BlogPage({
       ? resolvedSearchParams.category
       : "All";
 
-  let filteredPosts = blogPosts;
-
-  if (category && category !== "All") {
-    filteredPosts = filteredPosts.filter((post) => post.category === category);
-  }
-
-  if (searchQuery) {
-    filteredPosts = filteredPosts.filter(
-      (post) =>
-        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()),
-    );
-  }
+  const rawBlogs = await getBlogs(resolvedSearchParams);
+  const mappedPosts = rawBlogs.map(mapBlogToUI);
 
   const hasFilters = searchQuery || category !== "All";
   const featuredPost =
-    !hasFilters && filteredPosts.length > 0 ? filteredPosts[0] : null;
-  const standardPosts = featuredPost ? filteredPosts.slice(1) : filteredPosts;
+    !hasFilters && mappedPosts.length > 0 ? mappedPosts[0] : null;
+  const standardPosts = featuredPost ? mappedPosts.slice(1) : mappedPosts;
 
   return (
     <main className="flex min-h-screen flex-col bg-white">
@@ -69,8 +104,8 @@ export default async function BlogPage({
                   )}
                 </h2>
                 <span className="text-gray-400 text-sm tracking-widest uppercase">
-                  {filteredPosts.length} post
-                  {filteredPosts.length !== 1 ? "s" : ""}
+                  {mappedPosts.length} post
+                  {mappedPosts.length !== 1 ? "s" : ""}
                 </span>
               </div>
 
@@ -115,7 +150,7 @@ export default async function BlogPage({
               {/* Standard Posts Grid */}
               {standardPosts.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
-                  {standardPosts.map((post) => (
+                  {standardPosts.map((post: any) => (
                     <BlogCard key={post.id} post={post} />
                   ))}
                 </div>

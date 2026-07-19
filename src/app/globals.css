@@ -390,7 +390,8 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.6rem 2rem;
+  padding: 0.46rem 1rem; /* Reduced vertical padding */
+  font-size: 0.825rem; /* Standard text size */
   border-radius: 9999px;
   /* Pill shape */
   background: rgba(255, 255, 255, 0.05);
@@ -401,7 +402,6 @@
   font-weight: 500;
   overflow: hidden;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  /* Force refresh 1 */
 }
 
 /* Warm golden light radiating from the bottom */
