@@ -11,10 +11,11 @@ export function PublicLayoutWrapper({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const isAdmin = pathname?.startsWith("/admin");
+  const isAdmin =
+    pathname?.startsWith("/admin") || pathname?.startsWith("/login");
 
   if (isAdmin) {
-    return <main className="flex-1 min-h-screen bg-gray-50">{children}</main>;
+    return <main className="flex-1 h-full bg-black">{children}</main>;
   }
 
   return (

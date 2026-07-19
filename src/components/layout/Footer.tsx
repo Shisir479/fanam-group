@@ -134,7 +134,7 @@ export function Footer() {
                 </span>
                 <span>
                   Hotline:{" "}
-                  <span className="text-white font-semibold">16760</span>
+                  <span className="text-white font-semibold">01331662255</span>
                 </span>
               </div>
               <div className="flex items-center gap-3 text-white/75">

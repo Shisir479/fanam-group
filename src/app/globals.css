@@ -212,6 +212,7 @@
       drop-shadow(0 0 16px rgba(225, 225, 225, 0.55));
   }
 }
+
 .logo-sunrise {
   animation: sunriseUp 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -454,4 +455,14 @@
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.3);
+}
+
+/* Fix browser autofill styling for dark mode */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #111 inset !important;
+  -webkit-text-fill-color: white !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
