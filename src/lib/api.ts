@@ -4,7 +4,9 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
   ? `${process.env.NEXT_PUBLIC_BASE_URL}/api`
   : "http://localhost:8003/api";
 
-export const api = async (endpoint: string, options: RequestInit = {}) => {
+type FetchOptions = RequestInit & { next?: { revalidate?: number | false; tags?: string[] } };
+
+export const api = async (endpoint: string, options: FetchOptions = {}) => {
   const token = Cookies.get("token");
 
   const headers = new Headers(options.headers || {});

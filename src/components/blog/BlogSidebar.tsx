@@ -1,17 +1,18 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Search, ChevronRight } from "lucide-react";
-import { blogCategories, blogPosts } from "@/lib/blogData";
+import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
-export function BlogSidebar() {
+interface BlogSidebarProps {
+  categories: string[];
+  recentPosts: any[];
+}
+
+export function BlogSidebar({ categories, recentPosts }: BlogSidebarProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const currentCategory = searchParams.get("category") || "All";
-
-  const recentPosts = blogPosts.slice(0, 3);
 
   return (
     <div className="flex flex-col gap-16">
@@ -21,7 +22,7 @@ export function BlogSidebar() {
           Categories
         </h3>
         <ul className="flex flex-col gap-1">
-          {blogCategories.map((category) => (
+          {categories.map((category) => (
             <li key={category}>
               <Link
                 href={
@@ -48,27 +49,21 @@ export function BlogSidebar() {
         </h3>
         <div className="flex flex-col gap-8">
           {recentPosts.map((post) => (
-            <Link
-              key={post.id}
-              href={`/blog/${post.slug}`}
-              className="flex items-start gap-4 group"
-            >
-              <div className="w-24 h-24 flex-shrink-0 overflow-hidden">
+            <div key={post.id} className="flex items-start gap-4">
+              <Link href={`/blog/${post.slug}`} className="group relative block w-[90px] h-[75px] flex-shrink-0 overflow-hidden rounded-lg">
                 <img
-                  src={post.image}
-                  alt={post.title}
+                  src={post.image || post.cover?.url || "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=2073&auto=format&fit=crop"}
+                  alt={post.title || post.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
-              </div>
+              </Link>
               <div className="flex flex-col justify-center">
-                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">
-                  {post.date}
-                </span>
-                <h4 className="text-[15px] font-light text-brand-blue leading-snug group-hover:opacity-80 transition-opacity line-clamp-3">
-                  {post.title}
+                <h4 className="text-sm font-semibold text-gray-900 leading-tight group-hover:text-brand-blue transition-colors line-clamp-2">
+                  <Link href={`/blog/${post.slug}`}>{post.title || post.name}</Link>
                 </h4>
+                <p className="text-xs text-gray-400 mt-1.5">{post.date || new Date(post.publishedAt || post.createdAt).toLocaleDateString()}</p>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>

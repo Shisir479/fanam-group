@@ -5,6 +5,8 @@ import { PageBanner } from "@/components/ui/PageBanner";
 import { SharedButton } from "@/components/ui/SharedButton";
 import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
 import { useState } from "react";
+import { submitContactForm } from "@/services/contact.service";
+import toast from "react-hot-toast";
 
 const Facebook = ({ className }: { className?: string }) => (
   <svg
@@ -77,7 +79,7 @@ const Linkedin = ({ className }: { className?: string }) => (
 
 export function ContactView() {
   const [formData, setFormData] = useState({
-    name: "",
+    fullName: "",
     email: "",
     phone: "",
     subject: "",
@@ -90,11 +92,27 @@ export function ContactView() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form Data Submitted:", formData);
-    alert("Thank you for your message! We will get back to you soon.");
-    setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+    setIsLoading(true);
+    try {
+      const res = await submitContactForm(formData);
+      if (res.success) {
+        toast.success("Thank you for your message! We will get back to you soon.", {
+          duration: 5000,
+          position: 'top-center',
+        });
+        setFormData({ fullName: "", email: "", phone: "", subject: "", message: "" });
+      } else {
+        toast.error(res.message || "Failed to submit form. Please try again.");
+      }
+    } catch (error) {
+      toast.error("An error occurred. Please try again later.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -144,16 +162,16 @@ export function ContactView() {
                 <div className="relative">
                   <input
                     type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
+                    id="fullName"
+                    name="fullName"
+                    value={formData.fullName}
                     onChange={handleChange}
                     required
                     className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-brand-blue peer"
                     placeholder=" "
                   />
                   <label
-                    htmlFor="name"
+                    htmlFor="fullName"
                     className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-brand-blue peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none"
                   >
                     Full Name
@@ -240,9 +258,9 @@ export function ContactView() {
               </div>
 
               <div className="mt-4">
-                <SharedButton type="submit" className="cursor-pointer">
+                <SharedButton type="submit" className="cursor-pointer" disabled={isLoading}>
                   <span className="flex items-center gap-2 ">
-                    Send Message
+                    {isLoading ? "Sending..." : "Send Message"}
                     <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                   </span>
                 </SharedButton>

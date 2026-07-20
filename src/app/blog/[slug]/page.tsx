@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { BlockReveal } from "@/components/ui/BlockReveal";
 import { CalendarDays, Clock, Share2 } from "lucide-react";
-import { RelatedPosts } from "@/components/blog/RelatedPosts";
+import { getBlogBySlugPublic } from "@/services/blog.service";
 
 const Facebook = ({ className }: { className?: string }) => (
   <svg
@@ -54,18 +54,10 @@ const Linkedin = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
-  ? `${process.env.NEXT_PUBLIC_BASE_URL}/api`
-  : "http://localhost:8003/api";
-
 async function getBlogDetails(slug: string) {
   try {
-    const res = await fetch(`${BASE_URL}/blogs/${slug}`, {
-      next: { revalidate: 60 },
-    });
-    if (!res.ok) return null;
-    const data = await res.json();
-    return data.data || null;
+    const res = await getBlogBySlugPublic(slug);
+    return res.data || null;
   } catch (error) {
     return null;
   }
@@ -97,6 +89,7 @@ export default async function BlogDetailsPage({
   if (!rawPost) {
     notFound();
   }
+
 
   const post = {
     id: rawPost._id,
@@ -184,56 +177,55 @@ export default async function BlogDetailsPage({
       {/* Article Body */}
       <section className="py-20 md:py-32">
         <div className="container mx-auto px-5 md:px-16">
-          <div className="max-w-4xl mx-auto">
-            {/* Social Share (Floating Left on Desktop, Top on Mobile) */}
-            <div className="flex flex-row md:flex-col gap-4 md:absolute md:-ml-24 mb-12 md:mb-0">
-              <button className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-colors">
-                <Share2 className="w-4 h-4" />
-              </button>
-              <button className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-colors">
-                <Facebook className="w-4 h-4" />
-              </button>
-              <button className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-colors">
-                <Twitter className="w-4 h-4" />
-              </button>
-              <button className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-colors">
-                <Linkedin className="w-4 h-4" />
-              </button>
-            </div>
-
-            {/* Content */}
-            <article className="prose prose-lg md:prose-xl max-w-none text-gray-500 font-light leading-[2.2] mb-20">
-              {post.excerpt && (
-                <p className="text-2xl md:text-3xl text-brand-blue font-light leading-relaxed mb-12 border-l-2 border-brand-blue pl-8 py-2">
-                  {post.excerpt}
-                </p>
-              )}
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: post.content.replace(/\n/g, "<br/>"),
-                }}
-              />
-            </article>
-
-            {/* Tags */}
-            {post.tags.length > 0 && (
-              <div className="flex items-center gap-3 mb-20 pb-16 border-b border-gray-100">
-                <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mr-2">
-                  Tags
-                </span>
-                {post.tags.map((tag: string) => (
-                  <span
-                    key={tag}
-                    className="px-5 py-2 border border-gray-100 text-gray-500 text-[13px] hover:border-brand-blue hover:text-brand-blue cursor-pointer transition-colors"
-                  >
-                    {tag}
-                  </span>
-                ))}
+          <div className="max-w-4xl mx-auto relative">
+              {/* Social Share (Floating Left on Desktop, Top on Mobile) */}
+              <div className="flex flex-row md:flex-col gap-4 md:absolute md:-ml-24 mb-12 md:mb-0">
+                <button className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-colors">
+                  <Share2 className="w-4 h-4" />
+                </button>
+                <button className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-colors">
+                  <Facebook className="w-4 h-4" />
+                </button>
+                <button className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-colors">
+                  <Twitter className="w-4 h-4" />
+                </button>
+                <button className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-colors">
+                  <Linkedin className="w-4 h-4" />
+                </button>
               </div>
-            )}
 
-            {/* Related Posts */}
-            <RelatedPosts currentPostId={post.id} category={post.category} />
+              {/* Content */}
+              <article className="prose prose-lg md:prose-xl max-w-none text-gray-500 font-light leading-[2.2] mb-20">
+                {post.excerpt && (
+                  <p className="text-2xl md:text-3xl text-brand-blue font-light leading-relaxed mb-12 border-l-2 border-brand-blue pl-8 py-2">
+                    {post.excerpt}
+                  </p>
+                )}
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: post.content.replace(/\n/g, "<br/>"),
+                  }}
+                />
+              </article>
+
+              {/* Tags */}
+              {post.tags.length > 0 && (
+                <div className="flex items-center gap-3 mb-20 pb-16 border-b border-gray-100">
+                  <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mr-2">
+                    Tags
+                  </span>
+                  {post.tags.map((tag: string) => (
+                    <span
+                      key={tag}
+                      className="px-5 py-2 border border-gray-100 text-gray-500 text-[13px] hover:border-brand-blue hover:text-brand-blue cursor-pointer transition-colors"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              {/* Related Posts */}
           </div>
         </div>
       </section>

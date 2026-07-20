@@ -3,29 +3,22 @@ import { BlogCard } from "@/components/blog/BlogCard";
 import { BlogSidebar } from "@/components/blog/BlogSidebar";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { getBlogsPublic } from "@/services/blog.service";
 
 export const metadata = {
   title: "News & Blog - Bonedi Homes",
   description: "Latest news, insights, and market trends from Bonedi Homes.",
 };
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
-  ? `${process.env.NEXT_PUBLIC_BASE_URL}/api`
-  : "http://localhost:8003/api";
-
 async function getBlogs(searchParams: any) {
-  const query = new URLSearchParams();
-  if (searchParams.q) query.append("search", searchParams.q);
+  const params: any = {};
+  if (searchParams.q) params.search = searchParams.q;
   if (searchParams.category && searchParams.category !== "All")
-    query.append("category", searchParams.category);
+    params.category = searchParams.category;
 
   try {
-    const res = await fetch(`${BASE_URL}/blogs?${query.toString()}`, {
-      next: { revalidate: 60 },
-    });
-    if (!res.ok) return [];
-    const data = await res.json();
-    return data.data || [];
+    const res = await getBlogsPublic(params);
+    return res.data || [];
   } catch (error) {
     return [];
   }
@@ -71,6 +64,10 @@ export default async function BlogPage({
 
   const rawBlogs = await getBlogs(resolvedSearchParams);
   const mappedPosts = rawBlogs.map(mapBlogToUI);
+
+  // In a real app, fetch these from backend
+  const categories = ["All", "Real Estate", "Interior Design", "Market Trends", "Lifestyle", "Architecture"];
+  const recentPosts = mappedPosts.slice(0, 3);
 
   const hasFilters = searchQuery || category !== "All";
   const featuredPost =
@@ -166,7 +163,7 @@ export default async function BlogPage({
             {/* Sidebar */}
             <aside className="w-full lg:w-4/12">
               <div className="sticky top-28">
-                <BlogSidebar />
+                <BlogSidebar categories={categories} recentPosts={recentPosts} />
               </div>
             </aside>
           </div>

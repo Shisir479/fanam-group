@@ -1,5 +1,6 @@
 import { api } from "@/lib/api";
 import { createCrudService } from "./crud.service";
+import { revalidateGlobalCache } from "@/app/actions";
 
 export interface Blog {
   _id: string;
@@ -10,6 +11,11 @@ export interface Blog {
   cover?: {
     _id: string;
     url: string;
+  };
+  category?: {
+    _id: string;
+    name: string;
+    slug?: string;
   };
   tags: string[];
   status: "draft" | "active" | "inactive";
@@ -23,6 +29,7 @@ export interface Blog {
     firstName: string;
     lastName: string;
     email: string;
+    role?: string;
   };
   createdAt: string;
   updatedAt: string;
@@ -57,19 +64,36 @@ export const getBlogBySlugByAdmin = (
   slug: string,
 ): Promise<SingleBlogResponse> =>
   adminBlogCrud.getByIdOrSlug(slug) as Promise<SingleBlogResponse>;
-export const createBlogByAdmin = (
+export const createBlogByAdmin = async (
   data: Partial<Blog>,
-): Promise<{ success: boolean; message: string; id: string }> =>
-  adminBlogCrud.create(data) as Promise<any>;
-export const updateBlogBySlugByAdmin = (
+): Promise<{ success: boolean; message: string; id: string }> => {
+  const res = (await adminBlogCrud.create(data)) as any;
+  if (res?.success !== false) {
+    await revalidateGlobalCache("blogs");
+  }
+  return res;
+};
+
+export const updateBlogBySlugByAdmin = async (
   slug: string,
   data: Partial<Blog>,
-): Promise<{ success: boolean; message: string }> =>
-  adminBlogCrud.update(slug, data) as Promise<any>;
-export const deleteBlogBySlugByAdmin = (
+): Promise<{ success: boolean; message: string }> => {
+  const res = (await adminBlogCrud.update(slug, data)) as any;
+  if (res?.success !== false) {
+    await revalidateGlobalCache("blogs");
+  }
+  return res;
+};
+
+export const deleteBlogBySlugByAdmin = async (
   slug: string,
-): Promise<{ success: boolean; message: string }> =>
-  adminBlogCrud.delete(slug) as Promise<any>;
+): Promise<{ success: boolean; message: string }> => {
+  const res = (await adminBlogCrud.delete(slug)) as any;
+  if (!res || res.success !== false) {
+    await revalidateGlobalCache("blogs");
+  }
+  return res;
+};
 
 // ----------------------
 // Public Methods

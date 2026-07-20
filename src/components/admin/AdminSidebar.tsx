@@ -25,7 +25,7 @@ export function AdminSidebar() {
 
     { name: "Core Management", isHeader: true },
     { name: "Projects", icon: Building, href: "/admin/projects" },
-    { name: "Inquiries", icon: MessageSquare, href: "/admin/inquiries" },
+    { name: "Contacts", icon: MessageSquare, href: "/admin/contacts" },
     { name: "Users", icon: Users, href: "/admin/users" },
     { name: "Blog & News", icon: FileText, href: "/admin/blog" },
     { name: "Gallery", icon: ImageIcon, href: "/admin/gallery" },

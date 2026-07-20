@@ -5,7 +5,6 @@ import Link from "next/link";
 import {
   getBlogsByAdmin,
   deleteBlogBySlugByAdmin,
-  createBlogByAdmin,
   Blog,
 } from "@/services/blog.service";
 import {
@@ -18,13 +17,11 @@ import {
   Database,
 } from "lucide-react";
 import toast from "react-hot-toast";
-import { blogPosts } from "@/lib/blogData";
 import { DeleteModal } from "@/components/ui/DeleteModal";
 
 export default function AdminBlogList() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isSeeding, setIsSeeding] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [search, setSearch] = useState("");
@@ -57,7 +54,7 @@ export default function AdminBlogList() {
     setIsDeleting(true);
     try {
       const res = await deleteBlogBySlugByAdmin(deleteTarget);
-      if (res.success || res.message) {
+      if (!res || res.success !== false) {
         toast.success("Blog deleted successfully");
         setDeleteTarget(null);
         fetchBlogs();
@@ -146,13 +143,12 @@ export default function AdminBlogList() {
                     </td>
                     <td className="p-4">
                       <span
-                        className={`px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wide uppercase ${
-                          blog.status === "active"
-                            ? "bg-green-500/20 text-green-400"
-                            : blog.status === "inactive"
-                              ? "bg-red-500/20 text-red-400"
-                              : "bg-gray-500/20 text-gray-400"
-                        }`}
+                        className={`px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wide uppercase ${blog.status === "active"
+                          ? "bg-green-500/20 text-green-400"
+                          : blog.status === "inactive"
+                            ? "bg-red-500/20 text-red-400"
+                            : "bg-gray-500/20 text-gray-400"
+                          }`}
                       >
                         {blog.status}
                       </span>
@@ -207,11 +203,10 @@ export default function AdminBlogList() {
             <button
               key={idx}
               onClick={() => setPage(idx + 1)}
-              className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${
-                page === idx + 1
-                  ? "bg-purple-600 text-white"
-                  : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
-              }`}
+              className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${page === idx + 1
+                ? "bg-purple-600 text-white"
+                : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
+                }`}
             >
               {idx + 1}
             </button>
