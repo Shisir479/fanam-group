@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import toast from "react-hot-toast";
 import { DeleteModal } from "@/components/ui/DeleteModal";
+import { AdminTable, ColumnDef } from "@/components/ui/AdminTable";
 
 export default function AdminContactsList() {
   const [contacts, setContacts] = useState<Contact[]>([]);
@@ -64,6 +65,55 @@ export default function AdminContactsList() {
     }
   };
 
+  const columns: ColumnDef<Contact>[] = [
+    {
+      header: "Customer",
+      render: (contact) => (
+        <div>
+          <p className="font-medium text-white line-clamp-1">{contact.fullName}</p>
+          <p className="text-xs text-gray-400 mt-0.5">
+            {contact.email} <br /> {contact.phone}
+          </p>
+        </div>
+      ),
+    },
+    {
+      header: "Subject",
+      accessor: "subject",
+      className: "text-gray-300",
+    },
+    {
+      header: "Date",
+      render: (contact) => (
+        <span className="text-gray-400">
+          {new Date(contact.createdAt).toLocaleDateString()}
+        </span>
+      ),
+    },
+    {
+      header: "Actions",
+      className: "text-right",
+      render: (contact) => (
+        <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+          <button
+            onClick={() => setViewContact(contact)}
+            className="p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+            title="View Message"
+          >
+            <Mail className="w-4 h-4" />
+          </button>
+          <button
+            onClick={() => setDeleteTarget(contact._id)}
+            className="p-2 text-gray-400 hover:text-red-400 hover:bg-red-400/10 rounded-lg transition-colors"
+            title="Delete Contact"
+          >
+            <Trash2 className="w-4 h-4" />
+          </button>
+        </div>
+      ),
+    },
+  ];
+
   return (
     <div className="space-y-6 pb-12">
       {/* Header */}
@@ -91,74 +141,14 @@ export default function AdminContactsList() {
       </div>
 
       {/* Table */}
-      <div className="glass-panel overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="bg-white/5 text-gray-200 text-sm border-b border-white/10">
-                <th className="p-4 font-medium">Customer</th>
-                <th className="p-4 font-medium">Subject</th>
-                <th className="p-4 font-medium">Date</th>
-                <th className="p-4 font-medium text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="text-sm">
-              {isLoading ? (
-                <tr>
-                  <td colSpan={4} className="p-8 text-center">
-                    <Loader2 className="w-8 h-8 text-purple-500 animate-spin mx-auto" />
-                  </td>
-                </tr>
-              ) : contacts.length === 0 ? (
-                <tr>
-                  <td colSpan={4} className="p-8 text-center text-gray-400">
-                    No contacts found.
-                  </td>
-                </tr>
-              ) : (
-                contacts.map((contact) => (
-                  <tr
-                    key={contact._id}
-                    className="border-b border-white/10 hover:bg-white/5 transition-colors"
-                  >
-                    <td className="p-4">
-                      <p className="font-medium text-white line-clamp-1">
-                        {contact.fullName}
-                      </p>
-                      <p className="text-xs text-gray-400 mt-0.5">
-                        {contact.email} <br/> {contact.phone}
-                      </p>
-                    </td>
-                    <td className="p-4 text-gray-300">
-                      {contact.subject}
-                    </td>
-                    <td className="p-4 text-gray-400">
-                      {new Date(contact.createdAt).toLocaleDateString()}
-                    </td>
-                    <td className="p-4 text-right">
-                      <div className="flex items-center justify-end gap-2">
-                        <button
-                          onClick={() => setViewContact(contact)}
-                          className="p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
-                          title="View Message"
-                        >
-                          <Mail className="w-4 h-4" />
-                        </button>
-                        <button
-                          onClick={() => setDeleteTarget(contact._id)}
-                          className="p-2 text-gray-400 hover:text-red-400 hover:bg-red-400/10 rounded-lg transition-colors"
-                          title="Delete Contact"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
+      <AdminTable
+        columns={columns}
+        data={contacts}
+        isLoading={isLoading}
+        keyExtractor={(contact) => contact._id}
+        emptyMessage="No contacts found."
+      />
+        
         
         {/* Pagination */}
         {totalPages > 1 && (
@@ -184,7 +174,6 @@ export default function AdminContactsList() {
             </div>
           </div>
         )}
-      </div>
 
       {/* Delete Modal */}
       <DeleteModal

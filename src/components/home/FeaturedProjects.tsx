@@ -2,47 +2,14 @@
 
 import Image from "next/image";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { BlockReveal } from "@/components/ui/BlockReveal";
 import { SharedButton } from "@/components/ui/SharedButton";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
-
-import { projects } from "@/lib/projectData";
-
-const tabsData = {
-  featured: {
-    title: "FEATURED PROJECTS",
-    subtitle: (
-      <>
-        BESPOKE ENCLAVES WITH FINESSE <br className="hidden md:block" /> IN
-        ARCHITECTURE AND DESIGN
-      </>
-    ),
-    projects: projects.filter((p) => p.status.includes("featured")),
-  },
-  ongoing: {
-    title: "ONGOING PROJECTS",
-    subtitle: (
-      <>
-        SHAPING THE FUTURE OF MODERN LIVING <br className="hidden md:block" />{" "}
-        WITH EXCELLENCE
-      </>
-    ),
-    projects: projects.filter((p) => p.status.includes("ongoing")),
-  },
-  upcoming: {
-    title: "UPCOMING PROJECTS",
-    subtitle: (
-      <>
-        VISIONARY DESIGNS FOR <br className="hidden md:block" /> TOMORROW'S
-        LIFESTYLE
-      </>
-    ),
-    projects: projects.filter((p) => p.status.includes("upcoming")),
-  },
-};
+import { ProjectCard } from "@/components/ui/ProjectCard";
+import { getProjectsPublic } from "@/services/project.service";
 
 export function FeaturedProjects() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -50,6 +17,54 @@ export function FeaturedProjects() {
     "featured" | "ongoing" | "upcoming"
   >("featured");
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
+  const [projects, setProjects] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const res = await getProjectsPublic({ limit: 0 });
+        if (res.success && res.data) {
+          setProjects(res.data);
+        }
+      } catch (error) {
+        console.error("Failed to load projects:", error);
+      }
+    };
+    fetchProjects();
+  }, []);
+
+  const tabsData = {
+    featured: {
+      title: "FEATURED PROJECTS",
+      subtitle: (
+        <>
+          BESPOKE ENCLAVES WITH FINESSE <br className="hidden md:block" /> IN
+          ARCHITECTURE AND DESIGN
+        </>
+      ),
+      projects: projects.filter((p) => p.status?.toLowerCase().includes("featured") || p.featured),
+    },
+    ongoing: {
+      title: "ONGOING PROJECTS",
+      subtitle: (
+        <>
+          SHAPING THE FUTURE OF MODERN LIVING <br className="hidden md:block" />{" "}
+          WITH EXCELLENCE
+        </>
+      ),
+      projects: projects.filter((p) => p.status?.toLowerCase().includes("ongoing")),
+    },
+    upcoming: {
+      title: "UPCOMING PROJECTS",
+      subtitle: (
+        <>
+          VISIONARY DESIGNS FOR <br className="hidden md:block" /> TOMORROW'S
+          LIFESTYLE
+        </>
+      ),
+      projects: projects.filter((p) => p.status?.toLowerCase().includes("upcoming")),
+    },
+  };
 
   const currentData = tabsData[activeTab];
   // Duplicate projects to ensure Swiper has enough slides to loop infinitely
@@ -185,46 +200,9 @@ export function FeaturedProjects() {
           {extendedProjects.map((project, idx) => (
             <SwiperSlide
               key={`${project.id}-${idx}`}
-              className="relative group/card h-full !w-[85vw] sm:!w-[45vw] md:!w-[40vw] lg:!w-[30vw] xl:!w-[28vw] 2xl:!w-[25vw] overflow-hidden cursor-pointer transform-gpu"
+              className="h-full !w-[85vw] sm:!w-[45vw] md:!w-[40vw] lg:!w-[30vw] xl:!w-[28vw] 2xl:!w-[25vw] cursor-pointer"
             >
-              {/* Background Image that slowly zooms on hover */}
-              <Image
-                src={project.image}
-                alt={project.title}
-                fill
-                sizes="(max-width: 640px) 85vw, (max-width: 768px) 45vw, (max-width: 1024px) 40vw, 30vw"
-                className="object-cover transition-transform duration-[10000ms] ease-out group-hover/card:scale-[1.3] will-change-transform"
-              />
-
-              {/* Dark Gradient Overlay for text readability */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover/card:opacity-90 transition-opacity duration-500"></div>
-
-              {/* Content Container - Pure transform approach for buttery smooth animation */}
-              <div className="absolute inset-0 pointer-events-none">
-                {/* Title & Location (Translates UP on hover) */}
-                <div className="absolute bottom-[90px] left-6 right-6 md:left-8 md:right-8 transform transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover/card:-translate-y-[90px] pointer-events-auto">
-                  <h3 className="text-white text-2xl md:text-2xl font-bold uppercase tracking-wide">
-                    {project.title}
-                  </h3>
-                  <p className="text-white/90 text-sm md:text-[15px] font-medium mt-1">
-                    {project.location}
-                  </p>
-                </div>
-
-                {/* Description (Fades in and fills the space left by the title) */}
-                <div className="absolute bottom-[90px] left-6 right-6 md:left-8 md:right-8 opacity-0 transform translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover/card:opacity-100 group-hover/card:translate-y-0 pointer-events-auto">
-                  <p className="text-white text-[14px] md:text-[15px] leading-relaxed font-semibold pt-4 line-clamp-3">
-                    {project.description}
-                  </p>
-                </div>
-
-                {/* Always visible Explore Button */}
-                <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8 pointer-events-auto">
-                  <SharedButton className="text-white cursor-pointer ">
-                    Explore
-                  </SharedButton>
-                </div>
-              </div>
+              <ProjectCard project={project} className="w-full h-full" isSwiperSlide />
             </SwiperSlide>
           ))}
         </Swiper>

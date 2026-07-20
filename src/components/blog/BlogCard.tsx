@@ -1,8 +1,13 @@
 import Link from "next/link";
-import { BlogPost } from "@/lib/blogData";
+import { Blog } from "@/services/blog.service";
 import { ArrowRight, Clock, CalendarDays } from "lucide-react";
 
-export function BlogCard({ post }: { post: BlogPost }) {
+export function BlogCard({ post }: { post: Blog }) {
+  const categoryName = post.category?.name || "Uncategorized";
+  const dateStr = post.publishedAt
+    ? new Date(post.publishedAt).toLocaleDateString()
+    : new Date(post.createdAt).toLocaleDateString();
+
   return (
     <article className="group flex flex-col h-full">
       {/* Image Container */}
@@ -11,8 +16,8 @@ export function BlogCard({ post }: { post: BlogPost }) {
         className="relative w-full aspect-[4/3] md:aspect-[3/2] overflow-hidden mb-6 block"
       >
         <img
-          src={post.image}
-          alt={post.title}
+          src={post.cover?.url || "/placeholder.jpg"}
+          alt={post.name}
           className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
         />
         {/* Subtle overlay on hover */}
@@ -21,7 +26,7 @@ export function BlogCard({ post }: { post: BlogPost }) {
         {/* Category Label */}
         <div className="absolute top-4 left-4 bg-white/95 px-4 py-2">
           <span className="text-[10px] font-bold text-brand-blue uppercase tracking-[0.2em]">
-            {post.category}
+            {categoryName}
           </span>
         </div>
       </Link>
@@ -32,18 +37,18 @@ export function BlogCard({ post }: { post: BlogPost }) {
         <div className="flex items-center gap-4 text-[12px] text-gray-500 font-medium tracking-wide uppercase mb-4">
           <div className="flex items-center gap-1.5">
             <CalendarDays className="w-3.5 h-3.5 text-gray-400" />
-            <span>{post.date}</span>
+            <span>{dateStr}</span>
           </div>
           <div className="flex items-center gap-1.5">
             <Clock className="w-3.5 h-3.5 text-gray-400" />
-            <span>{post.readTime}</span>
+            <span>{post.readingTime || 5} min read</span>
           </div>
         </div>
 
         {/* Title */}
         <Link href={`/blog/${post.slug}`} className="inline-block">
           <h2 className="text-2xl lg:text-3xl font-light text-brand-blue leading-tight mb-5 group-hover:opacity-80 transition-opacity duration-300 line-clamp-2">
-            {post.title}
+            {post.name}
           </h2>
         </Link>
 

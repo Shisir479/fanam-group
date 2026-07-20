@@ -24,7 +24,7 @@ export function AdminSidebar() {
     { name: "Dashboard", icon: LayoutDashboard, href: "/admin", exact: true },
 
     { name: "Core Management", isHeader: true },
-    { name: "Projects", icon: Building, href: "/admin/projects" },
+    { name: "Projects", icon: Building, href: "/admin/project" },
     { name: "Contacts", icon: MessageSquare, href: "/admin/contacts" },
     { name: "Users", icon: Users, href: "/admin/users" },
     { name: "Blog & News", icon: FileText, href: "/admin/blog" },

@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import toast from "react-hot-toast";
 import { DeleteModal } from "@/components/ui/DeleteModal";
+import { AdminTable, ColumnDef } from "@/components/ui/AdminTable";
 
 export default function AdminBlogList() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
@@ -66,6 +67,83 @@ export default function AdminBlogList() {
     }
   };
 
+  const columns: ColumnDef<Blog>[] = [
+    {
+      header: "Post Details",
+      render: (blog) => (
+        <div>
+          <p className="font-medium text-white line-clamp-1">{blog.name}</p>
+          <p className="text-xs text-gray-400 mt-0.5">/{blog.slug}</p>
+        </div>
+      ),
+    },
+    {
+      header: "Status",
+      render: (blog) => (
+        <span
+          className={`px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wide uppercase ${
+            blog.status === "active"
+              ? "bg-green-500/20 text-green-400"
+              : blog.status === "inactive"
+              ? "bg-red-500/20 text-red-400"
+              : "bg-gray-500/20 text-gray-400"
+          }`}
+        >
+          {blog.status}
+        </span>
+      ),
+    },
+    {
+      header: "Author",
+      render: (blog) => (
+        <span className="text-gray-300 capitalize">
+          {blog.author?.firstName
+            ? `${blog.author.firstName} ${blog.author.lastName || ""}`
+            : "Unknown"}
+        </span>
+      ),
+    },
+    {
+      header: "Date",
+      render: (blog) => (
+        <span className="flex items-center gap-1.5 text-gray-400 text-xs">
+          <Calendar className="w-3.5 h-3.5" />
+          {new Date(blog.createdAt).toLocaleDateString()}
+        </span>
+      ),
+    },
+    {
+      header: "Actions",
+      className: "text-right space-x-2",
+      render: (blog) => (
+        <>
+          <Link
+            href={`/blog/${blog.slug}`}
+            target="_blank"
+            className="inline-flex p-1.5 text-gray-400 hover:text-blue-400 hover:bg-blue-400/10 rounded transition-colors"
+            title="View Public"
+          >
+            <Eye className="w-4 h-4" />
+          </Link>
+          <Link
+            href={`/admin/blog/edit/${blog.slug}`}
+            className="inline-flex p-1.5 text-gray-400 hover:text-green-400 hover:bg-green-400/10 rounded transition-colors"
+            title="Edit"
+          >
+            <Edit className="w-4 h-4" />
+          </Link>
+          <button
+            onClick={() => setDeleteTarget(blog.slug)}
+            className="inline-flex p-1.5 text-gray-400 hover:text-red-400 hover:bg-red-400/10 rounded transition-colors"
+            title="Delete"
+          >
+            <Trash2 className="w-4 h-4" />
+          </button>
+        </>
+      ),
+    },
+  ];
+
   return (
     <div className="space-y-6 pb-12">
       {/* Header */}
@@ -102,99 +180,13 @@ export default function AdminBlogList() {
       </div>
 
       {/* Table */}
-      <div className="glass-panel overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="bg-white/5 text-gray-200 text-sm border-b border-white/10">
-                <th className="p-4 font-medium">Post Details</th>
-                <th className="p-4 font-medium">Status</th>
-                <th className="p-4 font-medium">Author</th>
-                <th className="p-4 font-medium">Date</th>
-                <th className="p-4 font-medium text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="text-sm">
-              {isLoading ? (
-                <tr>
-                  <td colSpan={5} className="p-8 text-center">
-                    <Loader2 className="w-8 h-8 text-purple-500 animate-spin mx-auto" />
-                  </td>
-                </tr>
-              ) : blogs.length === 0 ? (
-                <tr>
-                  <td colSpan={5} className="p-8 text-center text-gray-400">
-                    No blogs found. Create one to get started.
-                  </td>
-                </tr>
-              ) : (
-                blogs.map((blog) => (
-                  <tr
-                    key={blog._id}
-                    className="border-b border-white/10 hover:bg-white/5 transition-colors"
-                  >
-                    <td className="p-4">
-                      <p className="font-medium text-white line-clamp-1">
-                        {blog.name}
-                      </p>
-                      <p className="text-xs text-gray-400 mt-0.5">
-                        /{blog.slug}
-                      </p>
-                    </td>
-                    <td className="p-4">
-                      <span
-                        className={`px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wide uppercase ${blog.status === "active"
-                          ? "bg-green-500/20 text-green-400"
-                          : blog.status === "inactive"
-                            ? "bg-red-500/20 text-red-400"
-                            : "bg-gray-500/20 text-gray-400"
-                          }`}
-                      >
-                        {blog.status}
-                      </span>
-                    </td>
-                    <td className="p-4 text-gray-300 capitalize">
-                      {blog.author?.firstName
-                        ? `${blog.author.firstName} ${blog.author.lastName || ""}`
-                        : "Unknown"}
-                    </td>
-                    <td className="p-4 text-gray-400 text-xs">
-                      <span className="flex items-center gap-1.5">
-                        <Calendar className="w-3.5 h-3.5" />
-                        {new Date(blog.createdAt).toLocaleDateString()}
-                      </span>
-                    </td>
-                    <td className="p-4 text-right space-x-2">
-                      <Link
-                        href={`/blog/${blog.slug}`}
-                        target="_blank"
-                        className="inline-flex p-1.5 text-gray-400 hover:text-blue-400 hover:bg-blue-400/10 rounded transition-colors"
-                        title="View Public"
-                      >
-                        <Eye className="w-4 h-4" />
-                      </Link>
-                      <Link
-                        href={`/admin/blog/edit/${blog.slug}`}
-                        className="inline-flex p-1.5 text-gray-400 hover:text-green-400 hover:bg-green-400/10 rounded transition-colors"
-                        title="Edit"
-                      >
-                        <Edit className="w-4 h-4" />
-                      </Link>
-                      <button
-                        onClick={() => setDeleteTarget(blog.slug)}
-                        className="inline-flex p-1.5 text-gray-400 hover:text-red-400 hover:bg-red-400/10 rounded transition-colors"
-                        title="Delete"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <AdminTable
+        columns={columns}
+        data={blogs}
+        isLoading={isLoading}
+        keyExtractor={(blog) => blog._id}
+        emptyMessage="No blogs found. Create one to get started."
+      />
 
       {/* Pagination */}
       {totalPages > 1 && (

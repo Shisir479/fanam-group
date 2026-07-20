@@ -1,40 +1,59 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BlockReveal } from "@/components/ui/BlockReveal";
 import { PageBanner } from "@/components/ui/PageBanner";
 import { SharedButton } from "@/components/ui/SharedButton";
-import { projects, Project } from "@/lib/projectData";
 import { Search, ChevronDown, Filter } from "lucide-react";
+import { getProjectsPublic } from "@/services/project.service";
+import { ProjectCard } from "@/components/ui/ProjectCard";
+import toast from "react-hot-toast";
 
 export function ProjectsView({
   initialStatus = "All",
 }: {
   initialStatus?: string;
 }) {
+  const [projects, setProjects] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState<string>("All");
   const [statusFilter, setStatusFilter] = useState<string>(initialStatus);
   const [sortBy, setSortBy] = useState<string>("newest");
   const [visibleCount, setVisibleCount] = useState(6);
   const [locationFilter, setLocationFilter] = useState<string>("Location");
-  const [sizeFilter, setSizeFilter] = useState<string>("Select Size Range");
+  // const [sizeFilter, setSizeFilter] = useState<string>("Select Size Range"); // Keeping UI but might not apply
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const res = await getProjectsPublic({ limit: 0 }); // limit: 0 fetches all projects for client-side filtering
+        if (res.success && res.data) {
+          setProjects(res.data);
+        } else {
+          toast.error("Failed to load projects");
+        }
+      } catch (error) {
+        console.error(error);
+        toast.error("Failed to load projects");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchProjects();
+  }, []);
 
   const categories = ["Type", "Residential", "Commercial", "Mixed Use"];
   const statuses = ["All", "upcoming", "ongoing", "completed"];
-  const locations = [
-    "Location",
-    ...Array.from(new Set(projects.map((p) => p.location))),
-  ];
-  const sizes = [
-    "Select Size Range",
-    "1000 - 1500 sqft",
-    "1500 - 2000 sqft",
-    "2000 - 3000 sqft",
-    "3000+ sqft",
-  ];
+  
+  // Extract unique locations dynamically
+  const locations = useMemo(() => {
+    const locs = new Set(projects.map(p => p.location?.area || p.location?.city).filter(Boolean));
+    return ["Location", ...Array.from(locs)];
+  }, [projects]);
 
   // Filter and sort logic
   const filteredAndSortedProjects = useMemo(() => {
@@ -45,8 +64,9 @@ export function ProjectsView({
       const query = searchQuery.toLowerCase();
       result = result.filter(
         (p) =>
-          p.title.toLowerCase().includes(query) ||
-          p.location.toLowerCase().includes(query),
+          p.name.toLowerCase().includes(query) ||
+          (p.location?.area || "").toLowerCase().includes(query) ||
+          (p.location?.city || "").toLowerCase().includes(query)
       );
     }
 
@@ -57,30 +77,30 @@ export function ProjectsView({
 
     // Status filter
     if (statusFilter !== "All") {
-      result = result.filter((p) => p.status.includes(statusFilter as any));
+      result = result.filter((p) => p.status === statusFilter.toLowerCase());
     }
 
     // Location filter
     if (locationFilter !== "Location") {
-      result = result.filter((p) => p.location === locationFilter);
+      result = result.filter((p) => p.location?.area === locationFilter || p.location?.city === locationFilter);
     }
 
     // Sorting
     result = [...result].sort((a, b) => {
       if (sortBy === "newest") {
-        return new Date(b.date).getTime() - new Date(a.date).getTime();
+        return new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime();
       } else if (sortBy === "oldest") {
-        return new Date(a.date).getTime() - new Date(b.date).getTime();
+        return new Date(a.createdAt || 0).getTime() - new Date(b.createdAt || 0).getTime();
       } else if (sortBy === "a-z") {
-        return a.title.localeCompare(b.title);
+        return a.name.localeCompare(b.name);
       } else if (sortBy === "z-a") {
-        return b.title.localeCompare(a.title);
+        return b.name.localeCompare(a.name);
       }
       return 0;
     });
 
     return result;
-  }, [searchQuery, categoryFilter, statusFilter, sortBy]);
+  }, [projects, searchQuery, categoryFilter, statusFilter, sortBy, locationFilter]);
 
   const displayedProjects = filteredAndSortedProjects.slice(0, visibleCount);
   const hasMore = visibleCount < filteredAndSortedProjects.length;
@@ -88,6 +108,14 @@ export function ProjectsView({
   const handleLoadMore = () => {
     setVisibleCount((prev) => prev + 6);
   };
+
+  if (isLoading) {
+    return (
+      <main className="min-h-screen bg-gray-50 flex items-center justify-center pb-24">
+         <div className="w-12 h-12 border-4 border-brand-blue/20 border-t-brand-blue rounded-full animate-spin"></div>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-gray-50 pb-24 flex flex-col">
@@ -149,8 +177,8 @@ export function ProjectsView({
                   className="w-full appearance-none bg-transparent py-3 pl-4 pr-10 text-[14px] text-gray-600 focus:outline-none cursor-pointer"
                 >
                   {locations.map((loc) => (
-                    <option key={loc} value={loc}>
-                      {loc}
+                    <option key={loc} value={loc as string}>
+                      {loc as string}
                     </option>
                   ))}
                 </select>
@@ -158,29 +186,28 @@ export function ProjectsView({
               </div>
             </div>
 
-            {/* Bottom Row: Size Range, Search */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {/* Size Range Dropdown */}
-              <div className="relative group bg-white border border-gray-200 md:col-span-1">
+            {/* Bottom Row: Sort, Search */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Sort By Dropdown */}
+              <div className="relative group bg-white border border-gray-200">
                 <select
-                  value={sizeFilter}
-                  onChange={(e) => setSizeFilter(e.target.value)}
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
                   className="w-full appearance-none bg-transparent py-3 pl-4 pr-10 text-[14px] text-gray-600 focus:outline-none cursor-pointer"
                 >
-                  {sizes.map((size) => (
-                    <option key={size} value={size}>
-                      {size}
-                    </option>
-                  ))}
+                  <option value="newest">Newest First</option>
+                  <option value="oldest">Oldest First</option>
+                  <option value="a-z">Name (A-Z)</option>
+                  <option value="z-a">Name (Z-A)</option>
                 </select>
                 <ChevronDown className="w-4 h-4 text-gray-600 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
               </div>
 
               {/* Search Box */}
-              <div className="relative bg-white border border-gray-200 md:col-span-1">
+              <div className="relative bg-white border border-gray-200">
                 <input
                   type="text"
-                  placeholder="Search Project Name"
+                  placeholder="Search Project Name or Location"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full bg-transparent py-3 px-4 text-[14px] text-gray-600 focus:outline-none"
@@ -195,68 +222,12 @@ export function ProjectsView({
       <section className="container mx-auto px-5 md:px-16">
         {displayedProjects.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {displayedProjects.map((project, idx) => (
-              <Link
-                href={`/projects/${project.slug}`}
-                key={project.id}
-                className="relative group/card w-full h-[500px] md:h-[600px] overflow-hidden cursor-pointer transform-gpu shadow-sm hover:shadow-xl transition-shadow duration-500 block"
-              >
-                {/* Background Image */}
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-[10000ms] ease-out group-hover/card:scale-[1.3] will-change-transform"
-                />
-
-                {/* Dark Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover/card:opacity-90 transition-opacity duration-500"></div>
-
-                {/* Category & Status Badges */}
-                <div className="absolute top-6 left-6 right-6 flex flex-wrap gap-2 pointer-events-auto z-10">
-                  <span className="bg-brand-blue text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 shadow-sm">
-                    {project.category}
-                  </span>
-                  {project.status
-                    .filter((s) => s !== "featured")
-                    .map((s) => (
-                      <span
-                        key={s}
-                        className="bg-white/90 backdrop-blur-sm text-brand-blue text-[11px] font-bold uppercase tracking-wider px-3 py-1 shadow-sm capitalize"
-                      >
-                        {s}
-                      </span>
-                    ))}
-                </div>
-
-                {/* Content Container */}
-                <div className="absolute inset-0 pointer-events-none">
-                  {/* Title & Location (Translates UP on hover) */}
-                  <div className="absolute bottom-[90px] left-6 right-6 md:left-8 md:right-8 transform transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover/card:-translate-y-[90px] pointer-events-auto">
-                    <h3 className="text-white text-2xl md:text-2xl font-bold uppercase tracking-wide leading-tight">
-                      {project.title}
-                    </h3>
-                    <p className="text-white/90 text-[14px] md:text-[15px] font-medium mt-1">
-                      {project.location}
-                    </p>
-                  </div>
-
-                  {/* Description */}
-                  <div className="absolute bottom-[90px] left-6 right-6 md:left-8 md:right-8 opacity-0 transform translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover/card:opacity-100 group-hover/card:translate-y-0 pointer-events-auto">
-                    <p className="text-white text-[14px] md:text-[15px] leading-relaxed font-semibold pt-4 line-clamp-3">
-                      {project.description}
-                    </p>
-                  </div>
-
-                  {/* Explore Button */}
-                  <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8 pointer-events-auto">
-                    <SharedButton className="text-white cursor-pointer">
-                      Explore
-                    </SharedButton>
-                  </div>
-                </div>
-              </Link>
+            {displayedProjects.map((project) => (
+              <ProjectCard 
+                key={project._id || project.id} 
+                project={project} 
+                className="h-[500px] md:h-[600px] shadow-sm hover:shadow-xl transition-shadow duration-500" 
+              />
             ))}
           </div>
         ) : (
