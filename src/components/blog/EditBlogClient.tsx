@@ -189,8 +189,6 @@ export default function EditBlogClient({ initialData, slug, onSubmit }: { initia
                 </SelectTrigger>
                 <SelectContent
                   alignItemWithTrigger={false}
-                  side="bottom"
-                  sideOffset={5}
                   className="bg-transparent backdrop-blur-2xl rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] border border-white/10 text-white"
                 >
                   <SelectItem

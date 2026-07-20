@@ -4,29 +4,12 @@ import { useState } from "react";
 import Image from "next/image";
 import { X } from "lucide-react";
 
-const VIDEOS = [
-  {
-    id: 1,
-    title: "Homecoming diaries | Edison Apricus",
-    thumbnail:
-      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=800&auto=format&fit=crop",
-    videoUrl: "https://www.youtube.com/embed/ScMzIvxBSi4?autoplay=1",
-  },
-  {
-    id: 2,
-    title: "Homecoming Diaries | Edison Angelo",
-    thumbnail:
-      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=800&auto=format&fit=crop",
-    videoUrl: "https://www.youtube.com/embed/ScMzIvxBSi4?autoplay=1",
-  },
-  {
-    id: 3,
-    title: "Celebration of Ownership",
-    thumbnail:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop",
-    videoUrl: "https://www.youtube.com/embed/ScMzIvxBSi4?autoplay=1",
-  },
-];
+export interface Video {
+  id: string;
+  title: string;
+  thumbnail: string;
+  videoUrl: string;
+}
 
 const PlayButton = () => (
   <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
@@ -42,14 +25,14 @@ const PlayButton = () => (
   </div>
 );
 
-export default function VideoGallery() {
+export default function VideoGallery({ videos = [] }: { videos?: Video[] }) {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
 
   return (
     <section className="w-full py-16 md:py-24 bg-white ">
       <div className="container mx-auto px-5 md:px-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
-          {VIDEOS.map((video) => (
+          {videos.map((video) => (
             <div
               key={video.id}
               className="flex flex-col gap-4 group cursor-pointer"
@@ -65,7 +48,7 @@ export default function VideoGallery() {
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors duration-500"></div>
                 <PlayButton />
               </div>
-              <h3 className="text-[17px] md:text-lg font-medium text-gray-900 text-left">
+              <h3 className="text-[17px] md:text-lg font-medium text-gray-900 text-left truncate" title={video.title}>
                 {video.title}
               </h3>
             </div>

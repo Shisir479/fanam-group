@@ -7,7 +7,19 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 type FetchOptions = RequestInit & { next?: { revalidate?: number | false; tags?: string[] } };
 
 export const api = async (endpoint: string, options: FetchOptions = {}) => {
-  const token = Cookies.get("token");
+  let token: string | undefined;
+  if (typeof window !== "undefined") {
+    token = Cookies.get("token");
+  } else {
+    try {
+      const moduleName = "next/headers";
+      const { cookies } = require(moduleName);
+      const cookieStore = await cookies();
+      token = cookieStore.get("token")?.value;
+    } catch (e) {
+      // Ignore
+    }
+  }
 
   const headers = new Headers(options.headers || {});
 
