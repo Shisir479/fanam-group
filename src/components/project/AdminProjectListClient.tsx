@@ -3,13 +3,20 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Project, getProjectsByAdmin, deleteProjectBySlugAdmin, createProjectByAdmin } from "@/services/project.service";
+import { Project, getProjectsByAdmin, deleteProjectBySlugAdmin } from "@/services/project.service";
 import { DeleteModal } from "@/components/ui/DeleteModal";
 import { Edit, Trash2, Plus, Search, Building, Home, MapPin, Database, Eye } from "lucide-react";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import { Pagination } from "@/components/ui/Pagination";
 import { AdminTable, ColumnDef } from "@/components/ui/AdminTable";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function AdminProjectListClient() {
   const router = useRouter();
@@ -18,6 +25,7 @@ export default function AdminProjectListClient() {
   const [isLoading, setIsLoading] = useState(true);
   
   const [search, setSearch] = useState(searchParams.get("search") || "");
+  const [status, setStatus] = useState(searchParams.get("status") || "");
   const [page, setPage] = useState(parseInt(searchParams.get("page") || "1"));
   const [totalPages, setTotalPages] = useState(1);
   
@@ -28,7 +36,7 @@ export default function AdminProjectListClient() {
   const fetchProjects = async () => {
     setIsLoading(true);
     try {
-      const res = await getProjectsByAdmin({ page, search, limit: 10, _t: Date.now() });
+      const res = await getProjectsByAdmin({ page, search, status, limit: 10, _t: Date.now() });
       if (res.success) {
         setProjects(res.data || []);
         setTotalPages(res.count || 1);
@@ -42,7 +50,7 @@ export default function AdminProjectListClient() {
 
   useEffect(() => {
     fetchProjects();
-  }, [page, search]);
+  }, [page, search, status]);
 
   const confirmDelete = (slug: string) => {
     setProjectToDelete(slug);
@@ -115,22 +123,10 @@ export default function AdminProjectListClient() {
       ),
     },
     {
-      header: "Category",
-      render: (project) => (
-        <div className="flex items-center gap-1.5 text-sm text-gray-300">
-          {project.category === "Residential" ? (
-            <Home className="w-3.5 h-3.5 text-blue-400" />
-          ) : (
-            <Building className="w-3.5 h-3.5 text-purple-400" />
-          )}
-          {project.category}
-        </div>
-      ),
-    },
-    {
       header: "Status",
+      className: "text-center",
       render: (project) => (
-        <div className="flex flex-col gap-1 items-start">
+        <div className="flex flex-col gap-1 items-center justify-center">
           <span
             className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium w-fit ${
               project.publishStatus === "active"
@@ -140,7 +136,7 @@ export default function AdminProjectListClient() {
           >
             {project.publishStatus === "active" ? "Published" : "Draft"}
           </span>
-          <span className="text-[11px] text-gray-400 uppercase tracking-wider font-medium">
+          <span className="text-[11px] text-gray-400 uppercase tracking-wider font-medium text-center">
             {project.status}
           </span>
         </div>
@@ -177,11 +173,6 @@ export default function AdminProjectListClient() {
       ),
     },
   ];
-
-  const [isSeeding, setIsSeeding] = useState(false);
-
-
-
   return (
     <>
       <div className="space-y-6 pb-12">
@@ -215,11 +206,31 @@ export default function AdminProjectListClient() {
               onChange={(e) => {
                 setSearch(e.target.value);
                 setPage(1);
-                router.push(`/admin/project?search=${e.target.value}&page=1`);
+                router.push(`/admin/project?search=${e.target.value}&status=${status}&page=1`);
               }}
             />
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
           </div>
+          <Select
+            value={status || "all"}
+            onValueChange={(value) => {
+              const val = value || "";
+              const newValue = val === "all" ? "" : val;
+              setStatus(newValue);
+              setPage(1);
+              router.push(`/admin/project?search=${search}&status=${newValue}&page=1`);
+            }}
+          >
+            <SelectTrigger className="w-full md:w-48">
+              <SelectValue placeholder="All Statuses" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Statuses</SelectItem>
+              <SelectItem value="upcoming">Upcoming</SelectItem>
+              <SelectItem value="ongoing">Ongoing</SelectItem>
+              <SelectItem value="completed">Completed</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
 
         {/* Projects List */}
@@ -236,7 +247,7 @@ export default function AdminProjectListClient() {
           totalPages={totalPages}
           onPageChange={(newPage) => {
             setPage(newPage);
-            router.push(`/admin/project?search=${search}&page=${newPage}`);
+            router.push(`/admin/project?search=${search}&status=${status}&page=${newPage}`);
           }}
           theme="dark"
         />

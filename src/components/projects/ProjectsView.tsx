@@ -188,21 +188,6 @@ export function ProjectsView({
 
             {/* Bottom Row: Sort, Search */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Sort By Dropdown */}
-              <div className="relative group bg-white border border-gray-200">
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="w-full appearance-none bg-transparent py-3 pl-4 pr-10 text-[14px] text-gray-600 focus:outline-none cursor-pointer"
-                >
-                  <option value="newest">Newest First</option>
-                  <option value="oldest">Oldest First</option>
-                  <option value="a-z">Name (A-Z)</option>
-                  <option value="z-a">Name (Z-A)</option>
-                </select>
-                <ChevronDown className="w-4 h-4 text-gray-600 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
-              </div>
-
               {/* Search Box */}
               <div className="relative bg-white border border-gray-200">
                 <input

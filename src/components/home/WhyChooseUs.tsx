@@ -2,7 +2,7 @@
 
 import { BlockReveal } from "@/components/ui/BlockReveal";
 
-const features = [
+const defaultFeatures = [
   {
     title: "Uncompromising Quality",
     description:
@@ -91,20 +91,33 @@ const features = [
   },
 ];
 
-export function WhyChooseUs() {
+export function WhyChooseUs({ data }: { data?: any }) {
+  const features = data?.strengths?.length > 0 
+    ? data.strengths.map((strength: any, idx: number) => ({
+        title: strength.title || "",
+        description: strength.description || "",
+        icon: strength.icon?.url ? (
+          <img src={strength.icon.url} alt={strength.title} className="w-8 h-8 object-contain" />
+        ) : defaultFeatures[idx % defaultFeatures.length].icon,
+      }))
+    : defaultFeatures;
+
+  const strengthTitle = data?.strengthTitle || "Our Core Strengths";
+  const strengthHeading = data?.strengthHeading || "Why Choose Us";
+
   return (
     <section className="w-full py-16 md:py-24 bg-gray-50">
       <div className="container mx-auto px-5 md:px-16">
         <div className="flex flex-col items-center text-center mb-16">
           <BlockReveal color="var(--color-brand-blue)">
             <div className="text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase mb-4">
-              Our Core Strengths
+              {strengthTitle}
             </div>
           </BlockReveal>
 
           <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
             <h2 className="text-2xl md:text-[34px] font-bold text-brand-blue leading-[1.2] uppercase">
-              Why Choose Us
+              {strengthHeading}
             </h2>
           </BlockReveal>
         </div>

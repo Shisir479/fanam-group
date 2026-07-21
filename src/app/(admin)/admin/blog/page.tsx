@@ -94,6 +94,16 @@ export default function AdminBlogList() {
       ),
     },
     {
+      header: "Category",
+      render: (blog) => (
+        <span className="text-gray-300">
+          {typeof blog.blogCategory === "string" 
+            ? blog.blogCategory 
+            : "N/A"}
+        </span>
+      ),
+    },
+    {
       header: "Author",
       render: (blog) => (
         <span className="text-gray-300 capitalize">

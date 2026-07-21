@@ -6,7 +6,7 @@ export const uploadSingleImage = async (
   const formData = new FormData();
   formData.append("images", file);
 
-  const res = await api("/admin/products/upload-images", {
+  const res = await api("/upload/single", {
     method: "POST",
     body: formData,
   });
@@ -22,7 +22,7 @@ export const uploadMultipleImages = async (
     formData.append("images", file);
   });
 
-  const res = await api("/admin/products/upload-images", {
+  const res = await api("/upload-images", {
     method: "POST",
     body: formData,
   });

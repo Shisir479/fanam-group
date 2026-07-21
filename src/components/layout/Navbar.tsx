@@ -115,12 +115,12 @@ export function Navbar() {
 
               {/* Gallery with Dropdown */}
               <div className="relative group h-full flex items-center">
-                <Link href="/gallery" className="h-full flex items-center">
+                <span className="h-full flex items-center cursor-pointer">
                   Gallery
                   <span
-                    className={`absolute left-0 bottom-0 w-full h-[4px] bg-white origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/gallery") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                    className={`absolute left-0 bottom-0 w-full h-[4px] bg-white origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/gallery/image-gallery") || pathname.startsWith("/gallery/video-gallery") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
                   ></span>
-                </Link>
+                </span>
                 <div className="absolute top-full left-0 min-w-[240px] bg-black/80 flex flex-col opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
                   <Link
                     href="/image-gallery"

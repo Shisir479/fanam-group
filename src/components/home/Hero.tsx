@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import Image from "next/image";
 
-const slides = [
+const defaultSlides = [
   {
     id: 1,
     image:
@@ -32,7 +32,15 @@ const AUTO_INTERVAL = 5000;
 
 type Phase = "idle" | "wiping";
 
-export function Hero() {
+export function Hero({ data }: { data?: any }) {
+  const slides = data?.heroSlides?.length > 0
+    ? data.heroSlides.map((slide: any, index: number) => ({
+        id: index + 1,
+        image: slide.image?.url || defaultSlides[index % defaultSlides.length].image,
+        title: slide.title || "",
+      }))
+    : defaultSlides;
+
   const [current, setCurrent] = useState(0);
   const [displayImage, setDisplayImage] = useState(0);
   const [nextImage, setNextImage] = useState(0);
@@ -196,7 +204,7 @@ export function Hero() {
         className="absolute right-6 top-1/2 -translate-y-1/2 flex flex-col items-center gap-2"
         style={{ zIndex: 20 }}
       >
-        {slides.map((_, index) => (
+        {slides.map((_: any, index: number) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}

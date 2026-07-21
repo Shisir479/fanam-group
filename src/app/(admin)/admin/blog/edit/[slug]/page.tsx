@@ -10,9 +10,9 @@ export const metadata = {
 export default async function EditBlogPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = params;
+  const { slug } = await params;
 
   // Fetch data on the server
   let blogData = null;

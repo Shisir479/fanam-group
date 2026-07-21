@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   Settings,
-  Users,
   Image as ImageIcon,
   MessageSquare,
   Home,
@@ -25,8 +24,8 @@ export function AdminSidebar() {
 
     { name: "Core Management", isHeader: true },
     { name: "Projects", icon: Building, href: "/admin/project" },
+    { name: "Services", icon: Building, href: "/admin/services" },
     { name: "Contacts", icon: MessageSquare, href: "/admin/contacts" },
-    { name: "Users", icon: Users, href: "/admin/users" },
     { name: "Blog & News", icon: FileText, href: "/admin/blog" },
     { name: "Gallery", icon: ImageIcon, href: "/admin/gallery" },
 
@@ -34,7 +33,7 @@ export function AdminSidebar() {
     { name: "Homepage Content", icon: Home, href: "/admin/content/homepage" },
     { name: "About Content", icon: Info, href: "/admin/content/about" },
     { name: "Contact Info", icon: PhoneCall, href: "/admin/content/contact" },
-    { name: "Legal Pages", icon: Shield, href: "/admin/content/legal" },
+    { name: "Pages", icon: FileText, href: "/admin/content/pages" },
 
     { name: "System", isHeader: true },
     { name: "Settings", icon: Settings, href: "/admin/settings" },
@@ -90,11 +89,10 @@ export function AdminSidebar() {
               <Link
                 key={item.name}
                 href={item.href || "#"}
-                className={`relative flex items-center justify-between px-3 py-1.5 rounded-lg transition-all outline-none group overflow-hidden ${
-                  isActive
+                className={`relative flex items-center justify-between px-3 py-1.5 rounded-lg transition-all outline-none group overflow-hidden ${isActive
                     ? "bg-white/5 border border-white/10 text-white"
                     : "text-gray-300 hover:text-white hover:bg-white/5 border border-transparent"
-                }`}
+                  }`}
               >
                 {/* Glassy Bottom Glow (Active State Only) */}
                 {isActive && (

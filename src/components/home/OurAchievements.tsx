@@ -3,14 +3,24 @@
 import { useEffect, useState, useRef } from "react";
 import { BlockReveal } from "@/components/ui/BlockReveal";
 
-const achievements = [
+const defaultAchievements = [
   { value: "50+", label: "Completed Projects" },
   { value: "2000+", label: "Happy Families" },
   { value: "15+", label: "Years of Excellence" },
   { value: "100%", label: "On-time Delivery" },
 ];
 
-export function OurAchievements() {
+export function OurAchievements({ data }: { data?: any }) {
+  const achievements = data?.achievements?.length > 0
+    ? data.achievements.map((ach: any) => ({
+        value: ach.number || "",
+        label: ach.title || "",
+      }))
+    : defaultAchievements;
+
+  const achievementTitle = data?.achievementTitle || "Our Legacy";
+  const achievementHeading = data?.achievementHeading || "Our Achievements";
+
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -49,13 +59,13 @@ export function OurAchievements() {
         <div className="flex flex-col items-center text-center mb-16">
           <BlockReveal color="#ffffff">
             <div className="text-[16px] font-semibold tracking-[0.2em] text-gray-300 uppercase mb-4">
-              Our Legacy
+              {achievementTitle}
             </div>
           </BlockReveal>
 
           <BlockReveal color="#ffffff" delay={0.2}>
             <h2 className="text-2xl md:text-[34px] font-bold text-white leading-[1.2] uppercase tracking-wider">
-              Our Achievements
+              {achievementHeading}
             </h2>
           </BlockReveal>
         </div>

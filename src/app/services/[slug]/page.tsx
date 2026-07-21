@@ -3,130 +3,26 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BlockReveal } from "@/components/ui/BlockReveal";
+import { getServiceBySlugPublic, getServicesPublic } from "@/services/service.service";
 
-// Reuse the same services data for simplicity
-const services = [
-  {
-    title: "Residential Properties",
-    slug: "residential-properties",
-    subtitle: "Find your dream home",
-    description:
-      "Discover luxury apartments, penthouses, and bespoke villas designed for comfort and modern living. We specialize in curating properties that offer an exceptional lifestyle, combining elegant design with practical functionality. Our residential properties are located in prime areas, ensuring you get the best of city life while enjoying a peaceful retreat.",
-    image:
-      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1200&auto=format&fit=crop",
-    features: [
-      {
-        title: "Prime Locations",
-        desc: "Situated in the most sought-after neighborhoods.",
-      },
-      {
-        title: "Modern Architecture",
-        desc: "Contemporary designs that stand out.",
-      },
-      {
-        title: "Spacious Interiors",
-        desc: "Thoughtfully planned for maximum comfort.",
-      },
-      {
-        title: "Smart Home Integration",
-        desc: "Equipped with the latest technology.",
-      },
-    ],
-  },
-  {
-    title: "Commercial Spaces",
-    slug: "commercial-spaces",
-    subtitle: "Elevate your business",
-    description:
-      "State-of-the-art office buildings and retail spaces tailored for business success and growth. Our commercial properties are designed to foster innovation and productivity, providing businesses with the infrastructure they need to thrive. From sleek corporate offices to bustling retail hubs, we offer spaces that elevate your brand.",
-    image:
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1200&auto=format&fit=crop",
-    features: [
-      {
-        title: "Strategic Business Hubs",
-        desc: "Located where commerce thrives.",
-      },
-      {
-        title: "Flexible Floor Plans",
-        desc: "Adaptable spaces for any business size.",
-      },
-      {
-        title: "High-Speed Connectivity",
-        desc: "Pre-wired for maximum digital efficiency.",
-      },
-      {
-        title: "Premium Facilities",
-        desc: "Top-tier amenities for your team and clients.",
-      },
-    ],
-  },
-  {
-    title: "Interior Design",
-    slug: "interior-design",
-    subtitle: "Artistry in every corner",
-    description:
-      "Transforming empty spaces into beautifully curated environments that reflect your personality. Our interior design team works closely with you to understand your vision and bring it to life. We focus on creating spaces that are not only visually stunning but also highly functional, ensuring every corner serves a purpose.",
-    image:
-      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1200&auto=format&fit=crop",
-    features: [
-      {
-        title: "Custom Furniture",
-        desc: "Bespoke pieces tailored to your style.",
-      },
-      {
-        title: "Space Optimization",
-        desc: "Making the most of every square foot.",
-      },
-      {
-        title: "Lighting Design",
-        desc: "Creating the perfect ambiance.",
-      },
-      {
-        title: "Sustainable Materials",
-        desc: "Eco-friendly choices for a greener future.",
-      },
-    ],
-  },
-  {
-    title: "Property Management",
-    slug: "property-management",
-    subtitle: "Hassle-free investments",
-    description:
-      "Comprehensive management services ensuring your investments are maintained and profitable. We handle everything from tenant screening and rent collection to property maintenance and financial reporting. Our goal is to provide peace of mind to property owners, knowing their investments are in capable hands.",
-    image:
-      "https://images.unsplash.com/photo-1628859250369-c513b3468843?q=80&w=1200&auto=format&fit=crop",
-    features: [
-      {
-        title: "Tenant Management",
-        desc: "Thorough screening and continuous support.",
-      },
-      {
-        title: "Routine Maintenance",
-        desc: "Keeping your property in pristine condition.",
-      },
-      {
-        title: "Financial Reporting",
-        desc: "Transparent and detailed financial statements.",
-      },
-      {
-        title: "24/7 Support",
-        desc: "Always available for emergencies.",
-      },
-    ],
-  },
-];
+export default async function ServiceDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
+  let service: any = null;
+  let otherServices: any[] = [];
 
-export async function generateStaticParams() {
-  return services.map((service) => ({
-    slug: service.slug,
-  }));
-}
+  try {
+    const res = await getServiceBySlugPublic(resolvedParams.slug);
+    if (res?.success && res.data) {
+      service = res.data;
+    }
 
-export default async function ServiceDetailsPage(props: {
-  params: Promise<{ slug: string }>;
-}) {
-  const params = await props.params;
-  const service = services.find((s) => s.slug === params.slug);
+    const servicesRes = await getServicesPublic({ status: "active", limit: 5 });
+    if (servicesRes?.success && servicesRes.data) {
+      otherServices = servicesRes.data.filter((s: any) => s.slug !== resolvedParams.slug);
+    }
+  } catch (error) {
+    console.error("Failed to fetch service", error);
+  }
 
   if (!service) {
     notFound();
@@ -135,76 +31,95 @@ export default async function ServiceDetailsPage(props: {
   return (
     <main className="w-full min-h-screen bg-[#f9fafb]">
       <PageBanner
-        title={service.title}
-        subtitle={service.subtitle}
-        bgImage={service.image}
-        altText={service.title}
+        title={service.name}
+        subtitle={service.heading}
+        bgImage={service.image?.url || "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2070&auto=format&fit=crop"}
+        altText={service.name}
       />
 
       <section className="py-16 md:py-24">
-        <div className="container mx-auto px-6 md:px-16 max-w-7xl">
-          {/* Overview Section */}
-          <div className="flex flex-col md:flex-row gap-16 items-center mb-24 group">
-            {/* Image side */}
-            <div className="w-full md:w-1/2 relative">
-              <div className="relative h-[400px] md:h-[550px] w-full ">
-                <Image
-                  src={service.image}
-                  alt={service.title}
-                  fill
-                  className="object-cover "
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/40 to-transparent mix-blend-multiply opacity-50" />
-              </div>
-              <div className="absolute -z-10 top-8 bottom-8 -left-8 w-full bg-[#4ea24b]/10 transition-transform duration-700 group-hover:-translate-x-4" />
+        <div className="container mx-auto px-6 md:px-16 flex flex-col lg:flex-row gap-16">
+          {/* Main Content Area */}
+          <div className="w-full lg:w-2/3">
+            <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-2xl mb-12 group">
+              <Image
+                src={service.image?.url || "/placeholder.jpg"}
+                alt={service.name}
+                fill
+                className="object-cover transform transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-brand-blue/10 mix-blend-multiply" />
             </div>
 
-            {/* Text side */}
-            <div className="w-full md:w-1/2">
-              <div className="mb-4">
-                <BlockReveal color="var(--color-brand-blue)">
-                  <span className="text-gray-400 font-semibold tracking-[0.2em] uppercase text-sm">
-                    Service Overview
-                  </span>
-                </BlockReveal>
-              </div>
-              <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
-                <h2 className="text-3xl md:text-4xl font-bold text-brand-blue uppercase mb-6 leading-tight">
-                  Discover The <br /> Difference
-                </h2>
-              </BlockReveal>
-              <p className="text-gray-600 text-lg leading-relaxed text-justify">
-                {service.description}
-              </p>
-            </div>
+            <BlockReveal color="var(--color-brand-blue)">
+              <h2 className="text-3xl md:text-4xl font-bold text-brand-blue leading-[1.2] mb-6 uppercase">
+                {service.heading}
+              </h2>
+            </BlockReveal>
+
+            {/* Rendering Rich Text Content */}
+            <div 
+              className="prose prose-lg max-w-none prose-headings:text-brand-blue prose-headings:font-bold prose-headings:uppercase prose-p:text-gray-600 prose-p:leading-relaxed prose-a:text-[#4ea24b] prose-a:no-underline hover:prose-a:underline prose-li:text-gray-600 marker:text-[#4ea24b]"
+              dangerouslySetInnerHTML={{ __html: service.description }}
+            />
           </div>
 
-          {/* Key Features Section */}
-          <div className="mb-24">
-            <div className="mb-12">
-              <div className="mb-4">
-                <BlockReveal color="var(--color-brand-blue)">
-                  <span className="text-gray-400 font-semibold tracking-[0.2em] uppercase text-sm">
-                    Our Core Strengths
-                  </span>
-                </BlockReveal>
-              </div>
-              <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
-                <h3 className="text-3xl md:text-4xl font-bold text-brand-blue uppercase mb-4">
-                  Why Choose Us
-                </h3>
-              </BlockReveal>
-            </div>
+          {/* Sidebar */}
+          <div className="w-full lg:w-1/3">
+            <div className="sticky top-32 space-y-8">
+              {/* Other Services Box */}
+              {otherServices.length > 0 && (
+                <div className="bg-white p-8 shadow-xl border-t-4 border-[#4ea24b]">
+                  <h3 className="text-xl font-bold text-brand-blue mb-6 uppercase">
+                    Other Services
+                  </h3>
+                  <ul className="space-y-4">
+                    {otherServices.map((s, idx) => (
+                      <li key={idx}>
+                        <Link
+                          href={`/services/${s.slug}`}
+                          className="block p-4 bg-gray-50 hover:bg-[#4ea24b] text-gray-700 hover:text-white font-medium transition-colors border border-gray-100 hover:border-[#4ea24b] group"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="line-clamp-1">{s.name}</span>
+                            <svg
+                              className="w-5 h-5 transform transition-transform duration-300 group-hover:translate-x-1"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M17 8l4 4m0 0l-4 4m4-4H3"
+                              />
+                            </svg>
+                          </div>
+                        </Link>
+                      </li>
+                    ))}
+                    <li>
+                      <Link
+                        href="/services"
+                        className="block mt-4 p-4 text-[#4ea24b] font-bold uppercase text-center border-2 border-[#4ea24b] hover:bg-[#4ea24b] hover:text-white transition-colors"
+                      >
+                        View All Services
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              )}
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {service.features.map((feature, i) => (
-                <div
-                  key={i}
-                  className="bg-white p-8 border border-gray-100 shadow-sm  group/card flex flex-col items-start"
-                >
-                  <div className="w-14 h-14 bg-brand-blue/5 flex items-center justify-center mb-6 group-hover/card:bg-[#4ea24b]/10 transition-colors duration-300">
+              {/* CTA Box */}
+              <div className="relative overflow-hidden bg-brand-blue p-8 shadow-xl">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#4ea24b] rounded-bl-full opacity-20 transform translate-x-8 -translate-y-8" />
+                <div className="absolute bottom-0 left-0 w-24 h-24 bg-[#CBA35E] rounded-tr-full opacity-20 transform -translate-x-8 translate-y-8" />
+
+                <div className="relative z-10 flex flex-col items-center text-center">
+                  <div className="w-16 h-16 bg-white/10 flex items-center justify-center rounded-full mb-6">
                     <svg
-                      className="w-6 h-6 text-brand-blue group-hover/card:text-[#4ea24b] transition-colors duration-300"
+                      className="w-8 h-8 text-white"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -213,18 +128,26 @@ export default async function ServiceDetailsPage(props: {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={1.5}
-                        d="M5 13l4 4L19 7"
+                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                       />
                     </svg>
                   </div>
-                  <h4 className="text-xl font-bold text-brand-blue mb-3 group-hover/card:text-[#4ea24b] transition-colors duration-300">
-                    {feature.title}
-                  </h4>
-                  <p className="text-gray-500 leading-relaxed text-sm">
-                    {feature.desc}
+
+                  <h3 className="text-xl font-bold text-white mb-3 uppercase tracking-wider">
+                    Need Consultation?
+                  </h3>
+                  <p className="text-gray-300 mb-6 text-sm">
+                    Contact our experts today to discuss your requirements.
                   </p>
+
+                  <Link
+                    href="/contact"
+                    className="w-full text-center py-4 bg-[#4ea24b] hover:bg-[#3d853a] text-white font-bold tracking-wider transition-colors uppercase text-sm"
+                  >
+                    Contact Us
+                  </Link>
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </div>

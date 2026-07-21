@@ -472,7 +472,44 @@ const Gallery = ({ image }: { image: any }) => {
   );
 };
 
-export function GalleryPreview() {
+export function GalleryPreview({ data }: { data?: any }) {
+  const defaultImages = [
+    {
+      src: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=1200",
+      title: "Luxury Villa",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80&w=800",
+      title: "Modern Apartment",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800",
+      title: "Commercial Hub",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1460408037948-b89a5e837b41?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      title: "Eco Retreat",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=800",
+      title: "Penthouse Suite",
+    },
+  ];
+
+  const galleryImages = data?.galleryImages?.length > 0
+    ? data.galleryImages.map((img: any) => ({
+        src: img.url || "",
+        title: "",
+      }))
+    : defaultImages;
+
+  const galleryTitle = data?.galleryTitle || "GALLERY";
+  const galleryHeading = data?.galleryHeading || (
+    <>
+      Discover Our <br className="hidden md:block" /> Signature Projects
+    </>
+  );
+
   const [index, setIndexTo] = useState<number>(0);
   const [count, setCountTo] = useState<number>(0);
   const [resizing, setResizingTo] = useState<boolean>(false);
@@ -516,13 +553,12 @@ export function GalleryPreview() {
           <div className="flex flex-col gap-4">
             <BlockReveal color="var(--color-brand-blue)">
               <div className="flex items-center text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
-                GALLERY
+                {galleryTitle}
               </div>
             </BlockReveal>
             <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
               <h2 className="text-2xl md:text-[34px] font-bold tracking-tight text-brand-blue leading-[1.1] uppercase">
-                Discover Our <br className="hidden md:block" /> Signature
-                Projects
+                {galleryHeading}
               </h2>
             </BlockReveal>
           </div>

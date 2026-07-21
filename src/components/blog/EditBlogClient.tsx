@@ -26,6 +26,7 @@ export default function EditBlogClient({ initialData, slug, onSubmit }: { initia
     metaTitle: initialData.metaTitle || "",
     metaDescription: initialData.metaDescription || "",
     status: initialData.status || "draft",
+    blogCategory: initialData.blogCategory || "Real Estate",
     tags: initialData.tags?.join(", ") || "",
   });
   const [coverUrl, setCoverUrl] = useState(initialData.cover?.url || "");
@@ -139,6 +140,27 @@ export default function EditBlogClient({ initialData, slug, onSubmit }: { initia
 
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-300">
+                Category
+              </label>
+              <Select
+                value={formData.blogCategory}
+                onValueChange={(val) => setFormData({ ...formData, blogCategory: val })}
+              >
+                <SelectTrigger className="w-full h-10 bg-white/5 border-white/10 text-white rounded-xl focus:ring-purple-500">
+                  <SelectValue placeholder="Select Category" />
+                </SelectTrigger>
+                <SelectContent className="bg-gray-900 border-white/10 text-white">
+                  <SelectItem value="Real Estate">Real Estate</SelectItem>
+                  <SelectItem value="Interior Design">Interior Design</SelectItem>
+                  <SelectItem value="Market Trends">Market Trends</SelectItem>
+                  <SelectItem value="Company News">Company News</SelectItem>
+                  <SelectItem value="Architecture">Architecture</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-gray-300">
                 Excerpt (Short Description)
               </label>
               <textarea
@@ -184,29 +206,17 @@ export default function EditBlogClient({ initialData, slug, onSubmit }: { initia
                   setFormData({ ...formData, status: value || "draft" })
                 }
               >
-                <SelectTrigger className="w-full px-4 py-2  border border-white/10 rounded-xl text-white outline-none focus:ring-1 focus:ring-purple-500 transition-colors h-auto min-h-[42px]">
+                <SelectTrigger>
                   <SelectValue placeholder="Select a status" />
                 </SelectTrigger>
-                <SelectContent
-                  alignItemWithTrigger={false}
-                  className="bg-transparent backdrop-blur-2xl rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] border border-white/10 text-white"
-                >
-                  <SelectItem
-                    value="draft"
-                    className="hover:text-white hover:bg-white/10 focus:bg-white/10 focus:text-white cursor-pointer py-2 px-3 rounded-lg m-1 transition-colors"
-                  >
+                <SelectContent alignItemWithTrigger={false}>
+                  <SelectItem value="draft">
                     Draft
                   </SelectItem>
-                  <SelectItem
-                    value="active"
-                    className="hover:text-white hover:bg-white/10 focus:bg-white/10 focus:text-white cursor-pointer py-2 px-3 rounded-lg m-1 transition-colors"
-                  >
+                  <SelectItem value="active">
                     Active (Published)
                   </SelectItem>
-                  <SelectItem
-                    value="inactive"
-                    className="hover:text-white hover:bg-white/10 focus:bg-white/10 focus:text-white cursor-pointer py-2 px-3 rounded-lg m-1 transition-colors"
-                  >
+                  <SelectItem value="inactive">
                     Inactive
                   </SelectItem>
                 </SelectContent>

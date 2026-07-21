@@ -13,8 +13,10 @@ export const metadata = {
 async function getBlogs(searchParams: any) {
   const params: any = {};
   if (searchParams.q) params.search = searchParams.q;
-  if (searchParams.category && searchParams.category !== "All")
-    params.category = searchParams.category;
+  if (searchParams.category && searchParams.category !== "All") {
+    // The sidebar uses string names, so we filter against blogCategory
+    params.blogCategory = searchParams.category;
+  }
 
   try {
     const res = await getBlogsPublic(params);
@@ -30,7 +32,7 @@ function mapBlogToUI(blog: any) {
     id: blog._id,
     title: blog.name,
     slug: blog.slug,
-    category: blog.category?.name || "Uncategorized",
+    category: blog.blogCategory || "Uncategorized",
     date: new Date(blog.publishedAt || blog.createdAt).toLocaleDateString(
       "en-US",
       {
@@ -66,13 +68,20 @@ export default async function BlogPage({
   const mappedPosts = rawBlogs.map(mapBlogToUI);
 
   // In a real app, fetch these from backend
-  const categories = ["All", "Real Estate", "Interior Design", "Market Trends", "Lifestyle", "Architecture"];
+  const categories = [
+    "All",
+    "Real Estate",
+    "Interior Design",
+    "Market Trends",
+    "Company News",
+    "Architecture"
+  ];
   const recentPosts = mappedPosts.slice(0, 3);
 
   const hasFilters = searchQuery || category !== "All";
   const featuredPost =
     !hasFilters && mappedPosts.length > 0 ? mappedPosts[0] : null;
-  const standardPosts = featuredPost ? mappedPosts.slice(1) : mappedPosts;
+  const standardPosts = mappedPosts;
 
   return (
     <main className="flex min-h-screen flex-col bg-white">

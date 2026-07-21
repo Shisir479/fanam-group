@@ -83,7 +83,7 @@ export async function generateMetadata({
     // Silent catch, fallback below
   }
 
-
+  console.log(project?.floorPlans)
 
   if (!project) return { title: "Project Not Found" };
 
@@ -228,7 +228,7 @@ export default async function ProjectDetailsPage({
       <section id="overview" className="py-12 md:py-16 bg-white">
         <div className="container mx-auto px-5 md:px-16 max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-            <div className="lg:col-span-7 xl:col-span-8">
+            <div className="lg:col-span-7 xl:col-span-8 min-w-0">
               <div className="flex flex-col gap-3 mb-12">
                 <BlockReveal color="var(--color-brand-blue)">
                   <h2 className="text-[14px] md:text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
@@ -242,12 +242,12 @@ export default async function ProjectDetailsPage({
                 </BlockReveal>
               </div>
               <div
-                className="text-gray-600 text-lg leading-[1.8] font-light prose prose-blue max-w-none"
+                className="text-gray-600 text-lg leading-[1.8] font-light prose prose-blue max-w-none min-w-0 break-words [&_*]:!whitespace-normal"
                 dangerouslySetInnerHTML={{ __html: project.overview || project.description }}
               />
             </div>
 
-            <div className="lg:col-span-5 xl:col-span-4">
+            <div className="lg:col-span-5 xl:col-span-4 min-w-0">
               {project.features && project.features.length > 0 && (
                 <div className="bg-gray-50 p-8 md:p-10 border border-gray-100 h-full shadow-sm">
                   <h3 className="text-xl font-bold text-brand-blue mb-6 uppercase tracking-wider">
@@ -414,14 +414,11 @@ export default async function ProjectDetailsPage({
           </div>
         </section>
       )}
-
-      {/* Construction Progress & Video */}
-      {(project.construction?.percentage > 0 || project.video) && (
         <section className="py-12 md:py-16 bg-white">
           <div className="container mx-auto px-5 md:px-16 ">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
               {/* Progress */}
-              {project.construction?.percentage > 0 && (
+              {project.construction && (
                 <div id="progress" className="flex flex-col h-full">
                   <div className="flex flex-col gap-3 mb-12">
                     <BlockReveal color="var(--color-brand-blue)">
@@ -449,7 +446,7 @@ export default async function ProjectDetailsPage({
                       <div
                         className="h-full bg-brand-blue relative"
                         style={{
-                          width: `${project.construction.percentage}%`,
+                          width: `${project.construction.percentage || 0}%`,
                         }}
                       >
                         <div className="absolute top-0 right-0 bottom-0 w-8 bg-white/20 animate-pulse skew-x-[-20deg]"></div>
@@ -460,7 +457,7 @@ export default async function ProjectDetailsPage({
                         Overall Completion
                       </span>
                       <div className="text-4xl font-bold text-brand-blue">
-                        {project.construction.percentage}%
+                        {project.construction.percentage || 0}%
                       </div>
                     </div>
                   </div>
@@ -495,7 +492,6 @@ export default async function ProjectDetailsPage({
             </div>
           </div>
         </section>
-      )}
 
       {/* 7. Location Map */}
       {project.location?.googleMap && (

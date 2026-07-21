@@ -10,18 +10,38 @@ import { LatestNews } from "@/components/home/LatestNews";
 import { GalleryPreview } from "@/components/home/GalleryPreview";
 import { ContactInfo } from "@/components/home/ContactInfo";
 import { InquiryCTA } from "@/components/home/InquiryCTA";
-export default function Home() {
+import { getHomepageCMSPublic } from "@/services/homepage-cms.service";
+import { getServicesPublic } from "@/services/service.service";
+
+export default async function Home() {
+  let cmsData: any = null;
+  let servicesData: any[] = [];
+  try {
+    const res = await getHomepageCMSPublic();
+    if (res?.success) {
+      cmsData = res.data;
+    }
+    
+    // Fetch dynamic services
+    const servicesRes = await getServicesPublic({ status: "active", limit: 4 });
+    if (servicesRes?.success) {
+      servicesData = servicesRes.data || [];
+    }
+  } catch (error) {
+    // fallback
+  }
+
   return (
     <div className="flex flex-col min-h-screen">
-      <Hero />
+      <Hero data={cmsData} />
       <AboutSection />
       <FeaturedProjects />
       <CompanyOverview />
-      <WhyChooseUs />
-      <OurAchievements />
-      <FeaturedServices />
+      <WhyChooseUs data={cmsData} />
+      <OurAchievements data={cmsData} />
+      <FeaturedServices services={servicesData} />
       <TestimonialSection />
-      <GalleryPreview />
+      <GalleryPreview data={cmsData} />
       <LatestNews />
       <InquiryCTA />
       <ContactInfo />

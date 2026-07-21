@@ -2,11 +2,18 @@ import Link from "next/link";
 import { Blog } from "@/services/blog.service";
 import { ArrowRight, Clock, CalendarDays } from "lucide-react";
 
-export function BlogCard({ post }: { post: Blog }) {
-  const categoryName = post.category?.name || "Uncategorized";
-  const dateStr = post.publishedAt
+export function BlogCard({ post }: { post: any }) {
+  const categoryStr = typeof post.category === 'object' ? post.category?.name : post.category;
+  const blogCategoryStr = typeof post.blogCategory === 'object' ? post.blogCategory?.name : post.blogCategory;
+  const categoryName = categoryStr || blogCategoryStr || "Uncategorized";
+  
+  const dateStr = post.date || (post.publishedAt
     ? new Date(post.publishedAt).toLocaleDateString()
-    : new Date(post.createdAt).toLocaleDateString();
+    : (post.createdAt ? new Date(post.createdAt).toLocaleDateString() : "Unknown Date"));
+
+  const imageUrl = post.image || post.cover?.url || "/placeholder.jpg";
+  const title = post.title || post.name;
+  const readTime = post.readTime || `${post.readingTime || 5} min read`;
 
   return (
     <article className="group flex flex-col h-full">
@@ -16,8 +23,8 @@ export function BlogCard({ post }: { post: Blog }) {
         className="relative w-full aspect-[4/3] md:aspect-[3/2] overflow-hidden mb-6 block"
       >
         <img
-          src={post.cover?.url || "/placeholder.jpg"}
-          alt={post.name}
+          src={imageUrl}
+          alt={title}
           className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
         />
         {/* Subtle overlay on hover */}
@@ -41,14 +48,14 @@ export function BlogCard({ post }: { post: Blog }) {
           </div>
           <div className="flex items-center gap-1.5">
             <Clock className="w-3.5 h-3.5 text-gray-400" />
-            <span>{post.readingTime || 5} min read</span>
+            <span>{readTime}</span>
           </div>
         </div>
 
         {/* Title */}
         <Link href={`/blog/${post.slug}`} className="inline-block">
           <h2 className="text-2xl lg:text-3xl font-light text-brand-blue leading-tight mb-5 group-hover:opacity-80 transition-opacity duration-300 line-clamp-2">
-            {post.name}
+            {title}
           </h2>
         </Link>
 

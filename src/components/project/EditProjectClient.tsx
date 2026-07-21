@@ -15,9 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import dynamic from "next/dynamic";
-const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
-import "react-quill-new/dist/quill.snow.css";
+import RichTextEditor from "@/components/ui/RichTextEditor";
 
 const CATEGORIES = ["Residential", "Commercial", "Mixed Use"];
 const PROPERTY_TYPES = ["Apartment", "Duplex", "Villa", "Office", "Shop", "Land"];
@@ -520,26 +518,18 @@ export default function EditProjectClient({ slug }: { slug: string }) {
 
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-300">Detailed Description *</label>
-              <div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden text-white editor-container">
-                <ReactQuill
-                  theme="snow"
-                  value={formData.description || ""}
-                  onChange={(value) => setFormData({ ...formData, description: value })}
-                  className="h-[200px]"
-                />
-              </div>
+              <RichTextEditor
+                value={formData.description || ""}
+                onChange={(value) => setFormData({ ...formData, description: value })}
+              />
             </div>
             
             <div className="space-y-2 mt-12 pt-8">
               <label className="text-sm font-medium text-gray-300">Project Overview *</label>
-              <div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden text-white editor-container">
-                <ReactQuill
-                  theme="snow"
-                  value={formData.overview || ""}
-                  onChange={(value) => setFormData({ ...formData, overview: value })}
-                  className="h-[150px]"
-                />
-              </div>
+              <RichTextEditor
+                value={formData.overview || ""}
+                onChange={(value) => setFormData({ ...formData, overview: value })}
+              />
             </div>
             
             <div className="space-y-2 mt-12 pt-8">
@@ -796,15 +786,12 @@ export default function EditProjectClient({ slug }: { slug: string }) {
                 value={formData.publishStatus}
                 onValueChange={(value) => setFormData({ ...formData, publishStatus: value as "active" | "inactive" })}
               >
-                <SelectTrigger className="w-full px-4 py-2 border border-white/10 rounded-xl text-white outline-none focus:ring-1 focus:ring-purple-500 transition-colors h-auto min-h-[42px] bg-white/5">
+                <SelectTrigger>
                   <SelectValue placeholder="Select Status" />
                 </SelectTrigger>
-                <SelectContent
-                  alignItemWithTrigger={false}
-                  className="bg-transparent backdrop-blur-2xl rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] border border-white/10 text-white"
-                >
-                  <SelectItem value="active" className="hover:text-white hover:bg-white/10 focus:bg-white/10 focus:text-white cursor-pointer py-2 px-3 rounded-lg m-1 transition-colors">Published</SelectItem>
-                  <SelectItem value="inactive" className="hover:text-white hover:bg-white/10 focus:bg-white/10 focus:text-white cursor-pointer py-2 px-3 rounded-lg m-1 transition-colors">Draft</SelectItem>
+                <SelectContent>
+                  <SelectItem value="active">Active</SelectItem>
+                  <SelectItem value="inactive">Draft</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -820,11 +807,6 @@ export default function EditProjectClient({ slug }: { slug: string }) {
                 />
                 <div className="w-11 h-6 bg-white/10 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-gray-300 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
               </label>
-            </div>
-
-            <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300">Priority (Sort Order)</label>
-                <input type="number" value={formData.priority || 0} onChange={(e) => setFormData({ ...formData, priority: Number(e.target.value) })} className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors" />
             </div>
           </div>
 

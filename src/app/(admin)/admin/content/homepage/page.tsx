@@ -1,797 +1,759 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useEffect } from "react";
+import { toast } from "react-hot-toast";
 import {
   Save,
   Image as ImageIcon,
-  Video,
   Type,
-  Link as LinkIcon,
-  Plus,
-  Trash2,
   Layout,
   Info,
-  Building,
   Award,
-  Settings,
-  Star,
-  FileText,
-  PhoneCall,
   CheckCircle2,
-  MessageSquare,
-  Globe,
+  Trash2,
+  Plus,
+  ArrowLeft,
+  Upload,
+  X
 } from "lucide-react";
+import Link from "next/link";
+import { getHomepageCMSAdmin, updateHomepageCMS } from "@/services/homepage-cms.service";
+import { uploadSingleImage } from "@/services/upload.service";
+
+import RichTextEditor from "@/components/ui/RichTextEditor";
 
 export default function HomepageManagement() {
   const [activeTab, setActiveTab] = useState("hero");
   const [isSaving, setIsSaving] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Drag to scroll logic (Optimized for 60FPS using refs instead of state)
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const isDragging = useRef(false);
-  const startX = useRef(0);
-  const scrollLeft = useRef(0);
+  const [formData, setFormData] = useState<any>({
+    heroHeading: "",
+    heroSlides: [],
+    companyTitle: "",
+    companyHeading: "",
+    companyDescriptionOne: "",
+    companyDescriptionTwo: "",
+    companyImage: null,
+    companyHighlights: [],
+    strengthTitle: "",
+    strengthHeading: "",
+    strengths: [],
+    achievementTitle: "",
+    achievementHeading: "",
+    achievements: [],
+    galleryTitle: "",
+    galleryHeading: "",
+    galleryDescription: "",
+    galleryImages: []
+  });
 
-  const handleMouseDown = (e: React.MouseEvent) => {
-    isDragging.current = true;
-    if (scrollContainerRef.current) {
-      startX.current = e.pageX - scrollContainerRef.current.offsetLeft;
-      scrollLeft.current = scrollContainerRef.current.scrollLeft;
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const res = await getHomepageCMSAdmin();
+      if (res?.success && res.data) {
+        setFormData(res.data);
+      }
+    } catch (error) {
+      toast.error("Failed to fetch Homepage CMS data");
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const stopDragging = () => {
-    isDragging.current = false;
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging.current) return;
-    e.preventDefault();
-    if (scrollContainerRef.current) {
-      const x = e.pageX - scrollContainerRef.current.offsetLeft;
-      const walk = (x - startX.current) * 1.5; // Slightly multiplied for a snappy feel
-      scrollContainerRef.current.scrollLeft = scrollLeft.current - walk;
-    }
-  };
-
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);
-    setTimeout(() => {
+    try {
+      const res = await updateHomepageCMS(formData);
+      if (res?.success) {
+        toast.success("Homepage CMS updated successfully!");
+      } else {
+        toast.error("Failed to update Homepage CMS.");
+      }
+    } catch (error) {
+      toast.error("An error occurred while saving.");
+    } finally {
       setIsSaving(false);
-    }, 1000);
+    }
+  };
+
+  const handleSlideAdd = () => {
+    setFormData({
+      ...formData,
+      heroSlides: [...(formData.heroSlides || []), { title: "", image: null }],
+    });
+  };
+
+  const handleSlideRemove = (index: number) => {
+    const newSlides = [...(formData.heroSlides || [])];
+    newSlides.splice(index, 1);
+    setFormData({ ...formData, heroSlides: newSlides });
+  };
+
+  const handleSlideChange = (index: number, field: string, value: any) => {
+    const newSlides = [...(formData.heroSlides || [])];
+    newSlides[index] = { ...newSlides[index], [field]: value };
+    setFormData({ ...formData, heroSlides: newSlides });
+  };
+
+  const handleSlideImageUpload = async (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      const toastId = toast.loading("Uploading image...");
+      try {
+        const uploadRes = await uploadSingleImage(file);
+        if (uploadRes?.success && uploadRes.data) {
+          handleSlideChange(index, "image", uploadRes.data);
+          toast.success("Image uploaded successfully", { id: toastId });
+        } else {
+          throw new Error("Upload failed");
+        }
+      } catch (error) {
+        toast.error("Failed to upload image", { id: toastId });
+      }
+    }
+  };
+
+  const handleGalleryImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const toastId = toast.loading("Uploading image...");
+      try {
+        // Upload one image (you can enhance this for multi-upload)
+        const file = e.target.files[0];
+        const uploadRes = await uploadSingleImage(file);
+        if (uploadRes?.success && uploadRes.data) {
+          const currentImages = formData.galleryImages || [];
+          setFormData({
+            ...formData,
+            galleryImages: [...currentImages, uploadRes.data]
+          });
+          toast.success("Image added to gallery", { id: toastId });
+        } else {
+          throw new Error("Upload failed");
+        }
+      } catch (error) {
+        toast.error("Failed to upload image", { id: toastId });
+      }
+    }
+  };
+
+  const handleGalleryImageRemove = (index: number) => {
+    const currentImages = [...(formData.galleryImages || [])];
+    currentImages.splice(index, 1);
+    setFormData({ ...formData, galleryImages: currentImages });
+  };
+
+  const handleStrengthAdd = () => {
+    setFormData({
+      ...formData,
+      strengths: [...(formData.strengths || []), { title: "", description: "", icon: "" }],
+    });
+  };
+
+  const handleStrengthRemove = (index: number) => {
+    const newStrengths = [...(formData.strengths || [])];
+    newStrengths.splice(index, 1);
+    setFormData({ ...formData, strengths: newStrengths });
+  };
+
+  const handleStrengthChange = (index: number, field: string, value: any) => {
+    const newStrengths = [...(formData.strengths || [])];
+    newStrengths[index] = { ...newStrengths[index], [field]: value };
+    setFormData({ ...formData, strengths: newStrengths });
+  };
+
+  const handleAchievementAdd = () => {
+    setFormData({
+      ...formData,
+      achievements: [...(formData.achievements || []), { number: "", title: "" }],
+    });
+  };
+
+  const handleAchievementRemove = (index: number) => {
+    const newAchievements = [...(formData.achievements || [])];
+    newAchievements.splice(index, 1);
+    setFormData({ ...formData, achievements: newAchievements });
+  };
+
+  const handleAchievementChange = (index: number, field: string, value: string) => {
+    const newAchievements = [...(formData.achievements || [])];
+    newAchievements[index] = { ...newAchievements[index], [field]: value };
+    setFormData({ ...formData, achievements: newAchievements });
+  };
+
+  const handleHighlightAdd = () => {
+    setFormData({
+      ...formData,
+      companyHighlights: [...(formData.companyHighlights || []), { title: "" }],
+    });
+  };
+
+  const handleHighlightRemove = (index: number) => {
+    const newHighlights = [...(formData.companyHighlights || [])];
+    newHighlights.splice(index, 1);
+    setFormData({ ...formData, companyHighlights: newHighlights });
+  };
+
+  const handleHighlightChange = (index: number, value: string) => {
+    const newHighlights = [...(formData.companyHighlights || [])];
+    newHighlights[index] = { title: value };
+    setFormData({ ...formData, companyHighlights: newHighlights });
+  };
+
+  const handleCompanyImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      const toastId = toast.loading("Uploading company image...");
+      try {
+        const uploadRes = await uploadSingleImage(file);
+        if (uploadRes?.success && uploadRes.data) {
+          setFormData({ ...formData, companyImage: uploadRes.data });
+          toast.success("Company image uploaded", { id: toastId });
+        } else {
+          throw new Error("Upload failed");
+        }
+      } catch (error) {
+        toast.error("Failed to upload company image", { id: toastId });
+      }
+    }
   };
 
   const tabs = [
-    {
-      id: "hero",
-      label: "Hero Banner",
-      icon: <Layout className="w-3.5 h-3.5" />,
-    },
-    {
-      id: "about",
-      label: "About Section",
-      icon: <Info className="w-3.5 h-3.5" />,
-    },
-    {
-      id: "projects",
-      label: "Featured Projects",
-      icon: <Building className="w-3.5 h-3.5" />,
-    },
-    {
-      id: "overview",
-      label: "Company Overview",
-      icon: <Globe className="w-3.5 h-3.5" />,
-    },
-    {
-      id: "why-us",
-      label: "Why Choose Us",
-      icon: <CheckCircle2 className="w-3.5 h-3.5" />,
-    },
-    {
-      id: "achievements",
-      label: "Achievements",
-      icon: <Award className="w-3.5 h-3.5" />,
-    },
-    {
-      id: "services",
-      label: "Services",
-      icon: <Settings className="w-3.5 h-3.5" />,
-    },
-    {
-      id: "testimonials",
-      label: "Testimonials",
-      icon: <Star className="w-3.5 h-3.5" />,
-    },
-    {
-      id: "gallery",
-      label: "Gallery Preview",
-      icon: <ImageIcon className="w-3.5 h-3.5" />,
-    },
-    {
-      id: "news",
-      label: "Latest News",
-      icon: <FileText className="w-3.5 h-3.5" />,
-    },
-    {
-      id: "video",
-      label: "Video Section",
-      icon: <Video className="w-3.5 h-3.5" />,
-    },
-    {
-      id: "cta",
-      label: "Inquiry CTA",
-      icon: <MessageSquare className="w-3.5 h-3.5" />,
-    },
-    {
-      id: "contact",
-      label: "Contact Info",
-      icon: <PhoneCall className="w-3.5 h-3.5" />,
-    },
+    { id: "hero", label: "Hero Banner", icon: <Layout className="w-3.5 h-3.5" /> },
+    { id: "overview", label: "Company Overview", icon: <Info className="w-3.5 h-3.5" /> },
+    { id: "why-us", label: "Strengths", icon: <CheckCircle2 className="w-3.5 h-3.5" /> },
+    { id: "achievements", label: "Achievements", icon: <Award className="w-3.5 h-3.5" /> },
+    { id: "gallery", label: "Gallery", icon: <ImageIcon className="w-3.5 h-3.5" /> },
   ];
 
+  if (isLoading) {
+    return <div className="text-white text-center mt-20">Loading...</div>;
+  }
+
   return (
-    <div className="max-w-6xl mx-auto pb-12 flex flex-col gap-6">
-      {/* Page Header */}
-      <div className="flex justify-between items-center glass-panel p-6">
-        <div>
-          <h2 className="text-2xl font-bold text-white">Homepage Management</h2>
-          <p className="text-sm text-gray-300 mt-1">
-            Manage content for:{" "}
-            <span className="font-semibold text-white">
-              {tabs.find((t) => t.id === activeTab)?.label}
-            </span>
-          </p>
+    <div className="w-full max-w-6xl mx-auto pb-24">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+        <div className="flex flex-col gap-2">
+          <Link 
+            href="/admin" 
+            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors w-fit text-sm"
+          >
+            <ArrowLeft className="w-4 h-4" /> Back to Dashboard
+          </Link>
+          <div>
+            <h1 className="text-2xl font-bold text-white tracking-wide flex items-center gap-2">
+              Homepage CMS
+            </h1>
+            <p className="text-sm text-gray-400 mt-1">
+              Manage your homepage content, images, and layout blocks.
+            </p>
+          </div>
         </div>
         <button
           onClick={handleSave}
           disabled={isSaving}
-          className="bg-white/20 hover:bg-white/30 text-white px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition-all shadow-lg shadow-black/10 disabled:opacity-70 border border-white/20"
+          className="flex items-center gap-2 px-6 py-2.5 bg-[#CBA35E] hover:bg-[#b58e4e] text-black rounded-lg font-bold transition-all shadow-lg disabled:opacity-50"
         >
-          <Save className="w-4 h-4" />
-          {isSaving ? "Saving..." : "Save Changes"}
+          {isSaving ? "Saving..." : <><Save className="w-4 h-4" /> Save Changes</>}
         </button>
       </div>
 
-      {/* Horizontal Tabs Header */}
-      <div className="w-full glass-panel overflow-hidden relative">
-        <div
-          ref={scrollContainerRef}
-          onMouseDown={handleMouseDown}
-          onMouseLeave={stopDragging}
-          onMouseUp={stopDragging}
-          onMouseMove={handleMouseMove}
-          className="flex overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] py-2 px-6 gap-2 pb-3 select-none cursor-pointer [mask-image:linear-gradient(to_right,transparent,black_24px,black_calc(100%-24px),transparent)]"
-        >
+      <div className="mb-6 overflow-x-auto [&::-webkit-scrollbar]:hidden">
+        <div className="flex gap-2 min-w-max p-1 bg-black/20 rounded-xl border border-white/5">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`whitespace-nowrap flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[13px] font-medium transition-all cursor-pointer ${
-                activeTab === tab.id
-                  ? "bg-white/20 text-white shadow-md shadow-black/10 border border-white/10"
-                  : "text-gray-300 border border-transparent"
-              }`}
+              type="button"
+              className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === tab.id
+                ? "bg-white/20 text-white shadow border border-white/10"
+                : "text-gray-400 hover:text-white"
+                }`}
             >
-              {tab.icon}
-              {tab.label}
+              {tab.icon} {tab.label}
             </button>
           ))}
         </div>
       </div>
 
-      {/* Main Content Area */}
-      <div className="w-full">
-        <form className="space-y-6" onSubmit={handleSave}>
-          {/* TAB: HERO BANNER */}
-          {activeTab === "hero" && (
-            <section className="glass-panel overflow-hidden">
-              <div className="bg-white/5 px-6 py-4 border-b border-white/10 flex items-center gap-2">
-                <Layout className="w-5 h-5 text-white" />
-                <h3 className="font-bold text-white">Hero Banner</h3>
+      <form className="space-y-6" onSubmit={handleSave}>
+        {/* HERO TAB */}
+        {activeTab === "hero" && (
+          <section className="glass-panel p-6 space-y-6">
+            <h3 className="font-bold text-white mb-4 border-b border-white/10 pb-2">Hero Section</h3>
+            <div className="space-y-4">
+              <div>
+                <label className="text-sm font-semibold text-gray-200">Main Heading</label>
+                <input
+                  type="text"
+                  value={formData.heroHeading || ""}
+                  onChange={(e) => setFormData({ ...formData, heroHeading: e.target.value })}
+                  className="w-full px-4 py-2 mt-1 bg-black/20 border border-white/20 rounded-lg text-white"
+                />
               </div>
-              <div className="p-6 space-y-6">
+
+              <div className="pt-4 border-t border-white/10">
+                <div className="flex items-center justify-between mb-4">
+                  <label className="text-sm font-semibold text-gray-200">Hero Slides</label>
+                  <button
+                    type="button"
+                    onClick={handleSlideAdd}
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-lg text-sm transition-colors"
+                  >
+                    <Plus className="w-4 h-4" /> Add Slide
+                  </button>
+                </div>
+
                 <div className="space-y-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-semibold text-gray-200 flex items-center gap-1.5">
-                      <Type className="w-3.5 h-3.5" /> Main Heading
+                  {(formData.heroSlides || []).map((slide: any, index: number) => (
+                    <div key={index} className="p-4 bg-black/20 border border-white/10 rounded-lg space-y-4">
+                      <div className="flex justify-between items-center mb-2">
+                        <h4 className="text-white font-medium">Slide {index + 1}</h4>
+                        <button
+                          type="button"
+                          onClick={() => handleSlideRemove(index)}
+                          className="p-1.5 text-red-400 hover:bg-red-500/20 rounded-lg transition-colors"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="text-sm text-gray-300 block mb-1">Slide Title</label>
+                          <input
+                            type="text"
+                            value={slide.title || ""}
+                            onChange={(e) => handleSlideChange(index, "title", e.target.value)}
+                            className="w-full px-3 py-2 bg-black/30 border border-white/10 rounded text-white text-sm"
+                            placeholder="Enter slide title"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="text-sm text-gray-300 block mb-1">Slide Image</label>
+                          {slide.image?.url ? (
+                            <div className="relative h-20 w-full rounded border border-white/20 overflow-hidden group">
+                              <img src={slide.image.url} alt="Slide" className="w-full h-full object-cover" />
+                              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <label className="cursor-pointer px-3 py-1 bg-white/20 hover:bg-white/30 rounded text-xs text-white">
+                                  Change
+                                  <input type="file" className="hidden" accept="image/*" onChange={(e) => handleSlideImageUpload(index, e)} />
+                                </label>
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="h-20 w-full border border-dashed border-white/20 rounded flex flex-col items-center justify-center bg-black/20 hover:bg-black/40 transition-colors">
+                              <label className="cursor-pointer flex flex-col items-center">
+                                <ImageIcon className="w-5 h-5 text-gray-400 mb-1" />
+                                <span className="text-xs text-gray-400">Upload Image</span>
+                                <input type="file" className="hidden" accept="image/*" onChange={(e) => handleSlideImageUpload(index, e)} />
+                              </label>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                  {(!formData.heroSlides || formData.heroSlides.length === 0) && (
+                    <div className="text-center p-6 border border-dashed border-white/10 rounded-lg text-gray-400 text-sm">
+                      No slides added yet. Click "Add Slide" to begin.
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+        
+        {/* COMPANY OVERVIEW TAB */}
+        {activeTab === "overview" && (
+          <section className="glass-panel p-6 space-y-6">
+            <h3 className="font-bold text-white mb-4 border-b border-white/10 pb-2">Company Overview</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="text-sm font-semibold text-gray-200">Subtitle</label>
+                <input
+                  type="text"
+                  value={formData.companyTitle || ""}
+                  onChange={(e) => setFormData({ ...formData, companyTitle: e.target.value })}
+                  className="w-full px-4 py-2 mt-1 bg-black/20 border border-white/20 rounded-lg text-white"
+                />
+              </div>
+              <div>
+                <label className="text-sm font-semibold text-gray-200">Main Heading</label>
+                <input
+                  type="text"
+                  value={formData.companyHeading || ""}
+                  onChange={(e) => setFormData({ ...formData, companyHeading: e.target.value })}
+                  className="w-full px-4 py-2 mt-1 bg-black/20 border border-white/20 rounded-lg text-white"
+                />
+              </div>
+              <div className="md:col-span-2">
+                <label className="text-sm font-semibold text-gray-200">Description Paragraph 1</label>
+                <textarea
+                  value={formData.companyDescriptionOne || ""}
+                  onChange={(e) => setFormData({ ...formData, companyDescriptionOne: e.target.value })}
+                  className="w-full px-4 py-2 mt-1 bg-black/20 border border-white/20 rounded-lg text-white"
+                  rows={4}
+                />
+              </div>
+              <div className="md:col-span-2">
+                <label className="text-sm font-semibold text-gray-200">Description Paragraph 2</label>
+                <textarea
+                  value={formData.companyDescriptionTwo || ""}
+                  onChange={(e) => setFormData({ ...formData, companyDescriptionTwo: e.target.value })}
+                  className="w-full px-4 py-2 mt-1 bg-black/20 border border-white/20 rounded-lg text-white"
+                  rows={4}
+                />
+              </div>
+              <div className="md:col-span-2">
+                <label className="text-sm font-semibold text-gray-200 block mb-2">Company Image</label>
+                {formData.companyImage?.url ? (
+                  <div className="relative h-48 w-full md:w-1/2 rounded-lg border border-white/20 overflow-hidden group">
+                    <img src={formData.companyImage.url} alt="Company Overview" className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <label className="cursor-pointer px-4 py-2 bg-white/20 hover:bg-white/30 rounded text-sm text-white">
+                        Change Image
+                        <input type="file" className="hidden" accept="image/*" onChange={handleCompanyImageUpload} />
+                      </label>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="h-48 w-full md:w-1/2 border border-dashed border-white/20 rounded-lg flex flex-col items-center justify-center bg-black/20 hover:bg-black/40 transition-colors">
+                    <label className="cursor-pointer flex flex-col items-center">
+                      <ImageIcon className="w-8 h-8 text-gray-400 mb-2" />
+                      <span className="text-sm text-gray-400">Upload Company Image</span>
+                      <input type="file" className="hidden" accept="image/*" onChange={handleCompanyImageUpload} />
                     </label>
+                  </div>
+                )}
+              </div>
+            </div>
+            
+            <div className="pt-4 border-t border-white/10">
+              <div className="flex items-center justify-between mb-4">
+                <label className="text-sm font-semibold text-gray-200">Company Highlights</label>
+                <button
+                  type="button"
+                  onClick={handleHighlightAdd}
+                  className="flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-lg text-sm transition-colors"
+                >
+                  <Plus className="w-4 h-4" /> Add Highlight
+                </button>
+              </div>
+              
+              <div className="space-y-3">
+                {(formData.companyHighlights || []).map((highlight: any, index: number) => (
+                  <div key={index} className="flex items-center gap-3 bg-black/20 p-3 rounded-lg border border-white/10">
                     <input
                       type="text"
-                      defaultValue="A Legacy of Elegance and Trust"
-                      className="w-full px-4 py-2 bg-black/20 border border-white/20 rounded-lg focus:ring-2 focus:ring-white/30 focus:border-white/50 outline-none transition-all text-white"
+                      value={highlight.title || ""}
+                      onChange={(e) => handleHighlightChange(index, e.target.value)}
+                      className="flex-1 px-3 py-2 bg-black/30 border border-white/10 rounded text-white text-sm"
+                      placeholder="e.g., 20+ Years of Excellence"
                     />
+                    <button
+                      type="button"
+                      onClick={() => handleHighlightRemove(index)}
+                      className="p-2 text-red-400 hover:bg-red-500/20 rounded-lg transition-colors"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
                   </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-semibold text-gray-200 flex items-center gap-1.5">
-                      <Type className="w-3.5 h-3.5" /> Subheading
-                    </label>
-                    <textarea
-                      rows={2}
-                      defaultValue="Discover Premium Real Estate Properties"
-                      className="w-full px-4 py-2 bg-black/20 border border-white/20 rounded-lg focus:ring-2 focus:ring-white/30 focus:border-white/50 outline-none transition-all resize-none text-white"
-                    />
+                ))}
+                {(!formData.companyHighlights || formData.companyHighlights.length === 0) && (
+                  <div className="text-center p-4 border border-dashed border-white/10 rounded-lg text-gray-400 text-sm">
+                    No highlights added yet. Click "Add Highlight" to begin.
                   </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-semibold text-gray-200 flex items-center gap-1.5">
-                      <ImageIcon className="w-3.5 h-3.5" /> Background
-                      Image/Video
-                    </label>
-                    <div className="flex gap-3">
-                      <input
-                        type="text"
-                        defaultValue="/videos/hero-bg.mp4"
-                        className="flex-1 px-4 py-2 bg-black/20 border border-white/20 rounded-lg focus:ring-2 focus:ring-white/30 focus:border-white/50 outline-none transition-all text-white"
-                      />
+                )}
+              </div>
+            </div>
+          </section>
+        )}
+        
+        {/* STRENGTHS TAB */}
+        {activeTab === "why-us" && (
+          <section className="glass-panel p-6 space-y-6">
+            <h3 className="font-bold text-white mb-4 border-b border-white/10 pb-2">Why Choose Us</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="text-sm font-semibold text-gray-200">Subtitle</label>
+                <input
+                  type="text"
+                  value={formData.strengthTitle || ""}
+                  onChange={(e) => setFormData({ ...formData, strengthTitle: e.target.value })}
+                  className="w-full px-4 py-2 mt-1 bg-black/20 border border-white/20 rounded-lg text-white"
+                />
+              </div>
+              <div>
+                <label className="text-sm font-semibold text-gray-200">Main Heading</label>
+                <input
+                  type="text"
+                  value={formData.strengthHeading || ""}
+                  onChange={(e) => setFormData({ ...formData, strengthHeading: e.target.value })}
+                  className="w-full px-4 py-2 mt-1 bg-black/20 border border-white/20 rounded-lg text-white"
+                />
+              </div>
+            </div>
+            
+            <div className="pt-4 border-t border-white/10">
+              <div className="flex items-center justify-between mb-4">
+                <label className="text-sm font-semibold text-gray-200">Strength Items</label>
+                <button
+                  type="button"
+                  onClick={handleStrengthAdd}
+                  className="flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-lg text-sm transition-colors"
+                >
+                  <Plus className="w-4 h-4" /> Add Item
+                </button>
+              </div>
+              
+              <div className="space-y-4">
+                {(formData.strengths || []).map((strength: any, index: number) => (
+                  <div key={index} className="p-4 bg-black/20 border border-white/10 rounded-lg space-y-4">
+                    <div className="flex justify-between items-center mb-2">
+                      <h4 className="text-white font-medium">Strength {index + 1}</h4>
                       <button
                         type="button"
-                        className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-lg font-medium transition-colors text-sm"
+                        onClick={() => handleStrengthRemove(index)}
+                        className="p-1.5 text-red-400 hover:bg-red-500/20 rounded-lg transition-colors"
                       >
-                        Upload File
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 gap-4">
+                      {/* Icon Upload or Preview */}
+                      <div className="flex items-start gap-4">
+                        {strength.icon?.url ? (
+                          <div className="relative w-16 h-16 rounded-lg overflow-hidden border border-white/10 bg-black/50 p-2">
+                            <img src={strength.icon.url} alt="Icon" className="w-full h-full object-contain" />
+                            <button
+                              type="button"
+                              onClick={() => handleStrengthChange(index, "icon", null)}
+                              className="absolute top-0 right-0 p-1 bg-red-500/80 hover:bg-red-500 text-white rounded-bl"
+                            >
+                              <X className="w-3 h-3" />
+                            </button>
+                          </div>
+                        ) : (
+                          <div className="flex-1">
+                            <label className="text-sm text-gray-300 block mb-1">Icon Image</label>
+                            <label className="flex flex-col items-center justify-center w-full h-24 border-2 border-dashed border-white/20 rounded-lg cursor-pointer hover:bg-white/5 transition-colors">
+                              <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                                <Upload className="w-6 h-6 text-gray-400 mb-2" />
+                                <p className="text-xs text-gray-400">Click to upload icon</p>
+                              </div>
+                              <input
+                                type="file"
+                                className="hidden"
+                                accept="image/*"
+                                onChange={async (e) => {
+                                  if (e.target.files && e.target.files[0]) {
+                                    const file = e.target.files[0];
+                                    const toastId = toast.loading("Uploading icon...");
+                                    try {
+                                      const uploadRes = await uploadSingleImage(file);
+                                      if (uploadRes?.success && uploadRes.data) {
+                                        handleStrengthChange(index, "icon", uploadRes.data);
+                                        toast.success("Icon uploaded successfully", { id: toastId });
+                                      } else {
+                                        throw new Error("Upload failed");
+                                      }
+                                    } catch (error) {
+                                      toast.error("Failed to upload icon", { id: toastId });
+                                    }
+                                  }
+                                }}
+                              />
+                            </label>
+                          </div>
+                        )}
+                      </div>
+
+                      <div>
+                        <label className="text-sm text-gray-300 block mb-1">Title</label>
+                        <input
+                          type="text"
+                          value={strength.title || ""}
+                          onChange={(e) => handleStrengthChange(index, "title", e.target.value)}
+                          className="w-full px-3 py-2 bg-black/30 border border-white/10 rounded text-white text-sm"
+                          placeholder="Strength Title"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-sm text-gray-300 block mb-1">Description</label>
+                        <textarea
+                          value={strength.description || ""}
+                          onChange={(e) => handleStrengthChange(index, "description", e.target.value)}
+                          className="w-full px-3 py-2 bg-black/30 border border-white/10 rounded text-white text-sm"
+                          placeholder="Strength Description"
+                          rows={3}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                {(!formData.strengths || formData.strengths.length === 0) && (
+                  <div className="text-center p-6 border border-dashed border-white/10 rounded-lg text-gray-400 text-sm">
+                    No strengths added yet. Click "Add Item" to begin.
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ACHIEVEMENTS TAB */}
+        {activeTab === "achievements" && (
+          <section className="glass-panel p-6 space-y-6">
+            <h3 className="font-bold text-white mb-4 border-b border-white/10 pb-2">Achievements</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="text-sm font-semibold text-gray-200">Subtitle</label>
+                <input
+                  type="text"
+                  value={formData.achievementTitle || ""}
+                  onChange={(e) => setFormData({ ...formData, achievementTitle: e.target.value })}
+                  className="w-full px-4 py-2 mt-1 bg-black/20 border border-white/20 rounded-lg text-white"
+                />
+              </div>
+              <div>
+                <label className="text-sm font-semibold text-gray-200">Main Heading</label>
+                <input
+                  type="text"
+                  value={formData.achievementHeading || ""}
+                  onChange={(e) => setFormData({ ...formData, achievementHeading: e.target.value })}
+                  className="w-full px-4 py-2 mt-1 bg-black/20 border border-white/20 rounded-lg text-white"
+                />
+              </div>
+            </div>
+            
+            <div className="pt-4 border-t border-white/10">
+              <div className="flex items-center justify-between mb-4">
+                <label className="text-sm font-semibold text-gray-200">Achievement Items</label>
+                <button
+                  type="button"
+                  onClick={handleAchievementAdd}
+                  className="flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-lg text-sm transition-colors"
+                >
+                  <Plus className="w-4 h-4" /> Add Item
+                </button>
+              </div>
+              
+              <div className="space-y-4">
+                {(formData.achievements || []).map((achievement: any, index: number) => (
+                  <div key={index} className="p-4 bg-black/20 border border-white/10 rounded-lg space-y-4">
+                    <div className="flex justify-between items-center mb-2">
+                      <h4 className="text-white font-medium">Achievement {index + 1}</h4>
+                      <button
+                        type="button"
+                        onClick={() => handleAchievementRemove(index)}
+                        className="p-1.5 text-red-400 hover:bg-red-500/20 rounded-lg transition-colors"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="text-sm text-gray-300 block mb-1">Number / Value</label>
+                        <input
+                          type="text"
+                          value={achievement.number || ""}
+                          onChange={(e) => handleAchievementChange(index, "number", e.target.value)}
+                          className="w-full px-3 py-2 bg-black/30 border border-white/10 rounded text-white text-sm"
+                          placeholder="E.g., 500+, 20M"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-sm text-gray-300 block mb-1">Title</label>
+                        <input
+                          type="text"
+                          value={achievement.title || ""}
+                          onChange={(e) => handleAchievementChange(index, "title", e.target.value)}
+                          className="w-full px-3 py-2 bg-black/30 border border-white/10 rounded text-white text-sm"
+                          placeholder="E.g., Happy Clients"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                {(!formData.achievements || formData.achievements.length === 0) && (
+                  <div className="text-center p-6 border border-dashed border-white/10 rounded-lg text-gray-400 text-sm">
+                    No achievements added yet. Click "Add Item" to begin.
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* GALLERY TAB */}
+        {activeTab === "gallery" && (
+          <section className="glass-panel p-6 space-y-6">
+            <h3 className="font-bold text-white mb-4 border-b border-white/10 pb-2">Gallery Section</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="text-sm font-semibold text-gray-200">Subtitle</label>
+                <input
+                  type="text"
+                  value={formData.galleryTitle || ""}
+                  onChange={(e) => setFormData({ ...formData, galleryTitle: e.target.value })}
+                  className="w-full px-4 py-2 mt-1 bg-black/20 border border-white/20 rounded-lg text-white"
+                />
+              </div>
+              <div>
+                <label className="text-sm font-semibold text-gray-200">Main Heading</label>
+                <input
+                  type="text"
+                  value={formData.galleryHeading || ""}
+                  onChange={(e) => setFormData({ ...formData, galleryHeading: e.target.value })}
+                  className="w-full px-4 py-2 mt-1 bg-black/20 border border-white/20 rounded-lg text-white"
+                />
+              </div>
+            </div>
+
+            <div className="pt-4 border-t border-white/10">
+              <div className="flex items-center justify-between mb-4">
+                <label className="text-sm font-semibold text-gray-200">Gallery Images</label>
+                <label className="flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-lg text-sm transition-colors cursor-pointer">
+                  <Plus className="w-4 h-4" /> Add Image
+                  <input type="file" className="hidden" accept="image/*" onChange={handleGalleryImageUpload} />
+                </label>
+              </div>
+
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                {(formData.galleryImages || []).map((image: any, index: number) => (
+                  <div key={index} className="relative group rounded-lg overflow-hidden border border-white/10 aspect-square">
+                    <img src={image.url} alt={`Gallery ${index}`} className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <button
+                        type="button"
+                        onClick={() => handleGalleryImageRemove(index)}
+                        className="p-2 bg-red-500 hover:bg-red-600 text-white rounded-full transition-colors"
+                      >
+                        <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
                   </div>
-                </div>
-              </div>
-            </section>
-          )}
-
-          {/* TAB: ABOUT SECTION */}
-          {activeTab === "about" && (
-            <section className="glass-panel overflow-hidden">
-              <div className="bg-white/5 px-6 py-4 border-b border-white/10 flex items-center gap-2">
-                <Info className="w-5 h-5 text-white" />
-                <h3 className="font-bold text-white">About Section</h3>
-              </div>
-              <div className="p-6 space-y-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-gray-200">
-                    Section Title
-                  </label>
-                  <input
-                    type="text"
-                    defaultValue="Who We Are"
-                    className="w-full px-4 py-2 bg-black/20 border border-white/20 rounded-lg focus:ring-2 focus:ring-white/30 focus:border-white/50 outline-none transition-all text-white"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-gray-200">
-                    Description text
-                  </label>
-                  <textarea
-                    rows={5}
-                    defaultValue="Bonedi has been a cornerstone of premium real estate development..."
-                    className="w-full px-4 py-2 bg-black/20 border border-white/20 rounded-lg focus:ring-2 focus:ring-white/30 focus:border-white/50 outline-none transition-all resize-none text-white"
-                  ></textarea>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-gray-200">
-                    Images (Left/Right composition)
-                  </label>
-                  <div className="grid grid-cols-2 gap-4 mt-2">
-                    <div className="border-2 border-dashed border-white/20 bg-black/10 rounded-xl p-4 flex flex-col items-center justify-center gap-2 text-gray-300 hover:bg-white/5 hover:border-white/40 cursor-pointer transition-colors h-32">
-                      <Plus className="w-6 h-6" />
-                      <span className="text-sm font-medium">Add Image 1</span>
-                    </div>
-                    <div className="border-2 border-dashed border-white/20 bg-black/10 rounded-xl p-4 flex flex-col items-center justify-center gap-2 text-gray-300 hover:bg-white/5 hover:border-white/40 cursor-pointer transition-colors h-32">
-                      <Plus className="w-6 h-6" />
-                      <span className="text-sm font-medium">Add Image 2</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-          )}
-
-          {/* TAB: FEATURED PROJECTS */}
-          {activeTab === "projects" && (
-            <section className="glass-panel overflow-hidden">
-              <div className="bg-white/5 px-6 py-4 border-b border-white/10 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Building className="w-5 h-5 text-white" />
-                  <h3 className="font-bold text-white">Featured Projects</h3>
-                </div>
-                <button
-                  type="button"
-                  className="text-sm bg-white/10 border border-white/20 text-white px-3 py-1.5 rounded-lg font-medium shadow-sm flex items-center gap-1 hover:bg-white/20"
-                >
-                  <Plus className="w-4 h-4" /> Select Projects
-                </button>
-              </div>
-              <div className="p-6">
-                <p className="text-sm text-gray-300 mb-4">
-                  Select which projects should appear in the Featured Projects
-                  carousel on the homepage.
-                </p>
-                <div className="border border-white/20 rounded-lg divide-y divide-white/10 overflow-hidden">
-                  <div className="p-3 flex items-center justify-between bg-black/20 hover:bg-white/5">
-                    <span className="font-medium text-sm text-white">
-                      Bonedi Swapno Neer
-                    </span>
-                    <button
-                      type="button"
-                      className="text-red-400 text-sm hover:underline"
-                    >
-                      Remove
-                    </button>
-                  </div>
-                  <div className="p-3 flex items-center justify-between bg-black/20 hover:bg-white/5">
-                    <span className="font-medium text-sm text-white">
-                      Bonedi Rupkotha
-                    </span>
-                    <button
-                      type="button"
-                      className="text-red-400 text-sm hover:underline"
-                    >
-                      Remove
-                    </button>
-                  </div>
-                  <div className="p-3 flex items-center justify-between bg-black/20 hover:bg-white/5">
-                    <span className="font-medium text-sm text-white">
-                      Bonedi Vista
-                    </span>
-                    <button
-                      type="button"
-                      className="text-red-400 text-sm hover:underline"
-                    >
-                      Remove
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </section>
-          )}
-
-          {/* TAB: COMPANY OVERVIEW */}
-          {activeTab === "overview" && (
-            <section className="glass-panel overflow-hidden">
-              <div className="bg-white/5 px-6 py-4 border-b border-white/10 flex items-center gap-2">
-                <Globe className="w-5 h-5 text-white" />
-                <h3 className="font-bold text-white">Company Overview</h3>
-              </div>
-              <div className="p-6 space-y-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-gray-200 flex items-center gap-1.5">
-                    Section Title
-                  </label>
-                  <input
-                    type="text"
-                    defaultValue="About Bonedi"
-                    className="w-full px-4 py-2 bg-black/20 border border-white/20 rounded-lg focus:ring-2 focus:ring-white/30 focus:border-white/50 outline-none transition-all text-white"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-gray-200 flex items-center gap-1.5">
-                    Overview Text
-                  </label>
-                  <textarea
-                    rows={4}
-                    defaultValue="We are a leading real estate developer..."
-                    className="w-full px-4 py-2 bg-black/20 border border-white/20 rounded-lg focus:ring-2 focus:ring-white/30 focus:border-white/50 outline-none transition-all resize-none text-white"
-                  />
-                </div>
-              </div>
-            </section>
-          )}
-
-          {/* TAB: WHY CHOOSE US */}
-          {activeTab === "why-us" && (
-            <section className="glass-panel overflow-hidden">
-              <div className="bg-white/5 px-6 py-4 border-b border-white/10 flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-white" />
-                <h3 className="font-bold text-white">Why Choose Us</h3>
-              </div>
-              <div className="p-6 space-y-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-gray-200">
-                    Section Title
-                  </label>
-                  <input
-                    type="text"
-                    defaultValue="Why Choose Bonedi"
-                    className="w-full px-4 py-2 bg-black/20 border border-white/20 rounded-lg focus:ring-2 focus:ring-white/30 focus:border-white/50 outline-none transition-all text-white"
-                  />
-                </div>
-                <div className="space-y-4">
-                  <label className="text-sm font-semibold text-gray-200">
-                    Selling Points
-                  </label>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {[1, 2, 3, 4].map((i) => (
-                      <div
-                        key={i}
-                        className="border border-white/10 bg-black/10 rounded-lg p-4 space-y-3 relative group hover:bg-white/5 transition-colors"
-                      >
-                        <button
-                          type="button"
-                          className="absolute top-3 right-3 text-red-400 opacity-0 group-hover:opacity-100 transition-opacity hover:text-red-300"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                        <input
-                          type="text"
-                          placeholder="Title (e.g. Premium Quality)"
-                          defaultValue={`Point ${i}`}
-                          className="w-full px-3 py-1.5 bg-black/20 border border-white/10 rounded-md text-sm text-white focus:outline-none focus:border-white/30"
-                        />
-                        <textarea
-                          rows={2}
-                          placeholder="Description..."
-                          className="w-full px-3 py-1.5 bg-black/20 border border-white/10 rounded-md text-sm text-white focus:outline-none focus:border-white/30 resize-none"
-                        ></textarea>
-                      </div>
-                    ))}
-                  </div>
-                  <button
-                    type="button"
-                    className="w-full py-3 border-2 border-dashed border-white/20 rounded-lg text-gray-300 hover:text-white hover:border-white/40 hover:bg-white/5 transition-all flex items-center justify-center gap-2 font-medium"
-                  >
-                    <Plus className="w-4 h-4" /> Add New Point
-                  </button>
-                </div>
-              </div>
-            </section>
-          )}
-
-          {/* TAB: ACHIEVEMENTS */}
-          {activeTab === "achievements" && (
-            <section className="glass-panel overflow-hidden">
-              <div className="bg-white/5 px-6 py-4 border-b border-white/10 flex items-center gap-2">
-                <Award className="w-5 h-5 text-white" />
-                <h3 className="font-bold text-white">Achievements</h3>
-              </div>
-              <div className="p-6 space-y-6">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  {[
-                    { label: "Years Experience", value: "15+" },
-                    { label: "Completed Projects", value: "200+" },
-                    { label: "Happy Clients", value: "10k+" },
-                    { label: "Awards Won", value: "25+" },
-                  ].map((stat, i) => (
-                    <div
-                      key={i}
-                      className="bg-black/20 border border-white/10 rounded-lg p-4 space-y-2"
-                    >
-                      <input
-                        type="text"
-                        defaultValue={stat.value}
-                        className="w-full text-2xl font-bold text-center bg-transparent border-b border-white/20 focus:border-white/50 outline-none text-white pb-1"
-                      />
-                      <input
-                        type="text"
-                        defaultValue={stat.label}
-                        className="w-full text-sm text-center bg-transparent border-none outline-none text-gray-300"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-          )}
-
-          {/* TAB: SERVICES */}
-          {activeTab === "services" && (
-            <section className="glass-panel overflow-hidden">
-              <div className="bg-white/5 px-6 py-4 border-b border-white/10 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Settings className="w-5 h-5 text-white" />
-                  <h3 className="font-bold text-white">Services</h3>
-                </div>
-                <button
-                  type="button"
-                  className="text-sm bg-white/10 border border-white/20 text-white px-3 py-1.5 rounded-lg font-medium shadow-sm flex items-center gap-1 hover:bg-white/20"
-                >
-                  <Plus className="w-4 h-4" /> Add Service
-                </button>
-              </div>
-              <div className="p-6 space-y-4">
-                {[1, 2, 3].map((i) => (
-                  <div
-                    key={i}
-                    className="flex items-center gap-4 bg-black/20 border border-white/10 rounded-lg p-3"
-                  >
-                    <div className="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center shrink-0 border border-white/10">
-                      <ImageIcon className="w-5 h-5 text-gray-400" />
-                    </div>
-                    <div className="flex-1 space-y-1">
-                      <input
-                        type="text"
-                        defaultValue={`Service ${i}`}
-                        className="w-full bg-transparent border-none text-white font-medium outline-none"
-                      />
-                      <input
-                        type="text"
-                        defaultValue="Short description of the service offered."
-                        className="w-full bg-transparent border-none text-sm text-gray-400 outline-none"
-                      />
-                    </div>
-                    <button
-                      type="button"
-                      className="p-2 text-gray-400 hover:text-red-400 transition-colors"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                  </div>
                 ))}
-              </div>
-            </section>
-          )}
-
-          {/* TAB: TESTIMONIALS */}
-          {activeTab === "testimonials" && (
-            <section className="glass-panel overflow-hidden">
-              <div className="bg-white/5 px-6 py-4 border-b border-white/10 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Star className="w-5 h-5 text-white" />
-                  <h3 className="font-bold text-white">Testimonials</h3>
-                </div>
-                <button
-                  type="button"
-                  className="text-sm bg-white/10 border border-white/20 text-white px-3 py-1.5 rounded-lg font-medium shadow-sm flex items-center gap-1 hover:bg-white/20"
-                >
-                  <Plus className="w-4 h-4" /> Add Review
-                </button>
-              </div>
-              <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-                {[1, 2].map((i) => (
-                  <div
-                    key={i}
-                    className="border border-white/10 bg-black/10 rounded-lg p-4 space-y-3 relative group"
-                  >
-                    <button
-                      type="button"
-                      className="absolute top-3 right-3 text-red-400 opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                    <textarea
-                      rows={3}
-                      defaultValue="Outstanding service and beautiful properties."
-                      className="w-full px-3 py-2 bg-black/20 border border-white/10 rounded-md text-sm text-white focus:outline-none resize-none"
-                    ></textarea>
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="text"
-                        defaultValue={`Client Name ${i}`}
-                        className="flex-1 px-3 py-1.5 bg-black/20 border border-white/10 rounded-md text-sm text-white focus:outline-none"
-                      />
-                      <input
-                        type="text"
-                        defaultValue="5"
-                        className="w-16 px-3 py-1.5 bg-black/20 border border-white/10 rounded-md text-sm text-white text-center focus:outline-none"
-                        title="Rating"
-                      />
-                    </div>
+                {(!formData.galleryImages || formData.galleryImages.length === 0) && (
+                  <div className="col-span-full text-center p-6 border border-dashed border-white/10 rounded-lg text-gray-400 text-sm">
+                    No images in the gallery yet. Click "Add Image" to begin.
                   </div>
-                ))}
+                )}
               </div>
-            </section>
-          )}
-
-          {/* TAB: GALLERY */}
-          {activeTab === "gallery" && (
-            <section className="glass-panel overflow-hidden">
-              <div className="bg-white/5 px-6 py-4 border-b border-white/10 flex items-center gap-2">
-                <ImageIcon className="w-5 h-5 text-white" />
-                <h3 className="font-bold text-white">Gallery Preview</h3>
-              </div>
-              <div className="p-6 space-y-4">
-                <p className="text-sm text-gray-300">
-                  Select images to highlight on the homepage gallery section.
-                </p>
-                <div className="grid grid-cols-3 md:grid-cols-4 gap-4">
-                  {[1, 2, 3, 4, 5, 6].map((i) => (
-                    <div
-                      key={i}
-                      className="aspect-square bg-black/20 border border-white/10 rounded-lg relative group overflow-hidden"
-                    >
-                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                        <button
-                          type="button"
-                          className="p-2 bg-red-500/80 text-white rounded-full hover:bg-red-500"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                      </div>
-                      <div className="w-full h-full flex items-center justify-center text-gray-500">
-                        <ImageIcon className="w-8 h-8 opacity-20" />
-                      </div>
-                    </div>
-                  ))}
-                  <button
-                    type="button"
-                    className="aspect-square border-2 border-dashed border-white/20 rounded-lg flex flex-col items-center justify-center text-gray-400 hover:text-white hover:border-white/40 hover:bg-white/5 transition-all"
-                  >
-                    <Plus className="w-6 h-6 mb-1" />
-                    <span className="text-xs font-medium">Add Image</span>
-                  </button>
-                </div>
-              </div>
-            </section>
-          )}
-
-          {/* TAB: LATEST NEWS */}
-          {activeTab === "news" && (
-            <section className="glass-panel overflow-hidden">
-              <div className="bg-white/5 px-6 py-4 border-b border-white/10 flex items-center gap-2">
-                <FileText className="w-5 h-5 text-white" />
-                <h3 className="font-bold text-white">Latest News</h3>
-              </div>
-              <div className="p-6 space-y-4">
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-gray-200">
-                    Section Title
-                  </label>
-                  <input
-                    type="text"
-                    defaultValue="Latest Insights"
-                    className="w-full px-4 py-2 bg-black/20 border border-white/20 rounded-lg focus:ring-2 focus:ring-white/30 outline-none text-white"
-                  />
-                </div>
-                <div className="pt-2">
-                  <p className="text-sm text-gray-300 mb-3">
-                    Currently showing 3 most recent articles automatically.
-                  </p>
-                  <button
-                    type="button"
-                    className="px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg text-white text-sm font-medium transition-colors"
-                  >
-                    Configure News Display
-                  </button>
-                </div>
-              </div>
-            </section>
-          )}
-
-          {/* TAB: VIDEO */}
-          {activeTab === "video" && (
-            <section className="glass-panel overflow-hidden">
-              <div className="bg-white/5 px-6 py-4 border-b border-white/10 flex items-center gap-2">
-                <Video className="w-5 h-5 text-white" />
-                <h3 className="font-bold text-white">Video Section</h3>
-              </div>
-              <div className="p-6 space-y-4">
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-gray-200">
-                    Video Title
-                  </label>
-                  <input
-                    type="text"
-                    defaultValue="Experience Bonedi Luxury"
-                    className="w-full px-4 py-2 bg-black/20 border border-white/20 rounded-lg outline-none text-white"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-gray-200">
-                    YouTube/Vimeo URL
-                  </label>
-                  <div className="flex gap-2">
-                    <div className="bg-black/20 border border-white/20 rounded-lg px-3 py-2 flex items-center justify-center shrink-0">
-                      <LinkIcon className="w-4 h-4 text-gray-400" />
-                    </div>
-                    <input
-                      type="text"
-                      defaultValue="https://youtube.com/..."
-                      className="flex-1 px-4 py-2 bg-black/20 border border-white/20 rounded-lg outline-none text-white"
-                    />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-gray-200">
-                    Custom Thumbnail
-                  </label>
-                  <div className="flex gap-3">
-                    <input
-                      type="text"
-                      defaultValue="/images/video-thumb.jpg"
-                      className="flex-1 px-4 py-2 bg-black/20 border border-white/20 rounded-lg outline-none text-white"
-                      readOnly
-                    />
-                    <button
-                      type="button"
-                      className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-lg font-medium transition-colors text-sm"
-                    >
-                      Upload
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </section>
-          )}
-
-          {/* TAB: INQUIRY CTA */}
-          {activeTab === "cta" && (
-            <section className="glass-panel overflow-hidden">
-              <div className="bg-white/5 px-6 py-4 border-b border-white/10 flex items-center gap-2">
-                <MessageSquare className="w-5 h-5 text-white" />
-                <h3 className="font-bold text-white">Inquiry CTA</h3>
-              </div>
-              <div className="p-6 space-y-4">
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-gray-200">
-                    CTA Headline
-                  </label>
-                  <input
-                    type="text"
-                    defaultValue="Ready to find your dream home?"
-                    className="w-full px-4 py-2 bg-black/20 border border-white/20 rounded-lg outline-none text-white"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-gray-200">
-                    Button Text
-                  </label>
-                  <input
-                    type="text"
-                    defaultValue="Contact Us Now"
-                    className="w-full px-4 py-2 bg-black/20 border border-white/20 rounded-lg outline-none text-white"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-gray-200">
-                    Background Style
-                  </label>
-                  <select className="w-full px-4 py-2 bg-black/20 border border-white/20 rounded-lg outline-none text-white appearance-none">
-                    <option value="solid" className="text-black">
-                      Solid Color
-                    </option>
-                    <option value="image" className="text-black" selected>
-                      Background Image
-                    </option>
-                    <option value="gradient" className="text-black">
-                      Gradient
-                    </option>
-                  </select>
-                </div>
-              </div>
-            </section>
-          )}
-
-          {/* TAB: CONTACT INFO */}
-          {activeTab === "contact" && (
-            <section className="glass-panel overflow-hidden">
-              <div className="bg-white/5 px-6 py-4 border-b border-white/10 flex items-center gap-2">
-                <PhoneCall className="w-5 h-5 text-white" />
-                <h3 className="font-bold text-white">Contact Info</h3>
-              </div>
-              <div className="p-6 space-y-4">
-                <div className="space-y-2">
-                  <label className="text-sm font-semibold text-gray-200">
-                    Display Address
-                  </label>
-                  <textarea
-                    rows={2}
-                    defaultValue="123 Luxury Avenue, Metropolis"
-                    className="w-full px-4 py-2 bg-black/20 border border-white/20 rounded-lg outline-none resize-none text-white"
-                  ></textarea>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-semibold text-gray-200">
-                      Phone Number
-                    </label>
-                    <input
-                      type="text"
-                      defaultValue="+1 (555) 123-4567"
-                      className="w-full px-4 py-2 bg-black/20 border border-white/20 rounded-lg outline-none text-white"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-semibold text-gray-200">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      defaultValue="inquiries@bonedi.com"
-                      className="w-full px-4 py-2 bg-black/20 border border-white/20 rounded-lg outline-none text-white"
-                    />
-                  </div>
-                </div>
-              </div>
-            </section>
-          )}
-        </form>
-      </div>
+            </div>
+          </section>
+        )}
+      </form>
     </div>
   );
 }

@@ -5,43 +5,11 @@ import Link from "next/link";
 import { BlockReveal } from "@/components/ui/BlockReveal";
 import { useState } from "react";
 
-const services = [
-  {
-    title: "Residential\nProperties",
-    description:
-      "Discover luxury apartments, penthouses, and bespoke villas designed for comfort and modern living.",
-    image:
-      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=400&auto=format&fit=crop",
-    href: "/services/residential-properties",
-  },
-  {
-    title: "Commercial\nSpaces",
-    description:
-      "State-of-the-art office buildings and retail spaces tailored for business success and growth.",
-    image:
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=400&auto=format&fit=crop",
-    href: "/services/commercial-spaces",
-  },
-  {
-    title: "Interior\nDesign",
-    description:
-      "Transforming empty spaces into beautifully curated environments that reflect your personality.",
-    image:
-      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=400&auto=format&fit=crop",
-    href: "/services/interior-design",
-  },
-  {
-    title: "Property\nManagement",
-    description:
-      "Comprehensive management services ensuring your investments are maintained and profitable.",
-    image:
-      "https://images.unsplash.com/photo-1628859250369-c513b3468843?q=80&w=874&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    href: "/services/property-management",
-  },
-];
-
-export function FeaturedServices() {
+export function FeaturedServices({ services = [] }: { services?: any[] }) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(0);
+
+  // Take only up to 4 services for this layout
+  const displayServices = services.slice(0, 4);
 
   return (
     <section className="w-full py-16 md:py-24 bg-white text-brand-blue">
@@ -94,8 +62,10 @@ export function FeaturedServices() {
 
         {/* Premium Accordion Gallery */}
         <div className="flex flex-col md:flex-row h-[800px] md:h-[600px] w-full gap-4">
-          {services.map((service, idx) => {
+          {displayServices.map((service, idx) => {
             const isActive = hoveredIndex === idx;
+            const titleLines = service.name.split(" ");
+            const formattedTitle = titleLines.length > 1 ? `${titleLines[0]}\n${titleLines.slice(1).join(" ")}` : service.name;
 
             return (
               <div
@@ -108,8 +78,8 @@ export function FeaturedServices() {
               >
                 {/* Image Background */}
                 <Image
-                  src={service.image}
-                  alt={service.title}
+                  src={service.image?.url || "/placeholder.jpg"}
+                  alt={service.name}
                   fill
                   className={`object-cover transform-gpu transition-transform duration-[10000ms] ease-linear ${
                     isActive ? "scale-110 grayscale-0" : "scale-100 grayscale"
@@ -126,9 +96,6 @@ export function FeaturedServices() {
                 ></div>
 
                 {/* Content Container: Fixed width to prevent shake! */}
-                {/* By anchoring ONLY to left and bottom with a MASSIVE fixed width (e.g. 600px), 
-                    this container NEVER changes size when the parent flex-box expands. 
-                    It completely eliminates layout subpixel jitter! */}
                 <div className="absolute left-0 bottom-0 w-[400px] md:w-[600px] h-full p-6 md:p-10 flex flex-col justify-end">
                   <div
                     className="absolute inset-0 p-6 md:p-10 flex flex-col justify-end overflow-hidden"
@@ -155,7 +122,7 @@ export function FeaturedServices() {
                       style={{ backfaceVisibility: "hidden" }}
                     >
                       <h3 className="text-2xl md:text-[32px] font-bold text-white uppercase leading-[1.1] whitespace-pre-line">
-                        {service.title}
+                        {formattedTitle}
                       </h3>
 
                       <div
@@ -165,12 +132,12 @@ export function FeaturedServices() {
                             : "max-h-0 opacity-0 mt-0"
                         }`}
                       >
-                        <p className="text-gray-300 text-sm md:text-[15px] font-medium leading-relaxed">
-                          {service.description}
+                        <p className="text-gray-300 text-sm md:text-[15px] font-medium leading-relaxed line-clamp-3">
+                          {service.shortDescription}
                         </p>
 
                         <Link
-                          href={service.href}
+                          href={`/services/${service.slug}`}
                           className="mt-6 flex items-center gap-3 text-sm font-bold text-[#4ea24b] uppercase tracking-wider group/btn"
                         >
                           <span className="relative overflow-hidden">

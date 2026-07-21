@@ -1,6 +1,8 @@
 import { BlockReveal } from "@/components/ui/BlockReveal";
 
-export function VisionMission() {
+export function VisionMission({ data }: { data: any }) {
+  if (!data) return null;
+
   return (
     <section className="w-full py-16 md:py-24 bg-brand-blue text-white">
       <div className="container mx-auto px-5 md:px-16">
@@ -13,22 +15,22 @@ export function VisionMission() {
             <div className="flex flex-col gap-4">
               <BlockReveal color="#ffffff">
                 <div className="flex items-center text-[14px] md:text-[16px] font-semibold tracking-[0.2em] text-white/60 uppercase">
-                  OUR VISION
+                  {data?.visionTitle || "OUR VISION"}
                 </div>
               </BlockReveal>
               <BlockReveal color="#ffffff" delay={0.2}>
                 <h2 className="text-2xl md:text-[34px] font-bold text-white leading-[1.3] uppercase">
-                  SHAPING TOMORROW
+                  {data?.visionHeading || "SHAPING TOMORROW"}
                 </h2>
               </BlockReveal>
             </div>
-            <p className="text-white/80 text-lg leading-relaxed font-light">
-              To be the most trusted and globally recognized real estate
-              developer, setting new benchmarks in architectural innovation,
-              sustainability, and community living. We envision a future where
-              every Bonedi home stands as a symbol of timeless elegance and
-              unmatched quality.
-            </p>
+            <div 
+              className="text-white/80 text-lg leading-relaxed font-light prose prose-invert max-w-none w-full min-w-0 break-words whitespace-normal"
+              dangerouslySetInnerHTML={{ 
+                __html: data?.visionDescription || 
+                "To be the most trusted and globally recognized real estate developer, setting new benchmarks in architectural innovation, sustainability, and community living. We envision a future where every Bonedi home stands as a symbol of timeless elegance and unmatched quality."
+              }}
+            />
           </div>
 
           {/* Mission */}
@@ -36,22 +38,22 @@ export function VisionMission() {
             <div className="flex flex-col gap-4">
               <BlockReveal color="#ffffff">
                 <div className="flex items-center text-[14px] md:text-[16px] font-semibold tracking-[0.2em] text-white/60 uppercase">
-                  OUR MISSION
+                  {data?.missionTitle || "OUR MISSION"}
                 </div>
               </BlockReveal>
               <BlockReveal color="#ffffff" delay={0.2}>
                 <h2 className="text-2xl md:text-[34px] font-bold text-white leading-[1.3] uppercase">
-                  DELIVERING EXCELLENCE
+                  {data?.missionHeading || "DELIVERING EXCELLENCE"}
                 </h2>
               </BlockReveal>
             </div>
-            <p className="text-white/80 text-lg leading-relaxed font-light">
-              To consistently deliver premium real estate projects that exceed
-              customer expectations through meticulous planning, cutting-edge
-              technology, and a commitment to environmental stewardship. We
-              strive to create value for our clients, partners, and the
-              communities we serve.
-            </p>
+            <div 
+              className="text-white/80 text-lg leading-relaxed font-light prose prose-invert max-w-none w-full min-w-0 break-words whitespace-normal"
+              dangerouslySetInnerHTML={{ 
+                __html: data?.missionDescription || 
+                "To consistently deliver premium real estate projects that exceed customer expectations through meticulous planning, cutting-edge technology, and a commitment to environmental stewardship. We strive to create value for our clients, partners, and the communities we serve."
+              }}
+            />
           </div>
         </div>
       </div>

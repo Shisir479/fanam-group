@@ -1,39 +1,41 @@
 import { BlockReveal } from "@/components/ui/BlockReveal";
 
-const milestones = [
-  {
-    year: "2010",
-    title: "Foundation",
-    description:
-      "Bonedi Homes was established with a vision to revolutionize urban living in Dhaka, focusing on premium residential properties.",
-  },
-  {
-    year: "2014",
-    title: "First Landmark Project",
-    description:
-      "Successfully delivered our first major project, 'Bonedi Heights', setting a new standard for luxury apartments.",
-  },
-  {
-    year: "2018",
-    title: "Expansion",
-    description:
-      "Expanded our operations to commercial real estate, developing state-of-the-art office spaces for multinational corporations.",
-  },
-  {
-    year: "2022",
-    title: "Sustainability Award",
-    description:
-      "Recognized nationally for integrating sustainable architecture and green building practices across all new developments.",
-  },
-  {
-    year: "2024",
-    title: "Global Reach",
-    description:
-      "Initiated collaborations with international architectural firms to bring global design standards to local projects.",
-  },
-];
+export function CompanyHistory({ data }: { data: any }) {
+  const milestones = data?.timeline?.length > 0 ? data.timeline : [
+    {
+      year: "2010",
+      title: "Foundation",
+      description:
+        "Bonedi Homes was established with a vision to revolutionize urban living in Dhaka, focusing on premium residential properties.",
+    },
+    {
+      year: "2014",
+      title: "First Landmark Project",
+      description:
+        "Successfully delivered our first major project, 'Bonedi Heights', setting a new standard for luxury apartments.",
+    },
+    {
+      year: "2018",
+      title: "Expansion",
+      description:
+        "Expanded our operations to commercial real estate, developing state-of-the-art office spaces for multinational corporations.",
+    },
+    {
+      year: "2022",
+      title: "Sustainability Award",
+      description:
+        "Recognized nationally for integrating sustainable architecture and green building practices across all new developments.",
+    },
+    {
+      year: "2024",
+      title: "Global Reach",
+      description:
+        "Initiated collaborations with international architectural firms to bring global design standards to local projects.",
+    },
+  ];
 
-export function CompanyHistory() {
+  if (!data) return null;
+
   return (
     <section className="w-full py-16 md:py-24 bg-white">
       <div className="container mx-auto px-5 md:px-16">
@@ -55,7 +57,7 @@ export function CompanyHistory() {
           <div className="absolute left-[15px] md:left-1/2 top-0 bottom-0 w-[2px] bg-gray-200 md:-translate-x-1/2"></div>
 
           <div className="flex flex-col gap-12">
-            {milestones.map((milestone, index) => (
+            {milestones.map((milestone: any, index: number) => (
               <div
                 key={index}
                 className={`relative flex flex-col md:flex-row items-start ${index % 2 === 0 ? "md:flex-row-reverse" : ""}`}

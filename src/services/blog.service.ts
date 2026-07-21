@@ -12,7 +12,7 @@ export interface Blog {
     _id: string;
     url: string;
   };
-  category?: {
+  blogCategory?: {
     _id: string;
     name: string;
     slug?: string;
