@@ -28,7 +28,24 @@ const newsItems = [
   },
 ];
 
-export function LatestNews() {
+export function LatestNews({ blogs = [] }: { blogs?: any[] }) {
+  // Use dynamic blogs if available, otherwise fallback to default static items
+  const displayItems =
+    blogs.length > 0
+      ? blogs.map((blog) => ({
+          title: blog.name || blog.title,
+          date: new Date(blog.createdAt || blog.publishedAt).toLocaleDateString(
+            "en-US",
+            { month: "long", day: "numeric", year: "numeric" },
+          ),
+          image:
+            blog.cover?.url ||
+            "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=600",
+          excerpt: blog.excerpt || blog.description?.substring(0, 100) + "...",
+          link: `/blog/${blog.slug}`,
+        }))
+      : newsItems.map((item) => ({ ...item, link: "/blog" }));
+
   return (
     <section className="w-full py-16 md:py-24 bg-gray-50">
       <div className="container mx-auto px-5 md:px-16">
@@ -77,20 +94,18 @@ export function LatestNews() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
-          {newsItems.map((item, idx) => (
-            <div
+          {displayItems.slice(0, 3).map((item, idx) => (
+            <Link
+              href={item.link}
               key={idx}
-              className="group flex flex-col bg-white overflow-hidden  shadow-sm transition-all duration-300"
+              className="group flex flex-col bg-white overflow-hidden shadow-sm transition-all duration-300"
             >
               <div className="relative h-60 overflow-hidden transform-gpu">
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover "
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-sm font-medium text-brand-blue">
-                  {item.date}
-                </div>
               </div>
               <div className="p-6 flex flex-col flex-1">
                 <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-brand-blue transition-colors">
@@ -99,10 +114,7 @@ export function LatestNews() {
                 <p className="text-gray-600 mb-6 flex-1 line-clamp-2">
                   {item.excerpt}
                 </p>
-                <a
-                  href="#"
-                  className="inline-flex items-center text-brand-blue font-semibold hover:gap-2 transition-all duration-300"
-                >
+                <span className="inline-flex items-center text-brand-blue font-semibold hover:gap-2 transition-all duration-300">
                   Read More
                   <svg
                     className="w-4 h-4 ml-2"
@@ -117,9 +129,9 @@ export function LatestNews() {
                       d="M17 8l4 4m0 0l-4 4m4-4H3"
                     />
                   </svg>
-                </a>
+                </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

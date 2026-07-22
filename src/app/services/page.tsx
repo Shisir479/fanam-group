@@ -7,7 +7,11 @@ import { ServiceType } from "@/services/service.service";
 export default async function ServicesPage() {
   let services: ServiceType[] = [];
   try {
-    const res = await getServicesPublic({ status: "active", sort: "sortOrder", order: "asc" });
+    const res = await getServicesPublic({
+      status: "active",
+      sort: "sortOrder",
+      order: "asc",
+    });
     if (res?.success) {
       services = res.data || [];
     }

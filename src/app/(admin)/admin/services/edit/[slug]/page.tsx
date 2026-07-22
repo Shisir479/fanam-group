@@ -1,12 +1,16 @@
-import { Metadata } from "next";
+import { constructMetadata } from "@/lib/metadata";
 import EditServiceClient from "@/components/admin/services/EditServiceClient";
 
-export const metadata: Metadata = {
-  title: "Edit Service | Bonedi Admin",
-  description: "Edit an existing service.",
-};
+export const metadata = constructMetadata({
+  title: "Admin Dashboard",
+  noIndex: true,
+});
 
-export default async function EditServicePage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function EditServicePage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const resolvedParams = await params;
   return <EditServiceClient slug={resolvedParams.slug} />;
 }

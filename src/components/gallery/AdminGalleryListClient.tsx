@@ -3,10 +3,21 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Gallery, getGalleriesByAdmin, deleteGalleryBySlugByAdmin } from "@/services/gallery.service";
+import {
+  Gallery,
+  getGalleriesByAdmin,
+  deleteGalleryBySlugByAdmin,
+} from "@/services/gallery.service";
 import { DeleteModal } from "@/components/ui/DeleteModal";
 import { Pagination } from "@/components/ui/Pagination";
-import { Edit, Trash2, Plus, Search, Image as ImageIcon, Video as VideoIcon } from "lucide-react";
+import {
+  Edit,
+  Trash2,
+  Plus,
+  Search,
+  Image as ImageIcon,
+  Video as VideoIcon,
+} from "lucide-react";
 import toast from "react-hot-toast";
 import { AdminTable, ColumnDef } from "@/components/ui/AdminTable";
 
@@ -19,7 +30,7 @@ export default function AdminGalleryListClient() {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  
+
   const [isDeleting, setIsDeleting] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [galleryToDelete, setGalleryToDelete] = useState<string | null>(null);
@@ -27,7 +38,12 @@ export default function AdminGalleryListClient() {
   const fetchGalleries = async () => {
     setIsLoading(true);
     try {
-      const res = await getGalleriesByAdmin({ page, search, limit: 10, _t: Date.now() });
+      const res = await getGalleriesByAdmin({
+        page,
+        search,
+        limit: 10,
+        _t: Date.now(),
+      });
       if (res.success) {
         setGalleries(res.data || []);
         setTotalPages(res.count || 1);
@@ -77,17 +93,27 @@ export default function AdminGalleryListClient() {
         <div className="w-16 h-16 rounded-lg overflow-hidden bg-white/5 flex items-center justify-center relative">
           {gallery.type === "image" && gallery.cover?.url ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={gallery.cover.url} alt={gallery.title} className="w-full h-full object-cover" />
+            <img
+              src={gallery.cover.url}
+              alt={gallery.title}
+              className="w-full h-full object-cover"
+            />
           ) : gallery.type === "video" && gallery.thumbnail?.url ? (
             <>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={gallery.thumbnail.url} alt={gallery.title} className="w-full h-full object-cover" />
+              <img
+                src={gallery.thumbnail.url}
+                alt={gallery.title}
+                className="w-full h-full object-cover"
+              />
               <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                 <VideoIcon className="text-white w-6 h-6" />
               </div>
             </>
+          ) : gallery.type === "video" ? (
+            <VideoIcon className="text-gray-500" />
           ) : (
-            gallery.type === "video" ? <VideoIcon className="text-gray-500" /> : <ImageIcon className="text-gray-500" />
+            <ImageIcon className="text-gray-500" />
           )}
         </div>
       ),
@@ -193,7 +219,7 @@ export default function AdminGalleryListClient() {
         keyExtractor={(gallery) => gallery._id!}
         emptyMessage="No gallery items found."
       />
-      
+
       {/* Pagination */}
       <Pagination
         currentPage={page}

@@ -10,34 +10,6 @@ import React, {
 import gsap from "gsap";
 import { BlockReveal } from "@/components/ui/BlockReveal";
 
-const galleryImages = [
-  {
-    src: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=1200",
-    title: "Luxury Villa",
-    category: "Residential",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80&w=800",
-    title: "Modern Apartment",
-    category: "Interior",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800",
-    title: "Commercial Hub",
-    category: "Architecture",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1460408037948-b89a5e837b41?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    title: "Eco Retreat",
-    category: "Exterior",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=800",
-    title: "Penthouse Suite",
-    category: "Residential",
-  },
-];
-
 type Orientation = "horizontal" | "vertical";
 
 interface IPosition {
@@ -496,12 +468,13 @@ export function GalleryPreview({ data }: { data?: any }) {
     },
   ];
 
-  const galleryImages = data?.galleryImages?.length > 0
-    ? data.galleryImages.map((img: any) => ({
-        src: img.url || "",
-        title: "",
-      }))
-    : defaultImages;
+  const galleryImages =
+    data?.galleryItems?.length > 0
+      ? data.galleryItems.map((item: any) => ({
+          src: item.image?.url || "",
+          title: item.title || "",
+        }))
+      : defaultImages;
 
   const galleryTitle = data?.galleryTitle || "GALLERY";
   const galleryHeading = data?.galleryHeading || (

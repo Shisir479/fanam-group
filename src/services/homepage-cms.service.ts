@@ -1,3 +1,4 @@
+import { revalidatePage } from "@/app/actions";
 import { api } from "@/lib/api";
 
 export const getHomepageCMSAdmin = async () => {
@@ -10,16 +11,20 @@ export const getHomepageCMSAdmin = async () => {
 
 export const updateHomepageCMS = async (payload: any) => {
   try {
-    return await api("/admin/homepage-cms", {
+    const res = await api("/admin/homepage-cms", {
       method: "PUT",
       body: JSON.stringify(payload),
     });
+    await revalidatePage("/", "layout");
+    return res;
   } catch (error: any) {
     if (error.status === 404) {
-      return await api("/admin/homepage-cms", {
+      const res = await api("/admin/homepage-cms", {
         method: "POST",
         body: JSON.stringify(payload),
       });
+      await revalidatePage("/", "layout");
+      return res;
     }
     throw error;
   }

@@ -14,10 +14,15 @@ export async function AboutSection() {
     // fallback to static
   }
 
-  const heading = aboutData?.companyHeading || "Redefining your standard of living";
-  const title =  "ABOUT US";
-  const description = aboutData?.companyDescription || `<p>Bonedi Homes is committed to building extraordinary spaces that reflect architectural brilliance and uncompromising quality. Our projects span across prime locations, offering unparalleled convenience, state-of-the-art amenities, and a community-centric lifestyle.</p>`;
-  const imageUrl = aboutData?.companyImage?.url || "https://images.unsplash.com/photo-1637909336968-0687e3086c63?q=80&w=870&auto=format&fit=crop";
+  const heading =
+    aboutData?.companyHeading || "Redefining your standard of living";
+  const title = "ABOUT US";
+  const description =
+    aboutData?.companyDescription ||
+    `<p>Bonedi Homes is committed to building extraordinary spaces that reflect architectural brilliance and uncompromising quality. Our projects span across prime locations, offering unparalleled convenience, state-of-the-art amenities, and a community-centric lifestyle.</p>`;
+  const imageUrl =
+    aboutData?.companyImage?.url ||
+    "https://images.unsplash.com/photo-1637909336968-0687e3086c63?q=80&w=870&auto=format&fit=crop";
 
   return (
     <section className="w-full py-16 md:py-24 bg-white">
@@ -63,7 +68,12 @@ export async function AboutSection() {
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
                 </svg>
               </Link>
             </div>

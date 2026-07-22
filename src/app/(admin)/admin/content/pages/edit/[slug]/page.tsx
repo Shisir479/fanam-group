@@ -1,9 +1,10 @@
+import { constructMetadata } from "@/lib/metadata";
 import EditPageClient from "@/components/pages/EditPageClient";
 
-export const metadata = {
-  title: "Edit Page Page | Admin Panel",
-  description: "Update an existing pages or dynamic page.",
-};
+export const metadata = constructMetadata({
+  title: "Admin Dashboard",
+  noIndex: true,
+});
 
 export default async function EditPagePage({
   params,

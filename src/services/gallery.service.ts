@@ -1,5 +1,5 @@
 import { createCrudService } from "./crud.service";
-import { revalidateGlobalCache } from "@/app/actions";
+import { revalidatePage } from "@/app/actions";
 
 export interface Gallery {
   _id: string;
@@ -42,24 +42,28 @@ export interface SingleGalleryResponse {
 // Admin Methods
 // ----------------------
 
-const adminGalleryCrud = createCrudService<Gallery, Partial<Gallery>, Partial<Gallery>>(
-  "/admin/gallery",
-);
+const adminGalleryCrud = createCrudService<
+  Gallery,
+  Partial<Gallery>,
+  Partial<Gallery>
+>("/admin/gallery");
 
 export const getGalleriesByAdmin = (
   params?: Record<string, any>,
-): Promise<GalleryResponse> => adminGalleryCrud.getAll(params) as Promise<GalleryResponse>;
+): Promise<GalleryResponse> =>
+  adminGalleryCrud.getAll(params) as Promise<GalleryResponse>;
 
 export const getGalleryBySlugByAdmin = (
   slug: string,
-): Promise<SingleGalleryResponse> => adminGalleryCrud.getByIdOrSlug(slug) as Promise<SingleGalleryResponse>;
+): Promise<SingleGalleryResponse> =>
+  adminGalleryCrud.getByIdOrSlug(slug) as Promise<SingleGalleryResponse>;
 
 export const createGalleryByAdmin = async (
   data: Partial<Gallery>,
 ): Promise<{ success: boolean; message: string; data?: Gallery }> => {
   const res = await adminGalleryCrud.create(data);
   if (res && res.success !== false) {
-    await revalidateGlobalCache("gallery");
+    await revalidatePage("/gallery", "layout");
   }
   return res as { success: boolean; message: string; data?: Gallery };
 };
@@ -70,7 +74,7 @@ export const updateGalleryByAdmin = async (
 ): Promise<{ success: boolean; message: string; data?: Gallery }> => {
   const res = await adminGalleryCrud.update(slug, data);
   if (res && res.success !== false) {
-    await revalidateGlobalCache("gallery");
+    await revalidatePage("/", "layout");
   }
   return res as { success: boolean; message: string; data?: Gallery };
 };
@@ -80,7 +84,7 @@ export const deleteGalleryBySlugByAdmin = async (
 ): Promise<{ success: boolean; message: string }> => {
   const res = await adminGalleryCrud.delete(slug);
   if (res && res.success !== false) {
-    await revalidateGlobalCache("gallery");
+    await revalidatePage("/", "layout");
   }
   return res as { success: boolean; message: string };
 };
@@ -89,14 +93,18 @@ export const deleteGalleryBySlugByAdmin = async (
 // Public Methods
 // ----------------------
 
-const publicGalleryCrud = createCrudService<Gallery, Partial<Gallery>, Partial<Gallery>>(
-  "/gallery",
-);
+const publicGalleryCrud = createCrudService<
+  Gallery,
+  Partial<Gallery>,
+  Partial<Gallery>
+>("/gallery");
 
 export const getGalleriesPublic = (
   params?: Record<string, any>,
-): Promise<GalleryResponse> => publicGalleryCrud.getAll(params) as Promise<GalleryResponse>;
+): Promise<GalleryResponse> =>
+  publicGalleryCrud.getAll(params) as Promise<GalleryResponse>;
 
 export const getGalleryBySlugPublic = (
   slug: string,
-): Promise<SingleGalleryResponse> => publicGalleryCrud.getByIdOrSlug(slug) as Promise<SingleGalleryResponse>;
+): Promise<SingleGalleryResponse> =>
+  publicGalleryCrud.getByIdOrSlug(slug) as Promise<SingleGalleryResponse>;

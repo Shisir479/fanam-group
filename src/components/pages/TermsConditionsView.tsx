@@ -25,14 +25,22 @@ export function TermsConditionsView({ pageData }: { pageData: any }) {
             </BlockReveal>
             <BlockReveal delay={0.2}>
               <p className="text-gray-500 uppercase tracking-widest text-sm font-semibold m-0">
-                Last Updated: {pageData?.updatedAt ? new Date(pageData.updatedAt).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : "July 2026"}
+                Last Updated:{" "}
+                {pageData?.updatedAt
+                  ? new Date(pageData.updatedAt).toLocaleDateString("en-US", {
+                      month: "long",
+                      year: "numeric",
+                    })
+                  : "July 2026"}
               </p>
             </BlockReveal>
           </div>
 
           <div
             className="prose prose-lg max-w-none prose-headings:text-brand-blue prose-a:text-blue-600 prose-img:rounded-xl text-gray-600 leading-relaxed break-words overflow-x-hidden"
-            dangerouslySetInnerHTML={{ __html: pageData?.description || "<p>Loading...</p>" }}
+            dangerouslySetInnerHTML={{
+              __html: pageData?.description || "<p>Loading...</p>",
+            }}
           />
         </div>
       </section>

@@ -1,6 +1,6 @@
 import { api } from "@/lib/api";
 import { createCrudService } from "./crud.service";
-import { revalidateGlobalCache } from "@/app/actions";
+import { revalidatePage } from "@/app/actions";
 
 export interface Blog {
   _id: string;
@@ -69,7 +69,7 @@ export const createBlogByAdmin = async (
 ): Promise<{ success: boolean; message: string; id: string }> => {
   const res = (await adminBlogCrud.create(data)) as any;
   if (res?.success !== false) {
-    await revalidateGlobalCache("blogs");
+    await revalidatePage("/", "layout");
   }
   return res;
 };
@@ -80,7 +80,7 @@ export const updateBlogBySlugByAdmin = async (
 ): Promise<{ success: boolean; message: string }> => {
   const res = (await adminBlogCrud.update(slug, data)) as any;
   if (res?.success !== false) {
-    await revalidateGlobalCache("blogs");
+    await revalidatePage("/", "layout");
   }
   return res;
 };
@@ -90,7 +90,7 @@ export const deleteBlogBySlugByAdmin = async (
 ): Promise<{ success: boolean; message: string }> => {
   const res = (await adminBlogCrud.delete(slug)) as any;
   if (!res || res.success !== false) {
-    await revalidateGlobalCache("blogs");
+    await revalidatePage("/", "layout");
   }
   return res;
 };

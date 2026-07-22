@@ -30,7 +30,10 @@ export function AdminTable<T>({
           <thead>
             <tr className="bg-white/5 border-b border-white/10 text-xs text-gray-400 uppercase tracking-wider">
               {columns.map((col, idx) => (
-                <th key={idx} className={`p-4 font-medium ${col.className || ""}`}>
+                <th
+                  key={idx}
+                  className={`p-4 font-medium ${col.className || ""}`}
+                >
                   {col.header}
                 </th>
               ))}
@@ -45,7 +48,10 @@ export function AdminTable<T>({
               </tr>
             ) : data.length === 0 ? (
               <tr>
-                <td colSpan={columns.length} className="p-8 text-center text-gray-400">
+                <td
+                  colSpan={columns.length}
+                  className="p-8 text-center text-gray-400"
+                >
                   {emptyMessage}
                 </td>
               </tr>
@@ -60,8 +66,8 @@ export function AdminTable<T>({
                       {col.render
                         ? col.render(row)
                         : col.accessor
-                        ? (row[col.accessor] as React.ReactNode)
-                        : null}
+                          ? (row[col.accessor] as React.ReactNode)
+                          : null}
                     </td>
                   ))}
                 </tr>

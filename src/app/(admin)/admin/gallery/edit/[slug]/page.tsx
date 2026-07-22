@@ -1,11 +1,15 @@
-import { getGalleryBySlugByAdmin, updateGalleryByAdmin } from "@/services/gallery.service";
+import { constructMetadata } from "@/lib/metadata";
+import {
+  getGalleryBySlugByAdmin,
+  updateGalleryByAdmin,
+} from "@/services/gallery.service";
 import EditGalleryClient from "@/components/gallery/EditGalleryClient";
 import { notFound } from "next/navigation";
 
-export const metadata = {
-  title: "Edit Gallery | Admin",
-  description: "Update an existing gallery item.",
-};
+export const metadata = constructMetadata({
+  title: "Admin Dashboard",
+  noIndex: true,
+});
 
 export default async function EditGalleryPage({
   params,
@@ -33,5 +37,7 @@ export default async function EditGalleryPage({
     return await updateGalleryByAdmin(slug, payload);
   };
 
-  return <EditGalleryClient initialData={initialData} onSubmit={handleUpdate} />;
+  return (
+    <EditGalleryClient initialData={initialData} onSubmit={handleUpdate} />
+  );
 }

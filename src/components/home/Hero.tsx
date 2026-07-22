@@ -33,13 +33,16 @@ const AUTO_INTERVAL = 5000;
 type Phase = "idle" | "wiping";
 
 export function Hero({ data }: { data?: any }) {
-  const slides = data?.heroSlides?.length > 0
-    ? data.heroSlides.map((slide: any, index: number) => ({
-        id: index + 1,
-        image: slide.image?.url || defaultSlides[index % defaultSlides.length].image,
-        title: slide.title || "",
-      }))
-    : defaultSlides;
+  const slides =
+    data?.heroSlides?.length > 0
+      ? data.heroSlides.map((slide: any, index: number) => ({
+          id: index + 1,
+          image:
+            slide.image?.url ||
+            defaultSlides[index % defaultSlides.length].image,
+          title: slide.title || "",
+        }))
+      : defaultSlides;
 
   const [current, setCurrent] = useState(0);
   const [displayImage, setDisplayImage] = useState(0);

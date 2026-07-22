@@ -1,9 +1,10 @@
+import { constructMetadata } from "@/lib/metadata";
 import AdminGalleryListClient from "@/components/gallery/AdminGalleryListClient";
 
-export const metadata = {
-  title: "Gallery | Admin",
-  description: "Manage your gallery items.",
-};
+export const metadata = constructMetadata({
+  title: "Admin Dashboard",
+  noIndex: true,
+});
 
 export default function AdminGalleryList() {
   return <AdminGalleryListClient />;

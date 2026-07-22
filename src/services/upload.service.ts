@@ -1,7 +1,7 @@
 import { api } from "@/lib/api";
 
 export const uploadSingleImage = async (
-  file: File
+  file: File,
 ): Promise<{ success: boolean; data: Array<{ _id: string; url: string }> }> => {
   const formData = new FormData();
   formData.append("images", file);
@@ -15,7 +15,7 @@ export const uploadSingleImage = async (
 };
 
 export const uploadMultipleImages = async (
-  files: File[]
+  files: File[],
 ): Promise<{ success: boolean; data: Array<{ _id: string; url: string }> }> => {
   const formData = new FormData();
   files.forEach((file) => {

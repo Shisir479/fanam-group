@@ -3,7 +3,11 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ServiceType, getServicesByAdmin, deleteServiceBySlugAdmin } from "@/services/service.service";
+import {
+  ServiceType,
+  getServicesByAdmin,
+  deleteServiceBySlugAdmin,
+} from "@/services/service.service";
 import { DeleteModal } from "@/components/ui/DeleteModal";
 import { Edit, Trash2, Plus, Search, Briefcase, Eye } from "lucide-react";
 import toast from "react-hot-toast";
@@ -23,12 +27,12 @@ export default function AdminServiceListClient() {
   const searchParams = useSearchParams();
   const [services, setServices] = useState<ServiceType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  
+
   const [search, setSearch] = useState(searchParams.get("search") || "");
   const [status, setStatus] = useState(searchParams.get("status") || "");
   const [page, setPage] = useState(parseInt(searchParams.get("page") || "1"));
   const [totalPages, setTotalPages] = useState(1);
-  
+
   const [isDeleting, setIsDeleting] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [serviceToDelete, setServiceToDelete] = useState<string | null>(null);
@@ -36,7 +40,13 @@ export default function AdminServiceListClient() {
   const fetchServices = async () => {
     setIsLoading(true);
     try {
-      const res = await getServicesByAdmin({ page, search, status, limit: 10, _t: Date.now() });
+      const res = await getServicesByAdmin({
+        page,
+        search,
+        status,
+        limit: 10,
+        _t: Date.now(),
+      });
       if (res.success) {
         setServices(res.data || []);
         setTotalPages(res.count || 1);
@@ -111,9 +121,7 @@ export default function AdminServiceListClient() {
     {
       header: "Category",
       render: (service) => (
-        <span className="text-sm text-gray-300">
-          {service.category}
-        </span>
+        <span className="text-sm text-gray-300">{service.category}</span>
       ),
     },
     {
@@ -132,73 +140,82 @@ export default function AdminServiceListClient() {
     },
     {
       header: "Actions",
+      className: "text-right space-x-2",
       render: (service) => (
-        <div className="flex items-center gap-2">
+        <>
           <Link
             href={`/services/${service.slug}`}
             target="_blank"
-            className="p-1.5 text-gray-400 hover:text-white hover:bg-white/10 rounded transition-colors"
-            title="View public page"
+            className="inline-flex p-1.5 text-gray-400 hover:text-blue-400 hover:bg-blue-400/10 rounded transition-colors"
+            title="View Public"
           >
             <Eye className="w-4 h-4" />
           </Link>
           <Link
             href={`/admin/services/edit/${service.slug}`}
-            className="p-1.5 text-blue-400 hover:text-blue-300 hover:bg-blue-400/10 rounded transition-colors"
+            className="inline-flex p-1.5 text-gray-400 hover:text-green-400 hover:bg-green-400/10 rounded transition-colors"
+            title="Edit"
           >
             <Edit className="w-4 h-4" />
           </Link>
           <button
             onClick={() => confirmDelete(service.slug)}
-            className="p-1.5 text-red-400 hover:text-red-300 hover:bg-red-400/10 rounded transition-colors"
+            className="inline-flex p-1.5 text-gray-400 hover:text-red-400 hover:bg-red-400/10 rounded transition-colors"
+            title="Delete"
           >
             <Trash2 className="w-4 h-4" />
           </button>
-        </div>
+        </>
       ),
     },
   ];
 
   return (
-    <div className="w-full max-w-6xl mx-auto pb-24">
+    <div className="space-y-6 pb-12">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-white tracking-wide">
-            Services Management
-          </h1>
+          <h2 className="text-2xl font-bold text-white">Services Management</h2>
           <p className="text-sm text-gray-400 mt-1">
             Create, edit, and manage services offered.
           </p>
         </div>
-        <Link
-          href="/admin/services/create"
-          className="flex items-center gap-2 px-6 py-2.5 bg-[#CBA35E] hover:bg-[#b58e4e] text-black rounded-lg font-bold transition-all shadow-lg"
-        >
-          <Plus className="w-4 h-4" />
-          Add Service
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link
+            href="/admin/services/create"
+            className="glass-btn whitespace-nowrap"
+          >
+            <Plus className="w-4 h-4" />
+            Add Service
+          </Link>
+        </div>
       </div>
 
       {/* Filters */}
-      <div className="glass-panel p-4 mb-6 flex flex-col md:flex-row gap-4">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-          <input
-            type="text"
-            placeholder="Search services..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 bg-black/20 border border-white/10 rounded-lg text-sm text-white focus:outline-none focus:border-[#CBA35E] transition-colors"
-          />
-        </div>
-        
+      <div className="glass-panel p-4 flex gap-4">
+        <input
+          type="text"
+          placeholder="Search services..."
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setPage(1);
+          }}
+          className="w-full md:w-1/3 px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+        />
+
         <div className="w-full md:w-48">
-          <Select value={status} onValueChange={setStatus}>
-            <SelectTrigger className="w-full bg-black/20 border-white/10 text-white">
+          <Select
+            value={status}
+            onValueChange={(val) => {
+              setStatus(val || "");
+              setPage(1);
+            }}
+          >
+            <SelectTrigger className="w-full bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors">
               <SelectValue placeholder="All Status" />
             </SelectTrigger>
-            <SelectContent className="bg-[#120a1c] border-white/10">
+            <SelectContent>
               <SelectItem value="all">All Status</SelectItem>
               <SelectItem value="active">Active</SelectItem>
               <SelectItem value="inactive">Inactive</SelectItem>
@@ -207,27 +224,33 @@ export default function AdminServiceListClient() {
         </div>
       </div>
 
-      {/* Data Table */}
-      <div className="glass-panel overflow-hidden">
-        <AdminTable
-          columns={columns}
-          data={services}
-          isLoading={isLoading}
-          keyExtractor={(row) => row.slug}
-          emptyMessage="No services found. Add your first service to get started."
-        />
-        
-        {/* Pagination */}
-        {totalPages > 1 && (
-          <div className="p-4 border-t border-white/10 flex justify-center">
-            <Pagination
-              currentPage={page}
-              totalPages={totalPages}
-              onPageChange={setPage}
-            />
-          </div>
-        )}
-      </div>
+      {/* Table */}
+      <AdminTable
+        columns={columns}
+        data={services}
+        isLoading={isLoading}
+        keyExtractor={(row) => row.slug}
+        emptyMessage="No services found. Add your first service to get started."
+      />
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="flex justify-center gap-2 mt-6">
+          {Array.from({ length: totalPages }).map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setPage(idx + 1)}
+              className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${
+                page === idx + 1
+                  ? "bg-purple-600 text-white"
+                  : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
+              }`}
+            >
+              {idx + 1}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Delete Modal */}
       <DeleteModal
@@ -236,7 +259,7 @@ export default function AdminServiceListClient() {
         onConfirm={handleDelete}
         title="Delete Service"
         description="Are you sure you want to delete this service? This action cannot be undone."
-        isDeleting={isDeleting}
+        isLoading={isDeleting}
       />
     </div>
   );

@@ -6,7 +6,12 @@ interface AutoResizeTextareaProps extends React.TextareaHTMLAttributes<HTMLTextA
   value: string;
 }
 
-export default function AutoResizeTextarea({ value, className = "", onChange, ...props }: AutoResizeTextareaProps) {
+export default function AutoResizeTextarea({
+  value,
+  className = "",
+  onChange,
+  ...props
+}: AutoResizeTextareaProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {

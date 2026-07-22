@@ -92,15 +92,22 @@ const defaultFeatures = [
 ];
 
 export function WhyChooseUs({ data }: { data?: any }) {
-  const features = data?.strengths?.length > 0 
-    ? data.strengths.map((strength: any, idx: number) => ({
-        title: strength.title || "",
-        description: strength.description || "",
-        icon: strength.icon?.url ? (
-          <img src={strength.icon.url} alt={strength.title} className="w-8 h-8 object-contain" />
-        ) : defaultFeatures[idx % defaultFeatures.length].icon,
-      }))
-    : defaultFeatures;
+  const features =
+    data?.strengths?.length > 0
+      ? data.strengths.map((strength: any, idx: number) => ({
+          title: strength.title || "",
+          description: strength.description || "",
+          icon: strength.icon?.url ? (
+            <img
+              src={strength.icon.url}
+              alt={strength.title}
+              className="w-24 h-24 object-contain"
+            />
+          ) : (
+            defaultFeatures[idx % defaultFeatures.length].icon
+          ),
+        }))
+      : defaultFeatures;
 
   const strengthTitle = data?.strengthTitle || "Our Core Strengths";
   const strengthHeading = data?.strengthHeading || "Why Choose Us";
@@ -123,7 +130,7 @@ export function WhyChooseUs({ data }: { data?: any }) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature, idx) => (
+          {features.map((feature: any, idx: number) => (
             <div
               key={idx}
               className="group bg-white p-8 border border-gray-100 hover:border-transparent hover:shadow-[0_20px_50px_rgba(0,59,109,0.1)] transition-all duration-500 relative overflow-hidden"

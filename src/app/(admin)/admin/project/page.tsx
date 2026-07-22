@@ -1,9 +1,10 @@
+import { constructMetadata } from "@/lib/metadata";
 import AdminProjectListClient from "@/components/project/AdminProjectListClient";
 
-export const metadata = {
-  title: "Projects | Admin",
-  description: "Manage your real estate projects.",
-};
+export const metadata = constructMetadata({
+  title: "Admin Dashboard",
+  noIndex: true,
+});
 
 export default function AdminProjectList() {
   return <AdminProjectListClient />;

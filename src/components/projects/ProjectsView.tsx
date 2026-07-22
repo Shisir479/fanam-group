@@ -1,23 +1,22 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BlockReveal } from "@/components/ui/BlockReveal";
 import { PageBanner } from "@/components/ui/PageBanner";
 import { SharedButton } from "@/components/ui/SharedButton";
 import { Search, ChevronDown, Filter } from "lucide-react";
-import { getProjectsPublic } from "@/services/project.service";
 import { ProjectCard } from "@/components/ui/ProjectCard";
-import toast from "react-hot-toast";
 
 export function ProjectsView({
   initialStatus = "All",
+  initialProjects = [],
 }: {
   initialStatus?: string;
+  initialProjects?: any[];
 }) {
-  const [projects, setProjects] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const projects = initialProjects;
 
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState<string>("All");
@@ -27,31 +26,14 @@ export function ProjectsView({
   const [locationFilter, setLocationFilter] = useState<string>("Location");
   // const [sizeFilter, setSizeFilter] = useState<string>("Select Size Range"); // Keeping UI but might not apply
 
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const res = await getProjectsPublic({ limit: 0 }); // limit: 0 fetches all projects for client-side filtering
-        if (res.success && res.data) {
-          setProjects(res.data);
-        } else {
-          toast.error("Failed to load projects");
-        }
-      } catch (error) {
-        console.error(error);
-        toast.error("Failed to load projects");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchProjects();
-  }, []);
-
   const categories = ["Type", "Residential", "Commercial", "Mixed Use"];
   const statuses = ["All", "upcoming", "ongoing", "completed"];
-  
+
   // Extract unique locations dynamically
   const locations = useMemo(() => {
-    const locs = new Set(projects.map(p => p.location?.area || p.location?.city).filter(Boolean));
+    const locs = new Set(
+      projects.map((p) => p.location?.area || p.location?.city).filter(Boolean),
+    );
     return ["Location", ...Array.from(locs)];
   }, [projects]);
 
@@ -66,7 +48,7 @@ export function ProjectsView({
         (p) =>
           p.name.toLowerCase().includes(query) ||
           (p.location?.area || "").toLowerCase().includes(query) ||
-          (p.location?.city || "").toLowerCase().includes(query)
+          (p.location?.city || "").toLowerCase().includes(query),
       );
     }
 
@@ -82,15 +64,25 @@ export function ProjectsView({
 
     // Location filter
     if (locationFilter !== "Location") {
-      result = result.filter((p) => p.location?.area === locationFilter || p.location?.city === locationFilter);
+      result = result.filter(
+        (p) =>
+          p.location?.area === locationFilter ||
+          p.location?.city === locationFilter,
+      );
     }
 
     // Sorting
     result = [...result].sort((a, b) => {
       if (sortBy === "newest") {
-        return new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime();
+        return (
+          new Date(b.createdAt || 0).getTime() -
+          new Date(a.createdAt || 0).getTime()
+        );
       } else if (sortBy === "oldest") {
-        return new Date(a.createdAt || 0).getTime() - new Date(b.createdAt || 0).getTime();
+        return (
+          new Date(a.createdAt || 0).getTime() -
+          new Date(b.createdAt || 0).getTime()
+        );
       } else if (sortBy === "a-z") {
         return a.name.localeCompare(b.name);
       } else if (sortBy === "z-a") {
@@ -100,7 +92,14 @@ export function ProjectsView({
     });
 
     return result;
-  }, [projects, searchQuery, categoryFilter, statusFilter, sortBy, locationFilter]);
+  }, [
+    projects,
+    searchQuery,
+    categoryFilter,
+    statusFilter,
+    sortBy,
+    locationFilter,
+  ]);
 
   const displayedProjects = filteredAndSortedProjects.slice(0, visibleCount);
   const hasMore = visibleCount < filteredAndSortedProjects.length;
@@ -108,14 +107,6 @@ export function ProjectsView({
   const handleLoadMore = () => {
     setVisibleCount((prev) => prev + 6);
   };
-
-  if (isLoading) {
-    return (
-      <main className="min-h-screen bg-gray-50 flex items-center justify-center pb-24">
-         <div className="w-12 h-12 border-4 border-brand-blue/20 border-t-brand-blue rounded-full animate-spin"></div>
-      </main>
-    );
-  }
 
   return (
     <main className="min-h-screen bg-gray-50 pb-24 flex flex-col">
@@ -208,10 +199,10 @@ export function ProjectsView({
         {displayedProjects.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {displayedProjects.map((project) => (
-              <ProjectCard 
-                key={project._id || project.id} 
-                project={project} 
-                className="h-[500px] md:h-[600px] shadow-sm hover:shadow-xl transition-shadow duration-500" 
+              <ProjectCard
+                key={project._id || project.id}
+                project={project}
+                className="h-[500px] md:h-[600px] shadow-sm hover:shadow-xl transition-shadow duration-500"
               />
             ))}
           </div>

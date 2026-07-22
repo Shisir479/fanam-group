@@ -3,11 +3,11 @@ import ImageGalleryBanner from "@/components/gallery/image/banner";
 import { getGalleriesPublic } from "@/services/gallery.service";
 
 export default async function ImageGalleryPage() {
-  const res = await getGalleriesPublic({ limit: 100 });
+  const res = await getGalleriesPublic();
   const rawGalleries = res?.data || [];
 
   // Filter image galleries
-  const imageGalleries = rawGalleries.filter(g => g.type === "image");
+  const imageGalleries = rawGalleries.filter((g) => g.type === "image");
 
   // Group by title to form albums
   const albumMap = new Map<string, Album>();

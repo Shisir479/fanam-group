@@ -13,17 +13,17 @@ export const createCrudService = <T, C = Partial<T>, U = Partial<T>>(
       });
       const queryString = query.toString();
       const endpoint = queryString ? `${basePath}?${queryString}` : basePath;
-      
+
       const tag = basePath.replace(/^\/+/, "").split("/")[0] || "api";
       return api(endpoint, {
-        next: { revalidate: 10, tags: [tag] }
+        next: { revalidate: 10, tags: [tag] },
       });
     },
 
     getByIdOrSlug: async (idOrSlug: string) => {
       const tag = basePath.replace(/^\/+/, "").split("/")[0] || "api";
       return api(`${basePath}/${idOrSlug}`, {
-        next: { revalidate: 10, tags: [tag] }
+        next: { revalidate: 10, tags: [tag] },
       });
     },
 

@@ -109,7 +109,10 @@ export default function AlbumGallery({ albums = [] }: { albums?: Album[] }) {
         {/* Albums Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3">
           {albums.map((album) => (
-            <div key={album.id} className="flex flex-col gap-3 group w-full max-w-[280px]">
+            <div
+              key={album.id}
+              className="flex flex-col gap-3 group w-full max-w-[280px]"
+            >
               <div
                 className="relative aspect-[4/3] w-full overflow-hidden cursor-pointer group"
                 onClick={() => openAlbum(album)}
@@ -126,7 +129,10 @@ export default function AlbumGallery({ albums = [] }: { albums?: Album[] }) {
                   </span>
                 </div>
               </div>
-              <h3 className="text-[14px] font-medium text-gray-700 text-left truncate" title={album.title}>
+              <h3
+                className="text-[14px] font-medium text-gray-700 text-left truncate"
+                title={album.title}
+              >
                 {album.title}
               </h3>
             </div>

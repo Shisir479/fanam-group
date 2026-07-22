@@ -1,10 +1,14 @@
+import { constructMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { BlockReveal } from "@/components/ui/BlockReveal";
 import { SharedButton } from "@/components/ui/SharedButton";
 import { GalleryViewer } from "@/components/ui/GalleryViewer";
-import { getProjectBySlugPublic, getSimilarProjects } from "@/services/project.service";
+import {
+  getProjectBySlugPublic,
+  getSimilarProjects,
+} from "@/services/project.service";
 
 import {
   MapPin,
@@ -83,14 +87,22 @@ export async function generateMetadata({
     // Silent catch, fallback below
   }
 
-  console.log(project?.floorPlans)
+  console.log(project?.floorPlans);
 
-  if (!project) return { title: "Project Not Found" };
+  if (!project)
+    return constructMetadata({
+      title: "Project Not Found",
+    });
 
-  return {
-    title: project.metaTitle || `${project.name || project.title} - Bonedi Homes Projects`,
-    description: project.metaDescription || project.shortDescription || project.description,
-  };
+  return constructMetadata({
+    title:
+      project.metaTitle ||
+      `${project.name || project.title} - Bonedi Homes Projects`,
+    description:
+      project.metaDescription ||
+      project.shortDescription ||
+      project.description,
+  });
 }
 
 export default async function ProjectDetailsPage({
@@ -110,14 +122,13 @@ export default async function ProjectDetailsPage({
     // Silent catch, fallback below
   }
 
-
-
   if (!project) {
     notFound();
   }
 
   const simRes = await getSimilarProjects(slug);
-  const similarProjects = simRes.success && Array.isArray(simRes.data) ? simRes.data : [];
+  const similarProjects =
+    simRes.success && Array.isArray(simRes.data) ? simRes.data : [];
 
   // Fallback icons map for amenities
   const getIcon = (iconName: string) => {
@@ -139,9 +150,14 @@ export default async function ProjectDetailsPage({
     }
   };
 
-  const formattedLocation = [project.location?.area, project.location?.city].filter(Boolean).join(", ");
-  const getImageUrl = (img: any) => typeof img === 'string' ? img : img?.url;
-  const heroImage = getImageUrl(project.banner) || getImageUrl(project.cover) || "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop";
+  const formattedLocation = [project.location?.area, project.location?.city]
+    .filter(Boolean)
+    .join(", ");
+  const getImageUrl = (img: any) => (typeof img === "string" ? img : img?.url);
+  const heroImage =
+    getImageUrl(project.banner) ||
+    getImageUrl(project.cover) ||
+    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop";
 
   return (
     <main className="min-h-screen bg-gray-50 pb-0 font-sans">
@@ -243,7 +259,9 @@ export default async function ProjectDetailsPage({
               </div>
               <div
                 className="text-gray-600 text-lg leading-[1.8] font-light prose prose-blue max-w-none min-w-0 break-words [&_*]:!whitespace-normal"
-                dangerouslySetInnerHTML={{ __html: project.overview || project.description }}
+                dangerouslySetInnerHTML={{
+                  __html: project.overview || project.description,
+                }}
               />
             </div>
 
@@ -260,7 +278,9 @@ export default async function ProjectDetailsPage({
                           <CheckCircle2 className="w-4 h-4 text-brand-blue flex-shrink-0" />
                         </div>
                         <span className="text-gray-700 font-medium">
-                          {typeof feature === 'string' ? feature : feature.title}
+                          {typeof feature === "string"
+                            ? feature
+                            : feature.title}
                         </span>
                       </li>
                     ))}
@@ -297,11 +317,17 @@ export default async function ProjectDetailsPage({
                 >
                   <div className="w-16 h-16 bg-blue-50 flex items-center justify-center group-hover:bg-brand-blue transition-colors duration-300">
                     <div className="text-brand-blue group-hover:text-white transition-colors duration-300">
-                      {getIcon(typeof amenity === 'string' ? "CheckCircle2" : amenity.icon)}
+                      {getIcon(
+                        typeof amenity === "string"
+                          ? "CheckCircle2"
+                          : amenity.icon,
+                      )}
                     </div>
                   </div>
                   <span className="text-[16px] font-bold text-gray-800 tracking-wide">
-                    {typeof amenity === 'string' ? amenity : (amenity.title || amenity.name)}
+                    {typeof amenity === "string"
+                      ? amenity
+                      : amenity.title || amenity.name}
                   </span>
                 </div>
               ))}
@@ -410,88 +436,102 @@ export default async function ProjectDetailsPage({
               </div>
             </div>
 
-            <GalleryViewer images={project.gallery.map((g: any) => typeof g === 'string' ? g : g.url)} />
+            <GalleryViewer
+              images={project.gallery.map((g: any) =>
+                typeof g === "string" ? g : g.url,
+              )}
+            />
           </div>
         </section>
       )}
-        <section className="py-12 md:py-16 bg-white">
-          <div className="container mx-auto px-5 md:px-16 ">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-              {/* Progress */}
-              {project.construction && (
-                <div id="progress" className="flex flex-col h-full">
-                  <div className="flex flex-col gap-3 mb-12">
-                    <BlockReveal color="var(--color-brand-blue)">
-                      <h2 className="text-[14px] md:text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
-                        Status
-                      </h2>
-                    </BlockReveal>
-                    <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
-                      <h3 className="text-2xl md:text-[34px] font-bold text-brand-blue leading-[1.3] uppercase inline-block">
-                        Construction Progress
-                      </h3>
-                    </BlockReveal>
-                  </div>
+      <section className="py-12 md:py-16 bg-white">
+        <div className="container mx-auto px-5 md:px-16 ">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            {/* Progress */}
+            {project.construction && (
+              <div id="progress" className="flex flex-col h-full">
+                <div className="flex flex-col gap-3 mb-12">
+                  <BlockReveal color="var(--color-brand-blue)">
+                    <h2 className="text-[14px] md:text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
+                      Status
+                    </h2>
+                  </BlockReveal>
+                  <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
+                    <h3 className="text-2xl md:text-[34px] font-bold text-brand-blue leading-[1.3] uppercase inline-block">
+                      Construction Progress
+                    </h3>
+                  </BlockReveal>
+                </div>
 
-                  <div className="bg-gray-50 p-10 shadow-sm flex flex-col justify-center flex-grow">
-                    <div className="flex justify-between text-[13px] text-gray-500 mb-4 font-bold uppercase tracking-wider">
-                      <span>
-                        Started: {project.construction.startedAt ? new Date(project.construction.startedAt).toLocaleDateString() : 'TBA'}
-                      </span>
-                      <span>
-                        Completion: {project.construction.completionDate ? new Date(project.construction.completionDate).toLocaleDateString() : 'TBA'}
-                      </span>
+                <div className="bg-gray-50 p-10 shadow-sm flex flex-col justify-center flex-grow">
+                  <div className="flex justify-between text-[13px] text-gray-500 mb-4 font-bold uppercase tracking-wider">
+                    <span>
+                      Started:{" "}
+                      {project.construction.startedAt
+                        ? new Date(
+                            project.construction.startedAt,
+                          ).toLocaleDateString()
+                        : "TBA"}
+                    </span>
+                    <span>
+                      Completion:{" "}
+                      {project.construction.completionDate
+                        ? new Date(
+                            project.construction.completionDate,
+                          ).toLocaleDateString()
+                        : "TBA"}
+                    </span>
+                  </div>
+                  <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden mb-6">
+                    <div
+                      className="h-full bg-brand-blue relative"
+                      style={{
+                        width: `${project.construction.percentage || 0}%`,
+                      }}
+                    >
+                      <div className="absolute top-0 right-0 bottom-0 w-8 bg-white/20 animate-pulse skew-x-[-20deg]"></div>
                     </div>
-                    <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden mb-6">
-                      <div
-                        className="h-full bg-brand-blue relative"
-                        style={{
-                          width: `${project.construction.percentage || 0}%`,
-                        }}
-                      >
-                        <div className="absolute top-0 right-0 bottom-0 w-8 bg-white/20 animate-pulse skew-x-[-20deg]"></div>
-                      </div>
-                    </div>
-                    <div className="flex items-end justify-between">
-                      <span className="text-gray-500 font-medium">
-                        Overall Completion
-                      </span>
-                      <div className="text-4xl font-bold text-brand-blue">
-                        {project.construction.percentage || 0}%
-                      </div>
+                  </div>
+                  <div className="flex items-end justify-between">
+                    <span className="text-gray-500 font-medium">
+                      Overall Completion
+                    </span>
+                    <div className="text-4xl font-bold text-brand-blue">
+                      {project.construction.percentage || 0}%
                     </div>
                   </div>
                 </div>
-              )}
+              </div>
+            )}
 
-              {/* Video Tour */}
-              {project.video && (
-                <div id="video-tour" className="flex flex-col h-full">
-                  <div className="flex flex-col gap-3 mb-12">
-                    <BlockReveal color="var(--color-brand-blue)">
-                      <h2 className="text-[14px] md:text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
-                        Experience
-                      </h2>
-                    </BlockReveal>
-                    <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
-                      <h3 className="text-2xl md:text-[34px] font-bold text-brand-blue leading-[1.3] uppercase   inline-block">
-                        Video Tour
-                      </h3>
-                    </BlockReveal>
-                  </div>
-                  <div className="relative w-full h-full min-h-[250px] bg-gray-200 border border-gray-200 overflow-hidden shadow-sm flex-grow">
-                    <iframe
-                      src={project.video}
-                      title="Video Tour"
-                      className="w-full h-full absolute inset-0"
-                      allowFullScreen
-                    ></iframe>
-                  </div>
+            {/* Video Tour */}
+            {project.video && (
+              <div id="video-tour" className="flex flex-col h-full">
+                <div className="flex flex-col gap-3 mb-12">
+                  <BlockReveal color="var(--color-brand-blue)">
+                    <h2 className="text-[14px] md:text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
+                      Experience
+                    </h2>
+                  </BlockReveal>
+                  <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
+                    <h3 className="text-2xl md:text-[34px] font-bold text-brand-blue leading-[1.3] uppercase   inline-block">
+                      Video Tour
+                    </h3>
+                  </BlockReveal>
                 </div>
-              )}
-            </div>
+                <div className="relative w-full h-full min-h-[250px] bg-gray-200 border border-gray-200 overflow-hidden shadow-sm flex-grow">
+                  <iframe
+                    src={project.video}
+                    title="Video Tour"
+                    className="w-full h-full absolute inset-0"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </div>
+            )}
           </div>
-        </section>
+        </div>
+      </section>
 
       {/* 7. Location Map */}
       {project.location?.googleMap && (
@@ -534,15 +574,14 @@ export default async function ProjectDetailsPage({
             <div className="flex flex-col text-white">
               <div className="mb-3">
                 <BlockReveal color="#ffffff">
-                  <h2
-                    className="text-2xl md:text-[34px] font-bold uppercase tracking-wide"
-                  >
+                  <h2 className="text-2xl md:text-[34px] font-bold uppercase tracking-wide">
                     {project.contactTitle || "Interested in this project?"}
                   </h2>
                 </BlockReveal>
               </div>
               <p className="text-white/80 text-[14px] md:text-[15px] leading-relaxed max-w-md mb-8">
-                {project.contactDescription || "Get in touch with our property consultants to learn more about availability, pricing details, and private viewings."}
+                {project.contactDescription ||
+                  "Get in touch with our property consultants to learn more about availability, pricing details, and private viewings."}
               </p>
 
               {project.brochure?.url && (
@@ -591,7 +630,10 @@ export default async function ProjectDetailsPage({
                 detailed inquiry form and connect with our property consultants.
               </p>
 
-              <SharedButton href={`/inquiry?project=${project.slug}`} className="w-full sm:w-auto">
+              <SharedButton
+                href={`/inquiry?project=${project.slug}`}
+                className="w-full sm:w-auto"
+              >
                 Go to Inquiry Form
               </SharedButton>
             </div>
@@ -619,7 +661,10 @@ export default async function ProjectDetailsPage({
                 >
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <Image
-                      src={p.cover?.url || "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab"}
+                      src={
+                        p.cover?.url ||
+                        "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab"
+                      }
                       alt={p.name}
                       fill
                       className="object-cover transition-transform duration-[8000ms] ease-out group-hover:scale-110"
@@ -630,7 +675,9 @@ export default async function ProjectDetailsPage({
                   </div>
                   <div className="p-6">
                     <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-2 block">
-                      {[p.location?.area, p.location?.city].filter(Boolean).join(", ")}
+                      {[p.location?.area, p.location?.city]
+                        .filter(Boolean)
+                        .join(", ")}
                     </span>
                     <h4 className="text-lg font-bold text-brand-blue group-hover:text-brand-blue/80 transition-colors">
                       {p.name}

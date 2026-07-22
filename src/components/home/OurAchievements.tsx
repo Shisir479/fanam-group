@@ -11,12 +11,13 @@ const defaultAchievements = [
 ];
 
 export function OurAchievements({ data }: { data?: any }) {
-  const achievements = data?.achievements?.length > 0
-    ? data.achievements.map((ach: any) => ({
-        value: ach.number || "",
-        label: ach.title || "",
-      }))
-    : defaultAchievements;
+  const achievements =
+    data?.achievements?.length > 0
+      ? data.achievements.map((ach: any) => ({
+          value: ach.number || "",
+          label: ach.title || "",
+        }))
+      : defaultAchievements;
 
   const achievementTitle = data?.achievementTitle || "Our Legacy";
   const achievementHeading = data?.achievementHeading || "Our Achievements";
@@ -71,7 +72,7 @@ export function OurAchievements({ data }: { data?: any }) {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 divide-x-0 md:divide-x divide-white/20">
-          {achievements.map((item, idx) => (
+          {achievements.map((item: any, idx: number) => (
             <div
               key={idx}
               className={`flex flex-col items-center justify-center transform transition-all duration-1000 ${

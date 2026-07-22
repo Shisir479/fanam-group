@@ -1,10 +1,11 @@
+import { constructMetadata } from "@/lib/metadata";
 import { createGalleryByAdmin } from "@/services/gallery.service";
 import CreateGalleryClient from "@/components/gallery/CreateGalleryClient";
 
-export const metadata = {
-  title: "Create Gallery | Admin",
-  description: "Add a new image or video to your gallery.",
-};
+export const metadata = constructMetadata({
+  title: "Admin Dashboard",
+  noIndex: true,
+});
 
 export default function CreateGalleryPage() {
   const handleCreate = async (payload: any) => {

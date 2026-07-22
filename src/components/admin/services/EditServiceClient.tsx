@@ -2,8 +2,19 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { updateServiceBySlugAdmin, getServiceBySlugAdmin, ServiceType } from "@/services/service.service";
-import { ArrowLeft, Upload, X, Save, Image as ImageIcon } from "lucide-react";
+import {
+  updateServiceBySlugAdmin,
+  getServiceBySlugAdmin,
+  ServiceType,
+} from "@/services/service.service";
+import {
+  ArrowLeft,
+  Upload,
+  X,
+  Save,
+  Image as ImageIcon,
+  Loader2,
+} from "lucide-react";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import Image from "next/image";
@@ -15,7 +26,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import RichTextEditor from "@/components/ui/RichTextEditor";
-import { uploadSingleImage } from "@/services/upload.service";
+import { useImageUpload } from "@/hooks/useImageUpload";
 
 const CATEGORIES = [
   "Residential Properties",
@@ -24,11 +35,12 @@ const CATEGORIES = [
   "Property Management",
   "Construction",
   "Architecture",
-  "Other"
+  "Other",
 ];
 
 export default function EditServiceClient({ slug }: { slug: string }) {
   const router = useRouter();
+  const { uploadSingle } = useImageUpload();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const imageInputRef = useRef<HTMLInputElement>(null);
@@ -103,8 +115,13 @@ export default function EditServiceClient({ slug }: { slug: string }) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!formData.name || !formData.slug || !formData.heading || !formData.description) {
+
+    if (
+      !formData.name ||
+      !formData.slug ||
+      !formData.heading ||
+      !formData.description
+    ) {
       toast.error("Please fill in all required fields");
       return;
     }
@@ -122,11 +139,15 @@ export default function EditServiceClient({ slug }: { slug: string }) {
 
       // Upload new image if selected
       if (imageFile) {
-        const uploadRes = await uploadSingleImage(imageFile, "services");
-        if (!uploadRes?.success || !uploadRes.data) {
+        const uploadedImage = await uploadSingle(imageFile, true);
+        if (!uploadedImage) {
           throw new Error("Failed to upload new image");
         }
-        finalImage = uploadRes.data;
+
+        finalImage = {
+          _id: uploadedImage._id || uploadedImage.url,
+          url: uploadedImage.url,
+        };
       }
 
       const finalData = {
@@ -156,27 +177,55 @@ export default function EditServiceClient({ slug }: { slug: string }) {
 
   return (
     <div className="w-full max-w-5xl mx-auto pb-24">
-      <div className="flex items-center gap-4 mb-8">
-        <Link
-          href="/admin/services"
-          className="p-2 bg-black/20 hover:bg-black/40 text-gray-400 hover:text-white rounded-lg transition-colors border border-white/5"
-        >
-          <ArrowLeft className="w-5 h-5" />
-        </Link>
-        <div>
-          <h1 className="text-2xl font-bold text-white tracking-wide">Edit Service</h1>
-          <p className="text-sm text-gray-400 mt-1">Update service information.</p>
+      <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center gap-4">
+          <Link
+            href="/admin/services"
+            className="p-2 glass-panel text-gray-400 hover:text-white transition-colors"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </Link>
+          <div>
+            <h1 className="text-2xl font-bold text-white tracking-wide">
+              Edit Service
+            </h1>
+            <p className="text-sm text-gray-400 mt-1">
+              Update service information.
+            </p>
+          </div>
         </div>
+
+        <button
+          type="submit"
+          form="edit-service-form"
+          disabled={isSubmitting}
+          className="glass-btn flex items-center gap-2"
+        >
+          {isSubmitting ? (
+            <Loader2 className="w-4 h-4 animate-spin" />
+          ) : (
+            <Save className="w-4 h-4" />
+          )}
+          Update Service
+        </button>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form
+        id="edit-service-form"
+        onSubmit={handleSubmit}
+        className="space-y-6"
+      >
         {/* Basic Info */}
         <div className="glass-panel p-6 space-y-6">
-          <h2 className="text-lg font-semibold text-white border-b border-white/10 pb-2">Basic Information</h2>
-          
+          <h2 className="text-lg font-semibold text-white border-b border-white/10 pb-2">
+            Basic Information
+          </h2>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="text-sm font-semibold text-gray-200 block mb-1">Service Name *</label>
+              <label className="text-sm font-semibold text-gray-200 block mb-1">
+                Service Name *
+              </label>
               <input
                 type="text"
                 required
@@ -186,43 +235,57 @@ export default function EditServiceClient({ slug }: { slug: string }) {
               />
             </div>
             <div>
-              <label className="text-sm font-semibold text-gray-200 block mb-1">Slug *</label>
+              <label className="text-sm font-semibold text-gray-200 block mb-1">
+                Slug *
+              </label>
               <input
                 type="text"
                 required
                 value={formData.slug}
-                onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, slug: e.target.value })
+                }
                 className="w-full px-4 py-2 bg-black/20 border border-white/10 rounded-lg text-gray-400 focus:outline-none focus:border-[#CBA35E] transition-colors"
               />
             </div>
-            
+
             <div>
-              <label className="text-sm font-semibold text-gray-200 block mb-1">Category *</label>
+              <label className="text-sm font-semibold text-gray-200 block mb-1">
+                Category *
+              </label>
               <Select
-                value={formData.category}
-                onValueChange={(val) => setFormData({ ...formData, category: val })}
+                value={formData.category || undefined}
+                onValueChange={(val) =>
+                  setFormData({ ...formData, category: val || undefined })
+                }
               >
                 <SelectTrigger className="w-full bg-black/20 border-white/10 text-white">
                   <SelectValue placeholder="Select Category" />
                 </SelectTrigger>
-                <SelectContent className="bg-[#120a1c] border-white/10">
+                <SelectContent>
                   {CATEGORIES.map((cat) => (
-                    <SelectItem key={cat} value={cat}>{cat}</SelectItem>
+                    <SelectItem key={cat} value={cat}>
+                      {cat}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
 
             <div>
-              <label className="text-sm font-semibold text-gray-200 block mb-1">Status</label>
+              <label className="text-sm font-semibold text-gray-200 block mb-1">
+                Status
+              </label>
               <Select
                 value={formData.status}
-                onValueChange={(val: any) => setFormData({ ...formData, status: val })}
+                onValueChange={(val: any) =>
+                  setFormData({ ...formData, status: val })
+                }
               >
                 <SelectTrigger className="w-full bg-black/20 border-white/10 text-white">
                   <SelectValue placeholder="Select Status" />
                 </SelectTrigger>
-                <SelectContent className="bg-[#120a1c] border-white/10">
+                <SelectContent>
                   <SelectItem value="active">Active</SelectItem>
                   <SelectItem value="inactive">Inactive</SelectItem>
                 </SelectContent>
@@ -233,46 +296,64 @@ export default function EditServiceClient({ slug }: { slug: string }) {
 
         {/* Content */}
         <div className="glass-panel p-6 space-y-6">
-          <h2 className="text-lg font-semibold text-white border-b border-white/10 pb-2">Service Content</h2>
-          
+          <h2 className="text-lg font-semibold text-white border-b border-white/10 pb-2">
+            Service Content
+          </h2>
+
           <div>
-            <label className="text-sm font-semibold text-gray-200 block mb-1">Heading *</label>
+            <label className="text-sm font-semibold text-gray-200 block mb-1">
+              Heading *
+            </label>
             <input
               type="text"
               required
               value={formData.heading}
-              onChange={(e) => setFormData({ ...formData, heading: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, heading: e.target.value })
+              }
               className="w-full px-4 py-2 bg-black/20 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#CBA35E] transition-colors"
             />
           </div>
 
           <div>
-            <label className="text-sm font-semibold text-gray-200 block mb-1">Short Description *</label>
+            <label className="text-sm font-semibold text-gray-200 block mb-1">
+              Short Description *
+            </label>
             <textarea
               required
               rows={3}
               value={formData.shortDescription}
-              onChange={(e) => setFormData({ ...formData, shortDescription: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, shortDescription: e.target.value })
+              }
               className="w-full px-4 py-2 bg-black/20 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#CBA35E] transition-colors resize-none"
             />
           </div>
 
           <div>
-            <label className="text-sm font-semibold text-gray-200 block mb-2">Detailed Description *</label>
+            <label className="text-sm font-semibold text-gray-200 block mb-2">
+              Detailed Description *
+            </label>
             <RichTextEditor
-              content={formData.description || ""}
-              onChange={(content) => setFormData({ ...formData, description: content })}
+              value={formData.description || ""}
+              onChange={(content) =>
+                setFormData({ ...formData, description: content })
+              }
             />
           </div>
         </div>
 
         {/* Media */}
         <div className="glass-panel p-6 space-y-6">
-          <h2 className="text-lg font-semibold text-white border-b border-white/10 pb-2">Media & Icon</h2>
-          
+          <h2 className="text-lg font-semibold text-white border-b border-white/10 pb-2">
+            Media & Icon
+          </h2>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="text-sm font-semibold text-gray-200 block mb-2">Main Image *</label>
+              <label className="text-sm font-semibold text-gray-200 block mb-2">
+                Main Image *
+              </label>
               <input
                 type="file"
                 ref={imageInputRef}
@@ -282,7 +363,12 @@ export default function EditServiceClient({ slug }: { slug: string }) {
               />
               {imagePreview ? (
                 <div className="relative aspect-video rounded-lg overflow-hidden border border-white/10 group">
-                  <Image src={imagePreview} alt="Preview" fill className="object-cover" />
+                  <Image
+                    src={imagePreview}
+                    alt="Preview"
+                    fill
+                    className="object-cover"
+                  />
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                     <button
                       type="button"
@@ -301,23 +387,31 @@ export default function EditServiceClient({ slug }: { slug: string }) {
                   </div>
                 </div>
               ) : (
-                <div 
+                <div
                   onClick={() => imageInputRef.current?.click()}
                   className="aspect-video rounded-lg border-2 border-dashed border-white/10 hover:border-[#CBA35E]/50 hover:bg-[#CBA35E]/5 transition-all cursor-pointer flex flex-col items-center justify-center text-gray-400 hover:text-[#CBA35E]"
                 >
                   <ImageIcon className="w-8 h-8 mb-2 opacity-50" />
-                  <span className="text-sm font-medium">Click to upload image</span>
-                  <span className="text-xs opacity-70 mt-1">1920x1080px recommended</span>
+                  <span className="text-sm font-medium">
+                    Click to upload image
+                  </span>
+                  <span className="text-xs opacity-70 mt-1">
+                    1920x1080px recommended
+                  </span>
                 </div>
               )}
             </div>
-            
+
             <div>
-              <label className="text-sm font-semibold text-gray-200 block mb-1">Icon (Optional)</label>
+              <label className="text-sm font-semibold text-gray-200 block mb-1">
+                Icon (Optional)
+              </label>
               <input
                 type="text"
                 value={formData.icon}
-                onChange={(e) => setFormData({ ...formData, icon: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, icon: e.target.value })
+                }
                 className="w-full px-4 py-2 bg-black/20 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#CBA35E] transition-colors"
               />
             </div>
@@ -326,53 +420,41 @@ export default function EditServiceClient({ slug }: { slug: string }) {
 
         {/* SEO */}
         <div className="glass-panel p-6 space-y-6">
-          <h2 className="text-lg font-semibold text-white border-b border-white/10 pb-2">SEO Settings</h2>
-          
+          <h2 className="text-lg font-semibold text-white border-b border-white/10 pb-2">
+            SEO Settings
+          </h2>
+
           <div className="space-y-4">
             <div>
-              <label className="text-sm font-semibold text-gray-200 block mb-1">Meta Title *</label>
+              <label className="text-sm font-semibold text-gray-200 block mb-1">
+                Meta Title *
+              </label>
               <input
                 type="text"
                 required
                 value={formData.metaTitle}
-                onChange={(e) => setFormData({ ...formData, metaTitle: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, metaTitle: e.target.value })
+                }
                 className="w-full px-4 py-2 bg-black/20 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#CBA35E] transition-colors"
               />
             </div>
-            
+
             <div>
-              <label className="text-sm font-semibold text-gray-200 block mb-1">Meta Description *</label>
+              <label className="text-sm font-semibold text-gray-200 block mb-1">
+                Meta Description *
+              </label>
               <textarea
                 required
                 rows={2}
                 value={formData.metaDescription}
-                onChange={(e) => setFormData({ ...formData, metaDescription: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, metaDescription: e.target.value })
+                }
                 className="w-full px-4 py-2 bg-black/20 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#CBA35E] transition-colors resize-none"
               />
             </div>
           </div>
-        </div>
-
-        {/* Submit */}
-        <div className="flex justify-end gap-4">
-          <Link
-            href="/admin/services"
-            className="px-6 py-2.5 bg-black/20 hover:bg-black/40 text-white rounded-lg font-medium transition-colors border border-white/10"
-          >
-            Cancel
-          </Link>
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="flex items-center gap-2 px-8 py-2.5 bg-[#CBA35E] hover:bg-[#b58e4e] text-black rounded-lg font-bold transition-all shadow-[0_0_15px_rgba(203,163,94,0.4)] disabled:opacity-50"
-          >
-            {isSubmitting ? (
-              <span className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin" />
-            ) : (
-              <Save className="w-5 h-5" />
-            )}
-            {isSubmitting ? "Updating..." : "Update Service"}
-          </button>
         </div>
       </form>
     </div>

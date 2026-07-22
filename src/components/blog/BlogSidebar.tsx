@@ -50,18 +50,32 @@ export function BlogSidebar({ categories, recentPosts }: BlogSidebarProps) {
         <div className="flex flex-col gap-8">
           {recentPosts.map((post) => (
             <div key={post.id} className="flex items-start gap-4">
-              <Link href={`/blog/${post.slug}`} className="group relative block w-[90px] h-[75px] flex-shrink-0 overflow-hidden rounded-lg">
+              <Link
+                href={`/blog/${post.slug}`}
+                className="group relative block w-[90px] h-[75px] flex-shrink-0 overflow-hidden rounded-lg"
+              >
                 <img
-                  src={post.image || post.cover?.url || "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=2073&auto=format&fit=crop"}
+                  src={
+                    post.image ||
+                    post.cover?.url ||
+                    "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=2073&auto=format&fit=crop"
+                  }
                   alt={post.title || post.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
               </Link>
               <div className="flex flex-col justify-center">
                 <h4 className="text-sm font-semibold text-gray-900 leading-tight group-hover:text-brand-blue transition-colors line-clamp-2">
-                  <Link href={`/blog/${post.slug}`}>{post.title || post.name}</Link>
+                  <Link href={`/blog/${post.slug}`}>
+                    {post.title || post.name}
+                  </Link>
                 </h4>
-                <p className="text-xs text-gray-400 mt-1.5">{post.date || new Date(post.publishedAt || post.createdAt).toLocaleDateString()}</p>
+                <p className="text-xs text-gray-400 mt-1.5">
+                  {post.date ||
+                    new Date(
+                      post.publishedAt || post.createdAt,
+                    ).toLocaleDateString()}
+                </p>
               </div>
             </div>
           ))}

@@ -41,10 +41,13 @@ export function CoreValues({ data }: { data: any }) {
     },
   ];
 
-  const values = data?.coreValues?.length > 0 ? data.coreValues.map((cv: any, i: number) => ({
-    ...cv,
-    icon: defaultValues[i % defaultValues.length].icon
-  })) : defaultValues;
+  const values =
+    data?.coreValues?.length > 0
+      ? data.coreValues.map((cv: any, i: number) => ({
+          ...cv,
+          icon: defaultValues[i % defaultValues.length].icon,
+        }))
+      : defaultValues;
 
   if (!data) return null;
 

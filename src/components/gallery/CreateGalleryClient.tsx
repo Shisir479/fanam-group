@@ -2,9 +2,16 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { uploadSingleImage } from "@/services/upload.service";
+import { useImageUpload } from "@/hooks/useImageUpload";
 import toast from "react-hot-toast";
-import { ArrowLeft, Save, Loader2, Image as ImageIcon, Video as VideoIcon, UploadCloud } from "lucide-react";
+import {
+  ArrowLeft,
+  Save,
+  Loader2,
+  Image as ImageIcon,
+  Video as VideoIcon,
+  UploadCloud,
+} from "lucide-react";
 import Link from "next/link";
 import {
   Select,
@@ -14,7 +21,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export default function CreateGalleryClient({ onSubmit }: { onSubmit: (payload: any) => Promise<any> }) {
+export default function CreateGalleryClient({
+  onSubmit,
+}: {
+  onSubmit: (payload: any) => Promise<any>;
+}) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -33,6 +44,7 @@ export default function CreateGalleryClient({ onSubmit }: { onSubmit: (payload: 
   const [coverId, setCoverId] = useState("");
   const [thumbnailUrl, setThumbnailUrl] = useState("");
   const [thumbnailId, setThumbnailId] = useState("");
+  const { uploadSingle } = useImageUpload();
   const [isUploadingCover, setIsUploadingCover] = useState(false);
   const [isUploadingThumbnail, setIsUploadingThumbnail] = useState(false);
 
@@ -56,7 +68,10 @@ export default function CreateGalleryClient({ onSubmit }: { onSubmit: (payload: 
     }));
   };
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, isThumbnail: boolean = false) => {
+  const handleFileUpload = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+    isThumbnail: boolean = false,
+  ) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -64,14 +79,14 @@ export default function CreateGalleryClient({ onSubmit }: { onSubmit: (payload: 
     else setIsUploadingCover(true);
 
     try {
-      const res = await uploadSingleImage(file);
-      if (res.success && res.data && res.data.length > 0) {
+      const imageData = await uploadSingle(file, true);
+      if (imageData) {
         if (isThumbnail) {
-          setThumbnailUrl(res.data[0].url);
-          setThumbnailId(res.data[0]._id || Date.now().toString());
+          setThumbnailUrl(imageData.url);
+          setThumbnailId(imageData._id);
         } else {
-          setCoverUrl(res.data[0].url);
-          setCoverId(res.data[0]._id || Date.now().toString());
+          setCoverUrl(imageData.url);
+          setCoverId(imageData._id);
         }
         toast.success("Image uploaded successfully");
       } else {
@@ -99,8 +114,12 @@ export default function CreateGalleryClient({ onSubmit }: { onSubmit: (payload: 
 
       const payload = {
         ...formData,
-        cover: coverUrl ? { _id: coverId || Date.now().toString(), url: coverUrl } : undefined,
-        thumbnail: thumbnailUrl ? { _id: thumbnailId || Date.now().toString(), url: thumbnailUrl } : undefined,
+        cover: coverUrl
+          ? { _id: coverId || Date.now().toString(), url: coverUrl }
+          : undefined,
+        thumbnail: thumbnailUrl
+          ? { _id: thumbnailId || Date.now().toString(), url: thumbnailUrl }
+          : undefined,
       };
 
       const res = await onSubmit(payload);
@@ -178,7 +197,9 @@ export default function CreateGalleryClient({ onSubmit }: { onSubmit: (payload: 
                   type="text"
                   required
                   value={formData.slug}
-                  onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, slug: e.target.value })
+                  }
                   className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
                   placeholder="luxury-villa-exterior"
                 />
@@ -190,7 +211,9 @@ export default function CreateGalleryClient({ onSubmit }: { onSubmit: (payload: 
                 </label>
                 <textarea
                   value={formData.description}
-                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, description: e.target.value })
+                  }
                   className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors min-h-[120px]"
                   placeholder="Short description of this media..."
                 />
@@ -212,10 +235,11 @@ export default function CreateGalleryClient({ onSubmit }: { onSubmit: (payload: 
                 <button
                   type="button"
                   onClick={() => setFormData({ ...formData, type: "image" })}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-xl border transition-colors ${formData.type === "image"
+                  className={`flex items-center gap-2 px-4 py-2 rounded-xl border transition-colors ${
+                    formData.type === "image"
                       ? "bg-blue-600/20 border-blue-500 text-blue-400"
                       : "bg-white/5 border-white/10 text-gray-400 hover:border-white/30 hover:text-white"
-                    }`}
+                  }`}
                 >
                   <ImageIcon size={18} />
                   Image
@@ -223,10 +247,11 @@ export default function CreateGalleryClient({ onSubmit }: { onSubmit: (payload: 
                 <button
                   type="button"
                   onClick={() => setFormData({ ...formData, type: "video" })}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-xl border transition-colors ${formData.type === "video"
+                  className={`flex items-center gap-2 px-4 py-2 rounded-xl border transition-colors ${
+                    formData.type === "video"
                       ? "bg-blue-600/20 border-blue-500 text-blue-400"
                       : "bg-white/5 border-white/10 text-gray-400 hover:border-white/30 hover:text-white"
-                    }`}
+                  }`}
                 >
                   <VideoIcon size={18} />
                   Video
@@ -244,11 +269,20 @@ export default function CreateGalleryClient({ onSubmit }: { onSubmit: (payload: 
                     {coverUrl ? (
                       <div className="relative group">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={coverUrl} alt="Cover" className="mx-auto max-h-[300px] rounded-xl object-contain" />
+                        <img
+                          src={coverUrl}
+                          alt="Cover"
+                          className="mx-auto max-h-[300px] rounded-xl object-contain"
+                        />
                         <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-xl">
                           <label className="cursor-pointer bg-white/20 hover:bg-white/30 px-4 py-2 rounded-md text-white backdrop-blur-sm transition-colors">
                             Change Image
-                            <input type="file" className="sr-only" accept="image/*" onChange={(e) => handleFileUpload(e, false)} />
+                            <input
+                              type="file"
+                              className="sr-only"
+                              accept="image/*"
+                              onChange={(e) => handleFileUpload(e, false)}
+                            />
                           </label>
                         </div>
                       </div>
@@ -262,11 +296,19 @@ export default function CreateGalleryClient({ onSubmit }: { onSubmit: (payload: 
                         <div className="mt-4 flex text-sm leading-6 text-gray-400">
                           <span className="relative cursor-pointer rounded-md font-semibold text-blue-400 hover:text-blue-300">
                             <span>Upload a file</span>
-                            <input type="file" className="sr-only" accept="image/*" onChange={(e) => handleFileUpload(e, false)} disabled={isUploadingCover} />
+                            <input
+                              type="file"
+                              className="sr-only"
+                              accept="image/*"
+                              onChange={(e) => handleFileUpload(e, false)}
+                              disabled={isUploadingCover}
+                            />
                           </span>
                           <p className="pl-1">or drag and drop</p>
                         </div>
-                        <p className="text-xs leading-5 text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                        <p className="text-xs leading-5 text-gray-500">
+                          PNG, JPG, GIF up to 10MB
+                        </p>
                       </label>
                     )}
                   </div>
@@ -283,7 +325,9 @@ export default function CreateGalleryClient({ onSubmit }: { onSubmit: (payload: 
                   <input
                     type="url"
                     value={formData.videoUrl}
-                    onChange={(e) => setFormData({ ...formData, videoUrl: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, videoUrl: e.target.value })
+                    }
                     className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
                     placeholder="https://youtube.com/watch?v=..."
                   />
@@ -297,11 +341,20 @@ export default function CreateGalleryClient({ onSubmit }: { onSubmit: (payload: 
                       {thumbnailUrl ? (
                         <div className="relative group">
                           {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={thumbnailUrl} alt="Thumbnail" className="mx-auto h-[150px] rounded-xl object-contain" />
+                          <img
+                            src={thumbnailUrl}
+                            alt="Thumbnail"
+                            className="mx-auto h-[150px] rounded-xl object-contain"
+                          />
                           <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-xl">
                             <label className="cursor-pointer bg-white/20 hover:bg-white/30 px-3 py-1.5 text-sm rounded-md text-white backdrop-blur-sm transition-colors">
                               Change
-                              <input type="file" className="sr-only" accept="image/*" onChange={(e) => handleFileUpload(e, true)} />
+                              <input
+                                type="file"
+                                className="sr-only"
+                                accept="image/*"
+                                onChange={(e) => handleFileUpload(e, true)}
+                              />
                             </label>
                           </div>
                         </div>
@@ -315,7 +368,13 @@ export default function CreateGalleryClient({ onSubmit }: { onSubmit: (payload: 
                           <div className="mt-2 flex text-sm text-gray-400">
                             <span className="relative cursor-pointer rounded-md font-semibold text-blue-400 hover:text-blue-300">
                               <span>Upload thumbnail</span>
-                              <input type="file" className="sr-only" accept="image/*" onChange={(e) => handleFileUpload(e, true)} disabled={isUploadingThumbnail} />
+                              <input
+                                type="file"
+                                className="sr-only"
+                                accept="image/*"
+                                onChange={(e) => handleFileUpload(e, true)}
+                                disabled={isUploadingThumbnail}
+                              />
                             </span>
                           </div>
                         </label>
@@ -341,7 +400,12 @@ export default function CreateGalleryClient({ onSubmit }: { onSubmit: (payload: 
               </label>
               <Select
                 value={formData.status}
-                onValueChange={(value) => setFormData({ ...formData, status: (value as "active" | "inactive") || "active" })}
+                onValueChange={(value) =>
+                  setFormData({
+                    ...formData,
+                    status: (value as "active" | "inactive") || "active",
+                  })
+                }
               >
                 <SelectTrigger className="w-full px-4 py-2 border border-white/10 rounded-xl text-white outline-none focus:ring-1 focus:ring-purple-500 transition-colors h-auto min-h-[42px] bg-white/5">
                   <SelectValue placeholder="Select Status" />
@@ -371,14 +435,18 @@ export default function CreateGalleryClient({ onSubmit }: { onSubmit: (payload: 
             <div className="flex items-center justify-between p-4 bg-white/5 rounded-xl border border-white/5">
               <div>
                 <label className="font-medium text-white block">Featured</label>
-                <span className="text-xs text-gray-500">Show in featured sections</span>
+                <span className="text-xs text-gray-500">
+                  Show in featured sections
+                </span>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
                 <input
                   type="checkbox"
                   className="sr-only peer"
                   checked={formData.featured}
-                  onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, featured: e.target.checked })
+                  }
                 />
                 <div className="w-11 h-6 bg-white/10 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-gray-300 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
               </label>
@@ -398,7 +466,9 @@ export default function CreateGalleryClient({ onSubmit }: { onSubmit: (payload: 
                 <input
                   type="text"
                   value={formData.metaTitle}
-                  onChange={(e) => setFormData({ ...formData, metaTitle: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, metaTitle: e.target.value })
+                  }
                   className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
                 />
               </div>
@@ -409,7 +479,12 @@ export default function CreateGalleryClient({ onSubmit }: { onSubmit: (payload: 
                 </label>
                 <textarea
                   value={formData.metaDescription}
-                  onChange={(e) => setFormData({ ...formData, metaDescription: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      metaDescription: e.target.value,
+                    })
+                  }
                   className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors min-h-[100px]"
                 />
               </div>

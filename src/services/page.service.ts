@@ -1,6 +1,6 @@
 import { api } from "@/lib/api";
 import { createCrudService } from "./crud.service";
-import { revalidateGlobalCache } from "@/app/actions";
+import { revalidatePage } from "@/app/actions";
 
 export interface Page {
   _id: string;
@@ -56,7 +56,7 @@ export const createPageByAdmin = async (
 ): Promise<{ success: boolean; message: string }> => {
   const res = (await adminPageCrud.create(data)) as any;
   if (res?.success !== false) {
-    await revalidateGlobalCache("pages");
+    await revalidatePage("/", "layout");
   }
   return res;
 };
@@ -67,7 +67,7 @@ export const updatePageBySlugByAdmin = async (
 ): Promise<{ success: boolean; message: string }> => {
   const res = (await adminPageCrud.update(slug, data)) as any;
   if (res?.success !== false) {
-    await revalidateGlobalCache("pages");
+    await revalidatePage("/", "layout");
   }
   return res;
 };
@@ -77,7 +77,7 @@ export const deletePageBySlugByAdmin = async (
 ): Promise<{ success: boolean; message: string }> => {
   const res = (await adminPageCrud.delete(slug)) as any;
   if (!res || res.success !== false) {
-    await revalidateGlobalCache("pages");
+    await revalidatePage("/", "layout");
   }
   return res;
 };

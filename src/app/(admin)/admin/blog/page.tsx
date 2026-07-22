@@ -7,15 +7,7 @@ import {
   deleteBlogBySlugByAdmin,
   Blog,
 } from "@/services/blog.service";
-import {
-  Plus,
-  Edit,
-  Trash2,
-  Eye,
-  Loader2,
-  Calendar,
-  Database,
-} from "lucide-react";
+import { Plus, Edit, Trash2, Eye, Calendar, Database } from "lucide-react";
 import toast from "react-hot-toast";
 import { DeleteModal } from "@/components/ui/DeleteModal";
 import { AdminTable, ColumnDef } from "@/components/ui/AdminTable";
@@ -85,8 +77,8 @@ export default function AdminBlogList() {
             blog.status === "active"
               ? "bg-green-500/20 text-green-400"
               : blog.status === "inactive"
-              ? "bg-red-500/20 text-red-400"
-              : "bg-gray-500/20 text-gray-400"
+                ? "bg-red-500/20 text-red-400"
+                : "bg-gray-500/20 text-gray-400"
           }`}
         >
           {blog.status}
@@ -97,9 +89,7 @@ export default function AdminBlogList() {
       header: "Category",
       render: (blog) => (
         <span className="text-gray-300">
-          {typeof blog.blogCategory === "string" 
-            ? blog.blogCategory 
-            : "N/A"}
+          {typeof blog.blogCategory === "string" ? blog.blogCategory : "N/A"}
         </span>
       ),
     },
@@ -205,10 +195,11 @@ export default function AdminBlogList() {
             <button
               key={idx}
               onClick={() => setPage(idx + 1)}
-              className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${page === idx + 1
-                ? "bg-purple-600 text-white"
-                : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
-                }`}
+              className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${
+                page === idx + 1
+                  ? "bg-purple-600 text-white"
+                  : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
+              }`}
             >
               {idx + 1}
             </button>

@@ -1,10 +1,20 @@
+import { constructMetadata } from "@/lib/metadata";
 import { TermsConditionsView } from "@/components/pages/TermsConditionsView";
 import { getPageBySlugPublic } from "@/services/page.service";
 
-export const metadata = {
-  title: "Terms & Conditions - Bonedi Homes",
-  description: "Terms and Conditions for Bonedi Homes",
-};
+export async function generateMetadata() {
+  let pageData = null;
+  try {
+    const res = await getPageBySlugPublic("terms-conditions");
+    if (res?.success) pageData = res.data;
+  } catch (e) {}
+
+  return constructMetadata({
+    title: pageData?.metaTitle || "Terms & Conditions - Bonedi Homes",
+    description:
+      pageData?.metaDescription || "Terms & Conditions for Bonedi Homes",
+  });
+}
 
 export default async function TermsConditionsPage() {
   let pageData = null;

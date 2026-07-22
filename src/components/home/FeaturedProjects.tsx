@@ -9,29 +9,18 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import { ProjectCard } from "@/components/ui/ProjectCard";
-import { getProjectsPublic } from "@/services/project.service";
 
-export function FeaturedProjects() {
+export function FeaturedProjects({
+  initialProjects = [],
+}: {
+  initialProjects?: any[];
+}) {
   const sectionRef = useRef<HTMLElement>(null);
   const [activeTab, setActiveTab] = useState<
     "featured" | "ongoing" | "upcoming"
   >("featured");
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
-  const [projects, setProjects] = useState<any[]>([]);
-
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const res = await getProjectsPublic({ limit: 0 });
-        if (res.success && res.data) {
-          setProjects(res.data);
-        }
-      } catch (error) {
-        console.error("Failed to load projects:", error);
-      }
-    };
-    fetchProjects();
-  }, []);
+  const projects = initialProjects;
 
   const tabsData = {
     featured: {
@@ -42,7 +31,9 @@ export function FeaturedProjects() {
           ARCHITECTURE AND DESIGN
         </>
       ),
-      projects: projects.filter((p) => p.status?.toLowerCase().includes("featured") || p.featured),
+      projects: projects.filter(
+        (p) => p.status?.toLowerCase().includes("featured") || p.featured,
+      ),
     },
     ongoing: {
       title: "ONGOING PROJECTS",
@@ -52,7 +43,9 @@ export function FeaturedProjects() {
           WITH EXCELLENCE
         </>
       ),
-      projects: projects.filter((p) => p.status?.toLowerCase().includes("ongoing")),
+      projects: projects.filter((p) =>
+        p.status?.toLowerCase().includes("ongoing"),
+      ),
     },
     upcoming: {
       title: "UPCOMING PROJECTS",
@@ -62,31 +55,29 @@ export function FeaturedProjects() {
           LIFESTYLE
         </>
       ),
-      projects: projects.filter((p) => p.status?.toLowerCase().includes("upcoming")),
+      projects: projects.filter((p) =>
+        p.status?.toLowerCase().includes("upcoming"),
+      ),
     },
   };
 
   const currentData = tabsData[activeTab];
-  // Duplicate projects to ensure Swiper has enough slides to loop infinitely
-  const extendedProjects = Array(4).fill(currentData.projects).flat();
+  // Only duplicate if there are very few items to prevent lag (DOM bloat).
+  // We need at least 12 slides for a smooth loop on wide screens.
+  const projectsCount = currentData.projects.length;
+  const repeatCount =
+    projectsCount === 0 ? 0 : Math.max(1, Math.ceil(12 / projectsCount));
+  const extendedProjects = Array(repeatCount).fill(currentData.projects).flat();
 
   const scrollLeftAction = () => {
     if (swiperInstance) {
-      if (window.innerWidth >= 1024) {
-        swiperInstance.slideToLoop(swiperInstance.realIndex - 3);
-      } else {
-        swiperInstance.slidePrev();
-      }
+      swiperInstance.slidePrev();
     }
   };
 
   const scrollRightAction = () => {
     if (swiperInstance) {
-      if (window.innerWidth >= 1024) {
-        swiperInstance.slideToLoop(swiperInstance.realIndex + 3);
-      } else {
-        swiperInstance.slideNext();
-      }
+      swiperInstance.slideNext();
     }
   };
 
@@ -189,7 +180,7 @@ export function FeaturedProjects() {
       {/* Projects Carousel - Swiper Infinite Loop */}
       <div className="w-full pb-8">
         <Swiper
-          key={activeTab}
+          key={`${activeTab}-${projects.length}`}
           onSwiper={setSwiperInstance}
           loop={true}
           spaceBetween={16}
@@ -202,7 +193,11 @@ export function FeaturedProjects() {
               key={`${project.id}-${idx}`}
               className="h-full !w-[85vw] sm:!w-[45vw] md:!w-[40vw] lg:!w-[30vw] xl:!w-[28vw] 2xl:!w-[25vw] cursor-pointer"
             >
-              <ProjectCard project={project} className="w-full h-full" isSwiperSlide />
+              <ProjectCard
+                project={project}
+                className="w-full h-full"
+                isSwiperSlide
+              />
             </SwiperSlide>
           ))}
         </Swiper>

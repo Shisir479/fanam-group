@@ -65,7 +65,10 @@ export function FeaturedServices({ services = [] }: { services?: any[] }) {
           {displayServices.map((service, idx) => {
             const isActive = hoveredIndex === idx;
             const titleLines = service.name.split(" ");
-            const formattedTitle = titleLines.length > 1 ? `${titleLines[0]}\n${titleLines.slice(1).join(" ")}` : service.name;
+            const formattedTitle =
+              titleLines.length > 1
+                ? `${titleLines[0]}\n${titleLines.slice(1).join(" ")}`
+                : service.name;
 
             return (
               <div

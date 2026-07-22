@@ -1,3 +1,4 @@
+import { constructMetadata } from "@/lib/metadata";
 import { BlogHero } from "@/components/blog/BlogHero";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { BlogSidebar } from "@/components/blog/BlogSidebar";
@@ -5,10 +6,10 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { getBlogsPublic } from "@/services/blog.service";
 
-export const metadata = {
+export const metadata = constructMetadata({
   title: "News & Blog - Bonedi Homes",
   description: "Latest news, insights, and market trends from Bonedi Homes.",
-};
+});
 
 async function getBlogs(searchParams: any) {
   const params: any = {};
@@ -74,7 +75,7 @@ export default async function BlogPage({
     "Interior Design",
     "Market Trends",
     "Company News",
-    "Architecture"
+    "Architecture",
   ];
   const recentPosts = mappedPosts.slice(0, 3);
 
@@ -172,7 +173,10 @@ export default async function BlogPage({
             {/* Sidebar */}
             <aside className="w-full lg:w-4/12">
               <div className="sticky top-28">
-                <BlogSidebar categories={categories} recentPosts={recentPosts} />
+                <BlogSidebar
+                  categories={categories}
+                  recentPosts={recentPosts}
+                />
               </div>
             </aside>
           </div>

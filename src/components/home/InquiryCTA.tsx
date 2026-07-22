@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { BlockReveal } from "@/components/ui/BlockReveal";
 import {
@@ -12,10 +13,18 @@ import {
 
 export function InquiryCTA() {
   const router = useRouter();
+  const [propertyType, setPropertyType] = useState<string>("");
+  const [location, setLocation] = useState<string>("");
+  const [phone, setPhone] = useState<string>("");
 
   const handleQuickSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    router.push("/inquiry");
+    const query = new URLSearchParams();
+    if (propertyType) query.append("type", propertyType);
+    if (location) query.append("location", location);
+    if (phone) query.append("phone", phone);
+
+    router.push(`/inquiry?${query.toString()}`);
   };
 
   return (
@@ -47,14 +56,20 @@ export function InquiryCTA() {
             <label className="block text-[11px] font-bold text-brand-blue uppercase tracking-wider mb-1">
               Property Type
             </label>
-            <Select>
+            <Select
+              value={propertyType}
+              onValueChange={(val) => setPropertyType(val || "")}
+            >
               <SelectTrigger className="w-full bg-transparent border-0 p-0 h-auto text-gray-900 font-semibold shadow-none focus:ring-0 focus:ring-offset-0 hover:bg-transparent rounded-none outline-none ring-0">
                 <SelectValue placeholder="Select Type" />
               </SelectTrigger>
               <SelectContent className="rounded-none border-gray-200 font-semibold text-gray-800">
-                <SelectItem value="apartment">Luxury Apartment</SelectItem>
-                <SelectItem value="plot">Residential Plot</SelectItem>
-                <SelectItem value="commercial">Commercial Space</SelectItem>
+                <SelectItem value="Residential">Residential</SelectItem>
+                <SelectItem value="Commercial">Commercial</SelectItem>
+                <SelectItem value="Mixed Use">Mixed Use</SelectItem>
+                <SelectItem value="Apartment">Apartment</SelectItem>
+                <SelectItem value="Villa">Villa</SelectItem>
+                <SelectItem value="Land">Land</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -67,6 +82,8 @@ export function InquiryCTA() {
             <input
               type="text"
               placeholder="e.g. Gulshan, Banani"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
               className="w-full bg-transparent text-gray-900 font-semibold focus:outline-none placeholder:font-normal placeholder:text-gray-400 outline-none ring-0"
             />
           </div>
@@ -79,6 +96,8 @@ export function InquiryCTA() {
             <input
               type="tel"
               placeholder="Enter mobile number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               className="w-full bg-transparent text-gray-900 font-semibold focus:outline-none placeholder:font-normal placeholder:text-gray-400 outline-none ring-0"
             />
           </div>

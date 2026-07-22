@@ -3,7 +3,11 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Page, getPagesByAdmin, deletePageBySlugByAdmin } from "@/services/page.service";
+import {
+  Page,
+  getPagesByAdmin,
+  deletePageBySlugByAdmin,
+} from "@/services/page.service";
 import { DeleteModal } from "@/components/ui/DeleteModal";
 import { Edit, Trash2, Plus, Search, FileText, Eye } from "lucide-react";
 import toast from "react-hot-toast";
@@ -23,12 +27,12 @@ export default function AdminPagesListClient() {
   const searchParams = useSearchParams();
   const [pages, setPages] = useState<Page[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  
+
   const [search, setSearch] = useState(searchParams.get("search") || "");
   const [status, setStatus] = useState(searchParams.get("status") || "");
   const [page, setPage] = useState(parseInt(searchParams.get("page") || "1"));
   const [totalPages, setTotalPages] = useState(1);
-  
+
   const [isDeleting, setIsDeleting] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [pageToDelete, setPageToDelete] = useState<string | null>(null);
@@ -36,7 +40,13 @@ export default function AdminPagesListClient() {
   const fetchPages = async () => {
     setIsLoading(true);
     try {
-      const res = await getPagesByAdmin({ page, search, status, limit: 10, _t: Date.now() });
+      const res = await getPagesByAdmin({
+        page,
+        search,
+        status,
+        limit: 10,
+        _t: Date.now(),
+      });
       if (res.success) {
         setPages(res.data || []);
         setTotalPages(res.count || 1);
@@ -197,7 +207,9 @@ export default function AdminPagesListClient() {
               onChange={(e) => {
                 setSearch(e.target.value);
                 setPage(1);
-                router.push(`/admin/content/pages?search=${e.target.value}&status=${status}&page=1`);
+                router.push(
+                  `/admin/content/pages?search=${e.target.value}&status=${status}&page=1`,
+                );
               }}
             />
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -209,7 +221,9 @@ export default function AdminPagesListClient() {
               const newValue = val === "all" ? "" : val;
               setStatus(newValue);
               setPage(1);
-              router.push(`/admin/content/pages?search=${search}&status=${newValue}&page=1`);
+              router.push(
+                `/admin/content/pages?search=${search}&status=${newValue}&page=1`,
+              );
             }}
           >
             <SelectTrigger className="w-full md:w-48">
@@ -237,7 +251,9 @@ export default function AdminPagesListClient() {
           totalPages={totalPages}
           onPageChange={(newPage) => {
             setPage(newPage);
-            router.push(`/admin/content/pages?search=${search}&status=${status}&page=${newPage}`);
+            router.push(
+              `/admin/content/pages?search=${search}&status=${status}&page=${newPage}`,
+            );
           }}
           theme="dark"
         />

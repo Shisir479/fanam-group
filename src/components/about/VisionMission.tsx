@@ -24,11 +24,12 @@ export function VisionMission({ data }: { data: any }) {
                 </h2>
               </BlockReveal>
             </div>
-            <div 
+            <div
               className="text-white/80 text-lg leading-relaxed font-light prose prose-invert max-w-none w-full min-w-0 break-words whitespace-normal"
-              dangerouslySetInnerHTML={{ 
-                __html: data?.visionDescription || 
-                "To be the most trusted and globally recognized real estate developer, setting new benchmarks in architectural innovation, sustainability, and community living. We envision a future where every Bonedi home stands as a symbol of timeless elegance and unmatched quality."
+              dangerouslySetInnerHTML={{
+                __html:
+                  data?.visionDescription ||
+                  "To be the most trusted and globally recognized real estate developer, setting new benchmarks in architectural innovation, sustainability, and community living. We envision a future where every Bonedi home stands as a symbol of timeless elegance and unmatched quality.",
               }}
             />
           </div>
@@ -47,11 +48,12 @@ export function VisionMission({ data }: { data: any }) {
                 </h2>
               </BlockReveal>
             </div>
-            <div 
+            <div
               className="text-white/80 text-lg leading-relaxed font-light prose prose-invert max-w-none w-full min-w-0 break-words whitespace-normal"
-              dangerouslySetInnerHTML={{ 
-                __html: data?.missionDescription || 
-                "To consistently deliver premium real estate projects that exceed customer expectations through meticulous planning, cutting-edge technology, and a commitment to environmental stewardship. We strive to create value for our clients, partners, and the communities we serve."
+              dangerouslySetInnerHTML={{
+                __html:
+                  data?.missionDescription ||
+                  "To consistently deliver premium real estate projects that exceed customer expectations through meticulous planning, cutting-edge technology, and a commitment to environmental stewardship. We strive to create value for our clients, partners, and the communities we serve.",
               }}
             />
           </div>

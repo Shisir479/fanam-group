@@ -1,23 +1,30 @@
 import { BlockReveal } from "@/components/ui/BlockReveal";
 
 export function LeadershipProfiles({ data }: { data: any }) {
-  const leaders = data?.boardMembers?.length > 0 ? data.boardMembers : [
-    {
-      name: "Tariqur Rahman",
-      designation: "Managing Director",
-      image: { url: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop" },
-      bio: "With over two decades of experience in real estate development, Tariqur oversees the strategic direction and operational excellence of Bonedi Homes. His visionary approach has been instrumental in shaping the company's robust portfolio.",
-    },
-    {
-      name: "Dr. Laila Zaman",
-      designation: "Director of Operations",
-      image: { url: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop" },
-      bio: "Dr. Zaman ensures that every Bonedi project meets the highest standards of quality and sustainability. Her expertise in project management and operations guarantees seamless execution from conceptualization to handover.",
-    },
-  ];
+  const leaders =
+    data?.boardMembers?.length > 0
+      ? data.boardMembers
+      : [
+          {
+            name: "Tariqur Rahman",
+            designation: "Managing Director",
+            image: {
+              url: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop",
+            },
+            bio: "With over two decades of experience in real estate development, Tariqur oversees the strategic direction and operational excellence of Bonedi Homes. His visionary approach has been instrumental in shaping the company's robust portfolio.",
+          },
+          {
+            name: "Dr. Laila Zaman",
+            designation: "Director of Operations",
+            image: {
+              url: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop",
+            },
+            bio: "Dr. Zaman ensures that every Bonedi project meets the highest standards of quality and sustainability. Her expertise in project management and operations guarantees seamless execution from conceptualization to handover.",
+          },
+        ];
 
   if (!data) return null;
-  console.log(data)
+  console.log(data);
 
   return (
     <section className="w-full py-16 md:py-24 bg-white">
@@ -45,7 +52,10 @@ export function LeadershipProfiles({ data }: { data: any }) {
               <div className="w-full md:w-5/12 lg:w-1/3">
                 <div className="relative w-full aspect-[4/5] md:aspect-[3/3] overflow-hidden group">
                   <img
-                    src={leader.image?.url || "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop"}
+                    src={
+                      leader.image?.url ||
+                      "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop"
+                    }
                     alt={leader.name}
                     className="w-full h-full object-cover object-top"
                   />
@@ -65,7 +75,7 @@ export function LeadershipProfiles({ data }: { data: any }) {
 
                 <div className="w-16 h-[2px] bg-brand-blue/20 mb-6 md:mb-8"></div>
 
-                <div 
+                <div
                   className="text-gray-600 text-[15px] md:text-[16px] leading-loose font-light max-w-2xl prose prose-invert min-w-0"
                   dangerouslySetInnerHTML={{ __html: leader.description }}
                 />

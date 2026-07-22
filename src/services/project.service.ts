@@ -1,3 +1,4 @@
+import { revalidatePage } from "@/app/actions";
 import { api } from "@/lib/api";
 
 export interface Project {
@@ -63,7 +64,12 @@ export interface Project {
 // ==========================================================
 
 export const createProjectByAdmin = async (payload: any) => {
-  return await api("/admin/projects", { method: "POST", body: JSON.stringify(payload) });
+  const res = await api("/admin/projects", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+  await revalidatePage("/", "layout");
+  return res;
 };
 
 export const getProjectsByAdmin = async (params: any = {}) => {
@@ -84,11 +90,18 @@ export const getProjectBySlugAdmin = async (slug: string) => {
 };
 
 export const updateProjectBySlugAdmin = async (slug: string, payload: any) => {
-  return await api(`/admin/projects/${slug}`, { method: "PUT", body: JSON.stringify(payload) });
+  const res = await api(`/admin/projects/${slug}`, {
+    method: "PUT",
+    body: JSON.stringify(payload),
+  });
+  await revalidatePage("/projects", "layout");
+  return res;
 };
 
 export const deleteProjectBySlugAdmin = async (slug: string) => {
-  return await api(`/admin/projects/${slug}`, { method: "DELETE" });
+  const res = await api(`/admin/projects/${slug}`, { method: "DELETE" });
+  await revalidatePage("/", "layout");
+  return res;
 };
 
 // ==========================================================

@@ -77,7 +77,21 @@ const Linkedin = ({ className }: { className?: string }) => (
   </svg>
 );
 
-export function ContactView() {
+const getMapSrc = (input: string | undefined) => {
+  const defaultSrc =
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14600.088365449767!2d90.40552796216127!3d23.817793740034444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c65538e12c1b%3A0x63353ec2299778!2sGulshan%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1709472314526!5m2!1sen!2sbd";
+  if (!input) return defaultSrc;
+  if (input.includes("<iframe") && input.includes("src=")) {
+    const match = input.match(/src="([^"]+)"/);
+    if (match && match[1]) return match[1];
+  }
+  if (input.startsWith("http") && !input.includes("embed")) {
+    return defaultSrc;
+  }
+  return input;
+};
+
+export function ContactView({ data }: { data?: any }) {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -100,11 +114,20 @@ export function ContactView() {
     try {
       const res = await submitContactForm(formData);
       if (res.success) {
-        toast.success("Thank you for your message! We will get back to you soon.", {
-          duration: 5000,
-          position: 'top-center',
+        toast.success(
+          "Thank you for your message! We will get back to you soon.",
+          {
+            duration: 5000,
+            position: "top-center",
+          },
+        );
+        setFormData({
+          fullName: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
         });
-        setFormData({ fullName: "", email: "", phone: "", subject: "", message: "" });
       } else {
         toast.error(res.message || "Failed to submit form. Please try again.");
       }
@@ -114,7 +137,7 @@ export function ContactView() {
       setIsLoading(false);
     }
   };
-
+  console.log(data?.addressOnMap);
   return (
     <main className="min-h-screen  bg-[#F8FAFC] pb-0 flex flex-col font-sans">
       {/* Hero Section - Matching AboutHero */}
@@ -136,7 +159,7 @@ export function ContactView() {
           {/* Left Side: Map */}
           <div className="w-full lg:w-1/2 h-[300px] lg:h-auto relative bg-gray-200">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14600.088365449767!2d90.40552796216127!3d23.817793740034444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c65538e12c1b%3A0x63353ec2299778!2sGulshan%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1709472314526!5m2!1sen!2sbd"
+              src={getMapSrc(data?.addressOnMap)}
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -258,7 +281,11 @@ export function ContactView() {
               </div>
 
               <div className="mt-4">
-                <SharedButton type="submit" className="cursor-pointer" disabled={isLoading}>
+                <SharedButton
+                  type="submit"
+                  className="cursor-pointer"
+                  disabled={isLoading}
+                >
                   <span className="flex items-center gap-2 ">
                     {isLoading ? "Sending..." : "Send Message"}
                     <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
@@ -277,7 +304,7 @@ export function ContactView() {
           <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/3 w-48 h-48 bg-white/5 rounded-none blur-3xl pointer-events-none"></div>
           <div className="absolute bottom-0 left-0 translate-y-1/3 -translate-x-1/3 w-64 h-64 bg-white/5 rounded-none blur-3xl pointer-events-none"></div>
 
-          <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="relative z-10 items-center  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Office Location */}
             <div className="flex flex-col gap-3 group cursor-default">
               <div className="w-10 h-10 bg-white/10 rounded-none flex items-center justify-center group-hover:bg-white group-hover:text-brand-blue transition-colors duration-300">
@@ -287,10 +314,9 @@ export function ContactView() {
                 <h4 className="font-semibold text-white/90 text-xs uppercase tracking-wider mb-1">
                   Corporate Office
                 </h4>
-                <p className="text-white/70 text-sm leading-relaxed">
-                  House #12, Road #34, Gulshan-2
-                  <br />
-                  Dhaka-1212, Bangladesh
+                <p className="text-white/70 text-sm leading-relaxed whitespace-pre-line">
+                  {data?.address ||
+                    "House #12, Road #34, Gulshan-2\nDhaka-1212, Bangladesh"}
                 </p>
               </div>
             </div>
@@ -304,10 +330,9 @@ export function ContactView() {
                 <h4 className="font-semibold text-white/90 text-xs uppercase tracking-wider mb-1">
                   Hotline
                 </h4>
-                <p className="text-white/70 text-sm">
-                  +880 1711-223344
-                  <br />
-                  +880 1811-223344
+                <p className="text-white/70 text-sm whitespace-pre-line">
+                  {data?.phone || "+880 1711-223344\n+880 1811-223344"}
+                  {data?.whatsappNo ? `\n${data.whatsappNo}` : ""}
                 </p>
               </div>
             </div>
@@ -322,61 +347,11 @@ export function ContactView() {
                   Email
                 </h4>
                 <a
-                  href="mailto:info@bonedihomes.com"
+                  href={`mailto:${data?.email || "info@bonedihomes.com"}`}
                   className="text-white/70 text-sm hover:text-white block transition-colors mb-0.5"
                 >
-                  info@bonedihomes.com
+                  {data?.email || "info@bonedihomes.com"}
                 </a>
-                <a
-                  href="mailto:sales@bonedihomes.com"
-                  className="text-white/70 text-sm hover:text-white block transition-colors"
-                >
-                  sales@bonedihomes.com
-                </a>
-              </div>
-            </div>
-
-            {/* Business Hours & Social */}
-            <div className="flex flex-col gap-3 group cursor-default">
-              <div className="w-10 h-10 bg-white/10 rounded-none flex items-center justify-center group-hover:bg-white group-hover:text-brand-blue transition-colors duration-300">
-                <Clock className="w-5 h-5" />
-              </div>
-              <div>
-                <h4 className="font-semibold text-white/90 text-xs uppercase tracking-wider mb-1">
-                  Business Hours
-                </h4>
-                <p className="text-white/70 text-sm mb-4">
-                  Sat - Thu: 9:00 AM - 6:00 PM
-                  <br />
-                  <span className="text-white/50">Friday: Closed</span>
-                </p>
-
-                <div className="flex gap-2">
-                  <a
-                    href="#"
-                    className="w-8 h-8 rounded-none bg-white/10 flex items-center justify-center hover:bg-white hover:text-brand-blue transition-all duration-300"
-                  >
-                    <Facebook className="w-3.5 h-3.5" />
-                  </a>
-                  <a
-                    href="#"
-                    className="w-8 h-8 rounded-none bg-white/10 flex items-center justify-center hover:bg-white hover:text-brand-blue transition-all duration-300"
-                  >
-                    <Twitter className="w-3.5 h-3.5" />
-                  </a>
-                  <a
-                    href="#"
-                    className="w-8 h-8 rounded-none bg-white/10 flex items-center justify-center hover:bg-white hover:text-brand-blue transition-all duration-300"
-                  >
-                    <Instagram className="w-3.5 h-3.5" />
-                  </a>
-                  <a
-                    href="#"
-                    className="w-8 h-8 rounded-none bg-white/10 flex items-center justify-center hover:bg-white hover:text-brand-blue transition-all duration-300"
-                  >
-                    <Linkedin className="w-3.5 h-3.5" />
-                  </a>
-                </div>
               </div>
             </div>
           </div>

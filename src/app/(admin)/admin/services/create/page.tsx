@@ -1,10 +1,10 @@
-import { Metadata } from "next";
+import { constructMetadata } from "@/lib/metadata";
 import CreateServiceClient from "@/components/admin/services/CreateServiceClient";
 
-export const metadata: Metadata = {
-  title: "Create Service | Bonedi Admin",
-  description: "Create a new service.",
-};
+export const metadata = constructMetadata({
+  title: "Admin Dashboard",
+  noIndex: true,
+});
 
 export default function CreateServicePage() {
   return <CreateServiceClient />;

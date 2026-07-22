@@ -1,9 +1,10 @@
+import { constructMetadata } from "@/lib/metadata";
 import CreatePageClient from "@/components/pages/CreatePageClient";
 
-export const metadata = {
-  title: "Create Page Page | Admin Panel",
-  description: "Create a new pages or dynamic page.",
-};
+export const metadata = constructMetadata({
+  title: "Admin Dashboard",
+  noIndex: true,
+});
 
 export default function CreatePagePage() {
   return <CreatePageClient />;

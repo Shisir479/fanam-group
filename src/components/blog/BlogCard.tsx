@@ -3,13 +3,21 @@ import { Blog } from "@/services/blog.service";
 import { ArrowRight, Clock, CalendarDays } from "lucide-react";
 
 export function BlogCard({ post }: { post: any }) {
-  const categoryStr = typeof post.category === 'object' ? post.category?.name : post.category;
-  const blogCategoryStr = typeof post.blogCategory === 'object' ? post.blogCategory?.name : post.blogCategory;
+  const categoryStr =
+    typeof post.category === "object" ? post.category?.name : post.category;
+  const blogCategoryStr =
+    typeof post.blogCategory === "object"
+      ? post.blogCategory?.name
+      : post.blogCategory;
   const categoryName = categoryStr || blogCategoryStr || "Uncategorized";
-  
-  const dateStr = post.date || (post.publishedAt
-    ? new Date(post.publishedAt).toLocaleDateString()
-    : (post.createdAt ? new Date(post.createdAt).toLocaleDateString() : "Unknown Date"));
+
+  const dateStr =
+    post.date ||
+    (post.publishedAt
+      ? new Date(post.publishedAt).toLocaleDateString()
+      : post.createdAt
+        ? new Date(post.createdAt).toLocaleDateString()
+        : "Unknown Date");
 
   const imageUrl = post.image || post.cover?.url || "/placeholder.jpg";
   const title = post.title || post.name;

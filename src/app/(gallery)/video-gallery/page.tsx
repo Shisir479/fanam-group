@@ -1,14 +1,12 @@
-
-
 import VideoGalleryBanner from "@/components/gallery/video/banner";
 import VideoGallery, { Video } from "@/components/gallery/video/VideoGallery";
 import { getGalleriesPublic } from "@/services/gallery.service";
 
 export default async function VideoGalleryPage() {
-  const res = await getGalleriesPublic({ limit: 100 });
+  const res = await getGalleriesPublic();
   const rawGalleries = res?.data || [];
 
-  const videoGalleries = rawGalleries.filter(g => g.type === "video");
+  const videoGalleries = rawGalleries.filter((g) => g.type === "video");
 
   const videos: Video[] = videoGalleries.map((gallery) => ({
     id: gallery._id || gallery.slug,

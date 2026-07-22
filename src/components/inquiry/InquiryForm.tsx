@@ -1,5 +1,15 @@
 "use client";
 
+import { useState, useRef, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+import {
+  createInvestmentBookingPublic,
+  InvestmentBookingPayload,
+} from "@/services/investment-booking.service";
+import { useImageUpload } from "@/hooks/useImageUpload";
+import toast from "react-hot-toast";
+import Image from "next/image";
+
 import { BlockReveal } from "@/components/ui/BlockReveal";
 import {
   Select,
@@ -10,6 +20,114 @@ import {
 } from "@/components/ui/select";
 
 export default function InquiryForm() {
+  const searchParams = useSearchParams();
+  const { uploadSingle } = useImageUpload();
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const signatureInputRef = useRef<HTMLInputElement>(null);
+  const [signatureFile, setSignatureFile] = useState<File | null>(null);
+  const [signaturePreview, setSignaturePreview] = useState<string | null>(null);
+
+  const [formData, setFormData] = useState<Partial<InvestmentBookingPayload>>({
+    fullName: "",
+    occupation: "",
+    nidPassport: "",
+    nationality: "Bangladesh",
+    dateOfBirth: "",
+    religion: "",
+    email: "",
+    phone: "",
+    presentAddress: "",
+    permanentAddress: "",
+    preferredLocation: "",
+    nomineeName: "",
+    nomineePresentAddress: "",
+    nomineePermanentAddress: "",
+    nomineeRelation: "",
+    nomineePhone: "",
+    investmentAmount: 0,
+    propertyType: "Apartment",
+    duration: 12,
+  });
+
+  useEffect(() => {
+    const queryPhone = searchParams.get("phone");
+    const queryLocation = searchParams.get("location");
+    const queryType = searchParams.get("type");
+    if (queryPhone || queryLocation || queryType) {
+      setFormData((prev) => ({
+        ...prev,
+        ...(queryPhone && { phone: queryPhone }),
+        ...(queryLocation && { preferredLocation: queryLocation }),
+        ...(queryType && { propertyType: queryType as any }),
+      }));
+    }
+  }, [searchParams]);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]:
+        name === "investmentAmount" || name === "duration"
+          ? Number(value)
+          : value,
+    }));
+  };
+
+  const handleSignatureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      setSignatureFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => setSignaturePreview(reader.result as string);
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (
+      !formData.fullName ||
+      !formData.phone ||
+      !formData.investmentAmount ||
+      !formData.propertyType
+    ) {
+      toast.error("Please fill all required fields");
+      return;
+    }
+    if (!signatureFile) {
+      toast.error("Applicant signature is required");
+      return;
+    }
+    setIsSubmitting(true);
+    const toastId = toast.loading("Submitting...");
+    try {
+      const uploadedSignature = await uploadSingle(signatureFile, true);
+      if (!uploadedSignature) throw new Error("Failed to upload signature");
+      const payload: InvestmentBookingPayload = {
+        ...formData,
+        fullName: formData.fullName!,
+        phone: formData.phone!,
+        investmentAmount: formData.investmentAmount!,
+        propertyType: formData.propertyType as any,
+        signature: { _id: uploadedSignature._id, url: uploadedSignature.url },
+      };
+      const res = await createInvestmentBookingPublic(payload);
+      if (res?.success) {
+        toast.success("Booking submitted successfully!", { id: toastId });
+        window.location.href = "/";
+      } else {
+        throw new Error(res?.message || "Failed to submit booking");
+      }
+    } catch (error: any) {
+      toast.error(error.message || "Failed to submit booking", { id: toastId });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <div className="w-full bg-white shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] border border-gray-100 overflow-hidden relative">
       {/* Header */}
@@ -35,7 +153,7 @@ export default function InquiryForm() {
         </div>
       </div>
 
-      <form className="p-8 md:p-14 space-y-12">
+      <form onSubmit={handleSubmit} className="p-8 md:p-14 space-y-12">
         {/* Row 1: Personal Info */}
         <div className="w-full">
           <div className="flex items-center justify-between mb-8 border-b border-gray-200 pb-4">
@@ -53,6 +171,9 @@ export default function InquiryForm() {
               <input
                 type="text"
                 placeholder="Enter your full name"
+                name="fullName"
+                value={formData.fullName}
+                onChange={handleChange}
                 className="w-full border border-gray-200 p-3.5 focus:border-brand-blue focus:ring-1 focus:ring-brand-blue focus:outline-none transition-all bg-gray-50/50 hover:bg-gray-50 text-gray-900 font-semibold placeholder:font-normal placeholder:text-gray-400 outline-none"
                 required
               />
@@ -64,6 +185,9 @@ export default function InquiryForm() {
               <input
                 type="text"
                 placeholder="Example: Service, Business, Freelancer"
+                name="occupation"
+                value={formData.occupation}
+                onChange={handleChange}
                 className="w-full border border-gray-200 p-3.5 focus:border-brand-blue focus:ring-1 focus:ring-brand-blue focus:outline-none transition-all bg-gray-50/50 hover:bg-gray-50 text-gray-900 font-semibold placeholder:font-normal placeholder:text-gray-400 outline-none"
               />
             </div>
@@ -74,6 +198,9 @@ export default function InquiryForm() {
               <input
                 type="text"
                 placeholder="Enter ID number"
+                name="nidPassport"
+                value={formData.nidPassport}
+                onChange={handleChange}
                 className="w-full border border-gray-200 p-3.5 focus:border-brand-blue focus:ring-1 focus:ring-brand-blue focus:outline-none transition-all bg-gray-50/50 hover:bg-gray-50 text-gray-900 font-semibold placeholder:font-normal placeholder:text-gray-400 outline-none"
               />
             </div>
@@ -83,7 +210,9 @@ export default function InquiryForm() {
               </label>
               <input
                 type="text"
-                defaultValue="Bangladesh"
+                name="nationality"
+                value={formData.nationality}
+                onChange={handleChange}
                 className="w-full border border-gray-200 p-3.5 focus:border-brand-blue focus:ring-1 focus:ring-brand-blue focus:outline-none transition-all bg-gray-50/50 hover:bg-gray-50 text-gray-900 font-semibold placeholder:font-normal placeholder:text-gray-400 outline-none"
               />
             </div>
@@ -93,6 +222,13 @@ export default function InquiryForm() {
               </label>
               <input
                 type="date"
+                name="dateOfBirth"
+                value={
+                  formData.dateOfBirth
+                    ? String(formData.dateOfBirth).split("T")[0]
+                    : ""
+                }
+                onChange={handleChange}
                 className="w-full border border-gray-200 p-3.5 focus:border-brand-blue focus:ring-1 focus:ring-brand-blue focus:outline-none transition-all bg-gray-50/50 hover:bg-gray-50 text-gray-900 font-semibold outline-none"
               />
             </div>
@@ -100,7 +236,12 @@ export default function InquiryForm() {
               <label className="block text-[11px] font-bold text-brand-blue uppercase tracking-wider mb-2">
                 Religion
               </label>
-              <Select>
+              <Select
+                value={formData.religion || undefined}
+                onValueChange={(val) =>
+                  setFormData({ ...formData, religion: val ?? undefined })
+                }
+              >
                 <SelectTrigger className="w-full border border-gray-200 p-3.5 h-[52px] rounded-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue bg-gray-50/50 hover:bg-gray-50 transition-all text-gray-900 font-semibold shadow-none outline-none">
                   <SelectValue placeholder="Select Religion" />
                 </SelectTrigger>
@@ -120,6 +261,9 @@ export default function InquiryForm() {
               <input
                 type="email"
                 placeholder="Enter Email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
                 className="w-full border border-gray-200 p-3.5 focus:border-brand-blue focus:ring-1 focus:ring-brand-blue focus:outline-none transition-all bg-gray-50/50 hover:bg-gray-50 text-gray-900 font-semibold placeholder:font-normal placeholder:text-gray-400 outline-none"
               />
             </div>
@@ -130,6 +274,9 @@ export default function InquiryForm() {
               <input
                 type="tel"
                 placeholder="Enter Phone Number"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
                 className="w-full border border-gray-200 p-3.5 focus:border-brand-blue focus:ring-1 focus:ring-brand-blue focus:outline-none transition-all bg-gray-50/50 hover:bg-gray-50 text-gray-900 font-semibold placeholder:font-normal placeholder:text-gray-400 outline-none"
                 required
               />
@@ -155,6 +302,9 @@ export default function InquiryForm() {
                 <textarea
                   rows={2}
                   placeholder="Enter your current address"
+                  name="presentAddress"
+                  value={formData.presentAddress}
+                  onChange={handleChange}
                   className="w-full border border-gray-200 p-3.5 focus:border-brand-blue focus:ring-1 focus:ring-brand-blue focus:outline-none transition-all bg-gray-50/50 hover:bg-gray-50 text-gray-900 font-semibold placeholder:font-normal placeholder:text-gray-400 resize-none outline-none"
                 ></textarea>
               </div>
@@ -165,6 +315,9 @@ export default function InquiryForm() {
                 <textarea
                   rows={2}
                   placeholder="Enter your permanent address"
+                  name="permanentAddress"
+                  value={formData.permanentAddress}
+                  onChange={handleChange}
                   className="w-full border border-gray-200 p-3.5 focus:border-brand-blue focus:ring-1 focus:ring-brand-blue focus:outline-none transition-all bg-gray-50/50 hover:bg-gray-50 text-gray-900 font-semibold placeholder:font-normal placeholder:text-gray-400 resize-none outline-none"
                 ></textarea>
               </div>
@@ -175,6 +328,9 @@ export default function InquiryForm() {
                 <input
                   type="text"
                   placeholder="Example: Sonargaon, Purbachal, Ajman"
+                  name="preferredLocation"
+                  value={formData.preferredLocation}
+                  onChange={handleChange}
                   className="w-full border border-gray-200 p-3.5 focus:border-brand-blue focus:ring-1 focus:ring-brand-blue focus:outline-none transition-all bg-gray-50/50 hover:bg-gray-50 text-gray-900 font-semibold placeholder:font-normal placeholder:text-gray-400 outline-none"
                 />
               </div>
@@ -198,6 +354,9 @@ export default function InquiryForm() {
                 <input
                   type="text"
                   placeholder="Enter nominee name"
+                  name="nomineeName"
+                  value={formData.nomineeName}
+                  onChange={handleChange}
                   className="w-full border border-gray-200 p-3.5 focus:border-brand-blue focus:ring-1 focus:ring-brand-blue focus:outline-none transition-all bg-gray-50/50 hover:bg-gray-50 text-gray-900 font-semibold placeholder:font-normal placeholder:text-gray-400 outline-none"
                 />
               </div>
@@ -209,6 +368,9 @@ export default function InquiryForm() {
                   <textarea
                     rows={2}
                     placeholder="Nominee address"
+                    name="nomineePresentAddress"
+                    value={formData.nomineePresentAddress}
+                    onChange={handleChange}
                     className="w-full border border-gray-200 p-3.5 focus:border-brand-blue focus:ring-1 focus:ring-brand-blue focus:outline-none transition-all bg-gray-50/50 hover:bg-gray-50 text-gray-900 font-semibold placeholder:font-normal placeholder:text-gray-400 resize-none outline-none"
                   ></textarea>
                 </div>
@@ -219,6 +381,9 @@ export default function InquiryForm() {
                   <textarea
                     rows={2}
                     placeholder="Nominee address"
+                    name="nomineePermanentAddress"
+                    value={formData.nomineePermanentAddress}
+                    onChange={handleChange}
                     className="w-full border border-gray-200 p-3.5 focus:border-brand-blue focus:ring-1 focus:ring-brand-blue focus:outline-none transition-all bg-gray-50/50 hover:bg-gray-50 text-gray-900 font-semibold placeholder:font-normal placeholder:text-gray-400 resize-none outline-none"
                   ></textarea>
                 </div>
@@ -231,6 +396,9 @@ export default function InquiryForm() {
                   <input
                     type="text"
                     placeholder="e.g. Spouse"
+                    name="nomineeRelation"
+                    value={formData.nomineeRelation}
+                    onChange={handleChange}
                     className="w-full border border-gray-200 p-3.5 focus:border-brand-blue focus:ring-1 focus:ring-brand-blue focus:outline-none transition-all bg-gray-50/50 hover:bg-gray-50 text-gray-900 font-semibold placeholder:font-normal placeholder:text-gray-400 outline-none"
                   />
                 </div>
@@ -241,6 +409,9 @@ export default function InquiryForm() {
                   <input
                     type="tel"
                     placeholder="017XXXXXXXX"
+                    name="nomineePhone"
+                    value={formData.nomineePhone}
+                    onChange={handleChange}
                     className="w-full border border-gray-200 p-3.5 focus:border-brand-blue focus:ring-1 focus:ring-brand-blue focus:outline-none transition-all bg-gray-50/50 hover:bg-gray-50 text-gray-900 font-semibold placeholder:font-normal placeholder:text-gray-400 outline-none"
                   />
                 </div>
@@ -267,6 +438,9 @@ export default function InquiryForm() {
                 <input
                   type="text"
                   placeholder="e.g., BDT 10,00,000"
+                  name="investmentAmount"
+                  value={formData.investmentAmount || ""}
+                  onChange={handleChange}
                   className="w-full border border-gray-200 p-3.5 focus:border-brand-blue focus:ring-1 focus:ring-brand-blue focus:outline-none transition-all bg-gray-50/50 hover:bg-gray-50 text-gray-900 font-semibold placeholder:font-normal placeholder:text-gray-400 outline-none"
                 />
               </div>
@@ -275,16 +449,25 @@ export default function InquiryForm() {
                   <label className="block text-[11px] font-bold text-brand-blue uppercase tracking-wider mb-2">
                     Property Type *
                   </label>
-                  <Select required>
+                  <Select
+                    required
+                    value={formData.propertyType}
+                    onValueChange={(val) =>
+                      setFormData({ ...formData, propertyType: val as any })
+                    }
+                  >
                     <SelectTrigger className="w-full border border-gray-200 p-3.5 h-[52px] rounded-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue bg-gray-50/50 hover:bg-gray-50 transition-all text-gray-900 font-semibold shadow-none outline-none">
                       <SelectValue placeholder="Select Type" />
                     </SelectTrigger>
                     <SelectContent className="rounded-none border-gray-200 font-semibold text-gray-800">
-                      <SelectItem value="plot">Residential Plot</SelectItem>
-                      <SelectItem value="apartment">
+                      <SelectItem value="Residential">Residential</SelectItem>
+                      <SelectItem value="Villa">Villa</SelectItem>
+                      <SelectItem value="Land">Land</SelectItem>
+                      <SelectItem value="Mixed Use">Mixed Use</SelectItem>
+                      <SelectItem value="Apartment">
                         Luxury Apartment
                       </SelectItem>
-                      <SelectItem value="commercial">
+                      <SelectItem value="Commercial">
                         Commercial Space
                       </SelectItem>
                     </SelectContent>
@@ -297,6 +480,9 @@ export default function InquiryForm() {
                   <input
                     type="number"
                     placeholder="12"
+                    name="duration"
+                    value={formData.duration || ""}
+                    onChange={handleChange}
                     className="w-full border border-gray-200 p-3.5 focus:border-brand-blue focus:ring-1 focus:ring-brand-blue focus:outline-none transition-all bg-gray-50/50 hover:bg-gray-50 text-gray-900 font-semibold placeholder:font-normal placeholder:text-gray-400 outline-none"
                   />
                 </div>
@@ -314,11 +500,22 @@ export default function InquiryForm() {
             </div>
 
             <div className="flex flex-col sm:flex-row items-start gap-6">
-              <div className="w-full sm:w-1/2 h-36 border-2 border-dashed border-gray-300 flex items-center justify-center bg-gray-50/50 transition-colors hover:bg-gray-50 group">
-                <span className="text-gray-400 text-sm font-medium group-hover:text-gray-500 transition-colors">
-                  Signature Preview
-                </span>
+              <div className="w-full sm:w-1/2 h-36 border-2 border-dashed border-gray-300 flex items-center justify-center bg-gray-50/50 transition-colors hover:bg-gray-50 group overflow-hidden">
+                {signaturePreview ? (
+                  <Image
+                    src={signaturePreview}
+                    alt="Signature preview"
+                    width={300}
+                    height={120}
+                    className="object-contain w-full h-full"
+                  />
+                ) : (
+                  <span className="text-gray-400 text-sm font-medium group-hover:text-gray-500 transition-colors">
+                    Signature Preview
+                  </span>
+                )}
               </div>
+
               <div className="w-full sm:w-1/2 space-y-4">
                 <div>
                   <label className="block text-[11px] font-bold text-brand-blue uppercase tracking-wider mb-2">
@@ -327,6 +524,8 @@ export default function InquiryForm() {
                   <input
                     type="file"
                     accept=".jpg,.jpeg,.png,.webp"
+                    ref={signatureInputRef}
+                    onChange={handleSignatureChange}
                     className="w-full text-sm text-gray-500 file:mr-4 file:py-2.5 file:px-6 file:border-0 file:text-[11px] file:font-bold file:uppercase file:tracking-wider file:bg-brand-blue file:text-white hover:file:bg-[#002f57] file:transition-colors file:cursor-pointer cursor-pointer border border-gray-200 bg-gray-50/50 p-1"
                   />
                 </div>
@@ -355,9 +554,12 @@ export default function InquiryForm() {
           </p>
           <button
             type="submit"
+            disabled={isSubmitting}
             className="w-full md:w-auto relative group/btn bg-brand-blue px-12 py-4 font-bold text-white uppercase tracking-wider overflow-hidden cursor-pointer shadow-md flex items-center justify-center shrink-0"
           >
-            <span className="relative z-10">Submit Request</span>
+            <span className="relative z-10">
+              {isSubmitting ? "Submitting..." : "Submit Request"}
+            </span>
             <span className="absolute inset-0 bg-[#002f57] scale-x-0 origin-left transition-transform duration-700 ease-out group-hover/btn:scale-x-100 z-0"></span>
           </button>
         </div>

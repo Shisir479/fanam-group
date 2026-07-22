@@ -12,20 +12,44 @@ import { ContactInfo } from "@/components/home/ContactInfo";
 import { InquiryCTA } from "@/components/home/InquiryCTA";
 import { getHomepageCMSPublic } from "@/services/homepage-cms.service";
 import { getServicesPublic } from "@/services/service.service";
+import { getBlogsPublic } from "@/services/blog.service";
+import { getBrandingSettingsPublic } from "@/services/settings.service";
+import { getProjectsPublic } from "@/services/project.service";
 
 export default async function Home() {
   let cmsData: any = null;
   let servicesData: any[] = [];
+  let blogsData: any[] = [];
+  let brandingData: any = null;
+  let projectsData: any[] = [];
   try {
     const res = await getHomepageCMSPublic();
     if (res?.success) {
       cmsData = res.data;
     }
-    
+
     // Fetch dynamic services
     const servicesRes = await getServicesPublic({ status: "active", limit: 4 });
     if (servicesRes?.success) {
       servicesData = servicesRes.data || [];
+    }
+
+    // Fetch dynamic blogs
+    const blogsRes = await getBlogsPublic({ status: "active", limit: 3 });
+    if (blogsRes?.success) {
+      blogsData = blogsRes.data || [];
+    }
+
+    // Fetch branding data
+    const brandingRes = await getBrandingSettingsPublic();
+    if (brandingRes?.success) {
+      brandingData = brandingRes.data;
+    }
+
+    // Fetch projects
+    const projectsRes = await getProjectsPublic({ limit: 0 });
+    if (projectsRes?.success) {
+      projectsData = projectsRes.data || [];
     }
   } catch (error) {
     // fallback
@@ -35,16 +59,16 @@ export default async function Home() {
     <div className="flex flex-col min-h-screen">
       <Hero data={cmsData} />
       <AboutSection />
-      <FeaturedProjects />
-      <CompanyOverview />
+      <FeaturedProjects initialProjects={projectsData} />
+      <CompanyOverview data={cmsData} />
       <WhyChooseUs data={cmsData} />
       <OurAchievements data={cmsData} />
       <FeaturedServices services={servicesData} />
       <TestimonialSection />
       <GalleryPreview data={cmsData} />
-      <LatestNews />
+      <LatestNews blogs={blogsData} />
       <InquiryCTA />
-      <ContactInfo />
+      <ContactInfo data={brandingData?.contact} />
     </div>
   );
 }

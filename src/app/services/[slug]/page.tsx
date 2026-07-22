@@ -3,9 +3,37 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BlockReveal } from "@/components/ui/BlockReveal";
-import { getServiceBySlugPublic, getServicesPublic } from "@/services/service.service";
+import {
+  getServiceBySlugPublic,
+  getServicesPublic,
+} from "@/services/service.service";
+import { constructMetadata } from "@/lib/metadata";
 
-export default async function ServiceDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const resolvedParams = await params;
+  let service: any = null;
+  try {
+    const res = await getServiceBySlugPublic(resolvedParams.slug);
+    if (res?.success) service = res.data;
+  } catch (error) {}
+
+  if (!service) return constructMetadata({ title: "Service Not Found" });
+
+  return constructMetadata({
+    title: `${service.name || service.title} - Bonedi Homes Services`,
+    description: service.shortDescription || service.description,
+  });
+}
+
+export default async function ServiceDetailsPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const resolvedParams = await params;
   let service: any = null;
   let otherServices: any[] = [];
@@ -18,7 +46,9 @@ export default async function ServiceDetailsPage({ params }: { params: Promise<{
 
     const servicesRes = await getServicesPublic({ status: "active", limit: 5 });
     if (servicesRes?.success && servicesRes.data) {
-      otherServices = servicesRes.data.filter((s: any) => s.slug !== resolvedParams.slug);
+      otherServices = servicesRes.data.filter(
+        (s: any) => s.slug !== resolvedParams.slug,
+      );
     }
   } catch (error) {
     console.error("Failed to fetch service", error);
@@ -33,7 +63,10 @@ export default async function ServiceDetailsPage({ params }: { params: Promise<{
       <PageBanner
         title={service.name}
         subtitle={service.heading}
-        bgImage={service.image?.url || "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2070&auto=format&fit=crop"}
+        bgImage={
+          service.image?.url ||
+          "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2070&auto=format&fit=crop"
+        }
         altText={service.name}
       />
 
@@ -41,12 +74,12 @@ export default async function ServiceDetailsPage({ params }: { params: Promise<{
         <div className="container mx-auto px-6 md:px-16 flex flex-col lg:flex-row gap-16">
           {/* Main Content Area */}
           <div className="w-full lg:w-2/3">
-            <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-2xl mb-12 group">
+            <div className="relative w-full aspect-video  overflow-hidden shadow-2xl mb-12 group">
               <Image
                 src={service.image?.url || "/placeholder.jpg"}
                 alt={service.name}
                 fill
-                className="object-cover transform transition-transform duration-700 group-hover:scale-105"
+                className="object-cover "
               />
               <div className="absolute inset-0 bg-brand-blue/10 mix-blend-multiply" />
             </div>
@@ -58,7 +91,7 @@ export default async function ServiceDetailsPage({ params }: { params: Promise<{
             </BlockReveal>
 
             {/* Rendering Rich Text Content */}
-            <div 
+            <div
               className="prose prose-lg max-w-none prose-headings:text-brand-blue prose-headings:font-bold prose-headings:uppercase prose-p:text-gray-600 prose-p:leading-relaxed prose-a:text-[#4ea24b] prose-a:no-underline hover:prose-a:underline prose-li:text-gray-600 marker:text-[#4ea24b]"
               dangerouslySetInnerHTML={{ __html: service.description }}
             />
@@ -69,7 +102,7 @@ export default async function ServiceDetailsPage({ params }: { params: Promise<{
             <div className="sticky top-32 space-y-8">
               {/* Other Services Box */}
               {otherServices.length > 0 && (
-                <div className="bg-white p-8 shadow-xl border-t-4 border-[#4ea24b]">
+                <div className="bg-white p-8 shadow-sm border-t-4 border-[#4ea24b]">
                   <h3 className="text-xl font-bold text-brand-blue mb-6 uppercase">
                     Other Services
                   </h3>

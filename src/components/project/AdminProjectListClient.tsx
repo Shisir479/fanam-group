@@ -3,9 +3,21 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Project, getProjectsByAdmin, deleteProjectBySlugAdmin } from "@/services/project.service";
+import {
+  Project,
+  getProjectsByAdmin,
+  deleteProjectBySlugAdmin,
+} from "@/services/project.service";
 import { DeleteModal } from "@/components/ui/DeleteModal";
-import { Edit, Trash2, Plus, Search, Building, Home, MapPin, Database, Eye } from "lucide-react";
+import {
+  Edit,
+  Trash2,
+  Plus,
+  Search,
+  Building,
+  MapPin,
+  Eye,
+} from "lucide-react";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import { Pagination } from "@/components/ui/Pagination";
@@ -23,12 +35,12 @@ export default function AdminProjectListClient() {
   const searchParams = useSearchParams();
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  
+
   const [search, setSearch] = useState(searchParams.get("search") || "");
   const [status, setStatus] = useState(searchParams.get("status") || "");
   const [page, setPage] = useState(parseInt(searchParams.get("page") || "1"));
   const [totalPages, setTotalPages] = useState(1);
-  
+
   const [isDeleting, setIsDeleting] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [projectToDelete, setProjectToDelete] = useState<string | null>(null);
@@ -36,7 +48,13 @@ export default function AdminProjectListClient() {
   const fetchProjects = async () => {
     setIsLoading(true);
     try {
-      const res = await getProjectsByAdmin({ page, search, status, limit: 10, _t: Date.now() });
+      const res = await getProjectsByAdmin({
+        page,
+        search,
+        status,
+        limit: 10,
+        _t: Date.now(),
+      });
       if (res.success) {
         setProjects(res.data || []);
         setTotalPages(res.count || 1);
@@ -118,7 +136,9 @@ export default function AdminProjectListClient() {
       render: (project) => (
         <div className="flex items-center gap-1.5 text-sm text-gray-300">
           <MapPin className="w-3.5 h-3.5 text-gray-400 flex-shrink-0" />
-          <span className="line-clamp-1">{project.location?.area || project.location?.city || "N/A"}</span>
+          <span className="line-clamp-1">
+            {project.location?.area || project.location?.city || "N/A"}
+          </span>
         </div>
       ),
     },
@@ -179,7 +199,9 @@ export default function AdminProjectListClient() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <h2 className="text-2xl font-bold text-white">Project Management</h2>
+            <h2 className="text-2xl font-bold text-white">
+              Project Management
+            </h2>
             <p className="text-sm text-gray-400 mt-1">
               Manage your real estate projects.
             </p>
@@ -206,7 +228,9 @@ export default function AdminProjectListClient() {
               onChange={(e) => {
                 setSearch(e.target.value);
                 setPage(1);
-                router.push(`/admin/project?search=${e.target.value}&status=${status}&page=1`);
+                router.push(
+                  `/admin/project?search=${e.target.value}&status=${status}&page=1`,
+                );
               }}
             />
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -218,7 +242,9 @@ export default function AdminProjectListClient() {
               const newValue = val === "all" ? "" : val;
               setStatus(newValue);
               setPage(1);
-              router.push(`/admin/project?search=${search}&status=${newValue}&page=1`);
+              router.push(
+                `/admin/project?search=${search}&status=${newValue}&page=1`,
+              );
             }}
           >
             <SelectTrigger className="w-full md:w-48">
@@ -247,7 +273,9 @@ export default function AdminProjectListClient() {
           totalPages={totalPages}
           onPageChange={(newPage) => {
             setPage(newPage);
-            router.push(`/admin/project?search=${search}&status=${status}&page=${newPage}`);
+            router.push(
+              `/admin/project?search=${search}&status=${status}&page=${newPage}`,
+            );
           }}
           theme="dark"
         />

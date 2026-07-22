@@ -1,6 +1,6 @@
 import { BlockReveal } from "@/components/ui/BlockReveal";
 
-export function ContactInfo() {
+export function ContactInfo({ data }: { data?: any }) {
   return (
     <section className="w-full py-16 md:py-24">
       <div className="container mx-auto px-5 md:px-16">
@@ -44,10 +44,9 @@ export function ContactInfo() {
             <h3 className="text-sm font-bold text-brand-blue uppercase tracking-wider mb-4">
               Address
             </h3>
-            <p className="text-gray-600 text-sm leading-relaxed">
-              123 Bonedi Estate Blvd,
-              <br />
-              Gulshan 1, Dhaka 1212
+            <p className="text-gray-600 text-sm leading-relaxed whitespace-pre-line">
+              {data?.address ||
+                "123 Bonedi Estate Blvd,\nGulshan 1, Dhaka 1212"}
             </p>
           </div>
 
@@ -72,8 +71,9 @@ export function ContactInfo() {
             <h3 className="text-sm font-bold text-brand-blue uppercase tracking-wider mb-4">
               Support
             </h3>
-            <p className="text-gray-600 text-sm mb-2">support@bonedi.com</p>
-            <p className="text-gray-600 text-sm">+1-600-890-4567</p>
+            <p className="text-gray-600 text-sm mb-2">
+              {data?.email || "support@bonedi.com"}
+            </p>
           </div>
 
           {/* Card 3: Mobile */}
@@ -97,8 +97,12 @@ export function ContactInfo() {
             <h3 className="text-sm font-bold text-brand-blue uppercase tracking-wider mb-4">
               Mobile
             </h3>
-            <p className="text-gray-600 text-sm mb-2">+880 1712-345678</p>
-            <p className="text-gray-600 text-sm">+880 1912-345678</p>
+            <p className="text-gray-600 text-sm mb-2">
+              {data?.phone || "+880 1712-345678"}
+            </p>
+            {data?.whatsappNo && (
+              <p className="text-gray-600 text-sm">{data.whatsappNo}</p>
+            )}
           </div>
         </div>
       </div>

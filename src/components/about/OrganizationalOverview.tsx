@@ -29,10 +29,13 @@ export function OrganizationalOverview({ data }: { data: any }) {
     },
   ];
 
-  const departments = data?.departments?.length > 0 ? data.departments.map((d: any, i: number) => ({
-    ...d,
-    icon: defaultDepartments[i % defaultDepartments.length].icon
-  })) : defaultDepartments;
+  const departments =
+    data?.departments?.length > 0
+      ? data.departments.map((d: any, i: number) => ({
+          ...d,
+          icon: defaultDepartments[i % defaultDepartments.length].icon,
+        }))
+      : defaultDepartments;
 
   if (!data) return null;
 
@@ -54,11 +57,12 @@ export function OrganizationalOverview({ data }: { data: any }) {
             </BlockReveal>
           </div>
 
-          <div 
+          <div
             className="text-gray-500 text-[15px] leading-relaxed font-light mt-2 max-w-2xl prose max-w-none"
-            dangerouslySetInnerHTML={{ 
-              __html: data?.organizationDescription || 
-              "Bonedi Homes is structured to deliver end-to-end real estate solutions. From initial architectural conceptualization to final property management, our specialized divisions work in seamless harmony to ensure the flawless execution of every project."
+            dangerouslySetInnerHTML={{
+              __html:
+                data?.organizationDescription ||
+                "Bonedi Homes is structured to deliver end-to-end real estate solutions. From initial architectural conceptualization to final property management, our specialized divisions work in seamless harmony to ensure the flawless execution of every project.",
             }}
           />
         </div>

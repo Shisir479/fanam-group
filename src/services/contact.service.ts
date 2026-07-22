@@ -23,7 +23,10 @@ export const getContactByIdByAdmin = async (id: string) => {
   return adminContactService.getByIdOrSlug(id);
 };
 
-export const updateContactByAdmin = async (id: string, data: Partial<Contact>) => {
+export const updateContactByAdmin = async (
+  id: string,
+  data: Partial<Contact>,
+) => {
   return adminContactService.update(id, data);
 };
 

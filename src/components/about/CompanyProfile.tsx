@@ -23,18 +23,23 @@ export function CompanyProfile({ data }: { data: any }) {
               </BlockReveal>
             </div>
 
-            <div 
+            <div
               className="text-gray-600 text-base leading-relaxed prose max-w-none"
-              dangerouslySetInnerHTML={{ 
-                __html: data?.companyDescription || 
-                `<p>At Bonedi Homes, we do more than just build structures; we create legacies. With a deep-rooted commitment to architectural brilliance and uncompromising quality, we have established ourselves as pioneers in the luxury real estate sector.</p><p>Our projects span across prime locations, offering unparalleled convenience, state-of-the-art amenities, and a community-centric lifestyle. We pride ourselves on our meticulous attention to detail, uncompromising quality, and a customer-first approach that ensures every Bonedi home is a masterpiece.</p>`
+              dangerouslySetInnerHTML={{
+                __html:
+                  data?.companyDescription ||
+                  `<p>At Bonedi Homes, we do more than just build structures; we create legacies. With a deep-rooted commitment to architectural brilliance and uncompromising quality, we have established ourselves as pioneers in the luxury real estate sector.</p><p>Our projects span across prime locations, offering unparalleled convenience, state-of-the-art amenities, and a community-centric lifestyle. We pride ourselves on our meticulous attention to detail, uncompromising quality, and a customer-first approach that ensures every Bonedi home is a masterpiece.</p>`,
               }}
             />
 
             <div className="grid grid-cols-2 gap-8 mt-6">
               <div className="flex flex-col gap-2">
                 <h4 className="text-4xl font-bold text-brand-blue">
-                  <Counter end={data?.experience || 15} suffix="+" duration={600} />
+                  <Counter
+                    end={data?.experience || 15}
+                    suffix="+"
+                    duration={600}
+                  />
                 </h4>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">
                   Years Experience
@@ -42,7 +47,11 @@ export function CompanyProfile({ data }: { data: any }) {
               </div>
               <div className="flex flex-col gap-2">
                 <h4 className="text-4xl font-bold text-brand-blue">
-                  <Counter end={data?.completedProjects || 50} suffix="+" duration={800} />
+                  <Counter
+                    end={data?.completedProjects || 50}
+                    suffix="+"
+                    duration={800}
+                  />
                 </h4>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">
                   Projects Completed
@@ -55,7 +64,10 @@ export function CompanyProfile({ data }: { data: any }) {
           <div className="w-full lg:w-1/2 relative">
             <div className="relative aspect-[4/3] w-full overflow-hidden shadow-lg border border-gray-100">
               <img
-                src={data?.companyImage?.url || "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2070&auto=format&fit=crop"}
+                src={
+                  data?.companyImage?.url ||
+                  "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2070&auto=format&fit=crop"
+                }
                 alt={data?.companyHeading || "Modern Apartment Building"}
                 className="w-full h-full object-cover"
               />

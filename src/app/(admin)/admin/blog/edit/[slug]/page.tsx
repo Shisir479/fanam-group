@@ -1,11 +1,15 @@
-import { getBlogBySlugByAdmin, updateBlogBySlugByAdmin } from "@/services/blog.service";
+import { constructMetadata } from "@/lib/metadata";
+import {
+  getBlogBySlugByAdmin,
+  updateBlogBySlugByAdmin,
+} from "@/services/blog.service";
 import EditBlogClient from "@/components/blog/EditBlogClient";
 import { notFound } from "next/navigation";
 
-export const metadata = {
-  title: "Edit Blog | Admin",
-  description: "Edit your existing blog post",
-};
+export const metadata = constructMetadata({
+  title: "Admin Dashboard",
+  noIndex: true,
+});
 
 export default async function EditBlogPage({
   params,
@@ -32,5 +36,11 @@ export default async function EditBlogPage({
     return await updateBlogBySlugByAdmin(slug, payload);
   };
 
-  return <EditBlogClient initialData={blogData} slug={slug} onSubmit={handleUpdate} />;
+  return (
+    <EditBlogClient
+      initialData={blogData}
+      slug={slug}
+      onSubmit={handleUpdate}
+    />
+  );
 }

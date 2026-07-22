@@ -48,7 +48,10 @@ export default function VideoGallery({ videos = [] }: { videos?: Video[] }) {
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors duration-500"></div>
                 <PlayButton />
               </div>
-              <h3 className="text-[17px] md:text-lg font-medium text-gray-900 text-left truncate" title={video.title}>
+              <h3
+                className="text-[17px] md:text-lg font-medium text-gray-900 text-left truncate"
+                title={video.title}
+              >
                 {video.title}
               </h3>
             </div>

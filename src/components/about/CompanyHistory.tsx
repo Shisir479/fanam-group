@@ -1,38 +1,41 @@
 import { BlockReveal } from "@/components/ui/BlockReveal";
 
 export function CompanyHistory({ data }: { data: any }) {
-  const milestones = data?.timeline?.length > 0 ? data.timeline : [
-    {
-      year: "2010",
-      title: "Foundation",
-      description:
-        "Bonedi Homes was established with a vision to revolutionize urban living in Dhaka, focusing on premium residential properties.",
-    },
-    {
-      year: "2014",
-      title: "First Landmark Project",
-      description:
-        "Successfully delivered our first major project, 'Bonedi Heights', setting a new standard for luxury apartments.",
-    },
-    {
-      year: "2018",
-      title: "Expansion",
-      description:
-        "Expanded our operations to commercial real estate, developing state-of-the-art office spaces for multinational corporations.",
-    },
-    {
-      year: "2022",
-      title: "Sustainability Award",
-      description:
-        "Recognized nationally for integrating sustainable architecture and green building practices across all new developments.",
-    },
-    {
-      year: "2024",
-      title: "Global Reach",
-      description:
-        "Initiated collaborations with international architectural firms to bring global design standards to local projects.",
-    },
-  ];
+  const milestones =
+    data?.timeline?.length > 0
+      ? data.timeline
+      : [
+          {
+            year: "2010",
+            title: "Foundation",
+            description:
+              "Bonedi Homes was established with a vision to revolutionize urban living in Dhaka, focusing on premium residential properties.",
+          },
+          {
+            year: "2014",
+            title: "First Landmark Project",
+            description:
+              "Successfully delivered our first major project, 'Bonedi Heights', setting a new standard for luxury apartments.",
+          },
+          {
+            year: "2018",
+            title: "Expansion",
+            description:
+              "Expanded our operations to commercial real estate, developing state-of-the-art office spaces for multinational corporations.",
+          },
+          {
+            year: "2022",
+            title: "Sustainability Award",
+            description:
+              "Recognized nationally for integrating sustainable architecture and green building practices across all new developments.",
+          },
+          {
+            year: "2024",
+            title: "Global Reach",
+            description:
+              "Initiated collaborations with international architectural firms to bring global design standards to local projects.",
+          },
+        ];
 
   if (!data) return null;
 
@@ -76,9 +79,13 @@ export function CompanyHistory({ data }: { data: any }) {
                     <h3 className="text-lg font-bold text-brand-blue uppercase tracking-wider">
                       {milestone.title}
                     </h3>
-                    <p className="text-gray-600 text-sm leading-relaxed mt-2">
-                      {milestone.description}
-                    </p>
+                    <div
+                      className="text-gray-600 text-sm leading-relaxed mt-2 whitespace-normal break-words"
+                      dangerouslySetInnerHTML={{
+                        __html:
+                          milestone.description?.replace(/&nbsp;/g, " ") || "",
+                      }}
+                    />
                   </div>
                 </div>
               </div>

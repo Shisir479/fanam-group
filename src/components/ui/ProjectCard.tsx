@@ -9,12 +9,20 @@ interface ProjectCardProps {
   isSwiperSlide?: boolean;
 }
 
-export function ProjectCard({ project, className, isSwiperSlide }: ProjectCardProps) {
+export function ProjectCard({
+  project,
+  className,
+  isSwiperSlide,
+}: ProjectCardProps) {
   const content = (
     <>
       {/* Background Image that slowly zooms on hover */}
       <Image
-        src={project.cover?.url || project.image || "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab"}
+        src={
+          project.cover?.url ||
+          project.image ||
+          "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab"
+        }
         alt={project.name || project.title}
         fill
         sizes="(max-width: 640px) 100vw, (max-width: 768px) 45vw, (max-width: 1024px) 40vw, 30vw"
@@ -29,17 +37,19 @@ export function ProjectCard({ project, className, isSwiperSlide }: ProjectCardPr
         <span className="bg-brand-blue text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 shadow-sm">
           {project.category}
         </span>
-        
+
         {project.status && (
           <span className="bg-white/90 backdrop-blur-sm text-brand-blue text-[11px] font-bold uppercase tracking-wider px-3 py-1 shadow-sm capitalize">
-            {Array.isArray(project.status) ? project.status.find((s: string) => s !== "featured") : project.status}
+            {Array.isArray(project.status)
+              ? project.status.find((s: string) => s !== "featured")
+              : project.status}
           </span>
         )}
-        
+
         {project.featured && (
-            <span className="bg-purple-600 text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 shadow-sm capitalize">
-              Featured
-            </span>
+          <span className="bg-purple-600 text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 shadow-sm capitalize">
+            Featured
+          </span>
         )}
       </div>
 
@@ -51,8 +61,10 @@ export function ProjectCard({ project, className, isSwiperSlide }: ProjectCardPr
             {project.name || project.title}
           </h3>
           <p className="text-white/90 text-sm md:text-[15px] font-medium mt-1">
-            {project.location?.area 
-              ? [project.location.area, project.location.city].filter(Boolean).join(", ") 
+            {project.location?.area
+              ? [project.location.area, project.location.city]
+                  .filter(Boolean)
+                  .join(", ")
               : project.location}
           </p>
         </div>
@@ -76,7 +88,7 @@ export function ProjectCard({ project, className, isSwiperSlide }: ProjectCardPr
 
   const wrapperClass = cn(
     "relative group/card overflow-hidden cursor-pointer transform-gpu block w-full h-full",
-    className
+    className,
   );
 
   return (

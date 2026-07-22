@@ -1,48 +1,43 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { BlockReveal } from "@/components/ui/BlockReveal";
 import { ScrollReelTestimonials } from "@/components/ui/scroll-reel-testimonials";
-
-const testimonials = [
-  {
-    title: "Heartfelt Tales of Our Happy Homeowners",
-    quote:
-      "Hear from Edison Adelia homeowners as they share their stories about their homes. Their experiences inspire us to keep providing the best for everyone we serve.",
-    author: "A.S.M Faizullah & AL Batul Sabera",
-    designation: "Apartment Owner",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=400",
-  },
-  {
-    title: "A Truly Professional Experience",
-    quote:
-      "The property management team at Bonedi Homes has been outstanding. They took care of everything and gave us peace of mind from day one.",
-    author: "Michael Chen",
-    designation: "Commercial Investor",
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400",
-  },
-  {
-    title: "Transforming Spaces with Excellence",
-    quote:
-      "The interior design transformed our space completely. We couldn't be happier with the results and the attention to detail throughout the process.",
-    author: "Emily Rodriguez",
-    designation: "Villa Owner",
-    image:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=400",
-  },
-  {
-    title: "Understanding Our Needs Perfectly",
-    quote:
-      "They understood exactly what our business needed for a new commercial space. The process was smooth, professional, and highly recommended.",
-    author: "David Thompson",
-    designation: "Business Owner",
-    image:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400",
-  },
-];
+import {
+  getTestimonialsPublic,
+  TestimonialType,
+} from "@/services/testimonial.service";
 
 export function TestimonialSection() {
+  const [testimonials, setTestimonials] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const res = await getTestimonialsPublic();
+        if (res?.data && res.data.length > 0) {
+          // Map backend format to frontend ScrollReelTestimonials format
+          const formatted = res.data.map((t: TestimonialType) => ({
+            title: t.title,
+            quote: t.review,
+            author: t.name,
+            designation: t.company
+              ? `${t.designation} - ${t.company}`
+              : t.designation || "",
+            image: t.image?.url || "",
+          }));
+          setTestimonials(formatted);
+        }
+      } catch (error) {
+        console.error("Failed to load testimonials:", error);
+      }
+    };
+
+    fetchTestimonials();
+  }, []);
+
+  if (testimonials.length === 0) return null;
+
   return (
     <section className="w-full py-16 md:py-24 bg-white">
       <div className="container mx-auto px-5 md:px-16 overflow-hidden">

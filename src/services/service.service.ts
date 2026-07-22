@@ -1,3 +1,4 @@
+import { revalidatePage } from "@/app/actions";
 import { api } from "@/lib/api";
 
 export interface ServiceType {
@@ -7,7 +8,15 @@ export interface ServiceType {
   heading: string;
   shortDescription: string;
   description: string;
-  category: "Residential Properties" | "Commercial Spaces" | "Interior Design" | "Property Management" | "Construction" | "Architecture" | "Other" | string;
+  category:
+    | "Residential Properties"
+    | "Commercial Spaces"
+    | "Interior Design"
+    | "Property Management"
+    | "Construction"
+    | "Architecture"
+    | "Other"
+    | string;
   icon?: string;
   sortOrder?: number;
   featured?: boolean;
@@ -25,7 +34,12 @@ export interface ServiceType {
 // ==========================================================
 
 export const createServiceByAdmin = async (payload: any) => {
-  return await api("/admin/services", { method: "POST", body: JSON.stringify(payload) });
+  const res = await api("/admin/services", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+  await revalidatePage("/", "layout");
+  return res;
 };
 
 export const getServicesByAdmin = async (params: any = {}) => {
@@ -38,11 +52,18 @@ export const getServiceBySlugAdmin = async (slug: string) => {
 };
 
 export const updateServiceBySlugAdmin = async (slug: string, payload: any) => {
-  return await api(`/admin/services/${slug}`, { method: "PUT", body: JSON.stringify(payload) });
+  const res = await api(`/admin/services/${slug}`, {
+    method: "PUT",
+    body: JSON.stringify(payload),
+  });
+  await revalidatePage("/", "layout");
+  return res;
 };
 
 export const deleteServiceBySlugAdmin = async (slug: string) => {
-  return await api(`/admin/services/${slug}`, { method: "DELETE" });
+  const res = await api(`/admin/services/${slug}`, { method: "DELETE" });
+  await revalidatePage("/", "layout");
+  return res;
 };
 
 // ==========================================================

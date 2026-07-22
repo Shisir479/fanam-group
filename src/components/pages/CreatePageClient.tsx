@@ -2,9 +2,15 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { uploadSingleImage } from "@/services/upload.service";
+import { useImageUpload } from "@/hooks/useImageUpload";
 import toast from "react-hot-toast";
-import { ArrowLeft, Save, Loader2, Image as ImageIcon, UploadCloud } from "lucide-react";
+import {
+  ArrowLeft,
+  Save,
+  Loader2,
+  Image as ImageIcon,
+  UploadCloud,
+} from "lucide-react";
 import Link from "next/link";
 import {
   Select,
@@ -15,7 +21,6 @@ import {
 } from "@/components/ui/select";
 import { createPageByAdmin } from "@/services/page.service";
 import RichTextEditor from "../ui/RichTextEditor";
-
 
 export default function CreatePageClient() {
   const router = useRouter();
@@ -31,7 +36,7 @@ export default function CreatePageClient() {
   });
   const [coverUrl, setCoverUrl] = useState("");
   const [coverId, setCoverId] = useState("");
-  const [isUploading, setIsUploading] = useState(false);
+  const { isUploading, uploadSingle } = useImageUpload();
 
   // Simple string-to-slug generator
   const generateSlug = (text: string) => {
@@ -138,9 +143,7 @@ export default function CreatePageClient() {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-300">
-                Slug
-              </label>
+              <label className="text-sm font-medium text-gray-300">Slug</label>
               <input
                 type="text"
                 required
@@ -176,7 +179,9 @@ export default function CreatePageClient() {
               </label>
               <RichTextEditor
                 value={formData.description}
-                onChange={(value) => setFormData({ ...formData, description: value })}
+                onChange={(value) =>
+                  setFormData({ ...formData, description: value })
+                }
               />
             </div>
           </div>
@@ -203,12 +208,8 @@ export default function CreatePageClient() {
                   <SelectValue placeholder="Select a status" />
                 </SelectTrigger>
                 <SelectContent alignItemWithTrigger={false}>
-                  <SelectItem value="active">
-                    Active (Published)
-                  </SelectItem>
-                  <SelectItem value="inactive">
-                    Inactive
-                  </SelectItem>
+                  <SelectItem value="active">Active (Published)</SelectItem>
+                  <SelectItem value="inactive">Inactive</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -218,7 +219,7 @@ export default function CreatePageClient() {
                 Cover Image
               </label>
               <label
-                className={`w-full h-32 border-2 border-dashed border-white/20 rounded-xl flex flex-col items-center justify-center text-gray-400 hover:text-white hover:border-purple-500 transition-colors cursor-pointer bg-white/5 overflow-hidden relative group ${isUploading ? 'opacity-50 pointer-events-none' : ''}`}
+                className={`w-full h-32 border-2 border-dashed border-white/20 rounded-xl flex flex-col items-center justify-center text-gray-400 hover:text-white hover:border-purple-500 transition-colors cursor-pointer bg-white/5 overflow-hidden relative group ${isUploading ? "opacity-50 pointer-events-none" : ""}`}
               >
                 <input
                   type="file"
@@ -227,18 +228,11 @@ export default function CreatePageClient() {
                   onChange={async (e) => {
                     const file = e.target.files?.[0];
                     if (!file) return;
-                    setIsUploading(true);
-                    try {
-                      const res = await uploadSingleImage(file);
-                      if (res.success && res.data && res.data.length > 0) {
-                        setCoverUrl(res.data[0].url);
-                        setCoverId(res.data[0]._id);
-                        toast.success("Image uploaded successfully");
-                      }
-                    } catch (error: any) {
-                      toast.error(error.message || "Failed to upload image");
-                    } finally {
-                      setIsUploading(false);
+
+                    const imageData = await uploadSingle(file);
+                    if (imageData) {
+                      setCoverUrl(imageData.url);
+                      setCoverId(imageData._id);
                     }
                   }}
                 />
@@ -257,7 +251,9 @@ export default function CreatePageClient() {
                     <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
                       <div className="flex items-center gap-2 text-white">
                         <UploadCloud className="w-5 h-5" />
-                        <span className="text-sm font-medium">Click to replace</span>
+                        <span className="text-sm font-medium">
+                          Click to replace
+                        </span>
                       </div>
                     </div>
                   </>

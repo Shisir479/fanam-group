@@ -1,3 +1,4 @@
+import { constructMetadata } from "@/lib/metadata";
 import { AboutHero } from "@/components/about/AboutHero";
 import { CompanyProfile } from "@/components/about/CompanyProfile";
 import { ChairmanMessage } from "@/components/about/ChairmanMessage";
@@ -7,17 +8,18 @@ import { CoreValues } from "@/components/about/CoreValues";
 import { CompanyHistory } from "@/components/about/CompanyHistory";
 import { OrganizationalOverview } from "@/components/about/OrganizationalOverview";
 import { getAboutPublic } from "@/services/about.service";
-
-export const revalidate = 60; // SSR with ISR (60s revalidation)
-
 export async function generateMetadata() {
   const res = await getAboutPublic();
   const about = res?.data;
 
-  return {
-    title: about?.heroTitle ? `${about.heroTitle} - Bonedi Homes` : "About Us - Bonedi Homes",
-    description: about?.companyDescription || "Learn about Bonedi Homes, our history, and our values.",
-  };
+  return constructMetadata({
+    title: about?.heroTitle
+      ? `${about.heroTitle.replace(/<[^>]*>?/gm, " ").trim()} - Bonedi Homes`
+      : "About Us - Bonedi Homes",
+    description:
+      about?.companyDescription ||
+      "Learn about Bonedi Homes, our history, and our values.",
+  });
 }
 
 export default async function AboutUsPage() {

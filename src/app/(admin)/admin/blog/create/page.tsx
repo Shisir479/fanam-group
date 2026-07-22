@@ -1,10 +1,11 @@
+import { constructMetadata } from "@/lib/metadata";
 import CreateBlogClient from "@/components/blog/CreateBlogClient";
 import { createBlogByAdmin } from "@/services/blog.service";
 
-export const metadata = {
-  title: "Create Blog | Admin",
-  description: "Create a new blog post",
-};
+export const metadata = constructMetadata({
+  title: "Admin Dashboard",
+  noIndex: true,
+});
 
 export default function CreateBlogPage() {
   const handleCreate = async (payload: any) => {

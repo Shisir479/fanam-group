@@ -1,9 +1,10 @@
+import { constructMetadata } from "@/lib/metadata";
 import InquiryForm from "@/components/inquiry/InquiryForm";
 
-export const metadata = {
+export const metadata = constructMetadata({
   title: "Inquiry - Bonedi Homes",
   description: "Submit an inquiry or book an investment with Bonedi Homes.",
-};
+});
 
 export default function InquiryPage() {
   return (
