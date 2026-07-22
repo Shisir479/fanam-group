@@ -9,12 +9,16 @@ import { SharedButton } from "@/components/ui/SharedButton";
 import { Search, ChevronDown, Filter } from "lucide-react";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 
+import { Banner } from "@/services/banner.service";
+
 export function ProjectsView({
   initialStatus = "All",
   initialProjects = [],
+  banner,
 }: {
   initialStatus?: string;
   initialProjects?: any[];
+  banner?: Banner;
 }) {
   const projects = initialProjects;
 
@@ -112,15 +116,17 @@ export function ProjectsView({
     <main className="min-h-screen bg-gray-50 pb-24 flex flex-col">
       {/* Hero Section */}
       <PageBanner
-        title={
-          <>
-            Our <br className="hidden md:block" /> Projects
-          </>
-        }
-        subtitle="Portfolio"
-        bgImage="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
-        altText="Bonedi Homes Projects"
-      />
+        title={banner?.title || "Our Projects"}
+        subtitle={banner?.eyebrowText || "Discover our portfolio of extraordinary residential and commercial properties."}
+        bgImage={banner?.backgroundImage || "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop"}
+        altText={banner?.title || "Projects Background"}
+      >
+        {banner?.description && (
+          <p className="text-white/80 text-[14px] md:text-[15px] leading-relaxed max-w-2xl mt-4">
+            {banner.description}
+          </p>
+        )}
+      </PageBanner>
 
       {/* Filters & Search */}
       <section className="w-full bg-white py-12 mb-12">

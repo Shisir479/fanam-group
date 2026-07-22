@@ -2,9 +2,11 @@ import { constructMetadata } from "@/lib/metadata";
 import { BlogHero } from "@/components/blog/BlogHero";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { BlogSidebar } from "@/components/blog/BlogSidebar";
+import { PageBanner } from "@/components/ui/PageBanner";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { getBlogsPublic } from "@/services/blog.service";
+import { getBannerByPagePublic } from "@/services/banner.service";
 
 export const metadata = constructMetadata({
   title: "News & Blog - Bonedi Homes",
@@ -45,7 +47,7 @@ function mapBlogToUI(blog: any) {
     readTime: `${blog.readingTime || 5} Min Read`,
     image:
       blog.cover?.url ||
-      "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=2073&auto=format&fit=crop",
+      "",
     excerpt:
       blog.excerpt ||
       blog.description?.replace(/<[^>]+>/g, "").substring(0, 120) + "...",
@@ -58,6 +60,12 @@ export default async function BlogPage({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const resolvedSearchParams = await searchParams;
+  let banner = null;
+  try {
+    const res = await getBannerByPagePublic("blog");
+    if (res?.success) banner = res.data;
+  } catch (error) {}
+
   const searchQuery =
     typeof resolvedSearchParams.q === "string" ? resolvedSearchParams.q : "";
   const category =
@@ -86,7 +94,18 @@ export default async function BlogPage({
 
   return (
     <main className="flex min-h-screen flex-col bg-white">
-      <BlogHero />
+      <PageBanner
+        title={banner?.title || "News & Blog"}
+        subtitle={banner?.eyebrowText || "Insights"}
+        bgImage={banner?.backgroundImage || "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070"}
+        altText={banner?.title || "News & Blog"}
+      >
+        {banner?.description && (
+          <p className="text-white/80 text-[14px] md:text-[15px] leading-relaxed max-w-2xl mt-4">
+            {banner.description}
+          </p>
+        )}
+      </PageBanner>
 
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-5 md:px-16">

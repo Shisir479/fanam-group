@@ -1,4 +1,5 @@
 import { constructMetadata } from "@/lib/metadata";
+import { getBannerByPagePublic } from "@/services/banner.service";
 import { TermsConditionsView } from "@/components/pages/TermsConditionsView";
 import { getPageBySlugPublic } from "@/services/page.service";
 
@@ -17,6 +18,12 @@ export async function generateMetadata() {
 }
 
 export default async function TermsConditionsPage() {
+  let banner = null;
+  try {
+    const res = await getBannerByPagePublic("terms-conditions");
+    if (res?.success) banner = res.data;
+  } catch (e) {}
+
   let pageData = null;
   try {
     const res = await getPageBySlugPublic("terms-and-conditions");

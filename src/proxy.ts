@@ -7,7 +7,7 @@ const protectedPaths = ["/admin"];
 // Paths that are only for unauthenticated users
 const authPaths = ["/login"];
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
   const { pathname } = request.nextUrl;
 

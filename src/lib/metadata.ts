@@ -12,7 +12,7 @@ export function constructMetadata({
   title = "Bonedi Homes - Luxury Real Estate",
   description = "Bonedi Homes offers bespoke enclaves with finesse in architecture and design. Discover your dream home with us.",
   image = "/assets/images/logo/logo.png",
-  icons = "/favicon.ico",
+  icons = "/icon.png",
   noIndex = false,
 }: MetadataProps = {}): Metadata {
   return {

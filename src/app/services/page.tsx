@@ -3,9 +3,11 @@ import Link from "next/link";
 import { PageBanner } from "@/components/ui/PageBanner";
 import { getServicesPublic } from "@/services/service.service";
 import { ServiceType } from "@/services/service.service";
+import { getBannerByPagePublic } from "@/services/banner.service";
 
 export default async function ServicesPage() {
   let services: ServiceType[] = [];
+  let banner = null;
   try {
     const res = await getServicesPublic({
       status: "active",
@@ -19,14 +21,27 @@ export default async function ServicesPage() {
     console.error("Failed to fetch services", error);
   }
 
+  try {
+    const res = await getBannerByPagePublic("services");
+    if (res?.success) banner = res.data;
+  } catch (error) {
+    console.error("Failed to fetch banner", error);
+  }
+
   return (
     <main className="w-full min-h-screen bg-[#f9fafb]">
       <PageBanner
-        title="Our Premium Services"
-        subtitle="Delivering unparalleled excellence through our comprehensive real estate solutions."
-        bgImage="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2070&auto=format&fit=crop"
-        altText="Services Background"
-      />
+        title={banner?.title || "Our Premium Services"}
+        subtitle={banner?.eyebrowText || "Delivering unparalleled excellence through our comprehensive real estate solutions."}
+        bgImage={banner?.backgroundImage || "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2070&auto=format&fit=crop"}
+        altText={banner?.title || "Services Background"}
+      >
+        {banner?.description && (
+          <p className="text-white/80 text-[14px] md:text-[15px] leading-relaxed max-w-2xl mt-4">
+            {banner.description}
+          </p>
+        )}
+      </PageBanner>
 
       <section className="py-16 md:py-24 overflow-hidden">
         <div className="container mx-auto px-6 md:px-16 flex flex-col gap-16 md:gap-24">

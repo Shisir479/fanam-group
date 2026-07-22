@@ -44,6 +44,7 @@ export function AdminSidebar() {
 
     { name: "System", isHeader: true },
     { name: "Settings", icon: Settings, href: "/admin/settings" },
+    { name: "Page Banners", icon: ImageIcon, href: "/admin/settings/pagebanner" },
   ];
 
   return (

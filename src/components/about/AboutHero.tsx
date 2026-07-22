@@ -1,22 +1,32 @@
 import { PageBanner } from "@/components/ui/PageBanner";
 
-export function AboutHero({ data }: { data: any }) {
+import { Banner } from "@/services/banner.service";
+
+export function AboutHero({ data, banner }: { data: any; banner?: Banner }) {
   return (
     <PageBanner
       title={
-        <div
-          dangerouslySetInnerHTML={{
-            __html:
-              data?.heroTitle || "Building Legacies <br /> Since Inception",
-          }}
-        />
+        banner?.title ? banner.title : (
+          <div
+            dangerouslySetInnerHTML={{
+              __html:
+                data?.heroTitle || "Building Legacies <br /> Since Inception",
+            }}
+          />
+        )
       }
-      subtitle={data?.heroSubtitle || "Discover Our Story"}
+      subtitle={banner?.eyebrowText || data?.heroSubtitle || "Discover Our Story"}
       bgImage={
-        data?.heroImage?.url ||
-        "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
+        banner?.backgroundImage || data?.heroImage?.url ||
+        ""
       }
-      altText={data?.heroTitle || "Bonedi Office"}
-    />
+      altText={banner?.title || data?.heroTitle || "Bonedi Office"}
+    >
+      {banner?.description && (
+        <p className="text-white/80 text-[14px] md:text-[15px] leading-relaxed max-w-2xl mt-4">
+          {banner.description}
+        </p>
+      )}
+    </PageBanner>
   );
 }

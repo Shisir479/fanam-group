@@ -8,6 +8,7 @@ import { CoreValues } from "@/components/about/CoreValues";
 import { CompanyHistory } from "@/components/about/CompanyHistory";
 import { OrganizationalOverview } from "@/components/about/OrganizationalOverview";
 import { getAboutPublic } from "@/services/about.service";
+import { getBannerByPagePublic } from "@/services/banner.service";
 export async function generateMetadata() {
   const res = await getAboutPublic();
   const about = res?.data;
@@ -25,6 +26,8 @@ export async function generateMetadata() {
 export default async function AboutUsPage() {
   const res = await getAboutPublic();
   const about = res?.data;
+  const banner = await getBannerByPagePublic("about");
+  console.log(banner)
 
   if (!about) {
     return (
@@ -36,7 +39,7 @@ export default async function AboutUsPage() {
 
   return (
     <main className="flex min-h-screen flex-col bg-white">
-      <AboutHero data={about} />
+      <AboutHero data={about} banner={banner?.data} />
       <CompanyProfile data={about} />
       <ChairmanMessage data={about} />
       <LeadershipProfiles data={about} />

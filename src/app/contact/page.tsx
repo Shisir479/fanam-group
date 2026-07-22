@@ -1,4 +1,5 @@
 import { constructMetadata } from "@/lib/metadata";
+import { getBannerByPagePublic } from "@/services/banner.service";
 import { ContactView } from "@/components/contact/ContactView";
 import { getBrandingSettingsPublic } from "@/services/settings.service";
 
@@ -9,6 +10,12 @@ export const metadata = constructMetadata({
 });
 
 export default async function ContactPage() {
+  let banner = null;
+  try {
+    const res = await getBannerByPagePublic("contact");
+    if (res?.success) banner = res.data;
+  } catch (e) {}
+
   let brandingData: any = null;
   try {
     const brandingRes = await getBrandingSettingsPublic();
