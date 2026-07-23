@@ -6,7 +6,9 @@ export function AboutHero({ data, banner }: { data: any; banner?: Banner }) {
   return (
     <PageBanner
       title={
-        banner?.title ? banner.title : (
+        banner?.title ? (
+          banner.title
+        ) : (
           <div
             dangerouslySetInnerHTML={{
               __html:
@@ -15,11 +17,10 @@ export function AboutHero({ data, banner }: { data: any; banner?: Banner }) {
           />
         )
       }
-      subtitle={banner?.eyebrowText || data?.heroSubtitle || "Discover Our Story"}
-      bgImage={
-        banner?.backgroundImage || data?.heroImage?.url ||
-        ""
+      subtitle={
+        banner?.eyebrowText || data?.heroSubtitle || "Discover Our Story"
       }
+      bgImage={banner?.backgroundImage || data?.heroImage?.url || ""}
       altText={banner?.title || data?.heroTitle || "Bonedi Office"}
     >
       {banner?.description && (

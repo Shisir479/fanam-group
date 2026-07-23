@@ -2,9 +2,7 @@
 
 import {
   Bell,
-  Search,
   Menu,
-  ArrowLeft,
   ChevronDown,
   User,
   LogOut,
@@ -61,13 +59,6 @@ export function AdminTopbar() {
       </div>
 
       <div className="flex items-center gap-4">
-        {/* Notification Bell */}
-        <button className="relative w-10 h-10 flex items-center justify-center rounded-xl glass-panel text-gray-200 hover:text-white transition-all overflow-hidden group">
-          <div className="absolute inset-0 bg-yellow-500/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          <Bell className="w-4 h-4 relative z-10" />
-          <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-yellow-500 rounded-full border border-[#120a1c] z-10"></span>
-        </button>
-
         {/* Profile Dropdown */}
         <div className="relative" ref={dropdownRef}>
           <button

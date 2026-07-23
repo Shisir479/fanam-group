@@ -14,8 +14,8 @@ const projectLinks = [
   { label: "Ongoing Projects", href: "/projects/ongoing" },
   { label: "Upcoming Projects", href: "/projects/upcoming" },
   { label: "Handed Over", href: "/projects/handed-over" },
-  { label: "Image Gallery", href: "/gallery/image" },
-  { label: "Video Gallery", href: "/gallery/video" },
+  { label: "Image Gallery", href: "/image-gallery" },
+  { label: "Video Gallery", href: "/video-gallery" },
   { label: "Privacy Policy", href: "/legal/privacy-policy" },
 ];
 
@@ -83,7 +83,19 @@ const socialLinks = [
   },
 ];
 
-export function Footer() {
+export function Footer({ brandingData }: { brandingData?: any }) {
+  const { logo, socialLinks: dynamicSocial, contact } = brandingData || {};
+
+  const activeSocialLinks = socialLinks.map((link) => {
+    // Map "Twitter" label to "twitter" key, "Facebook" to "facebook"
+    const key =
+      link.label.toLowerCase() === "twitter"
+        ? "twitter"
+        : link.label.toLowerCase();
+    const dynamicHref = dynamicSocial?.[key];
+    return { ...link, href: dynamicHref || link.href };
+  });
+
   return (
     <footer className="relative w-full bg-black text-white overflow-hidden">
       {/* Background Image with Dark Overlay */}
@@ -105,16 +117,16 @@ export function Footer() {
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center mb-7 h-26">
               <Image
-                src="/company_logo/Bonedia White Logo File.png"
+                src={logo?.url || "/company_logo/Bonedia White Logo File.png"}
                 alt="Company Logo"
                 width={160}
-                height={0}
-                className="object-cover border border border-white"
+                height={60}
+                className="object-contain"
               />
             </Link>
 
             <p className="text-white/55 text-sm leading-relaxed mb-6">
-              Building dreams into reality. Premium residential &amp; commercial
+              Building dreams into reality. Premium residential & commercial
               projects across Bangladesh.
             </p>
 
@@ -134,7 +146,9 @@ export function Footer() {
                 </span>
                 <span>
                   Hotline:{" "}
-                  <span className="text-white font-semibold">01331662255</span>
+                  <span className="text-white font-semibold">
+                    {contact?.phone || "01331662255"}
+                  </span>
                 </span>
               </div>
               <div className="flex items-center gap-3 text-white/75">
@@ -151,7 +165,9 @@ export function Footer() {
                     <polyline points="22,6 12,13 2,6" />
                   </svg>
                 </span>
-                <span className="break-all">bonedia.com</span>
+                <span className="break-all">
+                  {contact?.email || "bonedia.com"}
+                </span>
               </div>
             </div>
           </div>
@@ -205,10 +221,12 @@ export function Footer() {
               Follow Us
             </h4>
             <div className="flex flex-col gap-3">
-              {socialLinks.map((s) => (
+              {activeSocialLinks.map((s) => (
                 <a
                   key={s.label}
                   href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group flex items-center gap-3 transition-all duration-300"
                 >
                   <span
@@ -258,7 +276,10 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/40">
-          <p>&copy; 2026 Edison Real Estate. All Rights Reserved.</p>
+          <p>
+            &copy; {new Date().getFullYear()}{" "}
+            {brandingData?.siteName || "Bonedi Homes"}. All Rights Reserved.
+          </p>
           <p>
             Designed &amp; Developed by{" "}
             <span className="text-white/70 font-semibold hover:text-white transition-colors cursor-pointer">

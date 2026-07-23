@@ -22,45 +22,29 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export default function AdminPagesListClient() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const [pages, setPages] = useState<Page[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+interface Props {
+  initialPages: Page[];
+  totalPages: number;
+  currentPage: number;
+  currentSearch: string;
+  currentStatus: string;
+}
 
-  const [search, setSearch] = useState(searchParams.get("search") || "");
-  const [status, setStatus] = useState(searchParams.get("status") || "");
-  const [page, setPage] = useState(parseInt(searchParams.get("page") || "1"));
-  const [totalPages, setTotalPages] = useState(1);
+export default function AdminPagesListClient({
+  initialPages,
+  totalPages,
+  currentPage,
+  currentSearch,
+  currentStatus,
+}: Props) {
+  const router = useRouter();
+
+  const [search, setSearch] = useState(currentSearch);
+  const [status, setStatus] = useState(currentStatus);
 
   const [isDeleting, setIsDeleting] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [pageToDelete, setPageToDelete] = useState<string | null>(null);
-
-  const fetchPages = async () => {
-    setIsLoading(true);
-    try {
-      const res = await getPagesByAdmin({
-        page,
-        search,
-        status,
-        limit: 10,
-        _t: Date.now(),
-      });
-      if (res.success) {
-        setPages(res.data || []);
-        setTotalPages(res.count || 1);
-      }
-    } catch (error: any) {
-      toast.error(error.message || "Failed to fetch pages");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchPages();
-  }, [page, search, status]);
 
   const confirmDelete = (slug: string) => {
     setPageToDelete(slug);
@@ -76,7 +60,7 @@ export default function AdminPagesListClient() {
         toast.success("Page deleted successfully");
         setDeleteModalOpen(false);
         setPageToDelete(null);
-        fetchPages();
+        router.refresh();
       } else {
         toast.error(res.message || "Failed to delete page.");
       }
@@ -206,7 +190,6 @@ export default function AdminPagesListClient() {
               value={search}
               onChange={(e) => {
                 setSearch(e.target.value);
-                setPage(1);
                 router.push(
                   `/admin/content/pages?search=${e.target.value}&status=${status}&page=1`,
                 );
@@ -220,7 +203,6 @@ export default function AdminPagesListClient() {
               const val = value || "";
               const newValue = val === "all" ? "" : val;
               setStatus(newValue);
-              setPage(1);
               router.push(
                 `/admin/content/pages?search=${search}&status=${newValue}&page=1`,
               );
@@ -240,17 +222,16 @@ export default function AdminPagesListClient() {
         {/* List */}
         <AdminTable
           columns={columns}
-          data={pages}
-          isLoading={isLoading}
+          data={initialPages}
+          isLoading={false}
           keyExtractor={(p) => p._id!}
           emptyMessage="No pages found."
         />
         {/* Pagination */}
         <Pagination
-          currentPage={page}
+          currentPage={currentPage}
           totalPages={totalPages}
           onPageChange={(newPage) => {
-            setPage(newPage);
             router.push(
               `/admin/content/pages?search=${search}&status=${status}&page=${newPage}`,
             );

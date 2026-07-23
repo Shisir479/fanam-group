@@ -6,7 +6,7 @@ import { PageBanner } from "@/components/ui/PageBanner";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { getBlogsPublic } from "@/services/blog.service";
-import { getBannerByPagePublic } from "@/services/banner.service";
+import { getBannerByPageAdmin } from "@/services/banner.service";
 
 export const metadata = constructMetadata({
   title: "News & Blog - Bonedi Homes",
@@ -45,9 +45,7 @@ function mapBlogToUI(blog: any) {
       },
     ),
     readTime: `${blog.readingTime || 5} Min Read`,
-    image:
-      blog.cover?.url ||
-      "",
+    image: blog.cover?.url || "",
     excerpt:
       blog.excerpt ||
       blog.description?.replace(/<[^>]+>/g, "").substring(0, 120) + "...",
@@ -62,7 +60,7 @@ export default async function BlogPage({
   const resolvedSearchParams = await searchParams;
   let banner = null;
   try {
-    const res = await getBannerByPagePublic("blog");
+    const res = await getBannerByPageAdmin("blog");
     if (res?.success) banner = res.data;
   } catch (error) {}
 
@@ -97,7 +95,10 @@ export default async function BlogPage({
       <PageBanner
         title={banner?.title || "News & Blog"}
         subtitle={banner?.eyebrowText || "Insights"}
-        bgImage={banner?.backgroundImage || "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070"}
+        bgImage={
+          banner?.backgroundImage ||
+          "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070"
+        }
         altText={banner?.title || "News & Blog"}
       >
         {banner?.description && (

@@ -63,7 +63,7 @@ export const createGalleryByAdmin = async (
 ): Promise<{ success: boolean; message: string; data?: Gallery }> => {
   const res = await adminGalleryCrud.create(data);
   if (res && res.success !== false) {
-    await revalidatePage("/gallery", "layout");
+    await revalidatePage("/", "layout");
   }
   return res as { success: boolean; message: string; data?: Gallery };
 };
@@ -82,11 +82,11 @@ export const updateGalleryByAdmin = async (
 export const deleteGalleryBySlugByAdmin = async (
   slug: string,
 ): Promise<{ success: boolean; message: string }> => {
-  const res = await adminGalleryCrud.delete(slug);
-  if (res && res.success !== false) {
+  const res = (await adminGalleryCrud.delete(slug)) as any;
+  if (!res || res.success !== false) {
     await revalidatePage("/", "layout");
   }
-  return res as { success: boolean; message: string };
+  return res;
 };
 
 // ----------------------

@@ -1,7 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getBannerByPageAdmin, updateBannerByPageAdmin, Banner, BannerStat } from "@/services/banner.service";
+import {
+  getBannerByPageAdmin,
+  updateBannerByPageAdmin,
+  Banner,
+  BannerStat,
+} from "@/services/banner.service";
 import { useImageUpload } from "@/hooks/useImageUpload";
 import { ImagePlus, Loader2, Save, Trash2, Plus } from "lucide-react";
 import toast from "react-hot-toast";
@@ -47,10 +52,10 @@ export function AdminBannerClient() {
     setIsLoading(true);
     try {
       const res = await getBannerByPageAdmin(page);
-      
+
       // Handle both { success: true, data: banner } and direct banner object response
       const bannerData = res?.data || (res?._id ? res : null);
-      
+
       if (bannerData) {
         setBanner(bannerData);
       } else {
@@ -62,7 +67,9 @@ export function AdminBannerClient() {
           backgroundImage: "",
           stats: [],
         });
-        toast.error("Banner not found for this page. It cannot be edited until created by the backend.");
+        toast.error(
+          "Banner not found for this page. It cannot be edited until created by the backend.",
+        );
       }
     } catch (error) {
       console.error(error);
@@ -138,7 +145,9 @@ export function AdminBannerClient() {
     <div className="space-y-6 max-w-6xl mx-auto pb-24 text-white">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-md">
         <div>
-          <h2 className="text-2xl font-bold text-white tracking-tight">Page Banners</h2>
+          <h2 className="text-2xl font-bold text-white tracking-tight">
+            Page Banners
+          </h2>
           <p className="text-sm text-gray-400 mt-1">
             Select a page to manage its banner content.
           </p>
@@ -149,7 +158,11 @@ export function AdminBannerClient() {
             disabled={isSaving}
             className="glass-btn disabled:opacity-50"
           >
-            {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+            {isSaving ? (
+              <Loader2 className="w-4 h-4 animate-spin" />
+            ) : (
+              <Save className="w-4 h-4" />
+            )}
             {isSaving ? "Saving..." : "Save Banner"}
           </button>
         )}
@@ -185,7 +198,9 @@ export function AdminBannerClient() {
           <div className="py-20 flex flex-col items-center justify-center text-gray-400">
             <ImagePlus className="w-12 h-12 mb-4 opacity-50" />
             <p>Banner not found for this page.</p>
-            <p className="text-sm">Please select a valid page to edit its banner.</p>
+            <p className="text-sm">
+              Please select a valid page to edit its banner.
+            </p>
           </div>
         ) : (
           <div className="space-y-8 mt-8 border-t border-white/10 pt-8">
@@ -197,7 +212,9 @@ export function AdminBannerClient() {
                 <input
                   type="text"
                   value={banner.eyebrowText || ""}
-                  onChange={(e) => setBanner({ ...banner, eyebrowText: e.target.value })}
+                  onChange={(e) =>
+                    setBanner({ ...banner, eyebrowText: e.target.value })
+                  }
                   placeholder="e.g. BUILDING LEGACIES"
                   className="w-full px-4 py-2 mt-1 bg-black/20 border border-white/20 rounded-lg text-white focus:outline-none focus:border-white/40"
                 />
@@ -209,7 +226,9 @@ export function AdminBannerClient() {
                 <input
                   type="text"
                   value={banner.title || ""}
-                  onChange={(e) => setBanner({ ...banner, title: e.target.value })}
+                  onChange={(e) =>
+                    setBanner({ ...banner, title: e.target.value })
+                  }
                   placeholder="e.g. About Us"
                   className="w-full px-4 py-2 mt-1 bg-black/20 border border-white/20 rounded-lg text-white focus:outline-none focus:border-white/40"
                 />
@@ -220,7 +239,9 @@ export function AdminBannerClient() {
                 </label>
                 <textarea
                   value={banner.description || ""}
-                  onChange={(e) => setBanner({ ...banner, description: e.target.value })}
+                  onChange={(e) =>
+                    setBanner({ ...banner, description: e.target.value })
+                  }
                   rows={3}
                   className="w-full px-4 py-2 mt-1 bg-black/20 border border-white/20 rounded-lg text-white focus:outline-none focus:border-white/40 resize-none"
                   placeholder="Brief description..."
@@ -279,20 +300,12 @@ export function AdminBannerClient() {
             </div>
 
             <div className="border-t border-white/10 pt-8">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-bold text-white">Banner Stats (Optional)</h3>
-                <button
-                  type="button"
-                  onClick={addStat}
-                  className="flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-lg text-sm transition-colors"
-                >
-                  <Plus className="w-4 h-4" /> Add Stat
-                </button>
-              </div>
-
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {(banner.stats || []).map((stat, idx) => (
-                  <div key={idx} className="bg-black/20 border border-white/10 p-4 rounded-lg relative group">
+                  <div
+                    key={idx}
+                    className="bg-black/20 border border-white/10 p-4 rounded-lg relative group"
+                  >
                     <button
                       type="button"
                       onClick={() => removeStat(idx)}
@@ -302,21 +315,29 @@ export function AdminBannerClient() {
                     </button>
                     <div className="space-y-3">
                       <div>
-                        <label className="text-xs font-semibold text-gray-400 uppercase">Value</label>
+                        <label className="text-xs font-semibold text-gray-400 uppercase">
+                          Value
+                        </label>
                         <input
                           type="text"
                           value={stat.value}
-                          onChange={(e) => updateStat(idx, "value", e.target.value)}
+                          onChange={(e) =>
+                            updateStat(idx, "value", e.target.value)
+                          }
                           placeholder="e.g. 15+"
                           className="w-full px-3 py-1.5 mt-1 bg-black/30 border border-white/10 rounded text-white text-sm"
                         />
                       </div>
                       <div>
-                        <label className="text-xs font-semibold text-gray-400 uppercase">Label</label>
+                        <label className="text-xs font-semibold text-gray-400 uppercase">
+                          Label
+                        </label>
                         <input
                           type="text"
                           value={stat.label}
-                          onChange={(e) => updateStat(idx, "label", e.target.value)}
+                          onChange={(e) =>
+                            updateStat(idx, "label", e.target.value)
+                          }
                           placeholder="e.g. Years Experience"
                           className="w-full px-3 py-1.5 mt-1 bg-black/30 border border-white/10 rounded text-white text-sm"
                         />
@@ -324,9 +345,6 @@ export function AdminBannerClient() {
                     </div>
                   </div>
                 ))}
-                {(!banner.stats || banner.stats.length === 0) && (
-                  <p className="text-gray-500 text-sm italic col-span-full">No stats added. This is optional.</p>
-                )}
               </div>
             </div>
           </div>

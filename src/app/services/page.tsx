@@ -3,7 +3,7 @@ import Link from "next/link";
 import { PageBanner } from "@/components/ui/PageBanner";
 import { getServicesPublic } from "@/services/service.service";
 import { ServiceType } from "@/services/service.service";
-import { getBannerByPagePublic } from "@/services/banner.service";
+import { getBannerByPageAdmin } from "@/services/banner.service";
 
 export default async function ServicesPage() {
   let services: ServiceType[] = [];
@@ -22,7 +22,7 @@ export default async function ServicesPage() {
   }
 
   try {
-    const res = await getBannerByPagePublic("services");
+    const res = await getBannerByPageAdmin("services");
     if (res?.success) banner = res.data;
   } catch (error) {
     console.error("Failed to fetch banner", error);
@@ -32,8 +32,14 @@ export default async function ServicesPage() {
     <main className="w-full min-h-screen bg-[#f9fafb]">
       <PageBanner
         title={banner?.title || "Our Premium Services"}
-        subtitle={banner?.eyebrowText || "Delivering unparalleled excellence through our comprehensive real estate solutions."}
-        bgImage={banner?.backgroundImage || "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2070&auto=format&fit=crop"}
+        subtitle={
+          banner?.eyebrowText ||
+          "Delivering unparalleled excellence through our comprehensive real estate solutions."
+        }
+        bgImage={
+          banner?.backgroundImage ||
+          "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2070&auto=format&fit=crop"
+        }
         altText={banner?.title || "Services Background"}
       >
         {banner?.description && (

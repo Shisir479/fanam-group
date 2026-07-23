@@ -1,6 +1,6 @@
 import { ProjectsView } from "@/components/projects/ProjectsView";
 import { getProjectsPublic } from "@/services/project.service";
-import { getBannerByPagePublic } from "@/services/banner.service";
+import { getBannerByPageAdmin } from "@/services/banner.service";
 
 export default async function ProjectsPage() {
   let projects: any[] = [];
@@ -15,7 +15,7 @@ export default async function ProjectsPage() {
 
   let banner = null;
   try {
-    const bannerRes = await getBannerByPagePublic("projects");
+    const bannerRes = await getBannerByPageAdmin("projects");
     if (bannerRes?.success) banner = bannerRes.data;
   } catch (err) {}
 

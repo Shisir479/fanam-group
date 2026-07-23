@@ -1,11 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import {
   Gallery,
-  getGalleriesByAdmin,
   deleteGalleryBySlugByAdmin,
 } from "@/services/gallery.service";
 import { DeleteModal } from "@/components/ui/DeleteModal";
@@ -14,50 +13,31 @@ import {
   Edit,
   Trash2,
   Plus,
-  Search,
   Image as ImageIcon,
   Video as VideoIcon,
 } from "lucide-react";
 import toast from "react-hot-toast";
 import { AdminTable, ColumnDef } from "@/components/ui/AdminTable";
 
-interface AdminGalleryListClientProps {}
+interface AdminGalleryListClientProps {
+  initialGalleries: Gallery[];
+  totalPages: number;
+  currentPage: number;
+  currentSearch: string;
+}
 
-export default function AdminGalleryListClient() {
+export default function AdminGalleryListClient({
+  initialGalleries,
+  totalPages,
+  currentPage,
+  currentSearch,
+}: AdminGalleryListClientProps) {
   const router = useRouter();
-  const [galleries, setGalleries] = useState<Gallery[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [search, setSearch] = useState("");
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [search, setSearch] = useState(currentSearch);
 
   const [isDeleting, setIsDeleting] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [galleryToDelete, setGalleryToDelete] = useState<string | null>(null);
-
-  const fetchGalleries = async () => {
-    setIsLoading(true);
-    try {
-      const res = await getGalleriesByAdmin({
-        page,
-        search,
-        limit: 10,
-        _t: Date.now(),
-      });
-      if (res.success) {
-        setGalleries(res.data || []);
-        setTotalPages(res.count || 1);
-      }
-    } catch (error: any) {
-      toast.error(error.message || "Failed to fetch galleries");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchGalleries();
-  }, [page, search]);
 
   const confirmDelete = (slug: string) => {
     setGalleryToDelete(slug);
@@ -73,7 +53,7 @@ export default function AdminGalleryListClient() {
         toast.success("Gallery item deleted successfully");
         setDeleteModalOpen(false);
         setGalleryToDelete(null);
-        fetchGalleries();
+        router.refresh();
       } else {
         toast.error(res.message || "Failed to delete gallery item.");
       }
@@ -206,30 +186,38 @@ export default function AdminGalleryListClient() {
           className="w-full md:w-1/3 px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
           value={search}
           onChange={(e) => {
-            setSearch(e.target.value);
-            router.push(`/admin/gallery?search=${e.target.value}&page=1`);
+            const val = e.target.value;
+            setSearch(val);
+            const params = new URLSearchParams();
+            if (val) params.set("search", val);
+            params.set("page", "1");
+            router.push(`?${params.toString()}`);
           }}
         />
       </div>
 
       <AdminTable
         columns={columns}
-        data={galleries}
-        isLoading={isLoading}
+        data={initialGalleries}
+        isLoading={false}
         keyExtractor={(gallery) => gallery._id!}
         emptyMessage="No gallery items found."
       />
 
       {/* Pagination */}
-      <Pagination
-        currentPage={page}
-        totalPages={totalPages}
-        onPageChange={(newPage) => {
-          setPage(newPage);
-          router.push(`/admin/gallery?search=${search}&page=${newPage}`);
-        }}
-        theme="dark"
-      />
+      {totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={(newPage) => {
+            const params = new URLSearchParams();
+            if (search) params.set("search", search);
+            params.set("page", newPage.toString());
+            router.push(`?${params.toString()}`);
+          }}
+          theme="dark"
+        />
+      )}
 
       <DeleteModal
         isOpen={deleteModalOpen}

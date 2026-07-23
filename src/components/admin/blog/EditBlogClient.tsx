@@ -69,15 +69,15 @@ export default function EditBlogClient({
         ...formData,
         status: formData.status as "draft" | "active" | "inactive" | undefined,
         tags: tagsArray as any,
-        cover: coverUrl
-          ? { _id: coverId || Date.now().toString(), url: coverUrl }
-          : undefined,
+        cover: { _id: coverId || Date.now().toString(), url: coverUrl },
       };
 
       const res = await onSubmit(payload);
       if (res.success) {
         toast.success("Blog updated successfully!");
         router.push("/admin/blog");
+      } else {
+        toast.error(res.message || "Failed to update blog");
       }
     } catch (error: any) {
       toast.error(error.message || "Failed to update blog");

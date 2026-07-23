@@ -3,7 +3,7 @@ import {
   getBlogBySlugByAdmin,
   updateBlogBySlugByAdmin,
 } from "@/services/blog.service";
-import EditBlogClient from "@/components/blog/EditBlogClient";
+import EditBlogClient from "@/components/admin/blog/EditBlogClient";
 import { notFound } from "next/navigation";
 
 export const metadata = constructMetadata({

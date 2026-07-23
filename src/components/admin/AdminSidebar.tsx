@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import {
   LayoutDashboard,
   Settings,
@@ -15,12 +16,31 @@ import {
   PhoneCall,
   Shield,
   Star,
+  Plus,
+  Minus,
 } from "lucide-react";
+
+type MenuItem = {
+  name: string;
+  isHeader?: boolean;
+  icon?: any;
+  href?: string;
+  exact?: boolean;
+  children?: { name: string; icon: any; href: string }[];
+};
 
 export function AdminSidebar() {
   const pathname = usePathname();
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({
+    Settings: pathname?.startsWith("/admin/settings") || false,
+  });
 
-  const menuItems = [
+  const toggleExpand = (name: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    setExpanded((prev) => ({ ...prev, [name]: !prev[name] }));
+  };
+
+  const menuItems: MenuItem[] = [
     { name: "Dashboard", icon: LayoutDashboard, href: "/admin", exact: true },
 
     { name: "Core Management", isHeader: true },
@@ -43,8 +63,18 @@ export function AdminSidebar() {
     { name: "Pages", icon: FileText, href: "/admin/content/pages" },
 
     { name: "System", isHeader: true },
-    { name: "Settings", icon: Settings, href: "/admin/settings" },
-    { name: "Page Banners", icon: ImageIcon, href: "/admin/settings/pagebanner" },
+    {
+      name: "Settings",
+      icon: Settings,
+      children: [
+        { name: "General Settings", icon: Settings, href: "/admin/settings" },
+        {
+          name: "Page Banners",
+          icon: ImageIcon,
+          href: "/admin/settings/pagebanner",
+        },
+      ],
+    },
   ];
 
   return (
@@ -92,6 +122,89 @@ export function AdminSidebar() {
             const isActive = item.exact
               ? pathname === item.href
               : pathname?.startsWith(item.href || "");
+
+            if (item.children) {
+              const isExpanded = expanded[item.name];
+              const isAnyChildActive = item.children.some(
+                (child) => pathname === child.href,
+              );
+
+              return (
+                <div key={item.name} className="flex flex-col space-y-0.5">
+                  <button
+                    onClick={(e) => toggleExpand(item.name, e)}
+                    className={`w-full relative flex items-center justify-between px-3 py-1.5 rounded-lg transition-all outline-none group overflow-hidden ${
+                      isExpanded || isAnyChildActive
+                        ? "text-white"
+                        : "text-gray-300"
+                    } hover:text-white hover:bg-white/5 border border-transparent`}
+                  >
+                    <div className="flex items-center gap-2.5 relative z-10">
+                      <Icon
+                        className={`w-3.5 h-3.5 ${
+                          isExpanded || isAnyChildActive
+                            ? "text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]"
+                            : "text-gray-400 group-hover:text-white"
+                        } transition-colors`}
+                      />
+                      <span className="text-[13px] font-medium tracking-wide">
+                        {item.name}
+                      </span>
+                    </div>
+                    {isExpanded ? (
+                      <Minus className="w-3.5 h-3.5 text-gray-400 group-hover:text-white transition-colors" />
+                    ) : (
+                      <Plus className="w-3.5 h-3.5 text-gray-400 group-hover:text-white transition-colors" />
+                    )}
+                  </button>
+
+                  <div
+                    className={`grid transition-all duration-300 ease-in-out ${
+                      isExpanded
+                        ? "grid-rows-[1fr] opacity-100 mt-0.5"
+                        : "grid-rows-[0fr] opacity-0"
+                    }`}
+                  >
+                    <div className="overflow-hidden flex flex-col space-y-0.5">
+                      {item.children.map((child) => {
+                        const ChildIcon = child.icon as any;
+                        const isChildActive = pathname === child.href;
+                        return (
+                          <Link
+                            key={child.name}
+                            href={child.href}
+                            className={`relative flex items-center gap-2.5 pl-8 pr-3 py-1.5 rounded-lg transition-all outline-none group overflow-hidden ${
+                              isChildActive
+                                ? "bg-white/5 border border-white/10 text-white"
+                                : "text-gray-300 hover:text-white hover:bg-white/5 border border-transparent"
+                            }`}
+                          >
+                            {isChildActive && (
+                              <>
+                                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(255,165,0,0.15)_0%,transparent_60%)] pointer-events-none"></div>
+                                <div className="absolute bottom-0 left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-orange-400 to-transparent shadow-[0_-4px_12px_1px_rgba(255,165,0,0.6)] pointer-events-none"></div>
+                              </>
+                            )}
+                            <div className="flex items-center gap-2.5 relative z-10">
+                              <ChildIcon
+                                className={`w-3.5 h-3.5 ${
+                                  isChildActive
+                                    ? "text-white drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]"
+                                    : "text-gray-400 group-hover:text-white"
+                                } transition-colors`}
+                              />
+                              <span className="text-[12px] font-medium tracking-wide">
+                                {child.name}
+                              </span>
+                            </div>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              );
+            }
 
             return (
               <Link

@@ -3,7 +3,7 @@ import {
   getGalleryBySlugByAdmin,
   updateGalleryByAdmin,
 } from "@/services/gallery.service";
-import EditGalleryClient from "@/components/gallery/EditGalleryClient";
+import EditGalleryClient from "@/components/admin/gallery/EditGalleryClient";
 import { notFound } from "next/navigation";
 
 export const metadata = constructMetadata({

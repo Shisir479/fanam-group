@@ -1,11 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   TestimonialType,
-  getTestimonialsByAdmin,
   deleteTestimonialByIdAdmin,
 } from "@/services/testimonial.service";
 import { DeleteModal } from "@/components/ui/DeleteModal";
@@ -15,40 +14,27 @@ import Image from "next/image";
 import { Pagination } from "@/components/ui/Pagination";
 import { AdminTable, ColumnDef } from "@/components/ui/AdminTable";
 
-export default function AdminTestimonialListClient() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const [testimonials, setTestimonials] = useState<TestimonialType[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+interface AdminTestimonialListClientProps {
+  initialTestimonials: TestimonialType[];
+  totalPages: number;
+  currentPage: number;
+  currentSearch: string;
+}
 
-  const [search, setSearch] = useState(searchParams.get("search") || "");
-  const [page, setPage] = useState(parseInt(searchParams.get("page") || "1"));
-  const [totalPages, setTotalPages] = useState(1);
+export default function AdminTestimonialListClient({
+  initialTestimonials,
+  totalPages,
+  currentPage,
+  currentSearch,
+}: AdminTestimonialListClientProps) {
+  const router = useRouter();
+  const [search, setSearch] = useState(currentSearch);
 
   const [isDeleting, setIsDeleting] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [testimonialToDelete, setTestimonialToDelete] = useState<string | null>(
     null,
   );
-
-  const fetchTestimonials = async () => {
-    setIsLoading(true);
-    try {
-      const res = await getTestimonialsByAdmin(page, 10, search);
-      if (res.success) {
-        setTestimonials(res.data || []);
-        setTotalPages(res.count || 1);
-      }
-    } catch (error: any) {
-      toast.error(error.message || "Failed to fetch testimonials");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchTestimonials();
-  }, [page, search]);
 
   const confirmDelete = (id: string) => {
     setTestimonialToDelete(id);
@@ -64,7 +50,7 @@ export default function AdminTestimonialListClient() {
         toast.success("Testimonial deleted successfully");
         setDeleteModalOpen(false);
         setTestimonialToDelete(null);
-        fetchTestimonials();
+        router.refresh();
       } else {
         toast.error(res.message || "Failed to delete testimonial.");
       }
@@ -183,8 +169,12 @@ export default function AdminTestimonialListClient() {
             placeholder="Search testimonials..."
             value={search}
             onChange={(e) => {
-              setSearch(e.target.value);
-              setPage(1);
+              const val = e.target.value;
+              setSearch(val);
+              const params = new URLSearchParams();
+              if (val) params.set("search", val);
+              params.set("page", "1");
+              router.push(`?${params.toString()}`);
             }}
             className="w-full pl-9 pr-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
           />
@@ -194,18 +184,23 @@ export default function AdminTestimonialListClient() {
       {/* Table */}
       <AdminTable
         columns={columns}
-        data={testimonials}
-        isLoading={isLoading}
+        data={initialTestimonials}
+        isLoading={false}
         keyExtractor={(item) => item._id || Math.random().toString()}
         emptyMessage="No testimonials found. Create one to get started!"
       />
 
       {/* Pagination */}
-      {!isLoading && totalPages > 1 && (
+      {totalPages > 1 && (
         <Pagination
-          currentPage={page}
+          currentPage={currentPage}
           totalPages={totalPages}
-          onPageChange={setPage}
+          onPageChange={(newPage) => {
+            const params = new URLSearchParams();
+            if (search) params.set("search", search);
+            params.set("page", newPage.toString());
+            router.push(`?${params.toString()}`);
+          }}
         />
       )}
 

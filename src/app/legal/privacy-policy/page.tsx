@@ -1,5 +1,5 @@
 import { constructMetadata } from "@/lib/metadata";
-import { getBannerByPagePublic } from "@/services/banner.service";
+import { getBannerByPageAdmin } from "@/services/banner.service";
 import { PrivacyPolicyView } from "@/components/pages/PrivacyPolicyView";
 import { getPageBySlugPublic } from "@/services/page.service";
 
@@ -19,7 +19,7 @@ export async function generateMetadata() {
 export default async function PrivacyPolicyPage() {
   let banner = null;
   try {
-    const res = await getBannerByPagePublic("privacy-policy");
+    const res = await getBannerByPageAdmin("privacy-policy");
     if (res?.success) banner = res.data;
   } catch (e) {}
 

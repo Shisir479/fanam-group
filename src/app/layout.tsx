@@ -18,11 +18,37 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = constructMetadata();
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  let brandingData: any = null;
+  try {
+    const { getBrandingSettingsPublic, getMainSettingsPublic } =
+      await import("@/services/settings.service");
+    const [brandRes, mainRes] = await Promise.all([
+      getBrandingSettingsPublic(),
+      getMainSettingsPublic(),
+    ]);
+
+    if (brandRes?.success) {
+      brandingData = brandRes.data;
+      if (brandingData) {
+        brandingData.logo = brandingData.logoLight || brandingData.logo;
+      }
+    }
+
+    if (mainRes?.success && mainRes.data) {
+      brandingData = {
+        ...brandingData,
+        ...mainRes.data,
+      };
+    }
+  } catch (error) {
+    console.error("Failed to fetch branding or main data:", error);
+  }
+
   return (
     <html
       lang="en"
@@ -30,7 +56,9 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <AuthProvider>
-          <PublicLayoutWrapper>{children}</PublicLayoutWrapper>
+          <PublicLayoutWrapper brandingData={brandingData}>
+            {children}
+          </PublicLayoutWrapper>
           <Toaster position="top-right" />
         </AuthProvider>
       </body>

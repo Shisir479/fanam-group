@@ -1,13 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import {
-  Project,
-  getProjectsByAdmin,
-  deleteProjectBySlugAdmin,
-} from "@/services/project.service";
+import { Project, deleteProjectBySlugAdmin } from "@/services/project.service";
 import { DeleteModal } from "@/components/ui/DeleteModal";
 import {
   Edit,
@@ -30,45 +26,28 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export default function AdminProjectListClient() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+interface AdminProjectListClientProps {
+  initialProjects: Project[];
+  totalPages: number;
+  currentPage: number;
+  currentSearch: string;
+  currentStatus: string;
+}
 
-  const [search, setSearch] = useState(searchParams.get("search") || "");
-  const [status, setStatus] = useState(searchParams.get("status") || "");
-  const [page, setPage] = useState(parseInt(searchParams.get("page") || "1"));
-  const [totalPages, setTotalPages] = useState(1);
+export default function AdminProjectListClient({
+  initialProjects,
+  totalPages,
+  currentPage,
+  currentSearch,
+  currentStatus,
+}: AdminProjectListClientProps) {
+  const router = useRouter();
+  const [search, setSearch] = useState(currentSearch);
+  const [status, setStatus] = useState(currentStatus);
 
   const [isDeleting, setIsDeleting] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [projectToDelete, setProjectToDelete] = useState<string | null>(null);
-
-  const fetchProjects = async () => {
-    setIsLoading(true);
-    try {
-      const res = await getProjectsByAdmin({
-        page,
-        search,
-        status,
-        limit: 10,
-        _t: Date.now(),
-      });
-      if (res.success) {
-        setProjects(res.data || []);
-        setTotalPages(res.count || 1);
-      }
-    } catch (error: any) {
-      toast.error(error.message || "Failed to fetch projects");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchProjects();
-  }, [page, search, status]);
 
   const confirmDelete = (slug: string) => {
     setProjectToDelete(slug);
@@ -84,7 +63,7 @@ export default function AdminProjectListClient() {
         toast.success("Project deleted successfully");
         setDeleteModalOpen(false);
         setProjectToDelete(null);
-        fetchProjects();
+        router.refresh();
       } else {
         toast.error(res.message || "Failed to delete project.");
       }
@@ -226,11 +205,13 @@ export default function AdminProjectListClient() {
               className="w-full px-10 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
               value={search}
               onChange={(e) => {
-                setSearch(e.target.value);
-                setPage(1);
-                router.push(
-                  `/admin/project?search=${e.target.value}&status=${status}&page=1`,
-                );
+                const val = e.target.value;
+                setSearch(val);
+                const params = new URLSearchParams();
+                if (val) params.set("search", val);
+                if (status) params.set("status", status);
+                params.set("page", "1");
+                router.push(`?${params.toString()}`);
               }}
             />
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -241,10 +222,11 @@ export default function AdminProjectListClient() {
               const val = value || "";
               const newValue = val === "all" ? "" : val;
               setStatus(newValue);
-              setPage(1);
-              router.push(
-                `/admin/project?search=${search}&status=${newValue}&page=1`,
-              );
+              const params = new URLSearchParams();
+              if (search) params.set("search", search);
+              if (newValue) params.set("status", newValue);
+              params.set("page", "1");
+              router.push(`?${params.toString()}`);
             }}
           >
             <SelectTrigger className="w-full md:w-48">
@@ -262,20 +244,21 @@ export default function AdminProjectListClient() {
         {/* Projects List */}
         <AdminTable
           columns={columns}
-          data={projects}
-          isLoading={isLoading}
+          data={initialProjects}
+          isLoading={false}
           keyExtractor={(project) => project._id!}
           emptyMessage="No projects found."
         />
         {/* Pagination */}
         <Pagination
-          currentPage={page}
+          currentPage={currentPage}
           totalPages={totalPages}
           onPageChange={(newPage) => {
-            setPage(newPage);
-            router.push(
-              `/admin/project?search=${search}&status=${status}&page=${newPage}`,
-            );
+            const params = new URLSearchParams();
+            if (search) params.set("search", search);
+            if (status) params.set("status", status);
+            params.set("page", newPage.toString());
+            router.push(`?${params.toString()}`);
           }}
           theme="dark"
         />

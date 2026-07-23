@@ -1,58 +1,33 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
-import {
-  getBrandingSettingsAdmin,
-  updateBrandingSettingsAdmin,
-} from "@/services/settings.service";
+import { updateBrandingSettingsAdmin } from "@/services/settings.service";
 import { Save, Loader2 } from "lucide-react";
 
-export default function EditContactInfoClient() {
-  const [isLoading, setIsLoading] = useState(true);
+export default function EditContactInfoClient({
+  initialData,
+}: {
+  initialData: any;
+}) {
   const [isSaving, setIsSaving] = useState(false);
 
-  const [settingsId, setSettingsId] = useState<string | null>(null);
-  const [fullBrandingData, setFullBrandingData] = useState<any>(null);
+  const [settingsId, setSettingsId] = useState<string | null>(
+    initialData?._id || null,
+  );
+  const [fullBrandingData, setFullBrandingData] = useState<any>(
+    initialData || null,
+  );
 
   const [contactInfo, setContactInfo] = useState({
-    address: "",
-    addressOnMap: "",
-    lat: "23.8103",
-    long: "90.4125",
-    email: "",
-    phone: "",
-    whatsappNo: "",
+    address: initialData?.contact?.address || "",
+    addressOnMap: initialData?.contact?.addressOnMap || "",
+    lat: initialData?.contact?.lat || "23.8103",
+    long: initialData?.contact?.long || "90.4125",
+    email: initialData?.contact?.email || "",
+    phone: initialData?.contact?.phone || "",
+    whatsappNo: initialData?.contact?.whatsappNo || "",
   });
-
-  useEffect(() => {
-    fetchSettings();
-  }, []);
-
-  const fetchSettings = async () => {
-    try {
-      const res = await getBrandingSettingsAdmin();
-      if (res.success && res.data) {
-        setSettingsId(res.data._id);
-        setFullBrandingData(res.data);
-        if (res.data.contact) {
-          setContactInfo({
-            address: res.data.contact.address || "",
-            addressOnMap: res.data.contact.addressOnMap || "",
-            lat: res.data.contact.lat || "23.8103",
-            long: res.data.contact.long || "90.4125",
-            email: res.data.contact.email || "",
-            phone: res.data.contact.phone || "",
-            whatsappNo: res.data.contact.whatsappNo || "",
-          });
-        }
-      }
-    } catch (error: any) {
-      toast.error(error.message || "Failed to fetch settings");
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -95,14 +70,6 @@ export default function EditContactInfoClient() {
       setIsSaving(false);
     }
   };
-
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <Loader2 className="w-8 h-8 animate-spin text-purple-500" />
-      </div>
-    );
-  }
 
   return (
     <div className="space-y-6 max-w-[1400px] pb-10 text-white">

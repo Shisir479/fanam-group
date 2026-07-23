@@ -1,6 +1,6 @@
 import { constructMetadata } from "@/lib/metadata";
 import { createGalleryByAdmin } from "@/services/gallery.service";
-import CreateGalleryClient from "@/components/gallery/CreateGalleryClient";
+import CreateGalleryClient from "@/components/admin/gallery/CreateGalleryClient";
 
 export const metadata = constructMetadata({
   title: "Admin Dashboard",

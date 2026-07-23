@@ -6,6 +6,11 @@ export const metadata = constructMetadata({
   noIndex: true,
 });
 
-export default function AdminContactInfoPage() {
-  return <EditContactInfoClient />;
+import { getBrandingSettingsAdmin } from "@/services/settings.service";
+
+export default async function AdminContactInfoPage() {
+  const res = await getBrandingSettingsAdmin();
+  const initialData = res.success ? res.data : null;
+
+  return <EditContactInfoClient initialData={initialData} />;
 }

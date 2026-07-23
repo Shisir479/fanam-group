@@ -117,8 +117,14 @@ export function ProjectsView({
       {/* Hero Section */}
       <PageBanner
         title={banner?.title || "Our Projects"}
-        subtitle={banner?.eyebrowText || "Discover our portfolio of extraordinary residential and commercial properties."}
-        bgImage={banner?.backgroundImage || "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop"}
+        subtitle={
+          banner?.eyebrowText ||
+          "Discover our portfolio of extraordinary residential and commercial properties."
+        }
+        bgImage={
+          banner?.backgroundImage ||
+          "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop"
+        }
         altText={banner?.title || "Projects Background"}
       >
         {banner?.description && (

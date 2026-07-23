@@ -20,6 +20,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+import { validateFields } from "@/lib/validation";
+
 export default function CreateBlogClient({
   onSubmit,
 }: {
@@ -64,6 +66,39 @@ export default function CreateBlogClient({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const isValid = validateFields([
+      {
+        field: formData.name,
+        message: "Blog Title is required",
+        isString: true,
+      },
+      {
+        field: formData.slug,
+        message: "Slug (URL) is required",
+        isString: true,
+      },
+      { field: formData.blogCategory, message: "Category is required" },
+      {
+        field: formData.description,
+        message: "Main Content is required",
+        isString: true,
+      },
+      { field: coverUrl, message: "Cover Image is required" },
+      {
+        field: formData.metaTitle,
+        message: "SEO Meta Title is required",
+        isString: true,
+      },
+      {
+        field: formData.metaDescription,
+        message: "SEO Meta Description is required",
+        isString: true,
+      },
+    ]);
+
+    if (!isValid) return;
+
     setIsSubmitting(true);
 
     try {
@@ -76,15 +111,15 @@ export default function CreateBlogClient({
         ...formData,
         status: formData.status as "draft" | "active" | "inactive",
         tags: tagsArray as any,
-        cover: coverUrl
-          ? { _id: coverId || Date.now().toString(), url: coverUrl }
-          : undefined,
+        cover: { _id: coverId || Date.now().toString(), url: coverUrl },
       };
 
       const res = await onSubmit(payload);
       if (res.success) {
         toast.success("Blog created successfully!");
         router.push("/admin/blog");
+      } else {
+        toast.error(res.message || "Failed to create blog");
       }
     } catch (error: any) {
       toast.error(error.message || "Failed to create blog");

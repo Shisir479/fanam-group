@@ -5,10 +5,12 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
-export function Navbar() {
+export function Navbar({ brandingData }: { brandingData?: any }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
   const pathname = usePathname() || "";
+
+  const { logo } = brandingData || {};
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -38,7 +40,7 @@ export function Navbar() {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <Image
-                src="/company_logo/Bonedia White Logo File.png"
+                src={logo?.url || "/company_logo/Bonedia White Logo File.png"}
                 alt="Company Logo"
                 width={160}
                 height={52}

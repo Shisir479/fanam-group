@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   InvestmentBookingPayload,
-  getInvestmentBookingsAdmin,
   deleteInvestmentBookingAdmin,
   updateInvestmentBookingAdmin,
 } from "@/services/investment-booking.service";
@@ -42,16 +41,25 @@ export interface InvestmentBooking extends InvestmentBookingPayload {
   createdAt: string;
 }
 
-export default function AdminInvestmentBookingListClient() {
+export interface AdminInvestmentBookingListClientProps {
+  initialBookings: InvestmentBooking[];
+  totalPages: number;
+  currentPage: number;
+  currentSearch: string;
+  currentStatus: string;
+}
+
+export default function AdminInvestmentBookingListClient({
+  initialBookings,
+  totalPages,
+  currentPage,
+  currentSearch,
+  currentStatus,
+}: AdminInvestmentBookingListClientProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [bookings, setBookings] = useState<InvestmentBooking[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const [search, setSearch] = useState(searchParams.get("search") || "");
-  const [status, setStatus] = useState(searchParams.get("status") || "");
-  const [page, setPage] = useState(parseInt(searchParams.get("page") || "1"));
-  const [totalPages, setTotalPages] = useState(1);
+  const [search, setSearch] = useState(currentSearch);
+  const [status, setStatus] = useState(currentStatus);
 
   const [isDeleting, setIsDeleting] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -60,30 +68,6 @@ export default function AdminInvestmentBookingListClient() {
   const [viewModalOpen, setViewModalOpen] = useState(false);
   const [selectedBooking, setSelectedBooking] =
     useState<InvestmentBooking | null>(null);
-
-  const fetchBookings = async () => {
-    setIsLoading(true);
-    try {
-      const res: any = await getInvestmentBookingsAdmin({
-        page,
-        search,
-        status,
-        limit: 10,
-      });
-      if (res.success) {
-        setBookings(res.data || []);
-        setTotalPages(res.count || 1); // backend returns totalPages or count? Assuming totalPages is res.totalPages or res.count
-      }
-    } catch (error: any) {
-      toast.error(error.message || "Failed to fetch bookings");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchBookings();
-  }, [page, search, status]);
 
   const confirmDelete = (id: string) => {
     setBookingToDelete(id);
@@ -100,7 +84,7 @@ export default function AdminInvestmentBookingListClient() {
         toast.success("Booking deleted successfully");
         setDeleteModalOpen(false);
         setBookingToDelete(null);
-        fetchBookings();
+        router.refresh();
       } else {
         toast.error(res.message || "Failed to delete booking.");
       }
@@ -119,7 +103,7 @@ export default function AdminInvestmentBookingListClient() {
       });
       if (res.success !== false) {
         toast.success("Status updated successfully");
-        fetchBookings();
+        router.refresh();
         if (selectedBooking?._id === id) {
           setSelectedBooking({ ...selectedBooking, status: newStatus as any });
         }
@@ -270,8 +254,13 @@ export default function AdminInvestmentBookingListClient() {
           placeholder="Search by name, phone or email..."
           value={search}
           onChange={(e) => {
-            setSearch(e.target.value);
-            setPage(1);
+            const val = e.target.value;
+            setSearch(val);
+            const params = new URLSearchParams();
+            if (val) params.set("search", val);
+            if (status) params.set("status", status);
+            params.set("page", "1");
+            router.push(`?${params.toString()}`);
           }}
           className="w-full md:w-1/3 px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
         />
@@ -280,8 +269,13 @@ export default function AdminInvestmentBookingListClient() {
           <Select
             value={status}
             onValueChange={(val) => {
-              setStatus(val === "all" || val === null ? "" : val);
-              setPage(1);
+              const newStatus = val === "all" || val === null ? "" : val;
+              setStatus(newStatus);
+              const params = new URLSearchParams();
+              if (search) params.set("search", search);
+              if (newStatus) params.set("status", newStatus);
+              params.set("page", "1");
+              router.push(`?${params.toString()}`);
             }}
           >
             <SelectTrigger className="w-full bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors">
@@ -301,8 +295,8 @@ export default function AdminInvestmentBookingListClient() {
       {/* Table */}
       <AdminTable
         columns={columns}
-        data={bookings}
-        isLoading={isLoading}
+        data={initialBookings}
+        isLoading={false}
         keyExtractor={(row) => row._id}
         emptyMessage="No inquiries found."
       />
@@ -313,9 +307,15 @@ export default function AdminInvestmentBookingListClient() {
           {Array.from({ length: totalPages }).map((_, idx) => (
             <button
               key={idx}
-              onClick={() => setPage(idx + 1)}
+              onClick={() => {
+                const params = new URLSearchParams();
+                if (search) params.set("search", search);
+                if (status) params.set("status", status);
+                params.set("page", (idx + 1).toString());
+                router.push(`?${params.toString()}`);
+              }}
               className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${
-                page === idx + 1
+                currentPage === idx + 1
                   ? "bg-purple-600 text-white"
                   : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
               }`}

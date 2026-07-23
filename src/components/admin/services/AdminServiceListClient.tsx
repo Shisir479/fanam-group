@@ -1,11 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   ServiceType,
-  getServicesByAdmin,
   deleteServiceBySlugAdmin,
 } from "@/services/service.service";
 import { DeleteModal } from "@/components/ui/DeleteModal";
@@ -22,45 +21,28 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export default function AdminServiceListClient() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const [services, setServices] = useState<ServiceType[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+interface AdminServiceListClientProps {
+  initialServices: ServiceType[];
+  totalPages: number;
+  currentPage: number;
+  currentSearch: string;
+  currentStatus: string;
+}
 
-  const [search, setSearch] = useState(searchParams.get("search") || "");
-  const [status, setStatus] = useState(searchParams.get("status") || "");
-  const [page, setPage] = useState(parseInt(searchParams.get("page") || "1"));
-  const [totalPages, setTotalPages] = useState(1);
+export default function AdminServiceListClient({
+  initialServices,
+  totalPages,
+  currentPage,
+  currentSearch,
+  currentStatus,
+}: AdminServiceListClientProps) {
+  const router = useRouter();
+  const [search, setSearch] = useState(currentSearch);
+  const [status, setStatus] = useState(currentStatus);
 
   const [isDeleting, setIsDeleting] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [serviceToDelete, setServiceToDelete] = useState<string | null>(null);
-
-  const fetchServices = async () => {
-    setIsLoading(true);
-    try {
-      const res = await getServicesByAdmin({
-        page,
-        search,
-        status,
-        limit: 10,
-        _t: Date.now(),
-      });
-      if (res.success) {
-        setServices(res.data || []);
-        setTotalPages(res.count || 1);
-      }
-    } catch (error: any) {
-      toast.error(error.message || "Failed to fetch services");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchServices();
-  }, [page, search, status]);
 
   const confirmDelete = (slug: string) => {
     setServiceToDelete(slug);
@@ -76,7 +58,7 @@ export default function AdminServiceListClient() {
         toast.success("Service deleted successfully");
         setDeleteModalOpen(false);
         setServiceToDelete(null);
-        fetchServices();
+        router.refresh();
       } else {
         toast.error(res.message || "Failed to delete service.");
       }
@@ -198,8 +180,13 @@ export default function AdminServiceListClient() {
           placeholder="Search services..."
           value={search}
           onChange={(e) => {
-            setSearch(e.target.value);
-            setPage(1);
+            const val = e.target.value;
+            setSearch(val);
+            const params = new URLSearchParams();
+            if (val) params.set("search", val);
+            if (status) params.set("status", status);
+            params.set("page", "1");
+            router.push(`?${params.toString()}`);
           }}
           className="w-full md:w-1/3 px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
         />
@@ -208,8 +195,13 @@ export default function AdminServiceListClient() {
           <Select
             value={status}
             onValueChange={(val) => {
-              setStatus(val || "");
-              setPage(1);
+              const newStatus = val === "all" || val === null ? "" : val;
+              setStatus(newStatus);
+              const params = new URLSearchParams();
+              if (search) params.set("search", search);
+              if (newStatus) params.set("status", newStatus);
+              params.set("page", "1");
+              router.push(`?${params.toString()}`);
             }}
           >
             <SelectTrigger className="w-full bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors">
@@ -227,8 +219,8 @@ export default function AdminServiceListClient() {
       {/* Table */}
       <AdminTable
         columns={columns}
-        data={services}
-        isLoading={isLoading}
+        data={initialServices}
+        isLoading={false}
         keyExtractor={(row) => row.slug}
         emptyMessage="No services found. Add your first service to get started."
       />
@@ -239,9 +231,15 @@ export default function AdminServiceListClient() {
           {Array.from({ length: totalPages }).map((_, idx) => (
             <button
               key={idx}
-              onClick={() => setPage(idx + 1)}
+              onClick={() => {
+                const params = new URLSearchParams();
+                if (search) params.set("search", search);
+                if (status) params.set("status", status);
+                params.set("page", (idx + 1).toString());
+                router.push(`?${params.toString()}`);
+              }}
               className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${
-                page === idx + 1
+                currentPage === idx + 1
                   ? "bg-purple-600 text-white"
                   : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
               }`}
