@@ -87,7 +87,7 @@ export async function generateMetadata({
     // Silent catch, fallback below
   }
 
-  console.log(project?.floorPlans);
+  project?.floorPlans;
 
   if (!project)
     return constructMetadata({

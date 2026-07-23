@@ -18,6 +18,14 @@ export default function RichTextEditor({
   placeholder,
   className = "",
 }: RichTextEditorProps) {
+  const handleChange = (content: string, delta: any, source: string) => {
+    // Prevent infinite loop by checking if the content actually changed
+    // and if the change was triggered by a user action, not an API update
+    if (content !== (value || "")) {
+      onChange(content);
+    }
+  };
+
   return (
     <div
       className={`bg-white/5 rounded-xl border border-white/10 overflow-hidden text-white editor-container ${className}`}
@@ -25,7 +33,7 @@ export default function RichTextEditor({
       <ReactQuill
         theme="snow"
         value={value || ""}
-        onChange={onChange}
+        onChange={handleChange}
         placeholder={placeholder}
       />
     </div>

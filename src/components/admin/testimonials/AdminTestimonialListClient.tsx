@@ -105,10 +105,8 @@ export default function AdminTestimonialListClient({
       header: "Status",
       render: (item) => (
         <span
-          className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
-            item.status === "active"
-              ? "bg-green-500/10 text-green-400 border border-green-500/20"
-              : "bg-red-500/10 text-red-400 border border-red-500/20"
+          className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold w-fit bg-[#f7f8fa] border border-transparent shadow-[2px_2px_5px_rgba(180,185,195,0.4),-2px_-2px_5px_rgba(255,255,255,0.9)] ${
+            item.status === "active" ? "text-green-600" : "text-red-500"
           }`}
         >
           {item.status === "active" ? "Active" : "Inactive"}

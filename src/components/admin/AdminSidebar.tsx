@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import {
@@ -82,8 +83,14 @@ export function AdminSidebar() {
       {/* Header section */}
       <div className="p-4 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-yellow-300 via-yellow-500 to-orange-500 flex items-center justify-center shadow-lg">
-            <span className="font-bold text-[#120a1c] text-[10px]">BN</span>
+          <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center shadow-lg overflow-hidden">
+            <Image
+              src="/company_logo/bonedia.png"
+              alt="Bonedi Logo"
+              width={32}
+              height={32}
+              className="object-cover h-full w-full p-1"
+            />
           </div>
           <div>
             <h1 className="text-[13px] font-bold text-white leading-tight tracking-wide">

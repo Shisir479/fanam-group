@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { constructMetadata } from "@/lib/metadata";
 import { getBannerByPageAdmin } from "@/services/banner.service";
 import InquiryForm from "@/components/inquiry/InquiryForm";
@@ -33,7 +34,15 @@ export default async function InquiryPage() {
         )}
       </PageBanner>
       <div className="container mx-auto px-5 md:px-16 max-w-5xl py-20">
-        <InquiryForm />
+        <Suspense
+          fallback={
+            <div className="h-40 flex items-center justify-center">
+              Loading form...
+            </div>
+          }
+        >
+          <InquiryForm />
+        </Suspense>
       </div>
     </div>
   );

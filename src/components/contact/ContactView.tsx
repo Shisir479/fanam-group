@@ -137,7 +137,7 @@ export function ContactView({ data }: { data?: any }) {
       setIsLoading(false);
     }
   };
-  console.log(data?.addressOnMap);
+  data?.addressOnMap;
   return (
     <main className="min-h-screen  bg-[#F8FAFC] pb-0 flex flex-col font-sans">
       {/* Hero Section - Matching AboutHero */}

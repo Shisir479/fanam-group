@@ -98,7 +98,7 @@ export default function AdminProjectListClient({
             <div className="font-medium text-white flex items-center gap-2">
               {project.name}
               {project.featured && (
-                <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-amber-500/20 text-amber-300 border border-amber-500/20">
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold text-amber-600 bg-[#f7f8fa] border border-transparent shadow-[2px_2px_4px_rgba(180,185,195,0.4),-2px_-2px_4px_rgba(255,255,255,0.9)]">
                   Featured
                 </span>
               )}
@@ -125,17 +125,17 @@ export default function AdminProjectListClient({
       header: "Status",
       className: "text-center",
       render: (project) => (
-        <div className="flex flex-col gap-1 items-center justify-center">
+        <div className="flex flex-col gap-2 items-center justify-center">
           <span
-            className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium w-fit ${
+            className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold w-fit bg-[#f7f8fa] border border-transparent shadow-[2px_2px_5px_rgba(180,185,195,0.4),-2px_-2px_5px_rgba(255,255,255,0.9)] ${
               project.publishStatus === "active"
-                ? "bg-green-500/10 text-green-400 border border-green-500/20"
-                : "bg-red-500/10 text-red-400 border border-red-500/20"
+                ? "text-green-600"
+                : "text-red-500"
             }`}
           >
             {project.publishStatus === "active" ? "Published" : "Draft"}
           </span>
-          <span className="text-[11px] text-gray-400 uppercase tracking-wider font-medium text-center">
+          <span className="px-2 py-0.5 rounded-full text-[9px] font-bold text-gray-500 bg-[#f7f8fa] shadow-[2px_2px_4px_rgba(180,185,195,0.4),-2px_-2px_4px_rgba(255,255,255,0.9)] uppercase tracking-wider text-center">
             {project.status}
           </span>
         </div>

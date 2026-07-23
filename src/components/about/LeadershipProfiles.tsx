@@ -24,7 +24,7 @@ export function LeadershipProfiles({ data }: { data: any }) {
         ];
 
   if (!data) return null;
-  console.log(data);
+  data;
 
   return (
     <section className="w-full py-16 md:py-24 bg-white">

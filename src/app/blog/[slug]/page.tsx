@@ -93,7 +93,6 @@ export default async function BlogDetailsPage({
   if (!rawPost) {
     notFound();
   }
-  console.log(rawPost, "rawPost");
 
   const post = {
     id: rawPost._id,

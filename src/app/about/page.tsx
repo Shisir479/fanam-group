@@ -27,7 +27,7 @@ export default async function AboutUsPage() {
   const res = await getAboutPublic();
   const about = res?.data;
   const banner = await getBannerByPageAdmin("about");
-  console.log(banner);
+  banner;
 
   if (!about) {
     return (
