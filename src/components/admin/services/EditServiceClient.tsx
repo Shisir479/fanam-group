@@ -231,7 +231,7 @@ export default function EditServiceClient({ slug }: { slug: string }) {
                 required
                 value={formData.name}
                 onChange={handleNameChange}
-                className="w-full px-4 py-2 bg-black/20 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#CBA35E] transition-colors"
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
               />
             </div>
             <div>
@@ -245,7 +245,7 @@ export default function EditServiceClient({ slug }: { slug: string }) {
                 onChange={(e) =>
                   setFormData({ ...formData, slug: e.target.value })
                 }
-                className="w-full px-4 py-2 bg-black/20 border border-white/10 rounded-lg text-gray-400 focus:outline-none focus:border-[#CBA35E] transition-colors"
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-gray-400 outline-none focus:border-purple-500 transition-colors"
               />
             </div>
 
@@ -259,7 +259,7 @@ export default function EditServiceClient({ slug }: { slug: string }) {
                   setFormData({ ...formData, category: val || undefined })
                 }
               >
-                <SelectTrigger className="w-full bg-black/20 border-white/10 text-white">
+                <SelectTrigger className="w-full h-10 bg-white/5 border-white/10 text-white rounded-xl focus:ring-purple-500">
                   <SelectValue placeholder="Select Category" />
                 </SelectTrigger>
                 <SelectContent>
@@ -282,7 +282,7 @@ export default function EditServiceClient({ slug }: { slug: string }) {
                   setFormData({ ...formData, status: val })
                 }
               >
-                <SelectTrigger className="w-full bg-black/20 border-white/10 text-white">
+                <SelectTrigger className="w-full h-10 bg-white/5 border-white/10 text-white rounded-xl focus:ring-purple-500">
                   <SelectValue placeholder="Select Status" />
                 </SelectTrigger>
                 <SelectContent>
@@ -311,7 +311,7 @@ export default function EditServiceClient({ slug }: { slug: string }) {
               onChange={(e) =>
                 setFormData({ ...formData, heading: e.target.value })
               }
-              className="w-full px-4 py-2 bg-black/20 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#CBA35E] transition-colors"
+              className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
             />
           </div>
 
@@ -326,7 +326,7 @@ export default function EditServiceClient({ slug }: { slug: string }) {
               onChange={(e) =>
                 setFormData({ ...formData, shortDescription: e.target.value })
               }
-              className="w-full px-4 py-2 bg-black/20 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#CBA35E] transition-colors resize-none"
+              className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors resize-none"
             />
           </div>
 
@@ -412,7 +412,7 @@ export default function EditServiceClient({ slug }: { slug: string }) {
                 onChange={(e) =>
                   setFormData({ ...formData, icon: e.target.value })
                 }
-                className="w-full px-4 py-2 bg-black/20 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#CBA35E] transition-colors"
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
               />
             </div>
           </div>
@@ -436,7 +436,7 @@ export default function EditServiceClient({ slug }: { slug: string }) {
                 onChange={(e) =>
                   setFormData({ ...formData, metaTitle: e.target.value })
                 }
-                className="w-full px-4 py-2 bg-black/20 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#CBA35E] transition-colors"
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
               />
             </div>
 
@@ -451,7 +451,7 @@ export default function EditServiceClient({ slug }: { slug: string }) {
                 onChange={(e) =>
                   setFormData({ ...formData, metaDescription: e.target.value })
                 }
-                className="w-full px-4 py-2 bg-black/20 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#CBA35E] transition-colors resize-none"
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors resize-none"
               />
             </div>
           </div>

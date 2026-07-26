@@ -188,8 +188,8 @@ export function AdminSidebar() {
                           >
                             {isChildActive && (
                               <>
-                                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(255,165,0,0.15)_0%,transparent_60%)] pointer-events-none"></div>
-                                <div className="absolute bottom-0 left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-orange-400 to-transparent shadow-[0_-4px_12px_1px_rgba(255,165,0,0.6)] pointer-events-none"></div>
+                                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(121, 222, 74, 0.56)_0%,transparent_60%)] pointer-events-none"></div>
+                                <div className="absolute bottom-0 left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-green-400 to-transparent shadow-[0_-4px_12px_1px_rgba(74,222,128,0.6)] pointer-events-none"></div>
                               </>
                             )}
                             <div className="flex items-center gap-2.5 relative z-10">
@@ -226,8 +226,8 @@ export function AdminSidebar() {
                 {/* Glassy Bottom Glow (Active State Only) */}
                 {isActive && (
                   <>
-                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(255,165,0,0.15)_0%,transparent_60%)] pointer-events-none"></div>
-                    <div className="absolute bottom-0 left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-orange-400 to-transparent shadow-[0_-4px_12px_1px_rgba(255,165,0,0.6)] pointer-events-none"></div>
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(74,222,128,0.15)_0%,transparent_60%)] pointer-events-none"></div>
+                    <div className="absolute bottom-0 left-[10%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-green-400 to-transparent shadow-[0_-4px_12px_1px_rgba(74,222,128,0.6)] pointer-events-none"></div>
                   </>
                 )}
 

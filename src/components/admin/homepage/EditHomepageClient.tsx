@@ -393,7 +393,7 @@ export default function EditHomepageClient({
                   onChange={(e) =>
                     setFormData({ ...formData, heroHeading: e.target.value })
                   }
-                  className="w-full px-4 py-2 mt-1 bg-black/20 border border-white/20 rounded-lg text-white"
+                  className="w-full px-4 py-2 mt-1 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
                 />
               </div>
 
@@ -416,7 +416,7 @@ export default function EditHomepageClient({
                     (slide: any, index: number) => (
                       <div
                         key={index}
-                        className="p-4 bg-black/20 border border-white/10 rounded-lg space-y-4"
+                        className="p-4 bg-white/5 border border-white/10 rounded-xl space-y-4"
                       >
                         <div className="flex justify-between items-center mb-2">
                           <h4 className="text-white font-medium">
@@ -446,7 +446,7 @@ export default function EditHomepageClient({
                                   e.target.value,
                                 )
                               }
-                              className="w-full px-3 py-2 bg-black/30 border border-white/10 rounded text-white text-sm"
+                              className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors text-sm"
                               placeholder="Enter slide title"
                             />
                           </div>
@@ -528,7 +528,7 @@ export default function EditHomepageClient({
                   onChange={(e) =>
                     setFormData({ ...formData, companyTitle: e.target.value })
                   }
-                  className="w-full px-4 py-2 mt-1 bg-black/20 border border-white/20 rounded-lg text-white"
+                  className="w-full px-4 py-2 mt-1 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
                 />
               </div>
               <div>
@@ -541,7 +541,7 @@ export default function EditHomepageClient({
                   onChange={(e) =>
                     setFormData({ ...formData, companyHeading: e.target.value })
                   }
-                  className="w-full px-4 py-2 mt-1 bg-black/20 border border-white/20 rounded-lg text-white"
+                  className="w-full px-4 py-2 mt-1 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
                 />
               </div>
               <div className="md:col-span-2">
@@ -556,7 +556,7 @@ export default function EditHomepageClient({
                       companyDescriptionOne: e.target.value,
                     })
                   }
-                  className="w-full px-4 py-2 mt-1 bg-black/20 border border-white/20 rounded-lg text-white"
+                  className="w-full px-4 py-2 mt-1 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
                   rows={4}
                 />
               </div>
@@ -572,7 +572,7 @@ export default function EditHomepageClient({
                       companyDescriptionTwo: e.target.value,
                     })
                   }
-                  className="w-full px-4 py-2 mt-1 bg-black/20 border border-white/20 rounded-lg text-white"
+                  className="w-full px-4 py-2 mt-1 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
                   rows={4}
                 />
               </div>
@@ -646,7 +646,7 @@ export default function EditHomepageClient({
                   (highlight: any, index: number) => (
                     <div
                       key={index}
-                      className="flex items-center gap-3 bg-black/20 p-3 rounded-lg border border-white/10"
+                      className="flex items-center gap-3 bg-white/5 p-3 rounded-xl border border-white/10"
                     >
                       <input
                         type="text"
@@ -654,7 +654,7 @@ export default function EditHomepageClient({
                         onChange={(e) =>
                           handleHighlightChange(index, e.target.value)
                         }
-                        className="flex-1 px-3 py-2 bg-black/30 border border-white/10 rounded text-white text-sm"
+                        className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors text-sm"
                         placeholder="e.g., 20+ Years of Excellence"
                       />
                       <button
@@ -695,7 +695,7 @@ export default function EditHomepageClient({
                   onChange={(e) =>
                     setFormData({ ...formData, strengthTitle: e.target.value })
                   }
-                  className="w-full px-4 py-2 mt-1 bg-black/20 border border-white/20 rounded-lg text-white"
+                  className="w-full px-4 py-2 mt-1 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
                 />
               </div>
               <div>
@@ -711,7 +711,7 @@ export default function EditHomepageClient({
                       strengthHeading: e.target.value,
                     })
                   }
-                  className="w-full px-4 py-2 mt-1 bg-black/20 border border-white/20 rounded-lg text-white"
+                  className="w-full px-4 py-2 mt-1 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
                 />
               </div>
             </div>
@@ -735,7 +735,7 @@ export default function EditHomepageClient({
                   (strength: any, index: number) => (
                     <div
                       key={index}
-                      className="p-4 bg-black/20 border border-white/10 rounded-lg space-y-4"
+                      className="p-4 bg-white/5 border border-white/10 rounded-xl space-y-4"
                     >
                       <div className="flex justify-between items-center mb-2">
                         <h4 className="text-white font-medium">
@@ -836,7 +836,7 @@ export default function EditHomepageClient({
                                 e.target.value,
                               )
                             }
-                            className="w-full px-3 py-2 bg-black/30 border border-white/10 rounded text-white text-sm"
+                            className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors text-sm"
                             placeholder="Strength Title"
                           />
                         </div>
@@ -853,7 +853,7 @@ export default function EditHomepageClient({
                                 e.target.value,
                               )
                             }
-                            className="w-full px-3 py-2 bg-black/30 border border-white/10 rounded text-white text-sm"
+                            className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors text-sm"
                             placeholder="Strength Description"
                             rows={3}
                           />
@@ -892,7 +892,7 @@ export default function EditHomepageClient({
                       achievementTitle: e.target.value,
                     })
                   }
-                  className="w-full px-4 py-2 mt-1 bg-black/20 border border-white/20 rounded-lg text-white"
+                  className="w-full px-4 py-2 mt-1 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
                 />
               </div>
               <div>
@@ -908,7 +908,7 @@ export default function EditHomepageClient({
                       achievementHeading: e.target.value,
                     })
                   }
-                  className="w-full px-4 py-2 mt-1 bg-black/20 border border-white/20 rounded-lg text-white"
+                  className="w-full px-4 py-2 mt-1 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
                 />
               </div>
             </div>
@@ -932,7 +932,7 @@ export default function EditHomepageClient({
                   (achievement: any, index: number) => (
                     <div
                       key={index}
-                      className="p-4 bg-black/20 border border-white/10 rounded-lg space-y-4"
+                      className="p-4 bg-white/5 border border-white/10 rounded-xl space-y-4"
                     >
                       <div className="flex justify-between items-center mb-2">
                         <h4 className="text-white font-medium">
@@ -962,7 +962,7 @@ export default function EditHomepageClient({
                                 e.target.value,
                               )
                             }
-                            className="w-full px-3 py-2 bg-black/30 border border-white/10 rounded text-white text-sm"
+                            className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors text-sm"
                             placeholder="E.g., 500+, 20M"
                           />
                         </div>
@@ -980,7 +980,7 @@ export default function EditHomepageClient({
                                 e.target.value,
                               )
                             }
-                            className="w-full px-3 py-2 bg-black/30 border border-white/10 rounded text-white text-sm"
+                            className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors text-sm"
                             placeholder="E.g., Happy Clients"
                           />
                         </div>
@@ -1016,7 +1016,7 @@ export default function EditHomepageClient({
                   onChange={(e) =>
                     setFormData({ ...formData, galleryHeading: e.target.value })
                   }
-                  className="w-full px-4 py-2 mt-1 bg-black/20 border border-white/20 rounded-lg text-white"
+                  className="w-full px-4 py-2 mt-1 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
                 />
               </div>
             </div>
@@ -1042,7 +1042,7 @@ export default function EditHomepageClient({
                   (image: any, index: number) => (
                     <div
                       key={index}
-                      className="flex flex-col gap-2 p-2 bg-black/20 rounded-lg border border-white/10"
+                      className="flex flex-col gap-2 p-2 bg-white/5 rounded-xl border border-white/10"
                     >
                       <div className="relative group rounded-lg overflow-hidden border border-white/10 aspect-square w-full">
                         <img
@@ -1075,7 +1075,7 @@ export default function EditHomepageClient({
                             galleryImages: newImages,
                           });
                         }}
-                        className="w-full px-3 py-1.5 bg-black/30 border border-white/10 rounded text-white text-sm"
+                        className="w-full px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors text-sm"
                       />
                     </div>
                   ),

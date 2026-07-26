@@ -203,7 +203,7 @@ export default function EditTestimonialClient({ id }: { id: string }) {
                 onChange={(e) =>
                   setFormData({ ...formData, title: e.target.value })
                 }
-                className="w-full px-4 py-2 bg-black/20 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#CBA35E] transition-colors"
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
               />
             </div>
 
@@ -218,7 +218,7 @@ export default function EditTestimonialClient({ id }: { id: string }) {
                   setFormData({ ...formData, review: e.target.value })
                 }
                 rows={4}
-                className="w-full px-4 py-2 bg-black/20 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#CBA35E] transition-colors resize-none"
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors resize-none"
               />
             </div>
           </div>
@@ -241,7 +241,7 @@ export default function EditTestimonialClient({ id }: { id: string }) {
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
                 }
-                className="w-full px-4 py-2 bg-black/20 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#CBA35E] transition-colors"
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
               />
             </div>
 
@@ -255,7 +255,7 @@ export default function EditTestimonialClient({ id }: { id: string }) {
                 onChange={(e) =>
                   setFormData({ ...formData, designation: e.target.value })
                 }
-                className="w-full px-4 py-2 bg-black/20 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#CBA35E] transition-colors"
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
               />
             </div>
 
@@ -269,7 +269,7 @@ export default function EditTestimonialClient({ id }: { id: string }) {
                 onChange={(e) =>
                   setFormData({ ...formData, company: e.target.value })
                 }
-                className="w-full px-4 py-2 bg-black/20 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#CBA35E] transition-colors"
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
               />
             </div>
 
@@ -283,7 +283,7 @@ export default function EditTestimonialClient({ id }: { id: string }) {
                   if (val) setFormData({ ...formData, rating: parseInt(val) });
                 }}
               >
-                <SelectTrigger className="w-full bg-black/20 border-white/10 text-white">
+                <SelectTrigger className="w-full h-10 bg-white/5 border-white/10 text-white rounded-xl focus:ring-purple-500">
                   <SelectValue placeholder="Select Rating" />
                 </SelectTrigger>
                 <SelectContent>
@@ -306,7 +306,7 @@ export default function EditTestimonialClient({ id }: { id: string }) {
                   className={`relative w-40 h-40 rounded-xl border-2 border-dashed flex flex-col items-center justify-center cursor-pointer transition-all ${
                     imagePreview
                       ? "border-transparent bg-white/5"
-                      : "border-white/10 hover:border-[#CBA35E] hover:bg-white/5 bg-black/20"
+                      : "border-white/10 hover:border-purple-500 hover:bg-white/10 bg-white/5"
                   }`}
                 >
                   {imagePreview ? (
