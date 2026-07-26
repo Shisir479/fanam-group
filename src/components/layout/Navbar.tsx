@@ -96,12 +96,12 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
                   >
                     Upcoming
                   </Link>
-                  <Link
+                  {/* <Link
                     href="/projects/handed-over"
                     className={`px-6 py-5 text-sm font-semibold hover:text-white border-b border-white/10 transition-colors ${pathname === "/projects/handed-over" ? "text-white bg-white/10" : "text-white/70"}`}
                   >
                     Handed Over
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
 
@@ -260,13 +260,13 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
                 >
                   Upcoming
                 </Link>
-                <Link
+                {/* <Link
                   href="/projects/handed-over"
                   className="text-[15px] font-normal text-white/80"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Handed Over
-                </Link>
+                </Link> */}
               </div>
             </div>
 

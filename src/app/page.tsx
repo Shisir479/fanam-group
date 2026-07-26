@@ -11,7 +11,7 @@ import { GalleryPreview } from "@/components/home/GalleryPreview";
 import { ContactInfo } from "@/components/home/ContactInfo";
 import { InquiryCTA } from "@/components/home/InquiryCTA";
 import { getHomepageCMSPublic } from "@/services/homepage-cms.service";
-import { getServicesPublic } from "@/services/service.service";
+// import { getServicesPublic } from "@/services/service.service";
 import { getBlogsPublic } from "@/services/blog.service";
 import { getBrandingSettingsPublic } from "@/services/settings.service";
 import { getProjectsPublic } from "@/services/project.service";
@@ -28,11 +28,11 @@ export default async function Home() {
       cmsData = res.data;
     }
 
-    // Fetch dynamic services
-    const servicesRes = await getServicesPublic({ status: "active", limit: 4 });
-    if (servicesRes?.success) {
-      servicesData = servicesRes.data || [];
-    }
+    // // Fetch dynamic services
+    // const servicesRes = await getServicesPublic({ status: "active", limit: 4 });
+    // if (servicesRes?.success) {
+    //   servicesData = servicesRes.data || [];
+    // }
 
     // Fetch dynamic blogs
     const blogsRes = await getBlogsPublic({ status: "active", limit: 3 });
@@ -63,8 +63,8 @@ export default async function Home() {
       <CompanyOverview data={cmsData} />
       <WhyChooseUs data={cmsData} />
       <OurAchievements data={cmsData} />
-      <FeaturedServices services={servicesData} />
-      <TestimonialSection />
+      {/* <FeaturedServices services={servicesData} /> */}
+      {/* <TestimonialSection /> */}
       <GalleryPreview data={cmsData} />
       <LatestNews blogs={blogsData} />
       <InquiryCTA />

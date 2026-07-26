@@ -182,18 +182,18 @@ export function GalleryPreview({ data }: { data?: any }) {
   }, [activeIndex]);
 
   return (
-    <section className="w-full py-12 md:py-16 bg-white overflow-hidden">
+    <section className="w-full py-12 md:py-16 bg-transparent overflow-hidden">
       <div className="container mx-auto px-5 md:px-16">
         {/* Header */}
         <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6 relative z-10">
           <div className="flex flex-col gap-4">
             <BlockReveal color="var(--color-brand-blue)">
-              <div className="flex items-center text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
+              <div className="flex items-center text-[16px] font-semibold tracking-[0.2em] text-white/70 uppercase">
                 {galleryTitle}
               </div>
             </BlockReveal>
             <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
-              <h2 className="text-2xl md:text-[34px] font-bold tracking-tight text-brand-blue leading-[1.1] uppercase">
+              <h2 className="text-2xl md:text-[34px] font-bold tracking-tight text-white leading-[1.1] uppercase">
                 {galleryHeading}
               </h2>
             </BlockReveal>
