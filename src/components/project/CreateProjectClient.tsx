@@ -79,6 +79,11 @@ export default function CreateProjectClient() {
     overview: "",
     features: [{ title: "" }],
     amenities: [{ title: "", icon: "" }],
+    highlights: [{ title: "" }],
+    flatInsights: [{ title: "" }],
+    utilities: [{ title: "" }],
+    pricingTerms: [{ title: "" }],
+    termsConditions: [{ title: "" }],
     faqs: [{ question: "", answer: "" }],
     video: "",
     construction: {
@@ -119,7 +124,62 @@ export default function CreateProjectClient() {
       preview: string | null;
     }[]
   >([]);
+  const handleListChange = (
+    field:
+      | "features"
+      | "highlights"
+      | "flatInsights"
+      | "utilities"
+      | "pricingTerms"
+      | "termsConditions",
+    index: number,
+    value: string,
+  ) => {
+    const list = [...((formData[field] as { title: string }[]) || [])];
+    list[index].title = value;
 
+    setFormData({
+      ...formData,
+      [field]: list,
+    });
+  };
+
+  const addListItem = (
+    field:
+      | "features"
+      | "highlights"
+      | "flatInsights"
+      | "utilities"
+      | "pricingTerms"
+      | "termsConditions",
+  ) => {
+    setFormData({
+      ...formData,
+      [field]: [
+        ...((formData[field] as { title: string }[]) || []),
+        { title: "" },
+      ],
+    });
+  };
+
+  const removeListItem = (
+    field:
+      | "features"
+      | "highlights"
+      | "flatInsights"
+      | "utilities"
+      | "pricingTerms"
+      | "termsConditions",
+    index: number,
+  ) => {
+    const list = [...((formData[field] as { title: string }[]) || [])];
+    list.splice(index, 1);
+
+    setFormData({
+      ...formData,
+      [field]: list,
+    });
+  };
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.value;
     const slug = name
@@ -376,6 +436,20 @@ export default function CreateProjectClient() {
         formData.features?.filter((f) => f.title.trim() !== "") || [];
       const cleanedAmenities =
         formData.amenities?.filter((a) => a.title.trim() !== "") || [];
+      const cleanedHighlights =
+        formData.highlights?.filter((i) => i.title.trim() !== "") || [];
+
+      const cleanedFlatInsights =
+        formData.flatInsights?.filter((i) => i.title.trim() !== "") || [];
+
+      const cleanedUtilities =
+        formData.utilities?.filter((i) => i.title.trim() !== "") || [];
+
+      const cleanedPricingTerms =
+        formData.pricingTerms?.filter((i) => i.title.trim() !== "") || [];
+
+      const cleanedTermsConditions =
+        formData.termsConditions?.filter((i) => i.title.trim() !== "") || [];
       const cleanedFaqs =
         formData.faqs?.filter(
           (f) => f.question.trim() !== "" && f.answer.trim() !== "",
@@ -391,6 +465,11 @@ export default function CreateProjectClient() {
         floorPlans: finalFloorPlans,
         features: cleanedFeatures,
         amenities: cleanedAmenities,
+        highlights: cleanedHighlights,
+        flatInsights: cleanedFlatInsights,
+        utilities: cleanedUtilities,
+        pricingTerms: cleanedPricingTerms,
+        termsConditions: cleanedTermsConditions,
         faqs: cleanedFaqs,
         metaKeywords: formData.metaKeywords
           ? typeof formData.metaKeywords === "string"
@@ -415,7 +494,57 @@ export default function CreateProjectClient() {
       setIsSubmitting(false);
     }
   };
+  const DynamicList = ({
+    title,
+    field,
+  }: {
+    title: string;
+    field:
+    | "features"
+    | "highlights"
+    | "flatInsights"
+    | "utilities"
+    | "pricingTerms"
+    | "termsConditions";
+  }) => (
+    <div className="glass-panel p-6 space-y-4">
+      <div className="flex items-center justify-between border-b border-white/10 pb-4">
+        <h3 className="text-lg font-bold text-white">{title}</h3>
 
+        <button
+          type="button"
+          onClick={() => addListItem(field)}
+          className="p-1.5 bg-white/10 rounded text-gray-300 hover:text-white"
+        >
+          <Plus className="w-4 h-4" />
+        </button>
+      </div>
+
+      <div className="space-y-3">
+        {(formData[field] as { title: string }[])?.map((item, idx) => (
+          <div key={idx} className="flex gap-2">
+            <input
+              type="text"
+              value={item.title}
+              placeholder={`Enter ${title}`}
+              onChange={(e) =>
+                handleListChange(field, idx, e.target.value)
+              }
+              className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white outline-none focus:border-purple-500"
+            />
+
+            <button
+              type="button"
+              onClick={() => removeListItem(field, idx)}
+              className="p-2 text-red-400 hover:bg-red-500/20 rounded-lg"
+            >
+              <Trash2 className="w-4 h-4" />
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
   return (
     <div className="space-y-6 pb-12">
       <div className="flex items-center justify-between">
@@ -861,7 +990,34 @@ export default function CreateProjectClient() {
               </div>
             </div>
           </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
+            <DynamicList
+              title="Project Highlights"
+              field="highlights"
+            />
+
+            <DynamicList
+              title="Flat Insights"
+              field="flatInsights"
+            />
+
+            <DynamicList
+              title="Utility Details"
+              field="utilities"
+            />
+
+            <DynamicList
+              title="Pricing & Payment Terms"
+              field="pricingTerms"
+            />
+
+            <DynamicList
+              title="Terms & Conditions"
+              field="termsConditions"
+            />
+
+          </div>
           {/* FAQs */}
           <div className="glass-panel p-6 space-y-4 mt-6">
             <div className="flex items-center justify-between border-b border-white/10 pb-4">

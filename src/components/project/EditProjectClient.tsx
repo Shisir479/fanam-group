@@ -82,6 +82,11 @@ export default function EditProjectClient({ slug }: { slug: string }) {
     overview: "",
     features: [{ title: "" }],
     amenities: [{ title: "", icon: "" }],
+    highlights: [{ title: "" }],
+    flatInsights: [{ title: "" }],
+    utilities: [{ title: "" }],
+    pricingTerms: [{ title: "" }],
+    termsConditions: [{ title: "" }],
     faqs: [{ question: "", answer: "" }],
     video: "",
     construction: {
@@ -141,6 +146,15 @@ export default function EditProjectClient({ slug }: { slug: string }) {
             amenities: p.amenities?.length
               ? p.amenities
               : [{ title: "", icon: "" }],
+            highlights: p.highlights?.length ? p.highlights : [{ title: "" }],
+            flatInsights: p.flatInsights?.length ? p.flatInsights : [{ title: "" }],
+            utilities: p.utilities?.length ? p.utilities : [{ title: "" }],
+            pricingTerms: p.pricingTerms?.length
+              ? p.pricingTerms
+              : [{ title: "" }],
+            termsConditions: p.termsConditions?.length
+              ? p.termsConditions
+              : [{ title: "" }],
             faqs: p.faqs?.length ? p.faqs : [{ question: "", answer: "" }],
             location: {
               ...formData.location,
@@ -203,7 +217,59 @@ export default function EditProjectClient({ slug }: { slug: string }) {
     };
     fetchProject();
   }, [slug]);
+  const handleArrayTitleChange = (
+    key:
+      | "features"
+      | "highlights"
+      | "flatInsights"
+      | "utilities"
+      | "pricingTerms"
+      | "termsConditions",
+    index: number,
+    value: string,
+  ) => {
+    const items = [...((formData[key] as any[]) || [])];
+    items[index].title = value;
 
+    setFormData({
+      ...formData,
+      [key]: items,
+    });
+  };
+
+  const addArrayItem = (
+    key:
+      | "features"
+      | "highlights"
+      | "flatInsights"
+      | "utilities"
+      | "pricingTerms"
+      | "termsConditions",
+  ) => {
+    setFormData({
+      ...formData,
+      [key]: [...((formData[key] as any[]) || []), { title: "" }],
+    });
+  };
+
+  const removeArrayItem = (
+    key:
+      | "features"
+      | "highlights"
+      | "flatInsights"
+      | "utilities"
+      | "pricingTerms"
+      | "termsConditions",
+    index: number,
+  ) => {
+    const items = [...((formData[key] as any[]) || [])];
+    items.splice(index, 1);
+
+    setFormData({
+      ...formData,
+      [key]: items,
+    });
+  };
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.value;
     const newSlug = name
@@ -476,6 +542,8 @@ export default function EditProjectClient({ slug }: { slug: string }) {
         formData.features?.filter((f) => f.title.trim() !== "") || [];
       const cleanedAmenities =
         formData.amenities?.filter((a) => a.title.trim() !== "") || [];
+      const cleanArray = (arr?: { title: string }[]) =>
+        arr?.filter((i) => i.title.trim() !== "") || [];
       const cleanedFaqs =
         formData.faqs?.filter(
           (f) => f.question.trim() !== "" && f.answer.trim() !== "",
@@ -489,6 +557,11 @@ export default function EditProjectClient({ slug }: { slug: string }) {
         gallery: finalGallery,
         floorPlans: finalFloorPlans,
         features: cleanedFeatures,
+        highlights: cleanArray(formData.highlights),
+        flatInsights: cleanArray(formData.flatInsights),
+        utilities: cleanArray(formData.utilities),
+        pricingTerms: cleanArray(formData.pricingTerms),
+        termsConditions: cleanArray(formData.termsConditions),
         amenities: cleanedAmenities,
         faqs: cleanedFaqs,
         metaKeywords:
@@ -513,7 +586,56 @@ export default function EditProjectClient({ slug }: { slug: string }) {
       setIsSubmitting(false);
     }
   };
+  const ArrayTitleSection = ({
+    title,
+    field,
+  }: {
+    title: string;
+    field:
+    | "features"
+    | "highlights"
+    | "flatInsights"
+    | "utilities"
+    | "pricingTerms"
+    | "termsConditions";
+  }) => (
+    <div className="glass-panel p-6 space-y-4">
+      <div className="flex items-center justify-between border-b border-white/10 pb-4">
+        <h3 className="text-lg font-bold text-white">{title}</h3>
 
+        <button
+          type="button"
+          onClick={() => addArrayItem(field)}
+          className="p-1.5 bg-white/10 rounded text-gray-300 hover:text-white"
+        >
+          <Plus className="w-4 h-4" />
+        </button>
+      </div>
+
+      <div className="space-y-3">
+        {(formData[field] || []).map((item: any, index: number) => (
+          <div key={index} className="flex gap-2">
+            <input
+              value={item.title}
+              onChange={(e) =>
+                handleArrayTitleChange(field, index, e.target.value)
+              }
+              className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white"
+              placeholder="Enter title"
+            />
+
+            <button
+              type="button"
+              onClick={() => removeArrayItem(field, index)}
+              className="p-2 text-red-400 hover:bg-red-500/20 rounded-lg"
+            >
+              <Trash2 className="w-4 h-4" />
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-64 text-white gap-3">
@@ -968,7 +1090,21 @@ export default function EditProjectClient({ slug }: { slug: string }) {
               </div>
             </div>
           </div>
+          <ArrayTitleSection title="Project Highlights" field="highlights" />
 
+          <ArrayTitleSection title="Flat Insights" field="flatInsights" />
+
+          <ArrayTitleSection title="Utility Details" field="utilities" />
+
+          <ArrayTitleSection
+            title="Pricing & Payment Terms"
+            field="pricingTerms"
+          />
+
+          <ArrayTitleSection
+            title="Terms & Conditions"
+            field="termsConditions"
+          />
           {/* FAQs */}
           <div className="glass-panel p-6 space-y-4 mt-6">
             <div className="flex items-center justify-between border-b border-white/10 pb-4">
@@ -1169,8 +1305,8 @@ export default function EditProjectClient({ slug }: { slug: string }) {
                 value={
                   formData.construction?.startedAt
                     ? new Date(formData.construction.startedAt)
-                        .toISOString()
-                        .split("T")[0]
+                      .toISOString()
+                      .split("T")[0]
                     : ""
                 }
                 onChange={(e) =>
@@ -1188,8 +1324,8 @@ export default function EditProjectClient({ slug }: { slug: string }) {
                 value={
                   formData.construction?.completionDate
                     ? new Date(formData.construction.completionDate)
-                        .toISOString()
-                        .split("T")[0]
+                      .toISOString()
+                      .split("T")[0]
                     : ""
                 }
                 onChange={(e) =>
@@ -1395,7 +1531,7 @@ export default function EditProjectClient({ slug }: { slug: string }) {
                     {brochureFile
                       ? brochureFile.name
                       : existingBrochure?.url?.split("/").pop() ||
-                        "brochure.pdf"}
+                      "brochure.pdf"}
                   </span>
                 </div>
                 <button

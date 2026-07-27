@@ -27,6 +27,21 @@ import {
   Maximize,
   FileText,
   XIcon,
+  Puzzle,
+  Flame,
+  Trees,
+  Coffee,
+  Scissors,
+  Flower2,
+  Footprints,
+  Trophy,
+  HeartHandshake,
+  Library,
+  Shirt,
+  Car,
+  ShieldAlert,
+  Camera,
+  BatteryCharging,
 } from "lucide-react";
 
 // Inline SVG components to replace Lucide brand icons
@@ -133,18 +148,63 @@ export default async function ProjectDetailsPage({
   // Fallback icons map for amenities
   const getIcon = (iconName: string) => {
     switch (iconName) {
-      case "Waves":
-        return <Waves className="w-6 h-6" />;
-      case "Dumbbell":
-        return <Dumbbell className="w-6 h-6" />;
+      case "Building2":
+        return <Building2 className="w-6 h-6" />;
+
+      case "Puzzle":
+        return <Puzzle className="w-6 h-6" />;
+
       case "Users":
         return <Users className="w-6 h-6" />;
-      case "Baby":
-        return <Baby className="w-6 h-6" />;
-      case "TreePine":
-        return <TreePine className="w-6 h-6" />;
-      case "Book":
-        return <Book className="w-6 h-6" />;
+
+      case "Waves":
+        return <Waves className="w-6 h-6" />;
+
+      case "Flame":
+        return <Flame className="w-6 h-6" />;
+
+      case "Trees":
+        return <Trees className="w-6 h-6" />;
+
+      case "Coffee":
+        return <Coffee className="w-6 h-6" />;
+
+      case "Scissors":
+        return <Scissors className="w-6 h-6" />;
+
+      case "Dumbbell":
+        return <Dumbbell className="w-6 h-6" />;
+
+      case "Flower2":
+        return <Flower2 className="w-6 h-6" />;
+
+      case "Footprints":
+        return <Footprints className="w-6 h-6" />;
+
+      case "Trophy":
+        return <Trophy className="w-6 h-6" />;
+
+      case "HeartHandshake":
+        return <HeartHandshake className="w-6 h-6" />;
+
+      case "Library":
+        return <Library className="w-6 h-6" />;
+
+      case "Shirt":
+        return <Shirt className="w-6 h-6" />;
+
+      case "Car":
+        return <Car className="w-6 h-6" />;
+
+      case "ShieldAlert":
+        return <ShieldAlert className="w-6 h-6" />;
+
+      case "Camera":
+        return <Camera className="w-6 h-6" />;
+
+      case "BatteryCharging":
+        return <BatteryCharging className="w-6 h-6" />;
+
       default:
         return <CheckCircle2 className="w-6 h-6" />;
     }
@@ -158,7 +218,54 @@ export default async function ProjectDetailsPage({
     getImageUrl(project.banner) ||
     getImageUrl(project.cover) ||
     "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop";
+  console.log("Project Data:", project);
+  const InfoSection = ({
+    title,
+    subtitle,
+    items,
+  }: {
+    title: string;
+    subtitle: string;
+    items?: { title: string }[];
+  }) => {
+    if (!items || items.length === 0) return null;
 
+    return (
+      <section className="py-12 md:py-16 bg-white border-t border-gray-100">
+        <div className="container mx-auto px-5 md:px-16 max-w-7xl">
+          <div className="mb-10 flex flex-col gap-3">
+            <BlockReveal color="var(--color-brand-blue)">
+              <h2 className="text-[14px] md:text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
+                {subtitle}
+              </h2>
+            </BlockReveal>
+
+            <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
+              <h3 className="text-2xl md:text-[34px] font-bold text-brand-blue uppercase">
+                {title}
+              </h3>
+            </BlockReveal>
+          </div>
+
+          <div className="bg-gray-50 border border-gray-100 shadow-sm p-8 md:p-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-5">
+              {items.map((item, index) => (
+                <div key={index} className="flex items-start gap-4">
+                  <div className="mt-1">
+                    <CheckCircle2 className="w-5 h-5 text-brand-blue flex-shrink-0" />
+                  </div>
+
+                  <p className="text-gray-700 leading-relaxed">
+                    {item.title}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  };
   return (
     <main className="min-h-screen bg-gray-50 pb-0 font-sans">
       {/* 1. Project Banner */}
@@ -335,7 +442,35 @@ export default async function ProjectDetailsPage({
           </div>
         </section>
       )}
+      <InfoSection
+        subtitle="Project Details"
+        title="Project Highlights"
+        items={project.highlights}
+      />
 
+      <InfoSection
+        subtitle="Apartment Details"
+        title="Flat Insight"
+        items={project.flatInsights}
+      />
+
+      <InfoSection
+        subtitle="Utilities"
+        title="Utility Details"
+        items={project.utilities}
+      />
+
+      <InfoSection
+        subtitle="Payment"
+        title="Pricing & Payment Terms"
+        items={project.pricingTerms}
+      />
+
+      <InfoSection
+        subtitle="Important Information"
+        title="Terms & Conditions"
+        items={project.termsConditions}
+      />
       {/* 4. Floor Plans */}
       {project.floorPlans && project.floorPlans.length > 0 && (
         <section id="floor-plans" className="py-16 md:py-24 bg-white">
@@ -469,16 +604,16 @@ export default async function ProjectDetailsPage({
                       Started:{" "}
                       {project.construction.startedAt
                         ? new Date(
-                            project.construction.startedAt,
-                          ).toLocaleDateString()
+                          project.construction.startedAt,
+                        ).toLocaleDateString()
                         : "TBA"}
                     </span>
                     <span>
                       Completion:{" "}
                       {project.construction.completionDate
                         ? new Date(
-                            project.construction.completionDate,
-                          ).toLocaleDateString()
+                          project.construction.completionDate,
+                        ).toLocaleDateString()
                         : "TBA"}
                     </span>
                   </div>

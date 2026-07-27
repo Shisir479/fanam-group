@@ -27,6 +27,27 @@ export interface Project {
   overview: string;
   features: { title: string }[];
   amenities: { title: string; icon: string }[];
+
+  highlights: {
+    title: string;
+  }[];
+
+  flatInsights: {
+    title: string;
+  }[];
+
+  utilities: {
+    title: string;
+  }[];
+
+  pricingTerms: {
+    title: string;
+  }[];
+
+  termsConditions: {
+    title: string;
+  }[];
+
   floorPlans: {
     title: string;
     size: number;
