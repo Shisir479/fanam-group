@@ -44,7 +44,6 @@ export function PrivacyPolicyView({ pageData }: { pageData: any }) {
     <p>The individual is responsible for evaluating the accuracy, completeness, and usefulness of any opinions, advice, services, or other information provided. All information contained on any page is distributed with the understanding that the authors, publishers, and distributors are not rendering legal or other professional advice or opinions on specific facts or matters, and accordingly assume no liability whatsoever in connection with its use. The individual should consult their own legal or tax advisor with respect to their personal situation.</p>
     <p>In no event shall Bonedi Homes be liable for any direct, indirect, special, incidental, or consequential damages arising out of the use of the information herein.</p>
   `;
-  console.log(pageData);
   return (
     <main className="min-h-screen bg-white flex flex-col">
       <PageBanner
