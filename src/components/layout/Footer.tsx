@@ -283,7 +283,7 @@ export function Footer({ brandingData }: { brandingData?: any }) {
           <p>
             Designed &amp; Developed by{" "}
             <span className="text-white/70 font-semibold hover:text-white transition-colors cursor-pointer">
-              Dcastalia
+              Tech Solutions Plex Ltd.
             </span>
           </p>
         </div>
