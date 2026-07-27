@@ -4,9 +4,9 @@ import { CompanyProfile } from "@/components/about/CompanyProfile";
 import { ChairmanMessage } from "@/components/about/ChairmanMessage";
 import { LeadershipProfiles } from "@/components/about/LeadershipProfiles";
 import { VisionMission } from "@/components/about/VisionMission";
-import { CoreValues } from "@/components/about/CoreValues";
-import { CompanyHistory } from "@/components/about/CompanyHistory";
-import { OrganizationalOverview } from "@/components/about/OrganizationalOverview";
+// import { CoreValues } from "@/components/about/CoreValues";
+// import { CompanyHistory } from "@/components/about/CompanyHistory";
+// import { OrganizationalOverview } from "@/components/about/OrganizationalOverview";
 import { getAboutPublic } from "@/services/about.service";
 import { getBannerByPageAdmin } from "@/services/banner.service";
 export async function generateMetadata() {
@@ -44,9 +44,9 @@ export default async function AboutUsPage() {
       <ChairmanMessage data={about} />
       <LeadershipProfiles data={about} />
       <VisionMission data={about} />
-      <CoreValues data={about} />
+      {/* <CoreValues data={about} />
       <CompanyHistory data={about} />
-      <OrganizationalOverview data={about} />
+      <OrganizationalOverview data={about} /> */}
     </main>
   );
 }

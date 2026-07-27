@@ -75,14 +75,14 @@ export default function AdminLogin() {
                 Email Address
               </label>
               <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-white/60 group-focus-within:text-white transition-colors duration-300">
-                  <Mail className="h-4 w-4" />
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none !text-white transition-colors duration-300">
+                  <Mail className="h-4 w-4 !text-white" color="white" />
                 </div>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-white/[0.03] border border-white/20 rounded-xl py-3.5 pl-11 pr-4 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-white/40 focus:bg-white/[0.08] transition-all duration-300"
+                  className="w-full bg-white/[0.03] border border-white/20 rounded-xl py-3.5 pl-11 pr-4 !text-white text-sm placeholder:!text-white/50 focus:outline-none focus:border-white/40 focus:bg-white/[0.08] transition-all duration-300 [&:-webkit-autofill]:[-webkit-text-fill-color:white] [&:-webkit-autofill]:[transition:background-color_9999s_ease-in-out_0s]"
                   placeholder="admin@bonedihomes.com"
                   required
                 />
@@ -101,26 +101,26 @@ export default function AdminLogin() {
                 </a>
               </label>
               <div className="relative group">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-white/60 group-focus-within:text-white transition-colors duration-300">
-                  <Lock className="h-4 w-4" />
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none !text-white transition-colors duration-300">
+                  <Lock className="h-4 w-4 !text-white" color="white" />
                 </div>
                 <input
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-white/[0.03] border border-white/20 rounded-xl py-3.5 pl-11 pr-12 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-white/40 focus:bg-white/[0.08] transition-all duration-300 tracking-[0.2em]"
+                  className="w-full bg-white/[0.03] border border-white/20 rounded-xl py-3.5 pl-11 pr-12 !text-white text-sm placeholder:!text-white/50 focus:outline-none focus:border-white/40 focus:bg-white/[0.08] transition-all duration-300 tracking-[0.2em] [&:-webkit-autofill]:[-webkit-text-fill-color:white] [&:-webkit-autofill]:[transition:background-color_9999s_ease-in-out_0s]"
                   placeholder="••••••••"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-white/60 hover:text-white transition-colors duration-300 outline-none"
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center !text-white hover:!text-white transition-colors duration-300 outline-none"
                 >
                   {showPassword ? (
-                    <EyeOff className="h-4 w-4" />
+                    <EyeOff className="h-4 w-4 !text-white" color="white" />
                   ) : (
-                    <Eye className="h-4 w-4" />
+                    <Eye className="h-4 w-4 !text-white" color="white" />
                   )}
                 </button>
               </div>
@@ -130,19 +130,14 @@ export default function AdminLogin() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="group relative w-full flex items-center justify-center gap-3 bg-white text-black font-bold rounded-xl py-4 overflow-hidden cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed mt-8 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+              className="w-full flex items-center justify-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold rounded-xl py-4 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed mt-8 shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
             >
-              <span className="relative z-10 uppercase tracking-widest text-xs">
+              <span className="uppercase tracking-widest text-xs">
                 {isSubmitting ? "Authenticating..." : "Secure Login"}
               </span>
-              {!isSubmitting && (
-                <ArrowRight className="h-4 w-4 relative z-10 transform group-hover:translate-x-1 transition-transform" />
-              )}
-              {/* Button hover gradient */}
-              <div className="absolute inset-0 bg-gradient-to-r from-gray-100 via-white to-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              {!isSubmitting && <ArrowRight className="h-4 w-4" />}
             </button>
           </form>
-
           {/* Footer Text */}
           <div className="mt-8 text-center relative z-10">
             <p className="text-[9px] text-white/30 tracking-[0.2em] uppercase">

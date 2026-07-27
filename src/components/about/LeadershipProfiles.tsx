@@ -76,8 +76,10 @@ export function LeadershipProfiles({ data }: { data: any }) {
                 <div className="w-16 h-[2px] bg-brand-blue/20 mb-6 md:mb-8"></div>
 
                 <div
-                  className="text-gray-600 text-[15px] md:text-[16px] leading-loose font-light max-w-2xl prose prose-invert min-w-0"
-                  dangerouslySetInnerHTML={{ __html: leader.description }}
+                  className="text-gray-600 text-[15px] md:text-[16px] leading-loose font-light max-w-2xl prose prose-p:break-words whitespace-normal break-words overflow-hidden"
+                  dangerouslySetInnerHTML={{
+                    __html: leader.description || leader.bio,
+                  }}
                 />
               </div>
             </div>
