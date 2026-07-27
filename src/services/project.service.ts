@@ -10,6 +10,7 @@ export interface Project {
   category: string;
   propertyType: string;
   status: string;
+  landSize: string;
   featured: boolean;
   startingPrice: number;
   endingPrice: number;

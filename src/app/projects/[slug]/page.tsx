@@ -210,7 +210,7 @@ export default async function ProjectDetailsPage({
     }
   };
 
-  const formattedLocation = [project.location?.area, project.location?.city]
+  const formattedLocation = [project.location?.address, project.location?.area, project.location?.city, project.location?.district, project.location?.country]
     .filter(Boolean)
     .join(", ");
   const getImageUrl = (img: any) => (typeof img === "string" ? img : img?.url);
@@ -218,7 +218,6 @@ export default async function ProjectDetailsPage({
     getImageUrl(project.banner) ||
     getImageUrl(project.cover) ||
     "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop";
-  console.log("Project Data:", project);
   const InfoSection = ({
     title,
     subtitle,

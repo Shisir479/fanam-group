@@ -66,6 +66,7 @@ export default function EditProjectClient({ slug }: { slug: string }) {
     propertyType: "Apartment",
     status: "upcoming",
     featured: false,
+    landSize: "",
     startingPrice: 0,
     endingPrice: 0,
     bookingMoney: 0,
@@ -1356,6 +1357,22 @@ export default function EditProjectClient({ slug }: { slug: string }) {
             <h3 className="text-lg font-semibold text-white border-b border-white/10 pb-4">
               Pricing Details
             </h3>
+            <div className="space-y-2 md:col-span-2">
+              <label className="text-sm font-medium text-gray-300">
+                LandSize
+              </label>
+              <input
+                type="text"
+                value={formData.landSize || ""}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    landSize: e.target.value,
+                  })
+                }
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+              />
+            </div>
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-300">
                 Starting Price
