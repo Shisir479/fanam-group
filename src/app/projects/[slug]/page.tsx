@@ -42,6 +42,7 @@ import {
   ShieldAlert,
   Camera,
   BatteryCharging,
+  Ruler
 } from "lucide-react";
 
 // Inline SVG components to replace Lucide brand icons
@@ -301,8 +302,10 @@ export default async function ProjectDetailsPage({
 
       {/* Quick Info Bar (Overlapping Hero) */}
       <div className="container mx-auto px-5 md:px-16 -mt-12 md:-mt-16 relative z-30 mb-16">
-        <div className="bg-white p-6 md:p-8 shadow-xl border border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6 divide-y md:divide-y-0 md:divide-x divide-gray-100 ">
-          <div className="flex-1 flex items-center gap-4 w-full md:w-auto pt-4 md:pt-0 first:pt-0">
+        <div className="bg-white p-6 md:p-8 shadow-xl border border-gray-100 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-gray-100">
+
+          {/* Location */}
+          <div className="flex items-center gap-4 w-full pt-4 md:pt-0 first:pt-0 md:pr-6">
             <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center flex-shrink-0">
               <MapPin className="w-5 h-5 text-brand-blue" />
             </div>
@@ -316,7 +319,8 @@ export default async function ProjectDetailsPage({
             </div>
           </div>
 
-          <div className="flex-1 flex items-center gap-4 w-full md:w-auto pt-4 md:pt-0 px-0 md:px-8">
+          {/* Status */}
+          <div className="flex items-center gap-4 w-full pt-4 md:pt-0 md:px-6">
             <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center flex-shrink-0">
               <CheckCircle2 className="w-5 h-5 text-brand-blue" />
             </div>
@@ -330,7 +334,8 @@ export default async function ProjectDetailsPage({
             </div>
           </div>
 
-          <div className="flex-1 flex items-center gap-4 w-full md:w-auto pt-4 md:pt-0 pl-0 md:pl-8">
+          {/* Property Type */}
+          <div className="flex items-center gap-4 w-full pt-4 md:pt-0 md:px-6">
             <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center flex-shrink-0">
               <Building2 className="w-5 h-5 text-brand-blue" />
             </div>
@@ -343,6 +348,22 @@ export default async function ProjectDetailsPage({
               </p>
             </div>
           </div>
+
+          {/* Land Size */}
+          <div className="flex items-center gap-4 w-full pt-4 md:pt-0 md:pl-6">
+            <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center flex-shrink-0">
+              <Ruler className="w-5 h-5 text-brand-blue" />
+            </div>
+            <div>
+              <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mb-1">
+                Land Size
+              </p>
+              <p className="text-brand-blue font-bold text-lg">
+                {project.landSize || "N/A"}
+              </p>
+            </div>
+          </div>
+
         </div>
       </div>
 
