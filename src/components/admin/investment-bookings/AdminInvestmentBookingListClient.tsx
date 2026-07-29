@@ -137,14 +137,20 @@ export default function AdminInvestmentBookingListClient({
       ),
     },
     {
-      header: "Investment Info",
+      header: "Inquiry Info",
       render: (booking) => (
         <div className="flex flex-col gap-1">
           <div className="text-sm text-gray-200">
             Type: <span className="font-semibold">{booking.propertyType}</span>
           </div>
-          <div className="text-sm text-[#CBA35E] font-medium">
-            ৳{booking.investmentAmount?.toLocaleString()}
+          {booking.projectName && (
+            <div className="text-sm text-brand-blue">
+              Project:{" "}
+              <span className="font-semibold">{booking.projectName}</span>
+            </div>
+          )}
+          <div className="text-sm text-gray-400">
+            Loc: {booking.preferredLocation || "N/A"}
           </div>
         </div>
       ),
@@ -367,57 +373,37 @@ export default function AdminInvestmentBookingListClient({
                         <span className="text-gray-500">Email:</span>{" "}
                         {selectedBooking.email || "N/A"}
                       </p>
-                      <p>
-                        <span className="text-gray-500">Occupation:</span>{" "}
-                        {selectedBooking.occupation || "N/A"}
-                      </p>
-                      <p>
-                        <span className="text-gray-500">NID/Passport:</span>{" "}
-                        {selectedBooking.nidPassport || "N/A"}
-                      </p>
-                      <p>
-                        <span className="text-gray-500">Nationality:</span>{" "}
-                        {selectedBooking.nationality || "N/A"}
-                      </p>
-                      <p>
-                        <span className="text-gray-500">DOB:</span>{" "}
-                        {selectedBooking.dateOfBirth
-                          ? String(selectedBooking.dateOfBirth).split("T")[0]
-                          : "N/A"}
-                      </p>
-                      <p>
-                        <span className="text-gray-500">Religion:</span>{" "}
-                        {selectedBooking.religion || "N/A"}
-                      </p>
                     </div>
                   </div>
 
                   <div className="bg-white/5 p-4 rounded-xl border border-white/10 overflow-hidden">
                     <h3 className="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-3">
-                      Investment Details
+                      Inquiry Details
                     </h3>
                     <div className="space-y-2 text-sm break-all md:break-words">
                       <p>
                         <span className="text-gray-500">Property Type:</span>{" "}
                         {selectedBooking.propertyType}
                       </p>
-                      <p>
-                        <span className="text-gray-500">Amount:</span>{" "}
-                        <span className="text-[#CBA35E] font-bold">
-                          ৳{selectedBooking.investmentAmount?.toLocaleString()}
-                        </span>
-                      </p>
-                      <p>
-                        <span className="text-gray-500">Duration:</span>{" "}
-                        {selectedBooking.duration
-                          ? `${selectedBooking.duration} months`
-                          : "N/A"}
-                      </p>
+                      {selectedBooking.projectName && (
+                        <p>
+                          <span className="text-gray-500">Project:</span>{" "}
+                          {selectedBooking.projectName}
+                        </p>
+                      )}
                       <p>
                         <span className="text-gray-500">
                           Preferred Location:
                         </span>{" "}
                         {selectedBooking.preferredLocation || "N/A"}
+                      </p>
+                      <p>
+                        <span className="text-gray-500">Date:</span>{" "}
+                        {selectedBooking.createdAt
+                          ? new Date(
+                              selectedBooking.createdAt,
+                            ).toLocaleDateString()
+                          : "N/A"}
                       </p>
                       <p>
                         <span className="text-gray-500">Status:</span>
@@ -439,64 +425,7 @@ export default function AdminInvestmentBookingListClient({
                   </div>
                 </div>
 
-                <div className="bg-white/5 p-4 rounded-xl border border-white/10 overflow-hidden">
-                  <h3 className="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-3">
-                    Address Information
-                  </h3>
-                  <div className="space-y-2 text-sm break-all md:break-words">
-                    <p>
-                      <span className="text-gray-500">Present Address:</span>{" "}
-                      {selectedBooking.presentAddress || "N/A"}
-                    </p>
-                    <p>
-                      <span className="text-gray-500">Permanent Address:</span>{" "}
-                      {selectedBooking.permanentAddress || "N/A"}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="bg-white/5 p-4 rounded-xl border border-white/10 overflow-hidden">
-                  <h3 className="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-3">
-                    Nominee Information
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm break-all md:break-words">
-                    <p>
-                      <span className="text-gray-500">Name:</span>{" "}
-                      {selectedBooking.nomineeName || "N/A"}
-                    </p>
-                    <p>
-                      <span className="text-gray-500">Relation:</span>{" "}
-                      {selectedBooking.nomineeRelation || "N/A"}
-                    </p>
-                    <p>
-                      <span className="text-gray-500">Phone:</span>{" "}
-                      {selectedBooking.nomineePhone || "N/A"}
-                    </p>
-                    <p className="md:col-span-2">
-                      <span className="text-gray-500">Present Address:</span>{" "}
-                      {selectedBooking.nomineePresentAddress || "N/A"}
-                    </p>
-                    <p className="md:col-span-2">
-                      <span className="text-gray-500">Permanent Address:</span>{" "}
-                      {selectedBooking.nomineePermanentAddress || "N/A"}
-                    </p>
-                  </div>
-                </div>
-
-                {selectedBooking.signature?.url && (
-                  <div className="bg-white/5 p-4 rounded-xl border border-white/10">
-                    <h3 className="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-3">
-                      Applicant Signature
-                    </h3>
-                    <div className="bg-white rounded p-4 inline-block">
-                      <img
-                        src={selectedBooking.signature.url}
-                        alt="Signature"
-                        className="max-h-[100px] object-contain"
-                      />
-                    </div>
-                  </div>
-                )}
+                {/* Address, Nominee, Signature blocks removed because the form was simplified to just Name, Phone, Location, and Email */}
               </div>
             )}
           </div>

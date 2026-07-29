@@ -26,6 +26,7 @@ export interface InvestmentBookingPayload {
     url: string;
   };
   status?: "pending" | "contacted" | "approved" | "rejected";
+  projectName?: string;
 }
 
 export const createInvestmentBookingPublic = async (

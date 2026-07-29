@@ -148,7 +148,9 @@ export default function EditProjectClient({ slug }: { slug: string }) {
               ? p.amenities
               : [{ title: "", icon: "" }],
             highlights: p.highlights?.length ? p.highlights : [{ title: "" }],
-            flatInsights: p.flatInsights?.length ? p.flatInsights : [{ title: "" }],
+            flatInsights: p.flatInsights?.length
+              ? p.flatInsights
+              : [{ title: "" }],
             utilities: p.utilities?.length ? p.utilities : [{ title: "" }],
             pricingTerms: p.pricingTerms?.length
               ? p.pricingTerms
@@ -593,12 +595,12 @@ export default function EditProjectClient({ slug }: { slug: string }) {
   }: {
     title: string;
     field:
-    | "features"
-    | "highlights"
-    | "flatInsights"
-    | "utilities"
-    | "pricingTerms"
-    | "termsConditions";
+      | "features"
+      | "highlights"
+      | "flatInsights"
+      | "utilities"
+      | "pricingTerms"
+      | "termsConditions";
   }) => (
     <div className="glass-panel p-6 space-y-4">
       <div className="flex items-center justify-between border-b border-white/10 pb-4">
@@ -1306,8 +1308,8 @@ export default function EditProjectClient({ slug }: { slug: string }) {
                 value={
                   formData.construction?.startedAt
                     ? new Date(formData.construction.startedAt)
-                      .toISOString()
-                      .split("T")[0]
+                        .toISOString()
+                        .split("T")[0]
                     : ""
                 }
                 onChange={(e) =>
@@ -1325,8 +1327,8 @@ export default function EditProjectClient({ slug }: { slug: string }) {
                 value={
                   formData.construction?.completionDate
                     ? new Date(formData.construction.completionDate)
-                      .toISOString()
-                      .split("T")[0]
+                        .toISOString()
+                        .split("T")[0]
                     : ""
                 }
                 onChange={(e) =>
@@ -1548,7 +1550,7 @@ export default function EditProjectClient({ slug }: { slug: string }) {
                     {brochureFile
                       ? brochureFile.name
                       : existingBrochure?.url?.split("/").pop() ||
-                      "brochure.pdf"}
+                        "brochure.pdf"}
                   </span>
                 </div>
                 <button

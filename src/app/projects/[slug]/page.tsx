@@ -42,7 +42,7 @@ import {
   ShieldAlert,
   Camera,
   BatteryCharging,
-  Ruler
+  Ruler,
 } from "lucide-react";
 
 // Inline SVG components to replace Lucide brand icons
@@ -211,7 +211,13 @@ export default async function ProjectDetailsPage({
     }
   };
 
-  const formattedLocation = [project.location?.address, project.location?.area, project.location?.city, project.location?.district, project.location?.country]
+  const formattedLocation = [
+    project.location?.address,
+    project.location?.area,
+    project.location?.city,
+    project.location?.district,
+    project.location?.country,
+  ]
     .filter(Boolean)
     .join(", ");
   const getImageUrl = (img: any) => (typeof img === "string" ? img : img?.url);
@@ -255,9 +261,7 @@ export default async function ProjectDetailsPage({
                     <CheckCircle2 className="w-5 h-5 text-brand-blue flex-shrink-0" />
                   </div>
 
-                  <p className="text-gray-700 leading-relaxed">
-                    {item.title}
-                  </p>
+                  <p className="text-gray-700 leading-relaxed">{item.title}</p>
                 </div>
               ))}
             </div>
@@ -303,7 +307,6 @@ export default async function ProjectDetailsPage({
       {/* Quick Info Bar (Overlapping Hero) */}
       <div className="container mx-auto px-5 md:px-16 -mt-12 md:-mt-16 relative z-30 mb-16">
         <div className="bg-white p-6 md:p-8 shadow-xl border border-gray-100 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-gray-100">
-
           {/* Location */}
           <div className="flex items-center gap-4 w-full pt-4 md:pt-0 first:pt-0 md:pr-6">
             <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center flex-shrink-0">
@@ -363,7 +366,6 @@ export default async function ProjectDetailsPage({
               </p>
             </div>
           </div>
-
         </div>
       </div>
 
@@ -624,16 +626,16 @@ export default async function ProjectDetailsPage({
                       Started:{" "}
                       {project.construction.startedAt
                         ? new Date(
-                          project.construction.startedAt,
-                        ).toLocaleDateString()
+                            project.construction.startedAt,
+                          ).toLocaleDateString()
                         : "TBA"}
                     </span>
                     <span>
                       Completion:{" "}
                       {project.construction.completionDate
                         ? new Date(
-                          project.construction.completionDate,
-                        ).toLocaleDateString()
+                            project.construction.completionDate,
+                          ).toLocaleDateString()
                         : "TBA"}
                     </span>
                   </div>
@@ -786,7 +788,7 @@ export default async function ProjectDetailsPage({
               </p>
 
               <SharedButton
-                href={`/inquiry?project=${project.slug}`}
+                href={`/inquiry?projectName=${encodeURIComponent(project.name)}&location=${encodeURIComponent([project.location?.address, project.location?.area, project.location?.city, project.location?.district].filter(Boolean).join(", "))}&propertyType=${encodeURIComponent(project.category || project.propertyType || "")}`}
                 className="w-full sm:w-auto"
               >
                 Go to Inquiry Form

@@ -501,12 +501,12 @@ export default function CreateProjectClient() {
   }: {
     title: string;
     field:
-    | "features"
-    | "highlights"
-    | "flatInsights"
-    | "utilities"
-    | "pricingTerms"
-    | "termsConditions";
+      | "features"
+      | "highlights"
+      | "flatInsights"
+      | "utilities"
+      | "pricingTerms"
+      | "termsConditions";
   }) => (
     <div className="glass-panel p-6 space-y-4">
       <div className="flex items-center justify-between border-b border-white/10 pb-4">
@@ -528,9 +528,7 @@ export default function CreateProjectClient() {
               type="text"
               value={item.title}
               placeholder={`Enter ${title}`}
-              onChange={(e) =>
-                handleListChange(field, idx, e.target.value)
-              }
+              onChange={(e) => handleListChange(field, idx, e.target.value)}
               className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white outline-none focus:border-purple-500"
             />
 
@@ -992,32 +990,15 @@ export default function CreateProjectClient() {
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <DynamicList title="Project Highlights" field="highlights" />
 
-            <DynamicList
-              title="Project Highlights"
-              field="highlights"
-            />
+            <DynamicList title="Flat Insights" field="flatInsights" />
 
-            <DynamicList
-              title="Flat Insights"
-              field="flatInsights"
-            />
+            <DynamicList title="Utility Details" field="utilities" />
 
-            <DynamicList
-              title="Utility Details"
-              field="utilities"
-            />
+            <DynamicList title="Pricing & Payment Terms" field="pricingTerms" />
 
-            <DynamicList
-              title="Pricing & Payment Terms"
-              field="pricingTerms"
-            />
-
-            <DynamicList
-              title="Terms & Conditions"
-              field="termsConditions"
-            />
-
+            <DynamicList title="Terms & Conditions" field="termsConditions" />
           </div>
           {/* FAQs */}
           <div className="glass-panel p-6 space-y-4 mt-6">
