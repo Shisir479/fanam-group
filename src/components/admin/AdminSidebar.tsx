@@ -19,6 +19,14 @@ import {
   Star,
   Plus,
   Minus,
+  Users,
+  Award,
+  Flag,
+  Hexagon,
+  Calendar,
+  Heart,
+  Briefcase,
+  Newspaper,
 } from "lucide-react";
 
 type MenuItem = {
@@ -46,7 +54,7 @@ export function AdminSidebar() {
 
     { name: "Core Management", isHeader: true },
     { name: "Projects", icon: Building, href: "/admin/project" },
-    { name: "Services", icon: Building, href: "/admin/services" },
+    { name: "Leadership Team", icon: Users, href: "/admin/team" },
     { name: "Inquiries", icon: Shield, href: "/admin/investment-bookings" },
     { name: "Contacts", icon: MessageSquare, href: "/admin/contacts" },
     { name: "Blog & News", icon: FileText, href: "/admin/blog" },
@@ -56,6 +64,14 @@ export function AdminSidebar() {
     { name: "Content Management", isHeader: true },
     { name: "Homepage Content", icon: Home, href: "/admin/content/homepage" },
     { name: "About Content", icon: Info, href: "/admin/content/about" },
+    { name: "Company Milestones", icon: Flag, href: "/admin/milestones" },
+    { name: "Awards & Certs", icon: Award, href: "/admin/awards" },
+    { name: "Business Partners", icon: Hexagon, href: "/admin/brands" },
+    { name: "Events", icon: Calendar, href: "/admin/events" },
+    { name: "CSR Activities", icon: Heart, href: "/admin/csr" },
+    { name: "Careers", icon: Briefcase, href: "/admin/careers" },
+    { name: "Media Coverage", icon: Newspaper, href: "/admin/press" },
+    { name: "Investor Docs", icon: FileText, href: "/admin/documents" },
     {
       name: "Contact Info",
       icon: PhoneCall,
