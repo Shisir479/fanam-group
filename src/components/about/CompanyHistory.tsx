@@ -9,7 +9,7 @@ export function CompanyHistory({ data }: { data: any }) {
             year: "2010",
             title: "Foundation",
             description:
-              "Bonedi Homes was established with a vision to revolutionize urban living in Dhaka, focusing on premium residential properties.",
+              "Fanam Group was established with a vision to revolutionize urban living in Dhaka, focusing on premium residential properties.",
           },
           {
             year: "2014",

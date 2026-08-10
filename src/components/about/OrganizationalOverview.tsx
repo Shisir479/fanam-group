@@ -62,7 +62,7 @@ export function OrganizationalOverview({ data }: { data: any }) {
             dangerouslySetInnerHTML={{
               __html:
                 data?.organizationDescription ||
-                "Bonedi Homes is structured to deliver end-to-end real estate solutions. From initial architectural conceptualization to final property management, our specialized divisions work in seamless harmony to ensure the flawless execution of every project.",
+                "Fanam Group is structured to deliver end-to-end real estate solutions. From initial architectural conceptualization to final property management, our specialized divisions work in seamless harmony to ensure the flawless execution of every project.",
             }}
           />
         </div>

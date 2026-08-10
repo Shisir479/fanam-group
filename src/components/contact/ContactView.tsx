@@ -167,7 +167,7 @@ export function ContactView({ data }: { data?: any }) {
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               className="absolute inset-0 grayscale hover:grayscale-0 transition-all duration-700"
-              title="Bonedi Homes Location"
+              title="Fanam Group Location"
             />
             {/* Map Overlay to prevent accidental scrolling issues */}
             <div className="absolute inset-0 bg-black/5 pointer-events-none"></div>

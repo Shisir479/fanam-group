@@ -28,7 +28,7 @@ export function CompanyProfile({ data }: { data: any }) {
               dangerouslySetInnerHTML={{
                 __html:
                   data?.companyDescription ||
-                  `<p>At Bonedi Homes, we do more than just build structures; we create legacies. With a deep-rooted commitment to architectural brilliance and uncompromising quality, we have established ourselves as pioneers in the luxury real estate sector.</p><p>Our projects span across prime locations, offering unparalleled convenience, state-of-the-art amenities, and a community-centric lifestyle. We pride ourselves on our meticulous attention to detail, uncompromising quality, and a customer-first approach that ensures every Bonedi home is a masterpiece.</p>`,
+                  `<p>At Fanam Group, we do more than just build structures; we create legacies. With a deep-rooted commitment to architectural brilliance and uncompromising quality, we have established ourselves as pioneers in the luxury real estate sector.</p><p>Our projects span across prime locations, offering unparalleled convenience, state-of-the-art amenities, and a community-centric lifestyle. We pride ourselves on our meticulous attention to detail, uncompromising quality, and a customer-first approach that ensures every Bonedi home is a masterpiece.</p>`,
               }}
             />
 

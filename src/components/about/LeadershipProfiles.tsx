@@ -11,7 +11,7 @@ export function LeadershipProfiles({ data }: { data: any }) {
             image: {
               url: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop",
             },
-            bio: "With over two decades of experience in real estate development, Tariqur oversees the strategic direction and operational excellence of Bonedi Homes. His visionary approach has been instrumental in shaping the company's robust portfolio.",
+            bio: "With over two decades of experience in real estate development, Tariqur oversees the strategic direction and operational excellence of Fanam Group. His visionary approach has been instrumental in shaping the company's robust portfolio.",
           },
           {
             name: "Dr. Laila Zaman",

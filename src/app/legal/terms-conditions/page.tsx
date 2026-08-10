@@ -11,9 +11,9 @@ export async function generateMetadata() {
   } catch (e) {}
 
   return constructMetadata({
-    title: pageData?.metaTitle || "Terms & Conditions - Bonedi Homes",
+    title: pageData?.metaTitle || "Terms & Conditions - Fanam Group",
     description:
-      pageData?.metaDescription || "Terms & Conditions for Bonedi Homes",
+      pageData?.metaDescription || "Terms & Conditions for Fanam Group",
   });
 }
 

@@ -19,7 +19,7 @@ export async function AboutSection() {
   const title = "ABOUT US";
   const description =
     aboutData?.companyDescription ||
-    `<p>Bonedi Homes is committed to building extraordinary spaces that reflect architectural brilliance and uncompromising quality. Our projects span across prime locations, offering unparalleled convenience, state-of-the-art amenities, and a community-centric lifestyle.</p>`;
+    `<p>Fanam Group is committed to building extraordinary spaces that reflect architectural brilliance and uncompromising quality. Our projects span across prime locations, offering unparalleled convenience, state-of-the-art amenities, and a community-centric lifestyle.</p>`;
   const imageUrl =
     aboutData?.companyImage?.url ||
     "https://images.unsplash.com/photo-1637909336968-0687e3086c63?q=80&w=870&auto=format&fit=crop";

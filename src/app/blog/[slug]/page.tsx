@@ -77,7 +77,7 @@ export async function generateMetadata({
     });
 
   return constructMetadata({
-    title: `${post.metaTitle || post.name} - Bonedi Homes`,
+    title: `${post.metaTitle || post.name} - Fanam Group`,
     description: post.metaDescription || post.excerpt,
   });
 }

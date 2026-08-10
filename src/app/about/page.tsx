@@ -15,11 +15,11 @@ export async function generateMetadata() {
 
   return constructMetadata({
     title: about?.heroTitle
-      ? `${about.heroTitle.replace(/<[^>]*>?/gm, " ").trim()} - Bonedi Homes`
-      : "About Us - Bonedi Homes",
+      ? `${about.heroTitle.replace(/<[^>]*>?/gm, " ").trim()} - Fanam Group`
+      : "About Us - Fanam Group",
     description:
       about?.companyDescription ||
-      "Learn about Bonedi Homes, our history, and our values.",
+      "Learn about Fanam Group, our history, and our values.",
   });
 }
 

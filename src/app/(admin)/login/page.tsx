@@ -55,7 +55,7 @@ export default function AdminLogin() {
               className="inline-block transition-transform hover:scale-105 duration-500"
             >
               <Image
-                src="/company_logo/Bonedia White Logo File.png"
+                src="/company_logo/logo-white.63532709.svg"
                 alt="Bonedi Logo"
                 width={140}
                 height={45}

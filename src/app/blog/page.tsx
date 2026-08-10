@@ -9,8 +9,8 @@ import { getBlogsPublic } from "@/services/blog.service";
 import { getBannerByPageAdmin } from "@/services/banner.service";
 
 export const metadata = constructMetadata({
-  title: "News & Blog - Bonedi Homes",
-  description: "Latest news, insights, and market trends from Bonedi Homes.",
+  title: "News & Blog - Fanam Group",
+  description: "Latest news, insights, and market trends from Fanam Group.",
 });
 
 async function getBlogs(searchParams: any) {

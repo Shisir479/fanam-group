@@ -11,8 +11,8 @@ export async function generateMetadata() {
   } catch (e) {}
 
   return constructMetadata({
-    title: pageData?.metaTitle || "Privacy Policy - Bonedi Homes",
-    description: pageData?.metaDescription || "Privacy Policy for Bonedi Homes",
+    title: pageData?.metaTitle || "Privacy Policy - Fanam Group",
+    description: pageData?.metaDescription || "Privacy Policy for Fanam Group",
   });
 }
 

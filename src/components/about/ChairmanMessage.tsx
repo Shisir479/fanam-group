@@ -100,7 +100,7 @@ export function ChairmanMessage({ data }: { data: any }) {
                 </h4>
                 <p className="text-sm font-bold text-gray-600 uppercase tracking-wider mt-1">
                   {data?.chairmanDesignation ||
-                    "Chairman & Founder, Bonedi Homes"}
+                    "Chairman & Founder, Fanam Group"}
                 </p>
               </div>
             </div>

@@ -4,9 +4,9 @@ import { ContactView } from "@/components/contact/ContactView";
 import { getBrandingSettingsPublic } from "@/services/settings.service";
 
 export const metadata = constructMetadata({
-  title: "Contact Us - Bonedi Homes",
+  title: "Contact Us - Fanam Group",
   description:
-    "Get in touch with Bonedi Homes. Find our office locations, contact information, and business hours.",
+    "Get in touch with Fanam Group. Find our office locations, contact information, and business hours.",
 });
 
 export default async function ContactPage() {

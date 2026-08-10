@@ -53,6 +53,7 @@ export function AdminSidebar() {
     { name: "Dashboard", icon: LayoutDashboard, href: "/admin", exact: true },
 
     { name: "Core Management", isHeader: true },
+    { name: "Concerns", icon: Building, href: "/admin/concerns" },
     { name: "Projects", icon: Building, href: "/admin/project" },
     { name: "Leadership Team", icon: Users, href: "/admin/team" },
     { name: "Inquiries", icon: Shield, href: "/admin/investment-bookings" },

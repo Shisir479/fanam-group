@@ -5,8 +5,8 @@ import InquiryForm from "@/components/inquiry/InquiryForm";
 import { PageBanner } from "@/components/ui/PageBanner";
 
 export const metadata = constructMetadata({
-  title: "Inquiry - Bonedi Homes",
-  description: "Submit an inquiry or book an investment with Bonedi Homes.",
+  title: "Inquiry - Fanam Group",
+  description: "Submit an inquiry or book an investment with Fanam Group.",
 });
 
 export default async function InquiryPage() {
