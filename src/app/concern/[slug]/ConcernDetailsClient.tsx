@@ -33,7 +33,7 @@ export default function ConcernDetailsClient({ concern }: { concern: ConcernType
             className="max-w-4xl"
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white mb-6">
-              <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-[#f9c602] animate-pulse" />
               <span className="text-sm font-medium tracking-wide">Business Concern</span>
             </div>
             
@@ -50,7 +50,7 @@ export default function ConcernDetailsClient({ concern }: { concern: ConcernType
                 href={concern.websiteUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white px-8 py-4 rounded-full font-bold transition-colors shadow-lg"
+                className="inline-flex items-center gap-2 bg-[#f9c602]  text-white px-8 py-4 rounded-full font-bold transition-colors shadow-lg"
               >
                 Visit Official Website
                 <ExternalLink size={20} />
@@ -75,7 +75,7 @@ export default function ConcernDetailsClient({ concern }: { concern: ConcernType
               <h2 className="text-3xl font-bold mb-6 text-gray-900">
                 Overview
               </h2>
-              <div className="w-16 h-1 bg-amber-500 mb-6" />
+              <div className="w-16 h-1 bg-[#f9c602] mb-6" />
               <p className="text-lg text-gray-600 leading-relaxed whitespace-pre-wrap">
                 {concern.longDescription}
               </p>
@@ -92,7 +92,7 @@ export default function ConcernDetailsClient({ concern }: { concern: ConcernType
                 <h2 className="text-3xl font-bold mb-6 text-gray-900">
                   Core Operations
                 </h2>
-                <div className="w-16 h-1 bg-amber-500 mb-8" />
+                <div className="w-16 h-1 bg-[#f9c602] mb-8" />
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {concern.features.map((feature, idx) => (
@@ -100,8 +100,8 @@ export default function ConcernDetailsClient({ concern }: { concern: ConcernType
                       key={idx}
                       className="p-8 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow group"
                     >
-                      <div className="w-12 h-12 bg-amber-50 rounded-full flex items-center justify-center mb-6">
-                        <CheckCircle2 className="w-6 h-6 text-amber-600" />
+                      <div className="w-12 h-12 bg-[#f9c602]/10 rounded-full flex items-center justify-center mb-6">
+                        <CheckCircle2 className="w-6 h-6 text-[#f9c602]" />
                       </div>
                       <h3 className="text-xl font-bold text-gray-900 mb-2">{feature.title}</h3>
                       <p className="text-gray-600">{feature.description}</p>
@@ -127,13 +127,13 @@ export default function ConcernDetailsClient({ concern }: { concern: ConcernType
                         {project.name}
                       </h2>
                       {project.progress !== undefined && (
-                        <span className="px-4 py-1.5 rounded-full bg-amber-50 text-amber-600 font-bold border border-amber-100 flex items-center gap-2 shrink-0">
-                          <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                        <span className="px-4 py-1.5 rounded-full bg-[#f9c602]/10 text-[#f9c602] font-bold border border-[#f9c602]/20 flex items-center gap-2 shrink-0">
+                          <span className="w-2 h-2 rounded-full bg-[#f9c602] animate-pulse" />
                           {project.progress}% Complete
                         </span>
                       )}
                     </div>
-                    <div className="w-16 h-1 bg-amber-500 mb-8" />
+                    <div className="w-16 h-1 bg-[#f9c602] mb-8" />
                     
                     <p className="text-lg text-gray-600 leading-relaxed mb-10">
                       {project.overview}
@@ -147,7 +147,7 @@ export default function ConcernDetailsClient({ concern }: { concern: ConcernType
                             key={idx}
                             className="flex items-center gap-3 p-4 rounded-xl bg-white border border-gray-100 shadow-sm"
                           >
-                            <CheckCircle2 className="w-5 h-5 text-amber-500" />
+                            <CheckCircle2 className="w-5 h-5 text-[#f9c602]" />
                             <span className="font-bold text-gray-700">{feature}</span>
                           </div>
                         ))}

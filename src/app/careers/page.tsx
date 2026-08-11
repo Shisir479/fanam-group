@@ -72,7 +72,7 @@ export default async function CareersPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Why Fanam Group?</h2>
-            <div className="w-16 h-1 bg-amber-500 mx-auto" />
+            <div className="w-16 h-1 bg-[#f9c602] mx-auto" />
           </div>
           <div className="grid md:grid-cols-3 gap-10">
             {[
@@ -81,8 +81,8 @@ export default async function CareersPage() {
               { title: "Impactful Work", desc: "Contribute to projects that directly shape the nation's infrastructure and culture." }
             ].map((perk, i) => (
               <div key={i} className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow">
-                <div className="w-16 h-16 mx-auto bg-amber-50 rounded-full flex items-center justify-center mb-6">
-                  <CheckCircle2 className="w-8 h-8 text-amber-600" />
+                <div className="w-16 h-16 mx-auto bg-[#f9c602]/10 rounded-full flex items-center justify-center mb-6">
+                  <CheckCircle2 className="w-8 h-8 text-[#f9c602]" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">{perk.title}</h3>
                 <p className="text-gray-600">{perk.desc}</p>

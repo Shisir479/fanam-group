@@ -54,11 +54,10 @@ export function AdminSidebar() {
 
     { name: "Core Management", isHeader: true },
     { name: "Concerns", icon: Building, href: "/admin/concerns" },
-    { name: "Projects", icon: Building, href: "/admin/project" },
     { name: "Leadership Team", icon: Users, href: "/admin/team" },
     { name: "Inquiries", icon: Shield, href: "/admin/investment-bookings" },
     { name: "Contacts", icon: MessageSquare, href: "/admin/contacts" },
-    { name: "Blog & News", icon: FileText, href: "/admin/blog" },
+    { name: "News & Events", icon: Newspaper, href: "/admin/news-events" },
     { name: "Testimonials", icon: Star, href: "/admin/testimonials" },
     { name: "Gallery", icon: ImageIcon, href: "/admin/gallery" },
 
@@ -68,7 +67,6 @@ export function AdminSidebar() {
     { name: "Company Milestones", icon: Flag, href: "/admin/milestones" },
     { name: "Awards & Certs", icon: Award, href: "/admin/awards" },
     { name: "Business Partners", icon: Hexagon, href: "/admin/brands" },
-    { name: "Events", icon: Calendar, href: "/admin/events" },
     { name: "CSR Activities", icon: Heart, href: "/admin/csr" },
     { name: "Careers", icon: Briefcase, href: "/admin/careers" },
     { name: "Media Coverage", icon: Newspaper, href: "/admin/press" },
@@ -102,8 +100,8 @@ export function AdminSidebar() {
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center shadow-lg overflow-hidden">
             <Image
-              src="/company_logo/bonedia.png"
-              alt="Bonedi Logo"
+              src="/company_logo/fanam.png"
+              alt="Fanam Logo"
               width={32}
               height={32}
               className="object-cover h-full w-full p-1"
@@ -111,7 +109,7 @@ export function AdminSidebar() {
           </div>
           <div>
             <h1 className="text-[13px] font-bold text-white leading-tight tracking-wide">
-              Bonedi Admin
+              Fanam Admin
             </h1>
             <p className="text-[10px] text-gray-400">Dashboard</p>
           </div>

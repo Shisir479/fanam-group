@@ -127,12 +127,12 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
               </Link>
 
               <Link
-                href="/events"
+                href="/news-events"
                 className="relative group h-full flex items-center whitespace-nowrap"
               >
                 News & Events
                 <span
-                  className={`absolute left-0 bottom-0 w-full h-[4px] ${linkLineColor} origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/events") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                  className={`absolute left-0 bottom-0 w-full h-[4px] ${linkLineColor} origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/news-events") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
                 ></span>
               </Link>
 
@@ -245,7 +245,7 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
               Concern
             </Link>
 
-            <Link href="/events" onClick={() => setIsMobileMenuOpen(false)}>
+            <Link href="/news-events" onClick={() => setIsMobileMenuOpen(false)}>
               News & Events
             </Link>
 

@@ -56,7 +56,7 @@ export default function AdminLogin() {
             >
               <Image
                 src="/company_logo/logo-white.63532709.svg"
-                alt="Bonedi Logo"
+                alt="Fanam Logo"
                 width={140}
                 height={45}
                 className="w-[140px] h-auto drop-shadow-2xl"

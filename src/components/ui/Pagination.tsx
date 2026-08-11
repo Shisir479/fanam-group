@@ -24,14 +24,14 @@ export function Pagination({
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className={`w-8 h-8 flex items-center justify-center rounded-lg transition-colors ${
+        className={`w-8 h-8 flex items-center justify-center rounded-lg transition-all duration-300 ${
           currentPage === 1
             ? isDark
-              ? "text-gray-600 cursor-not-allowed"
-              : "text-gray-300 cursor-not-allowed"
+              ? "bg-white/5 text-gray-600 border border-white/5 cursor-not-allowed backdrop-blur-md"
+              : "bg-gray-100 text-gray-300 cursor-not-allowed"
             : isDark
-              ? "text-gray-400 hover:bg-white/10 hover:text-white"
-              : "text-gray-600 hover:bg-gray-100 hover:text-brand-blue"
+              ? "bg-white/10 text-gray-300 border border-white/10 hover:bg-white/20 hover:border-white/20 hover:text-white backdrop-blur-md shadow-lg"
+              : "bg-white text-gray-600 hover:bg-gray-50 hover:text-brand-blue shadow-sm border border-gray-200"
         }`}
       >
         <ChevronLeft className="w-4 h-4" />
@@ -41,14 +41,14 @@ export function Pagination({
         <button
           key={i}
           onClick={() => onPageChange(i + 1)}
-          className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${
+          className={`w-8 h-8 rounded-lg text-sm font-medium transition-all duration-300 ${
             currentPage === i + 1
               ? isDark
-                ? "bg-purple-600 text-white"
-                : "bg-brand-blue text-white"
+                ? "bg-white/20 text-white border border-white/30 backdrop-blur-md shadow-lg"
+                : "bg-brand-blue text-white shadow-md"
               : isDark
-                ? "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
-                : "bg-gray-50 text-gray-600 border border-gray-200 hover:bg-gray-100 hover:text-brand-blue"
+                ? "bg-white/5 text-gray-400 border border-white/5 hover:bg-white/10 hover:border-white/10 hover:text-white backdrop-blur-md"
+                : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 hover:text-brand-blue shadow-sm"
           }`}
         >
           {i + 1}
@@ -58,14 +58,14 @@ export function Pagination({
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className={`w-8 h-8 flex items-center justify-center rounded-lg transition-colors ${
+        className={`w-8 h-8 flex items-center justify-center rounded-lg transition-all duration-300 ${
           currentPage === totalPages
             ? isDark
-              ? "text-gray-600 cursor-not-allowed"
-              : "text-gray-300 cursor-not-allowed"
+              ? "bg-white/5 text-gray-600 border border-white/5 cursor-not-allowed backdrop-blur-md"
+              : "bg-gray-100 text-gray-300 cursor-not-allowed"
             : isDark
-              ? "text-gray-400 hover:bg-white/10 hover:text-white"
-              : "text-gray-600 hover:bg-gray-100 hover:text-brand-blue"
+              ? "bg-white/10 text-gray-300 border border-white/10 hover:bg-white/20 hover:border-white/20 hover:text-white backdrop-blur-md shadow-lg"
+              : "bg-white text-gray-600 hover:bg-gray-50 hover:text-brand-blue shadow-sm border border-gray-200"
         }`}
       >
         <ChevronRight className="w-4 h-4" />

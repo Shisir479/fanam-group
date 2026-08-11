@@ -17,7 +17,7 @@ export default function ConcernsPortfolioClient({ concerns }: { concerns: Concer
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-4xl md:text-6xl font-bold tracking-tight mb-6 text-gray-900"
         >
-          Our <span className="text-amber-500 font-light italic">Ecosystem</span>
+          Our <span className="text-[#f9c602] font-light italic">Ecosystem</span>
         </motion.h1>
         
         <motion.p
@@ -76,8 +76,8 @@ export default function ConcernsPortfolioClient({ concerns }: { concerns: Concer
                   className="w-full md:w-1/2 flex flex-col justify-center"
                 >
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="h-[2px] w-8 bg-amber-500" />
-                    <span className="text-amber-500 font-semibold tracking-widest uppercase text-xs">
+                    <div className="h-[2px] w-8 bg-[#f9c602]" />
+                    <span className="text-[#f9c602] font-semibold tracking-widest uppercase text-xs">
                       0{index + 1} &mdash; {concern.slug.replace('-', ' ')}
                     </span>
                   </div>
@@ -93,7 +93,7 @@ export default function ConcernsPortfolioClient({ concerns }: { concerns: Concer
                   <div className="flex flex-col sm:flex-row gap-4">
                     <Link
                       href={`/concern/${concern.slug}`}
-                      className="group flex items-center justify-center gap-2 bg-gray-900 hover:bg-amber-500 text-white px-6 py-3 rounded-full font-medium text-sm tracking-wide transition-all duration-300"
+                      className="group flex items-center justify-center gap-2 bg-gray-900 hover:bg-[#f9c602] text-white px-6 py-3 rounded-full font-medium text-sm tracking-wide transition-all duration-300"
                     >
                       Discover More
                       <ArrowRight size={18} className="transform group-hover:translate-x-1 transition-transform" />
