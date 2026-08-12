@@ -5,7 +5,11 @@ import NewsForm from "@/components/admin/news/NewsForm";
 import EventForm from "@/components/admin/events/EventForm";
 import { FileText, Calendar } from "lucide-react";
 
-export default function CreateNewsEventsClient({ initialType }: { initialType: "news" | "events" }) {
+export default function CreateNewsEventsClient({
+  initialType,
+}: {
+  initialType: "news" | "events";
+}) {
   const [activeTab, setActiveTab] = useState<"news" | "events">(initialType);
 
   return (

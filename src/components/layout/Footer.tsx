@@ -96,10 +96,12 @@ export function Footer({ brandingData }: { brandingData?: any }) {
       <div className="relative z-10 container mx-auto px-6 md:px-12 lg:px-16 pt-24 pb-12">
         {/* Main Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
-          
           {/* Col 1 — Brand & Mission (4 cols) */}
           <div className="lg:col-span-4">
-            <Link href="/" className="inline-block mb-8 transition-transform hover:opacity-90">
+            <Link
+              href="/"
+              className="inline-block mb-8 transition-transform hover:opacity-90"
+            >
               <Image
                 src={logo?.url || "/company_logo/bonedia.png"}
                 alt="Fanam Group Logo"
@@ -110,7 +112,9 @@ export function Footer({ brandingData }: { brandingData?: any }) {
             </Link>
 
             <p className="text-gray-400 text-sm leading-relaxed mb-8 pr-4">
-              Pioneering excellence in real estate, corporate investments, and luxury living. We build more than structures; we forge legacies across Bangladesh.
+              Pioneering excellence in real estate, corporate investments, and
+              luxury living. We build more than structures; we forge legacies
+              across Bangladesh.
             </p>
 
             <div className="space-y-4 text-sm text-gray-300">
@@ -119,19 +123,23 @@ export function Footer({ brandingData }: { brandingData?: any }) {
                   <Phone className="w-4 h-4" />
                 </span>
                 <div className="flex flex-col pt-1">
-                  <span className="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">Hotline</span>
+                  <span className="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">
+                    Hotline
+                  </span>
                   <span className="text-white font-medium text-base tracking-wide">
                     {contact?.phone || "+880 1331 662255"}
                   </span>
                 </div>
               </div>
-              
+
               <div className="flex items-start gap-4 group">
                 <span className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-yellow-500 group-hover:border-yellow-500 group-hover:text-black transition-all duration-300">
                   <Mail className="w-4 h-4" />
                 </span>
                 <div className="flex flex-col pt-1">
-                  <span className="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">Email Inquiry</span>
+                  <span className="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">
+                    Email Inquiry
+                  </span>
                   <span className="text-white font-medium text-base tracking-wide">
                     {contact?.email || "info@fanamgroup.com"}
                   </span>
@@ -154,7 +162,9 @@ export function Footer({ brandingData }: { brandingData?: any }) {
                     className="group inline-flex items-center text-gray-400 hover:text-white text-sm transition-all duration-300"
                   >
                     <span className="w-0 group-hover:w-4 h-[1px] bg-yellow-500 mr-0 group-hover:mr-3 transition-all duration-300 ease-out opacity-0 group-hover:opacity-100" />
-                    <span className="transform group-hover:translate-x-1 transition-transform duration-300">{link.label}</span>
+                    <span className="transform group-hover:translate-x-1 transition-transform duration-300">
+                      {link.label}
+                    </span>
                   </Link>
                 </li>
               ))}
@@ -175,7 +185,9 @@ export function Footer({ brandingData }: { brandingData?: any }) {
                     className="group inline-flex items-center text-gray-400 hover:text-white text-sm transition-all duration-300"
                   >
                     <span className="w-0 group-hover:w-4 h-[1px] bg-yellow-500 mr-0 group-hover:mr-3 transition-all duration-300 ease-out opacity-0 group-hover:opacity-100" />
-                    <span className="transform group-hover:translate-x-1 transition-transform duration-300">{link.label}</span>
+                    <span className="transform group-hover:translate-x-1 transition-transform duration-300">
+                      {link.label}
+                    </span>
                   </Link>
                 </li>
               ))}
@@ -189,17 +201,21 @@ export function Footer({ brandingData }: { brandingData?: any }) {
               Stay Connected
             </h4>
             <p className="text-gray-400 text-sm mb-6 leading-relaxed">
-              Subscribe to our newsletter for exclusive updates, project launches, and market insights.
+              Subscribe to our newsletter for exclusive updates, project
+              launches, and market insights.
             </p>
-            
-            <form className="relative mb-10 group" onSubmit={(e) => e.preventDefault()}>
-              <input 
-                type="email" 
-                placeholder="Enter your email address" 
+
+            <form
+              className="relative mb-10 group"
+              onSubmit={(e) => e.preventDefault()}
+            >
+              <input
+                type="email"
+                placeholder="Enter your email address"
                 className="w-full bg-white/5 border border-white/10 rounded-full py-4 pl-6 pr-14 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-yellow-500/50 focus:bg-white/10 transition-all duration-300"
               />
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 className="absolute right-2 top-2 bottom-2 w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center text-black hover:bg-yellow-400 hover:scale-105 transition-all duration-300 shadow-[0_0_15px_rgba(234,179,8,0.3)]"
               >
                 <ArrowRight className="w-4 h-4" />
@@ -227,11 +243,17 @@ export function Footer({ brandingData }: { brandingData?: any }) {
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs tracking-wide text-gray-500">
           <p>
             &copy; {new Date().getFullYear()}{" "}
-            <span className="text-gray-300">{brandingData?.siteName || "Fanam Group"}</span>. All Rights Reserved.
+            <span className="text-gray-300">
+              {brandingData?.siteName || "Fanam Group"}
+            </span>
+            . All Rights Reserved.
           </p>
           <div className="flex items-center gap-1">
             <span>Designed & Developed by</span>
-            <a href="#" className="text-gray-300 font-semibold hover:text-yellow-500 transition-colors ml-1">
+            <a
+              href="#"
+              className="text-gray-300 font-semibold hover:text-yellow-500 transition-colors ml-1"
+            >
               Tech Solutions Plex Ltd.
             </a>
           </div>

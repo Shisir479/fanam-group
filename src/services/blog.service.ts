@@ -8,16 +8,16 @@ export interface Blog {
   slug: string;
   excerpt: string;
   description: string;
+  category?: any;
   cover?: {
     _id: string;
     url: string;
   };
-  blogCategory?: {
+  tags: {
     _id: string;
     name: string;
-    slug?: string;
-  };
-  tags: string[];
+    slug: string;
+  }[];
   status: "draft" | "active" | "inactive";
   publishedAt?: string | null;
   metaTitle: string;

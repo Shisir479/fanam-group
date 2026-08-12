@@ -16,6 +16,8 @@ export interface TestimonialType {
     _id: string;
     url: string;
   };
+  metaTitle?: string;
+  metaDescription?: string;
   createdAt?: string;
   updatedAt?: string;
 }

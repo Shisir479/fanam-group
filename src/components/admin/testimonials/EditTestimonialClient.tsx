@@ -1,63 +1,39 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   updateTestimonialByIdAdmin,
   getTestimonialByIdAdmin,
-  TestimonialType,
 } from "@/services/testimonial.service";
-import {
-  ArrowLeft,
-  Upload,
-  X,
-  Save,
-  Image as ImageIcon,
-  Loader2,
-} from "lucide-react";
 import toast from "react-hot-toast";
-import Link from "next/link";
-import Image from "next/image";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { useImageUpload } from "@/hooks/useImageUpload";
+import DynamicAdminForm, {
+  FormField,
+} from "@/components/admin/ui/DynamicAdminForm";
 
 export default function EditTestimonialClient({ id }: { id: string }) {
   const router = useRouter();
-  const { uploadSingle } = useImageUpload();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const imageInputRef = useRef<HTMLInputElement>(null);
-
-  const [formData, setFormData] = useState<Partial<TestimonialType>>({
-    title: "",
-    name: "",
-    designation: "",
-    company: "",
-    review: "",
-    rating: 5,
-    featured: false,
-    sortOrder: 0,
-    status: "active",
-  });
-
-  const [imageFile, setImageFile] = useState<File | null>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [initialValues, setInitialValues] = useState<Record<
+    string,
+    any
+  > | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchTestimonial = async () => {
       try {
         const res = await getTestimonialByIdAdmin(id);
         if (res.success && res.data) {
-          setFormData(res.data);
-          if (res.data.image?.url) {
-            setImagePreview(res.data.image.url);
-          }
+          const data = res.data;
+          setInitialValues({
+            ...data,
+            rating: String(data.rating || 5),
+            sortOrder: String(data.sortOrder || 0),
+            image: data.image?.url || "",
+            imageId: data.image?._id || "",
+            metaTitle: data.metaTitle || "",
+            metaDescription: data.metaDescription || "",
+          });
         } else {
           toast.error("Failed to load testimonial");
           router.push("/admin/testimonials");
@@ -66,291 +42,144 @@ export default function EditTestimonialClient({ id }: { id: string }) {
         toast.error(error.message || "Failed to load testimonial");
         router.push("/admin/testimonials");
       } finally {
-        setIsLoading(false);
+        setLoading(false);
       }
     };
     if (id) fetchTestimonial();
   }, [id, router]);
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      if (file.size > 2 * 1024 * 1024) {
-        toast.error("Image size must be less than 2MB");
-        return;
-      }
-      setImageFile(file);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  const fields: FormField[] = [
+    {
+      name: "title",
+      label: "Title",
+      type: "text",
+      placeholder: "e.g., Amazing Service!",
+      required: true,
+    },
+    {
+      name: "name",
+      label: "Client Name",
+      type: "text",
+      placeholder: "John Doe",
+      required: true,
+    },
+    {
+      name: "designation",
+      label: "Designation",
+      type: "text",
+      placeholder: "CEO",
+    },
+    {
+      name: "company",
+      label: "Company",
+      type: "text",
+      placeholder: "Tech Corp",
+    },
+    {
+      name: "review",
+      label: "Review",
+      type: "textarea",
+      placeholder: "Write the testimonial here...",
+      required: true,
+    },
+    {
+      name: "image",
+      label: "Client Image",
+      type: "image",
+      required: true,
+      sidebar: true,
+      imageIdKey: "imageId",
+    },
+    {
+      name: "rating",
+      label: "Rating",
+      type: "select",
+      options: [
+        { label: "5 Stars", value: "5" },
+        { label: "4 Stars", value: "4" },
+        { label: "3 Stars", value: "3" },
+        { label: "2 Stars", value: "2" },
+        { label: "1 Star", value: "1" },
+      ],
+      sidebar: true,
+    },
+    {
+      name: "sortOrder",
+      label: "Sort Order",
+      type: "text",
+      placeholder: "0",
+      sidebar: true,
+    },
+    {
+      name: "status",
+      label: "Status",
+      type: "select",
+      options: [
+        { label: "Active", value: "active" },
+        { label: "Inactive", value: "inactive" },
+      ],
+      sidebar: true,
+    },
+    {
+      name: "featured",
+      label: "Featured",
+      type: "checkbox",
+      sidebar: true,
+    },
+    {
+      name: "metaTitle",
+      label: "Meta Title (SEO)",
+      type: "text",
+      placeholder: "SEO Title...",
+      sidebar: true,
+    },
+    {
+      name: "metaDescription",
+      label: "Meta Description (SEO)",
+      type: "textarea",
+      placeholder: "SEO Description...",
+      sidebar: true,
+    },
+  ];
 
-  const removeImage = () => {
-    setImageFile(null);
-    setImagePreview(null);
-    if (imageInputRef.current) imageInputRef.current.value = "";
-  };
-
-  const handleSubmit = async (e?: React.FormEvent) => {
-    if (e) e.preventDefault();
-
-    if (!formData.title || !formData.name || !formData.review) {
-      toast.error("Please fill in all required fields (Title, Name, Review)");
-      return;
-    }
-
-    if (!imagePreview && !imageFile) {
-      toast.error("Author image is required");
-      return;
-    }
-
-    setIsSubmitting(true);
-    const toastId = toast.loading("Updating testimonial...");
-
+  const handleSubmit = async (data: Record<string, any>) => {
     try {
-      let finalImage = formData.image;
-
-      if (imageFile) {
-        const uploadedImage = await uploadSingle(imageFile, true);
-        if (!uploadedImage) {
-          throw new Error("Failed to upload new image");
-        }
-        finalImage = {
-          _id: uploadedImage._id || uploadedImage.url,
-          url: uploadedImage.url,
-        };
-      }
-
       const finalData = {
-        ...formData,
-        image: finalImage,
+        ...data,
+        rating: Number(data.rating),
+        sortOrder: Number(data.sortOrder) || 0,
+        image: {
+          _id: data.imageId || data.image,
+          url: data.image,
+        },
       };
 
-      const res = await updateTestimonialByIdAdmin(id, finalData);
-
-      if (res.success) {
-        toast.success("Testimonial updated successfully", { id: toastId });
-        router.push("/admin/testimonials");
-        router.refresh();
-      } else {
-        throw new Error(res.message || "Failed to update testimonial");
-      }
+      await updateTestimonialByIdAdmin(id, finalData);
+      toast.success("Testimonial updated successfully");
+      router.push("/admin/testimonials");
+      router.refresh();
     } catch (error: any) {
-      toast.error(error.message || "An error occurred", { id: toastId });
-    } finally {
-      setIsSubmitting(false);
+      toast.error(error?.message || "Failed to update testimonial");
+      throw error;
     }
   };
 
-  if (isLoading) {
-    return <div className="text-white text-center mt-20">Loading...</div>;
+  if (loading || !initialValues) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+      </div>
+    );
   }
 
   return (
-    <div className="w-full max-w-5xl mx-auto pb-24">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-8">
-        <div className="flex items-center gap-4">
-          <Link
-            href="/admin/testimonials"
-            className="p-2 glass-panel text-gray-400 hover:text-white transition-colors"
-          >
-            <ArrowLeft className="w-5 h-5" />
-          </Link>
-          <div>
-            <h1 className="text-2xl font-bold text-white tracking-wide">
-              Edit Testimonial
-            </h1>
-            <p className="text-sm text-gray-400 mt-1">
-              Update client review information.
-            </p>
-          </div>
-        </div>
-        <button
-          type="submit"
-          form="testimonial-form"
-          disabled={isSubmitting}
-          className="glass-btn flex items-center gap-2"
-        >
-          {isSubmitting ? (
-            <Loader2 className="w-4 h-4 animate-spin" />
-          ) : (
-            <Save className="w-4 h-4" />
-          )}
-          Update Testimonial
-        </button>
-      </div>
-
-      <form id="testimonial-form" onSubmit={handleSubmit} className="space-y-6">
-        {/* Basic Info */}
-        <div className="glass-panel p-6 space-y-6">
-          <h2 className="text-lg font-semibold text-white border-b border-white/10 pb-2">
-            Review Information
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="md:col-span-2">
-              <label className="text-sm font-semibold text-gray-200 block mb-1">
-                Title / Headline *
-              </label>
-              <input
-                type="text"
-                required
-                value={formData.title}
-                onChange={(e) =>
-                  setFormData({ ...formData, title: e.target.value })
-                }
-                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
-              />
-            </div>
-
-            <div className="md:col-span-2">
-              <label className="text-sm font-semibold text-gray-200 block mb-1">
-                Review Content *
-              </label>
-              <textarea
-                required
-                value={formData.review}
-                onChange={(e) =>
-                  setFormData({ ...formData, review: e.target.value })
-                }
-                rows={4}
-                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors resize-none"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="glass-panel p-6 space-y-6">
-          <h2 className="text-lg font-semibold text-white border-b border-white/10 pb-2">
-            Author Information
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="text-sm font-semibold text-gray-200 block mb-1">
-                Author Name *
-              </label>
-              <input
-                type="text"
-                required
-                value={formData.name}
-                onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
-                }
-                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
-              />
-            </div>
-
-            <div>
-              <label className="text-sm font-semibold text-gray-200 block mb-1">
-                Designation
-              </label>
-              <input
-                type="text"
-                value={formData.designation}
-                onChange={(e) =>
-                  setFormData({ ...formData, designation: e.target.value })
-                }
-                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
-              />
-            </div>
-
-            <div>
-              <label className="text-sm font-semibold text-gray-200 block mb-1">
-                Company (Optional)
-              </label>
-              <input
-                type="text"
-                value={formData.company}
-                onChange={(e) =>
-                  setFormData({ ...formData, company: e.target.value })
-                }
-                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
-              />
-            </div>
-
-            <div>
-              <label className="text-sm font-semibold text-gray-200 block mb-1">
-                Rating
-              </label>
-              <Select
-                value={formData.rating?.toString()}
-                onValueChange={(val) => {
-                  if (val) setFormData({ ...formData, rating: parseInt(val) });
-                }}
-              >
-                <SelectTrigger className="w-full h-10 bg-white/5 border-white/10 text-white rounded-xl focus:ring-purple-500">
-                  <SelectValue placeholder="Select Rating" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="5">5 Stars</SelectItem>
-                  <SelectItem value="4">4 Stars</SelectItem>
-                  <SelectItem value="3">3 Stars</SelectItem>
-                  <SelectItem value="2">2 Stars</SelectItem>
-                  <SelectItem value="1">1 Star</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="md:col-span-2">
-              <label className="text-sm font-semibold text-gray-200 block mb-2">
-                Author Image *
-              </label>
-              <div className="flex items-start gap-6">
-                <div
-                  onClick={() => imageInputRef.current?.click()}
-                  className={`relative w-40 h-40 rounded-xl border-2 border-dashed flex flex-col items-center justify-center cursor-pointer transition-all ${
-                    imagePreview
-                      ? "border-transparent bg-white/5"
-                      : "border-white/10 hover:border-purple-500 hover:bg-white/10 bg-white/5"
-                  }`}
-                >
-                  {imagePreview ? (
-                    <>
-                      <Image
-                        src={imagePreview}
-                        alt="Preview"
-                        fill
-                        className="object-cover rounded-xl"
-                      />
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          removeImage();
-                        }}
-                        className="absolute -top-3 -right-3 p-1.5 bg-red-500 hover:bg-red-600 text-white rounded-full transition-colors shadow-lg"
-                      >
-                        <X className="w-4 h-4" />
-                      </button>
-                    </>
-                  ) : (
-                    <div className="flex flex-col items-center text-gray-400 gap-2">
-                      <ImageIcon className="w-8 h-8" />
-                      <span className="text-xs font-medium text-center px-4">
-                        Click to upload
-                        <br />
-                        square image (1:1)
-                      </span>
-                    </div>
-                  )}
-                </div>
-                <input
-                  ref={imageInputRef}
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  className="hidden"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
+    <DynamicAdminForm
+      title="Edit Testimonial"
+      fields={fields}
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+      submitLabel="Update Testimonial"
+      backHref="/admin/testimonials"
+    />
   );
 }

@@ -26,17 +26,22 @@ export default async function CareersPage() {
       <section className="bg-white pt-20 pb-12 overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
-            
             {/* Left Content */}
             <div className="lg:w-1/2 flex flex-col items-start text-left">
               <h1 className="text-4xl lg:text-6xl font-semibold text-gray-900 leading-[1.1] mb-5 tracking-tight">
                 Be Yourself <br /> And Join Us Today.
               </h1>
               <p className="text-gray-500 text-base lg:text-lg leading-relaxed max-w-lg mb-8">
-                From meaningful products to innovative and long-lasting companies, we strongly believe that nothing significant was ever achieved by oneself — create the future of commerce with us!
+                From meaningful products to innovative and long-lasting
+                companies, we strongly believe that nothing significant was ever
+                achieved by oneself — create the future of commerce with us!
               </p>
-              <a href="#openings" className="inline-flex items-center justify-center gap-3 bg-gray-900 text-white px-7 py-3.5 rounded-full font-bold text-sm tracking-wide hover:bg-gray-800 transition-colors shadow-lg shadow-gray-900/20">
-                <span className="w-1.5 h-1.5 rounded-full bg-white"></span> SEE OPEN ROLES
+              <a
+                href="#openings"
+                className="inline-flex items-center justify-center gap-3 bg-gray-900 text-white px-7 py-3.5 rounded-full font-bold text-sm tracking-wide hover:bg-gray-800 transition-colors shadow-lg shadow-gray-900/20"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-white"></span> SEE
+                OPEN ROLES
               </a>
             </div>
 
@@ -44,25 +49,44 @@ export default async function CareersPage() {
             <div className="lg:w-1/2 relative h-[400px] lg:h-[500px] w-full">
               {/* Image 1: Top Left - Horizontal Oval */}
               <div className="absolute top-[2%] left-[2%] w-[62%] h-[40%] rounded-[100px] md:rounded-[120px] overflow-hidden z-10">
-                <Image src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800&auto=format&fit=crop" alt="Team member" fill className="object-cover object-top" />
+                <Image
+                  src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800&auto=format&fit=crop"
+                  alt="Team member"
+                  fill
+                  className="object-cover object-top"
+                />
               </div>
-              
+
               {/* Image 2: Bottom Left - Circle */}
               <div className="absolute bottom-[8%] left-[12%] w-[26%] aspect-square rounded-full overflow-hidden z-20">
-                <Image src="https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?q=80&w=400&auto=format&fit=crop" alt="Team member" fill className="object-cover" />
+                <Image
+                  src="https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?q=80&w=400&auto=format&fit=crop"
+                  alt="Team member"
+                  fill
+                  className="object-cover"
+                />
               </div>
 
               {/* Image 3: Bottom Middle - Vertical Oval */}
               <div className="absolute bottom-[4%] left-[41%] w-[22%] h-[48%] rounded-full overflow-hidden z-30">
-                <Image src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=400&auto=format&fit=crop" alt="Team member" fill className="object-cover" />
+                <Image
+                  src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=400&auto=format&fit=crop"
+                  alt="Team member"
+                  fill
+                  className="object-cover"
+                />
               </div>
 
               {/* Image 4: Right - Large Pill */}
               <div className="absolute top-[3%] right-[2%] w-[32%] h-[94%] rounded-full overflow-hidden z-10">
-                <Image src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=800&auto=format&fit=crop" alt="Team member" fill className="object-cover object-center" />
+                <Image
+                  src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=800&auto=format&fit=crop"
+                  alt="Team member"
+                  fill
+                  className="object-cover object-center"
+                />
               </div>
             </div>
-            
           </div>
         </div>
       </section>
@@ -71,20 +95,35 @@ export default async function CareersPage() {
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Why Fanam Group?</h2>
-            <div className="w-16 h-1 bg-[#f9c602] mx-auto" />
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Why Fanam Group?
+            </h2>
           </div>
           <div className="grid md:grid-cols-3 gap-10">
             {[
-              { title: "Diverse Opportunities", desc: "Work across dynamic industries from real estate to digital media." },
-              { title: "Growth & Development", desc: "We invest heavily in training and promoting leaders from within." },
-              { title: "Impactful Work", desc: "Contribute to projects that directly shape the nation's infrastructure and culture." }
+              {
+                title: "Diverse Opportunities",
+                desc: "Work across dynamic industries from real estate to digital media.",
+              },
+              {
+                title: "Growth & Development",
+                desc: "We invest heavily in training and promoting leaders from within.",
+              },
+              {
+                title: "Impactful Work",
+                desc: "Contribute to projects that directly shape the nation's infrastructure and culture.",
+              },
             ].map((perk, i) => (
-              <div key={i} className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow">
+              <div
+                key={i}
+                className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow"
+              >
                 <div className="w-16 h-16 mx-auto bg-[#f9c602]/10 rounded-full flex items-center justify-center mb-6">
                   <CheckCircle2 className="w-8 h-8 text-[#f9c602]" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{perk.title}</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">
+                  {perk.title}
+                </h3>
                 <p className="text-gray-600">{perk.desc}</p>
               </div>
             ))}

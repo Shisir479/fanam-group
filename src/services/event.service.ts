@@ -20,7 +20,9 @@ export interface Event {
 
 // ---------------- Admin API ---------------- //
 
-export const getEventsByAdmin = async (params: { page?: number; limit?: number; search?: string } = {}) => {
+export const getEventsByAdmin = async (
+  params: { page?: number; limit?: number; search?: string } = {},
+) => {
   const query = new URLSearchParams();
   if (params.page) query.append("page", params.page.toString());
   if (params.limit) query.append("limit", params.limit.toString());
@@ -67,7 +69,9 @@ export const deleteEventByAdmin = async (id: string) => {
 
 // ---------------- Public API ---------------- //
 
-export const getEventsPublic = async (params: { page?: number; limit?: number; search?: string } = {}) => {
+export const getEventsPublic = async (
+  params: { page?: number; limit?: number; search?: string } = {},
+) => {
   const query = new URLSearchParams();
   if (params.page) query.append("page", params.page.toString());
   if (params.limit) query.append("limit", params.limit.toString());

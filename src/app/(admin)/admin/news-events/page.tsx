@@ -3,7 +3,10 @@ import AdminNewsEventsClient from "@/components/admin/news-events/AdminNewsEvent
 import { getNewsByAdmin, News } from "@/services/news.service";
 import { getEventsByAdmin, Event } from "@/services/event.service";
 
-export const metadata = constructMetadata({ title: "News & Events - Admin Dashboard", noIndex: true });
+export const metadata = constructMetadata({
+  title: "News & Events - Admin Dashboard",
+  noIndex: true,
+});
 
 export default async function AdminNewsEventsPage() {
   let initialNews: News[] = [];
@@ -21,5 +24,10 @@ export default async function AdminNewsEventsPage() {
     console.error("Failed to fetch news/events in SSR", error);
   }
 
-  return <AdminNewsEventsClient initialNews={initialNews} initialEvents={initialEvents} />;
+  return (
+    <AdminNewsEventsClient
+      initialNews={initialNews}
+      initialEvents={initialEvents}
+    />
+  );
 }

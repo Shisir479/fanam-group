@@ -4,7 +4,11 @@ import { constructMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import ConcernDetailsClient from "./ConcernDetailsClient";
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   try {
     const res = await getConcernBySlugPublic(slug);
@@ -16,11 +20,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       });
     }
   } catch (e) {}
-  
+
   return constructMetadata({ title: "Concern Details" });
 }
 
-export default async function ConcernDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function ConcernDetailsPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   let concern = null;
 

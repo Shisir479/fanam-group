@@ -97,11 +97,15 @@ export default async function BlogDetailsPage({
   const post = {
     id: rawPost._id,
     title: rawPost.name,
-    category: rawPost?.blogCategory || "Uncategorized",
-    date: new Date(rawPost.publishedAt || rawPost.createdAt).toLocaleDateString(
-      "en-US",
-      { year: "numeric", month: "long", day: "numeric" },
-    ),
+    category:
+      rawPost.tags && rawPost.tags.length > 0 ? rawPost.tags[0].name : "",
+    date: new Date(
+      rawPost.publishedAt || rawPost.createdAt || Date.now(),
+    ).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }),
     readTime: `${rawPost.readingTime || 5} Min Read`,
     image:
       rawPost.cover?.url ||
@@ -118,113 +122,107 @@ export default async function BlogDetailsPage({
   };
 
   return (
-    <main className="flex min-h-screen flex-col bg-white">
-      {/* Article Hero */}
-      <section className="relative w-full h-[70vh] min-h-[600px] flex items-end pb-20 bg-brand-blue">
-        <div className="absolute inset-0 z-0">
-          <img
-            src={post.image}
-            alt={post.title}
-            className="w-full h-full object-cover opacity-60"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
-        </div>
+    <main className="flex min-h-screen flex-col bg-white pt-24 md:pt-32">
+      {/* Article Header (Title & Meta) */}
+      <section className="container mx-auto px-5 md:px-16 pt-10 pb-12">
+        <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
+          {post?.category && (
+            <span className="inline-block text-[#f9c602] bg-[#f9c602]/10 text-[11px] font-bold uppercase tracking-wider px-4 py-2 rounded-md mb-8">
+              {post.category}
+            </span>
+          )}
 
-        <div className="container mx-auto px-5 md:px-16 relative z-20">
-          <div className="max-w-4xl mx-auto">
-            <BlockReveal color="#ffffff">
-              <span className="inline-block bg-white text-brand-blue text-[10px] font-bold uppercase tracking-[0.2em] px-4 py-2 mb-8">
-                {typeof post?.category === "object"
-                  ? post.category?.name
-                  : post?.category}
-              </span>
-            </BlockReveal>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-[1.2] mb-10 text-center">
+            {post.title}
+          </h1>
 
-            <BlockReveal color="#ffffff" delay={0.2}>
-              <h1 className="text-4xl md:text-5xl lg:text-7xl font-light text-white leading-[1.1] mb-8">
-                {post.title}
-              </h1>
-            </BlockReveal>
-
-            <BlockReveal color="#ffffff" delay={0.4}>
-              <div className="flex flex-wrap items-center gap-6 text-white/80 text-[13px] font-light tracking-wide uppercase">
-                <div className="flex items-center gap-3">
-                  <img
-                    src={post.authorImage}
-                    alt={post.author}
-                    className="w-10 h-10 rounded-full object-cover border border-white/20"
-                  />
-                  <div className="flex flex-col normal-case">
-                    <span className="font-medium text-white">
-                      {post.author}
-                    </span>
-                    <span className="text-[12px] capitalize">
-                      {post.authorRole}
-                    </span>
-                  </div>
-                </div>
-                <div className="h-6 w-[1px] bg-white/20 hidden md:block"></div>
-                <div className="flex items-center gap-2">
-                  <CalendarDays className="w-4 h-4 text-white/60" />
-                  <span>{post.date}</span>
-                </div>
-                <div className="h-6 w-[1px] bg-white/20 hidden md:block"></div>
-                <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-white/60" />
-                  <span>{post.readTime}</span>
-                </div>
+          <div className="flex flex-wrap items-center justify-center gap-6 text-gray-500 text-[13px] font-medium uppercase tracking-wider">
+            <div className="flex items-center gap-3">
+              <img
+                src={post.authorImage}
+                alt={post.author}
+                className="w-10 h-10 rounded-full object-cover border border-gray-200"
+              />
+              <div className="flex flex-col normal-case text-left">
+                <span className="font-bold text-gray-900">{post.author}</span>
+                <span className="text-[12px] capitalize">
+                  {post.authorRole}
+                </span>
               </div>
-            </BlockReveal>
+            </div>
+            <div className="h-6 w-[1px] bg-gray-200 hidden md:block"></div>
+            <div className="flex items-center gap-2">
+              <CalendarDays className="w-4 h-4 text-[#f9c602]" />
+              <span>{post.date}</span>
+            </div>
+            <div className="h-6 w-[1px] bg-gray-200 hidden md:block"></div>
+            <div className="flex items-center gap-2">
+              <Clock className="w-4 h-4 text-[#f9c602]" />
+              <span>{post.readTime}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Article Image */}
+      <section className="container mx-auto px-5 md:px-16 pb-16">
+        <div className="max-w-5xl mx-auto">
+          <div className="w-full aspect-[16/9] md:aspect-[21/9] rounded-3xl overflow-hidden relative shadow-lg">
+            <img
+              src={post.image}
+              alt={post.title}
+              className="w-full h-full object-cover"
+            />
           </div>
         </div>
       </section>
 
       {/* Article Body */}
-      <section className="py-20 md:py-32">
+      <section className="pb-20 md:pb-32">
         <div className="container mx-auto px-5 md:px-16">
-          <div className="max-w-4xl mx-auto relative">
-            {/* Social Share (Floating Left on Desktop, Top on Mobile) */}
-            <div className="flex flex-row md:flex-col gap-4 md:absolute md:-ml-24 mb-12 md:mb-0">
-              <button className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-colors">
+          <div className="max-w-4xl mx-auto flex flex-col items-center">
+            {/* Social Share (Centered Row) */}
+            <div className="flex flex-row justify-center gap-4 mb-12">
+              <button className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-[#f9c602] hover:border-[#f9c602] hover:bg-[#f9c602]/5 transition-colors">
                 <Share2 className="w-4 h-4" />
               </button>
-              <button className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-colors">
+              <button className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-[#f9c602] hover:border-[#f9c602] hover:bg-[#f9c602]/5 transition-colors">
                 <Facebook className="w-4 h-4" />
               </button>
-              <button className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-colors">
+              <button className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-[#f9c602] hover:border-[#f9c602] hover:bg-[#f9c602]/5 transition-colors">
                 <Twitter className="w-4 h-4" />
               </button>
-              <button className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center text-gray-400 hover:text-brand-blue hover:border-brand-blue transition-colors">
+              <button className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-[#f9c602] hover:border-[#f9c602] hover:bg-[#f9c602]/5 transition-colors">
                 <Linkedin className="w-4 h-4" />
               </button>
             </div>
 
             {/* Content */}
-            <article className="prose prose-lg md:prose-xl max-w-none text-gray-500 font-light leading-[2.2] mb-20">
+            <article className="prose prose-lg md:prose-xl max-w-none text-gray-600 font-normal leading-[1.8] mb-20 prose-headings:font-bold prose-headings:text-gray-900 prose-a:text-[#f9c602] prose-strong:text-gray-900 text-center w-full">
               {post.excerpt && (
-                <p className="text-2xl md:text-3xl text-brand-blue font-light leading-relaxed mb-12 border-l-2 border-brand-blue pl-8 py-2">
+                <p className="text-xl md:text-2xl text-gray-800 font-medium leading-relaxed mb-12 border-l-4 border-[#f9c602] pl-6 py-1 bg-gray-50/50 rounded-r-lg">
                   {post.excerpt}
                 </p>
               )}
               <div
                 dangerouslySetInnerHTML={{
-                  __html: post.content.replace(/\n/g, "<br/>"),
+                  __html: (post.content || "").replace(/\n/g, "<br/>"),
                 }}
               />
             </article>
 
             {/* Tags */}
             {post.tags.length > 0 && (
-              <div className="flex items-center gap-3 mb-20 pb-16 border-b border-gray-100">
+              <div className="flex flex-wrap items-center justify-center gap-3 mb-20 pb-16 border-b border-gray-200 w-full">
                 <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mr-2">
                   Tags
                 </span>
-                {post.tags.map((tag: string) => (
+                {post.tags.map((tag: any) => (
                   <span
-                    key={tag}
-                    className="px-5 py-2 border border-gray-100 text-gray-500 text-[13px] hover:border-brand-blue hover:text-brand-blue cursor-pointer transition-colors"
+                    key={tag._id || tag}
+                    className="px-4 py-1.5 rounded-md bg-gray-50 border border-gray-200 text-gray-600 text-[12px] font-semibold hover:border-[#f9c602] hover:text-[#f9c602] cursor-pointer transition-colors"
                   >
-                    {tag}
+                    {tag.name || tag}
                   </span>
                 ))}
               </div>

@@ -2,8 +2,22 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ConcernType, Project, updateConcernBySlugAdmin } from "@/services/concern.service";
-import { ArrowLeft, Save, Plus, Trash2, Edit, X, UploadCloud, Loader2, Image as ImageIcon } from "lucide-react";
+import {
+  ConcernType,
+  Project,
+  updateConcernBySlugAdmin,
+} from "@/services/concern.service";
+import {
+  ArrowLeft,
+  Save,
+  Plus,
+  Trash2,
+  Edit,
+  X,
+  UploadCloud,
+  Loader2,
+  Image as ImageIcon,
+} from "lucide-react";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import Image from "next/image";
@@ -14,16 +28,22 @@ interface ConcernProjectsClientProps {
   initialData: ConcernType;
 }
 
-export default function ConcernProjectsClient({ initialData }: ConcernProjectsClientProps) {
+export default function ConcernProjectsClient({
+  initialData,
+}: ConcernProjectsClientProps) {
   const router = useRouter();
-  const [projects, setProjects] = useState<Project[]>(initialData.projects || []);
+  const [projects, setProjects] = useState<Project[]>(
+    initialData.projects || [],
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
 
-  const [deleteTargetIndex, setDeleteTargetIndex] = useState<number | null>(null);
+  const [deleteTargetIndex, setDeleteTargetIndex] = useState<number | null>(
+    null,
+  );
   const [isDeleting, setIsDeleting] = useState(false);
-  
+
   const { uploadMultiple } = useImageUpload();
 
   // Modal State
@@ -35,7 +55,7 @@ export default function ConcernProjectsClient({ initialData }: ConcernProjectsCl
     features: [],
     galleryUrls: [],
   });
-  
+
   const [newGalleryFiles, setNewGalleryFiles] = useState<File[]>([]);
   const [newGalleryPreviews, setNewGalleryPreviews] = useState<string[]>([]);
 
@@ -98,14 +118,14 @@ export default function ConcernProjectsClient({ initialData }: ConcernProjectsCl
   const handleGalleryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
     if (files.length > 0) {
-      const validFiles = files.filter(f => f.size <= 5 * 1024 * 1024);
+      const validFiles = files.filter((f) => f.size <= 5 * 1024 * 1024);
       if (validFiles.length < files.length) {
         toast.error("Some files exceed the 5MB limit");
       }
-      setNewGalleryFiles(prev => [...prev, ...validFiles]);
-      
-      const previews = validFiles.map(f => URL.createObjectURL(f));
-      setNewGalleryPreviews(prev => [...prev, ...previews]);
+      setNewGalleryFiles((prev) => [...prev, ...validFiles]);
+
+      const previews = validFiles.map((f) => URL.createObjectURL(f));
+      setNewGalleryPreviews((prev) => [...prev, ...previews]);
     }
   };
 
@@ -131,14 +151,16 @@ export default function ConcernProjectsClient({ initialData }: ConcernProjectsCl
 
   const deleteProject = async () => {
     if (deleteTargetIndex === null) return;
-    
+
     setIsDeleting(true);
     const newProjects = [...projects];
     newProjects.splice(deleteTargetIndex, 1);
-    
+
     const loadingToast = toast.loading("Deleting project...");
     try {
-      const res = await updateConcernBySlugAdmin(initialData.slug, { projects: newProjects });
+      const res = await updateConcernBySlugAdmin(initialData.slug, {
+        projects: newProjects,
+      });
       if (res.success) {
         setProjects(newProjects);
         toast.success("Project deleted successfully", { id: loadingToast });
@@ -146,7 +168,9 @@ export default function ConcernProjectsClient({ initialData }: ConcernProjectsCl
         throw new Error(res.message);
       }
     } catch (error: any) {
-      toast.error(error.message || "Failed to delete project", { id: loadingToast });
+      toast.error(error.message || "Failed to delete project", {
+        id: loadingToast,
+      });
     } finally {
       setIsDeleting(false);
       setDeleteTargetIndex(null);
@@ -164,7 +188,7 @@ export default function ConcernProjectsClient({ initialData }: ConcernProjectsCl
 
     try {
       let uploadedGallery = formData.galleryUrls || [];
-      
+
       if (newGalleryFiles.length > 0) {
         toast.loading("Uploading gallery images...", { id: loadingToast });
         const res = await uploadMultiple(newGalleryFiles, true);
@@ -173,7 +197,8 @@ export default function ConcernProjectsClient({ initialData }: ConcernProjectsCl
         }
       }
 
-      const cleanedFeatures = formData.features?.filter(f => f.trim() !== "") || [];
+      const cleanedFeatures =
+        formData.features?.filter((f) => f.trim() !== "") || [];
 
       const newProject: Project = {
         name: formData.name!,
@@ -192,8 +217,10 @@ export default function ConcernProjectsClient({ initialData }: ConcernProjectsCl
       }
 
       toast.loading("Updating concern...", { id: loadingToast });
-      const res = await updateConcernBySlugAdmin(initialData.slug, { projects: newProjectsList });
-      
+      const res = await updateConcernBySlugAdmin(initialData.slug, {
+        projects: newProjectsList,
+      });
+
       if (res.success) {
         setProjects(newProjectsList);
         setIsModalOpen(false);
@@ -201,10 +228,11 @@ export default function ConcernProjectsClient({ initialData }: ConcernProjectsCl
       } else {
         throw new Error(res.message);
       }
-
     } catch (error: any) {
       console.error(error);
-      toast.error(error.message || "Something went wrong", { id: loadingToast });
+      toast.error(error.message || "Something went wrong", {
+        id: loadingToast,
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -222,7 +250,10 @@ export default function ConcernProjectsClient({ initialData }: ConcernProjectsCl
           </Link>
           <div>
             <h2 className="text-2xl font-bold text-white">Manage Projects</h2>
-            <p className="text-sm text-gray-400 mt-1">Concern: <span className="text-white font-medium">{initialData.name}</span></p>
+            <p className="text-sm text-gray-400 mt-1">
+              Concern:{" "}
+              <span className="text-white font-medium">{initialData.name}</span>
+            </p>
           </div>
         </div>
         <button
@@ -237,9 +268,16 @@ export default function ConcernProjectsClient({ initialData }: ConcernProjectsCl
       {projects.length === 0 ? (
         <div className="glass-panel p-12 flex flex-col items-center justify-center text-center">
           <ImageIcon className="w-12 h-12 text-gray-500 mb-4" />
-          <h3 className="text-xl font-bold text-white mb-2">No Projects Found</h3>
-          <p className="text-gray-400 mb-6">This concern currently has no projects associated with it.</p>
-          <button onClick={openAddModal} className="glass-btn flex items-center gap-2">
+          <h3 className="text-xl font-bold text-white mb-2">
+            No Projects Found
+          </h3>
+          <p className="text-gray-400 mb-6">
+            This concern currently has no projects associated with it.
+          </p>
+          <button
+            onClick={openAddModal}
+            className="glass-btn flex items-center gap-2"
+          >
             <Plus className="w-4 h-4" /> Create First Project
           </button>
         </div>
@@ -248,7 +286,9 @@ export default function ConcernProjectsClient({ initialData }: ConcernProjectsCl
           {projects.map((project, index) => (
             <div key={index} className="glass-panel p-6 flex flex-col group">
               <div className="flex justify-between items-start gap-3 mb-4">
-                <h3 className="text-xl font-bold text-white leading-tight break-words">{project.name}</h3>
+                <h3 className="text-xl font-bold text-white leading-tight break-words">
+                  {project.name}
+                </h3>
                 <span className="px-2 py-1 bg-amber-500/20 text-amber-500 text-xs font-bold rounded whitespace-nowrap shrink-0">
                   {project.progress}% Complete
                 </span>
@@ -256,10 +296,14 @@ export default function ConcernProjectsClient({ initialData }: ConcernProjectsCl
               <p className="text-gray-400 text-sm line-clamp-3 mb-6 flex-1">
                 {project.overview}
               </p>
-              
+
               <div className="flex gap-2 text-xs text-gray-500 mb-6">
-                <span className="px-2 py-1 bg-white/5 rounded">{project.galleryUrls?.length || 0} Images</span>
-                <span className="px-2 py-1 bg-white/5 rounded">{project.features?.length || 0} Features</span>
+                <span className="px-2 py-1 bg-white/5 rounded">
+                  {project.galleryUrls?.length || 0} Images
+                </span>
+                <span className="px-2 py-1 bg-white/5 rounded">
+                  {project.features?.length || 0} Features
+                </span>
               </div>
 
               <div className="flex gap-2 pt-4 border-t border-gray-100 mt-auto">
@@ -301,7 +345,9 @@ export default function ConcernProjectsClient({ initialData }: ConcernProjectsCl
             <div className="flex-1 overflow-y-auto p-6 space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-300">Project Name *</label>
+                  <label className="text-sm font-medium text-gray-300">
+                    Project Name *
+                  </label>
                   <input
                     type="text"
                     required
@@ -311,12 +357,16 @@ export default function ConcernProjectsClient({ initialData }: ConcernProjectsCl
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-300">Slug *</label>
+                  <label className="text-sm font-medium text-gray-300">
+                    Slug *
+                  </label>
                   <input
                     type="text"
                     required
                     value={formData.slug}
-                    onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, slug: e.target.value })
+                    }
                     className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
                   />
                 </div>
@@ -324,25 +374,36 @@ export default function ConcernProjectsClient({ initialData }: ConcernProjectsCl
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-300">Progress (%) *</label>
+                  <label className="text-sm font-medium text-gray-300">
+                    Progress (%) *
+                  </label>
                   <input
                     type="number"
                     min="0"
                     max="100"
                     required
                     value={formData.progress}
-                    onChange={(e) => setFormData({ ...formData, progress: Number(e.target.value) })}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        progress: Number(e.target.value),
+                      })
+                    }
                     className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300">Overview *</label>
+                <label className="text-sm font-medium text-gray-300">
+                  Overview *
+                </label>
                 <textarea
                   required
                   value={formData.overview}
-                  onChange={(e) => setFormData({ ...formData, overview: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, overview: e.target.value })
+                  }
                   className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors h-24 resize-none"
                 />
               </div>
@@ -350,8 +411,14 @@ export default function ConcernProjectsClient({ initialData }: ConcernProjectsCl
               {/* Features Array */}
               <div className="space-y-3 bg-white/5 p-4 rounded-xl border border-white/5">
                 <div className="flex items-center justify-between">
-                  <label className="text-sm font-medium text-gray-300">Project Features (Text array)</label>
-                  <button type="button" onClick={addFeature} className="text-xs text-amber-500 hover:text-amber-400 flex items-center gap-1">
+                  <label className="text-sm font-medium text-gray-300">
+                    Project Features (Text array)
+                  </label>
+                  <button
+                    type="button"
+                    onClick={addFeature}
+                    className="text-xs text-amber-500 hover:text-amber-400 flex items-center gap-1"
+                  >
                     <Plus className="w-3 h-3" /> Add Feature
                   </button>
                 </div>
@@ -377,13 +444,23 @@ export default function ConcernProjectsClient({ initialData }: ConcernProjectsCl
 
               {/* Gallery */}
               <div className="space-y-3 bg-white/5 p-4 rounded-xl border border-white/5">
-                <label className="text-sm font-medium text-gray-300 block">Project Gallery Images</label>
-                
+                <label className="text-sm font-medium text-gray-300 block">
+                  Project Gallery Images
+                </label>
+
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {/* Existing Images */}
                   {formData.galleryUrls?.map((img, idx) => (
-                    <div key={`exist-${idx}`} className="relative aspect-video rounded-lg overflow-hidden group">
-                      <Image src={img.url} alt="Gallery" fill className="object-cover" />
+                    <div
+                      key={`exist-${idx}`}
+                      className="relative aspect-video rounded-lg overflow-hidden group"
+                    >
+                      <Image
+                        src={img.url}
+                        alt="Gallery"
+                        fill
+                        className="object-cover"
+                      />
                       <button
                         onClick={() => removeExistingGalleryImage(idx)}
                         className="absolute top-2 right-2 p-1.5 bg-red-500 text-white rounded opacity-0 group-hover:opacity-100 transition-opacity"
@@ -395,9 +472,19 @@ export default function ConcernProjectsClient({ initialData }: ConcernProjectsCl
 
                   {/* New Image Previews */}
                   {newGalleryPreviews.map((url, idx) => (
-                    <div key={`new-${idx}`} className="relative aspect-video rounded-lg overflow-hidden group border-2 border-amber-500/50">
-                      <Image src={url} alt="New Gallery" fill className="object-cover" />
-                      <span className="absolute bottom-0 inset-x-0 bg-amber-500/80 text-white text-[10px] text-center py-0.5">New</span>
+                    <div
+                      key={`new-${idx}`}
+                      className="relative aspect-video rounded-lg overflow-hidden group border-2 border-amber-500/50"
+                    >
+                      <Image
+                        src={url}
+                        alt="New Gallery"
+                        fill
+                        className="object-cover"
+                      />
+                      <span className="absolute bottom-0 inset-x-0 bg-amber-500/80 text-white text-[10px] text-center py-0.5">
+                        New
+                      </span>
                       <button
                         onClick={() => removeNewGalleryImage(idx)}
                         className="absolute top-2 right-2 p-1.5 bg-red-500 text-white rounded opacity-0 group-hover:opacity-100 transition-opacity"
@@ -439,7 +526,11 @@ export default function ConcernProjectsClient({ initialData }: ConcernProjectsCl
                   disabled={isSubmitting}
                   className="glass-btn flex items-center gap-2 disabled:opacity-50"
                 >
-                  {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+                  {isSubmitting ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <Save className="w-4 h-4" />
+                  )}
                   Save Project
                 </button>
               </div>

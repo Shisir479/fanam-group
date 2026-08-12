@@ -3,26 +3,30 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ConcernType, deleteConcernBySlugAdmin } from "@/services/concern.service";
-import { DeleteModal } from "@/components/ui/DeleteModal";
 import {
-  Edit,
-  Trash2,
-  Plus,
-  Building,
-  Eye,
-  Folder,
-} from "lucide-react";
+  ConcernType,
+  deleteConcernBySlugAdmin,
+} from "@/services/concern.service";
+import { DeleteModal } from "@/components/ui/DeleteModal";
+import { Edit, Trash2, Plus, Building, Eye, Folder } from "lucide-react";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import { AdminTable, ColumnDef } from "@/components/ui/AdminTable";
+import { Pagination } from "@/components/ui/Pagination";
+import { AdminSearch } from "@/components/ui/AdminSearch";
 
 interface AdminConcernsListClientProps {
   initialConcerns: ConcernType[];
+  totalPages?: number;
+  currentPage?: number;
+  currentSearch?: string;
 }
 
 export default function AdminConcernsListClient({
   initialConcerns,
+  totalPages = 1,
+  currentPage = 1,
+  currentSearch = "",
 }: AdminConcernsListClientProps) {
   const router = useRouter();
 
@@ -54,6 +58,13 @@ export default function AdminConcernsListClient({
     } finally {
       setIsDeleting(false);
     }
+  };
+
+  const handlePageChange = (page: number) => {
+    const params = new URLSearchParams();
+    if (currentSearch) params.set("search", currentSearch);
+    params.set("page", page.toString());
+    router.push(`/admin/concerns?${params.toString()}`);
   };
 
   const columns: ColumnDef<ConcernType>[] = [
@@ -166,6 +177,10 @@ export default function AdminConcernsListClient({
           </div>
         </div>
 
+        <div className="glass-panel p-4 flex gap-4 mb-6">
+          <AdminSearch placeholder="Search concerns..." />
+        </div>
+
         {/* Concerns List */}
         <AdminTable
           columns={columns}
@@ -173,6 +188,12 @@ export default function AdminConcernsListClient({
           isLoading={false}
           keyExtractor={(c) => c._id!}
           emptyMessage="No concerns found."
+        />
+
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
         />
       </div>
 

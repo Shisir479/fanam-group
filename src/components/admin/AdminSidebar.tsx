@@ -54,10 +54,12 @@ export function AdminSidebar() {
 
     { name: "Core Management", isHeader: true },
     { name: "Concerns", icon: Building, href: "/admin/concerns" },
+    { name: "Careers", icon: Briefcase, href: "/admin/careers" },
+    { name: "Blog", icon: Briefcase, href: "/admin/blog" },
+    { name: "News & Events", icon: Newspaper, href: "/admin/news-events" },
     { name: "Leadership Team", icon: Users, href: "/admin/team" },
     { name: "Inquiries", icon: Shield, href: "/admin/investment-bookings" },
     { name: "Contacts", icon: MessageSquare, href: "/admin/contacts" },
-    { name: "News & Events", icon: Newspaper, href: "/admin/news-events" },
     { name: "Testimonials", icon: Star, href: "/admin/testimonials" },
     { name: "Gallery", icon: ImageIcon, href: "/admin/gallery" },
 
@@ -68,7 +70,6 @@ export function AdminSidebar() {
     { name: "Awards & Certs", icon: Award, href: "/admin/awards" },
     { name: "Business Partners", icon: Hexagon, href: "/admin/brands" },
     { name: "CSR Activities", icon: Heart, href: "/admin/csr" },
-    { name: "Careers", icon: Briefcase, href: "/admin/careers" },
     { name: "Media Coverage", icon: Newspaper, href: "/admin/press" },
     { name: "Investor Docs", icon: FileText, href: "/admin/documents" },
     {

@@ -1,10 +1,10 @@
 "use client";
 
-import { BlockReveal } from "@/components/ui/BlockReveal";
 import { PageBanner } from "@/components/ui/PageBanner";
 import { SharedButton } from "@/components/ui/SharedButton";
-import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
+import { MapPin, Phone, Mail, Send } from "lucide-react";
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { submitContactForm } from "@/services/contact.service";
 import toast from "react-hot-toast";
 
@@ -81,17 +81,21 @@ const getMapSrc = (input: string | undefined) => {
   const defaultSrc =
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14600.088365449767!2d90.40552796216127!3d23.817793740034444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c65538e12c1b%3A0x63353ec2299778!2sGulshan%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1709472314526!5m2!1sen!2sbd";
   if (!input) return defaultSrc;
+
   if (input.includes("<iframe") && input.includes("src=")) {
     const match = input.match(/src="([^"]+)"/);
-    if (match && match[1]) return match[1];
+    if (match && match[1] && match[1].includes("google.com/maps"))
+      return match[1];
   }
-  if (input.startsWith("http") && !input.includes("embed")) {
-    return defaultSrc;
+
+  if (input.includes("google.com/maps/embed")) {
+    return input;
   }
-  return input;
+
+  return defaultSrc;
 };
 
-export function ContactView({ data }: { data?: any }) {
+export function ContactView({ data, banner }: { data?: any; banner?: any }) {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -142,22 +146,24 @@ export function ContactView({ data }: { data?: any }) {
     <main className="min-h-screen  bg-[#F8FAFC] pb-0 flex flex-col font-sans">
       {/* Hero Section - Matching AboutHero */}
       <PageBanner
-        title="Contact Us"
-        subtitle="Let's Talk"
-        bgImage="https://images.unsplash.com/photo-1653378972306-599af0d77fe4?q=80&w=2069&auto=format&fit=crop"
-        altText="Contact Us"
-      >
-        <p className="max-w-2xl text-white/80 mt-2 text-sm md:text-base">
-          We're here to help and answer any question you might have. We look
-          forward to hearing from you.
-        </p>
-      </PageBanner>
+        title={banner?.title || "Contact Us"}
+        bgImage={
+          banner?.backgroundImage ||
+          "https://images.unsplash.com/photo-1653378972306-599af0d77fe4?q=80&w=2069&auto=format&fit=crop"
+        }
+        altText={banner?.title || "Contact Us"}
+      ></PageBanner>
 
       {/* Contact Section - Map and Form Split */}
-      <section className="container mx-auto px-5 md:px-16 py-16 md:py-24  relative z-20 mb-12 mt-4">
-        <div className="bg-white rounded-none shadow-sm border border-gray-100 overflow-hidden flex flex-col lg:flex-row">
+      <section className="container mx-auto px-5 md:px-16 py-16 md:py-24 relative z-20 mb-12 mt-4">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="bg-white rounded-2xl shadow-xl shadow-gray-200/50 border border-gray-100 overflow-hidden flex flex-col lg:flex-row"
+        >
           {/* Left Side: Map */}
-          <div className="w-full lg:w-1/2 h-[300px] lg:h-auto relative bg-gray-200">
+          <div className="w-full lg:w-1/2 h-[350px] lg:h-auto relative bg-gray-100">
             <iframe
               src={getMapSrc(data?.addressOnMap)}
               width="100%"
@@ -190,12 +196,12 @@ export function ContactView({ data }: { data?: any }) {
                     value={formData.fullName}
                     onChange={handleChange}
                     required
-                    className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-brand-blue peer"
+                    className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-[#f9c602] peer"
                     placeholder=" "
                   />
                   <label
                     htmlFor="fullName"
-                    className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-brand-blue peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none"
+                    className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-[#f9c602] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none"
                   >
                     Full Name
                   </label>
@@ -209,12 +215,12 @@ export function ContactView({ data }: { data?: any }) {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-brand-blue peer"
+                    className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-[#f9c602] peer"
                     placeholder=" "
                   />
                   <label
                     htmlFor="email"
-                    className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-brand-blue peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none"
+                    className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-[#f9c602] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none"
                   >
                     Email Address
                   </label>
@@ -230,12 +236,12 @@ export function ContactView({ data }: { data?: any }) {
                     value={formData.phone}
                     onChange={handleChange}
                     required
-                    className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-brand-blue peer"
+                    className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-[#f9c602] peer"
                     placeholder=" "
                   />
                   <label
                     htmlFor="phone"
-                    className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-brand-blue peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none"
+                    className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-[#f9c602] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none"
                   >
                     Phone Number
                   </label>
@@ -249,12 +255,12 @@ export function ContactView({ data }: { data?: any }) {
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-brand-blue peer"
+                    className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-[#f9c602] peer"
                     placeholder=" "
                   />
                   <label
                     htmlFor="subject"
-                    className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-brand-blue peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none"
+                    className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-[#f9c602] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none"
                   >
                     Subject
                   </label>
@@ -269,49 +275,52 @@ export function ContactView({ data }: { data?: any }) {
                   onChange={handleChange}
                   required
                   rows={4}
-                  className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-brand-blue peer resize-none"
+                  className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-[#f9c602] peer resize-none"
                   placeholder=" "
                 />
                 <label
                   htmlFor="message"
-                  className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-brand-blue peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none"
+                  className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-[#f9c602] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none"
                 >
                   Your Message
                 </label>
               </div>
 
               <div className="mt-4">
-                <SharedButton
+                <button
                   type="submit"
-                  className="cursor-pointer"
                   disabled={isLoading}
+                  className="flex items-center justify-center gap-2 bg-[#f9c602] text-gray-900 hover:bg-yellow-400 px-8 py-3 rounded-full font-bold uppercase tracking-wide transition-colors group w-fit"
                 >
-                  <span className="flex items-center gap-2 ">
-                    {isLoading ? "Sending..." : "Send Message"}
-                    <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                  </span>
-                </SharedButton>
+                  {isLoading ? "Sending..." : "Send Message"}
+                  <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                </button>
               </div>
             </form>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Contact Information Section */}
-      <section className="container mx-auto px-5 md:px-16 relative z-20 mb-20">
-        <div className="bg-brand-blue rounded-none shadow-lg overflow-hidden p-8 text-white relative">
-          {/* Abstract Shapes */}
-          <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/3 w-48 h-48 bg-white/5 rounded-none blur-3xl pointer-events-none"></div>
-          <div className="absolute bottom-0 left-0 translate-y-1/3 -translate-x-1/3 w-64 h-64 bg-white/5 rounded-none blur-3xl pointer-events-none"></div>
+      <section className="container mx-auto px-5 md:px-16 relative z-20 mb-24">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          className="bg-gray-900 rounded-3xl shadow-xl overflow-hidden p-8 md:p-12 text-white relative"
+        >
+          {/* Abstract Shapes for premium dark aesthetic */}
+          <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/3 w-64 h-64 bg-[#f9c602]/10 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 translate-y-1/3 -translate-x-1/3 w-80 h-80 bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
 
-          <div className="relative z-10 items-center  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-6 items-center">
             {/* Office Location */}
-            <div className="flex flex-col gap-3 group cursor-default">
-              <div className="w-10 h-10 bg-white/10 rounded-none flex items-center justify-center group-hover:bg-white group-hover:text-brand-blue transition-colors duration-300">
-                <MapPin className="w-5 h-5" />
+            <div className="flex flex-col md:items-center md:text-center gap-4 group cursor-default">
+              <div className="w-14 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center group-hover:border-[#f9c602] group-hover:text-[#f9c602] transition-colors duration-300">
+                <MapPin className="w-6 h-6" />
               </div>
               <div>
-                <h4 className="font-semibold text-white/90 text-xs uppercase tracking-wider mb-1">
+                <h4 className="font-bold text-white/90 text-sm uppercase tracking-widest mb-2">
                   Corporate Office
                 </h4>
                 <p className="text-white/70 text-sm leading-relaxed whitespace-pre-line">
@@ -322,12 +331,12 @@ export function ContactView({ data }: { data?: any }) {
             </div>
 
             {/* Hotline */}
-            <div className="flex flex-col gap-3 group cursor-default">
-              <div className="w-10 h-10 bg-white/10 rounded-none flex items-center justify-center group-hover:bg-white group-hover:text-brand-blue transition-colors duration-300">
-                <Phone className="w-5 h-5" />
+            <div className="flex flex-col md:items-center md:text-center gap-4 group cursor-default">
+              <div className="w-14 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center group-hover:border-[#f9c602] group-hover:text-[#f9c602] transition-colors duration-300">
+                <Phone className="w-6 h-6" />
               </div>
               <div>
-                <h4 className="font-semibold text-white/90 text-xs uppercase tracking-wider mb-1">
+                <h4 className="font-bold text-white/90 text-sm uppercase tracking-widest mb-2">
                   Hotline
                 </h4>
                 <p className="text-white/70 text-sm whitespace-pre-line">
@@ -338,12 +347,12 @@ export function ContactView({ data }: { data?: any }) {
             </div>
 
             {/* Email */}
-            <div className="flex flex-col gap-3 group cursor-default">
-              <div className="w-10 h-10 bg-white/10 rounded-none flex items-center justify-center group-hover:bg-white group-hover:text-brand-blue transition-colors duration-300">
-                <Mail className="w-5 h-5" />
+            <div className="flex flex-col md:items-center md:text-center gap-4 group cursor-default">
+              <div className="w-14 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center group-hover:border-[#f9c602] group-hover:text-[#f9c602] transition-colors duration-300">
+                <Mail className="w-6 h-6" />
               </div>
               <div>
-                <h4 className="font-semibold text-white/90 text-xs uppercase tracking-wider mb-1">
+                <h4 className="font-bold text-white/90 text-sm uppercase tracking-widest mb-2">
                   Email
                 </h4>
                 <a
@@ -355,7 +364,7 @@ export function ContactView({ data }: { data?: any }) {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
     </main>
   );

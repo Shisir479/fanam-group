@@ -3,9 +3,16 @@ import EventForm from "@/components/admin/events/EventForm";
 import { getEventByIdByAdmin } from "@/services/event.service";
 import { redirect } from "next/navigation";
 
-export const metadata = constructMetadata({ title: "Edit Event - Admin Dashboard", noIndex: true });
+export const metadata = constructMetadata({
+  title: "Edit Event - Admin Dashboard",
+  noIndex: true,
+});
 
-export default async function EditEventPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function EditEventPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const resolvedParams = await params;
   let eventData = null;
 

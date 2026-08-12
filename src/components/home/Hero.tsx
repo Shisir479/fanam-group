@@ -38,8 +38,11 @@ export function Hero({ data }: { data?: any }) {
           image:
             slide.image?.url ||
             defaultSlides[index % defaultSlides.length].image,
-          title: slide.title || defaultSlides[index % defaultSlides.length].title,
-          subtitle: slide.subtitle || defaultSlides[index % defaultSlides.length].subtitle,
+          title:
+            slide.title || defaultSlides[index % defaultSlides.length].title,
+          subtitle:
+            slide.subtitle ||
+            defaultSlides[index % defaultSlides.length].subtitle,
         }))
       : defaultSlides;
 
@@ -80,7 +83,7 @@ export function Hero({ data }: { data?: any }) {
             >
               {slides[current].subtitle}
             </motion.p>
-            
+
             <motion.h1
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}

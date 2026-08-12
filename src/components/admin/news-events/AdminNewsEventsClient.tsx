@@ -3,30 +3,45 @@
 import { useState, useEffect } from "react";
 import { Plus, Edit, Trash2, Calendar, FileText, Search } from "lucide-react";
 import { AdminTable, ColumnDef } from "@/components/ui/AdminTable";
-import { getEventsByAdmin, deleteEventByAdmin, Event } from "@/services/event.service";
-import { getNewsByAdmin, deleteNewsByAdmin, News } from "@/services/news.service";
+import {
+  getEventsByAdmin,
+  deleteEventByAdmin,
+  Event,
+} from "@/services/event.service";
+import {
+  getNewsByAdmin,
+  deleteNewsByAdmin,
+  News,
+} from "@/services/news.service";
 import Link from "next/link";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import { Pagination } from "@/components/ui/Pagination";
+import { DeleteModal } from "@/components/ui/DeleteModal";
+import { AdminSearch } from "@/components/ui/AdminSearch";
+import { useSearchParams, useRouter } from "next/navigation";
 
 interface AdminNewsEventsClientProps {
   initialNews: News[];
   initialEvents: Event[];
 }
 
-export default function AdminNewsEventsClient({ initialNews, initialEvents }: AdminNewsEventsClientProps) {
+export default function AdminNewsEventsClient({
+  initialNews,
+  initialEvents,
+}: AdminNewsEventsClientProps) {
   const [activeTab, setActiveTab] = useState<"news" | "events">("news");
-  
+
   const [newsList, setNewsList] = useState<News[]>(initialNews);
   const [eventsList, setEventsList] = useState<Event[]>(initialEvents);
   const [isLoading, setIsLoading] = useState(false);
-  const [search, setSearch] = useState("");
+  const searchParams = useSearchParams();
+  const search = searchParams.get("search") || "";
+  const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
   const fetchData = async () => {
-    setIsLoading(true);
     try {
       if (activeTab === "news") {
         const res = await getNewsByAdmin({ limit: 0, search });
@@ -37,8 +52,6 @@ export default function AdminNewsEventsClient({ initialNews, initialEvents }: Ad
       }
     } catch (error) {
       toast.error(`Failed to fetch ${activeTab}`);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -53,36 +66,48 @@ export default function AdminNewsEventsClient({ initialNews, initialEvents }: Ad
     setCurrentPage(1);
   }, [search, activeTab, initialNews, initialEvents]);
 
-  const handleDeleteNews = async (id: string) => {
-    if (confirm("Are you sure you want to delete this news item?")) {
-      try {
-        const res = await deleteNewsByAdmin(id);
+  const [deleteTarget, setDeleteTarget] = useState<{
+    id: string;
+    type: "news" | "event";
+  } | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const confirmDelete = async () => {
+    if (!deleteTarget) return;
+    setIsDeleting(true);
+
+    try {
+      if (deleteTarget.type === "news") {
+        const res = await deleteNewsByAdmin(deleteTarget.id);
         if (res.success !== false) {
           toast.success("News deleted successfully");
           fetchData();
         } else {
           toast.error(res.error || "Failed to delete news");
         }
-      } catch (error) {
-        toast.error("Failed to delete news");
-      }
-    }
-  };
-
-  const handleDeleteEvent = async (id: string) => {
-    if (confirm("Are you sure you want to delete this event?")) {
-      try {
-        const res = await deleteEventByAdmin(id);
+      } else {
+        const res = await deleteEventByAdmin(deleteTarget.id);
         if (res.success !== false) {
           toast.success("Event deleted successfully");
           fetchData();
         } else {
           toast.error(res.error || "Failed to delete event");
         }
-      } catch (error) {
-        toast.error("Failed to delete event");
       }
+    } catch (error) {
+      toast.error(`Failed to delete ${deleteTarget.type}`);
+    } finally {
+      setIsDeleting(false);
+      setDeleteTarget(null);
     }
+  };
+
+  const handleDeleteNews = (id: string) => {
+    setDeleteTarget({ id, type: "news" });
+  };
+
+  const handleDeleteEvent = (id: string) => {
+    setDeleteTarget({ id, type: "event" });
   };
 
   const newsColumns: ColumnDef<News>[] = [
@@ -92,7 +117,12 @@ export default function AdminNewsEventsClient({ initialNews, initialEvents }: Ad
         <div className="flex items-center gap-4 group">
           {news.cover?.url ? (
             <div className="relative w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
-              <Image src={news.cover.url} alt={news.title} fill className="object-cover" />
+              <Image
+                src={news.cover.url}
+                alt={news.title}
+                fill
+                className="object-cover"
+              />
             </div>
           ) : (
             <div className="w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
@@ -103,35 +133,47 @@ export default function AdminNewsEventsClient({ initialNews, initialEvents }: Ad
             <div className="font-semibold text-white group-hover:text-[#CBA35E] transition-colors line-clamp-1">
               {news.title}
             </div>
-            <div className="text-xs text-gray-400 line-clamp-1 mt-0.5">/{news.slug}</div>
+            <div className="text-xs text-gray-400 line-clamp-1 mt-0.5">
+              /{news.slug}
+            </div>
           </div>
         </div>
-      )
-    },
-    { 
-      header: "Status", 
-      render: (e) => (
-        <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold w-fit ${
-          e.status === 'published' ? 'bg-green-500/10 text-green-400' : 'bg-amber-500/10 text-amber-400'
-        }`}>
-          {e.status.charAt(0).toUpperCase() + e.status.slice(1)}
-        </span>
-      )
+      ),
     },
     {
-      header: "Actions", 
+      header: "Status",
+      render: (e) => (
+        <span
+          className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold w-fit ${
+            e.status === "published"
+              ? "bg-green-500/10 text-green-400"
+              : "bg-amber-500/10 text-amber-400"
+          }`}
+        >
+          {e.status.charAt(0).toUpperCase() + e.status.slice(1)}
+        </span>
+      ),
+    },
+    {
+      header: "Actions",
       className: "text-right space-x-2",
       render: (e) => (
         <>
-          <Link href={`/admin/news-events/edit/news/${e._id}`} className="inline-flex p-1.5 text-gray-400 hover:text-green-400 hover:bg-green-400/10 rounded transition-colors">
+          <Link
+            href={`/admin/news-events/edit/news/${e._id}`}
+            className="inline-flex p-1.5 text-gray-400 hover:text-green-400 hover:bg-green-400/10 rounded transition-colors"
+          >
             <Edit className="w-4 h-4" />
           </Link>
-          <button onClick={() => handleDeleteNews(e._id)} className="inline-flex p-1.5 text-gray-400 hover:text-red-400 hover:bg-red-400/10 rounded transition-colors">
+          <button
+            onClick={() => handleDeleteNews(e._id)}
+            className="inline-flex p-1.5 text-gray-400 hover:text-red-400 hover:bg-red-400/10 rounded transition-colors"
+          >
             <Trash2 className="w-4 h-4" />
           </button>
         </>
-      )
-    }
+      ),
+    },
   ];
 
   const eventsColumns: ColumnDef<Event>[] = [
@@ -141,7 +183,12 @@ export default function AdminNewsEventsClient({ initialNews, initialEvents }: Ad
         <div className="flex items-center gap-4 group">
           {event.cover?.url ? (
             <div className="relative w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
-              <Image src={event.cover.url} alt={event.title} fill className="object-cover" />
+              <Image
+                src={event.cover.url}
+                alt={event.title}
+                fill
+                className="object-cover"
+              />
             </div>
           ) : (
             <div className="w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
@@ -161,36 +208,48 @@ export default function AdminNewsEventsClient({ initialNews, initialEvents }: Ad
             </div>
           </div>
         </div>
-      )
+      ),
     },
     {
       header: "Location",
-      render: (e) => <span className="text-sm text-gray-300">{e.eventLocation}</span>
-    },
-    { 
-      header: "Status", 
       render: (e) => (
-        <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold w-fit ${
-          e.status === 'published' ? 'bg-green-500/10 text-green-400' : 'bg-amber-500/10 text-amber-400'
-        }`}>
-          {e.status.charAt(0).toUpperCase() + e.status.slice(1)}
-        </span>
-      )
+        <span className="text-sm text-gray-300">{e.eventLocation}</span>
+      ),
     },
     {
-      header: "Actions", 
+      header: "Status",
+      render: (e) => (
+        <span
+          className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold w-fit ${
+            e.status === "published"
+              ? "bg-green-500/10 text-green-400"
+              : "bg-amber-500/10 text-amber-400"
+          }`}
+        >
+          {e.status.charAt(0).toUpperCase() + e.status.slice(1)}
+        </span>
+      ),
+    },
+    {
+      header: "Actions",
       className: "text-right space-x-2",
       render: (e) => (
         <>
-          <Link href={`/admin/news-events/edit/event/${e._id}`} className="inline-flex p-1.5 text-gray-400 hover:text-green-400 hover:bg-green-400/10 rounded transition-colors">
+          <Link
+            href={`/admin/news-events/edit/event/${e._id}`}
+            className="inline-flex p-1.5 text-gray-400 hover:text-green-400 hover:bg-green-400/10 rounded transition-colors"
+          >
             <Edit className="w-4 h-4" />
           </Link>
-          <button onClick={() => handleDeleteEvent(e._id)} className="inline-flex p-1.5 text-gray-400 hover:text-red-400 hover:bg-red-400/10 rounded transition-colors">
+          <button
+            onClick={() => handleDeleteEvent(e._id)}
+            className="inline-flex p-1.5 text-gray-400 hover:text-red-400 hover:bg-red-400/10 rounded transition-colors"
+          >
             <Trash2 className="w-4 h-4" />
           </button>
         </>
-      )
-    }
+      ),
+    },
   ];
 
   return (
@@ -199,11 +258,17 @@ export default function AdminNewsEventsClient({ initialNews, initialEvents }: Ad
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h2 className="text-2xl font-bold text-white">News & Events</h2>
-          <p className="text-sm text-gray-400 mt-1">Manage your corporate news and upcoming events.</p>
+          <p className="text-sm text-gray-400 mt-1">
+            Manage your corporate news and upcoming events.
+          </p>
         </div>
         <div className="flex items-center gap-3">
-          <Link href={`/admin/news-events/create?type=${activeTab}`} className="glass-btn whitespace-nowrap">
-            <Plus className="w-4 h-4" /> Create New {activeTab === "news" ? "News" : "Event"}
+          <Link
+            href={`/admin/news-events/create?type=${activeTab}`}
+            className="glass-btn whitespace-nowrap"
+          >
+            <Plus className="w-4 h-4" /> Create New{" "}
+            {activeTab === "news" ? "News" : "Event"}
           </Link>
         </div>
       </div>
@@ -211,7 +276,10 @@ export default function AdminNewsEventsClient({ initialNews, initialEvents }: Ad
       {/* Tabs */}
       <div className="flex items-center gap-4 border-b border-white/10 pb-4">
         <button
-          onClick={() => { setActiveTab("news"); setSearch(""); }}
+          onClick={() => {
+            setActiveTab("news");
+            router.push("?");
+          }}
           className={`px-4 py-2 rounded-xl text-sm font-medium outline-none focus:outline-none transition-all flex items-center gap-2 ${
             activeTab === "news"
               ? "bg-white/10 text-white border border-white/10"
@@ -222,7 +290,10 @@ export default function AdminNewsEventsClient({ initialNews, initialEvents }: Ad
           News Articles
         </button>
         <button
-          onClick={() => { setActiveTab("events"); setSearch(""); }}
+          onClick={() => {
+            setActiveTab("events");
+            router.push("?");
+          }}
           className={`px-4 py-2 rounded-xl text-sm font-medium outline-none focus:outline-none transition-all flex items-center gap-2 ${
             activeTab === "events"
               ? "bg-white/10 text-white border border-white/10"
@@ -233,26 +304,23 @@ export default function AdminNewsEventsClient({ initialNews, initialEvents }: Ad
           Events
         </button>
       </div>
-      
+
       {/* Search */}
       <div className="glass-panel p-4 flex gap-4">
-        <input
-          type="text"
-          placeholder={`Search ${activeTab}...`}
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full md:w-1/3 px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
-        />
+        <AdminSearch placeholder={`Search ${activeTab}...`} />
       </div>
 
       {/* Table */}
       {activeTab === "news" ? (
         <div className="space-y-4">
-          <AdminTable 
-            columns={newsColumns} 
-            data={newsList.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)} 
-            isLoading={isLoading} 
-            keyExtractor={(e) => e._id} 
+          <AdminTable
+            columns={newsColumns}
+            data={newsList.slice(
+              (currentPage - 1) * itemsPerPage,
+              currentPage * itemsPerPage,
+            )}
+            isLoading={isLoading}
+            keyExtractor={(e) => e._id}
           />
           {!isLoading && newsList.length > itemsPerPage && (
             <Pagination
@@ -265,11 +333,14 @@ export default function AdminNewsEventsClient({ initialNews, initialEvents }: Ad
         </div>
       ) : (
         <div className="space-y-4">
-          <AdminTable 
-            columns={eventsColumns} 
-            data={eventsList.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)} 
-            isLoading={isLoading} 
-            keyExtractor={(e) => e._id} 
+          <AdminTable
+            columns={eventsColumns}
+            data={eventsList.slice(
+              (currentPage - 1) * itemsPerPage,
+              currentPage * itemsPerPage,
+            )}
+            isLoading={isLoading}
+            keyExtractor={(e) => e._id}
           />
           {!isLoading && eventsList.length > itemsPerPage && (
             <Pagination
@@ -281,6 +352,14 @@ export default function AdminNewsEventsClient({ initialNews, initialEvents }: Ad
           )}
         </div>
       )}
+      <DeleteModal
+        isOpen={!!deleteTarget}
+        onClose={() => setDeleteTarget(null)}
+        onConfirm={confirmDelete}
+        title={`Delete ${deleteTarget?.type === "news" ? "News" : "Event"}`}
+        description={`Are you sure you want to delete this ${deleteTarget?.type === "news" ? "news item" : "event"}? This action cannot be undone.`}
+        isLoading={isDeleting}
+      />
     </div>
   );
 }

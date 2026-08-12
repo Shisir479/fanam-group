@@ -35,7 +35,7 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
+
       // Handle solid/transparent state
       setIsScrolled(currentScrollY > 50);
 
@@ -52,7 +52,7 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
 
       lastScrollY.current = currentScrollY;
     };
-    
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     // Initial check
     handleScroll();
@@ -70,14 +70,19 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
       : "bg-white text-black";
 
   const linkLineColor = isBannerPage && !isScrolled ? "bg-white" : "bg-black";
-  const mobileHamburgerColor = isBannerPage && !isScrolled && !isMobileMenuOpen ? "bg-white" : isMobileMenuOpen ? "bg-white" : "bg-black";
+  const mobileHamburgerColor =
+    isBannerPage && !isScrolled && !isMobileMenuOpen
+      ? "bg-white"
+      : isMobileMenuOpen
+        ? "bg-white"
+        : "bg-black";
 
   return (
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500 ease-in-out ${navStyles} ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
       >
-        <div className="container mx-auto px-6 md:px-20 flex h-19 items-center justify-between">
+        <div className="container mx-auto px-6 md:px-20 flex h-18 items-center justify-between">
           <div className="flex items-center gap-20 h-full">
             <Link
               href="/"
@@ -95,73 +100,75 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center h-full gap-8 text-sm font-semibold tracking-wide">
+            <nav className="hidden lg:flex items-center h-full gap-8 text-base font-semibold tracking-wide">
               <Link
                 href="/"
-                className="relative group h-full flex items-center"
+                className={`relative group h-full flex items-center ${pathname === "/" ? "text-[#f9c602] font-extrabold" : "transition-colors"}`}
               >
                 Home
                 <span
-                  className={`absolute left-0 bottom-0 w-full h-[4px] ${linkLineColor} origin-left transition-transform duration-600 ease-out ${pathname === "/" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                  className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-left transition-transform duration-600 ease-out ${pathname === "/" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
                 ></span>
               </Link>
 
               <Link
                 href="/about"
-                className="relative group h-full flex items-center"
+                className={`relative group h-full flex items-center ${pathname.startsWith("/about") ? "text-[#f9c602] font-extrabold" : "transition-colors"}`}
               >
                 About Us
                 <span
-                  className={`absolute left-0 bottom-0 w-full h-[4px] ${linkLineColor} origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/about") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                  className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/about") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
                 ></span>
               </Link>
 
               <Link
                 href="/concern"
-                className="relative group h-full flex items-center"
+                className={`relative group h-full flex items-center ${pathname.startsWith("/concern") ? "text-[#f9c602] font-extrabold" : "transition-colors"}`}
               >
                 Concern
                 <span
-                  className={`absolute left-0 bottom-0 w-full h-[4px] ${linkLineColor} origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/concern") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                  className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/concern") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
                 ></span>
               </Link>
 
               <Link
                 href="/news-events"
-                className="relative group h-full flex items-center whitespace-nowrap"
+                className={`relative group h-full flex items-center whitespace-nowrap ${pathname.startsWith("/news-events") ? "text-[#f9c602] font-extrabold" : "transition-colors"}`}
               >
                 News & Events
                 <span
-                  className={`absolute left-0 bottom-0 w-full h-[4px] ${linkLineColor} origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/news-events") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                  className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/news-events") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
                 ></span>
               </Link>
 
               <Link
                 href="/blog"
-                className="relative group h-full flex items-center"
+                className={`relative group h-full flex items-center ${pathname.startsWith("/blog") ? "text-[#f9c602] font-extrabold" : "transition-colors"}`}
               >
                 Blogs
                 <span
-                  className={`absolute left-0 bottom-0 w-full h-[4px] ${linkLineColor} origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/blog") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                  className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/blog") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
                 ></span>
               </Link>
 
               <Link
                 href="/careers"
-                className="relative group h-full flex items-center"
+                className={`relative group h-full flex items-center ${pathname.startsWith("/careers") ? "text-[#f9c602] font-extrabold" : "transition-colors"}`}
               >
                 Career
                 <span
-                  className={`absolute left-0 bottom-0 w-full h-[4px] ${linkLineColor} origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/careers") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                  className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/careers") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
                 ></span>
               </Link>
 
               {/* Legal / More Pages with Dropdown */}
               <div className="relative group h-full flex items-center">
-                <span className="h-full flex items-center cursor-pointer">
+                <span
+                  className={`h-full flex items-center cursor-pointer ${pathname.startsWith("/legal") || pathname.startsWith("/contact") ? "text-[#f9c602] font-extrabold" : "transition-colors"}`}
+                >
                   More
                   <span
-                    className={`absolute left-0 bottom-0 w-full h-[4px] ${linkLineColor} origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/legal") || pathname.startsWith("/contact") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                    className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/legal") || pathname.startsWith("/contact") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
                   ></span>
                 </span>
                 <div className="absolute top-full right-0 min-w-[240px] bg-white shadow-xl border border-gray-100 flex flex-col opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
@@ -245,7 +252,10 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
               Concern
             </Link>
 
-            <Link href="/news-events" onClick={() => setIsMobileMenuOpen(false)}>
+            <Link
+              href="/news-events"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
               News & Events
             </Link>
 

@@ -92,9 +92,7 @@ export default function AdminTeamClient() {
       render: (member) => (
         <span
           className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold w-fit bg-[#f7f8fa] border border-transparent shadow-[2px_2px_5px_rgba(180,185,195,0.4),-2px_-2px_5px_rgba(255,255,255,0.9)] ${
-            member.status === "active"
-              ? "text-green-600"
-              : "text-red-500"
+            member.status === "active" ? "text-green-600" : "text-red-500"
           }`}
         >
           {member.status.charAt(0).toUpperCase() + member.status.slice(1)}

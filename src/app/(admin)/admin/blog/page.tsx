@@ -1,5 +1,6 @@
 import { constructMetadata } from "@/lib/metadata";
 import { getBlogsByAdmin, Blog } from "@/services/blog.service";
+import { getBlogTagsByAdmin, BlogTag } from "@/services/blog-tag.service";
 import AdminBlogClient from "@/components/admin/blog/AdminBlogClient";
 
 export const metadata = constructMetadata({
@@ -17,13 +18,22 @@ export default async function AdminBlogPage({
   const search = resolvedParams.search || "";
 
   let blogs: Blog[] = [];
+  let tags: BlogTag[] = [];
   let totalPages = 1;
 
   try {
-    const res = await getBlogsByAdmin({ page, search, limit: 10 });
-    if (res.success) {
-      blogs = res.data;
-      totalPages = res.count;
+    const [blogRes, tagRes] = await Promise.all([
+      getBlogsByAdmin({ page, search, limit: 10 }),
+      getBlogTagsByAdmin(),
+    ]);
+
+    if (blogRes.success) {
+      blogs = blogRes.data;
+      totalPages = blogRes.count;
+    }
+
+    if (tagRes?.success) {
+      tags = tagRes.data;
     }
   } catch (error) {
     console.error("Failed to fetch blogs in SSR", error);
@@ -32,6 +42,7 @@ export default async function AdminBlogPage({
   return (
     <AdminBlogClient
       initialBlogs={blogs}
+      initialTags={tags}
       totalPages={totalPages}
       currentPage={page}
       currentSearch={search}

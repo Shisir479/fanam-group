@@ -26,5 +26,5 @@ export default async function ContactPage() {
     // fallback
   }
 
-  return <ContactView data={brandingData?.contact} />;
+  return <ContactView data={brandingData?.contact} banner={banner} />;
 }

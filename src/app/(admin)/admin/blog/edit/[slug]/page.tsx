@@ -3,6 +3,7 @@ import {
   getBlogBySlugByAdmin,
   updateBlogBySlugByAdmin,
 } from "@/services/blog.service";
+import { getBlogTagsByAdmin } from "@/services/blog-tag.service";
 import EditBlogClient from "@/components/admin/blog/EditBlogClient";
 import { notFound } from "next/navigation";
 
@@ -20,12 +21,19 @@ export default async function EditBlogPage({
 
   // Fetch data on the server
   let blogData = null;
+  let tags: any[] = [];
   try {
-    const res = await getBlogBySlugByAdmin(slug);
+    const [res, tagRes] = await Promise.all([
+      getBlogBySlugByAdmin(slug),
+      getBlogTagsByAdmin(),
+    ]);
     if (res.success && res.data) {
       blogData = res.data;
     } else {
       return notFound();
+    }
+    if (tagRes?.success) {
+      tags = tagRes.data;
     }
   } catch (error) {
     return notFound();
@@ -41,6 +49,7 @@ export default async function EditBlogPage({
       initialData={blogData}
       slug={slug}
       onSubmit={handleUpdate}
+      availableTags={tags}
     />
   );
 }

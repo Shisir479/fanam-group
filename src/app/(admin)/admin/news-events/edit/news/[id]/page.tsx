@@ -3,9 +3,16 @@ import NewsForm from "@/components/admin/news/NewsForm";
 import { getNewsByIdByAdmin } from "@/services/news.service";
 import { redirect } from "next/navigation";
 
-export const metadata = constructMetadata({ title: "Edit News - Admin Dashboard", noIndex: true });
+export const metadata = constructMetadata({
+  title: "Edit News - Admin Dashboard",
+  noIndex: true,
+});
 
-export default async function EditNewsPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function EditNewsPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const resolvedParams = await params;
   let newsData = null;
 

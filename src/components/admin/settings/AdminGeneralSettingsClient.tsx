@@ -97,7 +97,7 @@ export default function AdminGeneralSettingsClient({
           setSettingsId(brandingRes.data._id);
           setLogo(
             brandingRes.data.logoLight ||
-            brandingRes.data.logo || { _id: "", url: "" },
+              brandingRes.data.logo || { _id: "", url: "" },
           );
           setFavicon(brandingRes.data.favicon || { _id: "", url: "" });
           setSocialLinks({

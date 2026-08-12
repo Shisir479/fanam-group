@@ -1,14 +1,29 @@
 import { api } from "@/lib/api";
 
-export const getApplicationsAdmin = async () => {
+export const getApplicationsAdmin = async (params?: {
+  page?: number;
+  limit?: number;
+}) => {
   try {
-    return await api("/admin/applications", { method: "GET" });
+    let query = "";
+    if (params) {
+      const searchParams = new URLSearchParams();
+      if (params.page) searchParams.append("page", String(params.page));
+      if (params.limit) searchParams.append("limit", String(params.limit));
+      if (Array.from(searchParams.keys()).length > 0) {
+        query = `?${searchParams.toString()}`;
+      }
+    }
+    return await api(`/admin/applications${query}`, { method: "GET" });
   } catch (error) {
     return { data: null };
   }
 };
 
-export const updateApplicationStatusAdmin = async (id: string, status: string) => {
+export const updateApplicationStatusAdmin = async (
+  id: string,
+  status: string,
+) => {
   try {
     return await api(`/admin/applications/${id}`, {
       method: "PUT",

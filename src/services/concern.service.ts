@@ -28,6 +28,8 @@ export interface ConcernType {
   heroImage: { _id: string; url: string };
   features: ConcernFeature[];
   projects?: Project[];
+  metaTitle?: string;
+  metaDescription?: string;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -45,8 +47,22 @@ export const createConcernByAdmin = async (payload: any) => {
   return res;
 };
 
-export const getConcernsByAdmin = async () => {
-  return await api(`/admin/concerns`, { method: "GET" });
+export const getConcernsByAdmin = async (params?: {
+  page?: number;
+  limit?: number;
+  search?: string;
+}) => {
+  let query = "";
+  if (params) {
+    const searchParams = new URLSearchParams();
+    if (params.page) searchParams.append("page", String(params.page));
+    if (params.limit) searchParams.append("limit", String(params.limit));
+    if (params.search) searchParams.append("search", params.search);
+    if (Array.from(searchParams.keys()).length > 0) {
+      query = `?${searchParams.toString()}`;
+    }
+  }
+  return await api(`/admin/concerns${query}`, { method: "GET" });
 };
 
 export const getConcernBySlugAdmin = async (slug: string) => {

@@ -3,7 +3,11 @@
 import { useState, useEffect } from "react";
 import { Plus, Edit, Trash2, Calendar, Search } from "lucide-react";
 import { AdminTable, ColumnDef } from "@/components/ui/AdminTable";
-import { getEventsByAdmin, deleteEventByAdmin, Event } from "@/services/event.service";
+import {
+  getEventsByAdmin,
+  deleteEventByAdmin,
+  Event,
+} from "@/services/event.service";
 import Link from "next/link";
 import toast from "react-hot-toast";
 
@@ -53,7 +57,11 @@ export default function AdminEventsClient() {
         <div className="flex items-center gap-4 group">
           {event.cover?.url ? (
             <div className="relative w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
-              <img src={event.cover.url} alt={event.title} className="w-full h-full object-cover" />
+              <img
+                src={event.cover.url}
+                alt={event.title}
+                className="w-full h-full object-cover"
+              />
             </div>
           ) : (
             <div className="w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0">
@@ -73,36 +81,46 @@ export default function AdminEventsClient() {
             </div>
           </div>
         </div>
-      )
+      ),
     },
     {
       header: "Location",
-      render: (e) => <span className="text-sm text-gray-300">{e.eventLocation}</span>
-    },
-    { 
-      header: "Status", 
       render: (e) => (
-        <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold w-fit bg-[#f7f8fa] border border-transparent shadow-[2px_2px_5px_rgba(180,185,195,0.4),-2px_-2px_5px_rgba(255,255,255,0.9)] ${
-          e.status === 'published' ? 'text-green-600' : 'text-amber-600'
-        }`}>
-          {e.status.charAt(0).toUpperCase() + e.status.slice(1)}
-        </span>
-      )
+        <span className="text-sm text-gray-300">{e.eventLocation}</span>
+      ),
     },
     {
-      header: "Actions", 
+      header: "Status",
+      render: (e) => (
+        <span
+          className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold w-fit bg-[#f7f8fa] border border-transparent shadow-[2px_2px_5px_rgba(180,185,195,0.4),-2px_-2px_5px_rgba(255,255,255,0.9)] ${
+            e.status === "published" ? "text-green-600" : "text-amber-600"
+          }`}
+        >
+          {e.status.charAt(0).toUpperCase() + e.status.slice(1)}
+        </span>
+      ),
+    },
+    {
+      header: "Actions",
       className: "text-right space-x-2",
       render: (e) => (
         <>
-          <Link href={`/admin/events/edit/${e._id}`} className="inline-flex p-1.5 text-gray-400 hover:text-green-400 hover:bg-green-400/10 rounded transition-colors">
+          <Link
+            href={`/admin/events/edit/${e._id}`}
+            className="inline-flex p-1.5 text-gray-400 hover:text-green-400 hover:bg-green-400/10 rounded transition-colors"
+          >
             <Edit className="w-4 h-4" />
           </Link>
-          <button onClick={() => handleDelete(e._id)} className="inline-flex p-1.5 text-gray-400 hover:text-red-400 hover:bg-red-400/10 rounded transition-colors">
+          <button
+            onClick={() => handleDelete(e._id)}
+            className="inline-flex p-1.5 text-gray-400 hover:text-red-400 hover:bg-red-400/10 rounded transition-colors"
+          >
             <Trash2 className="w-4 h-4" />
           </button>
         </>
-      )
-    }
+      ),
+    },
   ];
 
   return (
@@ -110,15 +128,20 @@ export default function AdminEventsClient() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h2 className="text-2xl font-bold text-white">Events</h2>
-          <p className="text-sm text-gray-400 mt-1">Manage upcoming and past events.</p>
+          <p className="text-sm text-gray-400 mt-1">
+            Manage upcoming and past events.
+          </p>
         </div>
         <div className="flex items-center gap-3">
-          <Link href="/admin/events/create" className="glass-btn whitespace-nowrap">
+          <Link
+            href="/admin/events/create"
+            className="glass-btn whitespace-nowrap"
+          >
             <Plus className="w-4 h-4" /> Create New Event
           </Link>
         </div>
       </div>
-      
+
       <div className="glass-panel p-4 flex gap-4">
         <input
           type="text"
@@ -129,7 +152,12 @@ export default function AdminEventsClient() {
         />
       </div>
 
-      <AdminTable columns={columns} data={events} isLoading={isLoading} keyExtractor={(e) => e._id} />
+      <AdminTable
+        columns={columns}
+        data={events}
+        isLoading={isLoading}
+        keyExtractor={(e) => e._id}
+      />
     </div>
   );
 }

@@ -4,14 +4,20 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { deleteBlogBySlugByAdmin, Blog } from "@/services/blog.service";
-import { Plus, Edit, Trash2, Eye, Calendar, FileText } from "lucide-react";
+import { Plus, Edit, Trash2, Eye, Calendar, FileText, Tag } from "lucide-react";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import { DeleteModal } from "@/components/ui/DeleteModal";
 import { AdminTable, ColumnDef } from "@/components/ui/AdminTable";
+import { Pagination } from "@/components/ui/Pagination";
+import { AdminSearch } from "@/components/ui/AdminSearch";
+
+import { BlogTag } from "@/services/blog-tag.service";
+import BlogTagManager from "@/components/admin/blog-tags/BlogTagManager";
 
 interface Props {
   initialBlogs: Blog[];
+  initialTags: BlogTag[];
   totalPages: number;
   currentPage: number;
   currentSearch: string;
@@ -19,12 +25,14 @@ interface Props {
 
 export default function AdminBlogClient({
   initialBlogs,
+  initialTags,
   totalPages,
   currentPage,
   currentSearch,
 }: Props) {
   const router = useRouter();
-  const [search, setSearch] = useState(currentSearch);
+  const [activeTab, setActiveTab] = useState<"posts" | "tags">("posts");
+  const [triggerCreateTag, setTriggerCreateTag] = useState(0);
 
   // Delete Modal State
   const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
@@ -49,22 +57,13 @@ export default function AdminBlogClient({
     }
   };
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = e.target.value;
-    setSearch(val);
-    const params = new URLSearchParams();
-    if (val) params.set("search", val);
-    params.set("page", "1");
-    router.push(`?${params.toString()}`);
-  };
-
   const handlePageChange = (newPage: number) => {
     const params = new URLSearchParams();
-    if (search) params.set("search", search);
+    if (currentSearch) params.set("search", currentSearch);
     params.set("page", newPage.toString());
     router.push(`?${params.toString()}`);
   };
-  initialBlogs;
+
   const columns: ColumnDef<Blog>[] = [
     {
       header: "Blog",
@@ -96,13 +95,22 @@ export default function AdminBlogClient({
       ),
     },
     {
-      header: "Category",
+      header: "Tags",
       render: (blog) => (
-        <span className="text-sm text-gray-300">
-          {typeof blog.blogCategory === "object" && blog.blogCategory !== null
-            ? blog.blogCategory.name
-            : blog.blogCategory || "Uncategorized"}
-        </span>
+        <div className="flex flex-wrap gap-1">
+          {blog.tags && blog.tags.length > 0 ? (
+            blog.tags.map((tag: any, idx: number) => (
+              <span
+                key={idx}
+                className="text-[10px] bg-white/10 text-gray-300 px-2 py-0.5 rounded-md"
+              >
+                {tag.name || tag}
+              </span>
+            ))
+          ) : (
+            <span className="text-sm text-gray-500">None</span>
+          )}
+        </div>
       ),
     },
     {
@@ -161,64 +169,94 @@ export default function AdminBlogClient({
         <div>
           <h2 className="text-2xl font-bold text-white">Blog & News</h2>
           <p className="text-sm text-gray-400 mt-1">
-            Manage your blog posts, news, and articles.
+            Manage your blog posts and tags.
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <Link
-            href="/admin/blog/create"
-            className="glass-btn whitespace-nowrap"
-          >
-            <Plus className="w-4 h-4" />
-            Create New Post
-          </Link>
-        </div>
-      </div>
-
-      <div className="glass-panel p-4 flex gap-4">
-        <input
-          type="text"
-          placeholder="Search blogs..."
-          value={search}
-          onChange={handleSearch}
-          className="w-full md:w-1/3 px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
-        />
-      </div>
-
-      <AdminTable
-        columns={columns}
-        data={initialBlogs}
-        isLoading={false}
-        keyExtractor={(blog) => blog._id || blog.slug}
-        emptyMessage="No blogs found. Create one to get started."
-      />
-
-      {totalPages > 1 && (
-        <div className="flex justify-center gap-2 mt-6">
-          {Array.from({ length: totalPages }).map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => handlePageChange(idx + 1)}
-              className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${
-                currentPage === idx + 1
-                  ? "bg-purple-600 text-white"
-                  : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
-              }`}
+          {activeTab === "posts" ? (
+            <Link
+              href="/admin/blog/create"
+              className="glass-btn whitespace-nowrap"
             >
-              {idx + 1}
+              <Plus className="w-4 h-4" /> Create New Post
+            </Link>
+          ) : (
+            <button
+              onClick={() => setTriggerCreateTag((prev) => prev + 1)}
+              className="glass-btn whitespace-nowrap"
+            >
+              <Plus className="w-4 h-4" /> Add Tag
             </button>
-          ))}
+          )}
         </div>
-      )}
+      </div>
 
-      <DeleteModal
-        isOpen={!!deleteTarget}
-        onClose={() => setDeleteTarget(null)}
-        onConfirm={confirmDelete}
-        isLoading={isDeleting}
-        title="Delete Blog Post"
-        description="Are you sure you want to delete this blog post? It will be permanently removed from the database."
-      />
+      <div className="flex items-center justify-between border-b border-white/10 pb-4">
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => {
+              setActiveTab("posts");
+            }}
+            className={`px-4 py-2 rounded-xl text-sm font-medium outline-none focus:outline-none transition-all flex items-center gap-2 ${
+              activeTab === "posts"
+                ? "bg-white/10 text-white border border-white/10"
+                : "text-gray-400 hover:text-white border border-transparent"
+            }`}
+          >
+            <FileText className="w-4 h-4" />
+            Posts
+          </button>
+          <button
+            onClick={() => {
+              setActiveTab("tags");
+            }}
+            className={`px-4 py-2 rounded-xl text-sm font-medium outline-none focus:outline-none transition-all flex items-center gap-2 ${
+              activeTab === "tags"
+                ? "bg-white/10 text-white border border-white/10"
+                : "text-gray-400 hover:text-white border border-transparent"
+            }`}
+          >
+            <Tag className="w-4 h-4" />
+            Tags
+          </button>
+        </div>
+      </div>
+
+      {activeTab === "posts" ? (
+        <>
+          <div className="glass-panel p-4 flex gap-4 mb-6">
+            <AdminSearch placeholder="Search posts..." />
+          </div>
+
+          <AdminTable
+            columns={columns}
+            data={initialBlogs}
+            isLoading={false}
+            keyExtractor={(blog) => blog._id || blog.slug}
+            emptyMessage="No blogs found. Create one to get started."
+          />
+
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+
+          <DeleteModal
+            isOpen={!!deleteTarget}
+            onClose={() => setDeleteTarget(null)}
+            onConfirm={confirmDelete}
+            isLoading={isDeleting}
+            title="Delete Blog Post"
+            description="Are you sure you want to delete this blog post? It will be permanently removed from the database."
+          />
+        </>
+      ) : (
+        <BlogTagManager
+          initialTags={initialTags}
+          triggerCreate={triggerCreateTag}
+        />
+      )}
     </div>
   );
 }

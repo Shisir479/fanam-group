@@ -20,7 +20,9 @@ export interface News {
 
 // ---------------- Admin API ---------------- //
 
-export const getNewsByAdmin = async (params: { page?: number; limit?: number; search?: string } = {}) => {
+export const getNewsByAdmin = async (
+  params: { page?: number; limit?: number; search?: string } = {},
+) => {
   const query = new URLSearchParams();
   if (params.page) query.append("page", params.page.toString());
   if (params.limit) query.append("limit", params.limit.toString());
@@ -67,7 +69,9 @@ export const deleteNewsByAdmin = async (id: string) => {
 
 // ---------------- Public API ---------------- //
 
-export const getNewsPublic = async (params: { page?: number; limit?: number; search?: string } = {}) => {
+export const getNewsPublic = async (
+  params: { page?: number; limit?: number; search?: string } = {},
+) => {
   const query = new URLSearchParams();
   if (params.page) query.append("page", params.page.toString());
   if (params.limit) query.append("limit", params.limit.toString());

@@ -1,11 +1,22 @@
 import { constructMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
-import { Briefcase, MapPin, Clock, ArrowLeft, Building, CheckCircle2 } from "lucide-react";
+import {
+  Briefcase,
+  MapPin,
+  Clock,
+  ArrowLeft,
+  Building,
+  CheckCircle2,
+} from "lucide-react";
 import Link from "next/link";
 import { getJobById } from "@/services/job.service";
 import JobDetailsClient from "@/components/careers/JobDetailsClient";
 
-export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const resolvedParams = await params;
   try {
     const res = await getJobById(resolvedParams.id);
@@ -20,7 +31,11 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   }
 }
 
-export default async function JobDetailsPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function JobDetailsPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const resolvedParams = await params;
   let job = null;
 
@@ -40,7 +55,10 @@ export default async function JobDetailsPage({ params }: { params: Promise<{ id:
       {/* Job Header */}
       <section className="bg-white py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-          <Link href="/careers" className="inline-flex items-center gap-2 text-gray-400 text-sm font-medium hover:text-gray-900 transition-colors mb-10">
+          <Link
+            href="/careers"
+            className="inline-flex items-center gap-2 text-gray-400 text-sm font-medium hover:text-gray-900 transition-colors mb-10"
+          >
             <ArrowLeft className="w-4 h-4" /> Back to Careers
           </Link>
 
@@ -59,18 +77,22 @@ export default async function JobDetailsPage({ params }: { params: Promise<{ id:
                 )}
               </div>
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 tracking-tight">{job.jobTitle}</h1>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
+                {job.jobTitle}
+              </h1>
 
               <div className="flex flex-wrap gap-3 mt-4">
                 <span className="flex items-center gap-1.5 text-gray-700 bg-white px-3.5 py-1.5 rounded-full text-sm font-medium border border-gray-200">
                   <MapPin className="w-4 h-4 text-blue-500" /> {job.location}
                 </span>
                 <span className="flex items-center gap-1.5 text-gray-700 bg-white px-3.5 py-1.5 rounded-full text-sm font-medium border border-gray-200">
-                  <Briefcase className="w-4 h-4 text-emerald-500" /> {job.employmentType}
+                  <Briefcase className="w-4 h-4 text-emerald-500" />{" "}
+                  {job.employmentType}
                 </span>
                 {job.workMode && (
                   <span className="flex items-center gap-1.5 text-gray-700 bg-white px-3.5 py-1.5 rounded-full text-sm font-medium border border-gray-200">
-                    <Building className="w-4 h-4 text-indigo-500" /> {job.workMode}
+                    <Building className="w-4 h-4 text-indigo-500" />{" "}
+                    {job.workMode}
                   </span>
                 )}
               </div>
@@ -85,7 +107,8 @@ export default async function JobDetailsPage({ params }: { params: Promise<{ id:
               </a>
               {job.applicationDeadline && (
                 <p className="text-sm text-red-600 font-semibold flex items-center justify-center lg:justify-end gap-1.5 w-full lg:w-auto bg-red-50 px-3 py-1.5 rounded-xl border border-red-100">
-                  <Clock className="w-4 h-4" /> Deadline: {new Date(job.applicationDeadline).toLocaleDateString()}
+                  <Clock className="w-4 h-4" /> Deadline:{" "}
+                  {new Date(job.applicationDeadline).toLocaleDateString()}
                 </p>
               )}
             </div>
@@ -102,14 +125,20 @@ export default async function JobDetailsPage({ params }: { params: Promise<{ id:
             <div className="space-y-8">
               {job.jobSummary && (
                 <div className="prose prose-lg max-w-none text-gray-600">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4 tracking-tight">Job Summary</h2>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4 tracking-tight">
+                    Job Summary
+                  </h2>
                   <p className="leading-relaxed">{job.jobSummary}</p>
                 </div>
               )}
 
               <div className="prose prose-lg max-w-none text-gray-600 prose-headings:text-gray-900 prose-headings:font-bold prose-headings:tracking-tight">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6 tracking-tight">Job Description</h2>
-                <div dangerouslySetInnerHTML={{ __html: job.jobDescription }}></div>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6 tracking-tight">
+                  Job Description
+                </h2>
+                <div
+                  dangerouslySetInnerHTML={{ __html: job.jobDescription }}
+                ></div>
               </div>
             </div>
 
@@ -118,10 +147,15 @@ export default async function JobDetailsPage({ params }: { params: Promise<{ id:
               <div className="space-y-10 pt-8 border-t border-gray-200/60">
                 {job.responsibilities && job.responsibilities.length > 0 && (
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6 tracking-tight">Key Responsibilities</h2>
+                    <h2 className="text-2xl font-bold text-gray-900 mb-6 tracking-tight">
+                      Key Responsibilities
+                    </h2>
                     <ul className="space-y-4">
                       {job.responsibilities.map((req: string, i: number) => (
-                        <li key={i} className="flex items-start gap-4 text-gray-600 text-lg">
+                        <li
+                          key={i}
+                          className="flex items-start gap-4 text-gray-600 text-lg"
+                        >
                           <span className="w-2 h-2 rounded-full bg-yellow-500 shrink-0 mt-2.5" />
                           <span className="leading-relaxed">{req}</span>
                         </li>
@@ -131,10 +165,15 @@ export default async function JobDetailsPage({ params }: { params: Promise<{ id:
                 )}
                 {job.skills && job.skills.length > 0 && (
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6 tracking-tight">Required Skills</h2>
+                    <h2 className="text-2xl font-bold text-gray-900 mb-6 tracking-tight">
+                      Required Skills
+                    </h2>
                     <div className="flex flex-wrap gap-2">
                       {job.skills.map((skill: string, i: number) => (
-                        <span key={i} className="px-4 py-2 bg-yellow-50 text-yellow-800 rounded-full font-medium text-sm border border-yellow-100">
+                        <span
+                          key={i}
+                          className="px-4 py-2 bg-yellow-50 text-yellow-800 rounded-full font-medium text-sm border border-yellow-100"
+                        >
                           {skill}
                         </span>
                       ))}
@@ -149,10 +188,15 @@ export default async function JobDetailsPage({ params }: { params: Promise<{ id:
               <div className="space-y-10 pt-8 border-t border-gray-200/60">
                 {job.benefits && job.benefits.length > 0 && (
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6 tracking-tight">Perks & Benefits</h2>
+                    <h2 className="text-2xl font-bold text-gray-900 mb-6 tracking-tight">
+                      Perks & Benefits
+                    </h2>
                     <ul className="grid sm:grid-cols-2 gap-x-8 gap-y-5">
                       {job.benefits.map((benefit: string, i: number) => (
-                        <li key={i} className="flex items-start gap-3 text-gray-600 text-lg">
+                        <li
+                          key={i}
+                          className="flex items-start gap-3 text-gray-600 text-lg"
+                        >
                           <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 mt-1" />
                           <span className="leading-relaxed">{benefit}</span>
                         </li>
@@ -162,8 +206,14 @@ export default async function JobDetailsPage({ params }: { params: Promise<{ id:
                 )}
                 {job.additionalInformation && (
                   <div className="prose prose-lg max-w-none text-gray-600 prose-headings:text-gray-900">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6 tracking-tight">Additional Information</h2>
-                    <div dangerouslySetInnerHTML={{ __html: job.additionalInformation }}></div>
+                    <h2 className="text-2xl font-bold text-gray-900 mb-6 tracking-tight">
+                      Additional Information
+                    </h2>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: job.additionalInformation,
+                      }}
+                    ></div>
                   </div>
                 )}
               </div>

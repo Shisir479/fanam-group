@@ -3,8 +3,11 @@ import { constructMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import EventDetailsClient from "./EventDetailsClient";
 
-
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   try {
     const res = await getEventBySlugPublic(slug);
@@ -16,11 +19,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       });
     }
   } catch (e) {}
-  
+
   return constructMetadata({ title: "Event Details" });
 }
 
-export default async function EventDetailsPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function EventDetailsPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   let event = null;
 

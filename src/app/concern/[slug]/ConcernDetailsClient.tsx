@@ -5,7 +5,11 @@ import Image from "next/image";
 import { ExternalLink, CheckCircle2 } from "lucide-react";
 import { ConcernType } from "@/services/concern.service";
 
-export default function ConcernDetailsClient({ concern }: { concern: ConcernType }) {
+export default function ConcernDetailsClient({
+  concern,
+}: {
+  concern: ConcernType;
+}) {
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">
       {/* Hero Section */}
@@ -34,13 +38,15 @@ export default function ConcernDetailsClient({ concern }: { concern: ConcernType
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white mb-6">
               <span className="w-2 h-2 rounded-full bg-[#f9c602] animate-pulse" />
-              <span className="text-sm font-medium tracking-wide">Business Concern</span>
+              <span className="text-sm font-medium tracking-wide">
+                Business Concern
+              </span>
             </div>
-            
+
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">
               {concern.name}
             </h1>
-            
+
             <p className="text-lg md:text-xl text-white/90 leading-relaxed max-w-2xl mb-8">
               {concern.shortDescription}
             </p>
@@ -62,7 +68,6 @@ export default function ConcernDetailsClient({ concern }: { concern: ConcernType
 
       <div className="container mx-auto px-6 md:px-20 py-20 max-w-5xl">
         <div className="space-y-20">
-          
           {/* Main Content */}
           <div className="space-y-20">
             {/* Overview */}
@@ -93,7 +98,7 @@ export default function ConcernDetailsClient({ concern }: { concern: ConcernType
                   Core Operations
                 </h2>
                 <div className="w-16 h-1 bg-[#f9c602] mb-8" />
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {concern.features.map((feature, idx) => (
                     <div
@@ -103,7 +108,9 @@ export default function ConcernDetailsClient({ concern }: { concern: ConcernType
                       <div className="w-12 h-12 bg-[#f9c602]/10 rounded-full flex items-center justify-center mb-6">
                         <CheckCircle2 className="w-6 h-6 text-[#f9c602]" />
                       </div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">{feature.title}</h3>
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">
+                        {feature.title}
+                      </h3>
                       <p className="text-gray-600">{feature.description}</p>
                     </div>
                   ))}
@@ -121,7 +128,10 @@ export default function ConcernDetailsClient({ concern }: { concern: ConcernType
                 className="space-y-16"
               >
                 {concern.projects.map((project) => (
-                  <div key={project.slug} className="pt-8 border-t border-gray-200 first:border-0 first:pt-0">
+                  <div
+                    key={project.slug}
+                    className="pt-8 border-t border-gray-200 first:border-0 first:pt-0"
+                  >
                     <div className="flex items-center justify-between mb-6">
                       <h2 className="text-3xl font-bold text-gray-900">
                         {project.name}
@@ -134,7 +144,7 @@ export default function ConcernDetailsClient({ concern }: { concern: ConcernType
                       )}
                     </div>
                     <div className="w-16 h-1 bg-[#f9c602] mb-8" />
-                    
+
                     <p className="text-lg text-gray-600 leading-relaxed mb-10">
                       {project.overview}
                     </p>
@@ -148,7 +158,9 @@ export default function ConcernDetailsClient({ concern }: { concern: ConcernType
                             className="flex items-center gap-3 p-4 rounded-xl bg-white border border-gray-100 shadow-sm"
                           >
                             <CheckCircle2 className="w-5 h-5 text-[#f9c602]" />
-                            <span className="font-bold text-gray-700">{feature}</span>
+                            <span className="font-bold text-gray-700">
+                              {feature}
+                            </span>
                           </div>
                         ))}
                       </div>
@@ -158,7 +170,10 @@ export default function ConcernDetailsClient({ concern }: { concern: ConcernType
                     {project.galleryUrls && project.galleryUrls.length > 0 && (
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {project.galleryUrls.map((imgObj, idx) => (
-                          <div key={idx} className="relative aspect-video rounded-2xl overflow-hidden group shadow-sm border border-gray-100">
+                          <div
+                            key={idx}
+                            className="relative aspect-video rounded-2xl overflow-hidden group shadow-sm border border-gray-100"
+                          >
                             <Image
                               src={imgObj.url}
                               alt={`${project.name} Gallery ${idx + 1}`}

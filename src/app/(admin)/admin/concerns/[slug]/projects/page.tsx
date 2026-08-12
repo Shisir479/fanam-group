@@ -9,7 +9,11 @@ export const metadata = constructMetadata({
   noIndex: true,
 });
 
-export default async function ConcernProjectsPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function ConcernProjectsPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const resolvedParams = await params;
   const { slug } = resolvedParams;
   let concern = null;

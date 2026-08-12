@@ -105,7 +105,9 @@ export default function AdminAwardsClient() {
     <div className="space-y-6 max-w-7xl mx-auto pb-24">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-white">Awards & Certifications</h2>
+          <h2 className="text-2xl font-bold text-white">
+            Awards & Certifications
+          </h2>
           <p className="text-sm text-gray-400 mt-1">
             Manage your company's awards, recognitions, and certificates.
           </p>
