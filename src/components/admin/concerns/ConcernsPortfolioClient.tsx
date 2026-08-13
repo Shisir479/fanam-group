@@ -12,7 +12,7 @@ export default function ConcernsPortfolioClient({
   concerns: ConcernType[];
 }) {
   return (
-    <div className="min-h-screen bg-white text-gray-900 pt-16 pb-24 overflow-hidden">
+    <div className="min-h-screen bg-white text-black pt-16 pb-24 overflow-hidden">
       {/* Premium Editorial Showcase */}
       <div className="flex flex-col gap-16 md:gap-24">
         {concerns?.map((concern, index) => {
@@ -71,7 +71,7 @@ export default function ConcernsPortfolioClient({
                     </span>
                   </div>
 
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 tracking-tight leading-tight">
+                  <h2 className="text-3xl md:text-4xl font-bold text-[#392F5F] mb-6 tracking-tight leading-tight">
                     {concern.name}
                   </h2>
 
@@ -82,7 +82,7 @@ export default function ConcernsPortfolioClient({
                   <div className="flex flex-col sm:flex-row gap-4">
                     <Link
                       href={`/concern/${concern.slug}`}
-                      className="group flex items-center justify-center gap-2 bg-gray-900 hover:bg-[#f9c602] text-white px-6 py-3 rounded-full font-medium text-sm tracking-wide transition-all duration-300"
+                      className="group flex items-center justify-center gap-2 bg-[#f9c602] text-[#392F5F] hover:bg-yellow-400 px-6 py-3 rounded-full font-medium text-sm tracking-wide transition-all duration-300"
                     >
                       Discover More
                       <ArrowRight
@@ -96,7 +96,7 @@ export default function ConcernsPortfolioClient({
                         href={concern.websiteUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group flex items-center justify-center gap-2 bg-transparent hover:bg-gray-50 text-gray-900 border border-gray-200 px-6 py-3 rounded-full font-medium text-sm tracking-wide transition-all duration-300"
+                        className="group flex items-center justify-center gap-2 bg-transparent hover:bg-[#392F5F] hover:text-white text-[#392F5F] border border-[#392F5F] px-6 py-3 rounded-full font-medium text-sm tracking-wide transition-all duration-300"
                       >
                         Visit Site
                         <ExternalLink size={18} />

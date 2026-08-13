@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { TextRoll } from "@/components/ui/skiper-ui/skiper58";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
@@ -105,9 +106,9 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
                 href="/"
                 className={`relative group h-full flex items-center ${pathname === "/" ? "text-[#f9c602] font-extrabold" : "transition-colors"}`}
               >
-                Home
+                <TextRoll>Home</TextRoll>
                 <span
-                  className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-left transition-transform duration-600 ease-out ${pathname === "/" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                  className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-center transition-transform duration-600 ease-out ${pathname === "/" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
                 ></span>
               </Link>
 
@@ -115,9 +116,9 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
                 href="/about"
                 className={`relative group h-full flex items-center ${pathname.startsWith("/about") ? "text-[#f9c602] font-extrabold" : "transition-colors"}`}
               >
-                About Us
+                <TextRoll>About Us</TextRoll>
                 <span
-                  className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/about") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                  className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-center transition-transform duration-600 ease-out ${pathname.startsWith("/about") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
                 ></span>
               </Link>
 
@@ -125,9 +126,9 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
                 href="/concern"
                 className={`relative group h-full flex items-center ${pathname.startsWith("/concern") ? "text-[#f9c602] font-extrabold" : "transition-colors"}`}
               >
-                Concern
+                <TextRoll>Concern</TextRoll>
                 <span
-                  className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/concern") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                  className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-center transition-transform duration-600 ease-out ${pathname.startsWith("/concern") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
                 ></span>
               </Link>
 
@@ -135,9 +136,9 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
                 href="/news-events"
                 className={`relative group h-full flex items-center whitespace-nowrap ${pathname.startsWith("/news-events") ? "text-[#f9c602] font-extrabold" : "transition-colors"}`}
               >
-                News & Events
+                <TextRoll>News & Events</TextRoll>
                 <span
-                  className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/news-events") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                  className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-center transition-transform duration-600 ease-out ${pathname.startsWith("/news-events") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
                 ></span>
               </Link>
 
@@ -145,9 +146,9 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
                 href="/blog"
                 className={`relative group h-full flex items-center ${pathname.startsWith("/blog") ? "text-[#f9c602] font-extrabold" : "transition-colors"}`}
               >
-                Blogs
+                <TextRoll>Blogs</TextRoll>
                 <span
-                  className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/blog") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                  className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-center transition-transform duration-600 ease-out ${pathname.startsWith("/blog") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
                 ></span>
               </Link>
 
@@ -155,9 +156,9 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
                 href="/careers"
                 className={`relative group h-full flex items-center ${pathname.startsWith("/careers") ? "text-[#f9c602] font-extrabold" : "transition-colors"}`}
               >
-                Career
+                <TextRoll>Career</TextRoll>
                 <span
-                  className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/careers") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                  className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-center transition-transform duration-600 ease-out ${pathname.startsWith("/careers") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
                 ></span>
               </Link>
 
@@ -166,9 +167,9 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
                 <span
                   className={`h-full flex items-center cursor-pointer ${pathname.startsWith("/legal") || pathname.startsWith("/contact") ? "text-[#f9c602] font-extrabold" : "transition-colors"}`}
                 >
-                  More
+                  <TextRoll>More</TextRoll>
                   <span
-                    className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-left transition-transform duration-600 ease-out ${pathname.startsWith("/legal") || pathname.startsWith("/contact") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                    className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-center transition-transform duration-600 ease-out ${pathname.startsWith("/legal") || pathname.startsWith("/contact") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
                   ></span>
                 </span>
                 <div className="absolute top-full right-0 min-w-[240px] bg-white shadow-xl border border-gray-100 flex flex-col opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
@@ -179,7 +180,7 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
                     Contact Us
                   </Link>
                   <Link
-                    href="/legal/faq"
+                    href="/faq"
                     className={`px-6 py-5 text-sm font-semibold hover:text-gray-900 hover:bg-gray-50 border-b border-gray-100 transition-colors ${pathname === "/legal/faq" ? "text-gray-900 bg-gray-50" : "text-gray-600"}`}
                   >
                     FAQ

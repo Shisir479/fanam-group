@@ -21,26 +21,26 @@ export default async function CareersPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-50 text-gray-900">
+    <main className="min-h-screen bg-white text-black">
       {/* Hero Section */}
       <section className="bg-white pt-20 pb-12 overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
             {/* Left Content */}
             <div className="lg:w-1/2 flex flex-col items-start text-left">
-              <h1 className="text-4xl lg:text-6xl font-semibold text-gray-900 leading-[1.1] mb-5 tracking-tight">
+              <h1 className="text-4xl lg:text-6xl font-semibold text-black leading-[1.1] mb-5 tracking-tight">
                 Be Yourself <br /> And Join Us Today.
               </h1>
-              <p className="text-gray-500 text-base lg:text-lg leading-relaxed max-w-lg mb-8">
+              <p className="text-gray-600 text-base lg:text-lg leading-relaxed max-w-lg mb-8">
                 From meaningful products to innovative and long-lasting
                 companies, we strongly believe that nothing significant was ever
                 achieved by oneself — create the future of commerce with us!
               </p>
               <a
                 href="#openings"
-                className="inline-flex items-center justify-center gap-3 bg-gray-900 text-white px-7 py-3.5 rounded-full font-bold text-sm tracking-wide hover:bg-gray-800 transition-colors shadow-lg shadow-gray-900/20"
+                className="inline-flex items-center justify-center gap-3 bg-[#f9c602] text-black px-7 py-3.5 rounded-full font-bold text-sm tracking-wide hover:bg-yellow-400 transition-colors shadow-lg shadow-yellow-500/20"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-white"></span> SEE
+                <span className="w-1.5 h-1.5 rounded-full bg-black"></span> SEE
                 OPEN ROLES
               </a>
             </div>
@@ -92,12 +92,16 @@ export default async function CareersPage() {
       </section>
 
       {/* Why Join Us */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-white border-t border-black/10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl font-bold text-black mb-4">
               Why Fanam Group?
             </h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              We're looking for individuals who are passionate, driven, and
+              ready to make an impact.
+            </p>
           </div>
           <div className="grid md:grid-cols-3 gap-10">
             {[

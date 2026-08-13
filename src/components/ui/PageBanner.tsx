@@ -1,7 +1,17 @@
+"use client";
+
 import { ReactNode } from "react";
 import { BlockReveal } from "@/components/ui/BlockReveal";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+import { Home } from "lucide-react";
+
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
 
 interface PageBannerProps {
   title: ReactNode;
@@ -9,7 +19,16 @@ interface PageBannerProps {
   bgImage: string;
   altText?: string;
   children?: ReactNode;
+  breadcrumbs?: BreadcrumbItem[];
 }
+
+// Helper function to capitalize and format route segments
+const formatSegment = (segment: string) => {
+  return segment
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+};
 
 export function PageBanner({
   title,
@@ -17,10 +36,33 @@ export function PageBanner({
   bgImage,
   altText = "Banner Image",
   children,
+  breadcrumbs,
 }: PageBannerProps) {
+  const pathname = usePathname();
+
+  // Dynamically generate breadcrumbs if not provided
+  let displayBreadcrumbs = breadcrumbs;
+
+  if (!displayBreadcrumbs) {
+    displayBreadcrumbs = [{ label: "Home", href: "/" }];
+
+    // e.g. pathname = "/news-events/my-post"
+    const segments = pathname.split("/").filter(Boolean);
+
+    let currentPath = "";
+    segments.forEach((segment, index) => {
+      currentPath += `/${segment}`;
+      const isLast = index === segments.length - 1;
+      displayBreadcrumbs!.push({
+        label: formatSegment(segment),
+        href: isLast ? undefined : currentPath,
+      });
+    });
+  }
+
   return (
-    <section className="relative w-full h-[40vh] min-h-[300px] md:min-h-[400px] flex items-center justify-center bg-gray-900 overflow-hidden">
-      {/* Background with light yellow shade overlay */}
+    <section className="relative w-full h-[40vh] min-h-[350px] md:min-h-[350px] flex items-center justify-center bg-gray-900 overflow-hidden">
+      {/* Background Image & Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
           src={bgImage}
@@ -29,37 +71,62 @@ export function PageBanner({
           className="object-cover"
           priority
         />
-        {/* Yellow/Gold Shade Overlay */}
+        {/* Subtle Golden/Yellow Shade Overlay */}
         <div className="absolute inset-0 bg-[#f9c602]/30 z-10" />
-        <div className="absolute inset-0 bg-black/40 z-10" />
+        <div className="absolute inset-0 bg-black/70 z-10" />
       </div>
 
-      <div className="container mx-auto px-5 md:px-16 relative z-20 flex flex-col items-center justify-center pt-10">
-        <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
+      <div className="container mx-auto px-5 md:px-16 relative z-20 h-full flex flex-col pt-28 md:pt-36 pb-12">
+        {/* Breadcrumb at Top Left */}
+        <div className="w-full flex justify-start mb-auto">
+          <div className="flex items-center flex-wrap gap-2 text-white/90 text-[13px] md:text-[15px] font-medium drop-shadow-sm">
+            {displayBreadcrumbs.map((crumb, index) => (
+              <div key={index} className="flex items-center gap-2">
+                {crumb.href ? (
+                  <Link
+                    href={crumb.href}
+                    className="flex items-center gap-1.5 hover:text-white text-white/80 transition-colors"
+                  >
+                    {crumb.label === "Home" && (
+                      <Home size={14} className="mb-[1px]" />
+                    )}
+                    {crumb.label}
+                  </Link>
+                ) : (
+                  <span className="flex items-center gap-1.5 text-white">
+                    {crumb.label === "Home" && (
+                      <Home size={14} className="mb-[1px]" />
+                    )}
+                    {crumb.label}
+                  </span>
+                )}
+
+                {index < displayBreadcrumbs.length - 1 && (
+                  <span className="text-white/60">/</span>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Centered Content */}
+        <div className="flex-1 flex flex-col items-center justify-center w-full max-w-4xl mx-auto">
           {/* Centered Title */}
           <div className="flex justify-center w-full">
-            <BlockReveal color="#ffffff" delay={0}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-wide drop-shadow-md mb-4 text-center">
-                {title}
-              </h1>
-            </BlockReveal>
+            <h1 className="text-4xl md:text-5xl font-bold text-white uppercase leading-tight tracking-wide drop-shadow-md mb-2 text-center">
+              {title}
+              {typeof title === "string" && !title.endsWith(".") ? "." : ""}
+            </h1>
           </div>
 
-          {/* Breadcrumb */}
-          <div className="flex justify-center w-full mt-2">
-            <BlockReveal color="#ffffff" delay={0.2}>
-              <div className="flex items-center justify-center gap-4 text-white text-[11px] md:text-[13px] font-bold tracking-[0.2em] uppercase drop-shadow-sm">
-                <Link
-                  href="/"
-                  className="hover:text-[#f9c602] transition-colors"
-                >
-                  Homepage
-                </Link>
-                <span>•</span>
-                <span className="text-white/80">{title}</span>
-              </div>
-            </BlockReveal>
-          </div>
+          {/* Subtitle */}
+          {subtitle && (
+            <div className="flex justify-center w-full mt-1">
+              <p className="text-base md:text-xl lg:text-2xl text-white uppercase tracking-wider drop-shadow-md text-center font-medium">
+                {subtitle}
+              </p>
+            </div>
+          )}
 
           {/* Optional Description / Children */}
           {children && (

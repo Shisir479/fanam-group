@@ -9,27 +9,27 @@ interface MetadataProps {
 }
 
 export function constructMetadata({
-  title = "Fanam Group - Luxury Real Estate",
-  description = "Fanam Group offers bespoke enclaves with finesse in architecture and design. Discover your dream home with us.",
-  image = "/assets/images/logo/logo.png",
-  icons = "/icon.png",
+  title,
+  description,
+  image,
+  icons,
   noIndex = false,
 }: MetadataProps = {}): Metadata {
   return {
-    title,
-    description,
+    ...(title && { title }),
+    ...(description && { description }),
     openGraph: {
-      title,
-      description,
-      images: [{ url: image }],
+      ...(title && { title }),
+      ...(description && { description }),
+      ...(image && { images: [{ url: image }] }),
     },
     twitter: {
       card: "summary_large_image",
-      title,
-      description,
-      images: [image],
+      ...(title && { title }),
+      ...(description && { description }),
+      ...(image && { images: [image] }),
     },
-    icons,
+    ...(icons && { icons }),
     ...(noIndex && {
       robots: {
         index: false,

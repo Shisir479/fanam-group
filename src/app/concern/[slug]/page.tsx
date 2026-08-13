@@ -2,7 +2,7 @@ import { getConcernBySlugPublic } from "@/services/concern.service";
 
 import { constructMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
-import ConcernDetailsClient from "./ConcernDetailsClient";
+import ConcernDetailsClient from "@/components/admin/concerns/ConcernDetailsClient";
 
 export async function generateMetadata({
   params,
@@ -14,8 +14,8 @@ export async function generateMetadata({
     const res = await getConcernBySlugPublic(slug);
     if (res.success && res.data) {
       return constructMetadata({
-        title: `${res.data.name} - Fanam Group`,
-        description: res.data.shortDescription,
+        title: res.data.metaTitle,
+        description: res.data.metaDescription,
         image: res.data.heroImage?.url,
       });
     }

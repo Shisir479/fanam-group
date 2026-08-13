@@ -3,7 +3,7 @@ import { getBannerByPageAdmin } from "@/services/banner.service";
 import { PageBanner } from "@/components/ui/PageBanner";
 
 import { constructMetadata } from "@/lib/metadata";
-import ConcernsPortfolioClient from "./ConcernsPortfolioClient";
+import ConcernsPortfolioClient from "@/components/admin/concerns/ConcernsPortfolioClient";
 
 export const metadata = constructMetadata({
   title: "Our Ecosystem - Fanam Group Concerns",
@@ -32,6 +32,7 @@ export default async function ConcernsPortfolioPage() {
     <main className="flex min-h-screen flex-col bg-white">
       <PageBanner
         title={banner?.title || "Our Ecosystem"}
+        subtitle={banner?.eyebrowText || "Discover Our Companies"}
         bgImage={
           banner?.backgroundImage ||
           "https://images.unsplash.com/photo-1560179707-f14e90ef3623?q=80&w=2070"

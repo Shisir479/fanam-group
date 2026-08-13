@@ -58,7 +58,7 @@ export default function DynamicAdminForm({
   const [formData, setFormData] = useState<Record<string, any>>(
     initialValues || {},
   );
-  const { isUploading, uploadSingle } = useImageUpload();
+  const { isUploading, uploadSingle, removeImage } = useImageUpload();
 
   const generateSlug = (text: string) => {
     return text
@@ -232,6 +232,13 @@ export default function DynamicAdminForm({
                   try {
                     const imageData = await uploadSingle(file);
                     if (imageData) {
+                      const oldId = field.imageIdKey
+                        ? formData[field.imageIdKey]
+                        : null;
+                      if (oldId && oldId !== imageData._id) {
+                        await removeImage(oldId, true);
+                      }
+
                       const updates: Record<string, any> = {
                         [field.name]: imageData.url,
                       };

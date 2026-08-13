@@ -41,9 +41,9 @@ export function BlogCardLight({ post }: { post: any }) {
   const imageUrl = post.image || post.cover?.url || "/placeholder.jpg";
 
   return (
-    <article className="group relative flex flex-col h-full bg-white rounded-[2rem] border border-gray-100 overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(0,59,109,0.15)]">
+    <article className="group relative flex flex-col h-full bg-white rounded-[2rem] border border-black/10 overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(0,59,109,0.15)]">
       {/* Decorative background glow on hover */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#003b6d]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-[#f9c602]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
 
       <Link
         href={`/blog/${post.slug}`}
@@ -59,7 +59,7 @@ export function BlogCardLight({ post }: { post: any }) {
 
           {/* Floating Tag */}
           <div className="absolute top-4 left-4 z-20 transition-transform duration-500 transform group-hover:-translate-y-1">
-            <span className="px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-[#003b6d] text-[10px] font-black uppercase tracking-[0.15em] shadow-lg border border-white/20">
+            <span className="px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-[#f9c602] text-[10px] font-black uppercase tracking-[0.15em] shadow-lg border border-white/20">
               {tagName}
             </span>
           </div>
@@ -72,7 +72,7 @@ export function BlogCardLight({ post }: { post: any }) {
         </div>
 
         <Link href={`/blog/${post.slug}`} className="inline-block mb-4">
-          <h2 className="text-2xl font-bold text-gray-900 leading-[1.3] group-hover:text-[#003b6d] transition-colors duration-300 line-clamp-2">
+          <h2 className="text-2xl font-bold text-black leading-[1.3] group-hover:text-[#f9c602] transition-colors duration-300 line-clamp-2">
             {post.title}
           </h2>
         </Link>
@@ -81,13 +81,13 @@ export function BlogCardLight({ post }: { post: any }) {
           {post.excerpt}
         </p>
 
-        <div className="mt-auto pt-6 border-t border-gray-50 flex items-center justify-between">
+        <div className="mt-auto pt-6 border-t border-black/10 flex items-center justify-between">
           <Link
             href={`/blog/${post.slug}`}
-            className="inline-flex items-center gap-2 text-[13px] font-bold text-[#003b6d] uppercase tracking-widest group/link"
+            className="inline-flex items-center gap-2 text-[13px] font-bold text-[#f9c602] uppercase tracking-widest group/link"
           >
             Read Story
-            <span className="w-6 h-6 rounded-full bg-[#003b6d]/10 flex items-center justify-center group-hover/link:bg-[#003b6d] group-hover/link:text-white transition-all duration-300">
+            <span className="w-6 h-6 rounded-full bg-[#f9c602]/10 flex items-center justify-center group-hover/link:bg-[#f9c602] group-hover/link:text-white transition-all duration-300">
               <svg
                 width="12"
                 height="12"
@@ -121,7 +121,7 @@ export function BlogCardSplitLight({ post }: { post: any }) {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group flex flex-col md:flex-row bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500 min-h-[450px]"
+      className="group flex flex-col md:flex-row bg-white rounded-3xl overflow-hidden border border-black/10 shadow-sm hover:shadow-2xl transition-all duration-500 min-h-[450px]"
     >
       <div className="w-full md:w-1/2 p-8 md:p-16 flex flex-col justify-center">
         <div className="flex mb-8">
@@ -129,14 +129,14 @@ export function BlogCardSplitLight({ post }: { post: any }) {
             {tagName}
           </span>
         </div>
-        <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 leading-tight mb-6 group-hover:text-[#f9c602] transition-colors line-clamp-3">
+        <h2 className="text-3xl md:text-4xl font-semibold text-black leading-tight mb-6 group-hover:text-[#f9c602] transition-colors line-clamp-3">
           {post.title}
         </h2>
         <p className="text-gray-500 text-lg mb-10 line-clamp-2">
           {post.excerpt}
         </p>
         <div>
-          <span className="inline-flex items-center justify-center px-8 py-3 rounded-xl border border-gray-200 text-gray-900 text-sm font-semibold hover:bg-gray-50 transition-colors">
+          <span className="inline-flex items-center justify-center px-8 py-3 rounded-xl border border-gray-200 text-black text-sm font-semibold hover:bg-gray-50 transition-colors">
             Read now
           </span>
         </div>
@@ -214,7 +214,7 @@ export function MagazineMainFeature({ post }: { post: any }) {
       <span className="text-[#f9c602] text-[11px] font-bold uppercase tracking-[0.15em] mb-4">
         {tagName}
       </span>
-      <h2 className="text-3xl md:text-5xl font-black text-gray-900 leading-[1.1] mb-4  transition-colors">
+      <h2 className="text-3xl md:text-5xl font-black text-black leading-[1.1] mb-4  transition-colors">
         {post.title}
       </h2>
       <p className="text-gray-500 text-sm">{post.date}</p>
@@ -242,7 +242,7 @@ export function MagazineSideFeature({ post }: { post: any }) {
       <span className="text-[#f9c602] text-[10px] font-bold uppercase tracking-[0.15em] mb-2">
         {tagName}
       </span>
-      <h3 className="text-xl font-bold text-gray-900 leading-[1.2] mb-2 transition-colors">
+      <h3 className="text-xl font-bold text-black leading-[1.2] mb-2 transition-colors">
         {post.title}
       </h3>
       <p className="text-gray-500 text-xs">{post.date}</p>
@@ -256,10 +256,10 @@ export function MagazineListFeature({ post }: { post: any }) {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group flex items-start gap-4 py-5 border-b border-gray-100 last:border-0"
+      className="group flex items-start gap-4 py-5 border-b border-black/10 last:border-0"
     >
       <div className="flex-1 pr-2">
-        <h4 className="text-sm font-bold text-gray-900 leading-[1.3] mb-2  transition-colors line-clamp-3">
+        <h4 className="text-sm font-bold text-black leading-[1.3] mb-2  transition-colors line-clamp-3">
           {post.title}
         </h4>
         <p className="text-gray-400 text-[11px]">{post.date}</p>
@@ -298,10 +298,10 @@ export function BlogCardCompact({ post }: { post: any }) {
             {tagName}
           </span>
         </div>
-        <h3 className="text-[17px] font-bold text-gray-900 leading-snug mb-3 group-hover:text-[#f9c602] transition-colors line-clamp-3">
+        <h3 className="text-[17px] font-bold text-black leading-snug mb-3 transition-colors line-clamp-3">
           {post.title}
         </h3>
-        <p className="text-gray-500 text-[12px] font-medium mt-auto border-t border-gray-50 pt-3 flex items-center gap-2">
+        <p className="text-gray-500 text-[12px] font-medium mt-auto border-t border-black/10 pt-3 flex items-center gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-3.5 w-3.5"

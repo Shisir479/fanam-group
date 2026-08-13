@@ -307,7 +307,7 @@ export function ContactView({ data, banner }: { data?: any; banner?: any }) {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="bg-gray-900 rounded-3xl shadow-xl overflow-hidden p-8 md:p-12 text-white relative"
+          className="bg-[#392F5F] rounded-3xl shadow-xl overflow-hidden p-8 md:p-12 text-white relative"
         >
           {/* Abstract Shapes for premium dark aesthetic */}
           <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/3 w-64 h-64 bg-[#f9c602]/10 rounded-full blur-3xl pointer-events-none"></div>

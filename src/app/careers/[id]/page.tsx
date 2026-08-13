@@ -101,7 +101,7 @@ export default async function JobDetailsPage({
             <div className="shrink-0 flex flex-col items-start lg:items-end gap-3 mt-6 lg:mt-0">
               <a
                 href="#apply-section"
-                className="bg-yellow-500 text-gray-900 font-bold px-8 py-3.5 rounded-full hover:bg-yellow-400 transition-colors shadow-sm text-center w-full lg:w-auto"
+                className="bg-[#392F5F] text-white font-bold px-8 py-3.5 rounded-full hover:bg-yellow-400 transition-colors shadow-sm text-center w-full lg:w-auto"
               >
                 Apply for this Position
               </a>

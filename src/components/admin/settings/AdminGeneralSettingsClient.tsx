@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { updateBrandingSettingsAdmin } from "@/services/settings.service";
 import { useImageUpload } from "@/hooks/useImageUpload";
-import { Save, Loader2, ImagePlus, Trash2 } from "lucide-react";
+import { Save, Loader2, UploadCloud, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -149,7 +149,7 @@ export default function AdminGeneralSettingsClient({
     fetchSettings();
   }, []);
 
-  const { uploadSingle, isUploading } = useImageUpload();
+  const { uploadSingle, isUploading, removeImage } = useImageUpload();
   const [uploadingLogo, setUploadingLogo] = useState(false);
   const [uploadingFavicon, setUploadingFavicon] = useState(false);
 
@@ -168,6 +168,9 @@ export default function AdminGeneralSettingsClient({
     try {
       const res = await uploadSingle(file);
       if (res && res._id) {
+        if (logo && logo._id && logo._id !== res._id) {
+          await removeImage(logo._id, true);
+        }
         setLogo({ _id: res._id, url: res.url });
         toast.success("Logo uploaded successfully");
       }
@@ -187,6 +190,9 @@ export default function AdminGeneralSettingsClient({
     try {
       const res = await uploadSingle(file);
       if (res && res._id) {
+        if (favicon && favicon._id && favicon._id !== res._id) {
+          await removeImage(favicon._id, true);
+        }
         setFavicon({ _id: res._id, url: res.url });
       }
     } catch (error) {
@@ -261,7 +267,7 @@ export default function AdminGeneralSettingsClient({
 
   return (
     <div className="space-y-6 max-w-[1400px] pb-10 text-white">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-md">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 glass-panel p-6 rounded-2xl">
         <div>
           <h2 className="text-2xl font-bold text-white tracking-tight">
             General Settings
@@ -293,7 +299,7 @@ export default function AdminGeneralSettingsClient({
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-6">
             {/* Main Settings */}
-            <div className="bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-md">
+            <div className="glass-panel p-6 rounded-2xl">
               <h3 className="text-lg font-bold text-white mb-4">
                 Core Settings
               </h3>
@@ -307,7 +313,7 @@ export default function AdminGeneralSettingsClient({
                     name="businessName"
                     value={mainSettings.businessName}
                     onChange={handleMainChange}
-                    className="w-full px-4 py-2 bg-black/30 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
                   />
                 </div>
                 <div>
@@ -319,14 +325,14 @@ export default function AdminGeneralSettingsClient({
                     name="domainName"
                     value={mainSettings.domainName}
                     onChange={handleMainChange}
-                    className="w-full px-4 py-2 bg-black/30 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
                   />
                 </div>
               </div>
             </div>
 
             {/* SEO Settings */}
-            <div className="bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-md">
+            <div className="glass-panel p-6 rounded-2xl">
               <h3 className="text-lg font-bold text-white mb-4">
                 SEO Settings
               </h3>
@@ -340,7 +346,7 @@ export default function AdminGeneralSettingsClient({
                     name="metaTitle"
                     value={mainSettings.seo.metaTitle}
                     onChange={handleSeoChange}
-                    className="w-full px-4 py-2 bg-black/30 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
                   />
                 </div>
                 <div>
@@ -352,7 +358,7 @@ export default function AdminGeneralSettingsClient({
                     value={mainSettings.seo.metaDescription}
                     onChange={handleSeoChange}
                     rows={2}
-                    className="w-full px-4 py-2 bg-black/30 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
                   />
                 </div>
                 <div>
@@ -364,7 +370,7 @@ export default function AdminGeneralSettingsClient({
                     value={mainSettings.seo.description}
                     onChange={handleSeoChange}
                     rows={2}
-                    className="w-full px-4 py-2 bg-black/30 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
                   />
                 </div>
                 <div>
@@ -384,13 +390,13 @@ export default function AdminGeneralSettingsClient({
                         },
                       })
                     }
-                    className="w-full px-4 py-2 bg-black/30 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
                   />
                 </div>
               </div>
             </div>
             {/* Social Links */}
-            <div className="bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-md">
+            <div className="glass-panel p-6 rounded-2xl">
               <h3 className="text-lg font-bold text-white mb-4">
                 Social Links
               </h3>
@@ -404,7 +410,7 @@ export default function AdminGeneralSettingsClient({
                     name="facebook"
                     value={socialLinks.facebook}
                     onChange={handleSocialChange}
-                    className="w-full px-4 py-2 bg-black/30 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
                     placeholder="https://facebook.com/..."
                   />
                 </div>
@@ -417,7 +423,7 @@ export default function AdminGeneralSettingsClient({
                     name="instagram"
                     value={socialLinks.instagram}
                     onChange={handleSocialChange}
-                    className="w-full px-4 py-2 bg-black/30 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
                     placeholder="https://instagram.com/..."
                   />
                 </div>
@@ -430,7 +436,7 @@ export default function AdminGeneralSettingsClient({
                     name="linkedin"
                     value={socialLinks.linkedin}
                     onChange={handleSocialChange}
-                    className="w-full px-4 py-2 bg-black/30 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
                     placeholder="https://linkedin.com/..."
                   />
                 </div>
@@ -443,7 +449,7 @@ export default function AdminGeneralSettingsClient({
                     name="twitter"
                     value={socialLinks.twitter}
                     onChange={handleSocialChange}
-                    className="w-full px-4 py-2 bg-black/30 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
                     placeholder="https://twitter.com/..."
                   />
                 </div>
@@ -456,7 +462,7 @@ export default function AdminGeneralSettingsClient({
                     name="youtube"
                     value={socialLinks.youtube}
                     onChange={handleSocialChange}
-                    className="w-full px-4 py-2 bg-black/30 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
                     placeholder="https://youtube.com/..."
                   />
                 </div>
@@ -466,99 +472,103 @@ export default function AdminGeneralSettingsClient({
 
           <div className="space-y-6">
             {/* Logo Upload */}
-            <div className="bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-md">
+            <div className="glass-panel p-6 rounded-2xl">
               <h3 className="text-lg font-bold text-white mb-4">Site Logo</h3>
 
-              <div className="relative aspect-video rounded-xl border-2 border-dashed border-white/20 bg-black/20 hover:border-yellow-500/50 transition-colors overflow-hidden group">
-                {logo.url ? (
-                  <>
-                    <Image
-                      src={logo.url}
-                      alt="Logo"
-                      fill
-                      className="object-contain p-4"
-                    />
-                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <button
-                        type="button"
-                        onClick={() => setLogo({ _id: "", url: "" })}
-                        className="p-2 bg-red-500/20 text-red-500 rounded-lg hover:bg-red-500/30 transition-colors"
-                      >
-                        <Trash2 className="w-5 h-5" />
-                      </button>
-                    </div>
-                  </>
-                ) : (
-                  <label className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer">
-                    {uploadingLogo ? (
-                      <Loader2 className="w-8 h-8 text-yellow-500 animate-spin" />
-                    ) : (
-                      <>
-                        <ImagePlus className="w-8 h-8 text-gray-400 mb-2" />
-                        <span className="text-sm text-gray-400">
-                          Upload Logo
-                        </span>
-                        <span className="text-xs text-gray-500 mt-1">
-                          PNG, JPG up to 2MB
-                        </span>
-                      </>
-                    )}
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleLogoUpload}
-                      disabled={uploadingLogo}
-                      className="hidden"
-                    />
-                  </label>
-                )}
+              <div className="relative aspect-video rounded-xl border-2 border-dashed border-white/20 bg-white/5 text-gray-400 hover:text-white hover:border-purple-500 transition-colors overflow-hidden group">
+                <label className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer">
+                  {logo.url ? (
+                    <>
+                      <Image
+                        src={logo.url}
+                        alt="Logo"
+                        fill
+                        className="object-contain p-4"
+                      />
+                      {uploadingLogo ? (
+                        <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-10">
+                          <Loader2 className="w-8 h-8 animate-spin text-white" />
+                        </div>
+                      ) : (
+                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                          <UploadCloud className="w-8 h-8 text-white" />
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      {uploadingLogo ? (
+                        <Loader2 className="w-8 h-8 text-yellow-500 animate-spin" />
+                      ) : (
+                        <>
+                          <UploadCloud className="w-8 h-8 text-gray-400 mb-2 group-hover:scale-110 transition-transform" />
+                          <span className="text-sm text-gray-400">
+                            Click to upload logo
+                          </span>
+                          <span className="text-xs text-gray-500 mt-1">
+                            PNG, JPG up to 2MB
+                          </span>
+                        </>
+                      )}
+                    </>
+                  )}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleLogoUpload}
+                    disabled={uploadingLogo}
+                    className="hidden"
+                  />
+                </label>
               </div>
             </div>
 
             {/* Favicon Upload */}
-            <div className="bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-md">
+            <div className="glass-panel p-6 rounded-2xl">
               <h3 className="text-lg font-bold text-white mb-4">Favicon</h3>
 
-              <div className="relative aspect-square w-32 mx-auto rounded-xl border-2 border-dashed border-white/20 bg-black/20 hover:border-yellow-500/50 transition-colors overflow-hidden group">
-                {favicon.url ? (
-                  <>
-                    <Image
-                      src={favicon.url}
-                      alt="Favicon"
-                      fill
-                      className="object-contain p-4"
-                    />
-                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <button
-                        type="button"
-                        onClick={() => setFavicon({ _id: "", url: "" })}
-                        className="p-2 bg-red-500/20 text-red-500 rounded-lg hover:bg-red-500/30 transition-colors"
-                      >
-                        <Trash2 className="w-5 h-5" />
-                      </button>
-                    </div>
-                  </>
-                ) : (
-                  <label className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer">
-                    {uploadingFavicon ? (
-                      <Loader2 className="w-6 h-6 text-yellow-500 animate-spin" />
-                    ) : (
-                      <>
-                        <ImagePlus className="w-6 h-6 text-gray-400 mb-2" />
-                        <span className="text-xs text-gray-400 text-center px-2">
-                          Upload Favicon
-                        </span>
-                      </>
-                    )}
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleFaviconUpload}
-                      disabled={uploadingFavicon}
-                      className="hidden"
-                    />
-                  </label>
-                )}
+              <div className="relative aspect-square w-32 mx-auto rounded-xl border-2 border-dashed border-white/20 bg-white/5 text-gray-400 hover:text-white hover:border-purple-500 transition-colors overflow-hidden group">
+                <label className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer">
+                  {favicon.url ? (
+                    <>
+                      <Image
+                        src={favicon.url}
+                        alt="Favicon"
+                        fill
+                        className="object-contain p-4"
+                      />
+                      {uploadingFavicon ? (
+                        <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-10">
+                          <Loader2 className="w-8 h-8 animate-spin text-white" />
+                        </div>
+                      ) : (
+                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                          <UploadCloud className="w-8 h-8 text-white" />
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      {uploadingFavicon ? (
+                        <Loader2 className="w-6 h-6 text-yellow-500 animate-spin" />
+                      ) : (
+                        <>
+                          <UploadCloud className="w-6 h-6 text-gray-400 mb-2 group-hover:scale-110 transition-transform" />
+                          <span className="text-xs text-gray-400 text-center px-2">
+                            Upload Favicon
+                          </span>
+                        </>
+                      )}
+                    </>
+                  )}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFaviconUpload}
+                    disabled={uploadingFavicon}
+                    className="hidden"
+                  />
+                </label>
               </div>
             </div>
           </div>

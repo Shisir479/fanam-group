@@ -55,9 +55,29 @@ export function useImageUpload() {
     }
   };
 
+  const removeImage = async (
+    id: string,
+    hideToast = true,
+  ): Promise<boolean> => {
+    try {
+      // Import dynamically to avoid circular dependencies if any, or just import at top
+      const { deleteImage } = await import("@/services/upload.service");
+      const res = await deleteImage(id);
+      if (res.success) {
+        if (!hideToast) toast.success("Image deleted successfully");
+        return true;
+      }
+      throw new Error("Failed to delete image");
+    } catch (error: any) {
+      if (!hideToast) toast.error(error.message || "Failed to delete image");
+      return false;
+    }
+  };
+
   return {
     isUploading,
     uploadSingle,
     uploadMultiple,
+    removeImage,
   };
 }

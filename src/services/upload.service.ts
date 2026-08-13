@@ -29,3 +29,12 @@ export const uploadMultipleImages = async (
 
   return res as any;
 };
+
+export const deleteImage = async (
+  id: string,
+): Promise<{ success: boolean }> => {
+  const res = await api(`/upload/${id}`, {
+    method: "DELETE",
+  });
+  return res as any;
+};

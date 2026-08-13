@@ -16,7 +16,54 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = constructMetadata();
+export async function generateMetadata(): Promise<Metadata> {
+  let title = "Fanam Group";
+  let description =
+    "Fanam Group offers bespoke enclaves with finesse in architecture and design. Discover your dream home with us.";
+  let image = "/assets/images/logo/logo.png";
+  let icons = "/icon.png";
+
+  try {
+    const { getMainSettingsPublic, getBrandingSettingsPublic } =
+      await import("@/services/settings.service");
+    const [mainRes, brandRes] = await Promise.all([
+      getMainSettingsPublic(),
+      getBrandingSettingsPublic(),
+    ]);
+
+    if (mainRes?.success && mainRes.data) {
+      if (mainRes.data.siteTitle) title = mainRes.data.siteTitle;
+      if (mainRes.data.seoDescription)
+        description = mainRes.data.seoDescription;
+    }
+    if (brandRes?.success && brandRes.data) {
+      if (brandRes.data.logo?.url) image = brandRes.data.logo.url;
+      if (brandRes.data.favicon?.url) icons = brandRes.data.favicon.url;
+    }
+  } catch (error) {
+    console.error("Failed to fetch global SEO settings:", error);
+  }
+
+  return {
+    title: {
+      template: "Fanam Group | %s",
+      default: title,
+    },
+    description,
+    openGraph: {
+      title,
+      description,
+      images: [{ url: image }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
+    },
+    icons,
+  };
+}
 
 export default async function RootLayout({
   children,

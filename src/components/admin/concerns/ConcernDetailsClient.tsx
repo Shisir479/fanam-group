@@ -11,7 +11,7 @@ export default function ConcernDetailsClient({
   concern: ConcernType;
 }) {
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900">
+    <div className="min-h-screen bg-white text-black">
       {/* Hero Section */}
       <div className="relative w-full min-h-[50vh] md:min-h-[60vh] flex items-center pt-32 pb-16">
         <div className="absolute inset-0">
@@ -24,9 +24,9 @@ export default function ConcernDetailsClient({
               priority
             />
           ) : (
-            <div className="w-full h-full bg-gray-900" />
+            <div className="w-full h-full bg-black" />
           )}
-          <div className="absolute inset-0 bg-gray-900/60" />
+          <div className="absolute inset-0 bg-black/60" />
         </div>
 
         <div className="relative z-10 container mx-auto px-6 md:px-20">
@@ -56,7 +56,7 @@ export default function ConcernDetailsClient({
                 href={concern.websiteUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-[#f9c602]  text-white px-8 py-4 rounded-full font-bold transition-colors shadow-lg"
+                className="inline-flex items-center gap-2 bg-[#f9c602] text-black px-8 py-4 rounded-full font-bold transition-colors shadow-lg"
               >
                 Visit Official Website
                 <ExternalLink size={20} />
@@ -77,13 +77,15 @@ export default function ConcernDetailsClient({
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl font-bold mb-6 text-gray-900">
-                Overview
-              </h2>
+              <h2 className="text-3xl font-bold mb-6 text-black">Overview</h2>
               <div className="w-16 h-1 bg-[#f9c602] mb-6" />
-              <p className="text-lg text-gray-600 leading-relaxed whitespace-pre-wrap">
-                {concern.longDescription}
-              </p>
+              <div
+                className="text-lg text-gray-600 leading-relaxed prose prose-lg max-w-none"
+                dangerouslySetInnerHTML={{
+                  __html:
+                    concern.longDescription?.replace(/&nbsp;/g, " ") || "",
+                }}
+              />
             </motion.section>
 
             {/* Features / Services Grid */}
@@ -94,7 +96,7 @@ export default function ConcernDetailsClient({
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                <h2 className="text-3xl font-bold mb-6 text-gray-900">
+                <h2 className="text-3xl font-bold mb-6 text-black">
                   Core Operations
                 </h2>
                 <div className="w-16 h-1 bg-[#f9c602] mb-8" />
@@ -103,12 +105,12 @@ export default function ConcernDetailsClient({
                   {concern.features.map((feature, idx) => (
                     <div
                       key={idx}
-                      className="p-8 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow group"
+                      className="p-8 rounded-2xl bg-white border border-black/10 shadow-sm hover:shadow-md transition-shadow group"
                     >
                       <div className="w-12 h-12 bg-[#f9c602]/10 rounded-full flex items-center justify-center mb-6">
                         <CheckCircle2 className="w-6 h-6 text-[#f9c602]" />
                       </div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">
+                      <h3 className="text-xl font-bold text-black mb-2">
                         {feature.title}
                       </h3>
                       <p className="text-gray-600">{feature.description}</p>
@@ -130,10 +132,10 @@ export default function ConcernDetailsClient({
                 {concern.projects.map((project) => (
                   <div
                     key={project.slug}
-                    className="pt-8 border-t border-gray-200 first:border-0 first:pt-0"
+                    className="pt-8 border-t border-black/10 first:border-0 first:pt-0"
                   >
                     <div className="flex items-center justify-between mb-6">
-                      <h2 className="text-3xl font-bold text-gray-900">
+                      <h2 className="text-3xl font-bold text-black">
                         {project.name}
                       </h2>
                       {project.progress !== undefined && (
@@ -145,9 +147,12 @@ export default function ConcernDetailsClient({
                     </div>
                     <div className="w-16 h-1 bg-[#f9c602] mb-8" />
 
-                    <p className="text-lg text-gray-600 leading-relaxed mb-10">
-                      {project.overview}
-                    </p>
+                    <div
+                      className="text-lg text-gray-600 leading-relaxed mb-10 prose prose-lg max-w-none"
+                      dangerouslySetInnerHTML={{
+                        __html: project.overview?.replace(/&nbsp;/g, " ") || "",
+                      }}
+                    />
 
                     {/* Project Features */}
                     {project.features && project.features.length > 0 && (
@@ -155,7 +160,7 @@ export default function ConcernDetailsClient({
                         {project.features.map((feature, idx) => (
                           <div
                             key={idx}
-                            className="flex items-center gap-3 p-4 rounded-xl bg-white border border-gray-100 shadow-sm"
+                            className="flex items-center gap-3 p-4 rounded-xl bg-white border border-black/10 shadow-sm"
                           >
                             <CheckCircle2 className="w-5 h-5 text-[#f9c602]" />
                             <span className="font-bold text-gray-700">
@@ -172,7 +177,7 @@ export default function ConcernDetailsClient({
                         {project.galleryUrls.map((imgObj, idx) => (
                           <div
                             key={idx}
-                            className="relative aspect-video rounded-2xl overflow-hidden group shadow-sm border border-gray-100"
+                            className="relative aspect-video rounded-2xl overflow-hidden group shadow-sm border border-black/10"
                           >
                             <Image
                               src={imgObj.url}
@@ -180,7 +185,7 @@ export default function ConcernDetailsClient({
                               fill
                               className="object-cover transform group-hover:scale-105 transition-transform duration-700"
                             />
-                            <div className="absolute inset-0 bg-gray-900/0 group-hover:bg-gray-900/10 transition-colors duration-500" />
+                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
                           </div>
                         ))}
                       </div>

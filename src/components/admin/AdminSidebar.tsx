@@ -78,6 +78,7 @@ export function AdminSidebar() {
       href: "/admin/content/contactInfo",
     },
     { name: "Pages", icon: FileText, href: "/admin/content/pages" },
+    { name: "FAQ", icon: MessageSquare, href: "/admin/faq" },
 
     { name: "System", isHeader: true },
     {

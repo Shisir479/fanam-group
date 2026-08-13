@@ -31,7 +31,7 @@ export default function EditConcernClient({
 }: EditConcernClientProps) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { isUploading, uploadSingle } = useImageUpload();
+  const { isUploading, uploadSingle, removeImage } = useImageUpload();
 
   const [formData, setFormData] = useState<Partial<ConcernType>>({
     name: initialData.name,
@@ -91,6 +91,9 @@ export default function EditConcernClient({
 
     const uploaded = await uploadSingle(file);
     if (uploaded) {
+      if (heroData && heroData._id && heroData._id !== uploaded._id) {
+        await removeImage(heroData._id, true);
+      }
       setHeroData(uploaded);
     }
   };

@@ -22,7 +22,7 @@ export default function NewsEventsClient({
   const publishedEvents = initialEvents.filter((e) => e.status === "published");
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900 pb-24">
+    <div className="min-h-screen bg-white text-black pb-24">
       <PageBanner
         title="News & Events"
         subtitle="CORPORATE UPDATES"

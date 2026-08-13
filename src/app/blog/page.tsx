@@ -120,7 +120,7 @@ export default async function BlogPage({
 
       {/* Magazine Hero Layout */}
       {heroPosts.length > 0 && (
-        <section className="container mx-auto px-5 md:px-16 pt-16 pb-8 border-b border-gray-100">
+        <section className="container mx-auto px-5 md:px-16 pt-16 pb-8 ">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
             {/* Left Column (2 Medium Posts) */}
             <div className="lg:col-span-3 flex flex-col justify-between hidden md:flex">
@@ -129,7 +129,7 @@ export default async function BlogPage({
             </div>
 
             {/* Center Column (1 Large Post) */}
-            <div className="lg:col-span-6 flex flex-col justify-center border-x border-gray-100 px-0 lg:px-8">
+            <div className="lg:col-span-6 flex flex-col justify-center border-x border-black/10 px-0 lg:px-8">
               <MagazineMainFeature post={heroPosts[0]} />
             </div>
 
@@ -156,7 +156,7 @@ export default async function BlogPage({
       )}
 
       {/* Main Content Section */}
-      <section className="py-16 md:py-24 bg-[#F8FAFC]">
+      <section className="py-16 md:py-24 bg-white">
         <div className="container mx-auto px-5 md:px-16">
           <div className="flex flex-col gap-12 mb-20 max-w-7xl mx-auto w-full">
             {/* Filtered Posts Grid (When a user clicks a tag pill like 'AI') */}
@@ -194,16 +194,16 @@ export default async function BlogPage({
             )}
 
             {mappedPosts.length === 0 && (
-              <div className="py-32 flex flex-col items-center justify-center bg-white rounded-3xl border border-gray-100 mx-4">
-                <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mb-6">
-                  <ArrowRight className="w-8 h-8 text-gray-300 rotate-90" />
+              <div className="py-32 flex flex-col items-center justify-center bg-white rounded-3xl border border-black/10 mx-4">
+                <div className="w-20 h-20 bg-white border border-black/10 rounded-full flex items-center justify-center mb-6">
+                  <ArrowRight className="w-8 h-8 text-gray-400 rotate-90" />
                 </div>
-                <p className="text-gray-400 text-xl font-light tracking-wide text-center">
+                <p className="text-gray-500 text-xl font-light tracking-wide text-center">
                   No articles found matching your criteria.
                 </p>
                 <Link
                   href="/blog"
-                  className="mt-8 text-sm font-bold text-gray-900 uppercase tracking-widest hover:text-[#f9c602] transition-colors border-b-2 border-[#f9c602] pb-1"
+                  className="mt-8 text-sm font-bold text-black uppercase tracking-widest hover:text-[#f9c602] transition-colors border-b-2 border-[#f9c602] pb-1"
                 >
                   Clear Filters
                 </Link>

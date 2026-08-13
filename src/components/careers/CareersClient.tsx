@@ -119,16 +119,13 @@ export default function CareersClient({ initialJobs }: Props) {
   return (
     <>
       {/* Open Positions */}
-      <section
-        id="openings"
-        className="py-20 bg-white border-t border-gray-200"
-      >
+      <section id="openings" className="py-20 bg-white ">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-black mb-4 tracking-tight">
               Join Us
             </h2>
-            <p className="text-xl text-gray-600 font-medium uppercase tracking-widest">
+            <p className="text-xl text-black font-medium uppercase tracking-widest">
               Available jobs
             </p>
           </div>
@@ -138,8 +135,8 @@ export default function CareersClient({ initialJobs }: Props) {
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-900"></div>
             </div>
           ) : jobs.length === 0 ? (
-            <div className="text-center py-20 bg-gray-50 rounded-2xl border border-gray-200">
-              <p className="text-gray-500 font-medium">
+            <div className="text-center py-20 bg-white rounded-2xl border border-black/10">
+              <p className="text-black font-medium">
                 No open positions available at this time.
               </p>
             </div>
@@ -151,14 +148,14 @@ export default function CareersClient({ initialJobs }: Props) {
                   key={job._id}
                   className="block h-full"
                 >
-                  <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 border-r-4 border-r-yellow-400 flex flex-col h-full p-6 md:p-8 hover:shadow-md transition-shadow">
+                  <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-black/10 border-r-4 border-r-yellow-400 flex flex-col h-full p-6 md:p-8 hover:shadow-md transition-shadow">
                     {/* Content Area */}
                     {job.company && (
                       <p className="text-gray-500 text-sm font-bold mb-2">
                         {job.company}
                       </p>
                     )}
-                    <h3 className="text-2xl font-extrabold text-gray-900 mb-3 leading-tight transition-colors">
+                    <h3 className="text-2xl font-extrabold text-black mb-3 leading-tight transition-colors">
                       {job.jobTitle}
                     </h3>
 
@@ -169,27 +166,27 @@ export default function CareersClient({ initialJobs }: Props) {
                     )}
 
                     {job.salary && (
-                      <p className="text-gray-900 font-extrabold text-base mb-6">
+                      <p className="text-black font-extrabold text-base mb-6">
                         Salary : {job.salary}
                       </p>
                     )}
 
                     {/* Bottom Metadata */}
-                    <div className="flex flex-wrap items-center justify-between gap-4 mt-auto pt-4 border-t border-gray-50">
+                    <div className="flex flex-wrap items-center justify-between gap-4 mt-auto pt-4 border-t border-black/10">
                       <div className="flex gap-2">
                         {job.category && (
-                          <span className="bg-gray-50 text-gray-700 text-xs font-semibold px-3 py-1.5 rounded-lg border border-gray-200">
+                          <span className="bg-white text-gray-600 text-xs font-semibold px-3 py-1.5 rounded-lg border border-black/10">
                             {job.category}
                           </span>
                         )}
                         {job.employmentType && (
-                          <span className="bg-gray-50 text-gray-700 text-xs font-semibold px-3 py-1.5 rounded-lg border border-gray-200">
+                          <span className="bg-white text-gray-600 text-xs font-semibold px-3 py-1.5 rounded-lg border border-black/10">
                             {job.employmentType}
                           </span>
                         )}
                       </div>
-                      <div className="flex items-center gap-1.5 text-gray-700 font-semibold text-sm">
-                        <MapPin className="w-4 h-4 text-green-600" />{" "}
+                      <div className="flex items-center gap-1.5 text-gray-600 font-semibold text-sm">
+                        <MapPin className="w-4 h-4 text-[#f9c602]" />{" "}
                         {job.location}
                       </div>
                     </div>
@@ -202,19 +199,19 @@ export default function CareersClient({ initialJobs }: Props) {
       </section>
 
       {/* Direct CV Drop */}
-      <section className="py-24 bg-white border-t border-gray-200/60">
+      <section className="py-24 bg-white ">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
-          <div className="flex flex-col md:flex-row rounded-[2rem] overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-gray-100 bg-white">
+          <div className="flex flex-col md:flex-row rounded-[2rem] overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-black/10 bg-white">
             {/* Left Side (Dark) */}
-            <div className="md:w-5/12 bg-gray-900 p-10 md:p-14 flex flex-col justify-center text-white">
+            <div className="md:w-5/12 bg-[#392F5F] p-10 md:p-14 flex flex-col justify-center text-white">
               <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mb-8">
-                <UploadCloud className="w-8 h-8 text-white" />
+                <UploadCloud className="w-8 h-8 text-[#f9c602]" />
               </div>
-              <h2 className="text-4xl md:text-5xl font-light leading-tight mb-6">
+              <h2 className="text-4xl md:text-5xl font-light leading-tight mb-6 text-white">
                 Can't find <br />{" "}
                 <span className="font-bold">the right fit?</span>
               </h2>
-              <p className="text-gray-400 text-lg leading-relaxed">
+              <p className="text-white/80 text-lg leading-relaxed">
                 We are always looking for exceptional talent. Drop your CV in
                 our talent pool and we'll reach out when a suitable opportunity
                 arises.
@@ -233,7 +230,7 @@ export default function CareersClient({ initialJobs }: Props) {
                 )}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm text-gray-500 mb-2 font-medium">
+                    <label className="block text-sm text-black mb-2 font-medium">
                       Name
                     </label>
                     <input
@@ -242,13 +239,13 @@ export default function CareersClient({ initialJobs }: Props) {
                       onChange={(e) =>
                         setFormData({ ...formData, name: e.target.value })
                       }
-                      className="w-full px-4 py-3.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 outline-none transition-all text-gray-900 font-medium"
+                      className="w-full px-4 py-3.5 rounded-xl border border-black/10 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 outline-none transition-all text-black font-medium"
                       placeholder="Full name"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm text-gray-500 mb-2 font-medium">
+                    <label className="block text-sm text-black mb-2 font-medium">
                       Phone
                     </label>
                     <input
@@ -257,7 +254,7 @@ export default function CareersClient({ initialJobs }: Props) {
                       onChange={(e) =>
                         setFormData({ ...formData, phone: e.target.value })
                       }
-                      className="w-full px-4 py-3.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 outline-none transition-all text-gray-900 font-medium"
+                      className="w-full px-4 py-3.5 rounded-xl border border-black/10 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 outline-none transition-all text-black font-medium"
                       placeholder="Phone number"
                       required
                     />
@@ -265,7 +262,7 @@ export default function CareersClient({ initialJobs }: Props) {
                 </div>
 
                 <div>
-                  <label className="block text-sm text-gray-500 mb-2 font-medium">
+                  <label className="block text-sm text-black mb-2 font-medium">
                     Email
                   </label>
                   <input
@@ -274,14 +271,14 @@ export default function CareersClient({ initialJobs }: Props) {
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
                     }
-                    className="w-full px-4 py-3.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 outline-none transition-all text-gray-900 font-medium"
+                    className="w-full px-4 py-3.5 rounded-xl border border-black/10 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 outline-none transition-all text-black font-medium"
                     placeholder="Email address"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm text-gray-500 mb-2 font-medium">
+                  <label className="block text-sm text-black mb-2 font-medium">
                     Cover Letter (Optional)
                   </label>
                   <textarea
@@ -290,28 +287,28 @@ export default function CareersClient({ initialJobs }: Props) {
                     onChange={(e) =>
                       setFormData({ ...formData, coverLetter: e.target.value })
                     }
-                    className="w-full px-4 py-3.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 outline-none transition-all text-gray-900 font-medium resize-none"
+                    className="w-full px-4 py-3.5 rounded-xl border border-black/10 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 outline-none transition-all text-black font-medium resize-none"
                     placeholder="Tell us about yourself"
                   ></textarea>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2 items-center">
-                  <div className="relative w-full h-[52px] px-4 rounded-xl border border-dashed border-gray-300 text-center hover:border-yellow-500 transition-colors cursor-pointer flex items-center justify-center gap-2 bg-gray-50/50 overflow-hidden">
+                  <div className="relative w-full h-[52px] px-4 rounded-xl border border-dashed border-black/10 text-center hover:border-yellow-500 transition-colors cursor-pointer flex items-center justify-center gap-2 bg-white/50 overflow-hidden">
                     <input
                       type="file"
                       accept=".pdf,.doc,.docx"
                       onChange={handleFileChange}
                       className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                     />
-                    <UploadCloud className="w-5 h-5 text-gray-400 shrink-0 relative z-0" />
-                    <span className="text-gray-600 text-sm font-medium relative z-0 truncate max-w-[80%]">
+                    <UploadCloud className="w-5 h-5 text-black shrink-0 relative z-0" />
+                    <span className="text-black text-sm font-medium relative z-0 truncate max-w-[80%]">
                       {cvFile ? cvFile.name : "Upload CV/Resume"}
                     </span>
                   </div>
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full h-[52px] bg-yellow-500 text-gray-900 font-bold rounded-xl hover:bg-yellow-400 transition-colors text-base shadow-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                    className="w-full h-[52px] bg-yellow-500 text-black font-bold rounded-xl hover:bg-yellow-400 transition-colors text-base shadow-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                   >
                     {submitting ? "Submitting..." : "Submit Application"}
                   </button>
