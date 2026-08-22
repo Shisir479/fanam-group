@@ -1,108 +1,80 @@
-import { BlockReveal } from "@/components/ui/BlockReveal";
+import { ArrowRight } from "lucide-react";
 
 export function ContactInfo({ data }: { data?: any }) {
   return (
-    <section className="w-full py-16 md:py-24">
-      <div className="container mx-auto px-5 md:px-16">
-        <div className="flex flex-col gap-4 mb-12">
-          <BlockReveal color="var(--color-brand-blue)">
-            <div className="flex items-center text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
-              CONTACT US
+    <section className="w-full py-12 md:py-16 bg-gray-50">
+      <div className="fanam-container">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+          {/* Left Column: Form */}
+          <div className="flex flex-col gap-6 w-full max-w-lg">
+            <div className="flex flex-col gap-2">
+              <h2 className="text-[#f9c602] font-serif font-bold text-3xl md:text-4xl">
+                Contact Us
+              </h2>
+              <p className="text-[#181428] text-base md:text-lg font-medium leading-snug">
+                Let's Build the Future Together with Innovation, Trust, and
+                Excellence
+              </p>
             </div>
-          </BlockReveal>
-          <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
-            <h2 className="text-2xl md:text-[34px] font-bold text-brand-blue leading-[1.3] uppercase max-w-3xl">
-              GET IN TOUCH
-            </h2>
-          </BlockReveal>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Card 1: Address */}
-          <div className="bg-white p-10 border border-gray-50 flex flex-col items-center text-center shadow-sm">
-            <div className="bg-brand-blue/10 p-4 text-brand-blue mb-6">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="2"
-                stroke="currentColor"
-                className="h-8 w-8"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+            <form className="flex flex-col gap-4 w-full">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  className="w-full border border-gray-200 rounded-lg p-3 bg-white text-[#181428] placeholder-gray-400 focus:outline-none focus:border-[#f9c602] focus:ring-1 focus:ring-[#f9c602] transition-colors shadow-sm"
                 />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+                <input
+                  type="email"
+                  placeholder="example@gmail.com"
+                  className="w-full border border-gray-200 rounded-lg p-3 bg-white text-[#181428] placeholder-gray-400 focus:outline-none focus:border-[#f9c602] focus:ring-1 focus:ring-[#f9c602] transition-colors shadow-sm"
                 />
-              </svg>
-            </div>
-            <h3 className="text-sm font-bold text-brand-blue uppercase tracking-wider mb-4">
-              Address
-            </h3>
-            <p className="text-gray-600 text-sm leading-relaxed whitespace-pre-line">
-              {data?.address ||
-                "123 Bonedi Estate Blvd,\nGulshan 1, Dhaka 1212"}
-            </p>
+                <input
+                  type="tel"
+                  placeholder="Phone Number"
+                  className="w-full border border-gray-200 rounded-lg p-3 bg-white text-[#181428] placeholder-gray-400 focus:outline-none focus:border-[#f9c602] focus:ring-1 focus:ring-[#f9c602] transition-colors shadow-sm"
+                />
+                <input
+                  type="text"
+                  placeholder="4:00 Available"
+                  className="w-full border border-gray-200 rounded-lg p-3 bg-white text-[#181428] placeholder-gray-400 focus:outline-none focus:border-[#f9c602] focus:ring-1 focus:ring-[#f9c602] transition-colors shadow-sm"
+                />
+              </div>
+
+              <textarea
+                placeholder="Message"
+                rows={4}
+                className="w-full border border-gray-200 rounded-lg p-3 bg-white text-[#181428] placeholder-gray-400 focus:outline-none focus:border-[#f9c602] focus:ring-1 focus:ring-[#f9c602] transition-colors resize-none shadow-sm"
+              />
+
+              <div className="mt-1">
+                <button
+                  type="button"
+                  className="group inline-flex items-center gap-3 bg-[#181428] text-white px-6 py-2.5 rounded-full font-medium text-sm hover:bg-[#f9c602] hover:text-[#181428] border border-[#181428] hover:border-[#f9c602] transition-all duration-300 shadow-lg hover:shadow-xl"
+                >
+                  <span className="transition-transform duration-300 group-hover:translate-x-1">
+                    Book Appointment
+                  </span>
+                  <span className="w-7 h-7 rounded-full bg-white/20 group-hover:bg-[#181428]/10 text-white group-hover:text-[#181428] flex items-center justify-center transition-all duration-300 group-hover:-translate-x-1 group-hover:-rotate-45">
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
+                </button>
+              </div>
+            </form>
           </div>
 
-          {/* Card 2: Support */}
-          <div className="bg-white p-10 border border-gray-50 flex flex-col items-center text-center shadow-sm">
-            <div className="bg-brand-blue/10 p-4 text-brand-blue mb-6">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="2"
-                stroke="currentColor"
-                className="h-8 w-8"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
-                />
-              </svg>
-            </div>
-            <h3 className="text-sm font-bold text-brand-blue uppercase tracking-wider mb-4">
-              Support
-            </h3>
-            <p className="text-gray-600 text-sm mb-2">
-              {data?.email || "support@bonedi.com"}
-            </p>
-          </div>
-
-          {/* Card 3: Mobile */}
-          <div className="bg-white p-10 border border-gray-50 flex flex-col items-center text-center shadow-sm">
-            <div className="bg-brand-blue/10 p-4 text-brand-blue mb-6">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="2"
-                stroke="currentColor"
-                className="h-8 w-8"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"
-                />
-              </svg>
-            </div>
-            <h3 className="text-sm font-bold text-brand-blue uppercase tracking-wider mb-4">
-              Mobile
-            </h3>
-            <p className="text-gray-600 text-sm mb-2">
-              {data?.phone || "+880 1712-345678"}
-            </p>
-            {data?.whatsappNo && (
-              <p className="text-gray-600 text-sm">{data.whatsappNo}</p>
-            )}
+          {/* Right Column: Map */}
+          <div className="w-full h-[350px] lg:h-[420px] rounded-md  overflow-hidden shadow-xl border border-gray-100 relative">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.1388651817445!2d90.39575971498188!3d23.8136894845582!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c711d13bbec7%3A0x8ce370043c7457a4!2sBanani%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1689254320234!5m2!1sen!2sbd"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen={false}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="absolute inset-0 grayscale-[20%] contrast-[1.1] opacity-90"
+            />
           </div>
         </div>
       </div>

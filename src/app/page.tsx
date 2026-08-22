@@ -7,11 +7,14 @@ import { getHomepageCMSPublic } from "@/services/homepage-cms.service";
 import { getBlogsPublic } from "@/services/blog.service";
 import { getBrandingSettingsPublic } from "@/services/settings.service";
 import { getProjectsPublic } from "@/services/project.service";
+import { ConcernsSection } from "@/components/home/ConcernsSection";
+import { AchievementsSection } from "@/components/home/AchievementsSection";
 
 export default async function Home() {
   let cmsData: any = null;
   let blogsData: any[] = [];
   let brandingData: any = null;
+
   try {
     const res = await getHomepageCMSPublic();
     if (res?.success) {
@@ -25,7 +28,7 @@ export default async function Home() {
     // }
 
     // Fetch dynamic blogs
-    const blogsRes = await getBlogsPublic({ status: "active", limit: 3 });
+    const blogsRes = await getBlogsPublic({ status: "active", limit: 4 });
     if (blogsRes?.success) {
       blogsData = blogsRes.data || [];
     }
@@ -43,6 +46,8 @@ export default async function Home() {
     <div className="flex flex-col min-h-screen">
       <Hero data={cmsData} />
       <AboutSection />
+      <ConcernsSection />
+      <AchievementsSection />
       {/* <TestimonialSection /> */}
       <LatestNews blogs={blogsData} />
       <ContactInfo data={brandingData?.contact} />

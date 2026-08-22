@@ -2,22 +2,26 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Mail, Phone } from "lucide-react";
 
-const quickLinks = [
+import { MapPin } from "lucide-react";
+
+const companyLinks = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
-  { label: "Our Projects", href: "/projects" },
-  { label: "Careers", href: "/careers" },
-  { label: "News & Insights", href: "/blog" },
-  { label: "Contact", href: "/contact" },
+  { label: "Our Concerns", href: "/concern" },
+  { label: "Projects", href: "/projects" },
+  { label: "News & Media", href: "/news-events" },
+  { label: "Career", href: "/careers" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
-const projectLinks = [
-  { label: "Ongoing Projects", href: "/projects/ongoing" },
-  { label: "Upcoming Projects", href: "/projects/upcoming" },
-  { label: "Completed Projects", href: "/projects/handed-over" },
-  { label: "Media Gallery", href: "/gallery" },
-  { label: "Privacy Policy", href: "/legal/privacy-policy" },
-  { label: "Terms & Conditions", href: "/legal/terms-conditions" },
+const usefulLinks = [
+  { label: "Awards & Recognition", href: "/about#milestones" },
+  { label: "Company Profile", href: "#" },
+  { label: "Leadership Team", href: "/about#leadership" },
+  { label: "Vision & Mission", href: "/about#vision" },
+  { label: "CSR Activities", href: "/csr" },
+  { label: "Fanam Real Estate", href: "/concern/real-estate" },
+  { label: "Future Ventures", href: "/concern/future" },
 ];
 
 const socialLinks = [
@@ -31,23 +35,11 @@ const socialLinks = [
     ),
   },
   {
-    label: "Instagram",
+    label: "YouTube",
     href: "#",
-    isInstagram: true,
     icon: (
-      <svg
-        width="18"
-        height="18"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        viewBox="0 0 24 24"
-      >
-        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+      <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33zM9.75 15.02l.02-6.53 6.24 3.28-6.26 3.25z" />
       </svg>
     ),
   },
@@ -62,11 +54,11 @@ const socialLinks = [
     ),
   },
   {
-    label: "YouTube",
+    label: "WhatsApp",
     href: "#",
     icon: (
       <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33zM9.75 15.02l.02-6.53 6.24 3.28-6.26 3.25z" />
+        <path d="M12.03 2.06c-5.5 0-9.97 4.47-9.97 9.97 0 1.76.46 3.44 1.32 4.93L2 22l5.22-1.37c1.45.79 3.09 1.2 4.79 1.2h.01c5.5 0 9.97-4.47 9.97-9.97 0-5.5-4.47-9.97-9.97-9.97m0 18.25h-.01c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.13.82.83-3.05-.2-.32a8.23 8.23 0 0 1-1.26-4.4c0-4.55 3.7-8.25 8.25-8.25 4.54 0 8.24 3.7 8.24 8.25s-3.7 8.25-8.24 8.25m4.53-6.19c-.25-.12-1.47-.72-1.7-.81-.22-.08-.39-.12-.55.12-.17.25-.65.81-.8 9.97-.15.17-.3.19-.55.07-.25-.12-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.39-1.72-.15-.25-.02-.38.11-.5.1-.11.25-.29.37-.43.12-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.55-1.33-.75-1.82-.2-.48-.41-.42-.55-.43h-.48c-.17 0-.45.06-.68.31s-.89.87-.89 2.12c0 1.25.91 2.45 1.04 2.62.12.17 1.79 2.73 4.33 3.83.6.26 1.08.41 1.45.53.61.19 1.16.16 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.15-.48-.28" />
       </svg>
     ),
   },
@@ -85,151 +77,40 @@ export function Footer({ brandingData }: { brandingData?: any }) {
   });
 
   return (
-    <footer className="relative w-full bg-[#0a0a0a] text-white overflow-hidden border-t border-white/5">
-      {/* Background Ambience */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-yellow-500/5 rounded-full blur-[120px] opacity-50" />
-        <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[150px] opacity-30" />
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.02]" />
-      </div>
-
-      <div className="relative z-10 container mx-auto px-6 md:px-12 lg:px-16 pt-24 pb-12">
+    <footer className="relative w-full bg-[#181428] text-white">
+      <div className="container mx-auto px-6 md:px-12 lg:px-16 pt-10 pb-6">
         {/* Main Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6 mb-8">
           {/* Col 1 — Brand & Mission (4 cols) */}
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-4 lg:pr-8">
             <Link
               href="/"
-              className="inline-block mb-8 transition-transform hover:opacity-90"
+              className="inline-block mb-4 transition-transform hover:opacity-90"
             >
               <Image
-                src={logo?.url || "/company_logo/bonedia.png"}
+                src={logo?.url || "/company_logo/logo-white.63532709.svg"}
                 alt="Fanam Group Logo"
                 width={180}
-                height={65}
-                className="object-contain brightness-0 invert"
+                height={55}
+                className="object-contain"
               />
             </Link>
 
-            <p className="text-gray-400 text-sm leading-relaxed mb-8 pr-4">
-              Pioneering excellence in real estate, corporate investments, and
-              luxury living. We build more than structures; we forge legacies
-              across Bangladesh.
+            <p className="text-gray-300 text-sm leading-relaxed mb-6">
+              Fanam Group is a diversified corporate group committed to
+              delivering excellence across Real Estate, E-commerce, Travel &
+              Tourism, Media, and emerging business sectors through innovation,
+              integrity, and sustainable growth.
             </p>
 
-            <div className="space-y-4 text-sm text-gray-300">
-              <div className="flex items-start gap-4 group">
-                <span className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-yellow-500 group-hover:border-yellow-500 group-hover:text-black transition-all duration-300">
-                  <Phone className="w-4 h-4" />
-                </span>
-                <div className="flex flex-col pt-1">
-                  <span className="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">
-                    Hotline
-                  </span>
-                  <span className="text-white font-medium text-base tracking-wide">
-                    {contact?.phone || "+880 1331 662255"}
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4 group">
-                <span className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-yellow-500 group-hover:border-yellow-500 group-hover:text-black transition-all duration-300">
-                  <Mail className="w-4 h-4" />
-                </span>
-                <div className="flex flex-col pt-1">
-                  <span className="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">
-                    Email Inquiry
-                  </span>
-                  <span className="text-white font-medium text-base tracking-wide">
-                    {contact?.email || "info@fanamgroup.com"}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Col 2 — Quick Links (2 cols) */}
-          <div className="lg:col-span-2 lg:ml-8">
-            <h4 className="text-white font-semibold text-sm uppercase tracking-[0.2em] mb-8 flex items-center gap-3">
-              <span className="w-2 h-2 rounded-full bg-yellow-500" />
-              Company
-            </h4>
-            <ul className="space-y-4">
-              {quickLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="group inline-flex items-center text-gray-400 hover:text-white text-sm transition-all duration-300"
-                  >
-                    <span className="w-0 group-hover:w-4 h-[1px] bg-yellow-500 mr-0 group-hover:mr-3 transition-all duration-300 ease-out opacity-0 group-hover:opacity-100" />
-                    <span className="transform group-hover:translate-x-1 transition-transform duration-300">
-                      {link.label}
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Col 3 — Explore (2 cols) */}
-          <div className="lg:col-span-2">
-            <h4 className="text-white font-semibold text-sm uppercase tracking-[0.2em] mb-8 flex items-center gap-3">
-              <span className="w-2 h-2 rounded-full bg-yellow-500" />
-              Discover
-            </h4>
-            <ul className="space-y-4">
-              {projectLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="group inline-flex items-center text-gray-400 hover:text-white text-sm transition-all duration-300"
-                  >
-                    <span className="w-0 group-hover:w-4 h-[1px] bg-yellow-500 mr-0 group-hover:mr-3 transition-all duration-300 ease-out opacity-0 group-hover:opacity-100" />
-                    <span className="transform group-hover:translate-x-1 transition-transform duration-300">
-                      {link.label}
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Col 4 — Newsletter & Social (4 cols) */}
-          <div className="lg:col-span-4">
-            <h4 className="text-white font-semibold text-sm uppercase tracking-[0.2em] mb-8 flex items-center gap-3">
-              <span className="w-2 h-2 rounded-full bg-yellow-500" />
-              Stay Connected
-            </h4>
-            <p className="text-gray-400 text-sm mb-6 leading-relaxed">
-              Subscribe to our newsletter for exclusive updates, project
-              launches, and market insights.
-            </p>
-
-            <form
-              className="relative mb-10 group"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <input
-                type="email"
-                placeholder="Enter your email address"
-                className="w-full bg-white/5 border border-white/10 rounded-full py-4 pl-6 pr-14 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-yellow-500/50 focus:bg-white/10 transition-all duration-300"
-              />
-              <button
-                type="submit"
-                className="absolute right-2 top-2 bottom-2 w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center text-black hover:bg-yellow-400 hover:scale-105 transition-all duration-300 shadow-[0_0_15px_rgba(234,179,8,0.3)]"
-              >
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </form>
-
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
               {activeSocialLinks.map((s) => (
                 <a
                   key={s.label}
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-white hover:text-black hover:scale-110 hover:-translate-y-1 transition-all duration-300"
+                  className="w-9 h-9 rounded-full bg-white text-[#181428] flex items-center justify-center hover:bg-[#f9c602] hover:scale-110 hover:-translate-y-1 transition-all duration-300"
                   aria-label={s.label}
                 >
                   {s.icon}
@@ -237,25 +118,97 @@ export function Footer({ brandingData }: { brandingData?: any }) {
               ))}
             </div>
           </div>
+
+          {/* Col 2 — Company Links (2 cols) */}
+          <div className="lg:col-span-2 lg:ml-8">
+            <h4 className="text-white font-semibold text-lg mb-4">Company</h4>
+            <ul className="space-y-3">
+              {companyLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-gray-300 hover:text-white text-sm transition-colors duration-300"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Col 3 — Useful Links (3 cols) */}
+          <div className="lg:col-span-3">
+            <h4 className="text-white font-semibold text-lg mb-4">
+              Useful links
+            </h4>
+            <ul className="space-y-3">
+              {usefulLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-gray-300 hover:text-white text-sm transition-colors duration-300"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Col 4 — Contact (3 cols) */}
+          <div className="lg:col-span-3">
+            <h4 className="text-white font-semibold text-lg mb-4">Contact</h4>
+
+            <div className="flex flex-col gap-4 text-gray-300 text-sm">
+              <div className="flex items-start gap-3">
+                <Phone className="w-4 h-4 mt-1 flex-shrink-0" />
+                <div className="flex flex-col gap-1">
+                  <span>+880 1822-94 20 20</span>
+                  <span>+880 1755-94 20 20</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <Mail className="w-4 h-4 flex-shrink-0" />
+                <span>info@fanamgroup.com</span>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <MapPin className="w-4 h-4 mt-1 flex-shrink-0" />
+                <span>
+                  House #01, Road #01, Block-A
+                  <br />
+                  Bashundhara R/A, Dhaka-1229, Bangladesh
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs tracking-wide text-gray-500">
+        <div className="pt-5 border-t border-dashed border-gray-600 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-400">
           <p>
-            &copy; {new Date().getFullYear()}{" "}
-            <span className="text-gray-300">
-              {brandingData?.siteName || "Fanam Group"}
-            </span>
-            . All Rights Reserved.
+            Copyright &copy; {new Date().getFullYear()} Tech solutions Plex.
           </p>
-          <div className="flex items-center gap-1">
-            <span>Designed & Developed by</span>
-            <a
-              href="#"
-              className="text-gray-300 font-semibold hover:text-yellow-500 transition-colors ml-1"
+          <div className="flex items-center gap-4">
+            <Link
+              href="/legal/terms-conditions"
+              className="hover:text-white transition-colors"
             >
-              Tech Solutions Plex Ltd.
-            </a>
+              Terms Of Use
+            </Link>
+            <Link
+              href="/contact"
+              className="hover:text-white transition-colors"
+            >
+              Support
+            </Link>
+            <Link
+              href="/legal/privacy-policy"
+              className="hover:text-white transition-colors"
+            >
+              Private Policy
+            </Link>
           </div>
         </div>
       </div>

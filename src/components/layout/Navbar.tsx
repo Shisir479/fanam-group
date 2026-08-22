@@ -3,24 +3,328 @@
 import Link from "next/link";
 import { TextRoll } from "@/components/ui/skiper-ui/skiper58";
 import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Newspaper,
+  BookOpen,
+  Images,
+  Phone,
+  HelpCircle,
+  Shield,
+  FileText,
+  ChevronRight,
+  Building2,
+  Users,
+  Target,
+  Globe,
+  TrendingUp,
+  BarChart3,
+  Briefcase,
+  Award,
+  Handshake,
+} from "lucide-react";
 
+// ─── Mega Menu Data ─────────────────────────────────────────────
+interface MegaMenuItem {
+  label: string;
+  href: string;
+  description: string;
+  icon: React.ReactNode;
+}
+
+interface MegaMenuSection {
+  title: string;
+  items: MegaMenuItem[];
+}
+
+interface NavItem {
+  label: string;
+  href?: string;
+  megaMenuKey?: string;
+}
+
+const megaMenuData: Record<string, MegaMenuSection[]> = {
+  about: [
+    {
+      title: "Company",
+      items: [
+        {
+          label: "About Fanam Group",
+          href: "/about",
+          description: "Our story, mission, vision & values",
+          icon: <Building2 className="w-5 h-5" />,
+        },
+        {
+          label: "Leadership Team",
+          href: "/about#leadership",
+          description: "Meet the people driving our success",
+          icon: <Users className="w-5 h-5" />,
+        },
+        {
+          label: "CSR Initiatives",
+          href: "/csr",
+          description: "Making a difference in communities",
+          icon: <Target className="w-5 h-5" />,
+        },
+      ],
+    },
+    {
+      title: "Explore",
+      items: [
+        {
+          label: "Our Concerns",
+          href: "/concern",
+          description: "Explore our diverse business verticals",
+          icon: <Globe className="w-5 h-5" />,
+        },
+        {
+          label: "Awards & Milestones",
+          href: "/about#milestones",
+          description: "Recognitions and key achievements",
+          icon: <Award className="w-5 h-5" />,
+        },
+        {
+          label: "Career Opportunities",
+          href: "/careers",
+          description: "Join our growing team",
+          icon: <Briefcase className="w-5 h-5" />,
+        },
+      ],
+    },
+  ],
+  "news-media": [
+    {
+      title: "News & Media",
+      items: [
+        {
+          label: "News & Events",
+          href: "/news-events",
+          description: "Latest corporate news and upcoming events",
+          icon: <Newspaper className="w-5 h-5" />,
+        },
+        {
+          label: "Blog & Insights",
+          href: "/blog",
+          description: "Thought leadership and industry insights",
+          icon: <BookOpen className="w-5 h-5" />,
+        },
+        {
+          label: "Media Gallery",
+          href: "/image-gallery",
+          description: "Photos and videos from our journey",
+          icon: <Images className="w-5 h-5" />,
+        },
+      ],
+    },
+    {
+      title: "Press",
+      items: [
+        {
+          label: "Press Releases",
+          href: "/press",
+          description: "Official announcements and statements",
+          icon: <FileText className="w-5 h-5" />,
+        },
+      ],
+    },
+  ],
+  investors: [
+    {
+      title: "Investor Relations",
+      items: [
+        {
+          label: "Investor Overview",
+          href: "/investors",
+          description: "Financial highlights and corporate governance",
+          icon: <TrendingUp className="w-5 h-5" />,
+        },
+        {
+          label: "Investment Opportunities",
+          href: "/investors#booking",
+          description: "Explore investment possibilities with us",
+          icon: <BarChart3 className="w-5 h-5" />,
+        },
+        {
+          label: "Partnership Inquiry",
+          href: "/inquiry",
+          description: "Collaborate and grow together",
+          icon: <Handshake className="w-5 h-5" />,
+        },
+      ],
+    },
+  ],
+  more: [
+    {
+      title: "Resources",
+      items: [
+        {
+          label: "Contact Us",
+          href: "/contact",
+          description: "Get in touch with our team",
+          icon: <Phone className="w-5 h-5" />,
+        },
+        {
+          label: "FAQ",
+          href: "/faq",
+          description: "Frequently asked questions",
+          icon: <HelpCircle className="w-5 h-5" />,
+        },
+        {
+          label: "Privacy Policy",
+          href: "/legal/privacy-policy",
+          description: "How we handle your data",
+          icon: <Shield className="w-5 h-5" />,
+        },
+        {
+          label: "Terms & Conditions",
+          href: "/legal/terms-conditions",
+          description: "Usage terms and guidelines",
+          icon: <FileText className="w-5 h-5" />,
+        },
+      ],
+    },
+  ],
+};
+
+const navItems: NavItem[] = [
+  { label: "Home", href: "/" },
+  { label: "About Us", megaMenuKey: "about" },
+  { label: "Concern", href: "/concern" },
+  { label: "News & Media", megaMenuKey: "news-media" },
+  { label: "Career", href: "/careers" },
+  { label: "Investors", megaMenuKey: "investors" },
+  { label: "More", megaMenuKey: "more" },
+];
+
+// ─── Mega Menu Panel ────────────────────────────────────────────
+function MegaMenuPanel({
+  sections,
+  onClose,
+  isScrolled,
+  isBannerPage,
+}: {
+  sections: MegaMenuSection[];
+  onClose: () => void;
+  isScrolled: boolean;
+  isBannerPage: boolean;
+}) {
+  const bgClass = isScrolled || !isBannerPage ? "bg-white" : "bg-white";
+  return (
+    <motion.div
+      initial={{ opacity: 0, height: 0 }}
+      animate={{ opacity: 1, height: "auto" }}
+      exit={{ opacity: 0, height: 0 }}
+      transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
+      className={`absolute top-full left-0 right-0 w-full ${bgClass} shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] overflow-hidden z-50`}
+    >
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -10 }}
+        transition={{ duration: 0.3, delay: 0.1 }}
+        className="container mx-auto px-6 md:px-20"
+      >
+        <div className="py-10 grid grid-cols-12 gap-8">
+          {/* Main content columns */}
+          <div
+            className={`${sections.length > 1 ? "col-span-10" : "col-span-12"} grid ${sections.length > 1 ? `grid-cols-${sections.length}` : "grid-cols-1"} gap-12`}
+          >
+            {sections.map((section, sIdx) => (
+              <div key={sIdx}>
+                {/* Section Title */}
+                <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-6 flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#f9c602]" />
+                  {section.title}
+                </h3>
+
+                {/* Items */}
+                <div className="space-y-1">
+                  {section.items.map((item, iIdx) => (
+                    <Link
+                      key={iIdx}
+                      href={item.href}
+                      onClick={onClose}
+                      className="group flex items-start gap-4 px-4 py-3.5 rounded-xl hover:bg-gray-50/80 transition-all duration-300"
+                    >
+                      {/* Icon */}
+                      <span className="flex-shrink-0 w-10 h-10 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-400 group-hover:bg-[#f9c602] group-hover:text-black group-hover:border-[#f9c602] group-hover:scale-110 transition-all duration-300">
+                        {item.icon}
+                      </span>
+
+                      {/* Text */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2">
+                          <span className="text-[15px] font-semibold text-gray-900 group-hover:text-black transition-colors">
+                            {item.label}
+                          </span>
+                          <ChevronRight className="w-3.5 h-3.5 text-gray-300 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                        </div>
+                        <p className="text-xs text-gray-400 mt-0.5 group-hover:text-gray-500 transition-colors">
+                          {item.description}
+                        </p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Right side CTA (only for sections with > 1 group) */}
+          {sections.length > 1 && (
+            <div className="col-span-2 flex flex-col justify-center">
+              <div className="rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100/50 border border-gray-100 p-6">
+                <div className="w-10 h-10 rounded-xl bg-[#f9c602] flex items-center justify-center mb-4">
+                  <ChevronRight className="w-5 h-5 text-black" />
+                </div>
+                <h4 className="text-sm font-bold text-gray-900 mb-2">
+                  Need Help?
+                </h4>
+                <p className="text-xs text-gray-500 leading-relaxed mb-4">
+                  Reach out to our team for any inquiries or assistance.
+                </p>
+                <Link
+                  href="/contact"
+                  onClick={onClose}
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#f9c602] hover:text-[#e0b000] transition-colors"
+                >
+                  Contact Us
+                  <ChevronRight className="w-3 h-3" />
+                </Link>
+              </div>
+            </div>
+          )}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+// ─── Main Navbar ────────────────────────────────────────────────
 export function Navbar({ brandingData }: { brandingData?: any }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
+  const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const lastScrollY = useRef(0);
+  const megaMenuTimeout = useRef<NodeJS.Timeout | null>(null);
   const pathname = usePathname() || "";
 
   const { logo } = brandingData || {};
 
-  // Check if current page is a banner page
   const isBannerPage =
     pathname === "/" ||
     (pathname.startsWith("/concern/") && pathname !== "/concern") ||
     pathname.startsWith("/divisions/");
+
+  // Close mega menu on route change
+  useEffect(() => {
+    setActiveMegaMenu(null);
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -36,18 +340,14 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
-      // Handle solid/transparent state
       setIsScrolled(currentScrollY > 50);
 
-      // Handle visibility on scroll direction
       if (currentScrollY < 50) {
         setIsVisible(true);
       } else if (currentScrollY > lastScrollY.current) {
-        // Scrolling down
         setIsVisible(false);
+        setActiveMegaMenu(null);
       } else {
-        // Scrolling up
         setIsVisible(true);
       }
 
@@ -55,36 +355,72 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    // Initial check
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleMegaMenuEnter = useCallback((key: string) => {
+    if (megaMenuTimeout.current) {
+      clearTimeout(megaMenuTimeout.current);
+      megaMenuTimeout.current = null;
+    }
+    setActiveMegaMenu(key);
+  }, []);
+
+  const handleMegaMenuLeave = useCallback(() => {
+    megaMenuTimeout.current = setTimeout(() => {
+      setActiveMegaMenu(null);
+    }, 200);
+  }, []);
+
+  const handlePanelEnter = useCallback(() => {
+    if (megaMenuTimeout.current) {
+      clearTimeout(megaMenuTimeout.current);
+      megaMenuTimeout.current = null;
+    }
+  }, []);
+
+  const handlePanelLeave = useCallback(() => {
+    megaMenuTimeout.current = setTimeout(() => {
+      setActiveMegaMenu(null);
+    }, 150);
   }, []);
 
   const toggleAccordion = (menu: string) => {
     setExpandedMenu(expandedMenu === menu ? null : menu);
   };
 
-  const navStyles = isMobileMenuOpen
-    ? "bg-brand-blue/90 backdrop-blur-md text-white"
-    : isBannerPage && !isScrolled
-      ? "bg-transparent text-white"
-      : "bg-white text-black";
+  const isNavActive = (item: NavItem): boolean => {
+    if (item.href) {
+      return item.href === "/"
+        ? pathname === "/"
+        : pathname.startsWith(item.href);
+    }
+    if (item.megaMenuKey) {
+      const sections = megaMenuData[item.megaMenuKey];
+      return sections?.some((s) =>
+        s.items.some((i) => pathname.startsWith(i.href.split("#")[0])),
+      );
+    }
+    return false;
+  };
 
-  const linkLineColor = isBannerPage && !isScrolled ? "bg-white" : "bg-black";
-  const mobileHamburgerColor =
-    isBannerPage && !isScrolled && !isMobileMenuOpen
-      ? "bg-white"
-      : isMobileMenuOpen
-        ? "bg-white"
-        : "bg-black";
+  const navStyles = isMobileMenuOpen
+    ? "bg-white/95 backdrop-blur-xl text-[#181428] shadow-sm border-b border-gray-100"
+    : isScrolled
+      ? "bg-white/80 backdrop-blur-xl text-[#181428] shadow-sm border-b border-white/50"
+      : "bg-white/60 backdrop-blur-lg text-[#181428] border-b border-white/30";
+
+  const mobileHamburgerColor = "bg-[#181428]";
 
   return (
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500 ease-in-out ${navStyles} ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
+        onMouseLeave={handleMegaMenuLeave}
       >
         <div className="container mx-auto px-6 md:px-20 flex h-18 items-center justify-between">
-          <div className="flex items-center gap-20 h-full">
+          <div className="flex items-center gap-16 h-full">
             <Link
               href="/"
               className="flex items-center group"
@@ -96,110 +432,72 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
                 width={160}
                 height={52}
                 priority
-                className={`h-14 md:h-20 object-contain transition-all duration-300 ${isBannerPage && !isScrolled ? "" : ""}`}
+                className="h-14 md:h-20 object-contain transition-all duration-300 brightness-0"
               />
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center h-full gap-8 text-base font-semibold tracking-wide">
-              <Link
-                href="/"
-                className={`relative group h-full flex items-center ${pathname === "/" ? "text-[#f9c602] font-extrabold" : "transition-colors"}`}
-              >
-                <TextRoll>Home</TextRoll>
-                <span
-                  className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-center transition-transform duration-600 ease-out ${pathname === "/" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
-                ></span>
-              </Link>
+            <nav className="hidden lg:flex items-center h-full gap-7 text-[15px] font-semibold tracking-wide">
+              {navItems.map((item) => {
+                const active = isNavActive(item);
+                const hasMega = !!item.megaMenuKey;
 
-              <Link
-                href="/about"
-                className={`relative group h-full flex items-center ${pathname.startsWith("/about") ? "text-[#f9c602] font-extrabold" : "transition-colors"}`}
-              >
-                <TextRoll>About Us</TextRoll>
-                <span
-                  className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-center transition-transform duration-600 ease-out ${pathname.startsWith("/about") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
-                ></span>
-              </Link>
+                if (hasMega) {
+                  return (
+                    <div
+                      key={item.label}
+                      className="relative h-full flex items-center"
+                      onMouseEnter={() =>
+                        handleMegaMenuEnter(item.megaMenuKey!)
+                      }
+                    >
+                      <span
+                        className={`h-full flex items-center gap-1 cursor-pointer transition-colors ${active ? "text-[#f9c602] font-extrabold" : ""}`}
+                      >
+                        <TextRoll>{item.label}</TextRoll>
+                        <svg
+                          width="10"
+                          height="10"
+                          viewBox="0 0 10 10"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className={`transition-transform duration-300 ${activeMegaMenu === item.megaMenuKey ? "rotate-180" : ""}`}
+                        >
+                          <path d="M2 4L5 7L8 4" />
+                        </svg>
+                        <span
+                          className={`absolute left-0 bottom-0 w-full h-[3px] bg-[#f9c602] origin-center transition-transform duration-500 ease-out ${active || activeMegaMenu === item.megaMenuKey ? "scale-x-100" : "scale-x-0"}`}
+                        />
+                      </span>
+                    </div>
+                  );
+                }
 
-              <Link
-                href="/concern"
-                className={`relative group h-full flex items-center ${pathname.startsWith("/concern") ? "text-[#f9c602] font-extrabold" : "transition-colors"}`}
-              >
-                <TextRoll>Concern</TextRoll>
-                <span
-                  className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-center transition-transform duration-600 ease-out ${pathname.startsWith("/concern") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
-                ></span>
-              </Link>
-
-              <Link
-                href="/news-events"
-                className={`relative group h-full flex items-center whitespace-nowrap ${pathname.startsWith("/news-events") ? "text-[#f9c602] font-extrabold" : "transition-colors"}`}
-              >
-                <TextRoll>News & Events</TextRoll>
-                <span
-                  className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-center transition-transform duration-600 ease-out ${pathname.startsWith("/news-events") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
-                ></span>
-              </Link>
-
-              <Link
-                href="/blog"
-                className={`relative group h-full flex items-center ${pathname.startsWith("/blog") ? "text-[#f9c602] font-extrabold" : "transition-colors"}`}
-              >
-                <TextRoll>Blogs</TextRoll>
-                <span
-                  className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-center transition-transform duration-600 ease-out ${pathname.startsWith("/blog") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
-                ></span>
-              </Link>
-
-              <Link
-                href="/careers"
-                className={`relative group h-full flex items-center ${pathname.startsWith("/careers") ? "text-[#f9c602] font-extrabold" : "transition-colors"}`}
-              >
-                <TextRoll>Career</TextRoll>
-                <span
-                  className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-center transition-transform duration-600 ease-out ${pathname.startsWith("/careers") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
-                ></span>
-              </Link>
-
-              {/* Legal / More Pages with Dropdown */}
-              <div className="relative group h-full flex items-center">
-                <span
-                  className={`h-full flex items-center cursor-pointer ${pathname.startsWith("/legal") || pathname.startsWith("/contact") ? "text-[#f9c602] font-extrabold" : "transition-colors"}`}
-                >
-                  <TextRoll>More</TextRoll>
-                  <span
-                    className={`absolute left-0 bottom-0 w-full h-[4px] bg-[#f9c602] origin-center transition-transform duration-600 ease-out ${pathname.startsWith("/legal") || pathname.startsWith("/contact") ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
-                  ></span>
-                </span>
-                <div className="absolute top-full right-0 min-w-[240px] bg-white shadow-xl border border-gray-100 flex flex-col opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                return (
                   <Link
-                    href="/contact"
-                    className={`px-6 py-5 text-sm font-semibold hover:text-gray-900 hover:bg-gray-50 border-b border-gray-100 transition-colors ${pathname === "/contact" ? "text-gray-900 bg-gray-50" : "text-gray-600"}`}
+                    key={item.label}
+                    href={item.href!}
+                    className={`relative group h-full flex items-center transition-colors ${active ? "text-[#f9c602] font-extrabold" : ""}`}
+                    onMouseEnter={() => setActiveMegaMenu(null)}
                   >
-                    Contact Us
+                    <TextRoll>{item.label}</TextRoll>
+                    <span
+                      className={`absolute left-0 bottom-0 w-full h-[3px] bg-[#f9c602] origin-center transition-transform duration-500 ease-out ${active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                    />
                   </Link>
-                  <Link
-                    href="/faq"
-                    className={`px-6 py-5 text-sm font-semibold hover:text-gray-900 hover:bg-gray-50 border-b border-gray-100 transition-colors ${pathname === "/legal/faq" ? "text-gray-900 bg-gray-50" : "text-gray-600"}`}
-                  >
-                    FAQ
-                  </Link>
-                  <Link
-                    href="/legal/privacy-policy"
-                    className={`px-6 py-5 text-sm font-semibold hover:text-gray-900 hover:bg-gray-50 transition-colors ${pathname === "/legal/privacy-policy" ? "text-gray-900 bg-gray-50" : "text-gray-600"}`}
-                  >
-                    Privacy Policy
-                  </Link>
-                </div>
-              </div>
+                );
+              })}
             </nav>
           </div>
 
           <div className="flex items-center gap-6">
-            <a
-              href="tel:01331662255"
-              className={`hidden lg:flex items-center gap-2 border px-6 py-2 transition-colors font-semibold ${isBannerPage && !isScrolled ? "border-white/40 hover:bg-white hover:text-black text-white" : "border-black/40 hover:bg-black hover:text-white text-black"}`}
+            <Link
+              href="/sitemap"
+              className="hidden lg:flex items-center gap-2 border border-gray-200 hover:bg-[#f9c602] hover:text-[#181428] hover:border-[#f9c602] text-[#181428] px-6 py-2 rounded-full transition-colors font-semibold shadow-sm"
+              onMouseEnter={() => setActiveMegaMenu(null)}
             >
               <svg
                 width="16"
@@ -208,103 +506,119 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21" />
+                <line x1="9" y1="3" x2="9" y2="18" />
+                <line x1="15" y1="6" x2="15" y2="21" />
               </svg>
-              01331662255
-            </a>
+              Sitemap
+            </Link>
 
-            {/* Mobile Hamburger Menu Button */}
+            {/* Mobile Hamburger */}
             <button
               className="lg:hidden flex flex-col items-center justify-center w-8 h-8 z-50 relative cursor-pointer"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               <span
                 className={`absolute block w-7 h-[2px] ${mobileHamburgerColor} transition-all duration-300 ease-out ${isMobileMenuOpen ? "rotate-45" : "-translate-y-2"}`}
-              ></span>
+              />
               <span
                 className={`absolute block w-7 h-[2px] ${mobileHamburgerColor} transition-all duration-300 ease-out ${isMobileMenuOpen ? "opacity-0" : "opacity-100"}`}
-              ></span>
+              />
               <span
                 className={`absolute block w-7 h-[2px] ${mobileHamburgerColor} transition-all duration-300 ease-out ${isMobileMenuOpen ? "-rotate-45" : "translate-y-2"}`}
-              ></span>
+              />
             </button>
           </div>
         </div>
+
+        {/* ─── Mega Menu Panels (Desktop) ─── */}
+        <AnimatePresence>
+          {activeMegaMenu && megaMenuData[activeMegaMenu] && (
+            <div
+              onMouseEnter={handlePanelEnter}
+              onMouseLeave={handlePanelLeave}
+            >
+              <MegaMenuPanel
+                sections={megaMenuData[activeMegaMenu]}
+                onClose={() => setActiveMegaMenu(null)}
+                isScrolled={isScrolled}
+                isBannerPage={isBannerPage}
+              />
+            </div>
+          )}
+        </AnimatePresence>
       </header>
 
-      {/* Mobile Menu Overlay */}
+      {/* ─── Backdrop overlay when mega menu is open ─── */}
+      <AnimatePresence>
+        {activeMegaMenu && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-x-0 top-[72px] bottom-0 bg-black/20 backdrop-blur-[2px] z-40 hidden lg:block"
+            onClick={() => setActiveMegaMenu(null)}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* ─── Mobile Menu Overlay ─── */}
       <div
-        className={`fixed inset-0 top-[76px] bg-brand-blue/80 backdrop-blur-md z-40 transition-transform duration-500 ease-in-out lg:hidden ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}
+        className={`fixed inset-0 top-[76px] bg-white/95 backdrop-blur-md z-40 transition-transform duration-500 ease-in-out lg:hidden ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}
       >
         <div className="flex flex-col h-full overflow-y-auto px-6 py-8 pb-24">
-          <div className="flex flex-col gap-8 text-white font-semibold text-[17px]">
-            <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
-              Home
-            </Link>
+          <div className="flex flex-col gap-6 text-[#181428] font-semibold text-[17px]">
+            {navItems.map((item) => {
+              if (item.megaMenuKey) {
+                const sections = megaMenuData[item.megaMenuKey];
+                return (
+                  <div key={item.label}>
+                    <div
+                      className="flex justify-between items-center cursor-pointer"
+                      onClick={() => toggleAccordion(item.megaMenuKey!)}
+                    >
+                      <span>{item.label}</span>
+                      <span className="text-2xl font-light text-[#181428]/70 w-8 text-center">
+                        {expandedMenu === item.megaMenuKey ? "−" : "+"}
+                      </span>
+                    </div>
+                    <div
+                      className={`flex flex-col gap-3 pl-4 overflow-hidden transition-all duration-300 ${expandedMenu === item.megaMenuKey ? "max-h-[500px] mt-4" : "max-h-0"}`}
+                    >
+                      {sections.map((section) =>
+                        section.items.map((subItem, idx) => (
+                          <Link
+                            key={idx}
+                            href={subItem.href}
+                            className="flex items-center gap-3 text-[15px] font-normal text-[#181428]/80 py-1"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                          >
+                            <span className="w-7 h-7 rounded-lg bg-gray-100 flex items-center justify-center text-[#181428]/60 flex-shrink-0">
+                              {subItem.icon}
+                            </span>
+                            {subItem.label}
+                          </Link>
+                        )),
+                      )}
+                    </div>
+                  </div>
+                );
+              }
 
-            {/* About Link */}
-            <Link href="/about" onClick={() => setIsMobileMenuOpen(false)}>
-              About Us
-            </Link>
-
-            {/* Concern Link */}
-            <Link href="/concern" onClick={() => setIsMobileMenuOpen(false)}>
-              Concern
-            </Link>
-
-            <Link
-              href="/news-events"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              News & Events
-            </Link>
-
-            <Link href="/blog" onClick={() => setIsMobileMenuOpen(false)}>
-              Blogs
-            </Link>
-
-            <Link href="/careers" onClick={() => setIsMobileMenuOpen(false)}>
-              Career
-            </Link>
-
-            {/* More Accordion */}
-            <div>
-              <div
-                className="flex justify-between items-center cursor-pointer"
-                onClick={() => toggleAccordion("more")}
-              >
-                <span>More</span>
-                <span className="text-2xl font-light text-white/70 w-8 text-center">
-                  {expandedMenu === "more" ? "-" : "+"}
-                </span>
-              </div>
-              <div
-                className={`flex flex-col gap-4 pl-4 overflow-hidden transition-all duration-300 ${expandedMenu === "more" ? "max-h-60 mt-4" : "max-h-0"}`}
-              >
+              return (
                 <Link
-                  href="/contact"
-                  className="text-[15px] font-normal text-white/80"
+                  key={item.label}
+                  href={item.href!}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Contact Us
+                  {item.label}
                 </Link>
-                <Link
-                  href="/legal/faq"
-                  className="text-[15px] font-normal text-white/80"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  FAQ
-                </Link>
-                <Link
-                  href="/legal/privacy-policy"
-                  className="text-[15px] font-normal text-white/80"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Privacy Policy
-                </Link>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
       </div>

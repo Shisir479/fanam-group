@@ -5,7 +5,7 @@ import { getJobsPublic } from "@/services/job.service";
 import CareersClient from "@/components/careers/CareersClient";
 
 export const metadata = constructMetadata({
-  title: "Careers | Fanam Group",
+  title: "Careers",
   description: "Join our team and build the future with Fanam Group.",
 });
 

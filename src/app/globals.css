@@ -5,9 +5,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-brand-blue: #003b6d;
+  --color-brand-blue: #181428;
   --color-brand-gray: #e5e7eb;
-  --color-brand-dark: #0a1128;
+  --color-brand-dark: #181428;
   --color-brand-light: #ffffff;
 
   --color-background: var(--background);
@@ -284,6 +284,15 @@
 }
 
 @layer utilities {
+  /* Global Layout Classes */
+  .fanam-section {
+    @apply w-full py-16 md:py-20;
+  }
+
+  .fanam-container {
+    @apply w-full max-w-[1400px] mx-auto px-6 md:px-14 lg:px-20;
+  }
+
   .bg-admin-gradient {
     background-color: #09090f;
     background-image:

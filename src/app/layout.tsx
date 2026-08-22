@@ -23,12 +23,17 @@ export async function generateMetadata(): Promise<Metadata> {
   let image = "/assets/images/logo/logo.png";
   let icons = "/icon.png";
 
+  let otherVerification: Record<string, string[]> = {};
+
   try {
     const { getMainSettingsPublic, getBrandingSettingsPublic } =
       await import("@/services/settings.service");
-    const [mainRes, brandRes] = await Promise.all([
+    const { seoService } = await import("@/services/seo.service");
+
+    const [mainRes, brandRes, seoRes] = await Promise.all([
       getMainSettingsPublic(),
       getBrandingSettingsPublic(),
+      seoService.getActiveMetaTags(),
     ]);
 
     if (mainRes?.success && mainRes.data) {
@@ -39,6 +44,17 @@ export async function generateMetadata(): Promise<Metadata> {
     if (brandRes?.success && brandRes.data) {
       if (brandRes.data.logo?.url) image = brandRes.data.logo.url;
       if (brandRes.data.favicon?.url) icons = brandRes.data.favicon.url;
+    }
+    if (seoRes?.success && Array.isArray(seoRes.data)) {
+      seoRes.data.forEach((tag: any) => {
+        if (
+          tag.isActive !== false &&
+          tag.metaTagContent &&
+          tag.verificationId
+        ) {
+          otherVerification[tag.metaTagContent] = [tag.verificationId];
+        }
+      });
     }
   } catch (error) {
     console.error("Failed to fetch global SEO settings:", error);
@@ -62,6 +78,10 @@ export async function generateMetadata(): Promise<Metadata> {
       images: [image],
     },
     icons,
+    verification:
+      Object.keys(otherVerification).length > 0
+        ? { other: otherVerification }
+        : undefined,
   };
 }
 

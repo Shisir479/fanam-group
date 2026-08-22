@@ -27,6 +27,7 @@ import {
   Heart,
   Briefcase,
   Newspaper,
+  Search,
 } from "lucide-react";
 
 type MenuItem = {
@@ -90,6 +91,11 @@ export function AdminSidebar() {
           name: "Page Banners",
           icon: ImageIcon,
           href: "/admin/settings/pagebanner",
+        },
+        {
+          name: "SEO Settings",
+          icon: Search,
+          href: "/admin/settings/seo",
         },
       ],
     },
