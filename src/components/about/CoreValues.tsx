@@ -1,90 +1,108 @@
-import { BlockReveal } from "@/components/ui/BlockReveal";
-import { Shield, Gem, Users, Leaf, Lightbulb, TrendingUp } from "lucide-react";
+import { Settings, Medal, Lightbulb, Target, TrendingUp, Network } from "lucide-react";
+
+const coreValues = [
+  {
+    title: "Integrity",
+    icon: <Settings className="w-8 h-8 text-slate-700" />,
+    bg: "bg-slate-100",
+  },
+  {
+    title: "Excellence",
+    icon: <Medal className="w-8 h-8 text-yellow-500" />,
+    bg: "bg-yellow-50",
+  },
+  {
+    title: "Innovation",
+    icon: <Lightbulb className="w-8 h-8 text-orange-500" />,
+    bg: "bg-orange-50",
+  },
+  {
+    title: "Customer Focus",
+    icon: <Target className="w-8 h-8 text-red-500" />,
+    bg: "bg-red-50",
+  },
+  {
+    title: "Sustainability",
+    icon: <TrendingUp className="w-8 h-8 text-green-500" />,
+    bg: "bg-green-50",
+  },
+  {
+    title: "Teamwork",
+    icon: <Network className="w-8 h-8 text-blue-600" />,
+    bg: "bg-blue-50",
+  },
+];
 
 export function CoreValues({ data }: { data: any }) {
-  const defaultValues = [
-    {
-      icon: <Shield className="w-8 h-8" />,
-      title: "Integrity",
-      description:
-        "We uphold the highest standards of honesty and transparency in all our interactions and transactions.",
-    },
-    {
-      icon: <Gem className="w-8 h-8" />,
-      title: "Quality",
-      description:
-        "Uncompromising commitment to excellence in materials, design, and construction.",
-    },
-    {
-      icon: <Users className="w-8 h-8" />,
-      title: "Customer First",
-      description:
-        "Our clients are at the heart of everything we do. We build relationships, not just buildings.",
-    },
-    {
-      icon: <Leaf className="w-8 h-8" />,
-      title: "Sustainability",
-      description:
-        "Dedicated to eco-friendly practices and building sustainable communities for the future.",
-    },
-    {
-      icon: <Lightbulb className="w-8 h-8" />,
-      title: "Innovation",
-      description:
-        "Continuously adopting new technologies and architectural trends to stay ahead of the curve.",
-    },
-    {
-      icon: <TrendingUp className="w-8 h-8" />,
-      title: "Growth",
-      description:
-        "Fostering an environment of continuous learning and growth for our team and partners.",
-    },
-  ];
-
-  const values =
-    data?.coreValues?.length > 0
-      ? data.coreValues.map((cv: any, i: number) => ({
-          ...cv,
-          icon: defaultValues[i % defaultValues.length].icon,
-        }))
-      : defaultValues;
-
-  if (!data) return null;
+  // Hardcoded to match the strict visual design provided
 
   return (
-    <section className="w-full py-16 md:py-24 bg-gray-50 border-t border-gray-200">
-      <div className="container mx-auto px-5 md:px-16">
-        <div className="text-center mb-16 flex flex-col items-center gap-4">
-          <BlockReveal color="var(--color-brand-blue)">
-            <div className="flex items-center text-[14px] md:text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
-              OUR PRINCIPLES
-            </div>
-          </BlockReveal>
-          <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
-            <h2 className="text-2xl md:text-[34px] font-bold text-brand-blue leading-[1.3] uppercase max-w-3xl text-center">
-              CORE VALUES
-            </h2>
-          </BlockReveal>
+    <section className="fanam-section bg-white relative overflow-hidden py-16 lg:py-24">
+      <div className="fanam-container">
+        
+        {/* Header */}
+        <div className="flex flex-col items-center text-center mb-16 lg:mb-24">
+          <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-[#f9c602]/10 text-[#181428] text-[10px] font-bold uppercase tracking-wider mb-6">
+            Our Core Values
+          </div>
+          
+          <p className="text-gray-500 text-[14px] md:text-[15px] font-medium leading-relaxed max-w-2xl mx-auto">
+            Our core values define who we are, guide every decision we make, and inspire us to deliver excellence with integrity and innovation.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {values.map((value: any, index: number) => (
-            <div
-              key={index}
-              className="bg-white p-10 border border-gray-50 shadow-sm transition-shadow group flex flex-col items-start"
+        {/* Desktop Layout (Horizontal Wavy Timeline) */}
+        <div className="hidden lg:block relative w-full h-[200px] px-12 z-0">
+          <div className="relative w-full h-full">
+            
+            {/* Wavy Dashed SVG Background */}
+            <svg 
+              className="absolute top-0 left-0 w-full h-[80px] overflow-visible z-0" 
+              preserveAspectRatio="none" 
+              viewBox="0 0 100 40"
             >
-              <div className="bg-brand-blue/5 text-brand-blue p-4 rounded-none mb-6 group-hover:bg-brand-blue group-hover:text-white transition-colors duration-300">
-                {value.icon}
+              <path 
+                d="M 0 20 Q 10 -10, 20 20 T 40 20 T 60 20 T 80 20 T 100 20" 
+                fill="transparent" 
+                stroke="#86efac" 
+                strokeWidth="2.5" 
+                vectorEffect="non-scaling-stroke"
+                strokeDasharray="8 8" 
+              />
+            </svg>
+
+            {/* Icons and Labels */}
+            {coreValues.map((val, i) => (
+              <div 
+                key={i} 
+                className="absolute top-0 flex flex-col items-center -translate-x-1/2 w-32 z-10"
+                style={{ left: `${i * 20}%` }}
+              >
+                <div className={`w-20 h-20 rounded-full flex items-center justify-center shadow-sm mb-4 border border-white ${val.bg} transform transition-transform hover:scale-110 duration-300`}>
+                  {val.icon}
+                </div>
+                <h4 className="text-[15px] font-bold text-[#181428] whitespace-nowrap">
+                  {val.title}
+                </h4>
               </div>
-              <h3 className="text-lg font-bold text-brand-blue uppercase tracking-wider mb-3">
-                {value.title}
-              </h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                {value.description}
-              </p>
+            ))}
+          </div>
+        </div>
+
+        {/* Mobile/Tablet Layout (Grid) */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-y-12 gap-x-4 lg:hidden">
+          {coreValues.map((val, i) => (
+            <div key={i} className="flex flex-col items-center text-center group">
+              <div className={`w-20 h-20 rounded-full flex items-center justify-center shadow-sm mb-4 border border-white ${val.bg} transform transition-transform group-hover:scale-110 duration-300`}>
+                {val.icon}
+              </div>
+              <h4 className="text-[14px] md:text-[15px] font-bold text-[#181428]">
+                {val.title}
+              </h4>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );

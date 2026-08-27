@@ -198,109 +198,7 @@ const navItems: NavItem[] = [
   { label: "More", megaMenuKey: "more" },
 ];
 
-// ─── Mega Menu Panel ────────────────────────────────────────────
-function MegaMenuPanel({
-  sections,
-  onClose,
-  isScrolled,
-  isBannerPage,
-}: {
-  sections: MegaMenuSection[];
-  onClose: () => void;
-  isScrolled: boolean;
-  isBannerPage: boolean;
-}) {
-  const bgClass = isScrolled || !isBannerPage ? "bg-white" : "bg-white";
-  return (
-    <motion.div
-      initial={{ opacity: 0, height: 0 }}
-      animate={{ opacity: 1, height: "auto" }}
-      exit={{ opacity: 0, height: 0 }}
-      transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
-      className={`absolute top-full left-0 right-0 w-full ${bgClass} shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] overflow-hidden z-50`}
-    >
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -10 }}
-        transition={{ duration: 0.3, delay: 0.1 }}
-        className="container mx-auto px-6 md:px-20"
-      >
-        <div className="py-10 grid grid-cols-12 gap-8">
-          {/* Main content columns */}
-          <div
-            className={`${sections.length > 1 ? "col-span-10" : "col-span-12"} grid ${sections.length > 1 ? `grid-cols-${sections.length}` : "grid-cols-1"} gap-12`}
-          >
-            {sections.map((section, sIdx) => (
-              <div key={sIdx}>
-                {/* Section Title */}
-                <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-6 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#f9c602]" />
-                  {section.title}
-                </h3>
-
-                {/* Items */}
-                <div className="space-y-1">
-                  {section.items.map((item, iIdx) => (
-                    <Link
-                      key={iIdx}
-                      href={item.href}
-                      onClick={onClose}
-                      className="group flex items-start gap-4 px-4 py-3.5 rounded-xl hover:bg-gray-50/80 transition-all duration-300"
-                    >
-                      {/* Icon */}
-                      <span className="flex-shrink-0 w-10 h-10 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-400 group-hover:bg-[#f9c602] group-hover:text-black group-hover:border-[#f9c602] group-hover:scale-110 transition-all duration-300">
-                        {item.icon}
-                      </span>
-
-                      {/* Text */}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2">
-                          <span className="text-[15px] font-semibold text-gray-900 group-hover:text-black transition-colors">
-                            {item.label}
-                          </span>
-                          <ChevronRight className="w-3.5 h-3.5 text-gray-300 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
-                        </div>
-                        <p className="text-xs text-gray-400 mt-0.5 group-hover:text-gray-500 transition-colors">
-                          {item.description}
-                        </p>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Right side CTA (only for sections with > 1 group) */}
-          {sections.length > 1 && (
-            <div className="col-span-2 flex flex-col justify-center">
-              <div className="rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100/50 border border-gray-100 p-6">
-                <div className="w-10 h-10 rounded-xl bg-[#f9c602] flex items-center justify-center mb-4">
-                  <ChevronRight className="w-5 h-5 text-black" />
-                </div>
-                <h4 className="text-sm font-bold text-gray-900 mb-2">
-                  Need Help?
-                </h4>
-                <p className="text-xs text-gray-500 leading-relaxed mb-4">
-                  Reach out to our team for any inquiries or assistance.
-                </p>
-                <Link
-                  href="/contact"
-                  onClick={onClose}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#f9c602] hover:text-[#e0b000] transition-colors"
-                >
-                  Contact Us
-                  <ChevronRight className="w-3 h-3" />
-                </Link>
-              </div>
-            </div>
-          )}
-        </div>
-      </motion.div>
-    </motion.div>
-  );
-}
+// Mega Menu Panel removed in favor of simple dropdowns
 
 // ─── Main Navbar ────────────────────────────────────────────────
 export function Navbar({ brandingData }: { brandingData?: any }) {
@@ -472,6 +370,39 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
                           className={`absolute left-0 bottom-0 w-full h-[3px] bg-[#f9c602] origin-center transition-transform duration-500 ease-out ${active || activeMegaMenu === item.megaMenuKey ? "scale-x-100" : "scale-x-0"}`}
                         />
                       </span>
+
+                      {/* Simple Dropdown Menu */}
+                      <AnimatePresence>
+                        {activeMegaMenu === item.megaMenuKey && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 15 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 15 }}
+                            transition={{ duration: 0.2 }}
+                            className="absolute top-full left-0 w-60 bg-white rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] border border-gray-100 py-3 mt-1 overflow-hidden z-50 flex flex-col"
+                          >
+                            {megaMenuData[item.megaMenuKey].map((section, sIdx) => (
+                              <div key={sIdx} className={`${sIdx !== 0 ? 'mt-2 pt-2 border-t border-gray-50' : ''}`}>
+                                {megaMenuData[item.megaMenuKey!].length > 1 && (
+                                  <div className="px-5 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-gray-400">
+                                    {section.title}
+                                  </div>
+                                )}
+                                {section.items.map((subItem, iIdx) => (
+                                  <Link
+                                    key={iIdx}
+                                    href={subItem.href}
+                                    onClick={() => setActiveMegaMenu(null)}
+                                    className="block px-5 py-2.5 text-[14px] text-gray-600 font-medium hover:bg-gray-50 hover:text-[#f9c602] transition-colors"
+                                  >
+                                    {subItem.label}
+                                  </Link>
+                                ))}
+                              </div>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                     </div>
                   );
                 }
@@ -534,37 +465,7 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
           </div>
         </div>
 
-        {/* ─── Mega Menu Panels (Desktop) ─── */}
-        <AnimatePresence>
-          {activeMegaMenu && megaMenuData[activeMegaMenu] && (
-            <div
-              onMouseEnter={handlePanelEnter}
-              onMouseLeave={handlePanelLeave}
-            >
-              <MegaMenuPanel
-                sections={megaMenuData[activeMegaMenu]}
-                onClose={() => setActiveMegaMenu(null)}
-                isScrolled={isScrolled}
-                isBannerPage={isBannerPage}
-              />
-            </div>
-          )}
-        </AnimatePresence>
       </header>
-
-      {/* ─── Backdrop overlay when mega menu is open ─── */}
-      <AnimatePresence>
-        {activeMegaMenu && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-x-0 top-[72px] bottom-0 bg-black/20 backdrop-blur-[2px] z-40 hidden lg:block"
-            onClick={() => setActiveMegaMenu(null)}
-          />
-        )}
-      </AnimatePresence>
 
       {/* ─── Mobile Menu Overlay ─── */}
       <div

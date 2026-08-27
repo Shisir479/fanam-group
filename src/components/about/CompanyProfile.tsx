@@ -1,81 +1,89 @@
-import { BlockReveal } from "@/components/ui/BlockReveal";
-import { Counter } from "@/components/ui/Counter";
+import { CheckCircle2 } from "lucide-react";
+import Image from "next/image";
 
 export function CompanyProfile({ data }: { data: any }) {
   if (!data) return null;
 
+  const features = [
+    "Creating long-term value for customers, partners, employees, and communities.",
+    "Driving progress through modern solutions and continuous improvement.",
+    "Delivering quality, trust, and exceptional customer experiences.",
+    "Operating across multiple industries with sustainable growth.",
+    "Building lasting relationships with ethical business practices."
+  ];
+
   return (
-    <section className="w-full py-16 md:py-24 bg-white">
-      <div className="container mx-auto px-5 md:px-16">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
+    <section className="fanam-section bg-white relative overflow-hidden py-16 lg:py-24">
+      <div className="fanam-container">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
+          
           {/* Left Text Side */}
-          <div className="w-full lg:w-1/2 flex flex-col gap-6 overflow-hidden">
-            <div className="flex flex-col gap-4 mb-2">
-              <BlockReveal color="var(--color-brand-blue)">
-                <div className="flex items-center text-[14px] md:text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
-                  {data?.companyTitle || "COMPANY PROFILE"}
-                </div>
-              </BlockReveal>
-              <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
-                <h2 className="text-2xl md:text-[34px] font-bold text-brand-blue leading-[1.3] uppercase">
-                  {data?.companyHeading || "Pioneering Luxury Real Estate"}
-                </h2>
-              </BlockReveal>
+          <div className="w-full lg:w-[50%] flex flex-col pr-0 lg:pr-8">
+            <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-[#f9c602]/10 text-[#181428] text-[10px] font-bold uppercase tracking-wider mb-6 self-start">
+              Company Profile
             </div>
 
-            <div
-              className="text-gray-600 text-base leading-relaxed prose max-w-none"
-              dangerouslySetInnerHTML={{
-                __html:
-                  data?.companyDescription ||
-                  `<p>At Fanam Group, we do more than just build structures; we create legacies. With a deep-rooted commitment to architectural brilliance and uncompromising quality, we have established ourselves as pioneers in the luxury real estate sector.</p><p>Our projects span across prime locations, offering unparalleled convenience, state-of-the-art amenities, and a community-centric lifestyle. We pride ourselves on our meticulous attention to detail, uncompromising quality, and a customer-first approach that ensures every Bonedi home is a masterpiece.</p>`,
-              }}
-            />
+            <h2 className="text-3xl md:text-[32px] leading-tight font-serif font-bold text-[#181428] mb-6">
+              Who We Are
+            </h2>
 
-            <div className="grid grid-cols-2 gap-8 mt-6">
-              <div className="flex flex-col gap-2">
-                <h4 className="text-4xl font-bold text-brand-blue">
-                  <Counter
-                    end={data?.experience || 15}
-                    suffix="+"
-                    duration={600}
-                  />
-                </h4>
-                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">
-                  Years Experience
-                </p>
+            <p className="text-[#181428]/80 leading-relaxed text-[13px] font-medium mb-8">
+              Fanam Group is a diversified corporate group committed to shaping the future through innovation, integrity, and excellence. With a growing portfolio spanning Real Estate, E-commerce, Travel & Tourism, Media, and emerging industries, we deliver high-quality products and services that create lasting value. Guided by a customer-first approach and a vision for sustainable growth, we build trusted businesses that positively impact communities, empower people, and contribute to long-term economic development.
+            </p>
+
+            <ul className="flex flex-col gap-3">
+              {features.map((feature, index) => (
+                <li key={index} className="flex items-start gap-3">
+                  <CheckCircle2 className="w-[18px] h-[18px] text-green-500 shrink-0 mt-0.5" />
+                  <span className="text-[#181428]/80 text-[13px] font-medium leading-relaxed">{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Right Image Side (Masonry/Bento Grid) */}
+          <div className="w-full lg:w-[50%] flex flex-col gap-4 mt-8 lg:mt-0">
+            {/* Row 1 */}
+            <div className="grid grid-cols-12 gap-4 h-40 sm:h-48 lg:h-52">
+              <div className="col-span-5 relative rounded-[1rem] overflow-hidden shadow-sm hover:shadow-md transition-shadow group">
+                <Image
+                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop"
+                  alt="Marketing Strategy"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
               </div>
-              <div className="flex flex-col gap-2">
-                <h4 className="text-4xl font-bold text-brand-blue">
-                  <Counter
-                    end={data?.completedProjects || 50}
-                    suffix="+"
-                    duration={800}
-                  />
-                </h4>
-                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">
-                  Projects Completed
-                </p>
+              <div className="col-span-7 relative rounded-[1rem] overflow-hidden shadow-sm hover:shadow-md transition-shadow group">
+                <Image
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop"
+                  alt="Team Collaboration"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+            </div>
+            
+            {/* Row 2 */}
+            <div className="grid grid-cols-12 gap-4 h-40 sm:h-48 lg:h-52">
+              <div className="col-span-7 relative rounded-[1rem] overflow-hidden shadow-sm hover:shadow-md transition-shadow group">
+                <Image
+                  src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop"
+                  alt="Virtual Meeting"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              <div className="col-span-5 relative rounded-[1rem] overflow-hidden shadow-sm hover:shadow-md transition-shadow group">
+                <Image
+                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop"
+                  alt="Working Professional"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
               </div>
             </div>
           </div>
 
-          {/* Right Image Side */}
-          <div className="w-full lg:w-1/2 relative">
-            <div className="relative aspect-[4/3] w-full overflow-hidden shadow-lg border border-gray-100">
-              <img
-                src={
-                  data?.companyImage?.url ||
-                  "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2070&auto=format&fit=crop"
-                }
-                alt={data?.companyHeading || "Modern Apartment Building"}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 border-[8px] border-white/20 pointer-events-none"></div>
-            </div>
-            {/* Decorative block */}
-            <div className="hidden lg:block absolute -bottom-6 -left-6 w-32 h-32 bg-gray-100 -z-10"></div>
-          </div>
         </div>
       </div>
     </section>
