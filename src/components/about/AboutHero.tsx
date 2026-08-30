@@ -22,12 +22,6 @@ export function AboutHero({ data, banner }: { data: any; banner?: Banner }) {
       }
       bgImage={banner?.backgroundImage || data?.heroImage?.url || ""}
       altText={banner?.title || data?.heroTitle || "Bonedi Office"}
-    >
-      {banner?.description && (
-        <p className="text-white/80 text-[14px] md:text-[15px] leading-relaxed max-w-2xl mt-4">
-          {banner.description}
-        </p>
-      )}
-    </PageBanner>
+    ></PageBanner>
   );
 }

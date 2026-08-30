@@ -24,6 +24,7 @@ import {
   Briefcase,
   Award,
   Handshake,
+  Video,
 } from "lucide-react";
 
 // ─── Mega Menu Data ─────────────────────────────────────────────
@@ -46,54 +47,6 @@ interface NavItem {
 }
 
 const megaMenuData: Record<string, MegaMenuSection[]> = {
-  about: [
-    {
-      title: "Company",
-      items: [
-        {
-          label: "About Fanam Group",
-          href: "/about",
-          description: "Our story, mission, vision & values",
-          icon: <Building2 className="w-5 h-5" />,
-        },
-        {
-          label: "Leadership Team",
-          href: "/about#leadership",
-          description: "Meet the people driving our success",
-          icon: <Users className="w-5 h-5" />,
-        },
-        {
-          label: "CSR Initiatives",
-          href: "/csr",
-          description: "Making a difference in communities",
-          icon: <Target className="w-5 h-5" />,
-        },
-      ],
-    },
-    {
-      title: "Explore",
-      items: [
-        {
-          label: "Our Concerns",
-          href: "/concern",
-          description: "Explore our diverse business verticals",
-          icon: <Globe className="w-5 h-5" />,
-        },
-        {
-          label: "Awards & Milestones",
-          href: "/about#milestones",
-          description: "Recognitions and key achievements",
-          icon: <Award className="w-5 h-5" />,
-        },
-        {
-          label: "Career Opportunities",
-          href: "/careers",
-          description: "Join our growing team",
-          icon: <Briefcase className="w-5 h-5" />,
-        },
-      ],
-    },
-  ],
   "news-media": [
     {
       title: "News & Media",
@@ -110,51 +63,10 @@ const megaMenuData: Record<string, MegaMenuSection[]> = {
           description: "Thought leadership and industry insights",
           icon: <BookOpen className="w-5 h-5" />,
         },
-        {
-          label: "Media Gallery",
-          href: "/image-gallery",
-          description: "Photos and videos from our journey",
-          icon: <Images className="w-5 h-5" />,
-        },
-      ],
-    },
-    {
-      title: "Press",
-      items: [
-        {
-          label: "Press Releases",
-          href: "/press",
-          description: "Official announcements and statements",
-          icon: <FileText className="w-5 h-5" />,
-        },
       ],
     },
   ],
-  investors: [
-    {
-      title: "Investor Relations",
-      items: [
-        {
-          label: "Investor Overview",
-          href: "/investors",
-          description: "Financial highlights and corporate governance",
-          icon: <TrendingUp className="w-5 h-5" />,
-        },
-        {
-          label: "Investment Opportunities",
-          href: "/investors#booking",
-          description: "Explore investment possibilities with us",
-          icon: <BarChart3 className="w-5 h-5" />,
-        },
-        {
-          label: "Partnership Inquiry",
-          href: "/inquiry",
-          description: "Collaborate and grow together",
-          icon: <Handshake className="w-5 h-5" />,
-        },
-      ],
-    },
-  ],
+  // Investors section removed in favor of direct link
   more: [
     {
       title: "Resources",
@@ -177,11 +89,24 @@ const megaMenuData: Record<string, MegaMenuSection[]> = {
           description: "How we handle your data",
           icon: <Shield className="w-5 h-5" />,
         },
+      ],
+    },
+  ],
+  gallery: [
+    {
+      title: "Gallery",
+      items: [
         {
-          label: "Terms & Conditions",
-          href: "/legal/terms-conditions",
-          description: "Usage terms and guidelines",
-          icon: <FileText className="w-5 h-5" />,
+          label: "Image Gallery",
+          href: "/image-gallery",
+          description: "Browse our photo collections",
+          icon: <Images className="w-5 h-5" />,
+        },
+        {
+          label: "Video Gallery",
+          href: "/video-gallery",
+          description: "Watch our video presentations",
+          icon: <Video className="w-5 h-5" />,
         },
       ],
     },
@@ -189,12 +114,12 @@ const megaMenuData: Record<string, MegaMenuSection[]> = {
 };
 
 const navItems: NavItem[] = [
-  { label: "Home", href: "/" },
-  { label: "About Us", megaMenuKey: "about" },
+  { label: "About Us", href: "/about" },
   { label: "Concern", href: "/concern" },
   { label: "News & Media", megaMenuKey: "news-media" },
   { label: "Career", href: "/careers" },
-  { label: "Investors", megaMenuKey: "investors" },
+  { label: "Investors", href: "/investors" },
+  { label: "Gallery", megaMenuKey: "gallery" },
   { label: "More", megaMenuKey: "more" },
 ];
 
@@ -381,25 +306,31 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
                             transition={{ duration: 0.2 }}
                             className="absolute top-full left-0 w-60 bg-white rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] border border-gray-100 py-3 mt-1 overflow-hidden z-50 flex flex-col"
                           >
-                            {megaMenuData[item.megaMenuKey].map((section, sIdx) => (
-                              <div key={sIdx} className={`${sIdx !== 0 ? 'mt-2 pt-2 border-t border-gray-50' : ''}`}>
-                                {megaMenuData[item.megaMenuKey!].length > 1 && (
-                                  <div className="px-5 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-gray-400">
-                                    {section.title}
-                                  </div>
-                                )}
-                                {section.items.map((subItem, iIdx) => (
-                                  <Link
-                                    key={iIdx}
-                                    href={subItem.href}
-                                    onClick={() => setActiveMegaMenu(null)}
-                                    className="block px-5 py-2.5 text-[14px] text-gray-600 font-medium hover:bg-gray-50 hover:text-[#f9c602] transition-colors"
-                                  >
-                                    {subItem.label}
-                                  </Link>
-                                ))}
-                              </div>
-                            ))}
+                            {megaMenuData[item.megaMenuKey].map(
+                              (section, sIdx) => (
+                                <div
+                                  key={sIdx}
+                                  className={`${sIdx !== 0 ? "mt-2 pt-2 border-t border-gray-50" : ""}`}
+                                >
+                                  {megaMenuData[item.megaMenuKey!].length >
+                                    1 && (
+                                    <div className="px-5 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-gray-400">
+                                      {section.title}
+                                    </div>
+                                  )}
+                                  {section.items.map((subItem, iIdx) => (
+                                    <Link
+                                      key={iIdx}
+                                      href={subItem.href}
+                                      onClick={() => setActiveMegaMenu(null)}
+                                      className="block px-5 py-2.5 text-[14px] text-gray-600 font-medium hover:bg-gray-50 hover:text-[#f9c602] transition-colors"
+                                    >
+                                      {subItem.label}
+                                    </Link>
+                                  ))}
+                                </div>
+                              ),
+                            )}
                           </motion.div>
                         )}
                       </AnimatePresence>
@@ -464,7 +395,6 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
             </button>
           </div>
         </div>
-
       </header>
 
       {/* ─── Mobile Menu Overlay ─── */}

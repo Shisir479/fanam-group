@@ -1,30 +1,51 @@
 import { constructMetadata } from "@/lib/metadata";
+import { PageBanner } from "@/components/ui/PageBanner";
+import InvestorsClient from "@/components/investors/InvestorsClient";
+import {
+  getInvestorReportsPublic,
+  InvestorReport,
+} from "@/services/investor.service";
+import {
+  getInvestmentPartnersPublic,
+  InvestmentPartner,
+} from "@/services/investment-partner.service";
 
 export const metadata = constructMetadata({
   title: "Investor Relations | Fanam Group",
 });
 
-export default function InvestorsPage() {
-  return (
-    <main className="min-h-screen bg-gray-50 pt-32 pb-24">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Investor Relations
-          </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Financial highlights, corporate governance, and reports for our
-            stakeholders.
-          </p>
-        </div>
+export default async function InvestorsPage() {
+  let initialReports: InvestorReport[] = [];
+  let initialPartners: InvestmentPartner[] = [];
 
-        <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm text-center">
-          <h3 className="text-xl font-semibold mb-2">Quarterly Reports</h3>
-          <p className="text-gray-500">
-            No reports available for download yet.
-          </p>
-        </div>
-      </div>
+  try {
+    const [reportsRes, partnersRes] = await Promise.all([
+      getInvestorReportsPublic({ limit: 100 }),
+      getInvestmentPartnersPublic({ limit: 50 }),
+    ]);
+
+    if (reportsRes?.success) {
+      initialReports = reportsRes.data || [];
+    }
+    if (partnersRes?.success) {
+      initialPartners = partnersRes.data || [];
+    }
+  } catch (error) {
+    console.error("Failed to fetch public investor data", error);
+  }
+
+  return (
+    <main className="min-h-screen bg-white">
+      <PageBanner
+        title="Investor Relations"
+        subtitle="Empowering Growth and Sustainability"
+        bgImage="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1920&auto=format&fit=crop"
+      ></PageBanner>
+
+      <InvestorsClient
+        initialReports={initialReports}
+        initialPartners={initialPartners}
+      />
     </main>
   );
 }

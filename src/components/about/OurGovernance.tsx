@@ -1,4 +1,12 @@
-import { UserCheck, ClipboardCheck, Recycle, Scale, Handshake, ShieldAlert, ChevronDown } from "lucide-react";
+import {
+  UserCheck,
+  ClipboardCheck,
+  Recycle,
+  Scale,
+  Handshake,
+  ShieldAlert,
+  ChevronDown,
+} from "lucide-react";
 
 const leftItems = [
   {
@@ -42,7 +50,6 @@ export function OurGovernance() {
       <div className="flex flex-col mt-2">
         {items.map((item, idx) => (
           <div key={idx} className="flex items-stretch">
-            
             {/* Timeline Column */}
             <div className="w-14 md:w-16 flex-shrink-0 flex flex-col items-center relative">
               {/* Continuous Dashed Line */}
@@ -68,8 +75,10 @@ export function OurGovernance() {
               <div className="bg-white border border-gray-100 rounded-xl p-4 px-5 shadow-sm hover:shadow-md transition-shadow relative h-[120px] flex flex-col justify-center">
                 {/* Left pointing tail */}
                 <div className="absolute top-[38px] -left-[6px] w-3 h-3 bg-white border-l border-t border-gray-100 rotate-[-45deg]"></div>
-                
-                <h4 className="text-[14px] font-bold text-[#181428] mb-1.5">{item.title}</h4>
+
+                <h4 className="text-[14px] font-bold text-[#181428] mb-1.5">
+                  {item.title}
+                </h4>
                 <p className="text-[12px] text-gray-500 leading-relaxed font-medium">
                   {item.desc}
                 </p>
@@ -84,31 +93,26 @@ export function OurGovernance() {
   return (
     <section className="fanam-section bg-white relative overflow-hidden py-16 lg:py-24 border-t border-gray-50">
       <div className="fanam-container">
-        
         {/* Header */}
         <div className="flex flex-col items-center text-center mb-16">
           <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-[#f9c602]/10 text-[#181428] text-[10px] font-bold uppercase tracking-wider mb-6">
             Our Governance
           </div>
-          
+
           <p className="text-gray-500 text-[14px] md:text-[15px] font-medium leading-relaxed max-w-3xl mx-auto">
-            Fanam Group is committed to maintaining the highest standards of transparency, accountability, ethical leadership, and responsible business practices across all operations.
+            Fanam Group is committed to maintaining the highest standards of
+            transparency, accountability, ethical leadership, and responsible
+            business practices across all operations.
           </p>
         </div>
 
         {/* 2-Column Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-          
           {/* Left Column */}
-          <div className="flex flex-col">
-            {renderTimeline(leftItems)}
-          </div>
+          <div className="flex flex-col">{renderTimeline(leftItems)}</div>
 
           {/* Right Column */}
-          <div className="flex flex-col">
-            {renderTimeline(rightItems)}
-          </div>
-
+          <div className="flex flex-col">{renderTimeline(rightItems)}</div>
         </div>
       </div>
     </section>

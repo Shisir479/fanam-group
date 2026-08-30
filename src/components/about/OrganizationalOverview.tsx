@@ -1,4 +1,10 @@
-import { Building2, Home, Landmark, ShieldCheck, ArrowRight } from "lucide-react";
+import {
+  Building2,
+  Home,
+  Landmark,
+  ShieldCheck,
+  ArrowRight,
+} from "lucide-react";
 import Link from "next/link";
 
 export function OrganizationalOverview({ data }: { data: any }) {
@@ -42,7 +48,6 @@ export function OrganizationalOverview({ data }: { data: any }) {
   return (
     <section className="fanam-section bg-gray-50 relative overflow-hidden">
       <div className="fanam-container">
-        
         {/* Header Section (Left Aligned) */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-10 mb-12">
           <div className="flex flex-col gap-3 flex-1 max-w-2xl">
@@ -69,9 +74,7 @@ export function OrganizationalOverview({ data }: { data: any }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {departments.map((dept: any, index: number) => (
             <div key={index} className="relative">
-              <div
-                className="group/dept flex flex-col relative h-full transition-all duration-500 cursor-pointer"
-              >
+              <div className="group/dept flex flex-col relative h-full transition-all duration-500 cursor-pointer">
                 {/* Icon Header */}
                 <div className="flex items-center gap-4 mb-6 relative z-10">
                   <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center border border-gray-100 text-[#181428] group-hover/dept:bg-[#f9c602] group-hover/dept:text-white group-hover/dept:border-[#f9c602] group-hover/dept:scale-110 transition-all duration-500 shadow-sm shrink-0">
@@ -84,7 +87,7 @@ export function OrganizationalOverview({ data }: { data: any }) {
                 <h3 className="text-[16px] font-bold text-[#181428] mb-3 group-hover/dept:text-[#f9c602] transition-colors duration-500 tracking-tight">
                   {dept.title}
                 </h3>
-                
+
                 <p className="text-[#181428]/80 text-[13px] font-medium leading-relaxed mb-6 group-hover/dept:text-gray-700 transition-colors duration-500">
                   {dept.description}
                 </p>
@@ -98,7 +101,6 @@ export function OrganizationalOverview({ data }: { data: any }) {
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

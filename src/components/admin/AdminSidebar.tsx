@@ -43,6 +43,7 @@ export function AdminSidebar() {
   const pathname = usePathname();
   const [expanded, setExpanded] = useState<Record<string, boolean>>({
     Settings: pathname?.startsWith("/admin/settings") || false,
+    Investors: pathname?.startsWith("/admin/invest") || false,
   });
 
   const toggleExpand = (name: string, e: React.MouseEvent) => {
@@ -72,7 +73,18 @@ export function AdminSidebar() {
     { name: "Business Partners", icon: Hexagon, href: "/admin/brands" },
     { name: "CSR Activities", icon: Heart, href: "/admin/csr" },
     { name: "Media Coverage", icon: Newspaper, href: "/admin/press" },
-    { name: "Investor Docs", icon: FileText, href: "/admin/documents" },
+    {
+      name: "Investors",
+      icon: FileText,
+      children: [
+        {
+          name: "Investment Partners",
+          icon: Hexagon,
+          href: "/admin/investment-partners",
+        },
+        { name: "Investor Docs", icon: FileText, href: "/admin/investors" },
+      ],
+    },
     {
       name: "Contact Info",
       icon: PhoneCall,

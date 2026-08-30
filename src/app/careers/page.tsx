@@ -3,6 +3,7 @@ import Image from "next/image";
 import { CheckCircle2 } from "lucide-react";
 import { getJobsPublic } from "@/services/job.service";
 import CareersClient from "@/components/careers/CareersClient";
+import { PageBanner } from "@/components/ui/PageBanner";
 
 export const metadata = constructMetadata({
   title: "Careers",
@@ -23,73 +24,11 @@ export default async function CareersPage() {
   return (
     <main className="min-h-screen bg-white text-black">
       {/* Hero Section */}
-      <section className="bg-white pt-20 pb-12 overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
-            {/* Left Content */}
-            <div className="lg:w-1/2 flex flex-col items-start text-left">
-              <h1 className="text-4xl lg:text-6xl font-semibold text-black leading-[1.1] mb-5 tracking-tight">
-                Be Yourself <br /> And Join Us Today.
-              </h1>
-              <p className="text-gray-600 text-base lg:text-lg leading-relaxed max-w-lg mb-8">
-                From meaningful products to innovative and long-lasting
-                companies, we strongly believe that nothing significant was ever
-                achieved by oneself — create the future of commerce with us!
-              </p>
-              <a
-                href="#openings"
-                className="inline-flex items-center justify-center gap-3 bg-[#f9c602] text-black px-7 py-3.5 rounded-full font-bold text-sm tracking-wide hover:bg-yellow-400 transition-colors shadow-lg shadow-yellow-500/20"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-black"></span> SEE
-                OPEN ROLES
-              </a>
-            </div>
-
-            {/* Right Images (Collage) */}
-            <div className="lg:w-1/2 relative h-[400px] lg:h-[500px] w-full">
-              {/* Image 1: Top Left - Horizontal Oval */}
-              <div className="absolute top-[2%] left-[2%] w-[62%] h-[40%] rounded-[100px] md:rounded-[120px] overflow-hidden z-10">
-                <Image
-                  src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800&auto=format&fit=crop"
-                  alt="Team member"
-                  fill
-                  className="object-cover object-top"
-                />
-              </div>
-
-              {/* Image 2: Bottom Left - Circle */}
-              <div className="absolute bottom-[8%] left-[12%] w-[26%] aspect-square rounded-full overflow-hidden z-20">
-                <Image
-                  src="https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?q=80&w=400&auto=format&fit=crop"
-                  alt="Team member"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-
-              {/* Image 3: Bottom Middle - Vertical Oval */}
-              <div className="absolute bottom-[4%] left-[41%] w-[22%] h-[48%] rounded-full overflow-hidden z-30">
-                <Image
-                  src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=400&auto=format&fit=crop"
-                  alt="Team member"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-
-              {/* Image 4: Right - Large Pill */}
-              <div className="absolute top-[3%] right-[2%] w-[32%] h-[94%] rounded-full overflow-hidden z-10">
-                <Image
-                  src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=800&auto=format&fit=crop"
-                  alt="Team member"
-                  fill
-                  className="object-cover object-center"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageBanner
+        title="Careers"
+        subtitle="Be Yourself And Join Us Today"
+        bgImage="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1920&auto=format&fit=crop"
+      ></PageBanner>
 
       {/* Why Join Us */}
       <section className="py-20 bg-white border-t border-black/10">

@@ -9,14 +9,13 @@ export function CompanyProfile({ data }: { data: any }) {
     "Driving progress through modern solutions and continuous improvement.",
     "Delivering quality, trust, and exceptional customer experiences.",
     "Operating across multiple industries with sustainable growth.",
-    "Building lasting relationships with ethical business practices."
+    "Building lasting relationships with ethical business practices.",
   ];
 
   return (
     <section className="fanam-section bg-white relative overflow-hidden py-16 lg:py-24">
       <div className="fanam-container">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
-          
           {/* Left Text Side */}
           <div className="w-full lg:w-[50%] flex flex-col pr-0 lg:pr-8">
             <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-[#f9c602]/10 text-[#181428] text-[10px] font-bold uppercase tracking-wider mb-6 self-start">
@@ -28,14 +27,23 @@ export function CompanyProfile({ data }: { data: any }) {
             </h2>
 
             <p className="text-[#181428]/80 leading-relaxed text-[13px] font-medium mb-8">
-              Fanam Group is a diversified corporate group committed to shaping the future through innovation, integrity, and excellence. With a growing portfolio spanning Real Estate, E-commerce, Travel & Tourism, Media, and emerging industries, we deliver high-quality products and services that create lasting value. Guided by a customer-first approach and a vision for sustainable growth, we build trusted businesses that positively impact communities, empower people, and contribute to long-term economic development.
+              Fanam Group is a diversified corporate group committed to shaping
+              the future through innovation, integrity, and excellence. With a
+              growing portfolio spanning Real Estate, E-commerce, Travel &
+              Tourism, Media, and emerging industries, we deliver high-quality
+              products and services that create lasting value. Guided by a
+              customer-first approach and a vision for sustainable growth, we
+              build trusted businesses that positively impact communities,
+              empower people, and contribute to long-term economic development.
             </p>
 
             <ul className="flex flex-col gap-3">
               {features.map((feature, index) => (
                 <li key={index} className="flex items-start gap-3">
                   <CheckCircle2 className="w-[18px] h-[18px] text-green-500 shrink-0 mt-0.5" />
-                  <span className="text-[#181428]/80 text-[13px] font-medium leading-relaxed">{feature}</span>
+                  <span className="text-[#181428]/80 text-[13px] font-medium leading-relaxed">
+                    {feature}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -62,7 +70,7 @@ export function CompanyProfile({ data }: { data: any }) {
                 />
               </div>
             </div>
-            
+
             {/* Row 2 */}
             <div className="grid grid-cols-12 gap-4 h-40 sm:h-48 lg:h-52">
               <div className="col-span-7 relative rounded-[1rem] overflow-hidden shadow-sm hover:shadow-md transition-shadow group">
@@ -83,7 +91,6 @@ export function CompanyProfile({ data }: { data: any }) {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>

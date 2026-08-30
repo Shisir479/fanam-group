@@ -3,47 +3,46 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
-import { BlockReveal } from "@/components/ui/BlockReveal";
+const col1Images = [
+  "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1000&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1000&auto=format&fit=crop",
+  "https://images.unsplash.com/39/lIZrwvbeRuuzqOoWJUEn_Photoaday_CSD%20%281%20of%201%29-5.jpg?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1000&auto=format&fit=crop",
+];
 
-const images = [
-  {
-    src: "https://images.unsplash.com/photo-1568295123886-8d09a5986b4e?q=80&w=435&auto=format&fit=crop",
-    style:
-      "top-[10%] left-[5%] rotate-[-12deg] w-[220px] md:w-[280px] aspect-[4/3] z-10",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop",
-    style:
-      "top-[25%] left-[30%] rotate-[8deg] w-[250px] md:w-[320px] aspect-[16/9] z-20",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1568992688065-536aad8a12f6?q=80&w=1032&auto=format&fit=crop",
-    style:
-      "top-[40%] left-[55%] rotate-[-5deg] w-[200px] md:w-[260px] aspect-[4/3] z-10",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2000&auto=format&fit=crop",
-    style:
-      "bottom-[15%] left-[20%] rotate-[15deg] w-[240px] md:w-[300px] aspect-[16/9] z-30",
-  },
+const col2Images = [
+  "https://images.unsplash.com/photo-1754531976828-69e42ce4e0d9?q=80&w=871&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1758599543120-c1cbcf407fec?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1000&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=1000&auto=format&fit=crop",
 ];
 
 export default function ImageGalleryBanner() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const imagesRef = useRef<(HTMLDivElement | null)[]>([]);
+  const col1Ref = useRef<HTMLDivElement>(null);
+  const col2Ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Entrance animation for scattered photos
     const ctx = gsap.context(() => {
-      gsap.from(imagesRef.current, {
-        y: 100,
-        opacity: 0,
-        rotation: 0,
-        scale: 0.8,
-        stagger: 0.15,
-        duration: 1,
-        ease: "back.out(1.5)",
+      // Infinite scroll down for col1
+      gsap.to(col1Ref.current, {
+        yPercent: -25, // Scroll exactly 1 of the 4 copies
+        ease: "none",
+        duration: 20,
+        repeat: -1,
       });
+
+      // Infinite scroll up for col2
+      gsap.fromTo(
+        col2Ref.current,
+        { yPercent: -25 },
+        {
+          yPercent: 0,
+          ease: "none",
+          duration: 25,
+          repeat: -1,
+        },
+      );
     }, containerRef);
     return () => ctx.revert();
   }, []);
@@ -51,50 +50,81 @@ export default function ImageGalleryBanner() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-[50vh] md:h-[60vh] lg:h-[70vh] bg-cover bg-center overflow-hidden flex items-end"
-      style={{
-        backgroundImage:
-          "url('https://images.unsplash.com/photo-1655817149896-542104bbdb09?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
-      }}
+      className="relative w-full h-[40vh] min-h-[350px] md:min-h-[350px] bg-slate-50 overflow-hidden flex items-center border-b border-gray-200"
     >
-      {/* Dark overlay for better text readability */}
-      <div className="absolute inset-0 bg-black/30 pointer-events-none z-0"></div>
+      {/* Background abstract element */}
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-blue/5 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/3" />
 
-      {/* Scattered Photos */}
-      {images.map((img, index) => (
-        <div
-          key={index}
-          ref={(el) => {
-            imagesRef.current[index] = el;
-          }}
-          className={`absolute shadow-2xl border-[6px] border-white ${img.style}`}
-        >
-          <Image
-            src={img.src}
-            alt="Gallery Photo"
-            fill
-            className="object-cover"
-          />
-        </div>
-      ))}
-
-      {/* Optional: Camera graphic on the right side */}
-      <div className="absolute right-0 md:-right-10 top-[20%] md:top-[10%] w-[150px] md:w-[400px]  aspect-square opacity-90 z-20 pointer-events-none">
-        <Image
-          src="https://res.cloudinary.com/duqlhfshv/image/upload/v1782892369/Adobe_Express_-_file_1_2_unb7gh.png"
-          alt="Camera"
-          fill
-          className="object-contain rotate-[15deg] drop-shadow-2xl"
-        />
-      </div>
-
-      {/* Title */}
-      <div className="container mx-auto px-5 md:px-16 relative z-40 pb-12">
-        <BlockReveal color="var(--color-brand-blue)" delay={0.5}>
-          <h1 className="text-white text-3xl md:text-4xl  font-extrabold tracking-wider uppercase drop-shadow-[0_4px_10px_rgba(0,0,0,0.6)]">
+      {/* Added pt-28 md:pt-36 to clear the fixed navbar */}
+      <div className="container mx-auto px-6 md:px-16 w-full h-full flex items-center relative z-10 pt-28 md:pt-36 pb-12">
+        {/* Left Side: Premium Typography */}
+        <div className="w-full lg:w-1/2 flex flex-col justify-center h-full">
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 uppercase leading-tight tracking-wide mb-2">
             IMAGE GALLERY
           </h1>
-        </BlockReveal>
+
+          <p className="text-base md:text-xl lg:text-2xl text-brand-blue uppercase tracking-wider font-medium mb-6">
+            VISUAL JOURNEY
+          </p>
+
+          <p className="text-slate-600 text-sm md:text-lg font-medium leading-relaxed max-w-md">
+            Explore the defining moments, groundbreaking projects, and the
+            people behind Fanam Group's continued success.
+          </p>
+        </div>
+      </div>
+
+      {/* Right Side: Infinite Parallax Gallery (Moved outside container to fix cutoff on right edge) */}
+      <div className="hidden lg:flex w-[55vw] xl:w-[50vw] h-full absolute right-0 top-0 items-center justify-end overflow-visible pointer-events-none pt-20 z-0">
+        {/* Precise gradient masks for smooth edge fading without hiding columns */}
+        <div className="absolute top-0 bottom-0 left-0 w-40 bg-gradient-to-r from-slate-50 to-transparent z-10" />
+        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-slate-50 to-transparent z-10" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-50 to-transparent z-10" />
+        <div className="absolute top-0 bottom-0 right-0 w-12 bg-gradient-to-l from-slate-50 to-transparent z-10" />
+
+        {/* Wrapper with 3D perspective rotation */}
+        <div className="flex gap-4 w-[440px] -rotate-[10deg] scale-100 translate-x-10 opacity-90">
+          {/* Column 1 (Scrolls Up) */}
+          <div ref={col1Ref} className="flex-1 flex flex-col gap-4 w-full">
+            {[...col1Images, ...col1Images, ...col1Images, ...col1Images].map(
+              (src, idx) => (
+                <div
+                  key={`col1-${idx}`}
+                  className="relative shrink-0 w-full h-[160px] rounded-xl overflow-hidden shadow-lg bg-gray-200 border-[3px] border-white"
+                >
+                  <Image
+                    src={src}
+                    alt="Gallery"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              ),
+            )}
+          </div>
+
+          {/* Column 2 (Scrolls Down) */}
+          <div
+            ref={col2Ref}
+            className="flex-1 flex flex-col gap-4 w-full translate-y-[80px]"
+          >
+            {[...col2Images, ...col2Images, ...col2Images, ...col2Images].map(
+              (src, idx) => (
+                <div
+                  key={`col2-${idx}`}
+                  className="relative shrink-0 w-full h-[200px] rounded-xl overflow-hidden shadow-lg bg-gray-200 border-[3px] border-white"
+                >
+                  <Image
+                    src={src}
+                    alt="Gallery"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              ),
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

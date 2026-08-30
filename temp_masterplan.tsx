@@ -32,10 +32,8 @@ export function AboutSection({ aboutData }: { aboutData?: any }) {
   return (
     <section className="w-full bg-white py-16 lg:py-20">
       <div className="container mx-auto px-6 md:px-12 lg:px-16">
-        
         {/* Header Section */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-10 mb-12">
-          
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-gray-700">
               <span className="w-2.5 h-2.5 rounded-full border border-[#0b6b4a] bg-transparent"></span>
@@ -51,10 +49,13 @@ export function AboutSection({ aboutData }: { aboutData?: any }) {
 
           <div className="max-w-[450px]">
             <p className="text-[#181428]/80 leading-relaxed text-sm font-medium">
-              Sam stands out to all—clients, developers, vendors, and industry professionals alike—for her exceptional talents, innovative spirit, and unwavering dedication in guiding buyers and sellers. Her ability to navigate the complexities of the market with ease and precision sets her apart.
+              Sam stands out to all—clients, developers, vendors, and industry
+              professionals alike—for her exceptional talents, innovative
+              spirit, and unwavering dedication in guiding buyers and sellers.
+              Her ability to navigate the complexities of the market with ease
+              and precision sets her apart.
             </p>
           </div>
-
         </div>
 
         {/* Cards Grid */}
@@ -70,16 +71,31 @@ export function AboutSection({ aboutData }: { aboutData?: any }) {
                 />
               </div>
               <div className="flex flex-col gap-2.5">
-                <h3 className="text-lg font-serif text-[#181428]">{card.title}</h3>
+                <h3 className="text-lg font-serif text-[#181428]">
+                  {card.title}
+                </h3>
                 <p className="text-gray-600 text-xs leading-relaxed">
                   {card.desc}
                 </p>
-                <Link 
+                <Link
                   href={card.link}
                   className="inline-flex items-center gap-2 border border-gray-300 rounded-full py-1.5 px-5 w-fit text-xs font-medium text-gray-700 hover:border-black hover:text-black transition-colors mt-1"
                 >
                   Read More
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M5 12h14M12 5l7 7-7 7"
+                    />
+                  </svg>
                 </Link>
               </div>
             </div>

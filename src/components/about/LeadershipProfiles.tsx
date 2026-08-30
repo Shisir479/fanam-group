@@ -30,7 +30,6 @@ export function LeadershipProfiles({ data }: { data: any }) {
   return (
     <section className="fanam-section bg-white relative overflow-hidden">
       <div className="fanam-container">
-        
         {/* Header */}
         <div className="text-center mb-16 flex flex-col items-center gap-3">
           <h2 className="text-3xl md:text-[32px] leading-tight font-serif font-bold text-[#f9c602]">
@@ -41,8 +40,10 @@ export function LeadershipProfiles({ data }: { data: any }) {
         {/* Ultra-Premium Corporate List Layout */}
         <div className="flex flex-col gap-16 mt-16 max-w-6xl mx-auto">
           {leaders.map((leader: any, index: number) => (
-            <div key={index} className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start border-b border-gray-100 pb-16 last:border-0 last:pb-0 group">
-              
+            <div
+              key={index}
+              className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start border-b border-gray-100 pb-16 last:border-0 last:pb-0 group"
+            >
               {/* Image Side (4/12 columns) */}
               <div className="lg:col-span-4 relative aspect-[4/5] rounded-[1rem] overflow-hidden bg-gray-50">
                 <Image
@@ -64,11 +65,11 @@ export function LeadershipProfiles({ data }: { data: any }) {
                     {leader.designation}
                   </p>
                 </div>
-                
+
                 <h3 className="text-[#181428] font-bold text-3xl md:text-[40px] tracking-tight mb-6 font-serif">
                   {leader.name}
                 </h3>
-                
+
                 {/* Bio text */}
                 <div
                   className="text-[#181428]/80 text-[14px] md:text-[15px] font-medium leading-relaxed prose prose-p:break-words whitespace-normal break-words max-w-none"
@@ -77,11 +78,9 @@ export function LeadershipProfiles({ data }: { data: any }) {
                   }}
                 />
               </div>
-
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

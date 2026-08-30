@@ -1,13 +1,12 @@
 import Image from "next/image";
 
 export function ChairmanMessage({ data }: { data: any }) {
-  // We are temporarily hardcoding the text and image because the backend 
+  // We are temporarily hardcoding the text and image because the backend
   // is still returning old real estate data (Bonedi Homes / Yasser Reza Chowdhury)
   return (
     <section className="fanam-section bg-white relative overflow-hidden py-16 lg:py-24">
       <div className="fanam-container">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
-          
           {/* Left Side: Image */}
           <div className="w-full lg:w-[35%] flex justify-center lg:justify-end relative pr-0 lg:pr-8">
             <div className="relative w-full max-w-[380px] aspect-[4/5] rounded-[1.5rem] overflow-hidden shadow-md border border-gray-100 group">

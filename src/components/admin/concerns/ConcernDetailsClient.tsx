@@ -13,7 +13,7 @@ export default function ConcernDetailsClient({
   return (
     <div className="min-h-screen bg-white text-black">
       {/* Hero Section */}
-      <div className="relative w-full min-h-[50vh] md:min-h-[60vh] flex items-center pt-32 pb-16">
+      <div className="relative w-full h-[40vh] min-h-[350px] md:min-h-[350px] flex items-center pt-32 pb-16">
         <div className="absolute inset-0">
           {concern.heroImage?.url ? (
             <Image
@@ -36,13 +36,6 @@ export default function ConcernDetailsClient({
             transition={{ duration: 0.8 }}
             className="max-w-4xl"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white mb-6">
-              <span className="w-2 h-2 rounded-full bg-[#f9c602] animate-pulse" />
-              <span className="text-sm font-medium tracking-wide">
-                Business Concern
-              </span>
-            </div>
-
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">
               {concern.name}
             </h1>
@@ -56,7 +49,7 @@ export default function ConcernDetailsClient({
                 href={concern.websiteUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-[#f9c602] text-black px-8 py-4 rounded-full font-bold transition-colors shadow-lg"
+                className="inline-flex items-center gap-2 bg-[#f9c602] text-black px-8 py-3 rounded-full font-bold transition-colors shadow-lg"
               >
                 Visit Official Website
                 <ExternalLink size={20} />

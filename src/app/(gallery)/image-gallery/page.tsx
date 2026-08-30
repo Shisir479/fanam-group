@@ -7,12 +7,12 @@ export default async function ImageGalleryPage() {
   const rawGalleries = res?.data || [];
 
   // Filter image galleries
-  const imageGalleries = rawGalleries.filter((g) => g.type === "image");
+  const imageGalleries = rawGalleries.filter((g: any) => g.type === "image");
 
   // Group by title to form albums
   const albumMap = new Map<string, Album>();
 
-  imageGalleries.forEach((gallery) => {
+  imageGalleries.forEach((gallery: any) => {
     if (!albumMap.has(gallery.title)) {
       albumMap.set(gallery.title, {
         id: gallery.slug,

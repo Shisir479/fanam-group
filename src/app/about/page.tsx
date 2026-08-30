@@ -87,7 +87,7 @@ export default async function AboutUsPage() {
 
       {/* 9. Board of Directors / Leadership Team */}
       {/* <LeadershipProfiles data={about} /> */}
-       <ContactInfo/>
+      <ContactInfo />
       {/* 10. Organizational Structure */}
       {/* <OrganizationalOverview data={about} /> */}
     </main>
