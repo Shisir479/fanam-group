@@ -2,56 +2,29 @@
 
 import Link from "next/link";
 import { PageBanner } from "@/components/ui/PageBanner";
-import {
-  Home,
-  Info,
-  Building2,
-  Newspaper,
-  FileText,
-  Briefcase,
-  PhoneCall,
-  HelpCircle,
-  Shield,
-} from "lucide-react";
+import * as Icons from "lucide-react";
 import { motion } from "framer-motion";
+import { SitemapCategory } from "@/services/settings.service";
 
-const sitemapData = [
-  {
-    title: "About",
-    items: [
-      { name: "About Us", href: "/about", icon: Info },
-      { name: "Our Concerns", href: "/concern", icon: Building2 },
-    ],
-  },
-  {
-    title: "Media",
-    items: [
-      { name: "News & Events", href: "/news-events", icon: Newspaper },
-      { name: "Blogs", href: "/blog", icon: FileText },
-    ],
-  },
-  {
-    title: "Support",
-    items: [
-      { name: "Contact Us", href: "/contact", icon: PhoneCall },
-      { name: "Careers", href: "/careers", icon: Briefcase },
-    ],
-  },
-  {
-    title: "Legal",
-    items: [
-      { name: "FAQ", href: "/faq", icon: HelpCircle },
-      { name: "Privacy Policy", href: "/legal/privacy-policy", icon: Shield },
-    ],
-  },
-];
+interface VisualSitemapClientProps {
+  initialData?: SitemapCategory[];
+}
 
-export default function VisualSitemapClient() {
+export default function VisualSitemapClient({
+  initialData,
+}: VisualSitemapClientProps) {
+  const sitemapData = initialData && initialData.length > 0 ? initialData : [];
+
+  const renderIcon = (iconName: string, className: string) => {
+    const Icon = (Icons as any)[iconName] || Icons.FileText;
+    return <Icon className={className} />;
+  };
+
   return (
     <>
       <PageBanner
         title="Visual Sitemap"
-        subtitle="Navigate through the connected structure of Fanam Group's website."
+        subtitle="Discover Fanam Group"
         bgImage="/assets/images/banner/about-banner.jpg"
       />
 
@@ -77,7 +50,7 @@ export default function VisualSitemapClient() {
                 href="/"
                 className="flex items-center gap-3 px-8 py-4 bg-white dark:bg-gray-800 rounded-full shadow-lg border-2 border-[#f9c602]  relative"
               >
-                <Home className="w-6 h-6 text-[#f9c602]" />
+                <Icons.Home className="w-6 h-6 text-[#f9c602]" />
                 <span className="font-bold text-gray-900 dark:text-white text-lg">
                   Fanam Group (Home)
                 </span>
@@ -129,7 +102,6 @@ export default function VisualSitemapClient() {
                 {/* Sub-items Line & Nodes */}
                 <div className="flex flex-col items-center mt-4 w-full relative">
                   {category.items.map((item, itemIdx) => {
-                    const Icon = item.icon;
                     return (
                       <div
                         key={itemIdx}
@@ -152,7 +124,10 @@ export default function VisualSitemapClient() {
                             href={item.href}
                             className="flex items-center gap-3 px-5 py-3 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:border-[#f9c602] hover:shadow-md transition-all duration-300 min-w-[180px] justify-center"
                           >
-                            <Icon className="w-4 h-4 text-[#0a1128] group-hover:text-[#f9c602] transition-colors" />
+                            {renderIcon(
+                              item.icon,
+                              "w-4 h-4 text-[#0a1128] group-hover:text-[#f9c602] transition-colors",
+                            )}
                             <span className="font-medium text-gray-700 dark:text-gray-200 text-sm group-hover:text-[#f9c602] transition-colors">
                               {item.name}
                             </span>

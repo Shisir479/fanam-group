@@ -136,7 +136,9 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
   const megaMenuTimeout = useRef<NodeJS.Timeout | null>(null);
   const pathname = usePathname() || "";
 
-  const { logo } = brandingData || {};
+  const { logo, logoLight } = brandingData || {};
+  const navbarLogo =
+    logoLight?.url || logoLight?.url || "/company_logo/logo-white.63532709.svg";
 
   const isBannerPage =
     pathname === "/" ||
@@ -250,12 +252,12 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <Image
-                src={logo?.url || "/company_logo/logo-white.63532709.svg"}
+                src={navbarLogo}
                 alt="Company Logo"
                 width={160}
                 height={52}
                 priority
-                className="h-14 md:h-20 object-contain transition-all duration-300 brightness-0"
+                className="h-14 md:h-20 object-contain transition-all duration-300"
               />
             </Link>
 

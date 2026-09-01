@@ -22,7 +22,7 @@ export function FaqClient({ initialFaqs = [] }: FaqClientProps) {
     <>
       <PageBanner
         title="FAQ"
-        subtitle="Find answers to common questions about our services and programs."
+        subtitle="Common questions, answered."
         bgImage="/assets/images/banner/about-banner.jpg"
       />
 

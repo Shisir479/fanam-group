@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { updateBrandingSettingsAdmin } from "@/services/settings.service";
 import { useImageUpload } from "@/hooks/useImageUpload";
-import { Save, Loader2, UploadCloud, Trash2 } from "lucide-react";
+import { Save, Loader2, UploadCloud } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -48,8 +48,11 @@ export default function AdminGeneralSettingsClient({
     });
   };
 
-  const [logo, setLogo] = useState(
+  const [logoLight, setLogoLight] = useState(
     initialData?.logoLight || initialData?.logo || { _id: "", url: "" },
+  );
+  const [logoDark, setLogoDark] = useState(
+    initialData?.logoDark || { _id: "", url: "" },
   );
   const [favicon, setFavicon] = useState(
     initialData?.favicon || { _id: "", url: "" },
@@ -95,10 +98,11 @@ export default function AdminGeneralSettingsClient({
         if (brandingRes.success && brandingRes.data) {
           setFullBrandingData(brandingRes.data);
           setSettingsId(brandingRes.data._id);
-          setLogo(
+          setLogoLight(
             brandingRes.data.logoLight ||
               brandingRes.data.logo || { _id: "", url: "" },
           );
+          setLogoDark(brandingRes.data.logoDark || { _id: "", url: "" });
           setFavicon(brandingRes.data.favicon || { _id: "", url: "" });
           setSocialLinks({
             facebook: brandingRes.data.socialLinks?.facebook || "",
@@ -150,7 +154,8 @@ export default function AdminGeneralSettingsClient({
   }, []);
 
   const { uploadSingle, isUploading, removeImage } = useImageUpload();
-  const [uploadingLogo, setUploadingLogo] = useState(false);
+  const [uploadingLogoLight, setUploadingLogoLight] = useState(false);
+  const [uploadingLogoDark, setUploadingLogoDark] = useState(false);
   const [uploadingFavicon, setUploadingFavicon] = useState(false);
 
   const handleSocialChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -161,23 +166,47 @@ export default function AdminGeneralSettingsClient({
     setThemeColors({ ...themeColors, [e.target.name]: e.target.value });
   };
 
-  const handleLogoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleLogoLightUpload = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    setUploadingLogo(true);
+    setUploadingLogoLight(true);
     try {
       const res = await uploadSingle(file);
       if (res && res._id) {
-        if (logo && logo._id && logo._id !== res._id) {
-          await removeImage(logo._id, true);
+        if (logoLight && logoLight._id && logoLight._id !== res._id) {
+          await removeImage(logoLight._id, true);
         }
-        setLogo({ _id: res._id, url: res.url });
-        toast.success("Logo uploaded successfully");
+        setLogoLight({ _id: res._id, url: res.url });
+        toast.success("Light Logo uploaded successfully");
       }
     } catch (error) {
       console.error(error);
     } finally {
-      setUploadingLogo(false);
+      setUploadingLogoLight(false);
+    }
+  };
+
+  const handleLogoDarkUpload = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadingLogoDark(true);
+    try {
+      const res = await uploadSingle(file);
+      if (res && res._id) {
+        if (logoDark && logoDark._id && logoDark._id !== res._id) {
+          await removeImage(logoDark._id, true);
+        }
+        setLogoDark({ _id: res._id, url: res.url });
+        toast.success("Dark Logo uploaded successfully");
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setUploadingLogoDark(false);
     }
   };
 
@@ -224,8 +253,9 @@ export default function AdminGeneralSettingsClient({
             ...themeColors,
           },
         },
-        logoLight: logo,
-        logo,
+        logoLight: logoLight,
+        logoDark: logoDark,
+        logo: logoLight,
         favicon,
       };
 
@@ -471,21 +501,26 @@ export default function AdminGeneralSettingsClient({
           </div>
 
           <div className="space-y-6">
-            {/* Logo Upload */}
+            {/* Light Logo Upload */}
             <div className="glass-panel p-6 rounded-2xl">
-              <h3 className="text-lg font-bold text-white mb-4">Site Logo</h3>
+              <h3 className="text-lg font-bold text-white mb-4">
+                Site Logo (Light)
+              </h3>
+              <p className="text-xs text-gray-500 mb-4">
+                Used on dark backgrounds (e.g. hero banner).
+              </p>
 
               <div className="relative aspect-video rounded-xl border-2 border-dashed border-white/20 bg-white/5 text-gray-400 hover:text-white hover:border-purple-500 transition-colors overflow-hidden group">
                 <label className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer">
-                  {logo.url ? (
+                  {logoLight.url ? (
                     <>
                       <Image
-                        src={logo.url}
-                        alt="Logo"
+                        src={logoLight.url}
+                        alt="Light Logo"
                         fill
                         className="object-contain p-4"
                       />
-                      {uploadingLogo ? (
+                      {uploadingLogoLight ? (
                         <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-10">
                           <Loader2 className="w-8 h-8 animate-spin text-white" />
                         </div>
@@ -497,13 +532,13 @@ export default function AdminGeneralSettingsClient({
                     </>
                   ) : (
                     <>
-                      {uploadingLogo ? (
+                      {uploadingLogoLight ? (
                         <Loader2 className="w-8 h-8 text-yellow-500 animate-spin" />
                       ) : (
                         <>
                           <UploadCloud className="w-8 h-8 text-gray-400 mb-2 group-hover:scale-110 transition-transform" />
                           <span className="text-sm text-gray-400">
-                            Click to upload logo
+                            Click to upload light logo
                           </span>
                           <span className="text-xs text-gray-500 mt-1">
                             PNG, JPG up to 2MB
@@ -515,8 +550,65 @@ export default function AdminGeneralSettingsClient({
                   <input
                     type="file"
                     accept="image/*"
-                    onChange={handleLogoUpload}
-                    disabled={uploadingLogo}
+                    onChange={handleLogoLightUpload}
+                    disabled={uploadingLogoLight}
+                    className="hidden"
+                  />
+                </label>
+              </div>
+            </div>
+
+            {/* Dark Logo Upload */}
+            <div className="glass-panel p-6 rounded-2xl">
+              <h3 className="text-lg font-bold text-white mb-4">
+                Site Logo (Dark)
+              </h3>
+              <p className="text-xs text-gray-500 mb-4">
+                Used on light backgrounds (e.g. sticky navbar).
+              </p>
+
+              <div className="relative aspect-video rounded-xl border-2 border-dashed border-white/20 bg-white/5 text-gray-400 hover:text-white hover:border-purple-500 transition-colors overflow-hidden group">
+                <label className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer">
+                  {logoDark.url ? (
+                    <>
+                      <Image
+                        src={logoDark.url}
+                        alt="Dark Logo"
+                        fill
+                        className="object-contain p-4 bg-white/80 rounded-xl"
+                      />
+                      {uploadingLogoDark ? (
+                        <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-10">
+                          <Loader2 className="w-8 h-8 animate-spin text-white" />
+                        </div>
+                      ) : (
+                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                          <UploadCloud className="w-8 h-8 text-white" />
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      {uploadingLogoDark ? (
+                        <Loader2 className="w-8 h-8 text-yellow-500 animate-spin" />
+                      ) : (
+                        <>
+                          <UploadCloud className="w-8 h-8 text-gray-400 mb-2 group-hover:scale-110 transition-transform" />
+                          <span className="text-sm text-gray-400">
+                            Click to upload dark logo
+                          </span>
+                          <span className="text-xs text-gray-500 mt-1">
+                            PNG, JPG up to 2MB
+                          </span>
+                        </>
+                      )}
+                    </>
+                  )}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleLogoDarkUpload}
+                    disabled={uploadingLogoDark}
                     className="hidden"
                   />
                 </label>

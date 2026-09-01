@@ -99,6 +99,7 @@ export function AdminSidebar() {
       icon: Settings,
       children: [
         { name: "General Settings", icon: Settings, href: "/admin/settings" },
+        { name: "Sitemap", icon: FileText, href: "/admin/settings/sitemap" },
         {
           name: "Page Banners",
           icon: ImageIcon,

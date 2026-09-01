@@ -140,18 +140,19 @@ export default function AdminInvestmentBookingListClient({
       header: "Inquiry Info",
       render: (booking) => (
         <div className="flex flex-col gap-1">
-          <div className="text-sm text-gray-200">
-            Type: <span className="font-semibold">{booking.propertyType}</span>
-          </div>
-          {booking.projectName && (
+          {booking.subject && (
             <div className="text-sm text-brand-blue">
-              Project:{" "}
-              <span className="font-semibold">{booking.projectName}</span>
+              Subject: <span className="font-semibold">{booking.subject}</span>
             </div>
           )}
-          <div className="text-sm text-gray-400">
-            Loc: {booking.preferredLocation || "N/A"}
-          </div>
+          {booking.message && (
+            <div className="text-sm text-gray-400">
+              Details: {booking.message}
+            </div>
+          )}
+          {!booking.subject && !booking.message && (
+            <div className="text-sm text-gray-400 italic">General Inquiry</div>
+          )}
         </div>
       ),
     },
@@ -381,22 +382,20 @@ export default function AdminInvestmentBookingListClient({
                       Inquiry Details
                     </h3>
                     <div className="space-y-2 text-sm break-all md:break-words">
-                      <p>
-                        <span className="text-gray-500">Property Type:</span>{" "}
-                        {selectedBooking.propertyType}
-                      </p>
-                      {selectedBooking.projectName && (
+                      {selectedBooking.subject && (
                         <p>
-                          <span className="text-gray-500">Project:</span>{" "}
-                          {selectedBooking.projectName}
+                          <span className="text-gray-500">Subject:</span>{" "}
+                          {selectedBooking.subject || "General Inquiry"}
                         </p>
                       )}
-                      <p>
-                        <span className="text-gray-500">
-                          Preferred Location:
-                        </span>{" "}
-                        {selectedBooking.preferredLocation || "N/A"}
-                      </p>
+                      {selectedBooking.message && (
+                        <p>
+                          <span className="text-gray-500">
+                            Message / Details:
+                          </span>{" "}
+                          {selectedBooking.message}
+                        </p>
+                      )}
                       <p>
                         <span className="text-gray-500">Date:</span>{" "}
                         {selectedBooking.createdAt

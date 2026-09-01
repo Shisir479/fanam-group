@@ -2,31 +2,12 @@ import { api } from "@/lib/api";
 
 export interface InvestmentBookingPayload {
   fullName: string;
-  occupation?: string;
-  nidPassport?: string;
-  nationality?: string;
-  dateOfBirth?: Date | string | null;
-  religion?: string;
   email?: string;
   phone: string;
-  presentAddress?: string;
-  permanentAddress?: string;
-  preferredLocation?: string;
-  nomineeName?: string;
-  nomineePresentAddress?: string;
-  nomineePermanentAddress?: string;
-  nomineeRelation?: string;
-  nomineePhone?: string;
-  investmentAmount: number;
-  propertyType:
-    "Residential" | "Commercial" | "Mixed Use" | "Apartment" | "Villa" | "Land";
-  duration?: number;
-  signature: {
-    _id: string;
-    url: string;
-  };
+  subject?: string;
+  message?: string;
   status?: "pending" | "contacted" | "approved" | "rejected";
-  projectName?: string;
+  remarks?: string;
 }
 
 export const createInvestmentBookingPublic = async (

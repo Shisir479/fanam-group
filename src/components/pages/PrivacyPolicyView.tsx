@@ -60,9 +60,6 @@ export function PrivacyPolicyView({ pageData }: { pageData: any }) {
         <div className="container mx-auto px-5 md:px-8">
           <div className="max-w-5xl mx-auto">
             <div className="mb-12 border-b border-black/10 pb-8 text-center flex flex-col items-center justify-center gap-4 w-full">
-              <h2 className="text-3xl md:text-5xl font-extrabold text-black tracking-tight m-0 text-center">
-                Privacy Policy & Disclaimer
-              </h2>
               <div className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full border border-black/10">
                 <span className="w-2 h-2 rounded-full bg-[#f9c602]"></span>
                 <p className="text-black uppercase tracking-widest text-xs font-bold m-0 text-center">

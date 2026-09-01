@@ -99,14 +99,32 @@ export default async function JobDetailsPage({
             </div>
 
             <div className="shrink-0 flex flex-col items-start lg:items-end gap-3 mt-6 lg:mt-0">
-              <a
-                href="#apply-section"
-                className="bg-[#392F5F] text-white font-bold px-8 py-3.5 rounded-full hover:bg-yellow-400 transition-colors shadow-sm text-center w-full lg:w-auto"
-              >
-                Apply for this Position
-              </a>
+              {job.applicationDeadline &&
+              new Date(job.applicationDeadline).getTime() <
+                new Date().setHours(0, 0, 0, 0) ? (
+                <button
+                  disabled
+                  className="bg-gray-300 text-gray-500 font-bold px-8 py-3.5 rounded-full cursor-not-allowed shadow-sm text-center w-full lg:w-auto"
+                >
+                  Application Closed
+                </button>
+              ) : (
+                <a
+                  href="#apply-section"
+                  className="bg-[#392F5F] text-white font-bold px-8 py-3.5 rounded-full hover:bg-yellow-400 transition-colors shadow-sm text-center w-full lg:w-auto"
+                >
+                  Apply for this Position
+                </a>
+              )}
               {job.applicationDeadline && (
-                <p className="text-sm text-red-600 font-semibold flex items-center justify-center lg:justify-end gap-1.5 w-full lg:w-auto bg-red-50 px-3 py-1.5 rounded-xl border border-red-100">
+                <p
+                  className={`text-sm font-semibold flex items-center justify-center lg:justify-end gap-1.5 w-full lg:w-auto px-3 py-1.5 rounded-xl border ${
+                    new Date(job.applicationDeadline).getTime() <
+                    new Date().setHours(0, 0, 0, 0)
+                      ? "text-gray-500 bg-gray-50 border-gray-200"
+                      : "text-red-600 bg-red-50 border-red-100"
+                  }`}
+                >
                   <Clock className="w-4 h-4" /> Deadline:{" "}
                   {new Date(job.applicationDeadline).toLocaleDateString()}
                 </p>
@@ -222,7 +240,15 @@ export default async function JobDetailsPage({
 
           {/* Right Column: Tabbed Sidebar */}
           <div className="lg:w-[400px] shrink-0">
-            <JobDetailsClient job={job} />
+            <JobDetailsClient
+              job={job}
+              isDeadlinePassed={
+                job.applicationDeadline
+                  ? new Date(job.applicationDeadline).getTime() <
+                    new Date().setHours(0, 0, 0, 0)
+                  : false
+              }
+            />
           </div>
         </div>
       </section>

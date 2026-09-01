@@ -8,7 +8,6 @@ const companyLinks = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
   { label: "Our Concerns", href: "/concern" },
-  { label: "Projects", href: "/projects" },
   { label: "News & Media", href: "/news-events" },
   { label: "Career", href: "/careers" },
   { label: "Contact Us", href: "/contact" },
@@ -17,11 +16,9 @@ const companyLinks = [
 const usefulLinks = [
   { label: "Awards & Recognition", href: "/about#milestones" },
   { label: "Company Profile", href: "#" },
-  { label: "Leadership Team", href: "/about#leadership" },
   { label: "Vision & Mission", href: "/about#vision" },
   { label: "CSR Activities", href: "/csr" },
-  { label: "Fanam Real Estate", href: "/concern/real-estate" },
-  { label: "Future Ventures", href: "/concern/future" },
+  { label: "Business Inquiry", href: "/contact" },
 ];
 
 const socialLinks = [
@@ -65,7 +62,14 @@ const socialLinks = [
 ];
 
 export function Footer({ brandingData }: { brandingData?: any }) {
-  const { logo, socialLinks: dynamicSocial, contact } = brandingData || {};
+  const {
+    logo,
+    logoDark,
+    socialLinks: dynamicSocial,
+    contact,
+  } = brandingData || {};
+  const footerLogo =
+    logoDark?.url || logo?.url || "/company_logo/logo-white.63532709.svg";
 
   const activeSocialLinks = socialLinks.map((link) => {
     const key =
@@ -88,7 +92,7 @@ export function Footer({ brandingData }: { brandingData?: any }) {
               className="inline-block mb-4 transition-transform hover:opacity-90"
             >
               <Image
-                src={logo?.url || "/company_logo/logo-white.63532709.svg"}
+                src={footerLogo}
                 alt="Fanam Group Logo"
                 width={180}
                 height={55}
@@ -191,7 +195,7 @@ export function Footer({ brandingData }: { brandingData?: any }) {
             Copyright &copy; {new Date().getFullYear()} Tech solutions Plex.
           </p>
           <div className="flex items-center gap-4">
-            <Link
+            {/* <Link
               href="/legal/terms-conditions"
               className="hover:text-white transition-colors"
             >
@@ -202,12 +206,12 @@ export function Footer({ brandingData }: { brandingData?: any }) {
               className="hover:text-white transition-colors"
             >
               Support
-            </Link>
+            </Link> */}
             <Link
               href="/legal/privacy-policy"
               className="hover:text-white transition-colors"
             >
-              Private Policy
+              Privacy Policy
             </Link>
           </div>
         </div>

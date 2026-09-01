@@ -12,6 +12,7 @@ import { CoreValues } from "@/components/about/CoreValues";
 import { OurGovernance } from "@/components/about/OurGovernance";
 import { LeadershipProfiles } from "@/components/about/LeadershipProfiles";
 import { OrganizationalOverview } from "@/components/about/OrganizationalOverview";
+import { CSRActivities } from "@/components/about/CSRActivities";
 
 // Corporate specific additions
 // Corporate Social Responsibility
@@ -81,6 +82,9 @@ export default async function AboutUsPage() {
 
       {/* 8. Awards & Recognition */}
       <AwardsRecognition />
+
+      {/* 8.2 CSR Activities */}
+      <CSRActivities />
 
       {/* 8.5 Our Governance */}
       <OurGovernance />

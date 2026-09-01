@@ -9,6 +9,34 @@ export const getBrandingSettingsAdmin = async () => {
   return api("/admin/settings/branding");
 };
 
+export interface SitemapItem {
+  name: string;
+  href: string;
+  icon: string;
+}
+
+export interface SitemapCategory {
+  title: string;
+  items: SitemapItem[];
+}
+
+export const updateSitemapSettingsAdmin = async (
+  sitemap: SitemapCategory[],
+) => {
+  const res = await api("/admin/settings/sitemap", {
+    method: "PUT",
+    body: JSON.stringify({ sitemap }),
+  });
+  if (res && res.success !== false) {
+    await revalidatePage("/", "layout");
+  }
+  return res;
+};
+
+export const getSitemapSettings = async () => {
+  return api("/settings/sitemap");
+};
+
 export const updateBrandingSettingsAdmin = async (id: string, data: any) => {
   const res = await api(`/admin/settings/branding/${id}`, {
     method: "PUT",

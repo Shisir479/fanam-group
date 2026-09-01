@@ -17,9 +17,13 @@ import { useImageUpload } from "@/hooks/useImageUpload";
 
 interface Props {
   job: any;
+  isDeadlinePassed?: boolean;
 }
 
-export default function JobDetailsClient({ job }: Props) {
+export default function JobDetailsClient({
+  job,
+  isDeadlinePassed = false,
+}: Props) {
   const [sidebarTab, setSidebarTab] = useState("overview");
   const [formData, setFormData] = useState({ name: "", email: "", phone: "" });
   const [cvFile, setCvFile] = useState<File | null>(null);
@@ -225,7 +229,20 @@ export default function JobDetailsClient({ job }: Props) {
         {/* APPLY TAB */}
         {sidebarTab === "apply" && (
           <div className="animate-in fade-in duration-300">
-            {job.applicationMethod === "Online Form" ? (
+            {isDeadlinePassed ? (
+              <div className="text-center py-8">
+                <div className="w-16 h-16 mx-auto bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                  <Clock className="w-8 h-8 text-gray-400" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                  Application Closed
+                </h3>
+                <p className="text-gray-500 text-sm">
+                  The deadline for this position has passed. Thank you for your
+                  interest.
+                </p>
+              </div>
+            ) : job.applicationMethod === "Online Form" ? (
               <form onSubmit={handleSubmit} className="space-y-4 text-left">
                 {submitStatus && (
                   <div

@@ -188,6 +188,30 @@ export default function ConcernDetailsClient({
               </motion.section>
             )}
           </div>
+
+          {/* Business Inquiry CTA */}
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mt-20 p-10 md:p-14 bg-gray-50 border border-gray-100 rounded-3xl text-center"
+          >
+            <h2 className="text-3xl font-bold mb-4 text-black">
+              Business Inquiry
+            </h2>
+            <p className="text-gray-600 text-lg mb-8 max-w-2xl mx-auto">
+              Interested in collaborating or have questions about {concern.name}
+              ? Get in touch with our team for business opportunities and
+              inquiries.
+            </p>
+            <a
+              href={`/inquiry?subject=${encodeURIComponent(concern.name)}`}
+              className="inline-flex items-center gap-2 bg-[#181428] text-white px-8 py-3.5 rounded-full font-bold hover:bg-[#f9c602] hover:text-[#181428] transition-all duration-300 shadow-lg hover:shadow-xl"
+            >
+              Contact This Concern
+            </a>
+          </motion.section>
         </div>
       </div>
     </div>

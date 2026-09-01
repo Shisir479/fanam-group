@@ -1,6 +1,56 @@
+"use client";
+
 import { ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { submitContactForm } from "@/services/contact.service";
+import toast from "react-hot-toast";
 
 export function ContactInfo({ data }: { data?: any }) {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      const res = await submitContactForm(formData);
+      if (res.success) {
+        toast.success(
+          "Thank you for your message! We will get back to you soon.",
+          {
+            duration: 5000,
+            position: "top-center",
+          },
+        );
+        setFormData({
+          fullName: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        toast.error(res.message || "Failed to submit form. Please try again.");
+      }
+    } catch (error) {
+      toast.error("An error occurred. Please try again later.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <section className="w-full py-12 md:py-16 bg-gray-50">
       <div className="fanam-container">
@@ -17,31 +67,54 @@ export function ContactInfo({ data }: { data?: any }) {
               </p>
             </div>
 
-            <form className="flex flex-col gap-4 w-full">
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col gap-4 w-full"
+            >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <input
                   type="text"
+                  name="fullName"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                  required
                   placeholder="Full Name"
                   className="w-full border border-gray-200 rounded-lg p-3 bg-white text-[#181428] placeholder-gray-400 focus:outline-none focus:border-[#f9c602] focus:ring-1 focus:ring-[#f9c602] transition-colors shadow-sm"
                 />
                 <input
                   type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
                   placeholder="example@gmail.com"
                   className="w-full border border-gray-200 rounded-lg p-3 bg-white text-[#181428] placeholder-gray-400 focus:outline-none focus:border-[#f9c602] focus:ring-1 focus:ring-[#f9c602] transition-colors shadow-sm"
                 />
                 <input
                   type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
                   placeholder="Phone Number"
                   className="w-full border border-gray-200 rounded-lg p-3 bg-white text-[#181428] placeholder-gray-400 focus:outline-none focus:border-[#f9c602] focus:ring-1 focus:ring-[#f9c602] transition-colors shadow-sm"
                 />
                 <input
                   type="text"
-                  placeholder="4:00 Available"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  required
+                  placeholder="Subject"
                   className="w-full border border-gray-200 rounded-lg p-3 bg-white text-[#181428] placeholder-gray-400 focus:outline-none focus:border-[#f9c602] focus:ring-1 focus:ring-[#f9c602] transition-colors shadow-sm"
                 />
               </div>
 
               <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
                 placeholder="Message"
                 rows={4}
                 className="w-full border border-gray-200 rounded-lg p-3 bg-white text-[#181428] placeholder-gray-400 focus:outline-none focus:border-[#f9c602] focus:ring-1 focus:ring-[#f9c602] transition-colors resize-none shadow-sm"
@@ -49,11 +122,12 @@ export function ContactInfo({ data }: { data?: any }) {
 
               <div className="mt-1">
                 <button
-                  type="button"
-                  className="group inline-flex items-center gap-3 bg-[#181428] text-white px-6 py-2.5 rounded-full font-medium text-sm hover:bg-[#f9c602] hover:text-[#181428] border border-[#181428] hover:border-[#f9c602] transition-all duration-300 shadow-lg hover:shadow-xl"
+                  type="submit"
+                  disabled={isLoading}
+                  className="group inline-flex items-center gap-3 bg-[#181428] text-white px-6 py-2.5 rounded-full font-medium text-sm hover:bg-[#f9c602] hover:text-[#181428] border border-[#181428] hover:border-[#f9c602] transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                   <span className="transition-transform duration-300 group-hover:translate-x-1">
-                    Book Appointment
+                    {isLoading ? "Submitting..." : "Book Appointment"}
                   </span>
                   <span className="w-7 h-7 rounded-full bg-white/20 group-hover:bg-[#181428]/10 text-white group-hover:text-[#181428] flex items-center justify-center transition-all duration-300 group-hover:-translate-x-1 group-hover:-rotate-45">
                     <ArrowRight className="w-3.5 h-3.5" />

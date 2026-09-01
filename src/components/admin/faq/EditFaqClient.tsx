@@ -21,7 +21,6 @@ export default function EditFaqClient({ initialData }: EditFaqClientProps) {
       type: "text",
       placeholder: "e.g., What are your service hours?",
       required: true,
-      defaultValue: initialData.question,
     },
     {
       name: "answer",
@@ -29,7 +28,6 @@ export default function EditFaqClient({ initialData }: EditFaqClientProps) {
       type: "textarea",
       placeholder: "Write the answer here...",
       required: true,
-      defaultValue: initialData.answer,
     },
     {
       name: "isActive",
@@ -40,7 +38,6 @@ export default function EditFaqClient({ initialData }: EditFaqClientProps) {
         { label: "Inactive", value: "false" },
       ],
       sidebar: true,
-      defaultValue: initialData.isActive ? "true" : "false",
     },
   ];
 
@@ -70,10 +67,14 @@ export default function EditFaqClient({ initialData }: EditFaqClientProps) {
     <div className="max-w-[1200px] mx-auto w-full">
       <DynamicAdminForm
         title="Edit FAQ"
-        description="Update frequently asked question."
         fields={fields}
+        initialValues={{
+          question: initialData.question,
+          answer: initialData.answer,
+          isActive: initialData.isActive ? "true" : "false",
+        }}
         onSubmit={handleSubmit}
-        submitButtonText="Update FAQ"
+        submitLabel="Update FAQ"
         backHref="/admin/faq"
       />
     </div>

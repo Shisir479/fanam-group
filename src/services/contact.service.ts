@@ -1,5 +1,6 @@
 import { api } from "@/lib/api";
 import { createCrudService } from "./crud.service";
+import { revalidatePage } from "@/app/actions";
 
 export interface Contact {
   _id: string;
@@ -27,10 +28,12 @@ export const updateContactByAdmin = async (
   id: string,
   data: Partial<Contact>,
 ) => {
+  await revalidatePage("/", "layout");
   return adminContactService.update(id, data);
 };
 
 export const deleteContactByAdmin = async (id: string) => {
+  await revalidatePage("/", "layout");
   return adminContactService.delete(id);
 };
 
