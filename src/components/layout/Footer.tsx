@@ -81,7 +81,7 @@ export function Footer({ brandingData }: { brandingData?: any }) {
   });
 
   return (
-    <footer className="relative w-full bg-[#181428] text-white">
+    <footer className="relative w-full bg-[#0a0a0a] text-white">
       <div className="container mx-auto px-6 md:px-12 lg:px-16 pt-10 pb-6">
         {/* Main Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6 mb-8">
@@ -114,7 +114,7 @@ export function Footer({ brandingData }: { brandingData?: any }) {
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-white text-[#181428] flex items-center justify-center hover:bg-[#f9c602] hover:scale-110 hover:-translate-y-1 transition-all duration-300"
+                  className="w-9 h-9 rounded-full bg-white text-[#0a0a0a] flex items-center justify-center hover:bg-[#f9c602] hover:scale-110 hover:-translate-y-1 transition-all duration-300"
                   aria-label={s.label}
                 >
                   {s.icon}

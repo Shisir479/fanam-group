@@ -10,19 +10,10 @@ import { CompanyHistory } from "@/components/about/CompanyHistory";
 import { AwardsRecognition } from "@/components/about/AwardsRecognition";
 import { CoreValues } from "@/components/about/CoreValues";
 import { OurGovernance } from "@/components/about/OurGovernance";
-import { LeadershipProfiles } from "@/components/about/LeadershipProfiles";
-import { OrganizationalOverview } from "@/components/about/OrganizationalOverview";
 import { CSRActivities } from "@/components/about/CSRActivities";
-
-// Corporate specific additions
-// Corporate Social Responsibility
 
 import { getAboutPublic } from "@/services/about.service";
 import { getBannerByPageAdmin } from "@/services/banner.service";
-import { ConcernsSection } from "@/components/home/ConcernsSection";
-import { OurAchievements } from "../../../temp_achievements";
-import { ContactView } from "@/components/contact/ContactView";
-import { ContactInfo } from "@/components/home/ContactInfo";
 
 export async function generateMetadata() {
   const res = await getAboutPublic();
@@ -53,7 +44,7 @@ export default async function AboutUsPage() {
 
   return (
     <main className="flex min-h-screen flex-col bg-white">
-      {/* 1. Page Banner (Unchanged as requested) */}
+      {/* 1. Page Banner */}
       <AboutHero data={about} banner={banner?.data || banner} />
 
       {/* 2. Group Profile (Who we are globally) */}
@@ -62,38 +53,32 @@ export default async function AboutUsPage() {
       {/* 3. Chairman's Message (Tone from the top) */}
       <ChairmanMessage data={about} />
 
-      {/* 3.5 Managing Directors (Below Chairman) */}
+      {/* 4. Managing Directors & Executive Leadership */}
       <ManagingDirectors />
 
-      {/* 4. Strategic Direction (Vision & Mission) */}
+      {/* 5. Strategic Direction (Vision & Mission) */}
       <VisionMission data={about} />
 
-      {/* 4.5 Why Choose Us (New Section) */}
+      {/* 6. Why Choose Us */}
       <WhyChooseUs />
 
-      {/* 4.6 Key Milestones (New Section) */}
+      {/* 7. Key Milestones */}
       <KeyMilestones />
 
-      {/* 4.7 Corporate History & Philosophy */}
+      {/* 8. Corporate History & Philosophy */}
       <CompanyHistory data={about} />
 
-      {/* 5. Core Principles (Values) */}
+      {/* 9. Core Principles (Values) */}
       <CoreValues data={about} />
 
-      {/* 8. Awards & Recognition */}
+      {/* 10. Awards & Recognition */}
       <AwardsRecognition />
 
-      {/* 8.2 CSR Activities */}
+      {/* 11. CSR Activities */}
       <CSRActivities />
 
-      {/* 8.5 Our Governance */}
+      {/* 12. Our Governance */}
       <OurGovernance />
-
-      {/* 9. Board of Directors / Leadership Team */}
-      {/* <LeadershipProfiles data={about} /> */}
-      <ContactInfo />
-      {/* 10. Organizational Structure */}
-      {/* <OrganizationalOverview data={about} /> */}
     </main>
   );
 }

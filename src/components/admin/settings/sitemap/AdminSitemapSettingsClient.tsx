@@ -243,7 +243,7 @@ export default function AdminSitemapSettingsClient({
                         <SelectTrigger className="w-full h-auto py-2 px-4 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:ring-1 focus:ring-[#f9c602]/50 focus:border-[#f9c602]/50 transition-colors">
                           <SelectValue placeholder="Select Icon" />
                         </SelectTrigger>
-                        <SelectContent className="bg-[#181428] border-white/10 text-white">
+                        <SelectContent className="bg-[#0a0a0a] border-white/10 text-white">
                           {AVAILABLE_ICONS.map((icon) => (
                             <SelectItem key={icon} value={icon}>
                               {icon}

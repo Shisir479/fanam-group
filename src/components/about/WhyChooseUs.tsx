@@ -1,89 +1,136 @@
+"use client";
+
+import React from "react";
 import Image from "next/image";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Award, Sparkles, ShieldCheck, Star } from "lucide-react";
 
 const features = [
-  "Trusted Corporate Brand",
-  "Sustainable Growth",
-  "Innovation-Driven Solutions",
-  "Experienced Leadership",
-  "Commitment to Excellence",
-  "Diversified Business Portfolio",
-  "Customer-First Approach",
-  "Long-Term Partnership",
+  {
+    title: "Trusted Corporate Brand",
+    detail: "Decades of proven integrity and verified reliability.",
+  },
+  {
+    title: "Sustainable Scalable Growth",
+    detail: "Responsible expansion creating multi-generational value.",
+  },
+  {
+    title: "Innovation-Driven Solutions",
+    detail: "Modern technologies and forward-looking business strategies.",
+  },
+  {
+    title: "Seasoned Executive Leadership",
+    detail: "Guided by veteran industry leaders and subject-matter experts.",
+  },
+  {
+    title: "Uncompromising Quality",
+    detail: "Gold standard execution across all products and deliverables.",
+  },
+  {
+    title: "Diversified Portfolio",
+    detail: "Robust synergy across real estate, tech, commerce & tourism.",
+  },
+  {
+    title: "Customer-First Philosophy",
+    detail: "Deep commitment to client delight and transparent communication.",
+  },
+  {
+    title: "Enduring Global Partnerships",
+    detail: "Strategic alliances with premier national & international entities.",
+  },
 ];
 
 export function WhyChooseUs() {
   return (
-    <section className="fanam-section bg-gray-50/30 relative overflow-hidden py-16 lg:py-24">
-      <div className="fanam-container">
-        <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-20">
-          {/* Left Side: Image Composition */}
-          <div className="w-full lg:w-[40%] max-w-[450px] mx-auto lg:mx-0 relative h-[380px] md:h-[420px] flex flex-shrink-0">
-            {/* Main Background Image */}
-            <div className="absolute top-0 right-4 w-[85%] h-[80%] rounded-[2rem] overflow-hidden shadow-sm border border-gray-100">
-              <Image
-                src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop"
-                alt="Business Meeting"
-                fill
-                className="object-cover"
-              />
-            </div>
+    <section className="relative fanam-section bg-gradient-to-b from-neutral-50/50 via-white to-neutral-50/50 overflow-hidden py-20 lg:py-28">
+      {/* Background blurs */}
+      <div className="absolute top-1/3 -left-48 w-96 h-96 bg-[#f9c602]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-0 w-96 h-96 bg-amber-100/30 rounded-full blur-3xl pointer-events-none" />
 
-            {/* Bottom Right Overlapping Image */}
-            <div className="absolute bottom-0 right-0 w-[65%] h-[50%] rounded-[1.5rem] overflow-hidden border-[6px] border-white shadow-xl z-10">
-              <Image
-                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2070&auto=format&fit=crop"
-                alt="Team Collaboration"
-                fill
-                className="object-cover"
-              />
-            </div>
-
-            {/* Left Floating Experience Card */}
-            <div className="absolute top-[20%] left-0 w-32 h-32 md:w-36 md:h-36 bg-[#312e81] rounded-xl flex flex-col items-center justify-center text-white shadow-2xl z-20">
-              {/* Decorative tail */}
-              <div className="absolute -bottom-3 left-6 w-6 h-6 bg-[#312e81] rotate-45 transform origin-top-left -z-10"></div>
-
-              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 flex items-center justify-center mb-2">
-                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full border border-white flex items-center justify-center">
-                  <div className="w-2 h-2 md:w-2.5 md:h-2.5 bg-white rounded-full"></div>
-                </div>
+      <div className="fanam-container relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Left Side: Modern Image Showcase */}
+          <div className="lg:col-span-5 relative">
+            <div className="relative w-full max-w-[460px] mx-auto h-[440px] sm:h-[480px]">
+              {/* Main Background Image */}
+              <div className="absolute top-0 right-0 w-[88%] h-[80%] rounded-[2.5rem] overflow-hidden shadow-lg border-2 border-white group">
+                <Image
+                  src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop"
+                  alt="Corporate Innovation"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
               </div>
-              <h3 className="text-3xl font-bold mb-1">25+</h3>
-              <p className="text-[10px] font-medium text-white/80">
-                Years Of Experience
-              </p>
+
+              {/* Overlapping Bottom Image */}
+              <div className="absolute bottom-0 left-0 w-[68%] h-[50%] rounded-[2rem] overflow-hidden border-[6px] border-white shadow-2xl z-10 group">
+                <Image
+                  src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2070&auto=format&fit=crop"
+                  alt="Team Collaboration"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+
+              {/* Floating Experience Badge (Luxury Gold & Dark Badge) */}
+              <div className="absolute top-12 -left-2 sm:-left-6 bg-[#0a0a0a] text-white border-2 border-[#f9c602]/50 p-5 rounded-2xl shadow-2xl z-20 flex flex-col items-center text-center">
+                <div className="flex items-center gap-1 mb-2 text-[#f9c602]">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-3.5 h-3.5 fill-[#f9c602]" />
+                  ))}
+                </div>
+                <h3 className="text-3xl sm:text-4xl font-extrabold text-[#f9c602] tracking-tight leading-none mb-1">
+                  25+
+                </h3>
+                <p className="text-[11px] font-bold uppercase tracking-wider text-white">
+                  Years Of
+                </p>
+                <p className="text-[11px] font-medium text-white/70">
+                  Excellence & Trust
+                </p>
+              </div>
             </div>
           </div>
 
-          {/* Right Side: Text & Features */}
-          <div className="w-full lg:w-[60%] flex flex-col justify-center">
-            <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-[#f9c602]/10 text-[#181428] text-[10px] font-bold uppercase tracking-wider mb-6 self-start">
-              Why Choose Us
+          {/* Right Side: Text & Feature Cards Grid */}
+          <div className="lg:col-span-7 flex flex-col">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f9c602]/15 border border-[#f9c602]/35 text-[#0a0a0a] text-xs font-bold uppercase tracking-wider mb-6 self-start shadow-sm">
+              <Award className="w-3.5 h-3.5 text-[#0a0a0a]" />
+              <span>Why Choose Us</span>
             </div>
 
-            <h2 className="text-3xl md:text-[40px] leading-tight font-bold text-[#181428] mb-6">
-              Why Choose Fanam Group
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#0a0a0a] leading-[1.2] tracking-tight mb-6">
+              The Strategic Advantage of{" "}
+              <span className="relative whitespace-nowrap text-[#0a0a0a]">
+                Fanam Group
+                <span className="absolute left-0 -bottom-1 w-full h-1 bg-[#f9c602] rounded-full" />
+              </span>
             </h2>
 
-            <p className="text-gray-500 text-[14px] md:text-[15px] font-medium leading-relaxed mb-10">
-              At Fanam Group, we combine innovation, expertise, and integrity to
-              deliver exceptional value across diverse industries. Our
-              commitment to quality, customer satisfaction, and sustainable
-              growth makes us a trusted partner for individuals, businesses, and
-              communities.
+            <p className="text-gray-600 text-base md:text-lg font-normal leading-relaxed mb-8">
+              We combine visionary foresight, technical agility, and unwavering integrity to deliver
+              unparalleled value across our diverse portfolio. Our commitment to excellence makes us
+              the trusted partner of choice for institutional clients, investors, and communities.
             </p>
 
-            {/* Features Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-8">
-              {features.map((feature, idx) => (
-                <div key={idx} className="flex items-center gap-3">
-                  <div className="w-5 h-5 rounded-full border border-green-500 flex items-center justify-center shrink-0">
-                    <CheckCircle2 className="w-4 h-4 text-green-500" />
+            {/* 8 Feature Cards (Grid 2x4) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              {features.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="group p-3.5 rounded-2xl bg-white border border-gray-100 hover:border-[#f9c602]/60 shadow-sm hover:shadow-md transition-all duration-300 flex items-start gap-3.5"
+                >
+                  <div className="w-8 h-8 rounded-xl bg-[#f9c602] text-[#0a0a0a] flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_12px_rgba(249,198,2,0.35)] group-hover:scale-105 transition-transform duration-300">
+                    <CheckCircle2 className="w-4 h-4 text-[#0a0a0a]" strokeWidth={2.5} />
                   </div>
-                  <span className="text-[14px] text-gray-600 font-medium">
-                    {feature}
-                  </span>
+                  <div>
+                    <h4 className="text-sm font-bold text-[#0a0a0a] mb-0.5 group-hover:text-black">
+                      {item.title}
+                    </h4>
+                    <p className="text-gray-500 text-xs leading-relaxed font-medium">
+                      {item.detail}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>

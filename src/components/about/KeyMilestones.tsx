@@ -1,89 +1,100 @@
-import { Building2, Handshake, Users, TrendingUp, Globe } from "lucide-react";
+"use client";
+
+import React from "react";
+import { Building2, Handshake, Users, TrendingUp, Globe, Sparkles } from "lucide-react";
 
 const milestones = [
   {
-    icon: (
-      <Building2
-        className="w-10 h-10 lg:w-12 lg:h-12 text-[#312e81]"
-        strokeWidth={1.5}
-      />
-    ),
+    icon: <Building2 className="w-8 h-8 text-[#0a0a0a]" strokeWidth={2} />,
     stat: "25+",
-    label: "Years of\nExcellence",
+    title: "Years of Excellence",
+    subtitle: "Pioneering institutional heritage",
   },
   {
-    icon: (
-      <Handshake
-        className="w-10 h-10 lg:w-12 lg:h-12 text-[#312e81]"
-        strokeWidth={1.5}
-      />
-    ),
+    icon: <Handshake className="w-8 h-8 text-[#0a0a0a]" strokeWidth={2} />,
     stat: "10+",
-    label: "Business\nVentures",
+    title: "Business Ventures",
+    subtitle: "Active enterprise concerns",
   },
   {
-    icon: (
-      <Users
-        className="w-10 h-10 lg:w-12 lg:h-12 text-[#312e81]"
-        strokeWidth={1.5}
-      />
-    ),
-    stat: "5000+",
-    label: "Dedicated\nEmployees",
+    icon: <Users className="w-8 h-8 text-[#0a0a0a]" strokeWidth={2} />,
+    stat: "5,000+",
+    title: "Dedicated Team",
+    subtitle: "Professionals & specialists",
   },
   {
-    icon: (
-      <TrendingUp
-        className="w-10 h-10 lg:w-12 lg:h-12 text-[#312e81]"
-        strokeWidth={1.5}
-      />
-    ),
+    icon: <TrendingUp className="w-8 h-8 text-[#0a0a0a]" strokeWidth={2} />,
     stat: "1M+",
-    label: "Happy\nCustomers",
+    title: "Happy Customers",
+    subtitle: "Across diversified sectors",
   },
   {
-    icon: (
-      <Globe
-        className="w-10 h-10 lg:w-12 lg:h-12 text-[#312e81]"
-        strokeWidth={1.5}
-      />
-    ),
+    icon: <Globe className="w-8 h-8 text-[#0a0a0a]" strokeWidth={2} />,
     stat: "10+",
-    label: "Global Presence",
+    title: "Global Reach",
+    subtitle: "International markets & hubs",
   },
 ];
 
 export function KeyMilestones() {
   return (
-    <section className="fanam-section bg-white relative overflow-hidden py-16 lg:py-24">
-      <div className="fanam-container">
+    <section className="relative fanam-section bg-[#0a0a0a] text-white overflow-hidden py-20 lg:py-28">
+      {/* Ambient gold glow elements */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[350px] bg-[#f9c602]/10 rounded-full blur-[160px] pointer-events-none" />
+
+      {/* Grid pattern overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+          backgroundSize: "32px 32px",
+        }}
+      />
+
+      <div className="fanam-container relative z-10">
         {/* Header */}
-        <div className="flex flex-col items-center text-center mb-16 lg:mb-24">
-          <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-[#f9c602]/10 text-[#181428] text-[10px] font-bold uppercase tracking-wider mb-6">
-            Key Milestones
+        <div className="flex flex-col items-center text-center mb-16 lg:mb-20">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f9c602]/15 border border-[#f9c602]/30 text-[#f9c602] text-xs font-bold uppercase tracking-wider mb-6">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Key Milestones</span>
           </div>
 
-          <p className="text-gray-500 text-[14px] md:text-[15px] font-medium leading-relaxed max-w-2xl mx-auto">
-            Celebrating the milestones that reflect our journey of innovation,
-            growth, and excellence across diverse industries.
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-white leading-[1.2] tracking-tight mb-5">
+            A Legacy of Impact, Measured in{" "}
+            <span className="text-[#f9c602]">Numbers</span>
+          </h2>
+
+          <p className="text-white/70 text-base md:text-lg font-normal leading-relaxed max-w-2xl mx-auto">
+            Celebrating the defining milestones that reflect our journey of relentless innovation,
+            operational scale, and trust across industries.
           </p>
         </div>
 
-        {/* Milestones Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-y-12 gap-x-6">
+        {/* Milestones Grid (5 Cards) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {milestones.map((item, idx) => (
             <div
               key={idx}
-              className="flex flex-col items-center justify-center text-center group"
+              className="group relative p-6 sm:p-7 rounded-3xl bg-white/5 border border-white/10 hover:border-[#f9c602]/50 backdrop-blur-md transition-all duration-300 flex flex-col items-center text-center transform hover:-translate-y-2 hover:bg-white/[0.08]"
             >
-              <div className="mb-6 transform transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-2">
+              {/* Gold Icon Box */}
+              <div className="w-16 h-16 rounded-2xl bg-[#f9c602] flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(249,198,2,0.4)] group-hover:scale-110 transition-transform duration-300">
                 {item.icon}
               </div>
-              <h3 className="text-4xl lg:text-[40px] font-bold text-[#181428] mb-2 tracking-tight">
+
+              {/* Stat Number */}
+              <h3 className="text-4xl lg:text-5xl font-extrabold text-[#f9c602] tracking-tight mb-2">
                 {item.stat}
               </h3>
-              <p className="text-[13px] md:text-[14px] text-gray-500 font-medium whitespace-pre-line leading-snug">
-                {item.label}
+
+              {/* Title */}
+              <h4 className="text-base font-bold text-white mb-1 tracking-tight">
+                {item.title}
+              </h4>
+
+              {/* Subtitle */}
+              <p className="text-white/60 text-xs font-medium">
+                {item.subtitle}
               </p>
             </div>
           ))}

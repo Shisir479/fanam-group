@@ -231,21 +231,22 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
   };
 
   const navStyles = isMobileMenuOpen
-    ? "bg-white/95 backdrop-blur-xl text-[#181428] shadow-sm border-b border-gray-100"
+    ? "bg-white/95 backdrop-blur-xl text-[#0a0a0a] shadow-sm border-b border-gray-100"
     : isScrolled
-      ? "bg-white/80 backdrop-blur-xl text-[#181428] shadow-sm border-b border-white/50"
-      : "bg-white/60 backdrop-blur-lg text-[#181428] border-b border-white/30";
+      ? "bg-white/80 backdrop-blur-xl text-[#0a0a0a] shadow-sm border-b border-white/50"
+      : "bg-white/60 backdrop-blur-lg text-[#0a0a0a] border-b border-white/30";
 
-  const mobileHamburgerColor = "bg-[#181428]";
+  const mobileHamburgerColor = "bg-[#0a0a0a]";
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500 ease-in-out ${navStyles} ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
+        className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500 ease-in-out ${navStyles}`}
         onMouseLeave={handleMegaMenuLeave}
       >
-        <div className="container mx-auto px-6 md:px-20 flex h-18 items-center justify-between">
-          <div className="flex items-center gap-16 h-full">
+        <div className="container mx-auto px-6 md:px-12 flex h-18 items-center justify-between">
+          {/* Left: Logo */}
+          <div className="flex-shrink-0 flex items-center">
             <Link
               href="/"
               className="flex items-center group"
@@ -257,12 +258,13 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
                 width={160}
                 height={52}
                 priority
-                className="h-14 md:h-20 object-contain transition-all duration-300"
+                className="h-14 md:h-18 object-contain transition-all duration-300"
               />
             </Link>
+          </div>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center h-full gap-7 text-[15px] font-semibold tracking-wide">
+          {/* Center: Desktop Navigation */}
+          <nav className="hidden lg:flex items-center justify-center h-full gap-7 text-[15px] font-semibold tracking-wide mx-auto">
               {navItems.map((item) => {
                 const active = isNavActive(item);
                 const hasMega = !!item.megaMenuKey;
@@ -355,12 +357,11 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
                 );
               })}
             </nav>
-          </div>
 
           <div className="flex items-center gap-6">
             <Link
               href="/sitemap"
-              className="hidden lg:flex items-center gap-2 border border-gray-200 hover:bg-[#f9c602] hover:text-[#181428] hover:border-[#f9c602] text-[#181428] px-6 py-2 rounded-full transition-colors font-semibold shadow-sm"
+              className="hidden lg:flex items-center gap-2 border border-gray-200 hover:bg-[#f9c602] hover:text-[#0a0a0a] hover:border-[#f9c602] text-[#0a0a0a] px-6 py-2 rounded-full transition-colors font-semibold shadow-sm"
               onMouseEnter={() => setActiveMegaMenu(null)}
             >
               <svg
@@ -404,7 +405,7 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
         className={`fixed inset-0 top-[76px] bg-white/95 backdrop-blur-md z-40 transition-transform duration-500 ease-in-out lg:hidden ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}
       >
         <div className="flex flex-col h-full overflow-y-auto px-6 py-8 pb-24">
-          <div className="flex flex-col gap-6 text-[#181428] font-semibold text-[17px]">
+          <div className="flex flex-col gap-6 text-[#0a0a0a] font-semibold text-[17px]">
             {navItems.map((item) => {
               if (item.megaMenuKey) {
                 const sections = megaMenuData[item.megaMenuKey];
@@ -415,7 +416,7 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
                       onClick={() => toggleAccordion(item.megaMenuKey!)}
                     >
                       <span>{item.label}</span>
-                      <span className="text-2xl font-light text-[#181428]/70 w-8 text-center">
+                      <span className="text-2xl font-light text-[#0a0a0a]/70 w-8 text-center">
                         {expandedMenu === item.megaMenuKey ? "−" : "+"}
                       </span>
                     </div>
@@ -427,10 +428,10 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
                           <Link
                             key={idx}
                             href={subItem.href}
-                            className="flex items-center gap-3 text-[15px] font-normal text-[#181428]/80 py-1"
+                            className="flex items-center gap-3 text-[15px] font-normal text-[#0a0a0a]/80 py-1"
                             onClick={() => setIsMobileMenuOpen(false)}
                           >
-                            <span className="w-7 h-7 rounded-lg bg-gray-100 flex items-center justify-center text-[#181428]/60 flex-shrink-0">
+                            <span className="w-7 h-7 rounded-lg bg-gray-100 flex items-center justify-center text-[#0a0a0a]/60 flex-shrink-0">
                               {subItem.icon}
                             </span>
                             {subItem.label}

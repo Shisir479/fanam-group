@@ -63,10 +63,10 @@ export default function CreateFaqClient() {
     <div className="max-w-[1200px] mx-auto w-full">
       <DynamicAdminForm
         title="Add New FAQ"
-        description="Create a new frequently asked question."
         fields={fields}
+        initialValues={{ question: "", answer: "", status: "active", order: 0 }}
         onSubmit={handleSubmit}
-        submitButtonText="Create FAQ"
+        submitLabel="Create FAQ"
         backHref="/admin/faq"
       />
     </div>

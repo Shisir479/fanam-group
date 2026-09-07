@@ -1,14 +1,15 @@
 import { Hero } from "@/components/home/Hero";
 import { AboutSection } from "@/components/home/AboutSection";
-import { LatestNews } from "@/components/home/LatestNews";
-import { ContactInfo } from "@/components/home/ContactInfo";
-import { getHomepageCMSPublic } from "@/services/homepage-cms.service";
-// import { getServicesPublic } from "@/services/service.service";
-import { getBlogsPublic } from "@/services/blog.service";
-import { getBrandingSettingsPublic } from "@/services/settings.service";
-import { getProjectsPublic } from "@/services/project.service";
 import { ConcernsSection } from "@/components/home/ConcernsSection";
 import { AchievementsSection } from "@/components/home/AchievementsSection";
+import { TestimonialSection } from "@/components/home/TestimonialSection";
+import { PartnersSection } from "@/components/home/PartnersSection";
+import { LatestNews } from "@/components/home/LatestNews";
+import { InquiryCTA } from "@/components/home/InquiryCTA";
+import { MetricsBar } from "@/components/home/MetricsBar";
+import { getHomepageCMSPublic } from "@/services/homepage-cms.service";
+import { getBlogsPublic } from "@/services/blog.service";
+import { getBrandingSettingsPublic } from "@/services/settings.service";
 
 export default async function Home() {
   let cmsData: any = null;
@@ -21,19 +22,11 @@ export default async function Home() {
       cmsData = res.data;
     }
 
-    // // Fetch dynamic services
-    // const servicesRes = await getServicesPublic({ status: "active", limit: 4 });
-    // if (servicesRes?.success) {
-    //   servicesData = servicesRes.data || [];
-    // }
-
-    // Fetch dynamic blogs
     const blogsRes = await getBlogsPublic({ status: "active", limit: 4 });
     if (blogsRes?.success) {
       blogsData = blogsRes.data || [];
     }
 
-    // Fetch branding data
     const brandingRes = await getBrandingSettingsPublic();
     if (brandingRes?.success) {
       brandingData = brandingRes.data;
@@ -45,12 +38,14 @@ export default async function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       <Hero data={cmsData} />
+      <MetricsBar />
       <AboutSection />
       <ConcernsSection />
       <AchievementsSection />
-      {/* <TestimonialSection /> */}
+      <PartnersSection />
+      <TestimonialSection />
+      <InquiryCTA />
       <LatestNews blogs={blogsData} />
-      <ContactInfo data={brandingData?.contact} />
     </div>
   );
 }

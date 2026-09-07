@@ -322,3 +322,5 @@ export function BlogCardCompact({ post }: { post: any }) {
     </Link>
   );
 }
+
+export const BlogCard = BlogCardLight;

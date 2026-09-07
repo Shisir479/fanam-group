@@ -106,7 +106,7 @@ export default function InquiryForm() {
                   message: "",
                 });
               }}
-              className="group inline-flex items-center gap-3 bg-[#181428] text-white px-8 py-3 rounded-full font-medium hover:bg-[#f9c602] hover:text-[#181428] transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="group inline-flex items-center gap-3 bg-[#0a0a0a] text-white px-8 py-3 rounded-full font-medium hover:bg-[#f9c602] hover:text-[#0a0a0a] transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               <span>Submit Another Inquiry</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -224,7 +224,7 @@ export default function InquiryForm() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full md:w-auto group inline-flex items-center justify-center gap-3 bg-[#f9c602] text-[#181428] px-10 py-3.5 rounded-full font-bold hover:bg-[#e0b200] transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed uppercase tracking-wide"
+              className="w-full md:w-auto group inline-flex items-center justify-center gap-3 bg-[#f9c602] text-[#0a0a0a] px-10 py-3.5 rounded-full font-bold hover:bg-[#e0b200] transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed uppercase tracking-wide"
             >
               <span>{isSubmitting ? "Submitting..." : "Submit Inquiry"}</span>
               <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
