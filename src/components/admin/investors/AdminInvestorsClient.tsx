@@ -252,7 +252,7 @@ export default function AdminInvestorsClient({
                     onChange={(e) =>
                       setFormData({ ...formData, title: e.target.value })
                     }
-                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                     placeholder="e.g. Q3 Financial Results 2023"
                   />
                 </div>
@@ -272,7 +272,7 @@ export default function AdminInvestorsClient({
                           year: parseInt(e.target.value),
                         })
                       }
-                      className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                      className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                     />
                   </div>
                   <div>
@@ -291,7 +291,7 @@ export default function AdminInvestorsClient({
                             | "Presentation",
                         })
                       }
-                      className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors [&>option]:bg-gray-900"
+                      className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors [&>option]:bg-gray-900"
                     >
                       <option>Annual Report</option>
                       <option>Quarterly Report</option>
@@ -311,7 +311,7 @@ export default function AdminInvestorsClient({
                     onChange={(e) =>
                       setFormData({ ...formData, pdfUrl: e.target.value })
                     }
-                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                     placeholder="e.g. https://example.com/report.pdf"
                   />
                   {/* Note: I changed this to a standard text input because `UploadInput` with `type="document"` might not be fully implemented or robust enough in this codebase context without seeing it. It's safer to allow text URL for now. */}
@@ -326,7 +326,7 @@ export default function AdminInvestorsClient({
                     onChange={(e) =>
                       setFormData({ ...formData, thumbnailUrl: e.target.value })
                     }
-                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                     placeholder="e.g. https://example.com/image.png"
                   />
                 </div>
@@ -343,7 +343,7 @@ export default function AdminInvestorsClient({
                         status: e.target.value as "active" | "inactive",
                       })
                     }
-                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors [&>option]:bg-gray-900"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors [&>option]:bg-gray-900"
                   >
                     <option value="active">Active</option>
                     <option value="inactive">Inactive</option>
@@ -364,7 +364,7 @@ export default function AdminInvestorsClient({
               <button
                 type="submit"
                 form="reportForm"
-                className="px-6 py-2 bg-purple-600 hover:bg-purple-500 text-white font-semibold rounded-xl transition-all shadow-[0_0_20px_rgba(147,51,234,0.3)] hover:shadow-[0_0_25px_rgba(147,51,234,0.5)] active:scale-95"
+                className="px-6 py-2 bg-brand-violet hover:bg-brand-violet text-white font-semibold rounded-xl transition-all shadow-[0_0_20px_rgba(147,51,234,0.3)] hover:shadow-[0_0_25px_rgba(147,51,234,0.5)] active:scale-95"
               >
                 {editMode ? "Update Report" : "Upload Report"}
               </button>

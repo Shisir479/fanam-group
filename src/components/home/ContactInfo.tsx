@@ -61,7 +61,7 @@ export function ContactInfo({ data }: { data?: any }) {
               <h2 className="text-[#f9c602] font-serif font-bold text-3xl md:text-4xl">
                 Contact Us
               </h2>
-              <p className="text-[#0a0a0a] text-base md:text-lg font-medium leading-snug">
+              <p className="text-[#392f5f] text-base md:text-lg font-medium leading-snug">
                 Let's Build the Future Together with Innovation, Trust, and
                 Excellence
               </p>
@@ -79,7 +79,7 @@ export function ContactInfo({ data }: { data?: any }) {
                   onChange={handleChange}
                   required
                   placeholder="Full Name"
-                  className="w-full border border-gray-200 rounded-lg p-3 bg-white text-[#0a0a0a] placeholder-gray-400 focus:outline-none focus:border-[#f9c602] focus:ring-1 focus:ring-[#f9c602] transition-colors shadow-sm"
+                  className="w-full border border-gray-200 rounded-lg p-3 bg-white text-[#392f5f] placeholder-gray-400 focus:outline-none focus:border-[#f9c602] focus:ring-1 focus:ring-[#f9c602] transition-colors shadow-sm"
                 />
                 <input
                   type="email"
@@ -88,7 +88,7 @@ export function ContactInfo({ data }: { data?: any }) {
                   onChange={handleChange}
                   required
                   placeholder="example@gmail.com"
-                  className="w-full border border-gray-200 rounded-lg p-3 bg-white text-[#0a0a0a] placeholder-gray-400 focus:outline-none focus:border-[#f9c602] focus:ring-1 focus:ring-[#f9c602] transition-colors shadow-sm"
+                  className="w-full border border-gray-200 rounded-lg p-3 bg-white text-[#392f5f] placeholder-gray-400 focus:outline-none focus:border-[#f9c602] focus:ring-1 focus:ring-[#f9c602] transition-colors shadow-sm"
                 />
                 <input
                   type="tel"
@@ -97,7 +97,7 @@ export function ContactInfo({ data }: { data?: any }) {
                   onChange={handleChange}
                   required
                   placeholder="Phone Number"
-                  className="w-full border border-gray-200 rounded-lg p-3 bg-white text-[#0a0a0a] placeholder-gray-400 focus:outline-none focus:border-[#f9c602] focus:ring-1 focus:ring-[#f9c602] transition-colors shadow-sm"
+                  className="w-full border border-gray-200 rounded-lg p-3 bg-white text-[#392f5f] placeholder-gray-400 focus:outline-none focus:border-[#f9c602] focus:ring-1 focus:ring-[#f9c602] transition-colors shadow-sm"
                 />
                 <input
                   type="text"
@@ -106,7 +106,7 @@ export function ContactInfo({ data }: { data?: any }) {
                   onChange={handleChange}
                   required
                   placeholder="Subject"
-                  className="w-full border border-gray-200 rounded-lg p-3 bg-white text-[#0a0a0a] placeholder-gray-400 focus:outline-none focus:border-[#f9c602] focus:ring-1 focus:ring-[#f9c602] transition-colors shadow-sm"
+                  className="w-full border border-gray-200 rounded-lg p-3 bg-white text-[#392f5f] placeholder-gray-400 focus:outline-none focus:border-[#f9c602] focus:ring-1 focus:ring-[#f9c602] transition-colors shadow-sm"
                 />
               </div>
 
@@ -117,19 +117,19 @@ export function ContactInfo({ data }: { data?: any }) {
                 required
                 placeholder="Message"
                 rows={4}
-                className="w-full border border-gray-200 rounded-lg p-3 bg-white text-[#0a0a0a] placeholder-gray-400 focus:outline-none focus:border-[#f9c602] focus:ring-1 focus:ring-[#f9c602] transition-colors resize-none shadow-sm"
+                className="w-full border border-gray-200 rounded-lg p-3 bg-white text-[#392f5f] placeholder-gray-400 focus:outline-none focus:border-[#f9c602] focus:ring-1 focus:ring-[#f9c602] transition-colors resize-none shadow-sm"
               />
 
               <div className="mt-1">
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="group inline-flex items-center gap-3 bg-[#0a0a0a] text-white px-6 py-2.5 rounded-full font-medium text-sm hover:bg-[#f9c602] hover:text-[#0a0a0a] border border-[#0a0a0a] hover:border-[#f9c602] transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="group inline-flex items-center gap-3 bg-[#392F5F] text-white px-7 py-3.5 font-semibold text-sm hover:bg-[#F9C602] hover:text-[#392F5F] border border-[#392F5F] hover:border-[#F9C602] transition-all duration-300 active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                   <span className="transition-transform duration-300 group-hover:translate-x-1">
                     {isLoading ? "Submitting..." : "Book Appointment"}
                   </span>
-                  <span className="w-7 h-7 rounded-full bg-white/20 group-hover:bg-[#0a0a0a]/10 text-white group-hover:text-[#0a0a0a] flex items-center justify-center transition-all duration-300 group-hover:-translate-x-1 group-hover:-rotate-45">
+                  <span className="w-7 h-7 rounded-full bg-white/20 group-hover:bg-[#392f5f]/10 text-white group-hover:text-[#392f5f] flex items-center justify-center transition-all duration-300 group-hover:-translate-x-1 group-hover:-rotate-45">
                     <ArrowRight className="w-3.5 h-3.5" />
                   </span>
                 </button>

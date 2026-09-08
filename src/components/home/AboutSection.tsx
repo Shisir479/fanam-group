@@ -7,10 +7,8 @@ import { motion } from "framer-motion";
 import {
   CheckCircle2,
   ArrowRight,
-  TrendingUp,
   Award,
   Building2,
-  Users2,
 } from "lucide-react";
 
 export function AboutSection() {
@@ -36,8 +34,8 @@ export function AboutSection() {
   return (
     <section className="relative fanam-section bg-gradient-to-b from-white via-neutral-50/50 to-white overflow-hidden">
       {/* Subtle decorative background blur shapes */}
-      <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#f9c602]/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-0 w-80 h-80 bg-neutral-200/50 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 -left-48 w-96 h-96 bg-[#F9C602]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-0 w-80 h-80 bg-[#F9C602]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="fanam-container relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
@@ -51,18 +49,18 @@ export function AboutSection() {
           >
             {/* Header Badge */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#f9c602]/15 border border-[#f9c602]/30 w-fit">
-              <Building2 className="w-4 h-4 text-[#0a0a0a]" />
-              <span className="text-[#0a0a0a] font-semibold text-xs md:text-sm tracking-wide uppercase">
+              <Building2 className="w-4 h-4 text-[#392F5F]" />
+              <span className="text-[#392F5F] font-semibold text-xs md:text-sm tracking-wide uppercase">
                 About Fanam Group
               </span>
             </div>
 
             {/* Headline */}
-            <h2 className="text-[#0a0a0a] font-serif font-bold text-3xl sm:text-4xl lg:text-5xl leading-[1.2]">
+            <h2 className="text-[#392F5F] font-serif font-bold text-3xl sm:text-4xl lg:text-5xl leading-[1.2]">
               Building Legacies, Driving{" "}
-              <span className="relative whitespace-nowrap text-[#0a0a0a]">
+              <span className="relative whitespace-nowrap text-[#392F5F]">
                 Transformation
-                <span className="absolute left-0 -bottom-1.5 w-full h-1 bg-[#f9c602] rounded-full" />
+                <span className="absolute left-0 -bottom-1.5 w-full h-1 bg-gradient-to-r from-[#6B4E9E] to-[#F9C602]" />
               </span>{" "}
               Since 2018
             </h2>
@@ -93,10 +91,10 @@ export function AboutSection() {
                 >
                   <div className="flex items-start gap-3">
                     <div className="w-6 h-6 rounded-full bg-[#f9c602]/20 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-[#f9c602] transition-colors duration-300">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#0a0a0a]" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#392F5F]" />
                     </div>
                     <div>
-                      <h4 className="text-[#0a0a0a] font-semibold text-sm">
+                      <h4 className="text-[#392F5F] font-semibold text-sm">
                         {item.title}
                       </h4>
                       <p className="text-gray-500 text-xs mt-0.5 leading-normal">
@@ -112,17 +110,17 @@ export function AboutSection() {
             <div className="pt-4 flex flex-wrap items-center gap-4">
               <Link
                 href="/about"
-                className="group inline-flex items-center gap-3 bg-[#0a0a0a] hover:bg-[#f9c602] border border-[#0a0a0a] hover:border-[#f9c602] text-white hover:text-[#0a0a0a] px-6 py-3 rounded-full font-medium text-sm transition-all duration-300 shadow-md hover:shadow-xl hover:scale-105"
+                className="group inline-flex items-center gap-3 bg-[#392F5F] hover:bg-[#F9C602] border border-[#392F5F] hover:border-[#F9C602] text-white hover:text-[#392F5F] px-7 py-3.5 font-semibold text-sm transition-all duration-300 active:scale-[0.98]"
               >
                 <span>Learn More About Us</span>
-                <span className="w-7 h-7 rounded-full bg-white/20 group-hover:bg-[#0a0a0a]/10 flex items-center justify-center transition-all duration-300 group-hover:translate-x-1 group-hover:-rotate-45">
-                  <ArrowRight className="w-3.5 h-3.5 text-white group-hover:text-[#0a0a0a]" />
+                <span className="w-6 h-6 bg-white/20 group-hover:bg-[#392F5F]/10 flex items-center justify-center transition-all duration-300 group-hover:translate-x-1">
+                  <ArrowRight className="w-3.5 h-3.5 text-white group-hover:text-[#392F5F]" />
                 </span>
               </Link>
 
               <Link
                 href="/concern"
-                className="inline-flex items-center gap-2 text-[#0a0a0a] hover:text-[#f9c602] font-semibold text-sm px-4 py-3 transition-colors duration-300"
+                className="inline-flex items-center gap-2 text-[#392F5F] hover:text-[#f9c602] font-semibold text-sm px-4 py-3 transition-colors duration-300"
               >
                 <span>View Our Business Concerns</span>
                 <ArrowRight className="w-4 h-4" />
@@ -164,8 +162,8 @@ export function AboutSection() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="absolute -top-6 -right-4 md:-right-6 z-20"
             >
-              <div className="bg-[#0a0a0a] text-white border border-white/10 rounded-2xl px-5 py-4 shadow-2xl flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-[#f9c602] flex items-center justify-center text-[#0a0a0a]">
+              <div className="bg-[#392F5F] text-white border border-white/10 rounded-2xl px-5 py-4 shadow-2xl flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[#f9c602] flex items-center justify-center text-[#392F5F]">
                   <Award className="w-5 h-5 font-bold" />
                 </div>
                 <div>
@@ -209,7 +207,7 @@ export function AboutSection() {
                       alt="Reviewer 3"
                       className="rounded-full border-2 border-white shadow-sm w-9 h-9 object-cover"
                     />
-                    <div className="w-9 h-9 rounded-full border-2 border-white shadow-sm bg-[#f9c602] flex items-center justify-center text-[#0a0a0a] text-sm font-bold z-10">
+                    <div className="w-9 h-9 rounded-full border-2 border-white shadow-sm bg-[#f9c602] flex items-center justify-center text-[#392F5F] text-sm font-bold z-10">
                       +
                     </div>
                   </div>
@@ -217,7 +215,7 @@ export function AboutSection() {
                     ★ 4.9
                   </div>
                 </div>
-                <p className="text-[#0a0a0a] font-semibold text-xs tracking-tight">
+                <p className="text-[#392F5F] font-semibold text-xs tracking-tight">
                   Trusted by 10,000+ Clients & Partners
                 </p>
               </div>

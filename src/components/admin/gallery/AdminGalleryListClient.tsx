@@ -126,7 +126,7 @@ export default function AdminGalleryListClient({
             {gallery.status}
           </span>
           {gallery.featured && (
-            <span className="px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wide uppercase bg-purple-500/20 text-purple-400">
+            <span className="px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wide uppercase bg-brand-violet/20 text-purple-400">
               Featured
             </span>
           )}
@@ -183,7 +183,7 @@ export default function AdminGalleryListClient({
         <input
           type="text"
           placeholder="Search galleries..."
-          className="w-full md:w-1/3 px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+          className="w-full md:w-1/3 px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
           value={search}
           onChange={(e) => {
             const val = e.target.value;

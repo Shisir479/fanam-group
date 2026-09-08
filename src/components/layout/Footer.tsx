@@ -81,7 +81,12 @@ export function Footer({ brandingData }: { brandingData?: any }) {
   });
 
   return (
-    <footer className="relative w-full bg-[#0a0a0a] text-white">
+    <footer className="relative w-full bg-[#392F5F] text-white overflow-hidden">
+      {/* Gold top accent */}
+      <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[#F9C602] via-white/60 to-[#F9C602]" />
+      {/* Ambient decorative glow */}
+      <div className="absolute -top-32 -right-32 w-96 h-96 bg-[#F9C602]/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-white/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="container mx-auto px-6 md:px-12 lg:px-16 pt-10 pb-6">
         {/* Main Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6 mb-8">
@@ -114,7 +119,7 @@ export function Footer({ brandingData }: { brandingData?: any }) {
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-white text-[#0a0a0a] flex items-center justify-center hover:bg-[#f9c602] hover:scale-110 hover:-translate-y-1 transition-all duration-300"
+                  className="w-9 h-9 rounded-full bg-white text-[#392F5F] flex items-center justify-center hover:bg-[#f9c602] hover:scale-110 hover:-translate-y-1 transition-all duration-300"
                   aria-label={s.label}
                 >
                   {s.icon}
@@ -190,7 +195,7 @@ export function Footer({ brandingData }: { brandingData?: any }) {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-5 border-t border-dashed border-gray-600 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-400">
+        <div className="pt-5 border-t border-white/15 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/60">
           <p>
             Copyright &copy; {new Date().getFullYear()} Tech solutions Plex.
           </p>

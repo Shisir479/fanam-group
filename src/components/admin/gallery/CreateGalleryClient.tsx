@@ -184,7 +184,7 @@ export default function CreateGalleryClient({
                   required
                   value={formData.title}
                   onChange={handleTitleChange}
-                  className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                  className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                   placeholder="e.g., Luxury Villa Exterior"
                 />
               </div>
@@ -200,7 +200,7 @@ export default function CreateGalleryClient({
                   onChange={(e) =>
                     setFormData({ ...formData, slug: e.target.value })
                   }
-                  className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                  className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                   placeholder="luxury-villa-exterior"
                 />
               </div>
@@ -214,7 +214,7 @@ export default function CreateGalleryClient({
                   onChange={(e) =>
                     setFormData({ ...formData, description: e.target.value })
                   }
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors min-h-[120px]"
+                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors min-h-[120px]"
                   placeholder="Short description of this media..."
                 />
               </div>
@@ -328,7 +328,7 @@ export default function CreateGalleryClient({
                     onChange={(e) =>
                       setFormData({ ...formData, videoUrl: e.target.value })
                     }
-                    className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                    className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                     placeholder="https://youtube.com/watch?v=..."
                   />
                 </div>
@@ -407,7 +407,7 @@ export default function CreateGalleryClient({
                   })
                 }
               >
-                <SelectTrigger className="w-full px-4 py-2 border border-white/10 rounded-xl text-white outline-none focus:ring-1 focus:ring-purple-500 transition-colors h-auto min-h-[42px] bg-white/5">
+                <SelectTrigger className="w-full px-4 py-2 border border-white/10 rounded-xl text-white outline-none focus:ring-1 focus:ring-brand-violet transition-colors h-auto min-h-[42px] bg-white/5">
                   <SelectValue placeholder="Select Status" />
                 </SelectTrigger>
                 <SelectContent
@@ -469,7 +469,7 @@ export default function CreateGalleryClient({
                   onChange={(e) =>
                     setFormData({ ...formData, metaTitle: e.target.value })
                   }
-                  className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                  className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                 />
               </div>
 
@@ -485,7 +485,7 @@ export default function CreateGalleryClient({
                       metaDescription: e.target.value,
                     })
                   }
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors min-h-[100px]"
+                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors min-h-[100px]"
                 />
               </div>
             </div>

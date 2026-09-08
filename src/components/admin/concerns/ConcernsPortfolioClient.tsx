@@ -82,7 +82,7 @@ export default function ConcernsPortfolioClient({
                   <div className="flex flex-col sm:flex-row gap-4">
                     <Link
                       href={`/concern/${concern.slug}`}
-                      className="group flex items-center justify-center gap-2 bg-[#f9c602] text-[#392F5F] hover:bg-yellow-400 px-6 py-3 rounded-full font-medium text-sm tracking-wide transition-all duration-300"
+                      className="group flex items-center justify-center gap-2 bg-[#f9c602] text-[#392F5F] hover:bg-brand-gold px-6 py-3 rounded-full font-medium text-sm tracking-wide transition-all duration-300"
                     >
                       Discover More
                       <ArrowRight

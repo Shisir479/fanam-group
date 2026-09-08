@@ -17,17 +17,17 @@ const ethicalPillars = [
   {
     title: "Ethical Leadership & Conduct",
     desc: "We enforce an uncompromising code of corporate ethics, ensuring every strategic decision reflects integrity, fairness, and honor.",
-    icon: <UserCheck className="w-5 h-5 text-[#0a0a0a]" />,
+    icon: <UserCheck className="w-5 h-5 text-[#392f5f]" />,
   },
   {
     title: "Strict Regulatory Compliance",
     desc: "We strictly observe all national laws, industrial regulations, statutory mandates, and corporate compliance benchmarks.",
-    icon: <ClipboardCheck className="w-5 h-5 text-[#0a0a0a]" />,
+    icon: <ClipboardCheck className="w-5 h-5 text-[#392f5f]" />,
   },
   {
     title: "Sustainable Corporate Stewardship",
     desc: "Our management champions resource efficiency and long-term societal value, balancing commercial growth with environmental care.",
-    icon: <Recycle className="w-5 h-5 text-[#0a0a0a]" />,
+    icon: <Recycle className="w-5 h-5 text-[#392f5f]" />,
   },
 ];
 
@@ -35,17 +35,17 @@ const riskPillars = [
   {
     title: "Radical Transparency & Accountability",
     desc: "We foster an open communication culture, transparent financial reporting, and clear governance across all executive tiers.",
-    icon: <Scale className="w-5 h-5 text-[#0a0a0a]" />,
+    icon: <Scale className="w-5 h-5 text-[#392f5f]" />,
   },
   {
     title: "Stakeholder Trust & Protection",
     desc: "We prioritize and protect the rights of our clients, investors, employees, and community partners through verified trust mechanisms.",
-    icon: <Handshake className="w-5 h-5 text-[#0a0a0a]" />,
+    icon: <Handshake className="w-5 h-5 text-[#392f5f]" />,
   },
   {
     title: "Enterprise Risk & Security",
     desc: "Our dedicated audit units actively assess operational risks, cyber resilience, and compliance safety to guarantee stability.",
-    icon: <ShieldAlert className="w-5 h-5 text-[#0a0a0a]" />,
+    icon: <ShieldAlert className="w-5 h-5 text-[#392f5f]" />,
   },
 ];
 
@@ -59,14 +59,14 @@ export function OurGovernance() {
       <div className="fanam-container relative z-10">
         {/* Header */}
         <div className="flex flex-col items-center text-center mb-16 lg:mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f9c602]/15 border border-[#f9c602]/35 text-[#0a0a0a] text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#0a0a0a]" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f9c602]/15 border border-[#f9c602]/35 text-[#392f5f] text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
+            <ShieldCheck className="w-3.5 h-3.5 text-[#392f5f]" />
             <span>Corporate Governance</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#0a0a0a] leading-[1.2] tracking-tight mb-5">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#392f5f] leading-[1.2] tracking-tight mb-5">
             Institutional Integrity & Ethical{" "}
-            <span className="relative whitespace-nowrap text-[#0a0a0a]">
+            <span className="relative whitespace-nowrap text-[#392f5f]">
               Governance
               <span className="absolute left-0 -bottom-1 w-full h-1 bg-[#f9c602] rounded-full" />
             </span>
@@ -83,11 +83,11 @@ export function OurGovernance() {
           {/* Column 1: Ethical Leadership */}
           <div className="p-8 sm:p-10 rounded-3xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3.5 mb-8 pb-4 border-b border-gray-100">
-              <div className="w-12 h-12 rounded-2xl bg-[#f9c602] flex items-center justify-center text-[#0a0a0a] shadow-sm">
+              <div className="w-12 h-12 rounded-2xl bg-[#f9c602] flex items-center justify-center text-[#392f5f] shadow-sm">
                 <ShieldCheck className="w-6 h-6" strokeWidth={2.2} />
               </div>
               <div>
-                <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#0a0a0a]">
+                <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#392f5f]">
                   Ethical Leadership & Compliance
                 </h3>
                 <p className="text-xs text-gray-500 font-medium">
@@ -102,11 +102,11 @@ export function OurGovernance() {
                   key={idx}
                   className="group p-5 rounded-2xl bg-neutral-50 border border-gray-100 hover:border-[#f9c602]/60 transition-all duration-300 flex items-start gap-4"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-white text-[#0a0a0a] flex items-center justify-center shrink-0 mt-0.5 shadow-sm border border-gray-100 group-hover:bg-[#f9c602] transition-colors duration-300">
+                  <div className="w-10 h-10 rounded-xl bg-white text-[#392f5f] flex items-center justify-center shrink-0 mt-0.5 shadow-sm border border-gray-100 group-hover:bg-[#f9c602] transition-colors duration-300">
                     {item.icon}
                   </div>
                   <div>
-                    <h4 className="text-base font-bold text-[#0a0a0a] mb-1 leading-snug">
+                    <h4 className="text-base font-bold text-[#392f5f] mb-1 leading-snug">
                       {item.title}
                     </h4>
                     <p className="text-gray-600 text-xs sm:text-sm leading-relaxed font-medium">
@@ -121,11 +121,11 @@ export function OurGovernance() {
           {/* Column 2: Risk & Accountability */}
           <div className="p-8 sm:p-10 rounded-3xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
             <div className="flex items-center gap-3.5 mb-8 pb-4 border-b border-gray-100">
-              <div className="w-12 h-12 rounded-2xl bg-[#0a0a0a] flex items-center justify-center text-[#f9c602] shadow-sm">
+              <div className="w-12 h-12 rounded-2xl bg-[#392f5f] flex items-center justify-center text-[#f9c602] shadow-sm">
                 <Scale className="w-6 h-6" strokeWidth={2.2} />
               </div>
               <div>
-                <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#0a0a0a]">
+                <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#392f5f]">
                   Accountability & Risk Stewardship
                 </h3>
                 <p className="text-xs text-gray-500 font-medium">
@@ -140,11 +140,11 @@ export function OurGovernance() {
                   key={idx}
                   className="group p-5 rounded-2xl bg-neutral-50 border border-gray-100 hover:border-[#f9c602]/60 transition-all duration-300 flex items-start gap-4"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-white text-[#0a0a0a] flex items-center justify-center shrink-0 mt-0.5 shadow-sm border border-gray-100 group-hover:bg-[#f9c602] transition-colors duration-300">
+                  <div className="w-10 h-10 rounded-xl bg-white text-[#392f5f] flex items-center justify-center shrink-0 mt-0.5 shadow-sm border border-gray-100 group-hover:bg-[#f9c602] transition-colors duration-300">
                     {item.icon}
                   </div>
                   <div>
-                    <h4 className="text-base font-bold text-[#0a0a0a] mb-1 leading-snug">
+                    <h4 className="text-base font-bold text-[#392f5f] mb-1 leading-snug">
                       {item.title}
                     </h4>
                     <p className="text-gray-600 text-xs sm:text-sm leading-relaxed font-medium">
@@ -158,9 +158,9 @@ export function OurGovernance() {
         </div>
 
         {/* Corporate Trust Banner */}
-        <div className="p-6 sm:p-8 rounded-3xl bg-[#0a0a0a] text-white flex flex-col md:flex-row items-center justify-between gap-6 border border-white/15 shadow-xl">
+        <div className="p-6 sm:p-8 rounded-3xl bg-[#392f5f] text-white flex flex-col md:flex-row items-center justify-between gap-6 border border-white/15 shadow-xl">
           <div className="flex items-center gap-4 text-center md:text-left">
-            <div className="w-12 h-12 rounded-2xl bg-[#f9c602] text-[#0a0a0a] flex items-center justify-center shadow-lg shrink-0">
+            <div className="w-12 h-12 rounded-2xl bg-[#f9c602] text-[#392f5f] flex items-center justify-center shadow-lg shrink-0">
               <Sparkles className="w-6 h-6" />
             </div>
             <div>

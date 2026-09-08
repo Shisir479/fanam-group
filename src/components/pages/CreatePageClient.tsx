@@ -138,7 +138,7 @@ export default function CreatePageClient() {
                 value={formData.name}
                 onChange={handleNameChange}
                 placeholder="e.g. Privacy Policy"
-                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
               />
             </div>
 
@@ -153,7 +153,7 @@ export default function CreatePageClient() {
                   setFormData({ ...formData, slug: newSlug });
                 }}
                 placeholder="privacy-policy"
-                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
               />
             </div>
 
@@ -169,7 +169,7 @@ export default function CreatePageClient() {
                   setFormData({ ...formData, link: e.target.value })
                 }
                 placeholder="/privacy-policy"
-                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
               />
             </div>
 
@@ -219,7 +219,7 @@ export default function CreatePageClient() {
                 Cover Image
               </label>
               <label
-                className={`w-full h-32 border-2 border-dashed border-white/20 rounded-xl flex flex-col items-center justify-center text-gray-400 hover:text-white hover:border-purple-500 transition-colors cursor-pointer bg-white/5 overflow-hidden relative group ${isUploading ? "opacity-50 pointer-events-none" : ""}`}
+                className={`w-full h-32 border-2 border-dashed border-white/20 rounded-xl flex flex-col items-center justify-center text-gray-400 hover:text-white hover:border-brand-violet transition-colors cursor-pointer bg-white/5 overflow-hidden relative group ${isUploading ? "opacity-50 pointer-events-none" : ""}`}
               >
                 <input
                   type="file"
@@ -238,7 +238,7 @@ export default function CreatePageClient() {
                 />
                 {isUploading ? (
                   <div className="flex flex-col items-center gap-2">
-                    <Loader2 className="w-8 h-8 animate-spin text-purple-500" />
+                    <Loader2 className="w-8 h-8 animate-spin text-brand-violet" />
                     <span className="text-sm text-gray-300">Uploading...</span>
                   </div>
                 ) : coverUrl ? (
@@ -284,7 +284,7 @@ export default function CreatePageClient() {
                   setFormData({ ...formData, metaTitle: e.target.value })
                 }
                 placeholder="SEO Title"
-                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
               />
             </div>
 
@@ -299,7 +299,7 @@ export default function CreatePageClient() {
                   setFormData({ ...formData, metaDescription: e.target.value })
                 }
                 placeholder="SEO Description..."
-                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors h-24 resize-none"
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors h-24 resize-none"
               />
             </div>
           </div>

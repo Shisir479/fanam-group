@@ -19,12 +19,12 @@ export default function Error({
   return (
     <main
       id="error-page"
-      className="fixed inset-0 z-[999999] flex items-center justify-center bg-[#0a1118] overflow-hidden"
+      className="fixed inset-0 z-[999999] flex items-center justify-center bg-[#2A2545] overflow-hidden"
     >
       {/* Background Decorative Elements */}
       <div className="absolute inset-0 opacity-20 pointer-events-none">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center mix-blend-overlay grayscale" />
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-[#0a1118]/90 to-[#0a1118]" />
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-[#2A2545]/90 to-[#2A2545]" />
       </div>
 
       <div className="container mx-auto px-6 relative z-10 text-center flex flex-col items-center">

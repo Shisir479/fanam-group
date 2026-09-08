@@ -183,7 +183,7 @@ export default function AdminInvestmentBookingListClient({
                   ? "text-red-400"
                   : booking.status === "contacted"
                     ? "text-blue-400"
-                    : "text-yellow-400"
+                    : "text-brand-gold"
             }`}
           >
             <SelectValue />
@@ -191,7 +191,7 @@ export default function AdminInvestmentBookingListClient({
           <SelectContent>
             <SelectItem value="pending">
               <div className="flex items-center">
-                <Clock className="w-3 h-3 mr-2 text-yellow-400" /> Pending
+                <Clock className="w-3 h-3 mr-2 text-brand-gold" /> Pending
               </div>
             </SelectItem>
             <SelectItem value="contacted">
@@ -269,7 +269,7 @@ export default function AdminInvestmentBookingListClient({
             params.set("page", "1");
             router.push(`?${params.toString()}`);
           }}
-          className="w-full md:w-1/3 px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+          className="w-full md:w-1/3 px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
         />
 
         <div className="w-full md:w-48">
@@ -285,7 +285,7 @@ export default function AdminInvestmentBookingListClient({
               router.push(`?${params.toString()}`);
             }}
           >
-            <SelectTrigger className="w-full bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors">
+            <SelectTrigger className="w-full bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors">
               <SelectValue placeholder="All Status" />
             </SelectTrigger>
             <SelectContent>
@@ -323,7 +323,7 @@ export default function AdminInvestmentBookingListClient({
               }}
               className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${
                 currentPage === idx + 1
-                  ? "bg-purple-600 text-white"
+                  ? "bg-brand-violet text-white"
                   : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
               }`}
             >
@@ -414,7 +414,7 @@ export default function AdminInvestmentBookingListClient({
                                 ? "text-red-400 bg-red-500/10"
                                 : selectedBooking.status === "contacted"
                                   ? "text-blue-400 bg-blue-500/10"
-                                  : "text-yellow-400 bg-yellow-500/10"
+                                  : "text-brand-gold bg-brand-gold/10"
                           }`}
                         >
                           {selectedBooking.status || "Pending"}

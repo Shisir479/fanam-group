@@ -127,7 +127,7 @@ export default function AdminContactsClient({
             params.set("page", "1");
             router.push(`?${params.toString()}`);
           }}
-          className="w-full md:w-1/3 px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+          className="w-full md:w-1/3 px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
         />
       </div>
 

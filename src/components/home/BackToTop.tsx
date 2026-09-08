@@ -54,7 +54,7 @@ export function BackToTop() {
         >
           <button
             onClick={scrollToTop}
-            className="relative w-14 h-14 rounded-full flex items-center justify-center bg-[#0a0a0a]/90 backdrop-blur-md text-white border border-[#f9c602]/30 shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_0_25px_rgba(249,198,2,0.4)] transition-all duration-300 hover:scale-105 active:scale-95 focus:outline-none"
+            className="relative w-14 h-14 rounded-full flex items-center justify-center bg-gradient-to-br from-[#392F5F] to-[#4A3A7A] backdrop-blur-md text-white border border-[#F9C602]/40 shadow-[0_8px_30px_rgba(57,47,95,0.45)] hover:shadow-[0_0_25px_rgba(249,198,2,0.5)] transition-all duration-300 hover:scale-105 active:scale-95 focus:outline-none"
             aria-label="Back to top"
           >
             {/* SVG Circular Scroll Progress Ring */}
@@ -76,7 +76,7 @@ export function BackToTop() {
                 cx="26"
                 cy="26"
                 r={radius}
-                className="stroke-[#f9c602] transition-all duration-150 ease-out"
+                className="stroke-[#F9C602] transition-all duration-150 ease-out"
                 strokeWidth="2.5"
                 strokeDasharray={circumference}
                 strokeDashoffset={strokeDashoffset}
@@ -86,7 +86,7 @@ export function BackToTop() {
             </svg>
 
             {/* Inner Icon */}
-            <ArrowUp className="w-5 h-5 text-white group-hover:text-[#f9c602] transition-all duration-300 transform group-hover:-translate-y-1" />
+            <ArrowUp className="w-5 h-5 text-white group-hover:text-[#F9C602] transition-all duration-300 transform group-hover:-translate-y-1" />
           </button>
         </motion.div>
       )}

@@ -62,7 +62,7 @@ export default function VisualSitemapClient({
               initial={{ height: 0 }}
               animate={{ height: 40 }}
               transition={{ duration: 0.4, delay: 0.2 }}
-              className="w-0.5 bg-[#0a1128]/30 dark:bg-gray-600"
+              className="w-0.5 bg-[#392F5F]/30 dark:bg-gray-600"
             ></motion.div>
           </div>
 
@@ -73,7 +73,7 @@ export default function VisualSitemapClient({
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="absolute top-0 left-[12.5%] right-[12.5%] h-0.5 bg-[#0a1128]/30 dark:bg-gray-600 origin-center"
+              className="absolute top-0 left-[12.5%] right-[12.5%] h-0.5 bg-[#392F5F]/30 dark:bg-gray-600 origin-center"
             ></motion.div>
 
             {sitemapData.map((category, idx) => (
@@ -86,7 +86,7 @@ export default function VisualSitemapClient({
                   initial={{ height: 0 }}
                   animate={{ height: 32 }}
                   transition={{ duration: 0.3, delay: 0.6 + idx * 0.1 }}
-                  className="w-0.5 bg-[#0a1128]/30 dark:bg-gray-600"
+                  className="w-0.5 bg-[#392F5F]/30 dark:bg-gray-600"
                 ></motion.div>
 
                 {/* Category Node */}
@@ -126,7 +126,7 @@ export default function VisualSitemapClient({
                           >
                             {renderIcon(
                               item.icon,
-                              "w-4 h-4 text-[#0a1128] group-hover:text-[#f9c602] transition-colors",
+                              "w-4 h-4 text-[#392F5F] group-hover:text-[#f9c602] transition-colors",
                             )}
                             <span className="font-medium text-gray-700 dark:text-gray-200 text-sm group-hover:text-[#f9c602] transition-colors">
                               {item.name}

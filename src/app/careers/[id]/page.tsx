@@ -91,7 +91,7 @@ export default async function JobDetailsPage({
                 </span>
                 {job.workMode && (
                   <span className="flex items-center gap-1.5 text-gray-700 bg-white px-3.5 py-1.5 rounded-full text-sm font-medium border border-gray-200">
-                    <Building className="w-4 h-4 text-indigo-500" />{" "}
+                    <Building className="w-4 h-4 text-brand-violet" />{" "}
                     {job.workMode}
                   </span>
                 )}
@@ -111,7 +111,7 @@ export default async function JobDetailsPage({
               ) : (
                 <a
                   href="#apply-section"
-                  className="bg-[#392F5F] text-white font-bold px-8 py-3.5 rounded-full hover:bg-yellow-400 transition-colors shadow-sm text-center w-full lg:w-auto"
+                  className="bg-[#392F5F] text-white font-bold px-8 py-3.5 rounded-full hover:bg-brand-gold transition-colors shadow-sm text-center w-full lg:w-auto"
                 >
                   Apply for this Position
                 </a>
@@ -174,7 +174,7 @@ export default async function JobDetailsPage({
                           key={i}
                           className="flex items-start gap-4 text-gray-600 text-lg"
                         >
-                          <span className="w-2 h-2 rounded-full bg-yellow-500 shrink-0 mt-2.5" />
+                          <span className="w-2 h-2 rounded-full bg-brand-gold shrink-0 mt-2.5" />
                           <span className="leading-relaxed">{req}</span>
                         </li>
                       ))}

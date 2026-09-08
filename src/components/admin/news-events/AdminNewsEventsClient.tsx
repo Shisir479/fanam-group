@@ -147,7 +147,7 @@ export default function AdminNewsEventsClient({
           className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold w-fit ${
             e.status === "published"
               ? "bg-green-500/10 text-green-400"
-              : "bg-amber-500/10 text-amber-400"
+              : "bg-brand-gold/10 text-amber-400"
           }`}
         >
           {e.status.charAt(0).toUpperCase() + e.status.slice(1)}
@@ -223,7 +223,7 @@ export default function AdminNewsEventsClient({
           className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold w-fit ${
             e.status === "published"
               ? "bg-green-500/10 text-green-400"
-              : "bg-amber-500/10 text-amber-400"
+              : "bg-brand-gold/10 text-amber-400"
           }`}
         >
           {e.status.charAt(0).toUpperCase() + e.status.slice(1)}

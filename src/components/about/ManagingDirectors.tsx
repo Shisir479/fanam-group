@@ -48,14 +48,14 @@ export function ManagingDirectors() {
       <div className="fanam-container relative z-10">
         {/* Header Section */}
         <div className="flex flex-col items-center text-center mb-16 lg:mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f9c602]/15 border border-[#f9c602]/35 text-[#0a0a0a] text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
-            <Users2 className="w-3.5 h-3.5 text-[#0a0a0a]" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f9c602]/15 border border-[#f9c602]/35 text-[#392f5f] text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
+            <Users2 className="w-3.5 h-3.5 text-[#392f5f]" />
             <span>Executive Leadership</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#0a0a0a] leading-[1.2] tracking-tight mb-5">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#392f5f] leading-[1.2] tracking-tight mb-5">
             Visionary Leaders Driving{" "}
-            <span className="relative whitespace-nowrap text-[#0a0a0a]">
+            <span className="relative whitespace-nowrap text-[#392f5f]">
               Progress
               <span className="absolute left-0 -bottom-1 w-full h-1 bg-[#f9c602] rounded-full" />
             </span>
@@ -89,12 +89,12 @@ export function ManagingDirectors() {
               </div>
 
               {/* Designation Pill */}
-              <span className="inline-block px-3 py-1 rounded-full bg-[#f9c602]/15 text-[#0a0a0a] text-[11px] font-bold uppercase tracking-wider mb-2">
+              <span className="inline-block px-3 py-1 rounded-full bg-[#f9c602]/15 text-[#392f5f] text-[11px] font-bold uppercase tracking-wider mb-2">
                 {exec.designation}
               </span>
 
               {/* Executive Name */}
-              <h3 className="text-lg font-bold text-[#0a0a0a] mb-2 tracking-tight group-hover:text-black">
+              <h3 className="text-lg font-bold text-[#392f5f] mb-2 tracking-tight group-hover:text-black">
                 {exec.name}
               </h3>
 

@@ -48,13 +48,17 @@ const achievements = [
 
 export function AchievementsSection() {
   return (
-    <section className="fanam-section bg-white relative overflow-hidden">
+    <section className="fanam-section bg-gradient-to-b from-white via-[#F3F0FA] to-white relative overflow-hidden">
       <div className="fanam-container">
         {/* Header */}
         <div className="text-center mb-16 md:mb-24 flex flex-col items-center">
-          <h2 className="text-[#f9c602] font-serif font-bold text-3xl md:text-4xl mb-4">
-            Achievements
-          </h2>
+          <div className="flex flex-col items-center">
+            <span className="text-[#6B4E9E] font-semibold text-xs md:text-sm uppercase tracking-[0.25em] mb-3">Achievements</span>
+            <h2 className="text-[#392F5F] font-serif font-bold text-3xl md:text-4xl mb-4">
+              Milestones of Excellence
+            </h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-[#392F5F] via-[#6B4E9E] to-[#F9C602]" />
+          </div>
           <p className="text-gray-600 text-sm md:text-base max-w-2xl text-center">
             Celebrating milestones that reflect our commitment to excellence,
             innovation, and sustainable growth.
@@ -81,7 +85,7 @@ export function AchievementsSection() {
                   </div>
                 ) : (
                   <div className="flex flex-col items-center justify-center h-full pb-6">
-                    <h3 className="text-[#0a0a0a] text-3xl xl:text-4xl font-bold leading-none mb-1.5">
+                    <h3 className="text-[#392F5F] text-3xl xl:text-4xl font-bold leading-none mb-1.5">
                       {item.stat}
                     </h3>
                     <p className="text-gray-600 text-xs xl:text-sm text-center px-1 font-medium">
@@ -97,7 +101,7 @@ export function AchievementsSection() {
                 <div className="rounded-full bg-white p-[2px]">
                   {/* Glass Circle */}
                   <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-md">
-                    <span className="text-[#0a0a0a] font-bold text-lg md:text-xl">
+                    <span className="text-[#392F5F] font-bold text-lg md:text-xl">
                       {item.id}
                     </span>
                   </div>
@@ -117,7 +121,7 @@ export function AchievementsSection() {
                   </div>
                 ) : (
                   <div className="flex flex-col items-center justify-center h-full pt-6">
-                    <h3 className="text-[#0a0a0a] text-3xl xl:text-4xl font-bold leading-none mb-1.5">
+                    <h3 className="text-[#392F5F] text-3xl xl:text-4xl font-bold leading-none mb-1.5">
                       {item.stat}
                     </h3>
                     <p className="text-gray-600 text-xs xl:text-sm text-center px-1 font-medium">

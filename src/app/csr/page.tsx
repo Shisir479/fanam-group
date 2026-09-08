@@ -45,7 +45,7 @@ export default async function CSRPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-[#0a0a0a]/5 text-[#0a0a0a] text-[10px] font-bold uppercase tracking-wider mb-6">
+              <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-[#392f5f]/5 text-[#392f5f] text-[10px] font-bold uppercase tracking-wider mb-6">
                 Our Commitment
               </div>
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 leading-tight">
@@ -83,7 +83,7 @@ export default async function CSRPage() {
                 alt="Community Care"
                 className="absolute inset-0 w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/80 via-transparent to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#392f5f]/80 via-transparent to-transparent"></div>
               <div className="absolute bottom-8 left-8 right-8">
                 <h3 className="text-2xl font-bold text-white mb-2">
                   Sustainable Impact
@@ -116,7 +116,7 @@ export default async function CSRPage() {
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 bg-[#f9c602] text-[#0a0a0a] px-6 py-3 rounded-full text-sm font-bold hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(249,198,2,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]"
+            className="inline-flex items-center gap-2 bg-[#f9c602] text-[#392f5f] px-6 py-3 rounded-full text-sm font-bold hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(249,198,2,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]"
           >
             <span>Partner With Us</span>
             <ArrowRight className="w-4 h-4" />

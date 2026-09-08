@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  ArrowRight,
   ArrowUpRight,
   ChevronLeft,
   ChevronRight,
@@ -80,25 +79,25 @@ export function ConcernsSection() {
   const [isEnd, setIsEnd] = useState(false);
 
   return (
-    <section className="fanam-section bg-[#0a0a0a] text-white relative overflow-hidden">
-      {/* Ambient background glow accents */}
-      <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#f9c602]/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-[#f9c602]/5 rounded-full blur-[120px] pointer-events-none" />
+    <section className="fanam-section bg-gradient-to-b from-white via-[#F3F0FA] to-[#EDE8F7] text-[#392F5F] relative overflow-hidden">
+      {/* Decorative animated accent shapes */}
+      <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#F9C602]/20 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-[#F9C602]/20 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="fanam-container relative z-10">
         {/* Section Header with Navigation Controls */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="max-w-2xl">
             {/* Header Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#f9c602] text-xs md:text-sm font-medium tracking-wide mb-4">
-              <Layers className="w-3.5 h-3.5 text-[#f9c602]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#392F5F]/10 text-[#392F5F] text-xs md:text-sm font-semibold tracking-wide mb-4 shadow-sm">
+              <Layers className="w-3.5 h-3.5 text-[#F9C602]" />
               <span>Multi-Industry Portfolio</span>
             </div>
 
-            <h2 className="font-serif font-bold text-3xl sm:text-4xl md:text-5xl text-white tracking-tight leading-tight">
-              Our Diversified <span className="text-[#f9c602]">Concerns</span>
+            <h2 className="font-serif font-bold text-3xl sm:text-4xl md:text-5xl text-[#392F5F] tracking-tight leading-tight">
+              Our Diversified <span className="text-[#F9C602]">Concerns</span>
             </h2>
-            <p className="text-white/70 text-sm sm:text-base mt-3 leading-relaxed">
+            <p className="text-[#392F5F]/60 text-sm sm:text-base mt-3 leading-relaxed">
               From landmark real estate developments to digital commerce and international
               travel — explore the synergistic enterprises defining Fanam Group.
             </p>
@@ -107,9 +106,9 @@ export function ConcernsSection() {
           {/* Navigation Arrows */}
           <div className="flex items-center gap-3 self-start md:self-auto">
             <button
-              onClick={() => swiperInstance?.slidePrev()}
+               onClick={() => swiperInstance?.slidePrev()}
               disabled={isBeginning}
-              className="w-12 h-12 rounded-full border border-white/20 bg-white/5 hover:bg-[#f9c602] text-white hover:text-[#0a0a0a] hover:border-[#f9c602] flex items-center justify-center transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed active:scale-95"
+              className="w-12 h-12 border border-[#392F5F]/15 bg-white hover:bg-[#392F5F] text-[#392F5F] hover:text-white hover:border-[#392F5F] flex items-center justify-center transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed active:scale-95 cursor-pointer shadow-sm"
               aria-label="Previous Concern"
             >
               <ChevronLeft className="w-5 h-5" />
@@ -117,7 +116,7 @@ export function ConcernsSection() {
             <button
               onClick={() => swiperInstance?.slideNext()}
               disabled={isEnd}
-              className="w-12 h-12 rounded-full border border-white/20 bg-white/5 hover:bg-[#f9c602] text-white hover:text-[#0a0a0a] hover:border-[#f9c602] flex items-center justify-center transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed active:scale-95"
+              className="w-12 h-12 border border-[#392F5F]/15 bg-white hover:bg-[#F9C602] text-[#392F5F] hover:border-[#F9C602] flex items-center justify-center transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed active:scale-95 cursor-pointer shadow-sm"
               aria-label="Next Concern"
             >
               <ChevronRight className="w-5 h-5" />
@@ -154,9 +153,9 @@ export function ConcernsSection() {
                     href={concern.href}
                     className="block group/card h-full outline-none"
                   >
-                    <div className="relative h-full flex flex-col bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-[#f9c602]/60 rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-1.5 shadow-lg hover:shadow-[0_12px_35px_rgba(0,0,0,0.5)] p-3.5">
+                    <div className="relative h-full flex flex-col bg-white border border-[#392F5F]/10 hover:border-[#F9C602]/50 overflow-hidden transition-all duration-500 hover:-translate-y-1.5 shadow-[0_8px_30px_rgba(14,42,71,0.08)] hover:shadow-[0_16px_45px_rgba(14,42,71,0.14)] p-3.5">
                       {/* Image Container with Zoom & Floating Category Badge */}
-                      <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden mb-5">
+                      <div className="relative w-full aspect-[4/3] overflow-hidden mb-5">
                         <Image
                           src={concern.image}
                           alt={concern.title}
@@ -165,10 +164,10 @@ export function ConcernsSection() {
                           className="object-cover transition-transform duration-700 group-hover/card:scale-110"
                         />
                         {/* Gradient Fade */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#392F5F]/85 via-[#6B4E9E]/25 to-transparent" />
 
-                        {/* Floating Category Pill */}
-                        <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-[#f9c602] text-xs font-medium">
+                        {/* Floating Category Pill — sharp */}
+                        <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5 px-3 py-1 bg-black/60 backdrop-blur-md border border-white/15 text-[#f9c602] text-xs font-medium">
                           <IconComponent className="w-3.5 h-3.5" />
                           <span>{concern.category}</span>
                         </div>
@@ -176,17 +175,17 @@ export function ConcernsSection() {
 
                       {/* Content */}
                       <div className="flex-1 flex flex-col px-1 pb-10">
-                        <h3 className="text-white group-hover/card:text-[#f9c602] font-serif font-bold text-xl tracking-tight mb-2.5 transition-colors duration-300">
+                        <h3 className="text-[#392F5F] group-hover/card:text-[#F9C602] font-serif font-bold text-xl tracking-tight mb-2.5 transition-colors duration-300">
                           {concern.title}
                         </h3>
-                        <p className="text-white/65 group-hover/card:text-white/80 text-sm leading-relaxed transition-colors duration-300 line-clamp-3">
+                        <p className="text-[#392F5F]/60 group-hover/card:text-[#392F5F]/80 text-sm leading-relaxed transition-colors duration-300 line-clamp-3">
                           {concern.description}
                         </p>
                       </div>
 
-                      {/* Interactive Button at Bottom Right */}
-                      <div className="absolute bottom-3 right-3 w-10 h-10 rounded-full bg-white/10 group-hover/card:bg-[#f9c602] border border-white/15 group-hover/card:border-[#f9c602] flex items-center justify-center transition-all duration-300 group-hover/card:scale-110 shadow-md">
-                        <ArrowUpRight className="w-4 h-4 text-white group-hover/card:text-[#0a0a0a] transition-all duration-300 group-hover/card:rotate-45" />
+                      {/* Interactive Button at Bottom Right — sharp */}
+                      <div className="absolute bottom-3 right-3 w-10 h-10 bg-white/10 group-hover/card:bg-[#f9c602] border border-white/15 group-hover/card:border-[#f9c602] flex items-center justify-center transition-all duration-300 group-hover/card:scale-110 shadow-md">
+                        <ArrowUpRight className="w-4 h-4 text-white group-hover/card:text-[#392f5f] transition-all duration-300 group-hover/card:rotate-45" />
                       </div>
                     </div>
                   </Link>

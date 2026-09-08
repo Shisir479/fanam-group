@@ -70,7 +70,7 @@ export function MetricsBar() {
             onClick={() => setActiveDesign("floating-island")}
             className={`px-3 py-1 rounded-full font-medium text-xs transition-all duration-200 cursor-pointer ${
               activeDesign === "floating-island"
-                ? "bg-[#0a0a0a] text-white shadow-sm"
+                ? "bg-[#392F5F] text-white shadow-sm"
                 : "text-gray-600 hover:text-black"
             }`}
           >
@@ -80,7 +80,7 @@ export function MetricsBar() {
             onClick={() => setActiveDesign("editorial-columns")}
             className={`px-3 py-1 rounded-full font-medium text-xs transition-all duration-200 cursor-pointer ${
               activeDesign === "editorial-columns"
-                ? "bg-[#0a0a0a] text-white shadow-sm"
+                ? "bg-[#392F5F] text-white shadow-sm"
                 : "text-gray-600 hover:text-black"
             }`}
           >
@@ -90,7 +90,7 @@ export function MetricsBar() {
             onClick={() => setActiveDesign("bento-cards")}
             className={`px-3 py-1 rounded-full font-medium text-xs transition-all duration-200 cursor-pointer ${
               activeDesign === "bento-cards"
-                ? "bg-[#0a0a0a] text-white shadow-sm"
+                ? "bg-[#392F5F] text-white shadow-sm"
                 : "text-gray-600 hover:text-black"
             }`}
           >
@@ -112,8 +112,8 @@ export function MetricsBar() {
           >
             <div className="fanam-container">
               <div className="relative rounded-3xl bg-white/95 backdrop-blur-xl border border-gray-200/80 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.12)] p-6 md:p-8 lg:p-10 overflow-hidden">
-                {/* Top Gold Shimmer Beam */}
-                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-[#f9c602] to-transparent" />
+                {/* Top Gradient Shimmer Beam */}
+                <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#392F5F] via-[#6B4E9E] to-[#F9C602]" />
 
                 <div className="grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-gray-100">
                   {metrics.map((metric) => {
@@ -124,17 +124,17 @@ export function MetricsBar() {
                         className="flex flex-col items-center text-center p-4 lg:px-6 first:pt-0 last:pb-0 lg:first:p-6 lg:last:p-6 group hover:bg-neutral-50/60 rounded-2xl transition-all duration-300"
                       >
                         {/* Gold Icon Capsule */}
-                        <div className="w-12 h-12 rounded-2xl bg-[#f9c602]/15 border border-[#f9c602]/30 flex items-center justify-center text-[#0a0a0a] mb-4 group-hover:bg-[#f9c602] group-hover:scale-110 transition-all duration-300 shadow-sm">
+                        <div className="w-12 h-12 rounded-2xl bg-[#f9c602]/15 border border-[#f9c602]/30 flex items-center justify-center text-[#392F5F] mb-4 group-hover:bg-[#f9c602] group-hover:scale-110 transition-all duration-300 shadow-sm">
                           <Icon className="w-5 h-5" />
                         </div>
 
                         {/* Number */}
-                        <div className="font-serif font-bold text-3xl sm:text-4xl lg:text-5xl text-[#0a0a0a] tracking-tight leading-none mb-2 group-hover:text-[#f9c602] transition-colors">
+                        <div className="font-serif font-bold text-3xl sm:text-4xl lg:text-5xl text-[#392F5F] tracking-tight leading-none mb-2 group-hover:text-[#f9c602] transition-colors">
                           {metric.value}
                         </div>
 
                         {/* Label */}
-                        <div className="text-[#0a0a0a] font-bold text-sm sm:text-base tracking-normal mb-1">
+                        <div className="text-[#392F5F] font-bold text-sm sm:text-base tracking-normal mb-1">
                           {metric.label}
                         </div>
 
@@ -180,11 +180,11 @@ export function MetricsBar() {
                       </div>
 
                       {/* Number with underline accent */}
-                      <div className="font-serif font-extrabold text-4xl sm:text-5xl text-[#0a0a0a] tracking-tight mb-2">
+                      <div className="font-serif font-extrabold text-4xl sm:text-5xl text-[#392F5F] tracking-tight mb-2">
                         {metric.value}
                       </div>
 
-                      <div className="text-base font-bold text-[#0a0a0a] mb-1">
+                      <div className="text-base font-bold text-[#392F5F] mb-1">
                         {metric.label}
                       </div>
 
@@ -224,21 +224,21 @@ export function MetricsBar() {
                       <div>
                         {/* Header with Icon and Pill */}
                         <div className="flex items-center justify-between mb-5">
-                          <div className="w-12 h-12 rounded-2xl bg-[#0a0a0a] text-white flex items-center justify-center group-hover:bg-[#f9c602] group-hover:text-[#0a0a0a] transition-all duration-300 shadow-md">
+                          <div className="w-12 h-12 rounded-2xl bg-[#392F5F] text-white flex items-center justify-center group-hover:bg-[#f9c602] group-hover:text-[#392F5F] transition-all duration-300 shadow-md">
                             <Icon className="w-5 h-5" />
                           </div>
-                          <span className="text-[11px] font-semibold text-[#0a0a0a] bg-gray-100 px-3 py-1 rounded-full border border-gray-200/50">
+                          <span className="text-[11px] font-semibold text-[#392F5F] bg-gray-100 px-3 py-1 rounded-full border border-gray-200/50">
                             {metric.badge}
                           </span>
                         </div>
 
                         {/* Metric Value */}
-                        <div className="font-serif font-black text-4xl sm:text-5xl text-[#0a0a0a] tracking-tight leading-none mb-2">
+                        <div className="font-serif font-black text-4xl sm:text-5xl text-[#392F5F] tracking-tight leading-none mb-2">
                           {metric.value}
                         </div>
 
                         {/* Title */}
-                        <h4 className="text-base font-bold text-[#0a0a0a] tracking-tight mb-1">
+                        <h4 className="text-base font-bold text-[#392F5F] tracking-tight mb-1">
                           {metric.label}
                         </h4>
                       </div>

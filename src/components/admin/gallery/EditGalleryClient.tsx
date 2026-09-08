@@ -178,7 +178,7 @@ export default function EditGalleryClient({
                   required
                   value={formData.title}
                   onChange={handleTitleChange}
-                  className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                  className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                 />
               </div>
 
@@ -204,7 +204,7 @@ export default function EditGalleryClient({
                   onChange={(e) =>
                     setFormData({ ...formData, description: e.target.value })
                   }
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors min-h-[120px]"
+                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors min-h-[120px]"
                 />
               </div>
             </div>
@@ -317,7 +317,7 @@ export default function EditGalleryClient({
                     onChange={(e) =>
                       setFormData({ ...formData, videoUrl: e.target.value })
                     }
-                    className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                    className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                     placeholder="https://youtube.com/watch?v=..."
                   />
                 </div>
@@ -396,7 +396,7 @@ export default function EditGalleryClient({
                   })
                 }
               >
-                <SelectTrigger className="w-full px-4 py-2 border border-white/10 rounded-xl text-white outline-none focus:ring-1 focus:ring-purple-500 transition-colors h-auto min-h-[42px] bg-white/5">
+                <SelectTrigger className="w-full px-4 py-2 border border-white/10 rounded-xl text-white outline-none focus:ring-1 focus:ring-brand-violet transition-colors h-auto min-h-[42px] bg-white/5">
                   <SelectValue placeholder="Select Status" />
                 </SelectTrigger>
                 <SelectContent
@@ -458,7 +458,7 @@ export default function EditGalleryClient({
                   onChange={(e) =>
                     setFormData({ ...formData, metaTitle: e.target.value })
                   }
-                  className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                  className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                 />
               </div>
 
@@ -474,7 +474,7 @@ export default function EditGalleryClient({
                       metaDescription: e.target.value,
                     })
                   }
-                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors min-h-[100px]"
+                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors min-h-[100px]"
                 />
               </div>
             </div>

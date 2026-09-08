@@ -5,31 +5,31 @@ import { Building2, Handshake, Users, TrendingUp, Globe, Sparkles } from "lucide
 
 const milestones = [
   {
-    icon: <Building2 className="w-8 h-8 text-[#0a0a0a]" strokeWidth={2} />,
+    icon: <Building2 className="w-8 h-8 text-[#392f5f]" strokeWidth={2} />,
     stat: "25+",
     title: "Years of Excellence",
     subtitle: "Pioneering institutional heritage",
   },
   {
-    icon: <Handshake className="w-8 h-8 text-[#0a0a0a]" strokeWidth={2} />,
+    icon: <Handshake className="w-8 h-8 text-[#392f5f]" strokeWidth={2} />,
     stat: "10+",
     title: "Business Ventures",
     subtitle: "Active enterprise concerns",
   },
   {
-    icon: <Users className="w-8 h-8 text-[#0a0a0a]" strokeWidth={2} />,
+    icon: <Users className="w-8 h-8 text-[#392f5f]" strokeWidth={2} />,
     stat: "5,000+",
     title: "Dedicated Team",
     subtitle: "Professionals & specialists",
   },
   {
-    icon: <TrendingUp className="w-8 h-8 text-[#0a0a0a]" strokeWidth={2} />,
+    icon: <TrendingUp className="w-8 h-8 text-[#392f5f]" strokeWidth={2} />,
     stat: "1M+",
     title: "Happy Customers",
     subtitle: "Across diversified sectors",
   },
   {
-    icon: <Globe className="w-8 h-8 text-[#0a0a0a]" strokeWidth={2} />,
+    icon: <Globe className="w-8 h-8 text-[#392f5f]" strokeWidth={2} />,
     stat: "10+",
     title: "Global Reach",
     subtitle: "International markets & hubs",
@@ -38,7 +38,7 @@ const milestones = [
 
 export function KeyMilestones() {
   return (
-    <section className="relative fanam-section bg-[#0a0a0a] text-white overflow-hidden py-20 lg:py-28">
+    <section className="relative fanam-section bg-[#392f5f] text-white overflow-hidden py-20 lg:py-28">
       {/* Ambient gold glow elements */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[350px] bg-[#f9c602]/10 rounded-full blur-[160px] pointer-events-none" />
 

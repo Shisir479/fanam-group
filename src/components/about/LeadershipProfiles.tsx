@@ -66,13 +66,13 @@ export function LeadershipProfiles({ data }: { data: any }) {
                   </p>
                 </div>
 
-                <h3 className="text-[#0a0a0a] font-bold text-3xl md:text-[40px] tracking-tight mb-6 font-serif">
+                <h3 className="text-[#392f5f] font-bold text-3xl md:text-[40px] tracking-tight mb-6 font-serif">
                   {leader.name}
                 </h3>
 
                 {/* Bio text */}
                 <div
-                  className="text-[#0a0a0a]/80 text-[14px] md:text-[15px] font-medium leading-relaxed prose prose-p:break-words whitespace-normal break-words max-w-none"
+                  className="text-[#392f5f]/80 text-[14px] md:text-[15px] font-medium leading-relaxed prose prose-p:break-words whitespace-normal break-words max-w-none"
                   dangerouslySetInnerHTML={{
                     __html: leader.description || leader.bio,
                   }}

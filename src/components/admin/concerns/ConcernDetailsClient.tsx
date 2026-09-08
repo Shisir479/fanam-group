@@ -207,7 +207,7 @@ export default function ConcernDetailsClient({
             </p>
             <a
               href={`/inquiry?subject=${encodeURIComponent(concern.name)}`}
-              className="inline-flex items-center gap-2 bg-[#0a0a0a] text-white px-8 py-3.5 rounded-full font-bold hover:bg-[#f9c602] hover:text-[#0a0a0a] transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="inline-flex items-center gap-2 bg-[#392f5f] text-white px-8 py-3.5 rounded-full font-bold hover:bg-[#f9c602] hover:text-[#392f5f] transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               Contact This Concern
             </a>

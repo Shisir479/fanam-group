@@ -5,9 +5,11 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-brand-blue: #0a0a0a;
+  --color-brand-blue: #392f5f;
+  --color-brand-gold: #f9c602;
+  --color-brand-violet: #6b4e9e;
   --color-brand-gray: #e5e7eb;
-  --color-brand-dark: #0a0a0a;
+  --color-brand-dark: #2a2545;
   --color-brand-light: #ffffff;
 
   --color-background: var(--background);
@@ -60,7 +62,7 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --primary: #392f5f;
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);

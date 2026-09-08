@@ -42,15 +42,15 @@ export function CompanyProfile({ data }: { data: any }) {
           {/* Left Text Column */}
           <div className="lg:col-span-6 flex flex-col">
             {/* Prominent Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f9c602]/15 border border-[#f9c602]/35 text-[#0a0a0a] text-xs font-bold uppercase tracking-wider mb-6 self-start shadow-sm">
-              <Building2 className="w-3.5 h-3.5 text-[#0a0a0a]" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f9c602]/15 border border-[#f9c602]/35 text-[#392f5f] text-xs font-bold uppercase tracking-wider mb-6 self-start shadow-sm">
+              <Building2 className="w-3.5 h-3.5 text-[#392f5f]" />
               <span>Company Profile</span>
             </div>
 
             {/* Headline */}
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#0a0a0a] leading-[1.18] tracking-tight mb-6">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#392f5f] leading-[1.18] tracking-tight mb-6">
               Shaping the Future with{" "}
-              <span className="relative whitespace-nowrap text-[#0a0a0a]">
+              <span className="relative whitespace-nowrap text-[#392f5f]">
                 Vision & Integrity
                 <span className="absolute left-0 -bottom-1 w-full h-1 bg-[#f9c602] rounded-full" />
               </span>
@@ -72,11 +72,11 @@ export function CompanyProfile({ data }: { data: any }) {
                   key={index}
                   className="group flex items-start gap-4 p-3.5 rounded-2xl bg-white border border-gray-100 hover:border-[#f9c602]/50 shadow-sm hover:shadow-md transition-all duration-300"
                 >
-                  <div className="w-7 h-7 rounded-xl bg-[#f9c602] text-[#0a0a0a] flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_12px_rgba(249,198,2,0.35)] group-hover:scale-105 transition-transform duration-300">
-                    <CheckCircle2 className="w-4 h-4 text-[#0a0a0a]" strokeWidth={2.5} />
+                  <div className="w-7 h-7 rounded-xl bg-[#f9c602] text-[#392f5f] flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_12px_rgba(249,198,2,0.35)] group-hover:scale-105 transition-transform duration-300">
+                    <CheckCircle2 className="w-4 h-4 text-[#392f5f]" strokeWidth={2.5} />
                   </div>
                   <div>
-                    <h4 className="text-[15px] font-bold text-[#0a0a0a] mb-0.5 group-hover:text-black transition-colors">
+                    <h4 className="text-[15px] font-bold text-[#392f5f] mb-0.5 group-hover:text-black transition-colors">
                       {feature.title}
                     </h4>
                     <p className="text-gray-600 text-xs md:text-[13px] leading-relaxed font-medium">
@@ -138,8 +138,8 @@ export function CompanyProfile({ data }: { data: any }) {
             </div>
 
             {/* Floating Luxury Impact Badge */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#0a0a0a]/90 backdrop-blur-md border border-[#f9c602]/40 text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-4 z-20 pointer-events-none">
-              <div className="w-12 h-12 rounded-xl bg-[#f9c602] flex items-center justify-center text-[#0a0a0a] shadow-[0_0_20px_rgba(249,198,2,0.5)]">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#392f5f]/90 backdrop-blur-md border border-[#f9c602]/40 text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-4 z-20 pointer-events-none">
+              <div className="w-12 h-12 rounded-xl bg-[#f9c602] flex items-center justify-center text-[#392f5f] shadow-[0_0_20px_rgba(249,198,2,0.5)]">
                 <Sparkles className="w-6 h-6" />
               </div>
               <div>

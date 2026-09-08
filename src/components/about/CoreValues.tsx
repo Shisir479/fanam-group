@@ -16,37 +16,37 @@ const coreValues = [
     num: "01",
     title: "Radical Integrity",
     desc: "We uphold the highest ethical standards, ensuring transparent communication, accountability, and unwavering trust in every relationship.",
-    icon: <ShieldCheck className="w-7 h-7 text-[#0a0a0a]" strokeWidth={2} />,
+    icon: <ShieldCheck className="w-7 h-7 text-[#392f5f]" strokeWidth={2} />,
   },
   {
     num: "02",
     title: "Pursuit of Excellence",
     desc: "We set ambitious benchmarks and execute with meticulous precision, delivering superior quality across every product and enterprise.",
-    icon: <Medal className="w-7 h-7 text-[#0a0a0a]" strokeWidth={2} />,
+    icon: <Medal className="w-7 h-7 text-[#392f5f]" strokeWidth={2} />,
   },
   {
     num: "03",
     title: "Continuous Innovation",
     desc: "We embrace progressive thinking, agile methodologies, and technological modernization to lead industries and pioneer change.",
-    icon: <Lightbulb className="w-7 h-7 text-[#0a0a0a]" strokeWidth={2} />,
+    icon: <Lightbulb className="w-7 h-7 text-[#392f5f]" strokeWidth={2} />,
   },
   {
     num: "04",
     title: "Customer Centricity",
     desc: "Our clients and partners are at the core of our vision; we build enduring value by actively listening and exceeding expectations.",
-    icon: <Target className="w-7 h-7 text-[#0a0a0a]" strokeWidth={2} />,
+    icon: <Target className="w-7 h-7 text-[#392f5f]" strokeWidth={2} />,
   },
   {
     num: "05",
     title: "Environmental Sustainability",
     desc: "We balance economic advancement with ecological stewardship, prioritizing green practices that safeguard our planet for tomorrow.",
-    icon: <Leaf className="w-7 h-7 text-[#0a0a0a]" strokeWidth={2} />,
+    icon: <Leaf className="w-7 h-7 text-[#392f5f]" strokeWidth={2} />,
   },
   {
     num: "06",
     title: "Empowered Teamwork",
     desc: "We foster an inclusive culture of mutual respect, shared purpose, and multidisciplinary collaboration to achieve great heights together.",
-    icon: <Users className="w-7 h-7 text-[#0a0a0a]" strokeWidth={2} />,
+    icon: <Users className="w-7 h-7 text-[#392f5f]" strokeWidth={2} />,
   },
 ];
 
@@ -59,14 +59,14 @@ export function CoreValues({ data }: { data: any }) {
       <div className="fanam-container relative z-10">
         {/* Header */}
         <div className="flex flex-col items-center text-center mb-16 lg:mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f9c602]/15 border border-[#f9c602]/35 text-[#0a0a0a] text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
-            <Sparkles className="w-3.5 h-3.5 text-[#0a0a0a]" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f9c602]/15 border border-[#f9c602]/35 text-[#392f5f] text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
+            <Sparkles className="w-3.5 h-3.5 text-[#392f5f]" />
             <span>Our Core Values</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#0a0a0a] leading-[1.2] tracking-tight mb-5">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#392f5f] leading-[1.2] tracking-tight mb-5">
             The Principles That Define{" "}
-            <span className="relative whitespace-nowrap text-[#0a0a0a]">
+            <span className="relative whitespace-nowrap text-[#392f5f]">
               Our DNA
               <span className="absolute left-0 -bottom-1 w-full h-1 bg-[#f9c602] rounded-full" />
             </span>
@@ -91,13 +91,13 @@ export function CoreValues({ data }: { data: any }) {
                   <div className="w-14 h-14 rounded-2xl bg-[#f9c602] flex items-center justify-center shadow-[0_0_18px_rgba(249,198,2,0.35)] group-hover:scale-105 transition-transform duration-300">
                     {val.icon}
                   </div>
-                  <span className="font-mono text-sm font-bold text-gray-400 group-hover:text-[#0a0a0a] transition-colors">
+                  <span className="font-mono text-sm font-bold text-gray-400 group-hover:text-[#392f5f] transition-colors">
                     {val.num}
                   </span>
                 </div>
 
                 {/* Title */}
-                <h3 className="text-xl font-bold text-[#0a0a0a] mb-3 tracking-tight group-hover:text-black">
+                <h3 className="text-xl font-bold text-[#392f5f] mb-3 tracking-tight group-hover:text-black">
                   {val.title}
                 </h3>
 

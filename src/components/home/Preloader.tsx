@@ -46,10 +46,16 @@ export function Preloader() {
             y: "-100%",
             transition: { duration: 0.85, ease: [0.76, 0, 0.24, 1] },
           }}
-          className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#0a0a0a] text-white select-none pointer-events-auto"
+          className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-gradient-to-br from-[#392F5F] via-[#4A3A7A] to-[#2A2545] text-white select-none pointer-events-auto"
         >
-          {/* Subtle Ambient Backlight */}
-          <div className="absolute w-[500px] h-[500px] bg-[#f9c602]/10 rounded-full blur-[140px] pointer-events-none" />
+          {/* Brand Gradient Backlight */}
+          <div
+            className="absolute w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(249,198,2,0.25) 0%, rgba(107,78,158,0.35) 50%, transparent 75%)",
+            }}
+          />
 
           <div className="relative z-10 flex flex-col items-center max-w-sm px-6 text-center">
             {/* Animated Brand Emblem */}
@@ -89,7 +95,7 @@ export function Preloader() {
             {/* Modern Linear Progress Bar */}
             <div className="w-56 md:w-64 h-[2px] bg-white/10 rounded-full overflow-hidden relative mb-4">
               <motion.div
-                className="h-full bg-gradient-to-r from-[#f9c602] via-[#ffe066] to-[#f9c602] shadow-[0_0_12px_#f9c602]"
+                className="h-full bg-gradient-to-r from-[#392F5F] via-[#6B4E9E] to-[#F9C602] shadow-[0_0_12px_rgba(249,198,2,0.6)]"
                 style={{ width: `${progress}%` }}
                 transition={{ ease: "linear" }}
               />

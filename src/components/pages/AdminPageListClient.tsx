@@ -186,7 +186,7 @@ export default function AdminPagesListClient({
             <input
               type="text"
               placeholder="Search pages..."
-              className="w-full px-10 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+              className="w-full px-10 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
               value={search}
               onChange={(e) => {
                 setSearch(e.target.value);

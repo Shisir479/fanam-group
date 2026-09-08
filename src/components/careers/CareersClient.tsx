@@ -148,7 +148,7 @@ export default function CareersClient({ initialJobs }: Props) {
                   key={job._id}
                   className="block h-full"
                 >
-                  <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-black/10 border-r-4 border-r-yellow-400 flex flex-col h-full p-6 md:p-8 hover:shadow-md transition-shadow">
+                  <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-black/10 border-r-4 border-r-brand-gold flex flex-col h-full p-6 md:p-8 hover:shadow-md transition-shadow">
                     {/* Content Area */}
                     {job.company && (
                       <p className="text-gray-500 text-sm font-bold mb-2">
@@ -239,7 +239,7 @@ export default function CareersClient({ initialJobs }: Props) {
                       onChange={(e) =>
                         setFormData({ ...formData, name: e.target.value })
                       }
-                      className="w-full px-4 py-3.5 rounded-xl border border-black/10 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 outline-none transition-all text-black font-medium"
+                      className="w-full px-4 py-3.5 rounded-xl border border-black/10 focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition-all text-black font-medium"
                       placeholder="Full name"
                       required
                     />
@@ -254,7 +254,7 @@ export default function CareersClient({ initialJobs }: Props) {
                       onChange={(e) =>
                         setFormData({ ...formData, phone: e.target.value })
                       }
-                      className="w-full px-4 py-3.5 rounded-xl border border-black/10 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 outline-none transition-all text-black font-medium"
+                      className="w-full px-4 py-3.5 rounded-xl border border-black/10 focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition-all text-black font-medium"
                       placeholder="Phone number"
                       required
                     />
@@ -271,7 +271,7 @@ export default function CareersClient({ initialJobs }: Props) {
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
                     }
-                    className="w-full px-4 py-3.5 rounded-xl border border-black/10 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 outline-none transition-all text-black font-medium"
+                    className="w-full px-4 py-3.5 rounded-xl border border-black/10 focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition-all text-black font-medium"
                     placeholder="Email address"
                     required
                   />
@@ -287,13 +287,13 @@ export default function CareersClient({ initialJobs }: Props) {
                     onChange={(e) =>
                       setFormData({ ...formData, coverLetter: e.target.value })
                     }
-                    className="w-full px-4 py-3.5 rounded-xl border border-black/10 focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 outline-none transition-all text-black font-medium resize-none"
+                    className="w-full px-4 py-3.5 rounded-xl border border-black/10 focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition-all text-black font-medium resize-none"
                     placeholder="Tell us about yourself"
                   ></textarea>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2 items-center">
-                  <div className="relative w-full h-[52px] px-4 rounded-xl border border-dashed border-black/10 text-center hover:border-yellow-500 transition-colors cursor-pointer flex items-center justify-center gap-2 bg-white/50 overflow-hidden">
+                  <div className="relative w-full h-[52px] px-4 rounded-xl border border-dashed border-black/10 text-center hover:border-brand-gold transition-colors cursor-pointer flex items-center justify-center gap-2 bg-white/50 overflow-hidden">
                     <input
                       type="file"
                       accept=".pdf,.doc,.docx"
@@ -308,7 +308,7 @@ export default function CareersClient({ initialJobs }: Props) {
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full h-[52px] bg-yellow-500 text-black font-bold rounded-xl hover:bg-yellow-400 transition-colors text-base shadow-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                    className="w-full h-[52px] bg-brand-gold text-black font-bold rounded-xl hover:bg-brand-gold transition-colors text-base shadow-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                   >
                     {submitting ? "Submitting..." : "Submit Application"}
                   </button>

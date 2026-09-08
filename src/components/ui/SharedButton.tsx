@@ -28,7 +28,7 @@ export function SharedButton({
   );
 
   const classes = cn(
-    "inline-flex items-center justify-center relative group border border-[#4ea24b] hover:border-brand-blue px-12 py-3 text-sm font-bold text-brand-blue overflow-hidden transition-colors duration-500",
+    "inline-flex items-center justify-center relative group border border-brand-gold hover:border-brand-blue px-12 py-3 text-sm font-bold text-brand-blue overflow-hidden transition-colors duration-500",
     hoverTextClass,
     className,
   );

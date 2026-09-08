@@ -10,21 +10,29 @@ export function InquiryCTA() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="w-full py-24 bg-[#0a0a0a] relative z-10 overflow-hidden">
-      {/* Content */}
+    <section ref={ref} className="w-full py-24 relative z-10 overflow-hidden bg-gradient-to-br from-[#1f1b3a] via-[#2a2545] to-[#3d3560]">
+      <motion.div
+        animate={{ scale: [1, 1.15, 1], opacity: [0.2, 0.35, 0.2] }}
+        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -top-24 -right-24 w-96 h-96 bg-[#F9C602]/25 blur-[110px] pointer-events-none"
+      />
+      <motion.div
+        animate={{ scale: [1.1, 1, 1.1], opacity: [0.15, 0.3, 0.15] }}
+        transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -bottom-24 -left-24 w-96 h-96 bg-[#F9C602]/20 blur-[110px] pointer-events-none"
+      />
       <div className="relative z-10 fanam-container grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center max-w-7xl mx-auto px-6">
-        
         {/* Left Column: Get In Touch */}
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-3 text-[10px] font-semibold tracking-[0.3em] uppercase text-[#f9c602] mb-8"
+            className="inline-flex items-center gap-3 text-[10px] font-semibold tracking-[0.3em] uppercase text-[#F9C602] mb-8"
           >
-            <span className="w-8 h-px bg-[#f9c602]" />
+            <span className="w-8 h-px bg-[#F9C602]" />
             Get In Touch
-            <span className="w-8 h-px bg-[#f9c602] lg:hidden" />
+            <span className="w-8 h-px bg-[#F9C602] lg:hidden" />
           </motion.div>
 
           <motion.h2
@@ -35,7 +43,7 @@ export function InquiryCTA() {
           >
             Ready to Start Your
             <br />
-            <span className="text-[#f9c602]">Next Project?</span>
+            <span className="text-[#F9C602]">Next Project?</span>
           </motion.h2>
 
           <motion.p
@@ -55,19 +63,19 @@ export function InquiryCTA() {
           >
             <Link
               href="/contact"
-              className="group relative inline-flex items-center gap-3 bg-[#f9c602] text-[#0a0a0a] px-8 py-4 rounded-full font-bold text-sm hover:bg-white transition-all duration-500 shadow-2xl hover:shadow-[#f9c602]/40"
+              className="group relative inline-flex items-center gap-3 bg-white text-[#1f1b3a] px-7 py-3.5 font-semibold text-sm hover:bg-[#F9C602] transition-all duration-300 active:scale-[0.98]"
             >
               <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1">
                 Contact Us
               </span>
-              <span className="relative z-10 w-8 h-8 rounded-full bg-[#0a0a0a]/10 flex items-center justify-center transition-all duration-300 group-hover:bg-[#0a0a0a] group-hover:text-white">
-                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:-rotate-45" />
+              <span className="relative z-10 w-7 h-7 bg-[#1f1b3a]/10 group-hover:bg-[#1f1b3a]/15 flex items-center justify-center transition-all duration-300">
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
               </span>
             </Link>
 
             <Link
               href="/concern"
-              className="group inline-flex items-center gap-3 bg-transparent text-white px-8 py-4 rounded-full font-medium text-sm border-2 border-white/30 hover:bg-white/10 hover:border-white/60 transition-all duration-300"
+              className="group inline-flex items-center gap-3 bg-transparent text-white px-7 py-3.5 font-semibold text-sm border border-white/30 hover:bg-white/10 hover:border-[#F9C602] transition-all duration-300 active:scale-[0.98]"
             >
               <span>Explore</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -80,13 +88,13 @@ export function InquiryCTA() {
           initial={{ opacity: 0, x: 30 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="w-full bg-white/5 backdrop-blur-md border border-white/10 p-8 md:p-10 rounded-[2rem]"
+          className="w-full bg-white border border-[#1f1b3a]/10 p-8 md:p-10"
         >
-          <h3 className="text-2xl font-serif text-white mb-4 text-center lg:text-left">Stay Updated</h3>
-          <p className="text-white/70 text-sm md:text-base mb-8 text-center lg:text-left">
+          <h3 className="text-2xl font-serif text-[#1f1b3a] mb-4 text-center lg:text-left">Stay Updated</h3>
+          <p className="text-[#1f1b3a]/60 text-sm md:text-base mb-8 text-center lg:text-left">
             Subscribe to our newsletter and be the first to know about our latest projects, achievements, and exclusive insights.
           </p>
-          
+
           <form
             className="flex flex-col gap-4"
             onSubmit={(e) => e.preventDefault()}
@@ -94,18 +102,18 @@ export function InquiryCTA() {
             <input
               type="email"
               placeholder="Enter your email address"
-              className="w-full px-6 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder-white/50 focus:border-[#f9c602] focus:ring-2 focus:ring-[#f9c602]/20 transition-all outline-none"
+              className="w-full px-6 py-3.5 bg-[#F5F8FC] border border-[#1f1b3a]/15 text-[#1f1b3a] placeholder-[#1f1b3a]/40 focus:border-[#F9C602] focus:ring-2 focus:ring-[#F9C602]/20 transition-all outline-none"
             />
             <button
               type="submit"
-              className="group inline-flex items-center justify-center gap-2 bg-[#f9c602] text-[#0a0a0a] px-8 py-4 rounded-full font-bold text-sm hover:bg-white transition-all duration-300 shadow-xl whitespace-nowrap"
+              className="group inline-flex items-center justify-center gap-2 bg-[#1f1b3a] text-white px-7 py-3.5 font-semibold text-sm hover:bg-[#F9C602] hover:text-[#1f1b3a] transition-all duration-300 active:scale-[0.98] whitespace-nowrap"
             >
               <span>Subscribe</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </button>
           </form>
-          
-          <p className="text-white/50 text-xs mt-6 text-center lg:text-left">
+
+          <p className="text-[#1f1b3a]/40 text-xs mt-6 text-center lg:text-left">
             Join 10,000+ subscribers. No spam, unsubscribe anytime.
           </p>
         </motion.div>

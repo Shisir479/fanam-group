@@ -343,7 +343,7 @@ export default function AdminGeneralSettingsClient({
                     name="businessName"
                     value={mainSettings.businessName}
                     onChange={handleMainChange}
-                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
                   />
                 </div>
                 <div>
@@ -355,7 +355,7 @@ export default function AdminGeneralSettingsClient({
                     name="domainName"
                     value={mainSettings.domainName}
                     onChange={handleMainChange}
-                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
                   />
                 </div>
               </div>
@@ -376,7 +376,7 @@ export default function AdminGeneralSettingsClient({
                     name="metaTitle"
                     value={mainSettings.seo.metaTitle}
                     onChange={handleSeoChange}
-                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
                   />
                 </div>
                 <div>
@@ -388,7 +388,7 @@ export default function AdminGeneralSettingsClient({
                     value={mainSettings.seo.metaDescription}
                     onChange={handleSeoChange}
                     rows={2}
-                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
                   />
                 </div>
                 <div>
@@ -400,7 +400,7 @@ export default function AdminGeneralSettingsClient({
                     value={mainSettings.seo.description}
                     onChange={handleSeoChange}
                     rows={2}
-                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
                   />
                 </div>
                 <div>
@@ -420,7 +420,7 @@ export default function AdminGeneralSettingsClient({
                         },
                       })
                     }
-                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
                   />
                 </div>
               </div>
@@ -440,7 +440,7 @@ export default function AdminGeneralSettingsClient({
                     name="facebook"
                     value={socialLinks.facebook}
                     onChange={handleSocialChange}
-                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
                     placeholder="https://facebook.com/..."
                   />
                 </div>
@@ -453,7 +453,7 @@ export default function AdminGeneralSettingsClient({
                     name="instagram"
                     value={socialLinks.instagram}
                     onChange={handleSocialChange}
-                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
                     placeholder="https://instagram.com/..."
                   />
                 </div>
@@ -466,7 +466,7 @@ export default function AdminGeneralSettingsClient({
                     name="linkedin"
                     value={socialLinks.linkedin}
                     onChange={handleSocialChange}
-                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
                     placeholder="https://linkedin.com/..."
                   />
                 </div>
@@ -479,7 +479,7 @@ export default function AdminGeneralSettingsClient({
                     name="twitter"
                     value={socialLinks.twitter}
                     onChange={handleSocialChange}
-                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
                     placeholder="https://twitter.com/..."
                   />
                 </div>
@@ -492,7 +492,7 @@ export default function AdminGeneralSettingsClient({
                     name="youtube"
                     value={socialLinks.youtube}
                     onChange={handleSocialChange}
-                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-brand-gold/50"
                     placeholder="https://youtube.com/..."
                   />
                 </div>
@@ -510,7 +510,7 @@ export default function AdminGeneralSettingsClient({
                 Used on dark backgrounds (e.g. hero banner).
               </p>
 
-              <div className="relative aspect-video rounded-xl border-2 border-dashed border-white/20 bg-white/5 text-gray-400 hover:text-white hover:border-purple-500 transition-colors overflow-hidden group">
+              <div className="relative aspect-video rounded-xl border-2 border-dashed border-white/20 bg-white/5 text-gray-400 hover:text-white hover:border-brand-violet transition-colors overflow-hidden group">
                 <label className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer">
                   {logoLight.url ? (
                     <>
@@ -533,7 +533,7 @@ export default function AdminGeneralSettingsClient({
                   ) : (
                     <>
                       {uploadingLogoLight ? (
-                        <Loader2 className="w-8 h-8 text-yellow-500 animate-spin" />
+                        <Loader2 className="w-8 h-8 text-brand-gold animate-spin" />
                       ) : (
                         <>
                           <UploadCloud className="w-8 h-8 text-gray-400 mb-2 group-hover:scale-110 transition-transform" />
@@ -567,7 +567,7 @@ export default function AdminGeneralSettingsClient({
                 Used on light backgrounds (e.g. sticky navbar).
               </p>
 
-              <div className="relative aspect-video rounded-xl border-2 border-dashed border-white/20 bg-white/5 text-gray-400 hover:text-white hover:border-purple-500 transition-colors overflow-hidden group">
+              <div className="relative aspect-video rounded-xl border-2 border-dashed border-white/20 bg-white/5 text-gray-400 hover:text-white hover:border-brand-violet transition-colors overflow-hidden group">
                 <label className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer">
                   {logoDark.url ? (
                     <>
@@ -590,7 +590,7 @@ export default function AdminGeneralSettingsClient({
                   ) : (
                     <>
                       {uploadingLogoDark ? (
-                        <Loader2 className="w-8 h-8 text-yellow-500 animate-spin" />
+                        <Loader2 className="w-8 h-8 text-brand-gold animate-spin" />
                       ) : (
                         <>
                           <UploadCloud className="w-8 h-8 text-gray-400 mb-2 group-hover:scale-110 transition-transform" />
@@ -619,7 +619,7 @@ export default function AdminGeneralSettingsClient({
             <div className="glass-panel p-6 rounded-2xl">
               <h3 className="text-lg font-bold text-white mb-4">Favicon</h3>
 
-              <div className="relative aspect-square w-32 mx-auto rounded-xl border-2 border-dashed border-white/20 bg-white/5 text-gray-400 hover:text-white hover:border-purple-500 transition-colors overflow-hidden group">
+              <div className="relative aspect-square w-32 mx-auto rounded-xl border-2 border-dashed border-white/20 bg-white/5 text-gray-400 hover:text-white hover:border-brand-violet transition-colors overflow-hidden group">
                 <label className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer">
                   {favicon.url ? (
                     <>
@@ -642,7 +642,7 @@ export default function AdminGeneralSettingsClient({
                   ) : (
                     <>
                       {uploadingFavicon ? (
-                        <Loader2 className="w-6 h-6 text-yellow-500 animate-spin" />
+                        <Loader2 className="w-6 h-6 text-brand-gold animate-spin" />
                       ) : (
                         <>
                           <UploadCloud className="w-6 h-6 text-gray-400 mb-2 group-hover:scale-110 transition-transform" />

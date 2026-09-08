@@ -11,7 +11,7 @@ const csrInitiatives = [
     metric: "50,000+ Citizens Impacted",
     description:
       "Empowering underserved rural and urban communities through robust local infrastructure, clean water access, and sustainable livelihood generation programs.",
-    icon: <Users className="w-6 h-6 text-[#0a0a0a]" />,
+    icon: <Users className="w-6 h-6 text-[#392f5f]" />,
     image:
       "https://images.unsplash.com/photo-1593113630400-ea4288922497?q=80&w=1000&auto=format&fit=crop",
     category: "Social Empowerment",
@@ -22,7 +22,7 @@ const csrInitiatives = [
     metric: "Green Zero-Waste Philosophy",
     description:
       "Implementing green energy solutions, eco-conscious construction practices, and aggressive reforestation to safeguard natural ecosystems for future generations.",
-    icon: <Droplets className="w-6 h-6 text-[#0a0a0a]" />,
+    icon: <Droplets className="w-6 h-6 text-[#392f5f]" />,
     image:
       "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=1000&auto=format&fit=crop",
     category: "Ecological Action",
@@ -33,7 +33,7 @@ const csrInitiatives = [
     metric: "25+ Schools & Clinics Supported",
     description:
       "Investing in long-term human potential by providing merit scholarships, constructing modern learning centers, and offering free community medical camps.",
-    icon: <BookOpen className="w-6 h-6 text-[#0a0a0a]" />,
+    icon: <BookOpen className="w-6 h-6 text-[#392f5f]" />,
     image:
       "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1000&auto=format&fit=crop",
     category: "Human Development",
@@ -50,14 +50,14 @@ export function CSRActivities() {
       <div className="fanam-container relative z-10">
         {/* Header */}
         <div className="flex flex-col items-center text-center mb-16 lg:mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f9c602]/15 border border-[#f9c602]/35 text-[#0a0a0a] text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
-            <Heart className="w-3.5 h-3.5 text-[#0a0a0a]" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f9c602]/15 border border-[#f9c602]/35 text-[#392f5f] text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
+            <Heart className="w-3.5 h-3.5 text-[#392f5f]" />
             <span>Social Responsibility</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#0a0a0a] leading-[1.2] tracking-tight mb-5">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#392f5f] leading-[1.2] tracking-tight mb-5">
             Empowering Communities, Enriching{" "}
-            <span className="relative whitespace-nowrap text-[#0a0a0a]">
+            <span className="relative whitespace-nowrap text-[#392f5f]">
               Tomorrow
               <span className="absolute left-0 -bottom-1 w-full h-1 bg-[#f9c602] rounded-full" />
             </span>

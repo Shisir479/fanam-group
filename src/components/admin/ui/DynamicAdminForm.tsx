@@ -131,7 +131,7 @@ export default function DynamicAdminForm({
               value={value}
               onChange={(e) => handleChange(field.name, e.target.value)}
               placeholder={field.placeholder}
-              className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+              className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
             />
           </div>
         );
@@ -147,7 +147,7 @@ export default function DynamicAdminForm({
               value={value}
               onChange={(e) => handleChange(field.name, e.target.value)}
               placeholder={field.placeholder}
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors min-h-[120px]"
+              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors min-h-[120px]"
             />
           </div>
         );
@@ -219,7 +219,7 @@ export default function DynamicAdminForm({
               {field.label} {field.required && "*"}
             </label>
             <label
-              className={`w-full h-32 border-2 border-dashed border-white/20 rounded-xl flex flex-col items-center justify-center text-gray-400 hover:text-white hover:border-purple-500 transition-colors cursor-pointer bg-white/5 overflow-hidden relative group ${isUploading ? "opacity-50 pointer-events-none" : ""}`}
+              className={`w-full h-32 border-2 border-dashed border-white/20 rounded-xl flex flex-col items-center justify-center text-gray-400 hover:text-white hover:border-brand-violet transition-colors cursor-pointer bg-white/5 overflow-hidden relative group ${isUploading ? "opacity-50 pointer-events-none" : ""}`}
             >
               <input
                 type="file"
@@ -296,7 +296,7 @@ export default function DynamicAdminForm({
               required={field.required}
               value={value}
               onChange={(e) => handleChange(field.name, e.target.value)}
-              className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors [color-scheme:dark]"
+              className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors [color-scheme:dark]"
             />
           </div>
         );
@@ -309,7 +309,7 @@ export default function DynamicAdminForm({
               id={`checkbox-${field.name}`}
               checked={!!value}
               onChange={(e) => handleChange(field.name, e.target.checked)}
-              className="w-5 h-5 rounded border-white/10 bg-white/5 text-purple-500 focus:ring-purple-500 focus:ring-offset-gray-900"
+              className="w-5 h-5 rounded border-white/10 bg-white/5 text-brand-violet focus:ring-brand-violet focus:ring-offset-gray-900"
             />
             <label
               htmlFor={`checkbox-${field.name}`}

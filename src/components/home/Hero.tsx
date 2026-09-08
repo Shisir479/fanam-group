@@ -10,7 +10,71 @@ import {
   ChevronRight,
   Sparkles,
   Compass,
+  Handshake,
+  Globe,
+  TrendingUp,
+  ShieldCheck,
 } from "lucide-react";
+
+/* ─── Inline premium social icons ─── */
+const socialLinks = [
+  {
+    label: "Facebook",
+    href: "https://facebook.com",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4 md:w-5 md:h-5">
+        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+      </svg>
+    ),
+  },
+  {
+    label: "Instagram",
+    href: "https://instagram.com",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4 md:w-5 md:h-5">
+        <rect x="2" y="2" width="20" height="20" rx="5" />
+        <circle cx="12" cy="12" r="5" />
+        <circle cx="17.5" cy="6.5" r="1.25" fill="currentColor" stroke="none" />
+      </svg>
+    ),
+  },
+  {
+    label: "LinkedIn",
+    href: "https://linkedin.com",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4 md:w-5 md:h-5">
+        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+        <rect x="2" y="9" width="4" height="12" />
+        <circle cx="4" cy="4" r="2" />
+      </svg>
+    ),
+  },
+  {
+    label: "Twitter",
+    href: "https://twitter.com",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4 md:w-5 md:h-5">
+        <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
+        <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
+      </svg>
+    ),
+  },
+  {
+    label: "YouTube",
+    href: "https://youtube.com",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4 md:w-5 md:h-5">
+        <rect x="2" y="4" width="20" height="16" rx="4" />
+        <polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none" />
+      </svg>
+    ),
+  },
+];
+
+/* ─── Corporate Palette ───
+   Deep Purple  #392F5F  (primary dark)
+   Brand Gold   #F9C602  (accent)
+   White        #FFFFFF  (base)  */
 
 const defaultSlides = [
   {
@@ -56,7 +120,42 @@ const defaultSlides = [
 
 const AUTOPLAY_DURATION = 6500; // ms
 
-export function Hero({ data }: { data?: any }) {
+const stats = [
+  {
+    id: 1,
+    icon: Handshake,
+    value: "50+",
+    label: "Tier-1 Partners",
+    subtitle: "Strategic Alliances",
+    description: "Global corporate network",
+  },
+  {
+    id: 2,
+    icon: Globe,
+    value: "15+",
+    label: "Asia, EU & Americas",
+    subtitle: "Global Markets",
+    description: "Cross-continental footprint",
+  },
+  {
+    id: 3,
+    icon: TrendingUp,
+    value: "$120M+",
+    label: "Institutional Capital",
+    subtitle: "Joint Venture Value",
+    description: "Co-developed landmark assets",
+  },
+  {
+    id: 4,
+    icon: ShieldCheck,
+    value: "99.4%",
+    label: "Verified Reliability",
+    subtitle: "Partner Retention",
+    description: "Trusted delivery track record",
+  },
+];
+
+export function Hero() {
   const [current, setCurrent] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -72,9 +171,7 @@ export function Hero({ data }: { data?: any }) {
 
   useEffect(() => {
     if (isHovered) return;
-    const timer = setInterval(() => {
-      nextSlide();
-    }, AUTOPLAY_DURATION);
+    const timer = setInterval(() => nextSlide(), AUTOPLAY_DURATION);
     return () => clearInterval(timer);
   }, [nextSlide, isHovered]);
 
@@ -86,20 +183,30 @@ export function Hero({ data }: { data?: any }) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* ─── 1. Continuous Slow Video Zoom-In Background Effect ─── */}
+      {/* ─── Premium geometric pattern overlay ─── */}
+      <div
+        className="absolute inset-0 opacity-[0.035] pointer-events-none z-[1]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+        }}
+      />
+
+      {/* ─── Background Media with Video-Style Motion ─── */}
       <AnimatePresence initial={false}>
         <motion.div
           key={current}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.4, ease: "easeInOut" }}
+          transition={{ duration: 1.2, ease: "easeInOut" }}
           className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none"
         >
-          {/* Continuous Slow Zoom-In Motion (Replicating Slow Drone / Video Push-In) */}
+          {/* Continuous slow push-in (drone-style) */}
           <motion.div
             initial={{ scale: 1.0 }}
-            animate={{ scale: 1.15 }}
+            animate={{ scale: 1.12 }}
             transition={{
               duration: AUTOPLAY_DURATION / 1000 + 1,
               ease: "linear",
@@ -129,102 +236,143 @@ export function Hero({ data }: { data?: any }) {
             )}
           </motion.div>
 
-          {/* Sweeping Volumetric Cinema Light Beam */}
+          {/* Soft dark cinematic veil — images remain visible */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/60 via-[#0a0a0a]/25 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/55 via-transparent to-transparent" />
+
+          {/* Horizontal Gold Scanline Sweep (Video-Feed Effect) */}
           <motion.div
-            key={`light-${current}`}
-            initial={{ x: "-100%", opacity: 0 }}
-            animate={{ x: "200%", opacity: [0, 0.35, 0] }}
-            transition={{ duration: 3.5, ease: "easeInOut" }}
-            className="absolute -inset-y-full w-[600px] bg-gradient-to-r from-transparent via-[#f9c602]/15 to-transparent -rotate-45 pointer-events-none blur-3xl"
-          />
-
-          {/* Color Grading & Cinematic Contrast Vignettes */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-[#0a0a0a] via-[#0a0a0a]/75 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-black/45 to-black/30" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(10,10,10,0.85)_100%)]" />
-
-          {/* 4K Projection Film Grid Texture */}
-          <div
-            className="absolute inset-0 opacity-[0.06] pointer-events-none mix-blend-overlay"
+            key={`scan-${current}`}
+            initial={{ y: "-10%", opacity: 0 }}
+            animate={{ y: "110%", opacity: [0, 0.7, 0] }}
+            transition={{ duration: 2.4, ease: "easeInOut", delay: 0.4 }}
+            className="absolute inset-x-0 h-40 pointer-events-none"
             style={{
-              backgroundImage: `repeating-linear-gradient(0deg, #fff, #fff 1px, transparent 1px, transparent 3px)`,
+              background:
+                "linear-gradient(to bottom, transparent, rgba(249,198,2,0.12), rgba(249,198,2,0.28), rgba(249,198,2,0.12), transparent)",
             }}
           />
         </motion.div>
       </AnimatePresence>
 
-      {/* ─── Ambient Living Gold Nebula ─── */}
+      {/* ─── Ambient living gradient aura ─── */}
       <motion.div
-        animate={{
-          scale: [1, 1.25, 1],
-          opacity: [0.12, 0.22, 0.12],
+        animate={{ scale: [1, 1.25, 1], opacity: [0.25, 0.45, 0.25], x: [0, 40, 0], y: [0, -20, 0] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -top-32 -right-24 w-[560px] h-[560px] rounded-full blur-[150px] pointer-events-none z-[2]"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(249,198,2,0.25) 0%, rgba(57,47,95,0.3) 45%, transparent 70%)",
         }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
+      />
+      <motion.div
+        animate={{ scale: [1.1, 1, 1.1], opacity: [0.3, 0.5, 0.3], x: [0, -30, 0] }}
+        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -bottom-40 -left-32 w-[500px] h-[500px] rounded-full blur-[150px] pointer-events-none z-[2]"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(57,47,95,0.4) 0%, rgba(74,58,122,0.3) 50%, transparent 75%)",
         }}
-        className="absolute -top-32 -right-32 w-[550px] h-[550px] bg-[#f9c602] rounded-full blur-[140px] pointer-events-none z-[2]"
       />
 
-      {/* ─── 2. Main Hero Content Layout (Steady, Left Aligned, Clean) ─── */}
-      <div className="relative z-10 w-full fanam-container pt-32 pb-24 md:pt-36 md:pb-28 flex flex-col justify-between min-h-screen">
-        <div className="my-auto max-w-3xl">
+      {/* ─── 2. Main Hero Content ─── */}
+      <div className="relative z-10 w-full fanam-container pt-28 pb-20 md:pt-32 md:pb-24 flex flex-col justify-between min-h-screen">
+        <div className="my-auto w-full">
+          <div className="max-w-3xl">
+            <div className="min-h-[250px] sm:min-h-[270px] md:min-h-[290px] flex flex-col justify-start relative">
+              {/* Soft ambient text shadow — no hard line */}
+              <div
+                className="absolute -inset-x-10 -inset-y-8 pointer-events-none"
+                style={{
+                  background:
+                    "radial-gradient(ellipse at left, rgba(10,10,10,0.35) 0%, transparent 70%)",
+                }}
+              />
 
-          {/* Fixed-Height Text Frame: Smooth Opacity Dissolve, ZERO vertical jump or shake */}
-          <div className="min-h-[250px] sm:min-h-[270px] md:min-h-[290px] flex flex-col justify-start">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={current}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
-              >
-                {/* Tagline Pill */}
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f9c602]/10 backdrop-blur-md border border-[#f9c602]/30 text-[#f9c602] text-xs md:text-sm font-medium tracking-wide mb-5 shadow-lg shadow-black/40">
-                  <Sparkles className="w-3.5 h-3.5 text-[#f9c602]" />
-                  <span>{currentSlide.tagline}</span>
-                </div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={current}
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                >
+                  {/* Tagline pill — frosted glass */}
+                  {/* <div className="inline-flex items-center gap-3 pl-4 pr-5 py-2 bg-white/10 backdrop-blur-xl border border-white/15 text-[#F9C602] text-xs md:text-sm font-semibold uppercase tracking-[0.18em] mb-6 shadow-lg shadow-black/20">
+                    <Sparkles className="w-3.5 h-3.5 text-[#F9C602]" />
+                    <span>{currentSlide.tagline}</span>
+                  </div> */}
 
-                {/* Title */}
-                <h1 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold leading-[1.12] tracking-tight mb-5 drop-shadow-2xl">
-                  {currentSlide.title}
-                </h1>
+                  <h1 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold leading-[1.12] tracking-tight mb-5 drop-shadow">
+                    {currentSlide.title}
+                  </h1>
 
-                {/* Description */}
-                <p className="text-white/85 text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl drop-shadow font-normal">
-                  {currentSlide.description}
-                </p>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+                  <p className="text-white/90 text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl font-normal drop-shadow">
+                    {currentSlide.description}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
 
-          {/* Action Buttons: Anchored with smooth hover states */}
-          <div className="flex flex-wrap items-center gap-4 mt-8">
+            {/* Action Buttons */}
+            <div className="flex flex-wrap items-center gap-4 mt-8">
             <Link
               href={currentSlide.ctaPrimary.href}
-              className="group relative inline-flex items-center gap-3 bg-[#f9c602] text-[#0a0a0a] px-7 py-3.5 rounded-full font-semibold text-sm tracking-wide transition-all duration-300 shadow-[0_0_25px_rgba(249,198,2,0.4)] hover:shadow-[0_0_40px_rgba(249,198,2,0.7)] hover:scale-105 active:scale-95"
+              className="group relative inline-flex items-center gap-3 bg-[#F9C602] text-[#392F5F] px-7 py-3.5 font-semibold text-sm uppercase tracking-widest transition-all duration-300 hover:bg-white hover:text-[#392F5F] active:scale-[0.98] shadow-[0_8px_24px_rgba(0,0,0,0.25)]"
             >
               <span>{currentSlide.ctaPrimary.label}</span>
-              <span className="w-7 h-7 rounded-full bg-[#0a0a0a]/10 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1 group-hover:-rotate-45">
-                <ArrowRight className="w-4 h-4 text-[#0a0a0a]" />
+              <span className="w-7 h-7 bg-[#392F5F]/10 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1">
+                <ArrowRight className="w-4 h-4" />
               </span>
             </Link>
 
             <Link
               href={currentSlide.ctaSecondary.href}
-              className="group inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full text-white/90 hover:text-white font-medium text-sm tracking-wide bg-white/5 hover:bg-white/15 backdrop-blur-md border border-white/20 hover:border-white/40 transition-all duration-300 hover:scale-105 active:scale-95"
+              className="group inline-flex items-center gap-2.5 px-7 py-3.5 text-white font-semibold text-sm uppercase tracking-widest bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/25 hover:border-[#F9C602] transition-all duration-300 active:scale-[0.98]"
             >
-              <Compass className="w-4 h-4 text-[#f9c602]" />
+              <Compass className="w-4 h-4 text-[#F9C602]" />
               <span>{currentSlide.ctaSecondary.label}</span>
-              <ArrowRight className="w-4 h-4 text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all" />
+              <ArrowRight className="w-4 h-4 text-white/60 group-hover:text-[#F9C602] group-hover:translate-x-1 transition-all" />
             </Link>
           </div>
+            </div>
+
+            {/* ─── Floating Island Stats Bento ─── */}
+            {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-10 w-full">
+            {stats.map((stat, idx) => {
+              const Icon = stat.icon;
+              return (
+                <motion.div
+                  key={stat.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * idx, duration: 0.6 }}
+                  className="group relative flex flex-col gap-3 p-4 md:p-5 bg-white/[0.06] hover:bg-white/[0.12] backdrop-blur-xl border border-white/15 hover:border-[#F9C602]/40 transition-all duration-500 hover:-translate-y-1 shadow-[0_8px_32px_rgba(0,0,0,0.25)]"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-center w-10 h-10 md:w-11 md:h-11 bg-[#F9C602]/10 group-hover:bg-[#F9C602]/20 border border-[#F9C602]/30 text-[#F9C602] transition-colors duration-300">
+                      <Icon className="w-5 h-5 md:w-5.5 md:h-5.5" />
+                    </div>
+                    <span className="text-2xl md:text-3xl font-bold text-white tracking-tight">
+                      {stat.value}
+                    </span>
+                  </div>
+                  <div className="flex flex-col gap-0.5">
+                    <span className="text-[11px] md:text-xs font-semibold text-[#F9C602] uppercase tracking-wider">
+                      {stat.subtitle}
+                    </span>
+                    <span className="text-xs md:text-sm text-white/80 font-medium leading-snug">
+                      {stat.label}
+                    </span>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div> */}
         </div>
 
         {/* ─── 3. Progress Controller & Slide Navigation ─── */}
-        <div className="pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Interactive Progress Indicators */}
           <div className="grid grid-cols-3 gap-3 sm:gap-4 w-full md:max-w-xl">
             {slides.map((slide, idx) => {
@@ -238,47 +386,39 @@ export function Hero({ data }: { data?: any }) {
                 >
                   <div className="flex items-center justify-between text-xs mb-1.5">
                     <span
-                      className={`font-mono transition-colors duration-300 ${
-                        isActive
-                          ? "text-[#f9c602] font-semibold"
-                          : "text-white/40 group-hover:text-white/70"
-                      }`}
+                      className={`font-mono transition-colors duration-300 ${isActive
+                        ? "text-[#F9C602] font-semibold"
+                        : "text-white/40 group-hover:text-white/70"
+                        }`}
                     >
                       0{idx + 1}
                     </span>
                     <span
-                      className={`hidden sm:inline-block text-[11px] font-medium truncate max-w-[110px] transition-colors duration-300 ${
-                        isActive
-                          ? "text-white"
-                          : "text-white/40 group-hover:text-white/70"
-                      }`}
+                      className={`hidden sm:inline-block text-[11px] font-medium truncate max-w-[110px] transition-colors duration-300 ${isActive
+                        ? "text-white"
+                        : "text-white/40 group-hover:text-white/70"
+                        }`}
                     >
                       {slide.category}
                     </span>
                   </div>
 
-                  {/* Progress Line */}
-                  <div className="w-full h-1 bg-white/20 rounded-full overflow-hidden relative">
+                  {/* Premium soft progress bar */}
+                  <div className="w-full h-1 bg-white/10 overflow-hidden relative">
                     {isActive ? (
                       <motion.div
                         key={`progress-${idx}-${current}`}
                         initial={{ width: "0%" }}
-                        animate={{
-                          width: isHovered ? undefined : "100%",
-                        }}
-                        transition={{
-                          duration: AUTOPLAY_DURATION / 1000,
-                          ease: "linear",
-                        }}
-                        className="h-full bg-gradient-to-r from-[#f9c602] to-[#ffe066] rounded-full shadow-[0_0_8px_#f9c602]"
+                        animate={{ width: isHovered ? undefined : "100%" }}
+                        transition={{ duration: AUTOPLAY_DURATION / 1000, ease: "linear" }}
+                        className="h-full bg-gradient-to-r from-[#F9C602] to-[#FFE066] shadow-[0_0_8px_rgba(249,198,2,0.4)]"
                       />
                     ) : (
                       <div
-                        className={`h-full rounded-full transition-all duration-300 ${
-                          idx < current
-                            ? "w-full bg-white/50"
-                            : "w-0 group-hover:w-1/3 bg-white/30"
-                        }`}
+                        className={`h-full transition-all duration-300 ${idx < current
+                          ? "w-full bg-white/40"
+                          : "w-0 group-hover:w-1/3 bg-white/20"
+                          }`}
                       />
                     )}
                   </div>
@@ -291,25 +431,25 @@ export function Hero({ data }: { data?: any }) {
           <div className="flex items-center gap-4 ml-auto">
             {/* Slide Number Counter */}
             <div className="font-mono text-sm tracking-wider flex items-baseline gap-1">
-              <span className="text-[#f9c602] font-bold text-lg">
+              <span className="text-[#F9C602] font-bold text-lg">
                 0{current + 1}
               </span>
               <span className="text-white/30 text-xs">/</span>
               <span className="text-white/40 text-xs">0{slides.length}</span>
             </div>
 
-            {/* Prev / Next Arrows */}
+            {/* Prev / Next Arrows — square corporate */}
             <div className="flex items-center gap-2">
               <button
                 onClick={prevSlide}
-                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#f9c602] text-white hover:text-[#0a0a0a] border border-white/15 hover:border-[#f9c602] backdrop-blur-md flex items-center justify-center transition-all duration-300 shadow-md active:scale-90 cursor-pointer"
+                className="w-11 h-11 bg-white/10 hover:bg-[#F9C602] text-white hover:text-[#392F5F] border border-white/20 hover:border-[#F9C602] backdrop-blur-xl flex items-center justify-center transition-all duration-300 active:scale-90 cursor-pointer"
                 aria-label="Previous Slide"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={nextSlide}
-                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#f9c602] text-white hover:text-[#0a0a0a] border border-white/15 hover:border-[#f9c602] backdrop-blur-md flex items-center justify-center transition-all duration-300 shadow-md active:scale-90 cursor-pointer"
+                className="w-11 h-11 bg-white/10 hover:bg-[#F9C602] text-white hover:text-[#392F5F] border border-white/20 hover:border-[#F9C602] backdrop-blur-xl flex items-center justify-center transition-all duration-300 active:scale-90 cursor-pointer"
                 aria-label="Next Slide"
               >
                 <ChevronRight className="w-5 h-5" />
@@ -317,6 +457,30 @@ export function Hero({ data }: { data?: any }) {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* ─── 4. Floating Social Icons (transparent bordered design) ─── */}
+      <div className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-3 md:gap-4">
+        {socialLinks.map((item, idx) => (
+          <motion.a
+            key={item.label}
+            href={item.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.1 * idx, duration: 0.5 }}
+            className="group relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/25 hover:border-[#F9C602] text-white hover:text-[#F9C602] transition-all duration-300 cursor-pointer"
+            aria-label={item.label}
+          >
+            <span className="transition-transform duration-300 group-hover:scale-110">
+              {item.icon}
+            </span>
+            <span className="absolute right-full mr-3 whitespace-nowrap rounded bg-[#392F5F] px-3 py-1 text-xs font-medium text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+              {item.label}
+            </span>
+          </motion.a>
+        ))}
       </div>
     </section>
   );

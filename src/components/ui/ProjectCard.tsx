@@ -47,7 +47,7 @@ export function ProjectCard({
         )}
 
         {project.featured && (
-          <span className="bg-purple-600 text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 shadow-sm capitalize">
+          <span className="bg-brand-violet text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 shadow-sm capitalize">
             Featured
           </span>
         )}

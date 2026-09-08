@@ -95,12 +95,12 @@ export function LatestNews({ blogs = [] }: { blogs?: any[] }) {
           </div>
           <Link
             href="/blog"
-            className="group hidden md:inline-flex items-center gap-3 bg-[#0a0a0a] text-white px-5 py-2.5 rounded-full font-medium text-sm hover:bg-[#f9c602] hover:text-[#0a0a0a] border border-[#0a0a0a] hover:border-[#f9c602] transition-all duration-300 shadow-lg hover:shadow-xl"
+            className="group hidden md:inline-flex items-center gap-3 bg-[#392F5F] text-white px-7 py-3.5 font-semibold text-sm hover:bg-[#F9C602] hover:text-[#392F5F] border border-[#392F5F] hover:border-[#F9C602] transition-all duration-300 active:scale-[0.98]"
           >
             <span className="transition-transform duration-300 group-hover:translate-x-1">
               View All
             </span>
-            <span className="w-5 h-5 rounded-full bg-white/20 group-hover:bg-[#0a0a0a]/10 text-white group-hover:text-[#0a0a0a] flex items-center justify-center transition-all duration-300 group-hover:-translate-x-1 group-hover:-rotate-45">
+            <span className="w-5 h-5 rounded-full bg-white/20 group-hover:bg-[#392F5F]/10 text-white group-hover:text-[#392F5F] flex items-center justify-center transition-all duration-300 group-hover:-translate-x-1 group-hover:-rotate-45">
               <ArrowRight className="w-3.5 h-3.5" />
             </span>
           </Link>
@@ -162,7 +162,7 @@ export function LatestNews({ blogs = [] }: { blogs?: any[] }) {
                       </div>
 
                       {/* Title & Excerpt */}
-                      <h3 className="text-[#0a0a0a] font-bold text-[17px] leading-snug mb-2.5 group-hover/card:text-[#f9c602] transition-colors duration-500 line-clamp-2">
+                      <h3 className="text-[#392F5F] font-bold text-[17px] leading-snug mb-2.5 group-hover/card:text-[#f9c602] transition-colors duration-500 line-clamp-2">
                         {item.title}
                       </h3>
                       <p className="text-gray-600 group-hover/card:text-gray-900 text-[13px] leading-relaxed transition-colors duration-500 line-clamp-3 pr-2">
@@ -171,7 +171,7 @@ export function LatestNews({ blogs = [] }: { blogs?: any[] }) {
                     </div>
 
                     {/* Interactive Button (Bottom Right) */}
-                    <div className="absolute -bottom-1 -right-1 w-[52px] h-[52px] z-20 rounded-full border-[5px] border-white bg-[#0a0a0a] group-hover/card:bg-[#f9c602] transition-colors duration-500 overflow-hidden">
+                    <div className="absolute -bottom-1 -right-1 w-[52px] h-[52px] z-20 rounded-full border-[5px] border-white bg-[#392F5F] group-hover/card:bg-[#f9c602] transition-colors duration-500 overflow-hidden">
                       {/* Thin inner border */}
                       <div className="absolute inset-0 w-full h-full rounded-full border border-white/10 transition-opacity duration-500 group-hover/card:opacity-0" />
                       {/* Default Arrow */}
@@ -184,7 +184,7 @@ export function LatestNews({ blogs = [] }: { blogs?: any[] }) {
                       {/* Hover Arrow */}
                       <div className="absolute inset-0 flex items-center justify-center transition-transform duration-500 transform-gpu -translate-x-full translate-y-full group-hover/card:translate-x-0 group-hover/card:translate-y-0">
                         <ArrowRight
-                          className="w-7 h-7 text-[#0a0a0a] -rotate-45"
+                          className="w-7 h-7 text-[#392F5F] -rotate-45"
                           strokeWidth={1.5}
                         />
                       </div>
@@ -198,7 +198,7 @@ export function LatestNews({ blogs = [] }: { blogs?: any[] }) {
           {/* Custom Navigation Arrows */}
           <button
             ref={prevRef}
-            className="absolute left-8 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-6 z-20 w-10 h-10 rounded-full bg-white border border-gray-200 shadow-xl flex items-center justify-center text-[#0a0a0a] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 hover:bg-[#f9c602] hover:border-[#f9c602] hover:text-[#0a0a0a] disabled:opacity-0 disabled:hidden"
+            className="absolute left-8 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-6 z-20 w-10 h-10 rounded-full bg-white border border-gray-200 shadow-xl flex items-center justify-center text-[#392F5F] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 hover:bg-[#f9c602] hover:border-[#f9c602] hover:text-[#392F5F] disabled:opacity-0 disabled:hidden"
             aria-label="Previous slide"
           >
             <ArrowLeft className="w-5 h-5" />
@@ -206,7 +206,7 @@ export function LatestNews({ blogs = [] }: { blogs?: any[] }) {
 
           <button
             ref={nextRef}
-            className="absolute right-8 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-6 z-20 w-10 h-10 rounded-full bg-white border border-gray-200 shadow-xl flex items-center justify-center text-[#0a0a0a] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 hover:bg-[#f9c602] hover:border-[#f9c602] hover:text-[#0a0a0a] disabled:opacity-0 disabled:hidden"
+            className="absolute right-8 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-6 z-20 w-10 h-10 rounded-full bg-white border border-gray-200 shadow-xl flex items-center justify-center text-[#392F5F] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 hover:bg-[#f9c602] hover:border-[#f9c602] hover:text-[#392F5F] disabled:opacity-0 disabled:hidden"
             aria-label="Next slide"
           >
             <ArrowRight className="w-5 h-5" />
@@ -217,12 +217,12 @@ export function LatestNews({ blogs = [] }: { blogs?: any[] }) {
         <div className="mt-8 flex justify-center md:hidden">
           <Link
             href="/blog"
-            className="group inline-flex items-center gap-3 bg-[#0a0a0a] text-white px-6 py-2.5 rounded-full font-medium text-sm hover:bg-[#f9c602] hover:text-[#0a0a0a] border border-[#0a0a0a] hover:border-[#f9c602] transition-all duration-300 shadow-lg hover:shadow-xl"
+            className="group inline-flex items-center gap-3 bg-[#392F5F] text-white px-7 py-3.5 font-semibold text-sm hover:bg-[#F9C602] hover:text-[#392F5F] border border-[#392F5F] hover:border-[#F9C602] transition-all duration-300 active:scale-[0.98]"
           >
             <span className="transition-transform duration-300 group-hover:translate-x-1">
               View All
             </span>
-            <span className="w-7 h-7 rounded-full bg-white/20 group-hover:bg-[#0a0a0a]/10 text-white group-hover:text-[#0a0a0a] flex items-center justify-center transition-all duration-300 group-hover:-translate-x-1 group-hover:-rotate-45">
+            <span className="w-7 h-7 rounded-full bg-white/20 group-hover:bg-[#392F5F]/10 text-white group-hover:text-[#392F5F] flex items-center justify-center transition-all duration-300 group-hover:-translate-x-1 group-hover:-rotate-45">
               <ArrowRight className="w-3.5 h-3.5" />
             </span>
           </Link>

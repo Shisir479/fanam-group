@@ -95,7 +95,7 @@ export default function AdminTestimonialListClient({
     {
       header: "Rating",
       render: (item) => (
-        <div className="flex items-center gap-1 text-yellow-500">
+        <div className="flex items-center gap-1 text-brand-gold">
           <Star className="w-4 h-4 fill-current" />
           <span className="text-sm text-gray-300 ml-1">{item.rating}/5</span>
         </div>
@@ -174,7 +174,7 @@ export default function AdminTestimonialListClient({
               params.set("page", "1");
               router.push(`?${params.toString()}`);
             }}
-            className="w-full pl-9 pr-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+            className="w-full pl-9 pr-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
           />
         </div>
       </div>

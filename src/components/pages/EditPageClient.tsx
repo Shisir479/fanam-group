@@ -108,7 +108,7 @@ export default function EditPageClient({ slug }: { slug: string }) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="flex flex-col items-center gap-4">
-          <Loader2 className="w-8 h-8 animate-spin text-purple-500" />
+          <Loader2 className="w-8 h-8 animate-spin text-brand-violet" />
           <p className="text-gray-400">Loading page details...</p>
         </div>
       </div>
@@ -167,7 +167,7 @@ export default function EditPageClient({ slug }: { slug: string }) {
                   setFormData({ ...formData, name: e.target.value })
                 }
                 placeholder="e.g. Privacy Policy"
-                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
               />
             </div>
 
@@ -182,7 +182,7 @@ export default function EditPageClient({ slug }: { slug: string }) {
                   setFormData({ ...formData, slug: newSlug });
                 }}
                 placeholder="privacy-policy"
-                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
               />
             </div>
 
@@ -198,7 +198,7 @@ export default function EditPageClient({ slug }: { slug: string }) {
                   setFormData({ ...formData, link: e.target.value })
                 }
                 placeholder="/privacy-policy"
-                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
               />
             </div>
 
@@ -248,7 +248,7 @@ export default function EditPageClient({ slug }: { slug: string }) {
                 Cover Image
               </label>
               <label
-                className={`w-full h-32 border-2 border-dashed border-white/20 rounded-xl flex flex-col items-center justify-center text-gray-400 hover:text-white hover:border-purple-500 transition-colors cursor-pointer bg-white/5 overflow-hidden relative group ${isUploading ? "opacity-50 pointer-events-none" : ""}`}
+                className={`w-full h-32 border-2 border-dashed border-white/20 rounded-xl flex flex-col items-center justify-center text-gray-400 hover:text-white hover:border-brand-violet transition-colors cursor-pointer bg-white/5 overflow-hidden relative group ${isUploading ? "opacity-50 pointer-events-none" : ""}`}
               >
                 <input
                   type="file"
@@ -267,7 +267,7 @@ export default function EditPageClient({ slug }: { slug: string }) {
                 />
                 {isUploading ? (
                   <div className="flex flex-col items-center gap-2">
-                    <Loader2 className="w-8 h-8 animate-spin text-purple-500" />
+                    <Loader2 className="w-8 h-8 animate-spin text-brand-violet" />
                     <span className="text-sm text-gray-300">Uploading...</span>
                   </div>
                 ) : coverUrl ? (
@@ -313,7 +313,7 @@ export default function EditPageClient({ slug }: { slug: string }) {
                   setFormData({ ...formData, metaTitle: e.target.value })
                 }
                 placeholder="SEO Title"
-                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
               />
             </div>
 
@@ -328,7 +328,7 @@ export default function EditPageClient({ slug }: { slug: string }) {
                   setFormData({ ...formData, metaDescription: e.target.value })
                 }
                 placeholder="SEO Description..."
-                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors h-24 resize-none"
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors h-24 resize-none"
               />
             </div>
           </div>

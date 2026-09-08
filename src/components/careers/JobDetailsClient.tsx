@@ -100,13 +100,13 @@ export default function JobDetailsClient({
       <div className="flex bg-gray-50 p-1.5 rounded-full mb-8 border border-gray-100">
         <button
           onClick={() => setSidebarTab("overview")}
-          className={`flex-1 py-2.5 rounded-full font-bold text-sm transition-all duration-200 text-center ${sidebarTab === "overview" ? "bg-yellow-500 text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-900"}`}
+          className={`flex-1 py-2.5 rounded-full font-bold text-sm transition-all duration-200 text-center ${sidebarTab === "overview" ? "bg-brand-gold text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-900"}`}
         >
           Job Overview
         </button>
         <button
           onClick={() => setSidebarTab("apply")}
-          className={`flex-1 py-2.5 rounded-full font-bold text-sm transition-all duration-200 text-center ${sidebarTab === "apply" ? "bg-yellow-500 text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-900"}`}
+          className={`flex-1 py-2.5 rounded-full font-bold text-sm transition-all duration-200 text-center ${sidebarTab === "apply" ? "bg-brand-gold text-gray-900 shadow-sm" : "text-gray-500 hover:text-gray-900"}`}
         >
           Apply Now
         </button>
@@ -132,8 +132,8 @@ export default function JobDetailsClient({
             )}
             {job.department && (
               <div className="flex gap-4 items-center">
-                <div className="w-10 h-10 rounded-full bg-indigo-50 flex items-center justify-center shrink-0">
-                  <Building className="w-4 h-4 text-indigo-500" />
+                <div className="w-10 h-10 rounded-full bg-brand-violet/10 flex items-center justify-center shrink-0">
+                  <Building className="w-4 h-4 text-brand-violet" />
                 </div>
                 <div>
                   <p className="text-xs text-gray-400 uppercase tracking-wider font-semibold">
@@ -145,8 +145,8 @@ export default function JobDetailsClient({
             )}
             {job.designation && (
               <div className="flex gap-4 items-center">
-                <div className="w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center shrink-0">
-                  <Award className="w-4 h-4 text-amber-500" />
+                <div className="w-10 h-10 rounded-full bg-brand-gold/10 flex items-center justify-center shrink-0">
+                  <Award className="w-4 h-4 text-brand-gold" />
                 </div>
                 <div>
                   <p className="text-xs text-gray-400 uppercase tracking-wider font-semibold">
@@ -197,8 +197,8 @@ export default function JobDetailsClient({
             )}
             {job.education && (
               <div className="flex gap-4 items-center">
-                <div className="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center shrink-0">
-                  <GraduationCap className="w-4 h-4 text-purple-500" />
+                <div className="w-10 h-10 rounded-full bg-brand-violet/10 flex items-center justify-center shrink-0">
+                  <GraduationCap className="w-4 h-4 text-brand-violet" />
                 </div>
                 <div>
                   <p className="text-xs text-gray-400 uppercase tracking-wider font-semibold">
@@ -316,7 +316,7 @@ export default function JobDetailsClient({
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full py-3.5 bg-yellow-500 text-gray-900 font-bold rounded-xl hover:bg-yellow-400 transition-colors mt-4 text-sm shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full py-3.5 bg-brand-gold text-gray-900 font-bold rounded-xl hover:bg-brand-gold transition-colors mt-4 text-sm shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {submitting ? "Submitting..." : "Submit Application"}
                 </button>

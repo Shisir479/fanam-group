@@ -397,7 +397,7 @@ export default function AdminCareersClient({
             className={`w-[130px] text-xs font-bold px-3 py-1 rounded-full border outline-none h-auto min-h-[32px]
             ${
               app.status === "Pending"
-                ? "text-yellow-500 border-yellow-500/20 bg-yellow-500/10"
+                ? "text-brand-gold border-brand-gold/20 bg-brand-gold/10"
                 : app.status === "Shortlisted"
                   ? "text-blue-500 border-blue-500/20 bg-blue-500/10"
                   : app.status === "Hired"
@@ -412,7 +412,7 @@ export default function AdminCareersClient({
           <SelectContent>
             <SelectItem
               value="Pending"
-              className="text-yellow-500 focus:text-yellow-500 font-medium"
+              className="text-brand-gold focus:text-brand-gold font-medium"
             >
               Pending
             </SelectItem>
@@ -659,7 +659,7 @@ export default function AdminCareersClient({
                           onChange={(e) =>
                             setFormData({ ...formData, jobId: e.target.value })
                           }
-                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                           placeholder="e.g. ENG-2023-01"
                         />
                       </div>
@@ -676,7 +676,7 @@ export default function AdminCareersClient({
                               company: e.target.value,
                             })
                           }
-                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                         />
                       </div>
                       <div>
@@ -692,7 +692,7 @@ export default function AdminCareersClient({
                               jobTitle: e.target.value,
                             })
                           }
-                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                         />
                       </div>
                       <div>
@@ -707,7 +707,7 @@ export default function AdminCareersClient({
                               category: e.target.value,
                             })
                           }
-                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                           placeholder="e.g. Engineering, Marketing"
                         />
                       </div>
@@ -723,7 +723,7 @@ export default function AdminCareersClient({
                               department: e.target.value,
                             })
                           }
-                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                         />
                       </div>
                       <div>
@@ -738,7 +738,7 @@ export default function AdminCareersClient({
                               designation: e.target.value,
                             })
                           }
-                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                         />
                       </div>
                       <div>
@@ -753,7 +753,7 @@ export default function AdminCareersClient({
                               jobLevel: e.target.value,
                             })
                           }
-                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors [&>option]:bg-gray-900"
+                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors [&>option]:bg-gray-900"
                         >
                           <option>Entry Level</option>
                           <option>Mid Level</option>
@@ -775,7 +775,7 @@ export default function AdminCareersClient({
                               vacancies: parseInt(e.target.value),
                             })
                           }
-                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                         />
                       </div>
                       <div>
@@ -791,7 +791,7 @@ export default function AdminCareersClient({
                               location: e.target.value,
                             })
                           }
-                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                         />
                       </div>
                       <div>
@@ -803,7 +803,7 @@ export default function AdminCareersClient({
                           onChange={(e) =>
                             setFormData({ ...formData, salary: e.target.value })
                           }
-                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                         />
                       </div>
                     </div>
@@ -828,7 +828,7 @@ export default function AdminCareersClient({
                               jobSummary: e.target.value,
                             })
                           }
-                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors resize-none"
+                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors resize-none"
                         />
                       </div>
                       <div>
@@ -845,7 +845,7 @@ export default function AdminCareersClient({
                               jobDescription: e.target.value,
                             })
                           }
-                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors resize-none"
+                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors resize-none"
                         />
                       </div>
                       <div>
@@ -861,7 +861,7 @@ export default function AdminCareersClient({
                               responsibilities: e.target.value,
                             })
                           }
-                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors resize-none"
+                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors resize-none"
                           placeholder="Lead teams, Architect solutions, Write clean code..."
                         />
                       </div>
@@ -878,7 +878,7 @@ export default function AdminCareersClient({
                                 education: e.target.value,
                               })
                             }
-                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                             placeholder="B.Sc in Computer Science"
                           />
                         </div>
@@ -894,7 +894,7 @@ export default function AdminCareersClient({
                                 experience: e.target.value,
                               })
                             }
-                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                             placeholder="5+ years"
                           />
                         </div>
@@ -908,7 +908,7 @@ export default function AdminCareersClient({
                           onChange={(e) =>
                             setFormData({ ...formData, skills: e.target.value })
                           }
-                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                           placeholder="React, Node.js, Leadership"
                         />
                       </div>
@@ -925,7 +925,7 @@ export default function AdminCareersClient({
                               benefits: e.target.value,
                             })
                           }
-                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors resize-none"
+                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors resize-none"
                           placeholder="Health Insurance, Remote Work, Bonuses"
                         />
                       </div>
@@ -942,7 +942,7 @@ export default function AdminCareersClient({
                               additionalInformation: e.target.value,
                             })
                           }
-                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors resize-none"
+                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors resize-none"
                         />
                       </div>
                     </div>
@@ -968,7 +968,7 @@ export default function AdminCareersClient({
                               employmentType: e.target.value,
                             })
                           }
-                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors [&>option]:bg-gray-900"
+                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors [&>option]:bg-gray-900"
                         >
                           <option>Full-Time</option>
                           <option>Part-Time</option>
@@ -989,7 +989,7 @@ export default function AdminCareersClient({
                               workMode: e.target.value,
                             })
                           }
-                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors [&>option]:bg-gray-900"
+                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors [&>option]:bg-gray-900"
                         >
                           <option>Onsite</option>
                           <option>Remote</option>
@@ -1008,7 +1008,7 @@ export default function AdminCareersClient({
                               jobStatus: e.target.value,
                             })
                           }
-                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors [&>option]:bg-gray-900"
+                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors [&>option]:bg-gray-900"
                         >
                           <option>Open</option>
                           <option>Closed</option>
@@ -1027,7 +1027,7 @@ export default function AdminCareersClient({
                               applicationMethod: e.target.value,
                             })
                           }
-                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors [&>option]:bg-gray-900"
+                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors [&>option]:bg-gray-900"
                         >
                           <option>Online Form</option>
                           <option>Email</option>
@@ -1046,7 +1046,7 @@ export default function AdminCareersClient({
                               featuredImage: e.target.value,
                             })
                           }
-                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                           placeholder="https://..."
                         />
                       </div>
@@ -1057,7 +1057,7 @@ export default function AdminCareersClient({
                         </label>
                         <Popover>
                           <PopoverTrigger
-                            className={`w-full flex justify-between items-center px-4 py-2 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-purple-500 transition-colors ${!formData.publishDate ? "text-gray-400" : "text-white"}`}
+                            className={`w-full flex justify-between items-center px-4 py-2 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-brand-violet transition-colors ${!formData.publishDate ? "text-gray-400" : "text-white"}`}
                           >
                             {formData.publishDate ? (
                               format(new Date(formData.publishDate), "PPP")
@@ -1093,7 +1093,7 @@ export default function AdminCareersClient({
                         </label>
                         <Popover>
                           <PopoverTrigger
-                            className={`w-full flex justify-between items-center px-4 py-2 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-purple-500 transition-colors ${!formData.applicationDeadline ? "text-gray-400" : "text-white"}`}
+                            className={`w-full flex justify-between items-center px-4 py-2 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-brand-violet transition-colors ${!formData.applicationDeadline ? "text-gray-400" : "text-white"}`}
                           >
                             {formData.applicationDeadline ? (
                               format(
@@ -1132,7 +1132,7 @@ export default function AdminCareersClient({
                         </label>
                         <Popover>
                           <PopoverTrigger
-                            className={`w-full flex justify-between items-center px-4 py-2 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-purple-500 transition-colors ${!formData.expiryDate ? "text-gray-400" : "text-white"}`}
+                            className={`w-full flex justify-between items-center px-4 py-2 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-brand-violet transition-colors ${!formData.expiryDate ? "text-gray-400" : "text-white"}`}
                           >
                             {formData.expiryDate ? (
                               format(new Date(formData.expiryDate), "PPP")

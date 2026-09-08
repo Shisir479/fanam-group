@@ -6,7 +6,7 @@ export default function NotFound() {
   return (
     <main
       id="not-found-page"
-      className="fixed inset-0 z-[999999] flex items-center justify-center bg-[#0a1118] overflow-hidden"
+      className="fixed inset-0 z-[999999] flex items-center justify-center bg-[#2A2545] overflow-hidden"
     >
       {/* GridScan Animated Background */}
       <div

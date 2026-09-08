@@ -194,7 +194,7 @@ export default function EditConcernClient({
                   value={formData.name}
                   onChange={handleNameChange}
                   placeholder="Enter concern name"
-                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                 />
               </div>
 
@@ -210,7 +210,7 @@ export default function EditConcernClient({
                     setFormData({ ...formData, slug: e.target.value })
                   }
                   placeholder="enter-concern-slug"
-                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                 />
               </div>
             </div>
@@ -227,7 +227,7 @@ export default function EditConcernClient({
                   setFormData({ ...formData, websiteUrl: e.target.value })
                 }
                 placeholder="https://example.com"
-                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
               />
             </div>
 
@@ -243,7 +243,7 @@ export default function EditConcernClient({
                   setFormData({ ...formData, shortDescription: e.target.value })
                 }
                 placeholder="Enter short description..."
-                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors h-32 resize-none"
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors h-32 resize-none"
               />
             </div>
 
@@ -283,7 +283,7 @@ export default function EditConcernClient({
                     onChange={(e) =>
                       handleFeatureChange(idx, "title", e.target.value)
                     }
-                    className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white outline-none focus:border-purple-500"
+                    className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white outline-none focus:border-brand-violet"
                   />
                   <input
                     type="text"
@@ -292,7 +292,7 @@ export default function EditConcernClient({
                     onChange={(e) =>
                       handleFeatureChange(idx, "description", e.target.value)
                     }
-                    className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white outline-none focus:border-purple-500"
+                    className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white outline-none focus:border-brand-violet"
                   />
                   <button
                     type="button"
@@ -317,7 +317,7 @@ export default function EditConcernClient({
                 Hero Image *
               </label>
               <label
-                className={`w-full h-48 border-2 border-dashed border-white/20 rounded-xl flex flex-col items-center justify-center text-gray-400 hover:text-white hover:border-purple-500 transition-colors cursor-pointer bg-white/5 overflow-hidden relative group ${isUploading ? "opacity-50 pointer-events-none" : ""}`}
+                className={`w-full h-48 border-2 border-dashed border-white/20 rounded-xl flex flex-col items-center justify-center text-gray-400 hover:text-white hover:border-brand-violet transition-colors cursor-pointer bg-white/5 overflow-hidden relative group ${isUploading ? "opacity-50 pointer-events-none" : ""}`}
               >
                 <input
                   type="file"
@@ -372,7 +372,7 @@ export default function EditConcernClient({
                 onChange={(e) =>
                   setFormData({ ...formData, metaTitle: e.target.value })
                 }
-                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                 placeholder="SEO Title (optional)"
               />
             </div>
@@ -386,7 +386,7 @@ export default function EditConcernClient({
                 onChange={(e) =>
                   setFormData({ ...formData, metaDescription: e.target.value })
                 }
-                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors h-32 resize-none"
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors h-32 resize-none"
                 placeholder="SEO Description (optional)"
               />
             </div>

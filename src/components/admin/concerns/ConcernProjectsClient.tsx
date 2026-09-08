@@ -289,7 +289,7 @@ export default function ConcernProjectsClient({
                 <h3 className="text-xl font-bold text-white leading-tight break-words">
                   {project.name}
                 </h3>
-                <span className="px-2 py-1 bg-amber-500/20 text-amber-500 text-xs font-bold rounded whitespace-nowrap shrink-0">
+                <span className="px-2 py-1 bg-brand-gold/20 text-brand-gold text-xs font-bold rounded whitespace-nowrap shrink-0">
                   {project.progress}% Complete
                 </span>
               </div>
@@ -353,7 +353,7 @@ export default function ConcernProjectsClient({
                     required
                     value={formData.name}
                     onChange={handleNameChange}
-                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                   />
                 </div>
                 <div className="space-y-2">
@@ -367,7 +367,7 @@ export default function ConcernProjectsClient({
                     onChange={(e) =>
                       setFormData({ ...formData, slug: e.target.value })
                     }
-                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                   />
                 </div>
               </div>
@@ -389,7 +389,7 @@ export default function ConcernProjectsClient({
                         progress: Number(e.target.value),
                       })
                     }
-                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors"
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                   />
                 </div>
               </div>
@@ -404,7 +404,7 @@ export default function ConcernProjectsClient({
                   onChange={(e) =>
                     setFormData({ ...formData, overview: e.target.value })
                   }
-                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors h-24 resize-none"
+                  className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors h-24 resize-none"
                 />
               </div>
 
@@ -417,7 +417,7 @@ export default function ConcernProjectsClient({
                   <button
                     type="button"
                     onClick={addFeature}
-                    className="text-xs text-amber-500 hover:text-amber-400 flex items-center gap-1"
+                    className="text-xs text-brand-gold hover:text-amber-400 flex items-center gap-1"
                   >
                     <Plus className="w-3 h-3" /> Add Feature
                   </button>
@@ -429,7 +429,7 @@ export default function ConcernProjectsClient({
                       value={feat}
                       placeholder="E.g. 24/7 Security"
                       onChange={(e) => handleFeatureChange(idx, e.target.value)}
-                      className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white outline-none focus:border-purple-500"
+                      className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white outline-none focus:border-brand-violet"
                     />
                     <button
                       type="button"
@@ -474,7 +474,7 @@ export default function ConcernProjectsClient({
                   {newGalleryPreviews.map((url, idx) => (
                     <div
                       key={`new-${idx}`}
-                      className="relative aspect-video rounded-lg overflow-hidden group border-2 border-amber-500/50"
+                      className="relative aspect-video rounded-lg overflow-hidden group border-2 border-brand-gold/50"
                     >
                       <Image
                         src={url}
@@ -482,7 +482,7 @@ export default function ConcernProjectsClient({
                         fill
                         className="object-cover"
                       />
-                      <span className="absolute bottom-0 inset-x-0 bg-amber-500/80 text-white text-[10px] text-center py-0.5">
+                      <span className="absolute bottom-0 inset-x-0 bg-brand-gold/80 text-white text-[10px] text-center py-0.5">
                         New
                       </span>
                       <button
@@ -495,7 +495,7 @@ export default function ConcernProjectsClient({
                   ))}
 
                   {/* Upload Button */}
-                  <div className="relative aspect-video rounded-lg border-2 border-dashed border-white/20 hover:border-purple-500 transition-colors flex flex-col items-center justify-center text-gray-400 hover:text-white group">
+                  <div className="relative aspect-video rounded-lg border-2 border-dashed border-white/20 hover:border-brand-violet transition-colors flex flex-col items-center justify-center text-gray-400 hover:text-white group">
                     <input
                       type="file"
                       accept="image/*"

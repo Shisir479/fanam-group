@@ -290,7 +290,7 @@ export function ContactView({ data, banner }: { data?: any; banner?: any }) {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="flex items-center justify-center gap-2 bg-[#f9c602] text-gray-900 hover:bg-yellow-400 px-8 py-3 rounded-full font-bold uppercase tracking-wide transition-colors group w-fit"
+                  className="flex items-center justify-center gap-2 bg-[#f9c602] text-gray-900 hover:bg-brand-gold px-8 py-3 rounded-full font-bold uppercase tracking-wide transition-colors group w-fit"
                 >
                   {isLoading ? "Sending..." : "Send Message"}
                   <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />

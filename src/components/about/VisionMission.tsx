@@ -49,14 +49,14 @@ export function VisionMission({ data }: { data: any }) {
       <div className="fanam-container relative z-10">
         {/* Header Section */}
         <div className="flex flex-col items-center text-center mb-16 lg:mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f9c602]/15 border border-[#f9c602]/35 text-[#0a0a0a] text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
-            <Compass className="w-3.5 h-3.5 text-[#0a0a0a]" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f9c602]/15 border border-[#f9c602]/35 text-[#392f5f] text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
+            <Compass className="w-3.5 h-3.5 text-[#392f5f]" />
             <span>Mission & Vision</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#0a0a0a] leading-[1.2] tracking-tight mb-5">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#392f5f] leading-[1.2] tracking-tight mb-5">
             Guided by Purpose,{" "}
-            <span className="relative whitespace-nowrap text-[#0a0a0a]">
+            <span className="relative whitespace-nowrap text-[#392f5f]">
               Driven by Vision
               <span className="absolute left-0 -bottom-1 w-full h-1 bg-[#f9c602] rounded-full" />
             </span>
@@ -72,7 +72,7 @@ export function VisionMission({ data }: { data: any }) {
         {/* 2 Grand Cards Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
           {/* Mission Card (High-Impact Dark Luxury) */}
-          <div className="relative rounded-3xl bg-[#0a0a0a] text-white p-8 sm:p-10 md:p-12 border border-white/15 shadow-2xl overflow-hidden flex flex-col justify-between group">
+          <div className="relative rounded-3xl bg-[#392f5f] text-white p-8 sm:p-10 md:p-12 border border-white/15 shadow-2xl overflow-hidden flex flex-col justify-between group">
             {/* Ambient gold glow in card */}
             <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#f9c602]/15 rounded-full blur-3xl pointer-events-none group-hover:bg-[#f9c602]/25 transition-all duration-700" />
 
@@ -80,7 +80,7 @@ export function VisionMission({ data }: { data: any }) {
               {/* Card Header */}
               <div className="flex items-center justify-between mb-8 pb-6 border-b border-white/10">
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-[#f9c602] text-[#0a0a0a] flex items-center justify-center shadow-[0_0_25px_rgba(249,198,2,0.4)]">
+                  <div className="w-14 h-14 rounded-2xl bg-[#f9c602] text-[#392f5f] flex items-center justify-center shadow-[0_0_25px_rgba(249,198,2,0.4)]">
                     <Target className="w-7 h-7" strokeWidth={2.2} />
                   </div>
                   <div>
@@ -140,21 +140,21 @@ export function VisionMission({ data }: { data: any }) {
               {/* Card Header */}
               <div className="flex items-center justify-between mb-8 pb-6 border-b border-gray-100">
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-[#0a0a0a] text-[#f9c602] flex items-center justify-center shadow-lg">
+                  <div className="w-14 h-14 rounded-2xl bg-[#392f5f] text-[#f9c602] flex items-center justify-center shadow-lg">
                     <Lightbulb className="w-7 h-7" strokeWidth={2.2} />
                   </div>
                   <div>
                     <span className="text-[11px] font-mono text-slate-500 uppercase tracking-widest font-semibold block mb-0.5">
                       Long-Term Horizon
                     </span>
-                    <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#0a0a0a]">
+                    <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#392f5f]">
                       Our Vision
                     </h3>
                   </div>
                 </div>
 
                 <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs">
-                  <Sparkles className="w-3.5 h-3.5 text-[#0a0a0a]" />
+                  <Sparkles className="w-3.5 h-3.5 text-[#392f5f]" />
                   <span>Future Focused</span>
                 </div>
               </div>
@@ -167,11 +167,11 @@ export function VisionMission({ data }: { data: any }) {
                     className="p-5 rounded-2xl bg-neutral-50 border border-gray-100 hover:border-[#f9c602]/60 transition-all duration-300"
                   >
                     <div className="flex items-start gap-4">
-                      <span className="w-9 h-9 rounded-xl bg-[#0a0a0a] text-[#f9c602] font-mono text-sm font-bold flex items-center justify-center shrink-0">
+                      <span className="w-9 h-9 rounded-xl bg-[#392f5f] text-[#f9c602] font-mono text-sm font-bold flex items-center justify-center shrink-0">
                         {item.num}
                       </span>
                       <div>
-                        <h4 className="text-base sm:text-lg font-bold text-[#0a0a0a] mb-1.5 leading-snug">
+                        <h4 className="text-base sm:text-lg font-bold text-[#392f5f] mb-1.5 leading-snug">
                           {item.title}
                         </h4>
                         <p className="text-gray-600 text-xs sm:text-sm leading-relaxed font-medium">
@@ -187,7 +187,7 @@ export function VisionMission({ data }: { data: any }) {
             {/* Card Footer Tag */}
             <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500 font-medium">
               <span>National & Global Reach</span>
-              <span className="text-[#0a0a0a] font-bold">Horizon 2030 & Beyond</span>
+              <span className="text-[#392f5f] font-bold">Horizon 2030 & Beyond</span>
             </div>
           </div>
         </div>

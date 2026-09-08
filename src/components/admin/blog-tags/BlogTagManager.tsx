@@ -170,7 +170,7 @@ export default function BlogTagManager({ initialTags, triggerCreate }: Props) {
                   setFormData({ ...formData, name: e.target.value })
                 }
                 placeholder="e.g. Artificial Intelligence"
-                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500"
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet"
               />
             </div>
             <div className="space-y-2">
@@ -183,7 +183,7 @@ export default function BlogTagManager({ initialTags, triggerCreate }: Props) {
                   setFormData({ ...formData, slug: e.target.value })
                 }
                 placeholder="e.g. artificial-intelligence"
-                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500"
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet"
               />
             </div>
             <div className="space-y-2 md:col-span-2">
@@ -198,7 +198,7 @@ export default function BlogTagManager({ initialTags, triggerCreate }: Props) {
                     status: e.target.value as "active" | "inactive",
                   })
                 }
-                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 [&>option]:bg-gray-900"
+                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet [&>option]:bg-gray-900"
               >
                 <option value="active">Active</option>
                 <option value="inactive">Inactive</option>
@@ -215,7 +215,7 @@ export default function BlogTagManager({ initialTags, triggerCreate }: Props) {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-xl transition-colors disabled:opacity-50"
+                className="px-6 py-2 bg-brand-violet hover:bg-purple-700 text-white text-sm font-medium rounded-xl transition-colors disabled:opacity-50"
               >
                 {isSubmitting ? "Saving..." : "Save Tag"}
               </button>

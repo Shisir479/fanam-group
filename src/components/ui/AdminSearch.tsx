@@ -42,7 +42,7 @@ export function AdminSearch({ placeholder = "Search..." }: AdminSearchProps) {
         placeholder={placeholder}
         value={search}
         onChange={handleSearch}
-        className="w-full pl-10 pr-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500 transition-colors placeholder:text-gray-500"
+        className="w-full pl-10 pr-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors placeholder:text-gray-500"
       />
     </div>
   );

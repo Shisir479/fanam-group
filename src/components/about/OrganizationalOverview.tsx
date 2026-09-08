@@ -51,7 +51,7 @@ export function OrganizationalOverview({ data }: { data: any }) {
         {/* Header Section (Left Aligned) */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-10 mb-12">
           <div className="flex flex-col gap-3 flex-1 max-w-2xl">
-            <h2 className="text-3xl md:text-[32px] leading-tight font-serif font-bold text-[#0a0a0a] break-words">
+            <h2 className="text-3xl md:text-[32px] leading-tight font-serif font-bold text-[#392f5f] break-words">
               {data?.organizationHeading || "Organizational Overview"}
             </h2>
           </div>
@@ -60,7 +60,7 @@ export function OrganizationalOverview({ data }: { data: any }) {
 
           <div className="flex-1 lg:max-w-[450px] min-w-0">
             <div
-              className="text-[#0a0a0a]/80 leading-relaxed text-[13px] font-medium prose prose-p:break-words whitespace-normal break-words max-w-none w-full"
+              className="text-[#392f5f]/80 leading-relaxed text-[13px] font-medium prose prose-p:break-words whitespace-normal break-words max-w-none w-full"
               dangerouslySetInnerHTML={{
                 __html:
                   data?.organizationDescription ||
@@ -77,18 +77,18 @@ export function OrganizationalOverview({ data }: { data: any }) {
               <div className="group/dept flex flex-col relative h-full transition-all duration-500 cursor-pointer">
                 {/* Icon Header */}
                 <div className="flex items-center gap-4 mb-6 relative z-10">
-                  <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center border border-gray-100 text-[#0a0a0a] group-hover/dept:bg-[#f9c602] group-hover/dept:text-white group-hover/dept:border-[#f9c602] group-hover/dept:scale-110 transition-all duration-500 shadow-sm shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center border border-gray-100 text-[#392f5f] group-hover/dept:bg-[#f9c602] group-hover/dept:text-white group-hover/dept:border-[#f9c602] group-hover/dept:scale-110 transition-all duration-500 shadow-sm shrink-0">
                     {dept.icon}
                   </div>
                   <div className="h-[1px] flex-1 bg-gray-100 group-hover/dept:bg-[#f9c602]/30 transition-colors duration-500"></div>
                 </div>
 
                 {/* Content */}
-                <h3 className="text-[16px] font-bold text-[#0a0a0a] mb-3 group-hover/dept:text-[#f9c602] transition-colors duration-500 tracking-tight">
+                <h3 className="text-[16px] font-bold text-[#392f5f] mb-3 group-hover/dept:text-[#f9c602] transition-colors duration-500 tracking-tight">
                   {dept.title}
                 </h3>
 
-                <p className="text-[#0a0a0a]/80 text-[13px] font-medium leading-relaxed mb-6 group-hover/dept:text-gray-700 transition-colors duration-500">
+                <p className="text-[#392f5f]/80 text-[13px] font-medium leading-relaxed mb-6 group-hover/dept:text-gray-700 transition-colors duration-500">
                   {dept.description}
                 </p>
 

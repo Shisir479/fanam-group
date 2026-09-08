@@ -73,7 +73,7 @@ export function WhyChooseUs() {
               </div>
 
               {/* Floating Experience Badge (Luxury Gold & Dark Badge) */}
-              <div className="absolute top-12 -left-2 sm:-left-6 bg-[#0a0a0a] text-white border-2 border-[#f9c602]/50 p-5 rounded-2xl shadow-2xl z-20 flex flex-col items-center text-center">
+              <div className="absolute top-12 -left-2 sm:-left-6 bg-[#392f5f] text-white border-2 border-[#f9c602]/50 p-5 rounded-2xl shadow-2xl z-20 flex flex-col items-center text-center">
                 <div className="flex items-center gap-1 mb-2 text-[#f9c602]">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-3.5 h-3.5 fill-[#f9c602]" />
@@ -94,14 +94,14 @@ export function WhyChooseUs() {
 
           {/* Right Side: Text & Feature Cards Grid */}
           <div className="lg:col-span-7 flex flex-col">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f9c602]/15 border border-[#f9c602]/35 text-[#0a0a0a] text-xs font-bold uppercase tracking-wider mb-6 self-start shadow-sm">
-              <Award className="w-3.5 h-3.5 text-[#0a0a0a]" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f9c602]/15 border border-[#f9c602]/35 text-[#392f5f] text-xs font-bold uppercase tracking-wider mb-6 self-start shadow-sm">
+              <Award className="w-3.5 h-3.5 text-[#392f5f]" />
               <span>Why Choose Us</span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#0a0a0a] leading-[1.2] tracking-tight mb-6">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#392f5f] leading-[1.2] tracking-tight mb-6">
               The Strategic Advantage of{" "}
-              <span className="relative whitespace-nowrap text-[#0a0a0a]">
+              <span className="relative whitespace-nowrap text-[#392f5f]">
                 Fanam Group
                 <span className="absolute left-0 -bottom-1 w-full h-1 bg-[#f9c602] rounded-full" />
               </span>
@@ -120,11 +120,11 @@ export function WhyChooseUs() {
                   key={idx}
                   className="group p-3.5 rounded-2xl bg-white border border-gray-100 hover:border-[#f9c602]/60 shadow-sm hover:shadow-md transition-all duration-300 flex items-start gap-3.5"
                 >
-                  <div className="w-8 h-8 rounded-xl bg-[#f9c602] text-[#0a0a0a] flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_12px_rgba(249,198,2,0.35)] group-hover:scale-105 transition-transform duration-300">
-                    <CheckCircle2 className="w-4 h-4 text-[#0a0a0a]" strokeWidth={2.5} />
+                  <div className="w-8 h-8 rounded-xl bg-[#f9c602] text-[#392f5f] flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_12px_rgba(249,198,2,0.35)] group-hover:scale-105 transition-transform duration-300">
+                    <CheckCircle2 className="w-4 h-4 text-[#392f5f]" strokeWidth={2.5} />
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-[#0a0a0a] mb-0.5 group-hover:text-black">
+                    <h4 className="text-sm font-bold text-[#392f5f] mb-0.5 group-hover:text-black">
                       {item.title}
                     </h4>
                     <p className="text-gray-500 text-xs leading-relaxed font-medium">

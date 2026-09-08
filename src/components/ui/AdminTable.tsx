@@ -43,7 +43,7 @@ export function AdminTable<T>({
             {isLoading ? (
               <tr>
                 <td colSpan={columns.length} className="p-8 text-center">
-                  <Loader2 className="w-8 h-8 text-purple-500 animate-spin mx-auto" />
+                  <Loader2 className="w-8 h-8 text-brand-violet animate-spin mx-auto" />
                 </td>
               </tr>
             ) : data.length === 0 ? (

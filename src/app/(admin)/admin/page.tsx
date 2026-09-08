@@ -73,10 +73,10 @@ export default function AdminDashboard() {
       title: "Our Services",
       value: data?.statistics.totalServices || 0,
       icon: (
-        <Briefcase className="w-7 h-7 text-purple-600 dark:text-purple-400" />
+        <Briefcase className="w-7 h-7 text-brand-violet dark:text-purple-400" />
       ),
-      bgGradient: "from-purple-500/20 to-transparent dark:from-purple-500/10",
-      borderColor: "border-purple-500/30 dark:border-purple-500/20",
+      bgGradient: "from-brand-violet/20 to-transparent dark:from-brand-violet/10",
+      borderColor: "border-brand-violet/30 dark:border-brand-violet/20",
     },
     {
       title: "Blog & News",
@@ -123,8 +123,8 @@ export default function AdminDashboard() {
       icon: (
         <Activity className="w-7 h-7 text-indigo-600 dark:text-indigo-400" />
       ),
-      bgGradient: "from-indigo-500/20 to-transparent dark:from-indigo-500/10",
-      borderColor: "border-indigo-500/30 dark:border-indigo-500/20",
+      bgGradient: "from-brand-violet/20 to-transparent dark:from-brand-violet/10",
+      borderColor: "border-brand-violet/30 dark:border-brand-violet/20",
     },
     {
       title: "Total Visitors",

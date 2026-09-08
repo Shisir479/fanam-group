@@ -47,7 +47,7 @@ export function CompanyOverview({ data }: { data?: any }) {
   const image3 = data?.companyImages?.[2]?.url || defaultImages[2];
 
   return (
-    <section className="w-full py-16 md:py-24 bg-[#001f3f] text-white relative overflow-hidden">
+    <section className="w-full py-16 md:py-24 bg-brand-navy text-white relative overflow-hidden">
       {/* Background Graphic */}
       <div className="absolute top-0 right-0 w-1/2 h-full opacity-10 pointer-events-none">
         <svg

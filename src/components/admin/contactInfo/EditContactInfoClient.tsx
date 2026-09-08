@@ -114,7 +114,7 @@ export default function EditContactInfoClient({
                 value={contactInfo.email}
                 onChange={handleChange}
                 required
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white outline-none focus:border-purple-500 transition-colors"
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white outline-none focus:border-brand-violet transition-colors"
                 placeholder="info@yourcompany.com"
               />
             </div>
@@ -129,7 +129,7 @@ export default function EditContactInfoClient({
                 value={contactInfo.phone}
                 onChange={handleChange}
                 required
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white outline-none focus:border-purple-500 transition-colors"
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white outline-none focus:border-brand-violet transition-colors"
                 placeholder="+880 1711-223344"
               />
             </div>
@@ -143,7 +143,7 @@ export default function EditContactInfoClient({
                 name="whatsappNo"
                 value={contactInfo.whatsappNo}
                 onChange={handleChange}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white outline-none focus:border-purple-500 transition-colors"
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white outline-none focus:border-brand-violet transition-colors"
                 placeholder="+880 1912-345678"
               />
             </div>
@@ -157,7 +157,7 @@ export default function EditContactInfoClient({
                 name="addressOnMap"
                 value={contactInfo.addressOnMap}
                 onChange={handleChange}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white outline-none focus:border-purple-500 transition-colors"
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white outline-none focus:border-brand-violet transition-colors"
                 placeholder="https://maps.google.com/..."
               />
             </div>
@@ -173,7 +173,7 @@ export default function EditContactInfoClient({
               onChange={handleChange}
               required
               rows={3}
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white outline-none focus:border-purple-500 transition-colors resize-y"
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white outline-none focus:border-brand-violet transition-colors resize-y"
               placeholder="123 Bonedi Estate Blvd,&#10;Gulshan 1, Dhaka 1212"
             />
           </div>

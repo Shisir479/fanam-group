@@ -6,7 +6,7 @@ import { Quote, Sparkles, Award, ShieldCheck } from "lucide-react";
 
 export function ChairmanMessage({ data }: { data: any }) {
   return (
-    <section className="relative fanam-section bg-[#0a0a0a] text-white overflow-hidden py-20 lg:py-28">
+    <section className="relative fanam-section bg-[#392f5f] text-white overflow-hidden py-20 lg:py-28">
       {/* Ambient gold glow elements */}
       <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-[#f9c602]/10 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute -bottom-32 -right-32 w-[500px] h-[500px] bg-[#f9c602]/10 rounded-full blur-[140px] pointer-events-none" />
@@ -43,7 +43,7 @@ export function ChairmanMessage({ data }: { data: any }) {
                 {/* Bottom Card Inside Image */}
                 <div className="absolute bottom-6 left-6 right-6 p-4 rounded-xl bg-black/60 backdrop-blur-md border border-white/10">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-[#f9c602] flex items-center justify-center text-[#0a0a0a] shadow-[0_0_15px_rgba(249,198,2,0.4)] shrink-0">
+                    <div className="w-10 h-10 rounded-lg bg-[#f9c602] flex items-center justify-center text-[#392f5f] shadow-[0_0_15px_rgba(249,198,2,0.4)] shrink-0">
                       <Award className="w-5 h-5" />
                     </div>
                     <div>
@@ -59,8 +59,8 @@ export function ChairmanMessage({ data }: { data: any }) {
               </div>
 
               {/* Floating Golden Seal */}
-              <div className="absolute -top-4 -right-4 bg-gradient-to-br from-[#f9c602] to-[#e5b302] text-[#0a0a0a] px-4 py-2 rounded-xl font-bold text-xs shadow-lg flex items-center gap-1.5 border border-white/20">
-                <ShieldCheck className="w-4 h-4 text-[#0a0a0a]" />
+              <div className="absolute -top-4 -right-4 bg-gradient-to-br from-brand-gold to-brand-gold-dark text-[#1c1c1c] px-4 py-2 rounded-xl font-bold text-xs shadow-lg flex items-center gap-1.5 border border-white/20">
+                <ShieldCheck className="w-4 h-4 text-[#392f5f]" />
                 <span>Executive Leadership</span>
               </div>
             </div>
