@@ -86,8 +86,8 @@ const defaultSlides = [
     title: "Shaping Tomorrow Through Vision, Integrity & Diverse Excellence",
     description:
       "From visionary real estate developments to digital commerce, global trading, hospitality, and modern ventures — Fanam Group builds enduring value across Bangladesh and beyond.",
-    ctaPrimary: { label: "Discover Our Concerns", href: "/concern" },
-    ctaSecondary: { label: "About Fanam Group", href: "/about" },
+    ctaPrimary: { label: "Explore Our Enterprise", href: "/concern" },
+    ctaSecondary: { label: "Our Heritage", href: "/about" },
     category: "Conglomerate",
   },
   {
@@ -99,8 +99,8 @@ const defaultSlides = [
     title: "A Dynamic Portfolio United by a Single Standard of Distinction",
     description:
       "Redefining urban lifestyles with landmark residential projects and empowering modern consumers with cutting-edge IT and digital retail solutions.",
-    ctaPrimary: { label: "Explore Projects", href: "/concern" },
-    ctaSecondary: { label: "About Fanam Group", href: "/about" },
+    ctaPrimary: { label: "View Developments", href: "/concern" },
+    ctaSecondary: { label: "Our Heritage", href: "/about" },
     category: "Real Estate & IT",
   },
   {
@@ -112,8 +112,8 @@ const defaultSlides = [
     title: "Empowering Communities & Inspiring Sustainable Innovation",
     description:
       "Committed to responsible progress, fostering long-term partnerships, and driving economic prosperity through ethical leadership and future-ready enterprise.",
-    ctaPrimary: { label: "Our Story", href: "/about" },
-    ctaSecondary: { label: "About Fanam Group", href: "/about" },
+    ctaPrimary: { label: "Our Journey", href: "/about" },
+    ctaSecondary: { label: "Our Heritage", href: "/about" },
     category: "Global Impact",
   },
 ];

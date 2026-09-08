@@ -58,7 +58,7 @@ export function ContactInfo({ data }: { data?: any }) {
           {/* Left Column: Form */}
           <div className="flex flex-col gap-6 w-full max-w-lg">
             <div className="flex flex-col gap-2">
-              <h2 className="text-[#f9c602] font-serif font-bold text-3xl md:text-4xl">
+              <h2 className="text-[#392F5F] font-serif font-bold text-3xl md:text-4xl mb-4">
                 Contact Us
               </h2>
               <p className="text-[#392f5f] text-base md:text-lg font-medium leading-snug">

@@ -90,7 +90,7 @@ export function InquiryCTA() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="w-full bg-white border border-[#1f1b3a]/10 p-8 md:p-10"
         >
-          <h3 className="text-2xl font-serif text-[#1f1b3a] mb-4 text-center lg:text-left">Stay Updated</h3>
+          <h3 className="text-[#392F5F] font-serif font-bold text-3xl md:text-4xl mb-4 text-center lg:text-left">Stay Updated</h3>
           <p className="text-[#1f1b3a]/60 text-sm md:text-base mb-8 text-center lg:text-left">
             Subscribe to our newsletter and be the first to know about our latest projects, achievements, and exclusive insights.
           </p>
@@ -106,7 +106,7 @@ export function InquiryCTA() {
             />
             <button
               type="submit"
-              className="group inline-flex items-center justify-center gap-2 bg-[#1f1b3a] text-white px-7 py-3.5 font-semibold text-sm hover:bg-[#F9C602] hover:text-[#1f1b3a] transition-all duration-300 active:scale-[0.98] whitespace-nowrap"
+              className="group inline-flex items-center justify-center gap-2 bg-[#F9C602] text-[#392F5F] px-7 py-3.5 font-semibold text-sm hover:bg-[#392F5F] hover:text-white transition-all duration-300 active:scale-[0.98] whitespace-nowrap"
             >
               <span>Subscribe</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />

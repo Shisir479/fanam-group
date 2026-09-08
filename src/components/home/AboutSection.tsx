@@ -48,15 +48,15 @@ export function AboutSection() {
             className="flex flex-col gap-5 lg:col-span-7"
           >
             {/* Header Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#f9c602]/15 border border-[#f9c602]/30 w-fit">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-[#f9c602]/15 border border-[#f9c602]/30 w-fit">
               <Building2 className="w-4 h-4 text-[#392F5F]" />
               <span className="text-[#392F5F] font-semibold text-xs md:text-sm tracking-wide uppercase">
-                About Fanam Group
+                Corporate Profile
               </span>
             </div>
 
             {/* Headline */}
-            <h2 className="text-[#392F5F] font-serif font-bold text-3xl sm:text-4xl lg:text-5xl leading-[1.2]">
+            <h2 className="text-[#392F5F] font-serif font-bold text-3xl md:text-4xl mb-4 leading-[1.2]">
               Building Legacies, Driving{" "}
               <span className="relative whitespace-nowrap text-[#392F5F]">
                 Transformation
@@ -112,7 +112,7 @@ export function AboutSection() {
                 href="/about"
                 className="group inline-flex items-center gap-3 bg-[#392F5F] hover:bg-[#F9C602] border border-[#392F5F] hover:border-[#F9C602] text-white hover:text-[#392F5F] px-7 py-3.5 font-semibold text-sm transition-all duration-300 active:scale-[0.98]"
               >
-                <span>Learn More About Us</span>
+                <span>Discover Our Heritage</span>
                 <span className="w-6 h-6 bg-white/20 group-hover:bg-[#392F5F]/10 flex items-center justify-center transition-all duration-300 group-hover:translate-x-1">
                   <ArrowRight className="w-3.5 h-3.5 text-white group-hover:text-[#392F5F]" />
                 </span>
@@ -122,7 +122,7 @@ export function AboutSection() {
                 href="/concern"
                 className="inline-flex items-center gap-2 text-[#392F5F] hover:text-[#f9c602] font-semibold text-sm px-4 py-3 transition-colors duration-300"
               >
-                <span>View Our Business Concerns</span>
+                <span>Explore Our Enterprises</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>

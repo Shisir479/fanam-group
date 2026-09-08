@@ -45,13 +45,13 @@ export function TestimonialSection() {
         <div className="mb-12 flex flex-col gap-4">
           <BlockReveal color="var(--color-brand-blue)">
             <div className="flex items-center text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
-              TESTIMONIAL
+              TESTIMONIALS
             </div>
           </BlockReveal>
 
           <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
-            <h2 className="text-2xl md:text-[34px] font-bold tracking-tight text-brand-blue leading-[1.3] uppercase max-w-2xl">
-              WHAT CUSTOMERS <br className="hidden md:block" /> SAY ABOUT US
+            <h2 className="text-[#392F5F] font-serif font-bold text-3xl md:text-4xl mb-4 tracking-tight leading-tight uppercase max-w-2xl">
+              TRUSTED BY <br className="hidden md:block" /> INDUSTRY LEADERS
             </h2>
           </BlockReveal>
         </div>

@@ -89,13 +89,13 @@ export function ConcernsSection() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="max-w-2xl">
             {/* Header Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#392F5F]/10 text-[#392F5F] text-xs md:text-sm font-semibold tracking-wide mb-4 shadow-sm">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white border border-[#392F5F]/10 text-[#392F5F] text-xs md:text-sm font-semibold tracking-wide mb-4 shadow-sm">
               <Layers className="w-3.5 h-3.5 text-[#F9C602]" />
-              <span>Multi-Industry Portfolio</span>
+              <span>Enterprise Portfolio</span>
             </div>
 
-            <h2 className="font-serif font-bold text-3xl sm:text-4xl md:text-5xl text-[#392F5F] tracking-tight leading-tight">
-              Our Diversified <span className="text-[#F9C602]">Concerns</span>
+            <h2 className="text-[#392F5F] font-serif font-bold text-3xl md:text-4xl mb-4 tracking-tight leading-tight">
+              Our Strategic <span className="text-[#F9C602]">Enterprises</span>
             </h2>
             <p className="text-[#392F5F]/60 text-sm sm:text-base mt-3 leading-relaxed">
               From landmark real estate developments to digital commerce and international

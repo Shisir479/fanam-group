@@ -72,10 +72,10 @@ export function PartnersSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#392F5F]/5 border border-[#392F5F]/10 text-[#392F5F] text-xs md:text-sm font-medium tracking-wide mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-[#392F5F]/5 border border-[#392F5F]/10 text-[#392F5F] text-xs md:text-sm font-medium tracking-wide mb-6"
           >
             <span className="w-2 h-2 rounded-full bg-[#f9c602]" />
-            Trusted Partners
+            Strategic Partners
           </motion.div>
 
           <motion.h2
@@ -83,9 +83,9 @@ export function PartnersSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-serif font-bold text-3xl sm:text-4xl md:text-5xl text-[#392F5F] tracking-tight leading-tight"
+            className="text-[#392F5F] font-serif font-bold text-3xl md:text-4xl mb-4 tracking-tight leading-tight"
           >
-            Trusted by Industry <span className="bg-gradient-to-r from-[#6B4E9E] to-[#F9C602] bg-clip-text text-transparent">Leaders</span>
+            Alliances of <span className="bg-gradient-to-r from-[#6B4E9E] to-[#F9C602] bg-clip-text text-transparent">Distinction</span>
           </motion.h2>
 
           <motion.p

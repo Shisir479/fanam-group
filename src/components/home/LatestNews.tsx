@@ -85,8 +85,8 @@ export function LatestNews({ blogs = [] }: { blogs?: any[] }) {
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-12">
           <div className="max-w-2xl">
-            <h2 className="text-[#f9c602] font-serif font-bold text-3xl md:text-4xl mb-4">
-              Latest News & Updates
+            <h2 className="text-[#392F5F] font-serif font-bold text-3xl md:text-4xl mb-4">
+              Corporate Insights
             </h2>
             <p className="text-gray-600 text-sm md:text-base leading-relaxed max-w-lg">
               Follow our latest achievements, announcements, events, and
@@ -98,7 +98,7 @@ export function LatestNews({ blogs = [] }: { blogs?: any[] }) {
             className="group hidden md:inline-flex items-center gap-3 bg-[#392F5F] text-white px-7 py-3.5 font-semibold text-sm hover:bg-[#F9C602] hover:text-[#392F5F] border border-[#392F5F] hover:border-[#F9C602] transition-all duration-300 active:scale-[0.98]"
           >
             <span className="transition-transform duration-300 group-hover:translate-x-1">
-              View All
+              View All Insights
             </span>
             <span className="w-5 h-5 rounded-full bg-white/20 group-hover:bg-[#392F5F]/10 text-white group-hover:text-[#392F5F] flex items-center justify-center transition-all duration-300 group-hover:-translate-x-1 group-hover:-rotate-45">
               <ArrowRight className="w-3.5 h-3.5" />
@@ -213,14 +213,14 @@ export function LatestNews({ blogs = [] }: { blogs?: any[] }) {
           </button>
         </div>
 
-        {/* Mobile View All Button */}
+        {/* Mobile View All Insights Button */}
         <div className="mt-8 flex justify-center md:hidden">
           <Link
             href="/blog"
             className="group inline-flex items-center gap-3 bg-[#392F5F] text-white px-7 py-3.5 font-semibold text-sm hover:bg-[#F9C602] hover:text-[#392F5F] border border-[#392F5F] hover:border-[#F9C602] transition-all duration-300 active:scale-[0.98]"
           >
             <span className="transition-transform duration-300 group-hover:translate-x-1">
-              View All
+              View All Insights
             </span>
             <span className="w-7 h-7 rounded-full bg-white/20 group-hover:bg-[#392F5F]/10 text-white group-hover:text-[#392F5F] flex items-center justify-center transition-all duration-300 group-hover:-translate-x-1 group-hover:-rotate-45">
               <ArrowRight className="w-3.5 h-3.5" />

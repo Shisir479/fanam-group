@@ -53,9 +53,9 @@ export function AchievementsSection() {
         {/* Header */}
         <div className="text-center mb-16 md:mb-24 flex flex-col items-center">
           <div className="flex flex-col items-center">
-            <span className="text-[#6B4E9E] font-semibold text-xs md:text-sm uppercase tracking-[0.25em] mb-3">Achievements</span>
+            <span className="text-[#6B4E9E] font-semibold text-xs md:text-sm uppercase tracking-[0.25em] mb-3">Milestones</span>
             <h2 className="text-[#392F5F] font-serif font-bold text-3xl md:text-4xl mb-4">
-              Milestones of Excellence
+              Legacy of Achievement
             </h2>
             <div className="w-16 h-1 bg-gradient-to-r from-[#392F5F] via-[#6B4E9E] to-[#F9C602]" />
           </div>
