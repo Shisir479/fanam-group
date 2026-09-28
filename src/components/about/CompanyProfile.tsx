@@ -3,7 +3,13 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { CheckCircle2, Building2, Sparkles, Globe2, ShieldCheck } from "lucide-react";
+import {
+  CheckCircle2,
+  Building2,
+  Sparkles,
+  Globe2,
+  ShieldCheck,
+} from "lucide-react";
 
 export function CompanyProfile({ data }: { data: any }) {
   if (!data) return null;
@@ -58,11 +64,12 @@ export function CompanyProfile({ data }: { data: any }) {
 
             {/* Narrative text */}
             <p className="text-gray-700 text-base md:text-[16px] font-normal leading-relaxed mb-8">
-              Fanam Group is a diversified corporate conglomerate committed to shaping
-              the future through innovation, integrity, and operational excellence. With a
-              growing footprint spanning Real Estate, E-Commerce, Travel & Tourism, Media,
-              and emerging industries, we deliver high-value solutions that build enduring
-              legacies and empower communities across Bangladesh and beyond.
+              Fanam Group is a diversified corporate conglomerate committed to
+              shaping the future through innovation, integrity, and operational
+              excellence. With a growing footprint spanning Real Estate,
+              E-Commerce, Travel & Tourism, Media, and emerging industries, we
+              deliver high-value solutions that build enduring legacies and
+              empower communities across Bangladesh and beyond.
             </p>
 
             {/* Feature List Cards */}
@@ -73,7 +80,10 @@ export function CompanyProfile({ data }: { data: any }) {
                   className="group flex items-start gap-4 p-3.5 rounded-2xl bg-white border border-gray-100 hover:border-[#f9c602]/50 shadow-sm hover:shadow-md transition-all duration-300"
                 >
                   <div className="w-7 h-7 rounded-xl bg-[#f9c602] text-[#392f5f] flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_12px_rgba(249,198,2,0.35)] group-hover:scale-105 transition-transform duration-300">
-                    <CheckCircle2 className="w-4 h-4 text-[#392f5f]" strokeWidth={2.5} />
+                    <CheckCircle2
+                      className="w-4 h-4 text-[#392f5f]"
+                      strokeWidth={2.5}
+                    />
                   </div>
                   <div>
                     <h4 className="text-[15px] font-bold text-[#392f5f] mb-0.5 group-hover:text-black transition-colors">

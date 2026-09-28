@@ -14,24 +14,45 @@ import {
   Globe,
   TrendingUp,
   ShieldCheck,
+  Award,
+  Building2,
+  Layers,
 } from "lucide-react";
 
-/* ─── Inline premium social icons ─── */
-const socialLinks = [
+/* ─── Corporate Palette ───
+   Deep Purple  #392F5F  (primary dark)
+   Brand Gold   #F9C602  (accent)
+   White        #FFFFFF  (base)  */
+
+const defaultSocialLinks = [
   {
+    key: "facebook",
     label: "Facebook",
     href: "https://facebook.com",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4 md:w-5 md:h-5">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        className="w-4 h-4 md:w-5 md:h-5"
+      >
         <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
       </svg>
     ),
   },
   {
+    key: "instagram",
     label: "Instagram",
     href: "https://instagram.com",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4 md:w-5 md:h-5">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        className="w-4 h-4 md:w-5 md:h-5"
+      >
         <rect x="2" y="2" width="20" height="20" rx="5" />
         <circle cx="12" cy="12" r="5" />
         <circle cx="17.5" cy="6.5" r="1.25" fill="currentColor" stroke="none" />
@@ -39,10 +60,17 @@ const socialLinks = [
     ),
   },
   {
+    key: "linkedin",
     label: "LinkedIn",
     href: "https://linkedin.com",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4 md:w-5 md:h-5">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        className="w-4 h-4 md:w-5 md:h-5"
+      >
         <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
         <rect x="2" y="9" width="4" height="12" />
         <circle cx="4" cy="4" r="2" />
@@ -50,31 +78,40 @@ const socialLinks = [
     ),
   },
   {
+    key: "twitter",
     label: "Twitter",
     href: "https://twitter.com",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4 md:w-5 md:h-5">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        className="w-4 h-4 md:w-5 md:h-5"
+      >
         <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
         <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
       </svg>
     ),
   },
   {
+    key: "youtube",
     label: "YouTube",
     href: "https://youtube.com",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4 md:w-5 md:h-5">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        className="w-4 h-4 md:w-5 md:h-5"
+      >
         <rect x="2" y="4" width="20" height="16" rx="4" />
         <polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none" />
       </svg>
     ),
   },
 ];
-
-/* ─── Corporate Palette ───
-   Deep Purple  #392F5F  (primary dark)
-   Brand Gold   #F9C602  (accent)
-   White        #FFFFFF  (base)  */
 
 const defaultSlides = [
   {
@@ -120,7 +157,7 @@ const defaultSlides = [
 
 const AUTOPLAY_DURATION = 6500; // ms
 
-const stats = [
+const defaultStats = [
   {
     id: 1,
     icon: Handshake,
@@ -155,11 +192,49 @@ const stats = [
   },
 ];
 
-export function Hero() {
+export function Hero({
+  cmsData,
+  homeSettings,
+  mainSettings,
+  branding,
+}: {
+  cmsData?: Record<string, unknown>;
+  homeSettings?: Record<string, unknown>;
+  mainSettings?: Record<string, unknown>;
+  branding?: { socialLinks?: Record<string, string> };
+}) {
   const [current, setCurrent] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
-  const slides = defaultSlides;
+  // Use CMS slides if available, otherwise fallback to defaultSlides
+  const cmsSlides = (cmsData?.heroSlides ||
+    homeSettings?.slides ||
+    []) as Array<Record<string, unknown>>;
+  const slides =
+    cmsSlides.length > 0
+      ? cmsSlides.map((slide: Record<string, unknown>, idx: number) => ({
+          id: (slide._id as string) || idx + 1,
+          image:
+            ((slide.image as Record<string, unknown>)?.url as string) ||
+            (slide.image as string) ||
+            "",
+          video: (slide.videoUrl as string) || "",
+          tagline:
+            (slide.tagline as string) || (slide.subtitle as string) || "",
+          title: (slide.title as string) || (slide.heading as string) || "",
+          description:
+            (slide.description as string) || (slide.content as string) || "",
+          ctaPrimary: (slide.ctaPrimary as { label: string; href: string }) || {
+            label: "Explore Our Enterprise",
+            href: "/concern",
+          },
+          ctaSecondary: (slide.ctaSecondary as {
+            label: string;
+            href: string;
+          }) || { label: "Our Heritage", href: "/about" },
+          category: (slide.category as string) || "General",
+        }))
+      : defaultSlides;
 
   const nextSlide = useCallback(() => {
     setCurrent((prev) => (prev + 1) % slides.length);
@@ -176,6 +251,14 @@ export function Hero() {
   }, [nextSlide, isHovered]);
 
   const currentSlide = slides[current];
+
+  // Dynamic social links from branding settings
+  const dynamicSocialLinks = branding?.socialLinks
+    ? defaultSocialLinks.map((link) => ({
+        ...link,
+        href: branding.socialLinks?.[link.key] || link.href,
+      }))
+    : defaultSocialLinks;
 
   return (
     <section
@@ -257,7 +340,12 @@ export function Hero() {
 
       {/* ─── Ambient living gradient aura ─── */}
       <motion.div
-        animate={{ scale: [1, 1.25, 1], opacity: [0.25, 0.45, 0.25], x: [0, 40, 0], y: [0, -20, 0] }}
+        animate={{
+          scale: [1, 1.25, 1],
+          opacity: [0.25, 0.45, 0.25],
+          x: [0, 40, 0],
+          y: [0, -20, 0],
+        }}
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         className="absolute -top-32 -right-24 w-[560px] h-[560px] rounded-full blur-[150px] pointer-events-none z-[2]"
         style={{
@@ -266,7 +354,11 @@ export function Hero() {
         }}
       />
       <motion.div
-        animate={{ scale: [1.1, 1, 1.1], opacity: [0.3, 0.5, 0.3], x: [0, -30, 0] }}
+        animate={{
+          scale: [1.1, 1, 1.1],
+          opacity: [0.3, 0.5, 0.3],
+          x: [0, -30, 0],
+        }}
         transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
         className="absolute -bottom-40 -left-32 w-[500px] h-[500px] rounded-full blur-[150px] pointer-events-none z-[2]"
         style={{
@@ -316,29 +408,29 @@ export function Hero() {
 
             {/* Action Buttons */}
             <div className="flex flex-wrap items-center gap-4 mt-8">
-            <Link
-              href={currentSlide.ctaPrimary.href}
-              className="group relative inline-flex items-center gap-3 bg-[#F9C602] text-[#392F5F] px-7 py-3.5 font-semibold text-sm uppercase tracking-widest transition-all duration-300 hover:bg-white hover:text-[#392F5F] active:scale-[0.98] shadow-[0_8px_24px_rgba(0,0,0,0.25)]"
-            >
-              <span>{currentSlide.ctaPrimary.label}</span>
-              <span className="w-7 h-7 bg-[#392F5F]/10 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1">
-                <ArrowRight className="w-4 h-4" />
-              </span>
-            </Link>
+              <Link
+                href={currentSlide.ctaPrimary.href}
+                className="group relative inline-flex items-center gap-3 bg-[#F9C602] text-[#392F5F] px-7 py-3.5 font-semibold text-sm uppercase tracking-widest transition-all duration-300 hover:bg-white hover:text-[#392F5F] active:scale-[0.98] shadow-[0_8px_24px_rgba(0,0,0,0.25)]"
+              >
+                <span>{currentSlide.ctaPrimary.label}</span>
+                <span className="w-7 h-7 bg-[#392F5F]/10 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1">
+                  <ArrowRight className="w-4 h-4" />
+                </span>
+              </Link>
 
-            <Link
-              href={currentSlide.ctaSecondary.href}
-              className="group inline-flex items-center gap-2.5 px-7 py-3.5 text-white font-semibold text-sm uppercase tracking-widest bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/25 hover:border-[#F9C602] transition-all duration-300 active:scale-[0.98]"
-            >
-              <Compass className="w-4 h-4 text-[#F9C602]" />
-              <span>{currentSlide.ctaSecondary.label}</span>
-              <ArrowRight className="w-4 h-4 text-white/60 group-hover:text-[#F9C602] group-hover:translate-x-1 transition-all" />
-            </Link>
-          </div>
+              <Link
+                href={currentSlide.ctaSecondary.href}
+                className="group inline-flex items-center gap-2.5 px-7 py-3.5 text-white font-semibold text-sm uppercase tracking-widest bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/25 hover:border-[#F9C602] transition-all duration-300 active:scale-[0.98]"
+              >
+                <Compass className="w-4 h-4 text-[#F9C602]" />
+                <span>{currentSlide.ctaSecondary.label}</span>
+                <ArrowRight className="w-4 h-4 text-white/60 group-hover:text-[#F9C602] group-hover:translate-x-1 transition-all" />
+              </Link>
             </div>
+          </div>
 
-            {/* ─── Floating Island Stats Bento ─── */}
-            {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-10 w-full">
+          {/* ─── Floating Island Stats Bento ─── */}
+          {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-10 w-full">
             {stats.map((stat, idx) => {
               const Icon = stat.icon;
               return (
@@ -386,18 +478,20 @@ export function Hero() {
                 >
                   <div className="flex items-center justify-between text-xs mb-1.5">
                     <span
-                      className={`font-mono transition-colors duration-300 ${isActive
-                        ? "text-[#F9C602] font-semibold"
-                        : "text-white/40 group-hover:text-white/70"
-                        }`}
+                      className={`font-mono transition-colors duration-300 ${
+                        isActive
+                          ? "text-[#F9C602] font-semibold"
+                          : "text-white/40 group-hover:text-white/70"
+                      }`}
                     >
                       0{idx + 1}
                     </span>
                     <span
-                      className={`hidden sm:inline-block text-[11px] font-medium truncate max-w-[110px] transition-colors duration-300 ${isActive
-                        ? "text-white"
-                        : "text-white/40 group-hover:text-white/70"
-                        }`}
+                      className={`hidden sm:inline-block text-[11px] font-medium truncate max-w-[110px] transition-colors duration-300 ${
+                        isActive
+                          ? "text-white"
+                          : "text-white/40 group-hover:text-white/70"
+                      }`}
                     >
                       {slide.category}
                     </span>
@@ -410,15 +504,19 @@ export function Hero() {
                         key={`progress-${idx}-${current}`}
                         initial={{ width: "0%" }}
                         animate={{ width: isHovered ? undefined : "100%" }}
-                        transition={{ duration: AUTOPLAY_DURATION / 1000, ease: "linear" }}
+                        transition={{
+                          duration: AUTOPLAY_DURATION / 1000,
+                          ease: "linear",
+                        }}
                         className="h-full bg-gradient-to-r from-[#F9C602] to-[#FFE066] shadow-[0_0_8px_rgba(249,198,2,0.4)]"
                       />
                     ) : (
                       <div
-                        className={`h-full transition-all duration-300 ${idx < current
-                          ? "w-full bg-white/40"
-                          : "w-0 group-hover:w-1/3 bg-white/20"
-                          }`}
+                        className={`h-full transition-all duration-300 ${
+                          idx < current
+                            ? "w-full bg-white/40"
+                            : "w-0 group-hover:w-1/3 bg-white/20"
+                        }`}
                       />
                     )}
                   </div>
@@ -461,9 +559,9 @@ export function Hero() {
 
       {/* ─── 4. Floating Social Icons (transparent bordered design) ─── */}
       <div className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-3 md:gap-4">
-        {socialLinks.map((item, idx) => (
+        {dynamicSocialLinks.map((item, idx) => (
           <motion.a
-            key={item.label}
+            key={item.key}
             href={item.href}
             target="_blank"
             rel="noopener noreferrer"

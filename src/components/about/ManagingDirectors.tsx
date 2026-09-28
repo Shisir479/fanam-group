@@ -62,9 +62,9 @@ export function ManagingDirectors() {
           </h2>
 
           <p className="text-gray-600 text-base md:text-lg font-normal leading-relaxed max-w-3xl mx-auto">
-            Our experienced leadership brings decades of collective industry expertise,
-            driving operational excellence, customer satisfaction, and ethical stewardship
-            across every business sector of Fanam Group.
+            Our experienced leadership brings decades of collective industry
+            expertise, driving operational excellence, customer satisfaction,
+            and ethical stewardship across every business sector of Fanam Group.
           </p>
         </div>
 

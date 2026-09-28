@@ -66,3 +66,11 @@ export const updateMainSettingsAdmin = async (id: string, data: any) => {
   }
   return res;
 };
+
+export const getHomeSettingsPublic = async () => {
+  return api("/settings/home");
+};
+
+export const getHomeSettingsAdmin = async () => {
+  return api("/admin/settings/home");
+};

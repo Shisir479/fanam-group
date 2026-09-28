@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 
-const achievements = [
+const defaultAchievements = [
   {
     id: "01",
     stat: "25+",
@@ -46,14 +46,54 @@ const achievements = [
   },
 ];
 
-export function AchievementsSection() {
+interface Achievement {
+  id: string;
+  stat: string;
+  label: string;
+  image: string;
+  type: "up" | "down";
+}
+
+export function AchievementsSection({
+  cmsData,
+  mainSettings,
+}: {
+  cmsData?: Record<string, unknown>;
+  mainSettings?: Record<string, unknown>;
+}) {
+  // Dynamic achievements from CMS or main settings
+  const cmsAchievements = (mainSettings?.achievements ||
+    cmsData?.achievements ||
+    []) as Array<Record<string, unknown>>;
+
+  // Filter out invalid CMS entries and map valid ones
+  const validCmsAchievements = cmsAchievements
+    .map((item: Record<string, unknown>) => ({
+      id: (item._id as string) || (item.id as string) || "",
+      stat: (item.stat as string) || (item.value as string) || "",
+      label: (item.label as string) || "",
+      image:
+        ((item.image as Record<string, unknown>)?.url as string) ||
+        (item.image as string) ||
+        "",
+      type: ((item.type as string) === "down" ? "down" : "up") as "up" | "down",
+    }))
+    .filter((item) => item.id && item.stat && item.label && item.image); // Only keep complete entries
+
+  const achievements =
+    validCmsAchievements.length > 0
+      ? validCmsAchievements
+      : defaultAchievements;
+
   return (
     <section className="fanam-section bg-gradient-to-b from-white via-[#F3F0FA] to-white relative overflow-hidden">
       <div className="fanam-container">
         {/* Header */}
         <div className="text-center mb-16 md:mb-24 flex flex-col items-center">
           <div className="flex flex-col items-center">
-            <span className="text-[#6B4E9E] font-semibold text-xs md:text-sm uppercase tracking-[0.25em] mb-3">Milestones</span>
+            <span className="text-[#6B4E9E] font-semibold text-xs md:text-sm uppercase tracking-[0.25em] mb-3">
+              Milestones
+            </span>
             <h2 className="text-[#392F5F] font-serif font-bold text-3xl md:text-4xl mb-4">
               Legacy of Achievement
             </h2>

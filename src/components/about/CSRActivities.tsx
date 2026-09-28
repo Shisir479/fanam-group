@@ -2,7 +2,14 @@
 
 import React from "react";
 import Image from "next/image";
-import { Heart, Droplets, BookOpen, Users, ArrowRight, Sparkles } from "lucide-react";
+import {
+  Heart,
+  Droplets,
+  BookOpen,
+  Users,
+  ArrowRight,
+  Sparkles,
+} from "lucide-react";
 
 const csrInitiatives = [
   {
@@ -64,8 +71,9 @@ export function CSRActivities() {
           </h2>
 
           <p className="text-gray-600 text-base md:text-lg font-normal leading-relaxed max-w-2xl mx-auto">
-            At Fanam Group, our success is measured not merely by commercial milestones,
-            but by the tangible, lasting upliftment we bring to people, education, and the environment.
+            At Fanam Group, our success is measured not merely by commercial
+            milestones, but by the tangible, lasting upliftment we bring to
+            people, education, and the environment.
           </p>
         </div>
 

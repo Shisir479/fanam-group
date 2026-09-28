@@ -4,32 +4,50 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import {
-  CheckCircle2,
-  ArrowRight,
-  Award,
-  Building2,
-} from "lucide-react";
+import { CheckCircle2, ArrowRight, Award, Building2 } from "lucide-react";
 
-export function AboutSection() {
-  const highlights = [
-    {
-      title: "Trusted Conglomerate",
-      desc: "A beacon of excellence and trust in Bangladesh's business landscape.",
-    },
-    {
-      title: "Multi-Sector Presence",
-      desc: "Visionary leadership across Real Estate, E-Commerce, Trading & IT.",
-    },
-    {
-      title: "Enduring Integrity",
-      desc: "Long-term client & partner relationships built on radical transparency.",
-    },
-    {
-      title: "Decade of Sustained Growth",
-      desc: "Continuous expansion driven by high standards and innovation.",
-    },
-  ];
+const defaultHighlights = [
+  {
+    title: "Trusted Conglomerate",
+    desc: "A beacon of excellence and trust in Bangladesh's business landscape.",
+  },
+  {
+    title: "Multi-Sector Presence",
+    desc: "Visionary leadership across Real Estate, E-Commerce, Trading & IT.",
+  },
+  {
+    title: "Enduring Integrity",
+    desc: "Long-term client & partner relationships built on radical transparency.",
+  },
+  {
+    title: "Decade of Sustained Growth",
+    desc: "Continuous expansion driven by high standards and innovation.",
+  },
+];
+
+interface Highlight {
+  title: string;
+  desc: string;
+}
+
+export function AboutSection({
+  cmsData,
+  mainSettings,
+}: {
+  cmsData?: Record<string, unknown>;
+  mainSettings?: Record<string, unknown>;
+}) {
+  // Dynamic highlights from CMS or main settings
+  const cmsHighlights = (mainSettings?.highlights ||
+    cmsData?.highlights ||
+    []) as Array<Record<string, unknown>>;
+  const highlights: Highlight[] =
+    cmsHighlights.length > 0
+      ? cmsHighlights.map((item: Record<string, unknown>, index: number) => ({
+          title: (item.title as string) || "",
+          desc: (item.desc as string) || (item.description as string) || "",
+        }))
+      : defaultHighlights;
 
   return (
     <section className="relative fanam-section bg-gradient-to-b from-white via-neutral-50/50 to-white overflow-hidden">
@@ -67,11 +85,11 @@ export function AboutSection() {
 
             {/* Narrative text */}
             <p className="text-gray-600 text-base md:text-[16px] leading-relaxed max-w-2xl font-normal">
-              Starting as an ambitious real estate pioneer in 2018, Fanam Group has
-              rapidly expanded into a diversified, multi-industry powerhouse. Today,
-              our dynamic footprint spans real estate, e-commerce, international
-              trading, hospitality, and tech solutions — united under one gold standard
-              of uncompromising quality.
+              Starting as an ambitious real estate pioneer in 2018, Fanam Group
+              has rapidly expanded into a diversified, multi-industry
+              powerhouse. Today, our dynamic footprint spans real estate,
+              e-commerce, international trading, hospitality, and tech solutions
+              — united under one gold standard of uncompromising quality.
             </p>
 
             {/* Feature Points Grid */}
@@ -170,7 +188,9 @@ export function AboutSection() {
                   <div className="text-xl font-bold font-mono text-[#f9c602]">
                     7+ Years
                   </div>
-                  <div className="text-white/70 text-xs">Excellence Journey</div>
+                  <div className="text-white/70 text-xs">
+                    Excellence Journey
+                  </div>
                 </div>
               </div>
             </motion.div>

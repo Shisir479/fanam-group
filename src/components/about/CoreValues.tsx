@@ -73,8 +73,8 @@ export function CoreValues({ data }: { data: any }) {
           </h2>
 
           <p className="text-gray-600 text-base md:text-lg font-normal leading-relaxed max-w-2xl mx-auto">
-            Our core values guide every decision we make, inspire our collective culture,
-            and guarantee unyielding integrity in all that we deliver.
+            Our core values guide every decision we make, inspire our collective
+            culture, and guarantee unyielding integrity in all that we deliver.
           </p>
         </div>
 

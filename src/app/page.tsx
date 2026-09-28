@@ -9,27 +9,47 @@ import { InquiryCTA } from "@/components/home/InquiryCTA";
 import { MetricsBar } from "@/components/home/MetricsBar";
 import { getHomepageCMSPublic } from "@/services/homepage-cms.service";
 import { getBlogsPublic } from "@/services/blog.service";
-import { getBrandingSettingsPublic } from "@/services/settings.service";
+import {
+  getBrandingSettingsPublic,
+  getMainSettingsPublic,
+  getHomeSettingsPublic,
+} from "@/services/settings.service";
 
 export default async function Home() {
   let cmsData: any = null;
   let blogsData: any[] = [];
   let brandingData: any = null;
+  let mainSettingsData: any = null;
+  let homeSettingsData: any = null;
 
   try {
-    const res = await getHomepageCMSPublic();
-    if (res?.success) {
-      cmsData = res.data;
+    const [cmsRes, blogsRes, brandingRes, mainSettingsRes, homeSettingsRes] =
+      await Promise.all([
+        getHomepageCMSPublic(),
+        getBlogsPublic({ status: "active", limit: 4 }),
+        getBrandingSettingsPublic(),
+        getMainSettingsPublic(),
+        getHomeSettingsPublic(),
+      ]);
+
+    if (cmsRes?.success) {
+      cmsData = cmsRes.data;
     }
 
-    const blogsRes = await getBlogsPublic({ status: "active", limit: 4 });
     if (blogsRes?.success) {
       blogsData = blogsRes.data || [];
     }
 
-    const brandingRes = await getBrandingSettingsPublic();
     if (brandingRes?.success) {
       brandingData = brandingRes.data;
+    }
+
+    if (mainSettingsRes?.success) {
+      mainSettingsData = mainSettingsRes.data;
+    }
+
+    if (homeSettingsRes?.success) {
+      homeSettingsData = homeSettingsRes.data;
     }
   } catch (error) {
     // fallback
@@ -37,14 +57,22 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Hero />
-      <MetricsBar />
-      <AboutSection />
-      <ConcernsSection />
-      <AchievementsSection />
-      <PartnersSection />
+      <Hero
+        cmsData={cmsData}
+        homeSettings={homeSettingsData}
+        mainSettings={mainSettingsData}
+        branding={brandingData}
+      />
+      {/* <MetricsBar 
+        cmsData={cmsData} 
+        mainSettings={mainSettingsData}
+      /> */}
+      <AboutSection cmsData={cmsData} mainSettings={mainSettingsData} />
+      <ConcernsSection cmsData={cmsData} branding={brandingData} />
+      <AchievementsSection cmsData={cmsData} mainSettings={mainSettingsData} />
+      <PartnersSection cmsData={cmsData} />
       <TestimonialSection />
-      <InquiryCTA />
+      <InquiryCTA mainSettings={mainSettingsData} branding={brandingData} />
       <LatestNews blogs={blogsData} />
     </div>
   );

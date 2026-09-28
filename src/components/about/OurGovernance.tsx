@@ -73,8 +73,9 @@ export function OurGovernance() {
           </h2>
 
           <p className="text-gray-600 text-base md:text-lg font-normal leading-relaxed max-w-3xl mx-auto">
-            Fanam Group operates under a rigorous governance framework built upon transparency,
-            fiduciary accountability, regulatory adherence, and world-class ethical leadership.
+            Fanam Group operates under a rigorous governance framework built
+            upon transparency, fiduciary accountability, regulatory adherence,
+            and world-class ethical leadership.
           </p>
         </div>
 
@@ -168,7 +169,8 @@ export function OurGovernance() {
                 Institutional Trust & Compliance Seal
               </h4>
               <p className="text-xs text-white/70">
-                100% Regulatory Adherence • Independent Internal Audits • Zero Tolerance for Unethical Conduct
+                100% Regulatory Adherence • Independent Internal Audits • Zero
+                Tolerance for Unethical Conduct
               </p>
             </div>
           </div>

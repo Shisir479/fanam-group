@@ -88,20 +88,22 @@ export function ChairmanMessage({ data }: { data: any }) {
             {/* Executive Message Content */}
             <div className="space-y-4 text-white/85 text-base sm:text-lg leading-relaxed font-normal">
               <p className="italic text-white font-medium border-l-2 border-[#f9c602] pl-4">
-                &ldquo;At Fanam Group, we believe that enduring success is never accidental —
-                it is forged through steadfast integrity, bold innovation, and an unwavering
-                commitment to societal progress.&rdquo;
+                &ldquo;At Fanam Group, we believe that enduring success is never
+                accidental — it is forged through steadfast integrity, bold
+                innovation, and an unwavering commitment to societal
+                progress.&rdquo;
               </p>
               <p>
-                Since our journey began, our north star has been clear: to build enterprises
-                that deliver genuine, quantifiable value to our clients, partners, and the communities
-                we proudly serve.
+                Since our journey began, our north star has been clear: to build
+                enterprises that deliver genuine, quantifiable value to our
+                clients, partners, and the communities we proudly serve.
               </p>
               <p>
-                As we continue to expand our footprint across multiple industries, our focus remains
-                firm on sustainable industrial development, ethical corporate governance, and empowering
-                future generations. Together, we are not merely building businesses — we are shaping
-                a resilient legacy for tomorrow.
+                As we continue to expand our footprint across multiple
+                industries, our focus remains firm on sustainable industrial
+                development, ethical corporate governance, and empowering future
+                generations. Together, we are not merely building businesses —
+                we are shaping a resilient legacy for tomorrow.
               </p>
             </div>
 

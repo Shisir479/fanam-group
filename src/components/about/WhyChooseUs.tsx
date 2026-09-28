@@ -35,7 +35,8 @@ const features = [
   },
   {
     title: "Enduring Global Partnerships",
-    detail: "Strategic alliances with premier national & international entities.",
+    detail:
+      "Strategic alliances with premier national & international entities.",
   },
 ];
 
@@ -108,9 +109,11 @@ export function WhyChooseUs() {
             </h2>
 
             <p className="text-gray-600 text-base md:text-lg font-normal leading-relaxed mb-8">
-              We combine visionary foresight, technical agility, and unwavering integrity to deliver
-              unparalleled value across our diverse portfolio. Our commitment to excellence makes us
-              the trusted partner of choice for institutional clients, investors, and communities.
+              We combine visionary foresight, technical agility, and unwavering
+              integrity to deliver unparalleled value across our diverse
+              portfolio. Our commitment to excellence makes us the trusted
+              partner of choice for institutional clients, investors, and
+              communities.
             </p>
 
             {/* 8 Feature Cards (Grid 2x4) */}
@@ -121,7 +124,10 @@ export function WhyChooseUs() {
                   className="group p-3.5 rounded-2xl bg-white border border-gray-100 hover:border-[#f9c602]/60 shadow-sm hover:shadow-md transition-all duration-300 flex items-start gap-3.5"
                 >
                   <div className="w-8 h-8 rounded-xl bg-[#f9c602] text-[#392f5f] flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_12px_rgba(249,198,2,0.35)] group-hover:scale-105 transition-transform duration-300">
-                    <CheckCircle2 className="w-4 h-4 text-[#392f5f]" strokeWidth={2.5} />
+                    <CheckCircle2
+                      className="w-4 h-4 text-[#392f5f]"
+                      strokeWidth={2.5}
+                    />
                   </div>
                   <div>
                     <h4 className="text-sm font-bold text-[#392f5f] mb-0.5 group-hover:text-black">

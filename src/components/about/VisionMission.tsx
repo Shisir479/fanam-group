@@ -1,7 +1,13 @@
 "use client";
 
 import React from "react";
-import { Target, Lightbulb, Compass, Sparkles, ArrowUpRight } from "lucide-react";
+import {
+  Target,
+  Lightbulb,
+  Compass,
+  Sparkles,
+  ArrowUpRight,
+} from "lucide-react";
 
 export function VisionMission({ data }: { data: any }) {
   const missionItems = [
@@ -63,9 +69,10 @@ export function VisionMission({ data }: { data: any }) {
           </h2>
 
           <p className="text-gray-600 text-base md:text-lg font-normal leading-relaxed max-w-3xl mx-auto">
-            Guided by a clear strategic vision and an uncompromising mission, we are
-            committed to creating sustainable multi-industry growth, delivering excellence,
-            and building lasting value for all stakeholders.
+            Guided by a clear strategic vision and an uncompromising mission, we
+            are committed to creating sustainable multi-industry growth,
+            delivering excellence, and building lasting value for all
+            stakeholders.
           </p>
         </div>
 
@@ -127,7 +134,9 @@ export function VisionMission({ data }: { data: any }) {
             {/* Card Footer Tag */}
             <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between text-xs text-white/50">
               <span>Fanam Group Corporate Core</span>
-              <span className="text-[#f9c602] font-semibold">Excellence Guaranteed</span>
+              <span className="text-[#f9c602] font-semibold">
+                Excellence Guaranteed
+              </span>
             </div>
           </div>
 
@@ -187,7 +196,9 @@ export function VisionMission({ data }: { data: any }) {
             {/* Card Footer Tag */}
             <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500 font-medium">
               <span>National & Global Reach</span>
-              <span className="text-[#392f5f] font-bold">Horizon 2030 & Beyond</span>
+              <span className="text-[#392f5f] font-bold">
+                Horizon 2030 & Beyond
+              </span>
             </div>
           </div>
         </div>

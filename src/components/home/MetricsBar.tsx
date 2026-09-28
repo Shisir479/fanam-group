@@ -13,7 +13,7 @@ import {
   Layers,
 } from "lucide-react";
 
-const metrics = [
+const defaultMetrics = [
   {
     id: "alliances",
     index: "01",
@@ -54,8 +54,68 @@ const metrics = [
 
 type DesignType = "floating-island" | "editorial-columns" | "bento-cards";
 
-export function MetricsBar() {
-  const [activeDesign, setActiveDesign] = useState<DesignType>("floating-island");
+interface Metric {
+  id: string;
+  index?: string;
+  value: string;
+  label: string;
+  subtext?: string;
+  badge?: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+export function MetricsBar({
+  cmsData,
+  mainSettings,
+}: {
+  cmsData?: Record<string, unknown>;
+  mainSettings?: Record<string, unknown>;
+}) {
+  const [activeDesign, setActiveDesign] =
+    useState<DesignType>("floating-island");
+
+  // Dynamic metrics from CMS or main settings
+  const cmsMetrics = (mainSettings?.metrics || cmsData?.metrics || []) as Array<
+    Record<string, unknown>
+  >;
+  const metrics: Metric[] =
+    cmsMetrics.length > 0
+      ? cmsMetrics.map((metric: Record<string, unknown>, idx: number) => {
+          const iconMap: Record<
+            string,
+            React.ComponentType<{ className?: string }>
+          > = {
+            handshake: Handshake,
+            globe2: Globe2,
+            globe: Globe2,
+            building2: Building2,
+            building: Building2,
+            award: Award,
+            sparkles: Sparkles,
+            trendingup: TrendingUp,
+            shieldcheck: ShieldCheck,
+            layers: Layers,
+          };
+          const Icon =
+            iconMap[(metric.icon as string)?.toLowerCase()] || Handshake;
+          return {
+            id:
+              (metric._id as string) ||
+              (metric.id as string) ||
+              `metric-${idx}`,
+            index: (metric.index as string) || String(idx + 1).padStart(2, "0"),
+            value: (metric.value as string) || "",
+            label: (metric.label as string) || "",
+            subtext:
+              (metric.subtext as string) ||
+              (metric.description as string) ||
+              "",
+            badge:
+              (metric.badge as string) || (metric.subtitle as string) || "",
+            icon: Icon,
+          };
+        })
+      : defaultMetrics;
 
   return (
     <div className="relative z-20 w-full bg-white">
@@ -172,7 +232,7 @@ export function MetricsBar() {
                       {/* Index Tag */}
                       <div className="flex items-center justify-between text-xs mb-4">
                         <span className="font-mono text-[#f9c602] font-bold tracking-wider">
-                          // {metric.index}
+                          {"// " + metric.index}
                         </span>
                         <span className="px-2.5 py-0.5 rounded-full bg-gray-100 text-gray-600 text-[11px] font-semibold">
                           {metric.badge}

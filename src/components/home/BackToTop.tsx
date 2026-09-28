@@ -17,7 +17,7 @@ export function BackToTop() {
       if (totalScroll > 0) {
         const progress = Math.min(
           100,
-          Math.max(0, (currentScroll / totalScroll) * 100)
+          Math.max(0, (currentScroll / totalScroll) * 100),
         );
         setScrollProgress(progress);
       }
@@ -40,7 +40,8 @@ export function BackToTop() {
 
   const radius = 22;
   const circumference = 2 * Math.PI * radius;
-  const strokeDashoffset = circumference - (scrollProgress / 100) * circumference;
+  const strokeDashoffset =
+    circumference - (scrollProgress / 100) * circumference;
 
   return (
     <AnimatePresence>

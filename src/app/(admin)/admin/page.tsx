@@ -75,7 +75,8 @@ export default function AdminDashboard() {
       icon: (
         <Briefcase className="w-7 h-7 text-brand-violet dark:text-purple-400" />
       ),
-      bgGradient: "from-brand-violet/20 to-transparent dark:from-brand-violet/10",
+      bgGradient:
+        "from-brand-violet/20 to-transparent dark:from-brand-violet/10",
       borderColor: "border-brand-violet/30 dark:border-brand-violet/20",
     },
     {
@@ -123,7 +124,8 @@ export default function AdminDashboard() {
       icon: (
         <Activity className="w-7 h-7 text-indigo-600 dark:text-indigo-400" />
       ),
-      bgGradient: "from-brand-violet/20 to-transparent dark:from-brand-violet/10",
+      bgGradient:
+        "from-brand-violet/20 to-transparent dark:from-brand-violet/10",
       borderColor: "border-brand-violet/30 dark:border-brand-violet/20",
     },
     {

@@ -127,7 +127,16 @@ const navItems: NavItem[] = [
 // Mega Menu Panel removed in favor of simple dropdowns
 
 // ─── Main Navbar ────────────────────────────────────────────────
-export function Navbar({ brandingData }: { brandingData?: any }) {
+export function Navbar({
+  brandingData,
+}: {
+  brandingData?: {
+    logo?: { url?: string };
+    logoLight?: { url?: string };
+    socialLinks?: Record<string, string>;
+    contact?: { phone?: string; email?: string; whatsappNo?: string };
+  };
+}) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
   const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
@@ -137,9 +146,115 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
   const megaMenuTimeout = useRef<NodeJS.Timeout | null>(null);
   const pathname = usePathname() || "";
 
-  const { logo, logoLight } = brandingData || {};
+  const { logo, logoLight, socialLinks, contact } = brandingData || {};
   const navbarLogo =
     logo?.url || logoLight?.url || "/company_logo/logo-white.63532709.svg";
+
+  // Dynamic contact info with fallbacks
+  const phone = contact?.phone || "+880 1822-94 20 20";
+  const email = contact?.email || "info@fanamgroup.com";
+
+  // Dynamic social links from branding settings - using inline SVGs
+  const dynamicSocialLinks = socialLinks
+    ? [
+        {
+          key: "facebook",
+          label: "Facebook",
+          href: socialLinks.facebook || "https://facebook.com",
+          icon: (
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              className="w-4 h-4"
+            >
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+            </svg>
+          ),
+        },
+        {
+          key: "instagram",
+          label: "Instagram",
+          href: socialLinks.instagram || "https://instagram.com",
+          icon: (
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              className="w-4 h-4"
+            >
+              <rect x="2" y="2" width="20" height="20" rx="5" />
+              <circle cx="12" cy="12" r="5" />
+              <circle
+                cx="17.5"
+                cy="6.5"
+                r="1.25"
+                fill="currentColor"
+                stroke="none"
+              />
+            </svg>
+          ),
+        },
+        {
+          key: "linkedin",
+          label: "LinkedIn",
+          href: socialLinks.linkedin || "https://linkedin.com",
+          icon: (
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              className="w-4 h-4"
+            >
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+              <rect x="2" y="9" width="4" height="12" />
+              <circle cx="4" cy="4" r="2" />
+            </svg>
+          ),
+        },
+        {
+          key: "twitter",
+          label: "Twitter",
+          href: socialLinks.twitter || "https://twitter.com",
+          icon: (
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              className="w-4 h-4"
+            >
+              <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
+              <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
+            </svg>
+          ),
+        },
+        {
+          key: "youtube",
+          label: "YouTube",
+          href: socialLinks.youtube || "https://youtube.com",
+          icon: (
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              className="w-4 h-4"
+            >
+              <rect x="2" y="4" width="20" height="16" rx="4" />
+              <polygon
+                points="10,8 16,12 10,16"
+                fill="currentColor"
+                stroke="none"
+              />
+            </svg>
+          ),
+        },
+      ]
+    : [];
 
   const isBannerPage =
     pathname === "/" ||
@@ -249,18 +364,46 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
           <div className="container mx-auto px-6 md:px-12 h-9 flex items-center justify-between">
             <div className="flex items-center gap-6">
               <span className="flex items-center gap-1.5">
-                <Phone className="w-3 h-3 text-[#F9C602]" /> +880 1822-94 20 20
+                <Phone className="w-3 h-3 text-[#F9C602]" /> {phone}
               </span>
               <span className="flex items-center gap-1.5">
-                <Mail className="w-3 h-3 text-[#F9C602]" /> info@fanamgroup.com
+                <Mail className="w-3 h-3 text-[#F9C602]" /> {email}
               </span>
             </div>
             <div className="flex items-center gap-4 font-medium">
-              <Link href="/about" className="hover:text-[#F9C602] transition-colors">Company Profile</Link>
+              {dynamicSocialLinks.map((s) => (
+                <a
+                  key={s.key}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-7 h-7 flex items-center justify-center text-white/70 hover:text-[#F9C602] transition-colors"
+                  aria-label={s.label}
+                >
+                  {s.icon}
+                </a>
+              ))}
               <span className="w-px h-3 bg-white/20" />
-              <Link href="/investors" className="hover:text-[#F9C602] transition-colors">Investor Relations</Link>
+              <Link
+                href="/about"
+                className="hover:text-[#F9C602] transition-colors"
+              >
+                Company Profile
+              </Link>
               <span className="w-px h-3 bg-white/20" />
-              <Link href="/contact" className="px-3 py-0.5 bg-[#F9C602] text-[#392F5F] font-semibold hover:bg-white transition-colors">Get In Touch</Link>
+              <Link
+                href="/investors"
+                className="hover:text-[#F9C602] transition-colors"
+              >
+                Investor Relations
+              </Link>
+              <span className="w-px h-3 bg-white/20" />
+              <Link
+                href="/contact"
+                className="px-3 py-0.5 bg-[#F9C602] text-[#392F5F] font-semibold hover:bg-white transition-colors"
+              >
+                Get In Touch
+              </Link>
             </div>
           </div>
         </div>
@@ -286,98 +429,95 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
 
           {/* Center: Desktop Navigation */}
           <nav className="hidden lg:flex items-center justify-center h-full gap-7 text-[15px] font-semibold tracking-wide mx-auto">
-              {navItems.map((item) => {
-                const active = isNavActive(item);
-                const hasMega = !!item.megaMenuKey;
+            {navItems.map((item) => {
+              const active = isNavActive(item);
+              const hasMega = !!item.megaMenuKey;
 
-                if (hasMega) {
-                  return (
-                    <div
-                      key={item.label}
-                      className="relative h-full flex items-center"
-                      onMouseEnter={() =>
-                        handleMegaMenuEnter(item.megaMenuKey!)
-                      }
-                    >
-                      <span
-                        className={`h-full flex items-center gap-1 cursor-pointer transition-colors ${active ? "text-[#f9c602] font-extrabold" : ""}`}
-                      >
-                        <TextRoll>{item.label}</TextRoll>
-                        <svg
-                          width="10"
-                          height="10"
-                          viewBox="0 0 10 10"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className={`transition-transform duration-300 ${activeMegaMenu === item.megaMenuKey ? "rotate-180" : ""}`}
-                        >
-                          <path d="M2 4L5 7L8 4" />
-                        </svg>
-                        <span
-                          className={`absolute left-0 bottom-0 w-full h-[3px] bg-[#f9c602] origin-center transition-transform duration-500 ease-out ${active || activeMegaMenu === item.megaMenuKey ? "scale-x-100" : "scale-x-0"}`}
-                        />
-                      </span>
-
-                      {/* Simple Dropdown Menu */}
-                      <AnimatePresence>
-                        {activeMegaMenu === item.megaMenuKey && (
-                          <motion.div
-                            initial={{ opacity: 0, y: 15 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: 15 }}
-                            transition={{ duration: 0.2 }}
-                            className="absolute top-full left-0 w-60 bg-white rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] border border-gray-100 py-3 mt-1 overflow-hidden z-50 flex flex-col"
-                          >
-                            {megaMenuData[item.megaMenuKey].map(
-                              (section, sIdx) => (
-                                <div
-                                  key={sIdx}
-                                  className={`${sIdx !== 0 ? "mt-2 pt-2 border-t border-gray-50" : ""}`}
-                                >
-                                  {megaMenuData[item.megaMenuKey!].length >
-                                    1 && (
-                                    <div className="px-5 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-gray-400">
-                                      {section.title}
-                                    </div>
-                                  )}
-                                  {section.items.map((subItem, iIdx) => (
-                                    <Link
-                                      key={iIdx}
-                                      href={subItem.href}
-                                      onClick={() => setActiveMegaMenu(null)}
-                                      className="block px-5 py-2.5 text-[14px] text-gray-600 font-medium hover:bg-gray-50 hover:text-[#f9c602] transition-colors"
-                                    >
-                                      {subItem.label}
-                                    </Link>
-                                  ))}
-                                </div>
-                              ),
-                            )}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  );
-                }
-
+              if (hasMega) {
                 return (
-                  <Link
+                  <div
                     key={item.label}
-                    href={item.href!}
-                    className={`relative group h-full flex items-center transition-colors ${active ? "text-[#f9c602] font-extrabold" : ""}`}
-                    onMouseEnter={() => setActiveMegaMenu(null)}
+                    className="relative h-full flex items-center"
+                    onMouseEnter={() => handleMegaMenuEnter(item.megaMenuKey!)}
                   >
-                    <TextRoll>{item.label}</TextRoll>
                     <span
-                      className={`absolute left-0 bottom-0 w-full h-[3px] bg-[#f9c602] origin-center transition-transform duration-500 ease-out ${active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
-                    />
-                  </Link>
+                      className={`h-full flex items-center gap-1 cursor-pointer transition-colors ${active ? "text-[#f9c602] font-extrabold" : ""}`}
+                    >
+                      <TextRoll>{item.label}</TextRoll>
+                      <svg
+                        width="10"
+                        height="10"
+                        viewBox="0 0 10 10"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className={`transition-transform duration-300 ${activeMegaMenu === item.megaMenuKey ? "rotate-180" : ""}`}
+                      >
+                        <path d="M2 4L5 7L8 4" />
+                      </svg>
+                      <span
+                        className={`absolute left-0 bottom-0 w-full h-[3px] bg-[#f9c602] origin-center transition-transform duration-500 ease-out ${active || activeMegaMenu === item.megaMenuKey ? "scale-x-100" : "scale-x-0"}`}
+                      />
+                    </span>
+
+                    {/* Simple Dropdown Menu */}
+                    <AnimatePresence>
+                      {activeMegaMenu === item.megaMenuKey && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 15 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 15 }}
+                          transition={{ duration: 0.2 }}
+                          className="absolute top-full left-0 w-60 bg-white rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] border border-gray-100 py-3 mt-1 overflow-hidden z-50 flex flex-col"
+                        >
+                          {megaMenuData[item.megaMenuKey].map(
+                            (section, sIdx) => (
+                              <div
+                                key={sIdx}
+                                className={`${sIdx !== 0 ? "mt-2 pt-2 border-t border-gray-50" : ""}`}
+                              >
+                                {megaMenuData[item.megaMenuKey!].length > 1 && (
+                                  <div className="px-5 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-gray-400">
+                                    {section.title}
+                                  </div>
+                                )}
+                                {section.items.map((subItem, iIdx) => (
+                                  <Link
+                                    key={iIdx}
+                                    href={subItem.href}
+                                    onClick={() => setActiveMegaMenu(null)}
+                                    className="block px-5 py-2.5 text-[14px] text-gray-600 font-medium hover:bg-gray-50 hover:text-[#f9c602] transition-colors"
+                                  >
+                                    {subItem.label}
+                                  </Link>
+                                ))}
+                              </div>
+                            ),
+                          )}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 );
-              })}
-            </nav>
+              }
+
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href!}
+                  className={`relative group h-full flex items-center transition-colors ${active ? "text-[#f9c602] font-extrabold" : ""}`}
+                  onMouseEnter={() => setActiveMegaMenu(null)}
+                >
+                  <TextRoll>{item.label}</TextRoll>
+                  <span
+                    className={`absolute left-0 bottom-0 w-full h-[3px] bg-[#f9c602] origin-center transition-transform duration-500 ease-out ${active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}
+                  />
+                </Link>
+              );
+            })}
+          </nav>
 
           <div className="flex items-center gap-6">
             <Link
@@ -474,6 +614,21 @@ export function Navbar({ brandingData }: { brandingData?: any }) {
                 </Link>
               );
             })}
+            {/* Mobile Social Links */}
+            <div className="flex items-center gap-4 pt-6 border-t border-gray-100">
+              {dynamicSocialLinks.map((s) => (
+                <a
+                  key={s.key}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-[#392F5F] hover:bg-[#F9C602] hover:text-white transition-all duration-300"
+                  aria-label={s.label}
+                >
+                  {s.icon}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>

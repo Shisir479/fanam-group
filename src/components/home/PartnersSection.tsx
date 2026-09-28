@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const partners = [
+const defaultPartners = [
   {
     name: "TV TechVision",
     category: "Technology",
@@ -46,7 +46,30 @@ const partners = [
   },
 ];
 
-export function PartnersSection() {
+interface Partner {
+  name: string;
+  category: string;
+  short: string;
+}
+
+export function PartnersSection({
+  cmsData,
+}: {
+  cmsData?: Record<string, unknown>;
+}) {
+  // Dynamic partners from CMS
+  const cmsPartners = (cmsData?.partners || []) as Array<
+    Record<string, unknown>
+  >;
+  const partners: Partner[] =
+    cmsPartners.length > 0
+      ? cmsPartners.map((partner: Record<string, unknown>) => ({
+          name: (partner.name as string) || "",
+          category: (partner.category as string) || "",
+          short: (partner.short as string) || "",
+        }))
+      : defaultPartners;
+
   return (
     <section className="relative w-full py-20 md:py-28 bg-gradient-to-b from-[#EDE8F7] via-[#F3F0FA] to-white text-[#392F5F] overflow-hidden">
       {/* Subtle background pattern */}
@@ -85,7 +108,10 @@ export function PartnersSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-[#392F5F] font-serif font-bold text-3xl md:text-4xl mb-4 tracking-tight leading-tight"
           >
-            Alliances of <span className="bg-gradient-to-r from-[#6B4E9E] to-[#F9C602] bg-clip-text text-transparent">Distinction</span>
+            Alliances of{" "}
+            <span className="bg-gradient-to-r from-[#6B4E9E] to-[#F9C602] bg-clip-text text-transparent">
+              Distinction
+            </span>
           </motion.h2>
 
           <motion.p

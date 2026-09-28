@@ -1,7 +1,14 @@
 "use client";
 
 import React from "react";
-import { Building2, Handshake, Users, TrendingUp, Globe, Sparkles } from "lucide-react";
+import {
+  Building2,
+  Handshake,
+  Users,
+  TrendingUp,
+  Globe,
+  Sparkles,
+} from "lucide-react";
 
 const milestones = [
   {
@@ -65,8 +72,9 @@ export function KeyMilestones() {
           </h2>
 
           <p className="text-white/70 text-base md:text-lg font-normal leading-relaxed max-w-2xl mx-auto">
-            Celebrating the defining milestones that reflect our journey of relentless innovation,
-            operational scale, and trust across industries.
+            Celebrating the defining milestones that reflect our journey of
+            relentless innovation, operational scale, and trust across
+            industries.
           </p>
         </div>
 

@@ -20,7 +20,7 @@ import type { Swiper as SwiperType } from "swiper";
 // Import Swiper styles
 import "swiper/css";
 
-const concerns = [
+const defaultConcerns = [
   {
     category: "Real Estate",
     icon: Building,
@@ -73,10 +73,58 @@ const concerns = [
   },
 ];
 
-export function ConcernsSection() {
+interface Concern {
+  category: string;
+  icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  description: string;
+  image: string;
+  href: string;
+}
+
+export function ConcernsSection({
+  cmsData,
+  branding,
+}: {
+  cmsData?: Record<string, unknown>;
+  branding?: Record<string, unknown>;
+}) {
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
+
+  // Dynamic concerns from CMS
+  const cmsConcerns = (cmsData?.concerns ||
+    cmsData?.enterprises ||
+    []) as Array<Record<string, unknown>>;
+  const concerns: Concern[] =
+    cmsConcerns.length > 0
+      ? cmsConcerns.map((concern: Record<string, unknown>, index: number) => {
+          const iconMap: Record<
+            string,
+            React.ComponentType<{ className?: string }>
+          > = {
+            building: Building,
+            laptop: Laptop,
+            shoppingbag: ShoppingBag,
+            plane: Plane,
+            sprout: Sprout,
+          };
+          const IconComponent =
+            iconMap[(concern.icon as string)?.toLowerCase()] || Building;
+          return {
+            category: (concern.category as string) || "",
+            icon: IconComponent,
+            title: (concern.title as string) || "",
+            description: (concern.description as string) || "",
+            image:
+              ((concern.image as Record<string, unknown>)?.url as string) ||
+              (concern.image as string) ||
+              "",
+            href: (concern.href as string) || "/concern",
+          };
+        })
+      : defaultConcerns;
 
   return (
     <section className="fanam-section bg-gradient-to-b from-white via-[#F3F0FA] to-[#EDE8F7] text-[#392F5F] relative overflow-hidden">
@@ -98,15 +146,16 @@ export function ConcernsSection() {
               Our Strategic <span className="text-[#F9C602]">Enterprises</span>
             </h2>
             <p className="text-[#392F5F]/60 text-sm sm:text-base mt-3 leading-relaxed">
-              From landmark real estate developments to digital commerce and international
-              travel — explore the synergistic enterprises defining Fanam Group.
+              From landmark real estate developments to digital commerce and
+              international travel — explore the synergistic enterprises
+              defining Fanam Group.
             </p>
           </div>
 
           {/* Navigation Arrows */}
           <div className="flex items-center gap-3 self-start md:self-auto">
             <button
-               onClick={() => swiperInstance?.slidePrev()}
+              onClick={() => swiperInstance?.slidePrev()}
               disabled={isBeginning}
               className="w-12 h-12 border border-[#392F5F]/15 bg-white hover:bg-[#392F5F] text-[#392F5F] hover:text-white hover:border-[#392F5F] flex items-center justify-center transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed active:scale-95 cursor-pointer shadow-sm"
               aria-label="Previous Concern"

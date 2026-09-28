@@ -5,12 +5,53 @@ import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-export function InquiryCTA() {
+export function InquiryCTA({
+  cmsData,
+  mainSettings,
+  branding,
+}: {
+  cmsData?: Record<string, unknown>;
+  mainSettings?: Record<string, unknown>;
+  branding?: Record<string, unknown>;
+}) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  // Dynamic CTA content from CMS or main settings
+  const cmsCTA = (mainSettings?.cta ||
+    mainSettings?.inquiryCTA ||
+    cmsData?.cta ||
+    {}) as Record<string, unknown>;
+
+  const badgeText = (cmsCTA.badge as string) || "Get In Touch";
+  const headline =
+    (cmsCTA.headline as string) || "Ready to Start Your Next Project?";
+  const description =
+    (cmsCTA.description as string) ||
+    "Whether you're looking for premium real estate, innovative business solutions, or strategic partnerships — Fanam Group is here to exceed your expectations.";
+  const primaryCTA = (cmsCTA.primaryCTA as { label: string; href: string }) || {
+    label: "Contact Us",
+    href: "/contact",
+  };
+  const secondaryCTA = (cmsCTA.secondaryCTA as {
+    label: string;
+    href: string;
+  }) || { label: "Explore", href: "/concern" };
+
+  const newsletterTitle = (cmsCTA.newsletterTitle as string) || "Stay Updated";
+  const newsletterDesc =
+    (cmsCTA.newsletterDesc as string) ||
+    "Subscribe to our newsletter and be the first to know about our latest projects, achievements, and exclusive insights.";
+  const subscribeLabel = (cmsCTA.subscribeLabel as string) || "Subscribe";
+  const subscribeNote =
+    (cmsCTA.subscribeNote as string) ||
+    "Join 10,000+ subscribers. No spam, unsubscribe anytime.";
+
   return (
-    <section ref={ref} className="w-full py-24 relative z-10 overflow-hidden bg-gradient-to-br from-[#1f1b3a] via-[#2a2545] to-[#3d3560]">
+    <section
+      ref={ref}
+      className="w-full py-24 relative z-10 overflow-hidden bg-gradient-to-br from-[#1f1b3a] via-[#2a2545] to-[#3d3560]"
+    >
       <motion.div
         animate={{ scale: [1, 1.15, 1], opacity: [0.2, 0.35, 0.2] }}
         transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
@@ -31,7 +72,7 @@ export function InquiryCTA() {
             className="inline-flex items-center gap-3 text-[10px] font-semibold tracking-[0.3em] uppercase text-[#F9C602] mb-8"
           >
             <span className="w-8 h-px bg-[#F9C602]" />
-            Get In Touch
+            {badgeText}
             <span className="w-8 h-px bg-[#F9C602] lg:hidden" />
           </motion.div>
 
@@ -41,9 +82,7 @@ export function InquiryCTA() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="text-4xl md:text-[50px] lg:text-[56px] font-serif text-white leading-[1.05] mb-8 tracking-tight"
           >
-            Ready to Start Your
-            <br />
-            <span className="text-[#F9C602]">Next Project?</span>
+            {headline}
           </motion.h2>
 
           <motion.p
@@ -52,7 +91,7 @@ export function InquiryCTA() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-white/80 text-base md:text-lg leading-relaxed font-medium mb-12 max-w-2xl"
           >
-            Whether you&apos;re looking for premium real estate, innovative business solutions, or strategic partnerships — Fanam Group is here to exceed your expectations.
+            {description}
           </motion.p>
 
           <motion.div
@@ -62,11 +101,11 @@ export function InquiryCTA() {
             className="flex flex-wrap items-center justify-center lg:justify-start gap-5"
           >
             <Link
-              href="/contact"
+              href={primaryCTA.href}
               className="group relative inline-flex items-center gap-3 bg-white text-[#1f1b3a] px-7 py-3.5 font-semibold text-sm hover:bg-[#F9C602] transition-all duration-300 active:scale-[0.98]"
             >
               <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1">
-                Contact Us
+                {primaryCTA.label}
               </span>
               <span className="relative z-10 w-7 h-7 bg-[#1f1b3a]/10 group-hover:bg-[#1f1b3a]/15 flex items-center justify-center transition-all duration-300">
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
@@ -74,10 +113,10 @@ export function InquiryCTA() {
             </Link>
 
             <Link
-              href="/concern"
+              href={secondaryCTA.href}
               className="group inline-flex items-center gap-3 bg-transparent text-white px-7 py-3.5 font-semibold text-sm border border-white/30 hover:bg-white/10 hover:border-[#F9C602] transition-all duration-300 active:scale-[0.98]"
             >
-              <span>Explore</span>
+              <span>{secondaryCTA.label}</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </motion.div>
@@ -90,9 +129,11 @@ export function InquiryCTA() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="w-full bg-white border border-[#1f1b3a]/10 p-8 md:p-10"
         >
-          <h3 className="text-[#392F5F] font-serif font-bold text-3xl md:text-4xl mb-4 text-center lg:text-left">Stay Updated</h3>
+          <h3 className="text-[#392F5F] font-serif font-bold text-3xl md:text-4xl mb-4 text-center lg:text-left">
+            {newsletterTitle}
+          </h3>
           <p className="text-[#1f1b3a]/60 text-sm md:text-base mb-8 text-center lg:text-left">
-            Subscribe to our newsletter and be the first to know about our latest projects, achievements, and exclusive insights.
+            {newsletterDesc}
           </p>
 
           <form
@@ -108,13 +149,13 @@ export function InquiryCTA() {
               type="submit"
               className="group inline-flex items-center justify-center gap-2 bg-[#F9C602] text-[#392F5F] px-7 py-3.5 font-semibold text-sm hover:bg-[#392F5F] hover:text-white transition-all duration-300 active:scale-[0.98] whitespace-nowrap"
             >
-              <span>Subscribe</span>
+              <span>{subscribeLabel}</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </button>
           </form>
 
           <p className="text-[#1f1b3a]/40 text-xs mt-6 text-center lg:text-left">
-            Join 10,000+ subscribers. No spam, unsubscribe anytime.
+            {subscribeNote}
           </p>
         </motion.div>
       </div>

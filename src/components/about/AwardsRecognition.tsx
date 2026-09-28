@@ -72,8 +72,9 @@ export function AwardsRecognition() {
           </h2>
 
           <p className="text-gray-600 text-base md:text-lg font-normal leading-relaxed max-w-2xl mx-auto">
-            Honored by respected industry bodies and international institutions, these accolades
-            stand testament to our unwavering standard of craftsmanship and ethical excellence.
+            Honored by respected industry bodies and international institutions,
+            these accolades stand testament to our unwavering standard of
+            craftsmanship and ethical excellence.
           </p>
         </div>
 

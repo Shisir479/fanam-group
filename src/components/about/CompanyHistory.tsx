@@ -89,8 +89,9 @@ export function CompanyHistory({ data }: { data: any }) {
           </h2>
 
           <p className="text-gray-600 text-base md:text-lg font-normal leading-relaxed max-w-3xl mx-auto">
-            Explore the milestones that have defined Fanam Group&apos;s ascent and the
-            core philosophies that steer our daily actions toward enduring excellence.
+            Explore the milestones that have defined Fanam Group&apos;s ascent
+            and the core philosophies that steer our daily actions toward
+            enduring excellence.
           </p>
         </div>
 
