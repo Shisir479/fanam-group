@@ -368,8 +368,8 @@ export function Hero({
       />
 
       {/* ─── 2. Main Hero Content ─── */}
-      <div className="relative z-10 w-full fanam-container pt-28 pb-20 md:pt-32 md:pb-24 flex flex-col justify-between min-h-screen">
-        <div className="my-auto w-full">
+      <div className="relative z-10 w-full fanam-container pt-28 pb-8 md:pt-32 md:pb-12 flex flex-col justify-end min-h-[90vh] md:min-h-screen">
+        <div className="mt-auto mb-4 w-full">
           <div className="max-w-3xl">
             <div className="min-h-[250px] sm:min-h-[270px] md:min-h-[290px] flex flex-col justify-start relative">
               {/* Soft ambient text shadow — no hard line */}
@@ -389,46 +389,41 @@ export function Hero({
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.5, ease: "easeInOut" }}
                 >
-                  {/* Tagline pill — frosted glass */}
-                  {/* <div className="inline-flex items-center gap-3 pl-4 pr-5 py-2 bg-white/10 backdrop-blur-xl border border-white/15 text-[#F9C602] text-xs md:text-sm font-semibold uppercase tracking-[0.18em] mb-6 shadow-lg shadow-black/20">
-                    <Sparkles className="w-3.5 h-3.5 text-[#F9C602]" />
+                  {/* Tagline */}
+                  <div className="inline-flex items-center gap-2 text-white font-medium mb-4">
+                    <Sparkles className="w-4 h-4" />
                     <span>{currentSlide.tagline}</span>
-                  </div> */}
+                  </div>
 
-                  <h1 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold leading-[1.12] tracking-tight mb-5 drop-shadow">
+                  <h1 className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight mb-8 drop-shadow max-w-4xl">
                     {currentSlide.title}
                   </h1>
 
-                  <p className="text-white/90 text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl font-normal drop-shadow">
-                    {currentSlide.description}
-                  </p>
+                  {/* Action Buttons */}
+                  <div className="flex flex-wrap items-center gap-4 mt-8">
+                    <Link
+                      href={currentSlide.ctaPrimary.href}
+                      className="group relative inline-flex items-center gap-4 bg-white text-[#392F5F] rounded-full pl-6 pr-2 py-2 font-medium text-[15px] transition-all duration-300 hover:bg-gray-100 active:scale-[0.98] shadow-lg"
+                    >
+                      <span>{currentSlide.ctaPrimary.label}</span>
+                      <span className="w-8 h-8 rounded-full bg-[#F9C602] text-[#392F5F] flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1">
+                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                      </span>
+                    </Link>
+                  </div>
                 </motion.div>
               </AnimatePresence>
             </div>
-
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 mt-8">
-              <Link
-                href={currentSlide.ctaPrimary.href}
-                className="group relative inline-flex items-center gap-3 bg-[#F9C602] text-[#392F5F] px-7 py-3.5 font-semibold text-sm uppercase tracking-widest transition-all duration-300 hover:bg-white hover:text-[#392F5F] active:scale-[0.98] shadow-[0_8px_24px_rgba(0,0,0,0.25)]"
-              >
-                <span>{currentSlide.ctaPrimary.label}</span>
-                <span className="w-7 h-7 bg-[#392F5F]/10 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1">
-                  <ArrowRight className="w-4 h-4" />
-                </span>
-              </Link>
-
-              <Link
-                href={currentSlide.ctaSecondary.href}
-                className="group inline-flex items-center gap-2.5 px-7 py-3.5 text-white font-semibold text-sm uppercase tracking-widest bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/25 hover:border-[#F9C602] transition-all duration-300 active:scale-[0.98]"
-              >
-                <Compass className="w-4 h-4 text-[#F9C602]" />
-                <span>{currentSlide.ctaSecondary.label}</span>
-                <ArrowRight className="w-4 h-4 text-white/60 group-hover:text-[#F9C602] group-hover:translate-x-1 transition-all" />
-              </Link>
-            </div>
           </div>
 
+          {/* Right Aligned Description */}
+          <div className="absolute bottom-8 md:bottom-16 right-24 md:right-32 max-w-[320px] hidden md:block">
+            <div className="border-t border-white/30 pt-4">
+              <p className="text-white/90 text-[15px] leading-relaxed font-normal">
+                {currentSlide.description}
+              </p>
+            </div>
+          </div>
           {/* ─── Floating Island Stats Bento ─── */}
           {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-10 w-full">
             {stats.map((stat, idx) => {
@@ -463,98 +458,7 @@ export function Hero({
           </div> */}
         </div>
 
-        {/* ─── 3. Progress Controller & Slide Navigation ─── */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          {/* Interactive Progress Indicators */}
-          <div className="grid grid-cols-3 gap-3 sm:gap-4 w-full md:max-w-xl">
-            {slides.map((slide, idx) => {
-              const isActive = idx === current;
-              return (
-                <button
-                  key={slide.id}
-                  onClick={() => setCurrent(idx)}
-                  className="group text-left focus:outline-none transition-opacity cursor-pointer"
-                  aria-label={`Go to slide ${idx + 1}`}
-                >
-                  <div className="flex items-center justify-between text-xs mb-1.5">
-                    <span
-                      className={`font-mono transition-colors duration-300 ${
-                        isActive
-                          ? "text-[#F9C602] font-semibold"
-                          : "text-white/40 group-hover:text-white/70"
-                      }`}
-                    >
-                      0{idx + 1}
-                    </span>
-                    <span
-                      className={`hidden sm:inline-block text-[11px] font-medium truncate max-w-[110px] transition-colors duration-300 ${
-                        isActive
-                          ? "text-white"
-                          : "text-white/40 group-hover:text-white/70"
-                      }`}
-                    >
-                      {slide.category}
-                    </span>
-                  </div>
 
-                  {/* Premium soft progress bar */}
-                  <div className="w-full h-1 bg-white/10 overflow-hidden relative">
-                    {isActive ? (
-                      <motion.div
-                        key={`progress-${idx}-${current}`}
-                        initial={{ width: "0%" }}
-                        animate={{ width: isHovered ? undefined : "100%" }}
-                        transition={{
-                          duration: AUTOPLAY_DURATION / 1000,
-                          ease: "linear",
-                        }}
-                        className="h-full bg-gradient-to-r from-[#F9C602] to-[#FFE066] shadow-[0_0_8px_rgba(249,198,2,0.4)]"
-                      />
-                    ) : (
-                      <div
-                        className={`h-full transition-all duration-300 ${
-                          idx < current
-                            ? "w-full bg-white/40"
-                            : "w-0 group-hover:w-1/3 bg-white/20"
-                        }`}
-                      />
-                    )}
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Slide Navigation Controls */}
-          <div className="flex items-center gap-4 ml-auto">
-            {/* Slide Number Counter */}
-            <div className="font-mono text-sm tracking-wider flex items-baseline gap-1">
-              <span className="text-[#F9C602] font-bold text-lg">
-                0{current + 1}
-              </span>
-              <span className="text-white/30 text-xs">/</span>
-              <span className="text-white/40 text-xs">0{slides.length}</span>
-            </div>
-
-            {/* Prev / Next Arrows — square corporate */}
-            <div className="flex items-center gap-2">
-              <button
-                onClick={prevSlide}
-                className="w-11 h-11 bg-white/10 hover:bg-[#F9C602] text-white hover:text-[#392F5F] border border-white/20 hover:border-[#F9C602] backdrop-blur-xl flex items-center justify-center transition-all duration-300 active:scale-90 cursor-pointer"
-                aria-label="Previous Slide"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <button
-                onClick={nextSlide}
-                className="w-11 h-11 bg-white/10 hover:bg-[#F9C602] text-white hover:text-[#392F5F] border border-white/20 hover:border-[#F9C602] backdrop-blur-xl flex items-center justify-center transition-all duration-300 active:scale-90 cursor-pointer"
-                aria-label="Next Slide"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* ─── 4. Floating Social Icons (transparent bordered design) ─── */}
@@ -568,7 +472,19 @@ export function Hero({
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 * idx, duration: 0.5 }}
-            className="group relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/25 hover:border-[#F9C602] text-white hover:text-[#F9C602] transition-all duration-300 cursor-pointer"
+            className={`group relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/25 transition-all duration-300 cursor-pointer drop-shadow-md hover:scale-110 text-white ${
+              item.key === "facebook"
+                ? "hover:text-[#1877F2]"
+                : item.key === "instagram"
+                  ? "hover:text-[#E1306C]"
+                  : item.key === "linkedin"
+                    ? "hover:text-[#0A66C2]"
+                    : item.key === "twitter"
+                      ? "hover:text-gray-300"
+                      : item.key === "youtube"
+                        ? "hover:text-[#FF0000]"
+                        : "hover:text-gray-300"
+            }`}
             aria-label={item.label}
           >
             <span className="transition-transform duration-300 group-hover:scale-110">

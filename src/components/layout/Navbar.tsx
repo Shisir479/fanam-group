@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { TextRoll } from "@/components/ui/skiper-ui/skiper58";
 import Image from "next/image";
-import { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -132,7 +132,7 @@ export function Navbar({
 }: {
   brandingData?: {
     logo?: { url?: string };
-    logoLight?: { url?: string };
+    logoDark?: { url?: string };
     socialLinks?: Record<string, string>;
     contact?: { phone?: string; email?: string; whatsappNo?: string };
   };
@@ -146,9 +146,9 @@ export function Navbar({
   const megaMenuTimeout = useRef<NodeJS.Timeout | null>(null);
   const pathname = usePathname() || "";
 
-  const { logo, logoLight, socialLinks, contact } = brandingData || {};
+  const { logo, logoDark, socialLinks, contact } = brandingData || {};
   const navbarLogo =
-    logo?.url || logoLight?.url || "/company_logo/logo-white.63532709.svg";
+    logoDark?.url || logo?.url || "/company_logo/logo-white.63532709.svg";
 
   // Dynamic contact info with fallbacks
   const phone = contact?.phone || "+880 1822-94 20 20";
@@ -347,12 +347,12 @@ export function Navbar({
   };
 
   const navStyles = isMobileMenuOpen
-    ? "bg-white/95 backdrop-blur-xl text-[#392F5F] shadow-sm border-b border-gray-100"
+    ? "bg-[#0a0a0a]/95 backdrop-blur-xl text-white shadow-sm border-b border-white/10"
     : isScrolled
-      ? "bg-white/90 backdrop-blur-xl text-[#392F5F] shadow-[0_4px_24px_rgba(57,47,95,0.08)] border-b border-[#392F5F]/10"
-      : "bg-white/80 backdrop-blur-lg text-[#392F5F] border-b border-white/30";
+      ? "bg-[#0a0a0a]/90 backdrop-blur-xl text-white shadow-[0_4px_24px_rgba(0,0,0,0.2)] border-b border-white/10"
+      : "bg-transparent text-white border-b border-transparent";
 
-  const mobileHamburgerColor = "bg-[#392F5F]";
+  const mobileHamburgerColor = "bg-white";
 
   return (
     <>
@@ -360,55 +360,9 @@ export function Navbar({
         className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500 ease-in-out ${navStyles}`}
         onMouseLeave={handleMegaMenuLeave}
       >
-        <div className="w-full bg-[#392F5F] text-white/85 text-xs hidden lg:block">
-          <div className="container mx-auto px-6 md:px-12 h-9 flex items-center justify-between">
-            <div className="flex items-center gap-6">
-              <span className="flex items-center gap-1.5">
-                <Phone className="w-3 h-3 text-[#F9C602]" /> {phone}
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Mail className="w-3 h-3 text-[#F9C602]" /> {email}
-              </span>
-            </div>
-            <div className="flex items-center gap-4 font-medium">
-              {dynamicSocialLinks.map((s) => (
-                <a
-                  key={s.key}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-7 h-7 flex items-center justify-center text-white/70 hover:text-[#F9C602] transition-colors"
-                  aria-label={s.label}
-                >
-                  {s.icon}
-                </a>
-              ))}
-              <span className="w-px h-3 bg-white/20" />
-              <Link
-                href="/about"
-                className="hover:text-[#F9C602] transition-colors"
-              >
-                Company Profile
-              </Link>
-              <span className="w-px h-3 bg-white/20" />
-              <Link
-                href="/investors"
-                className="hover:text-[#F9C602] transition-colors"
-              >
-                Investor Relations
-              </Link>
-              <span className="w-px h-3 bg-white/20" />
-              <Link
-                href="/contact"
-                className="px-3 py-0.5 bg-[#F9C602] text-[#392F5F] font-semibold hover:bg-white transition-colors"
-              >
-                Get In Touch
-              </Link>
-            </div>
-          </div>
-        </div>
 
-        <div className="container mx-auto px-6 md:px-12 flex h-18 items-center justify-between">
+
+        <div className={`container mx-auto px-6 md:px-12 flex items-center justify-between transition-all duration-500 ${isScrolled ? "h-16 md:h-20" : "h-20 md:h-24"}`}>
           {/* Left: Logo */}
           <div className="flex-shrink-0 flex items-center">
             <Link
@@ -422,13 +376,13 @@ export function Navbar({
                 width={160}
                 height={52}
                 priority
-                className="h-14 md:h-18 object-contain transition-all duration-300"
+                className="h-10 md:h-12 object-contain transition-all duration-300"
               />
             </Link>
           </div>
 
           {/* Center: Desktop Navigation */}
-          <nav className="hidden lg:flex items-center justify-center h-full gap-7 text-[15px] font-semibold tracking-wide mx-auto">
+          <nav className="hidden lg:flex items-center justify-center h-full gap-7 md:gap-8 text-[17px] font-medium tracking-wide mx-auto">
             {navItems.map((item) => {
               const active = isNavActive(item);
               const hasMega = !!item.megaMenuKey;
@@ -521,25 +475,14 @@ export function Navbar({
 
           <div className="flex items-center gap-6">
             <Link
-              href="/sitemap"
-              className="hidden lg:flex items-center gap-2 border border-[#392F5F]/20 hover:bg-[#F9C602] hover:text-[#392F5F] hover:border-[#F9C602] text-[#392F5F] px-6 py-3.5 transition-colors font-semibold text-sm active:scale-[0.98]"
+              href="/contact"
+              className="hidden lg:flex items-center gap-2 bg-white text-[#392F5F] hover:bg-gray-100 rounded-full px-6 py-2.5 transition-colors font-medium text-sm active:scale-[0.98]"
               onMouseEnter={() => setActiveMegaMenu(null)}
             >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21" />
-                <line x1="9" y1="3" x2="9" y2="18" />
-                <line x1="15" y1="6" x2="15" y2="21" />
-              </svg>
-              Sitemap
+              Get In Touch
+              <span className="w-6 h-6 rounded-full bg-[#F9C602] text-[#392F5F] flex items-center justify-center ml-2 transition-transform duration-300 group-hover:translate-x-1">
+                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
             </Link>
 
             {/* Mobile Hamburger */}

@@ -1,24 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowUpRight,
-  ChevronLeft,
-  ChevronRight,
-  Layers,
-  Building,
-  Laptop,
-  ShoppingBag,
-  Plane,
-  Sprout,
-} from "lucide-react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import type { Swiper as SwiperType } from "swiper";
-
-// Import Swiper styles
-import "swiper/css";
+import { ArrowUpRight, Building, Laptop, ShoppingBag, Plane, Sprout } from "lucide-react";
+import { motion } from "framer-motion";
 
 const defaultConcerns = [
   {
@@ -84,14 +70,11 @@ interface Concern {
 
 export function ConcernsSection({
   cmsData,
-  branding,
 }: {
   cmsData?: Record<string, unknown>;
   branding?: Record<string, unknown>;
 }) {
-  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
-  const [isBeginning, setIsBeginning] = useState(true);
-  const [isEnd, setIsEnd] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   // Dynamic concerns from CMS
   const cmsConcerns = (cmsData?.concerns ||
@@ -99,7 +82,7 @@ export function ConcernsSection({
     []) as Array<Record<string, unknown>>;
   const concerns: Concern[] =
     cmsConcerns.length > 0
-      ? cmsConcerns.map((concern: Record<string, unknown>, index: number) => {
+      ? cmsConcerns.map((concern: Record<string, unknown>) => {
           const iconMap: Record<
             string,
             React.ComponentType<{ className?: string }>
@@ -126,122 +109,111 @@ export function ConcernsSection({
         })
       : defaultConcerns;
 
+  // Track scrolling to determine active item
+  useEffect(() => {
+    const handleScroll = () => {
+      const items = document.querySelectorAll(".concern-scroll-item");
+      let active = 0;
+      items.forEach((item, index) => {
+        const rect = item.getBoundingClientRect();
+        // If the item is in the middle of the screen
+        if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+          active = index;
+        }
+      });
+      setActiveIndex(active);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <section className="fanam-section bg-gradient-to-b from-white via-[#F3F0FA] to-[#EDE8F7] text-[#392F5F] relative overflow-hidden">
-      {/* Decorative animated accent shapes */}
-      <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#F9C602]/20 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-[#F9C602]/20 rounded-full blur-[120px] pointer-events-none" />
-
-      <div className="fanam-container relative z-10">
-        {/* Section Header with Navigation Controls */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-          <div className="max-w-2xl">
-            {/* Header Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white border border-[#392F5F]/10 text-[#392F5F] text-xs md:text-sm font-semibold tracking-wide mb-4 shadow-sm">
-              <Layers className="w-3.5 h-3.5 text-[#F9C602]" />
-              <span>Enterprise Portfolio</span>
+    <section className="bg-[#EFECE6] relative w-full">
+      <div className="w-full max-w-[1600px] mx-auto">
+        <div className="flex flex-col lg:flex-row relative">
+          
+          {/* Left Side: Sticky Image Area (Desktop Only) */}
+          <div className="hidden lg:block w-1/2 sticky top-0 h-screen p-6 xl:p-10">
+            <div className="relative w-full h-full rounded-[2rem] overflow-hidden shadow-2xl">
+               {concerns.map((concern, idx) => (
+                 <motion.div
+                   key={idx}
+                   className="absolute inset-0 w-full h-full"
+                   initial={{ opacity: 0, scale: 1.05 }}
+                   animate={{ 
+                     opacity: activeIndex === idx ? 1 : 0,
+                     scale: activeIndex === idx ? 1 : 1.05 
+                   }}
+                   transition={{ duration: 0.8, ease: "easeInOut" }}
+                 >
+                   <Image 
+                     src={concern.image} 
+                     alt={concern.title} 
+                     fill 
+                     className="object-cover"
+                     priority={idx === 0} 
+                   />
+                   <div className="absolute inset-0 bg-black/10" />
+                 </motion.div>
+               ))}
             </div>
-
-            <h2 className="text-[#392F5F] font-serif font-bold text-3xl md:text-4xl mb-4 tracking-tight leading-tight">
-              Our Strategic <span className="text-[#F9C602]">Enterprises</span>
-            </h2>
-            <p className="text-[#392F5F]/60 text-sm sm:text-base mt-3 leading-relaxed">
-              From landmark real estate developments to digital commerce and
-              international travel — explore the synergistic enterprises
-              defining Fanam Group.
-            </p>
           </div>
 
-          {/* Navigation Arrows */}
-          <div className="flex items-center gap-3 self-start md:self-auto">
-            <button
-              onClick={() => swiperInstance?.slidePrev()}
-              disabled={isBeginning}
-              className="w-12 h-12 border border-[#392F5F]/15 bg-white hover:bg-[#392F5F] text-[#392F5F] hover:text-white hover:border-[#392F5F] flex items-center justify-center transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed active:scale-95 cursor-pointer shadow-sm"
-              aria-label="Previous Concern"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              onClick={() => swiperInstance?.slideNext()}
-              disabled={isEnd}
-              className="w-12 h-12 border border-[#392F5F]/15 bg-white hover:bg-[#F9C602] text-[#392F5F] hover:border-[#F9C602] flex items-center justify-center transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed active:scale-95 cursor-pointer shadow-sm"
-              aria-label="Next Concern"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
+          {/* Right Side: Scrollable Content List */}
+          <div className="w-full lg:w-1/2 flex flex-col py-24 lg:py-48 px-6 lg:px-16 xl:px-24 border-l border-[#392F5F]/10">
+             
+             {/* Section Intro */}
+             <div className="mb-32 text-center lg:text-left">
+               <span className="text-[#392F5F] font-bold text-xs tracking-widest uppercase mb-4 block">
+                 Enterprise Portfolio
+               </span>
+               <h2 className="text-[#1A1A1A] font-serif font-bold text-4xl md:text-5xl lg:text-[56px] leading-[1.1] tracking-tight">
+                 Strategic <br /> Enterprises
+               </h2>
+             </div>
 
-        {/* Carousel */}
-        <div className="w-full">
-          <Swiper
-            onSwiper={(swiper) => {
-              setSwiperInstance(swiper);
-              setIsBeginning(swiper.isBeginning);
-              setIsEnd(swiper.isEnd);
-            }}
-            onSlideChange={(swiper) => {
-              setIsBeginning(swiper.isBeginning);
-              setIsEnd(swiper.isEnd);
-            }}
-            spaceBetween={20}
-            slidesPerView={1.1}
-            breakpoints={{
-              640: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-              1280: { slidesPerView: 3.5 },
-            }}
-            className="w-full !pb-4"
-          >
-            {concerns.map((concern, index) => {
-              const IconComponent = concern.icon;
-              return (
-                <SwiperSlide key={index} className="!h-auto">
-                  <Link
-                    href={concern.href}
-                    className="block group/card h-full outline-none"
+             {/* Concern Items */}
+             {concerns.map((concern, idx) => (
+               <div 
+                 key={idx} 
+                 className="concern-scroll-item min-h-[80vh] flex flex-col justify-center items-center text-center py-24 border-b border-[#392F5F]/10 last:border-b-0"
+               >
+                  <div className="text-lg md:text-xl font-medium tracking-widest text-[#392F5F]/60 mb-8">
+                    0{idx + 1} / 0{concerns.length}
+                  </div>
+                  
+                  <h3 className="text-3xl md:text-[44px] font-medium leading-[1.2] mb-12 text-[#1A1A1A] max-w-md">
+                    {concern.title}
+                  </h3>
+                  
+                  {/* Small Inline Image */}
+                  <div className="relative w-full max-w-sm aspect-[4/3] rounded-2xl overflow-hidden mb-12 shadow-lg">
+                    <Image 
+                      src={concern.image} 
+                      alt={concern.title} 
+                      fill 
+                      className="object-cover" 
+                    />
+                  </div>
+
+                  <p className="text-[#1A1A1A]/70 text-lg leading-relaxed mb-12 max-w-md">
+                    {concern.description}
+                  </p>
+
+                  <Link 
+                    href={concern.href} 
+                    className="group inline-flex items-center gap-3 bg-[#1A1A1A] hover:bg-[#392F5F] text-white px-6 py-3.5 rounded-full w-fit transition-all duration-300"
                   >
-                    <div className="relative h-full flex flex-col bg-white border border-[#392F5F]/10 hover:border-[#F9C602]/50 overflow-hidden transition-all duration-500 hover:-translate-y-1.5 shadow-[0_8px_30px_rgba(14,42,71,0.08)] hover:shadow-[0_16px_45px_rgba(14,42,71,0.14)] p-3.5">
-                      {/* Image Container with Zoom & Floating Category Badge */}
-                      <div className="relative w-full aspect-[4/3] overflow-hidden mb-5">
-                        <Image
-                          src={concern.image}
-                          alt={concern.title}
-                          fill
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                          className="object-cover transition-transform duration-700 group-hover/card:scale-110"
-                        />
-                        {/* Gradient Fade */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#392F5F]/85 via-[#6B4E9E]/25 to-transparent" />
-
-                        {/* Floating Category Pill — sharp */}
-                        <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5 px-3 py-1 bg-black/60 backdrop-blur-md border border-white/15 text-[#f9c602] text-xs font-medium">
-                          <IconComponent className="w-3.5 h-3.5" />
-                          <span>{concern.category}</span>
-                        </div>
-                      </div>
-
-                      {/* Content */}
-                      <div className="flex-1 flex flex-col px-1 pb-10">
-                        <h3 className="text-[#392F5F] group-hover/card:text-[#F9C602] font-serif font-bold text-xl tracking-tight mb-2.5 transition-colors duration-300">
-                          {concern.title}
-                        </h3>
-                        <p className="text-[#392F5F]/60 group-hover/card:text-[#392F5F]/80 text-sm leading-relaxed transition-colors duration-300 line-clamp-3">
-                          {concern.description}
-                        </p>
-                      </div>
-
-                      {/* Interactive Button at Bottom Right — sharp */}
-                      <div className="absolute bottom-3 right-3 w-10 h-10 bg-white/10 group-hover/card:bg-[#f9c602] border border-white/15 group-hover/card:border-[#f9c602] flex items-center justify-center transition-all duration-300 group-hover/card:scale-110 shadow-md">
-                        <ArrowUpRight className="w-4 h-4 text-white group-hover/card:text-[#392f5f] transition-all duration-300 group-hover/card:rotate-45" />
-                      </div>
-                    </div>
+                     <span className="font-semibold text-[15px]">Explore Services</span>
+                     <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-[#1A1A1A]">
+                        <ArrowUpRight className="w-4 h-4 group-hover:rotate-45 transition-transform" />
+                     </div>
                   </Link>
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
+               </div>
+             ))}
+          </div>
+
         </div>
       </div>
     </section>
