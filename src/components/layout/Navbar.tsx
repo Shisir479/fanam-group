@@ -349,7 +349,7 @@ export function Navbar({
   const navStyles = isMobileMenuOpen
     ? "bg-[#0a0a0a]/95 backdrop-blur-xl text-white shadow-sm border-b border-white/10"
     : isScrolled
-      ? "bg-[#0a0a0a]/90 backdrop-blur-xl text-white shadow-[0_4px_24px_rgba(0,0,0,0.2)] border-b border-white/10"
+      ? "bg-[#0a0a0a]/70 backdrop-blur-xl text-white shadow-[0_4px_24px_rgba(0,0,0,0.2)] border-b border-white/10"
       : "bg-transparent text-white border-b border-transparent";
 
   const mobileHamburgerColor = "bg-white";
@@ -373,8 +373,8 @@ export function Navbar({
               <Image
                 src={navbarLogo}
                 alt="Company Logo"
-                width={160}
-                height={52}
+                width={190}
+                height={58}
                 priority
                 className="h-10 md:h-12 object-contain transition-all duration-300"
               />

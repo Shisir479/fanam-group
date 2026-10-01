@@ -47,10 +47,7 @@ export function VisionMission({ data }: { data: any }) {
   ];
 
   return (
-    <section className="relative fanam-section bg-gradient-to-b from-white via-neutral-50/50 to-white overflow-hidden py-20 lg:py-28">
-      {/* Ambient background glows */}
-      <div className="absolute top-1/4 -right-48 w-[500px] h-[500px] bg-[#f9c602]/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-1/4 -left-48 w-[500px] h-[500px] bg-slate-900/5 rounded-full blur-[140px] pointer-events-none" />
+    <section className="relative fanam-section bg-white overflow-hidden py-20 lg:py-28">
 
       <div className="fanam-container relative z-10">
         {/* Header Section */}
@@ -80,8 +77,6 @@ export function VisionMission({ data }: { data: any }) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
           {/* Mission Card (High-Impact Dark Luxury) */}
           <div className="relative rounded-3xl bg-[#392f5f] text-white p-8 sm:p-10 md:p-12 border border-white/15 shadow-2xl overflow-hidden flex flex-col justify-between group">
-            {/* Ambient gold glow in card */}
-            <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#f9c602]/15 rounded-full blur-3xl pointer-events-none group-hover:bg-[#f9c602]/25 transition-all duration-700" />
 
             <div>
               {/* Card Header */}
@@ -142,8 +137,6 @@ export function VisionMission({ data }: { data: any }) {
 
           {/* Vision Card (Crisp Alabaster & Gold Luxury) */}
           <div className="relative rounded-3xl bg-white text-slate-900 p-8 sm:p-10 md:p-12 border-2 border-gray-100 hover:border-[#f9c602]/60 shadow-xl overflow-hidden flex flex-col justify-between group transition-all duration-300">
-            {/* Ambient gold glow in card */}
-            <div className="absolute -top-24 -right-24 w-64 h-64 bg-amber-100/50 rounded-full blur-3xl pointer-events-none group-hover:bg-[#f9c602]/20 transition-all duration-700" />
 
             <div>
               {/* Card Header */}

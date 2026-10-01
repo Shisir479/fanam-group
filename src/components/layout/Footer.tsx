@@ -169,11 +169,7 @@ export function Footer({
 
   return (
     <footer className="relative w-full bg-[#392F5F] text-white overflow-hidden">
-      {/* Gold top accent */}
-      <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-[#F9C602] via-white/60 to-[#F9C602]" />
-      {/* Ambient decorative glow */}
-      <div className="absolute -top-32 -right-32 w-96 h-96 bg-[#F9C602]/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-white/5 rounded-full blur-[120px] pointer-events-none" />
+
       <div className="container mx-auto px-6 md:px-12 lg:px-16 pt-10 pb-6">
         {/* Main Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6 mb-8">

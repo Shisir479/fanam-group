@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import CountUp from "react-countup";
 
 const defaultAchievements = [
   {
@@ -54,6 +55,17 @@ interface Achievement {
   type: "up" | "down";
 }
 
+const parseStat = (statStr: string) => {
+  const match = statStr.match(/([\d,\.]+)(.*)/);
+  if (match) {
+    return {
+      num: parseFloat(match[1].replace(/,/g, "")),
+      suffix: match[2],
+    };
+  }
+  return { num: 0, suffix: statStr };
+};
+
 export function AchievementsSection({
   cmsData,
   mainSettings,
@@ -86,23 +98,20 @@ export function AchievementsSection({
       : defaultAchievements;
 
   return (
-    <section className="fanam-section bg-gradient-to-b from-white via-[#F3F0FA] to-white relative overflow-hidden">
+    <section className="fanam-section py-16 md:py-20 bg-gradient-to-b from-white via-[#F3F0FA] to-white relative overflow-hidden">
       <div className="fanam-container">
         {/* Header */}
         <div className="text-center mb-16 md:mb-24 flex flex-col items-center">
-          <div className="flex flex-col items-center">
-            <span className="text-[#6B4E9E] font-semibold text-xs md:text-sm uppercase tracking-[0.25em] mb-3">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <span className="text-[#F9C602] font-bold tracking-widest text-base">&lt; &lt; &lt;</span>
+            <span className="text-gray-500 font-semibold tracking-widest uppercase text-[13px]">
               Milestones
             </span>
-            <h2 className="text-[#392F5F] font-serif font-bold text-3xl md:text-4xl mb-4">
-              Legacy of Achievement
-            </h2>
-            <div className="w-16 h-1 bg-gradient-to-r from-[#392F5F] via-[#6B4E9E] to-[#F9C602]" />
+            <span className="text-[#F9C602] font-bold tracking-widest text-base">&gt; &gt; &gt;</span>
           </div>
-          <p className="text-gray-600 text-sm md:text-base max-w-2xl text-center">
-            Celebrating milestones that reflect our commitment to excellence,
-            innovation, and sustainable growth.
-          </p>
+          <h2 className="text-[#392F5F] font-serif font-medium text-3xl md:text-4xl lg:text-[44px] leading-[1.2] tracking-tight mb-6">
+            Legacy of Achievement
+          </h2>
         </div>
 
         {/* Grid */}
@@ -126,7 +135,19 @@ export function AchievementsSection({
                 ) : (
                   <div className="flex flex-col items-center justify-center h-full pb-6">
                     <h3 className="text-[#392F5F] text-3xl xl:text-4xl font-bold leading-none mb-1.5">
-                      {item.stat}
+                      {(() => {
+                        const { num, suffix } = parseStat(item.stat);
+                        if (num === 0) return item.stat;
+                        return (
+                          <CountUp
+                            end={num}
+                            suffix={suffix}
+                            enableScrollSpy
+                            scrollSpyOnce
+                            duration={2.5}
+                          />
+                        );
+                      })()}
                     </h3>
                     <p className="text-gray-600 text-xs xl:text-sm text-center px-1 font-medium">
                       {item.label}
@@ -162,7 +183,19 @@ export function AchievementsSection({
                 ) : (
                   <div className="flex flex-col items-center justify-center h-full pt-6">
                     <h3 className="text-[#392F5F] text-3xl xl:text-4xl font-bold leading-none mb-1.5">
-                      {item.stat}
+                      {(() => {
+                        const { num, suffix } = parseStat(item.stat);
+                        if (num === 0) return item.stat;
+                        return (
+                          <CountUp
+                            end={num}
+                            suffix={suffix}
+                            enableScrollSpy
+                            scrollSpyOnce
+                            duration={2.5}
+                          />
+                        );
+                      })()}
                     </h3>
                     <p className="text-gray-600 text-xs xl:text-sm text-center px-1 font-medium">
                       {item.label}

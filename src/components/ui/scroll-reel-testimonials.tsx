@@ -49,7 +49,7 @@ const SLIDE_MS = 800; // column slide duration + interaction lock
 const EASE_INOUT = "cubic-bezier(0.65,0,0.35,1)";
 
 const TITLE_CLASSES =
-  "m-0 text-xl font-bold leading-[1.3] text-brand-blue md:text-2xl ";
+  "m-0 text-xl font-bold leading-[1.3] text-[#F9C602] md:text-2xl ";
 const QUOTE_CLASSES = "m-0 text-sm font-normal leading-relaxed text-gray-600 ";
 const AUTHOR_CLASSES =
   "m-0 text-sm font-bold leading-[1.3] text-black md:text-[15px]";

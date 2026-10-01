@@ -14,6 +14,7 @@ import {
   getMainSettingsPublic,
   getHomeSettingsPublic,
 } from "@/services/settings.service";
+import { getConcernsPublic } from "@/services/concern.service";
 
 export default async function Home() {
   let cmsData: any = null;
@@ -21,15 +22,17 @@ export default async function Home() {
   let brandingData: any = null;
   let mainSettingsData: any = null;
   let homeSettingsData: any = null;
+  let apiConcerns: any[] = [];
 
   try {
-    const [cmsRes, blogsRes, brandingRes, mainSettingsRes, homeSettingsRes] =
+    const [cmsRes, blogsRes, brandingRes, mainSettingsRes, homeSettingsRes, concernsRes] =
       await Promise.all([
         getHomepageCMSPublic(),
         getBlogsPublic({ status: "active", limit: 4 }),
         getBrandingSettingsPublic(),
         getMainSettingsPublic(),
         getHomeSettingsPublic(),
+        getConcernsPublic(),
       ]);
 
     if (cmsRes?.success) {
@@ -51,6 +54,10 @@ export default async function Home() {
     if (homeSettingsRes?.success) {
       homeSettingsData = homeSettingsRes.data;
     }
+
+    if (concernsRes?.success) {
+      apiConcerns = concernsRes.data || [];
+    }
   } catch (error) {
     // fallback
   }
@@ -68,12 +75,12 @@ export default async function Home() {
         mainSettings={mainSettingsData}
       /> */}
       <AboutSection cmsData={cmsData} mainSettings={mainSettingsData} />
-      <ConcernsSection cmsData={cmsData} branding={brandingData} />
+      <ConcernsSection cmsData={cmsData} branding={brandingData} apiConcerns={apiConcerns} />
       <AchievementsSection cmsData={cmsData} mainSettings={mainSettingsData} />
-      <PartnersSection cmsData={cmsData} />
       <TestimonialSection />
-      <InquiryCTA mainSettings={mainSettingsData} branding={brandingData} />
       <LatestNews blogs={blogsData} />
+      <InquiryCTA mainSettings={mainSettingsData} branding={brandingData} />
+      <PartnersSection cmsData={cmsData} />
     </div>
   );
 }

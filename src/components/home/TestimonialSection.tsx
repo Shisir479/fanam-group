@@ -39,21 +39,20 @@ export function TestimonialSection() {
   if (testimonials.length === 0) return null;
 
   return (
-    <section className="w-full py-16 md:py-24 bg-white">
+    <section className="w-full py-16 md:py-20 bg-white">
       <div className="container mx-auto px-5 md:px-16 overflow-hidden">
         {/* Header */}
-        <div className="mb-12 flex flex-col gap-4">
-          <BlockReveal color="var(--color-brand-blue)">
-            <div className="flex items-center text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
-              TESTIMONIALS
-            </div>
-          </BlockReveal>
-
-          <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
-            <h2 className="text-[#392F5F] font-serif font-bold text-3xl md:text-4xl mb-4 tracking-tight leading-tight uppercase max-w-2xl">
-              TRUSTED BY <br className="hidden md:block" /> INDUSTRY LEADERS
-            </h2>
-          </BlockReveal>
+        <div className="mb-16 text-center">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <span className="text-[#F9C602] font-bold tracking-widest text-base">&lt; &lt; &lt;</span>
+            <span className="text-gray-500 font-semibold tracking-widest uppercase text-[13px]">
+              Testimonials
+            </span>
+            <span className="text-[#F9C602] font-bold tracking-widest text-base">&gt; &gt; &gt;</span>
+          </div>
+          <h2 className="text-[#392F5F] font-serif font-medium text-3xl md:text-4xl lg:text-[44px] leading-[1.2] tracking-tight">
+            Trusted By <br className="hidden md:block" /> Industry Leaders
+          </h2>
         </div>
 
         {/* Content Slider Area */}

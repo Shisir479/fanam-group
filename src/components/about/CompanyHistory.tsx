@@ -67,10 +67,7 @@ const philosophyItems = [
 
 export function CompanyHistory({ data }: { data: any }) {
   return (
-    <section className="relative fanam-section bg-gradient-to-b from-white via-neutral-50/60 to-white overflow-hidden py-20 lg:py-28">
-      {/* Ambient background glows */}
-      <div className="absolute top-1/3 -left-48 w-96 h-96 bg-[#f9c602]/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-0 w-96 h-96 bg-neutral-200/50 rounded-full blur-3xl pointer-events-none" />
+    <section className="relative fanam-section bg-white overflow-hidden py-20 lg:py-28">
 
       <div className="fanam-container relative z-10">
         {/* Header */}

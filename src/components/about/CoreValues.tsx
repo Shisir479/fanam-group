@@ -52,9 +52,7 @@ const coreValues = [
 
 export function CoreValues({ data }: { data: any }) {
   return (
-    <section className="relative fanam-section bg-gradient-to-b from-neutral-50/50 via-white to-neutral-50/50 overflow-hidden py-20 lg:py-28">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[#f9c602]/5 rounded-full blur-[140px] pointer-events-none" />
+    <section className="relative fanam-section bg-white overflow-hidden py-20 lg:py-28">
 
       <div className="fanam-container relative z-10">
         {/* Header */}

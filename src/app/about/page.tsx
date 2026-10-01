@@ -54,16 +54,16 @@ export default async function AboutUsPage() {
       <ChairmanMessage data={about} />
 
       {/* 4. Managing Directors & Executive Leadership */}
-      <ManagingDirectors />
+      {/* <ManagingDirectors /> */}
 
       {/* 5. Strategic Direction (Vision & Mission) */}
       <VisionMission data={about} />
 
       {/* 6. Why Choose Us */}
-      <WhyChooseUs />
+      {/* <WhyChooseUs /> */}
 
       {/* 7. Key Milestones */}
-      <KeyMilestones />
+      {/* <KeyMilestones /> */}
 
       {/* 8. Corporate History & Philosophy */}
       <CompanyHistory data={about} />
@@ -72,13 +72,13 @@ export default async function AboutUsPage() {
       <CoreValues data={about} />
 
       {/* 10. Awards & Recognition */}
-      <AwardsRecognition />
+      {/* <AwardsRecognition /> */}
 
       {/* 11. CSR Activities */}
-      <CSRActivities />
+      {/* <CSRActivities /> */}
 
       {/* 12. Our Governance */}
-      <OurGovernance />
+      {/* <OurGovernance /> */}
     </main>
   );
 }
