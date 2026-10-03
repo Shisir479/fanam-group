@@ -3,7 +3,13 @@
 import React, { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ArrowLeft, Calendar, Clock, CornerDownRight } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowLeft,
+  Calendar,
+  Clock,
+  CornerDownRight,
+} from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 
@@ -79,7 +85,10 @@ export function LatestNews({ blogs = [] }: { blogs?: any[] }) {
   const carouselItems =
     displayItems.length < 5 ? [...displayItems, ...displayItems] : displayItems;
 
-  const safeItems = [...displayItems, ...displayItems, ...displayItems].slice(0, 6);
+  const safeItems = [...displayItems, ...displayItems, ...displayItems].slice(
+    0,
+    6,
+  );
 
   return (
     <section className="fanam-section py-16 md:py-20 bg-[#EFECE6] relative overflow-hidden">
@@ -87,11 +96,15 @@ export function LatestNews({ blogs = [] }: { blogs?: any[] }) {
         {/* Header */}
         <div className="flex flex-col items-center text-center mb-16">
           <div className="flex items-center gap-3 mb-6">
-            <span className="text-[#F9C602] font-bold tracking-widest text-base">&lt; &lt; &lt;</span>
+            <span className="text-[#F9C602] font-bold tracking-widest text-base">
+              &lt; &lt; &lt;
+            </span>
             <span className="text-gray-500 font-semibold tracking-widest uppercase text-[13px]">
               Latest News
             </span>
-            <span className="text-[#F9C602] font-bold tracking-widest text-base">&gt; &gt; &gt;</span>
+            <span className="text-[#F9C602] font-bold tracking-widest text-base">
+              &gt; &gt; &gt;
+            </span>
           </div>
           <h2 className="text-[#392F5F] font-serif font-medium text-3xl md:text-4xl lg:text-[44px] leading-[1.2] tracking-tight mb-4">
             Corporate Insights
@@ -100,10 +113,12 @@ export function LatestNews({ blogs = [] }: { blogs?: any[] }) {
 
         {/* 4-Column Flex Masonry Grid */}
         <div className="flex flex-col md:flex-row gap-4 lg:gap-6">
-          
           {/* Column 1 */}
           <div className="flex-1 flex flex-col gap-4 lg:gap-6">
-            <Link href={safeItems[0].link} className="bg-white hover:bg-[#392F5F] rounded-[1.2rem] p-6 lg:p-8 shadow-md transition-colors duration-500 flex flex-col items-center text-center justify-center py-10 lg:py-12 relative group overflow-hidden">
+            <Link
+              href={safeItems[0].link}
+              className="bg-white hover:bg-[#392F5F] rounded-[1.2rem] p-6 lg:p-8 shadow-md transition-colors duration-500 flex flex-col items-center text-center justify-center py-10 lg:py-12 relative group overflow-hidden"
+            >
               <div className="flex flex-col items-center transition-transform duration-500 group-hover:-translate-y-6">
                 <div className="text-gray-500 font-bold text-[10px] uppercase tracking-widest mb-3 transition-all duration-500 group-hover:opacity-0 group-hover:-translate-y-4">
                   PUBLISHED: {safeItems[0].date}
@@ -117,8 +132,16 @@ export function LatestNews({ blogs = [] }: { blogs?: any[] }) {
                 <span className="underline underline-offset-4">Read more</span>
               </div>
             </Link>
-            <Link href={safeItems[1].link} className="relative rounded-[1.2rem] overflow-hidden bg-gray-200 shadow-md group flex-1 min-h-[250px] lg:min-h-[300px]">
-              <Image src={safeItems[1].image} alt={safeItems[1].title} fill className="object-cover transition-transform duration-1000 group-hover:scale-105" />
+            <Link
+              href={safeItems[1].link}
+              className="relative rounded-[1.2rem] overflow-hidden bg-gray-200 shadow-md group flex-1 min-h-[250px] lg:min-h-[300px]"
+            >
+              <Image
+                src={safeItems[1].image}
+                alt={safeItems[1].title}
+                fill
+                className="object-cover transition-transform duration-1000 group-hover:scale-105"
+              />
               <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md rounded-full px-4 py-1.5 text-white font-bold text-[10px] tracking-widest z-10 uppercase">
                 BRANDING
               </div>
@@ -127,13 +150,24 @@ export function LatestNews({ blogs = [] }: { blogs?: any[] }) {
 
           {/* Column 2 */}
           <div className="flex-1 flex flex-col gap-4 lg:gap-6">
-            <Link href={safeItems[2].link} className="relative rounded-[1.2rem] overflow-hidden bg-gray-200 shadow-sm group flex-1 min-h-[250px] lg:min-h-[300px]">
-              <Image src={safeItems[2].image} alt={safeItems[2].title} fill className="object-cover transition-transform duration-1000 group-hover:scale-105" />
+            <Link
+              href={safeItems[2].link}
+              className="relative rounded-[1.2rem] overflow-hidden bg-gray-200 shadow-sm group flex-1 min-h-[250px] lg:min-h-[300px]"
+            >
+              <Image
+                src={safeItems[2].image}
+                alt={safeItems[2].title}
+                fill
+                className="object-cover transition-transform duration-1000 group-hover:scale-105"
+              />
               <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md rounded-full px-4 py-1.5 text-white font-bold text-[10px] tracking-widest z-10 uppercase">
                 MODERN BRANDING
               </div>
             </Link>
-            <Link href={safeItems[3].link} className="bg-white hover:bg-[#392F5F] rounded-[1.2rem] p-6 lg:p-8 shadow-md transition-colors duration-500 flex flex-col items-center text-center justify-center py-10 lg:py-12 relative group overflow-hidden">
+            <Link
+              href={safeItems[3].link}
+              className="bg-white hover:bg-[#392F5F] rounded-[1.2rem] p-6 lg:p-8 shadow-md transition-colors duration-500 flex flex-col items-center text-center justify-center py-10 lg:py-12 relative group overflow-hidden"
+            >
               <div className="flex flex-col items-center transition-transform duration-500 group-hover:-translate-y-6">
                 <div className="text-gray-500 font-bold text-[10px] uppercase tracking-widest mb-3 transition-all duration-500 group-hover:opacity-0 group-hover:-translate-y-4">
                   PUBLISHED: {safeItems[3].date}
@@ -151,7 +185,10 @@ export function LatestNews({ blogs = [] }: { blogs?: any[] }) {
 
           {/* Column 3 */}
           <div className="flex-1 flex flex-col gap-4 lg:gap-6">
-            <Link href={safeItems[4].link} className="bg-white hover:bg-[#392F5F] rounded-[1.2rem] p-6 lg:p-8 shadow-md transition-colors duration-500 flex flex-col items-center text-center justify-center py-10 lg:py-12 relative group overflow-hidden">
+            <Link
+              href={safeItems[4].link}
+              className="bg-white hover:bg-[#392F5F] rounded-[1.2rem] p-6 lg:p-8 shadow-md transition-colors duration-500 flex flex-col items-center text-center justify-center py-10 lg:py-12 relative group overflow-hidden"
+            >
               <div className="flex flex-col items-center transition-transform duration-500 group-hover:-translate-y-6">
                 <div className="text-gray-500 font-bold text-[10px] uppercase tracking-widest mb-3 transition-all duration-500 group-hover:opacity-0 group-hover:-translate-y-4">
                   PUBLISHED: {safeItems[4].date}
@@ -165,8 +202,16 @@ export function LatestNews({ blogs = [] }: { blogs?: any[] }) {
                 <span className="underline underline-offset-4">Read more</span>
               </div>
             </Link>
-            <Link href={safeItems[5].link} className="relative rounded-[1.2rem] overflow-hidden bg-gray-200 shadow-sm group flex-1 min-h-[250px] lg:min-h-[300px]">
-              <Image src={safeItems[5].image} alt={safeItems[5].title} fill className="object-cover transition-transform duration-1000 group-hover:scale-105" />
+            <Link
+              href={safeItems[5].link}
+              className="relative rounded-[1.2rem] overflow-hidden bg-gray-200 shadow-sm group flex-1 min-h-[250px] lg:min-h-[300px]"
+            >
+              <Image
+                src={safeItems[5].image}
+                alt={safeItems[5].title}
+                fill
+                className="object-cover transition-transform duration-1000 group-hover:scale-105"
+              />
               <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md rounded-full px-4 py-1.5 text-white font-bold text-[10px] tracking-widest z-10 uppercase">
                 REBRANDING
               </div>
@@ -196,7 +241,6 @@ export function LatestNews({ blogs = [] }: { blogs?: any[] }) {
               </div>
             </div>
           </div>
-          
         </div>
       </div>
     </section>

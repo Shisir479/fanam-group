@@ -62,7 +62,7 @@ export function PrivacyPolicyView({ pageData }: { pageData: any }) {
             <div className="mb-12 border-b border-black/10 pb-8 text-center flex flex-col items-center justify-center gap-4 w-full">
               <div className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full border border-black/10">
                 <span className="w-2 h-2 rounded-full bg-[#f9c602]"></span>
-                <p className="text-black uppercase tracking-widest text-xs font-bold m-0 text-center">
+                <p className="text-[#392f5f] uppercase tracking-widest text-xs font-bold m-0 text-center">
                   Last Updated:{" "}
                   {pageData?.updatedAt
                     ? new Date(pageData.updatedAt).toLocaleDateString("en-US", {
@@ -75,7 +75,7 @@ export function PrivacyPolicyView({ pageData }: { pageData: any }) {
             </div>
 
             <div
-              className="prose prose-lg md:prose-xl max-w-none prose-headings:text-black prose-headings:font-bold prose-h3:text-2xl prose-strong:text-black prose-a:text-[#f9c602] hover:prose-a:text-black transition-colors prose-img:rounded-xl text-black leading-relaxed break-words overflow-x-hidden"
+              className="prose prose-lg md:prose-xl max-w-none prose-headings:text-[#392f5f] prose-headings:font-bold prose-h3:text-2xl prose-strong:text-[#392f5f] prose-a:text-[#f9c602] hover:prose-a:text-[#392f5f] transition-colors prose-img:rounded-xl text-[#392f5f]/90 leading-relaxed break-words overflow-x-hidden"
               dangerouslySetInnerHTML={{
                 __html: pageData?.description || fallbackHtml,
               }}

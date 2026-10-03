@@ -52,13 +52,13 @@ export default function InvestorsClient({
       <section className="py-24 bg-slate-50 border-b border-slate-100">
         <div className="container mx-auto px-6 md:px-16 max-w-7xl">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-brand-blue font-bold tracking-wider uppercase text-sm mb-3 block">
+            <span className="text-[#f9c602] font-bold tracking-wider uppercase text-sm mb-3 block">
               Partnerships
             </span>
-            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6 leading-tight">
+            <h2 className="text-3xl md:text-5xl font-extrabold text-[#392f5f] mb-6 leading-tight">
               Our Investment Partners
             </h2>
-            <p className="text-lg text-slate-600">
+            <p className="text-lg text-gray-600">
               At Fanam Group, we value the trust and commitment of our partners.
               Our comprehensive investor relations strategy ensures transparency
               and consistent growth for all our stakeholders.
@@ -78,7 +78,7 @@ export default function InvestorsClient({
                     className="group bg-white rounded-2xl overflow-hidden shadow-lg shadow-slate-200/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col border border-slate-100"
                   >
                     <div className="relative h-64 w-full overflow-hidden">
-                      <div className="absolute inset-0 bg-brand-blue/20 mix-blend-multiply z-10 group-hover:bg-transparent transition-colors duration-500" />
+                      <div className="absolute inset-0 bg-[#392f5f]/30 mix-blend-multiply z-10 group-hover:bg-transparent transition-colors duration-500" />
                       <Image
                         src={category.image}
                         alt={category.title}
@@ -86,22 +86,22 @@ export default function InvestorsClient({
                         className="object-cover group-hover:scale-110 transition-transform duration-700"
                       />
                       <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black/60 to-transparent z-20" />
-                      <div className="absolute bottom-5 left-5 z-30 bg-white p-3 rounded-xl shadow-md">
-                        <IconComponent className="w-8 h-8 text-brand-blue" />
+                      <div className="absolute bottom-5 left-5 z-30 bg-white p-3 rounded-xl shadow-md group-hover:bg-[#f9c602] transition-colors duration-300">
+                        <IconComponent className="w-8 h-8 text-[#392f5f]" />
                       </div>
                     </div>
 
-                    <div className="p-8 flex-1 flex flex-col">
-                      <h3 className="text-2xl font-bold text-slate-900 mb-4">
+                    <div className="p-8 flex-1 flex flex-col group-hover:bg-[#392f5f] transition-colors duration-300">
+                      <h3 className="text-2xl font-bold text-[#392f5f] group-hover:text-white mb-4 transition-colors duration-300">
                         {category.title}
                       </h3>
-                      <p className="text-slate-600 mb-8 flex-1 leading-relaxed">
+                      <p className="text-gray-600 group-hover:text-gray-300 mb-8 flex-1 leading-relaxed transition-colors duration-300">
                         {category.description}
                       </p>
 
                       <Link
                         href={`/contact?subject=Investing as ${category.title}`}
-                        className="inline-flex items-center text-brand-blue font-semibold hover:text-blue-800 transition-colors mt-auto group/link"
+                        className="inline-flex items-center text-[#f9c602] font-bold hover:text-white transition-colors mt-auto group/link"
                       >
                         Partner With Us
                         <ArrowRight className="ml-2 w-4 h-4 group-hover/link:translate-x-2 transition-transform" />
@@ -128,19 +128,19 @@ export default function InvestorsClient({
       {/* 2. Financial Performance Section */}
       <section className="py-24 bg-white relative">
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-          <div className="absolute -top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-brand-blue/5 blur-3xl" />
+          <div className="absolute -top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-[#f9c602]/10 blur-3xl" />
         </div>
 
         <div className="container mx-auto px-6 md:px-16 max-w-7xl relative z-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div className="max-w-2xl">
-              <span className="text-brand-blue font-bold tracking-wider uppercase text-sm mb-3 block">
+              <span className="text-[#f9c602] font-bold tracking-wider uppercase text-sm mb-3 block">
                 Performance
               </span>
-              <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 leading-tight">
+              <h2 className="text-3xl md:text-5xl font-extrabold text-[#392f5f] mb-4 leading-tight">
                 Financial Reports
               </h2>
-              <p className="text-lg text-slate-600">
+              <p className="text-lg text-gray-600">
                 Access our latest annual reports, quarterly financial
                 statements, and investor presentations to stay updated on our
                 growth trajectory.
@@ -156,7 +156,7 @@ export default function InvestorsClient({
                   className="bg-slate-50 rounded-3xl p-8 lg:p-12 border border-slate-100"
                 >
                   <div className="flex items-center gap-4 mb-8">
-                    <span className="text-4xl md:text-6xl font-black text-slate-200">
+                    <span className="text-4xl md:text-6xl font-black text-[#392f5f]/10">
                       {year}
                     </span>
                     <div className="h-px bg-slate-200 flex-1"></div>
@@ -169,18 +169,18 @@ export default function InvestorsClient({
                         href={report.pdfUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group flex flex-col p-6 rounded-2xl bg-white border border-slate-200 hover:border-brand-blue hover:shadow-xl hover:shadow-brand-blue/5 transition-all duration-300"
+                        className="group flex flex-col p-6 rounded-2xl bg-white border border-slate-200 hover:border-[#f9c602] hover:shadow-xl hover:shadow-[#f9c602]/10 transition-all duration-300 hover:bg-[#392f5f]"
                       >
-                        <div className="w-14 h-14 rounded-xl bg-blue-50 text-brand-blue flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-brand-blue group-hover:text-white transition-all duration-300">
+                        <div className="w-14 h-14 rounded-xl bg-[#392f5f]/10 text-[#392f5f] flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-[#f9c602] transition-all duration-300">
                           <FileText className="w-7 h-7" />
                         </div>
-                        <h4 className="font-bold text-lg text-slate-900 group-hover:text-brand-blue transition-colors mb-2 line-clamp-2">
+                        <h4 className="font-bold text-lg text-[#392f5f] group-hover:text-white transition-colors mb-2 line-clamp-2">
                           {report.title}
                         </h4>
-                        <p className="text-sm text-slate-500 mb-6">
+                        <p className="text-sm text-gray-500 group-hover:text-gray-300 mb-6 transition-colors">
                           {report.category}
                         </p>
-                        <div className="mt-auto flex items-center justify-between text-sm font-semibold text-brand-blue border-t border-slate-100 pt-4">
+                        <div className="mt-auto flex items-center justify-between text-sm font-bold text-[#392f5f] group-hover:text-[#f9c602] border-t border-slate-100 group-hover:border-white/10 pt-4 transition-colors">
                           <span>Download PDF</span>
                           <Download className="w-4 h-4 transform group-hover:translate-y-1 transition-transform" />
                         </div>
@@ -213,10 +213,10 @@ export default function InvestorsClient({
               <span className="text-[#f9c602] font-bold tracking-wider uppercase text-sm mb-3 block">
                 Compliance
               </span>
-              <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
+              <h2 className="text-3xl md:text-5xl font-extrabold text-[#392f5f] mb-6 leading-tight">
                 Corporate Governance
               </h2>
-              <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
                 At Fanam Group, we are committed to maintaining the highest
                 standards of corporate governance, transparency, and ethics. We
                 believe that good governance is the foundation of long-term
@@ -231,22 +231,22 @@ export default function InvestorsClient({
                       href={doc.pdfUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center justify-between p-5 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 hover:border-slate-300 transition-all"
+                      className="group flex items-center justify-between p-5 rounded-xl bg-slate-50 border border-slate-200 hover:bg-[#392f5f] hover:border-[#f9c602] transition-all duration-300"
                     >
                       <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-full bg-slate-200 flex items-center justify-center shrink-0">
-                          <FileText className="w-5 h-5 text-slate-700" />
+                        <div className="w-12 h-12 rounded-full bg-[#392f5f]/10 group-hover:bg-[#f9c602] flex items-center justify-center shrink-0 transition-colors duration-300">
+                          <FileText className="w-5 h-5 text-[#392f5f]" />
                         </div>
                         <div>
-                          <h4 className="font-semibold text-slate-900 group-hover:text-[#f9c602] transition-colors">
+                          <h4 className="font-bold text-[#392f5f] group-hover:text-white transition-colors duration-300">
                             {doc.title}
                           </h4>
-                          <p className="text-sm text-slate-500">
+                          <p className="text-sm text-gray-500 group-hover:text-gray-300 transition-colors duration-300">
                             Published: {doc.year}
                           </p>
                         </div>
                       </div>
-                      <Download className="w-5 h-5 text-slate-400 group-hover:text-[#f9c602] transition-colors" />
+                      <Download className="w-5 h-5 text-gray-400 group-hover:text-[#f9c602] transition-colors duration-300" />
                     </a>
                   ))}
                 </div>
@@ -260,7 +260,7 @@ export default function InvestorsClient({
             </div>
 
             <div className="relative h-[400px] lg:h-[450px] w-full rounded-3xl overflow-hidden shadow-2xl">
-              <div className="absolute inset-0 bg-brand-blue/10 mix-blend-multiply z-10" />
+              <div className="absolute inset-0 bg-[#392f5f]/20 mix-blend-multiply z-10" />
               <Image
                 src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1000&auto=format&fit=crop"
                 alt="Corporate Governance"

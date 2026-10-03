@@ -132,7 +132,7 @@ export default async function BlogDetailsPage({
             </span>
           )}
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-[1.2] mb-10 text-center">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#392F5F] leading-[1.2] mb-10 text-center">
             {post.title}
           </h1>
 
@@ -144,7 +144,7 @@ export default async function BlogDetailsPage({
                 className="w-10 h-10 rounded-full object-cover border border-gray-200"
               />
               <div className="flex flex-col normal-case text-left">
-                <span className="font-bold text-gray-900">{post.author}</span>
+                <span className="font-bold text-[#392F5F]">{post.author}</span>
                 <span className="text-[12px] capitalize">
                   {post.authorRole}
                 </span>
@@ -183,24 +183,24 @@ export default async function BlogDetailsPage({
           <div className="max-w-4xl mx-auto flex flex-col items-center">
             {/* Social Share (Centered Row) */}
             <div className="flex flex-row justify-center gap-4 mb-12">
-              <button className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-[#f9c602] hover:border-[#f9c602] hover:bg-[#f9c602]/5 transition-colors">
+              <button className="w-12 h-12 rounded-full border border-gray-400 flex items-center justify-center text-gray-400 hover:text-[#f9c602] hover:border-[#f9c602] hover:bg-[#f9c602]/5 transition-colors">
                 <Share2 className="w-4 h-4" />
               </button>
-              <button className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-[#f9c602] hover:border-[#f9c602] hover:bg-[#f9c602]/5 transition-colors">
+              <button className="w-12 h-12 rounded-full border border-gray-400 flex items-center justify-center text-gray-400 hover:text-[#f9c602] hover:border-[#f9c602] hover:bg-[#f9c602]/5 transition-colors">
                 <Facebook className="w-4 h-4" />
               </button>
-              <button className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-[#f9c602] hover:border-[#f9c602] hover:bg-[#f9c602]/5 transition-colors">
+              <button className="w-12 h-12 rounded-full border border-gray-400 flex items-center justify-center text-gray-400 hover:text-[#f9c602] hover:border-[#f9c602] hover:bg-[#f9c602]/5 transition-colors">
                 <Twitter className="w-4 h-4" />
               </button>
-              <button className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-[#f9c602] hover:border-[#f9c602] hover:bg-[#f9c602]/5 transition-colors">
+              <button className="w-12 h-12 rounded-full border border-gray-400 flex items-center justify-center text-gray-400 hover:text-[#f9c602] hover:border-[#f9c602] hover:bg-[#f9c602]/5 transition-colors">
                 <Linkedin className="w-4 h-4" />
               </button>
             </div>
 
             {/* Content */}
-            <article className="prose prose-lg md:prose-xl max-w-none text-gray-600 font-normal leading-[1.8] mb-20 prose-headings:font-bold prose-headings:text-gray-900 prose-a:text-[#f9c602] prose-strong:text-gray-900 text-center w-full">
+            <article className="prose prose-lg md:prose-xl max-w-none text-gray-600 font-normal leading-[1.8] mb-20 prose-headings:font-bold prose-headings:text-[#392F5F] prose-a:text-[#f9c602] prose-strong:text-[#392F5F] text-center w-full">
               {post.excerpt && (
-                <p className="text-xl md:text-2xl text-gray-800 font-medium leading-relaxed mb-12 border-l-4 border-[#f9c602] pl-6 py-1 bg-gray-50/50 rounded-r-lg">
+                <p className="text-xl md:text-2xl text-[#392F5F] font-medium leading-relaxed mb-12 border-l-4 border-[#f9c602] pl-6 py-1 bg-gray-50/50 rounded-r-lg">
                   {post.excerpt}
                 </p>
               )}

@@ -181,7 +181,7 @@ export function ContactView({ data, banner }: { data?: any; banner?: any }) {
 
           {/* Right Side: Contact Form */}
           <div className="w-full lg:w-1/2 p-8 md:p-10 lg:p-12 bg-white flex flex-col justify-center">
-            <h3 className="text-xl font-bold text-gray-900 mb-6 uppercase tracking-wide">
+            <h3 className="text-xl font-bold text-[#392f5f] mb-6 uppercase tracking-wide">
               Send a Message
             </h3>
 
@@ -196,12 +196,12 @@ export function ContactView({ data, banner }: { data?: any; banner?: any }) {
                     value={formData.fullName}
                     onChange={handleChange}
                     required
-                    className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-[#f9c602] peer"
+                    className="block w-full px-0 py-2.5 text-base text-[#392f5f] bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-[#f9c602] peer font-medium"
                     placeholder=" "
                   />
                   <label
                     htmlFor="fullName"
-                    className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-[#f9c602] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none"
+                    className="absolute text-sm text-[#392f5f]/70 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-[#f9c602] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-bold pointer-events-none"
                   >
                     Full Name
                   </label>
@@ -215,12 +215,12 @@ export function ContactView({ data, banner }: { data?: any; banner?: any }) {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-[#f9c602] peer"
+                    className="block w-full px-0 py-2.5 text-base text-[#392f5f] bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-[#f9c602] peer font-medium"
                     placeholder=" "
                   />
                   <label
                     htmlFor="email"
-                    className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-[#f9c602] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none"
+                    className="absolute text-sm text-[#392f5f]/70 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-[#f9c602] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-bold pointer-events-none"
                   >
                     Email Address
                   </label>
@@ -236,12 +236,12 @@ export function ContactView({ data, banner }: { data?: any; banner?: any }) {
                     value={formData.phone}
                     onChange={handleChange}
                     required
-                    className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-[#f9c602] peer"
+                    className="block w-full px-0 py-2.5 text-base text-[#392f5f] bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-[#f9c602] peer font-medium"
                     placeholder=" "
                   />
                   <label
                     htmlFor="phone"
-                    className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-[#f9c602] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none"
+                    className="absolute text-sm text-[#392f5f]/70 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-[#f9c602] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-bold pointer-events-none"
                   >
                     Phone Number
                   </label>
@@ -255,12 +255,12 @@ export function ContactView({ data, banner }: { data?: any; banner?: any }) {
                     value={formData.subject}
                     onChange={handleChange}
                     required
-                    className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-[#f9c602] peer"
+                    className="block w-full px-0 py-2.5 text-base text-[#392f5f] bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-[#f9c602] peer font-medium"
                     placeholder=" "
                   />
                   <label
                     htmlFor="subject"
-                    className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-[#f9c602] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none"
+                    className="absolute text-sm text-[#392f5f]/70 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-[#f9c602] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-bold pointer-events-none"
                   >
                     Subject
                   </label>
@@ -275,12 +275,12 @@ export function ContactView({ data, banner }: { data?: any; banner?: any }) {
                   onChange={handleChange}
                   required
                   rows={4}
-                  className="block w-full px-0 py-2.5 text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-[#f9c602] peer resize-none"
+                  className="block w-full px-0 py-2.5 text-base text-[#392f5f] bg-transparent border-0 border-b-2 border-gray-200 appearance-none focus:outline-none focus:ring-0 focus:border-[#f9c602] peer resize-none font-medium"
                   placeholder=" "
                 />
                 <label
                   htmlFor="message"
-                  className="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-[#f9c602] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-semibold pointer-events-none"
+                  className="absolute text-sm text-[#392f5f]/70 duration-300 transform -translate-y-6 scale-75 top-3 z-10 origin-[0] peer-focus:left-0 peer-focus:text-[#f9c602] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider font-bold pointer-events-none"
                 >
                   Your Message
                 </label>
@@ -290,7 +290,7 @@ export function ContactView({ data, banner }: { data?: any; banner?: any }) {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="flex items-center justify-center gap-2 bg-[#f9c602] text-gray-900 hover:bg-brand-gold px-8 py-3 rounded-full font-bold uppercase tracking-wide transition-colors group w-fit"
+                  className="flex items-center justify-center gap-2 bg-[#f9c602] text-[#392f5f] hover:bg-[#392f5f] hover:text-[#f9c602] px-8 py-3 rounded-full font-black uppercase tracking-wide transition-colors group w-fit duration-300"
                 >
                   {isLoading ? "Sending..." : "Send Message"}
                   <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
@@ -309,14 +309,10 @@ export function ContactView({ data, banner }: { data?: any; banner?: any }) {
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           className="bg-[#392F5F] rounded-3xl shadow-xl overflow-hidden p-8 md:p-12 text-white relative"
         >
-          {/* Abstract Shapes for premium dark aesthetic */}
-          <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/3 w-64 h-64 bg-[#f9c602]/10 rounded-full blur-3xl pointer-events-none"></div>
-          <div className="absolute bottom-0 left-0 translate-y-1/3 -translate-x-1/3 w-80 h-80 bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
-
           <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-6 items-center">
             {/* Office Location */}
             <div className="flex flex-col md:items-center md:text-center gap-4 group cursor-default">
-              <div className="w-14 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center group-hover:border-[#f9c602] group-hover:text-[#f9c602] transition-colors duration-300">
+              <div className="w-14 h-14 bg-white/5 border border-[#f9c602] text-[#f9c602] rounded-2xl flex items-center justify-center group-hover:bg-[#f9c602] group-hover:text-[#392f5f] transition-colors duration-300">
                 <MapPin className="w-6 h-6" />
               </div>
               <div>
@@ -332,7 +328,7 @@ export function ContactView({ data, banner }: { data?: any; banner?: any }) {
 
             {/* Hotline */}
             <div className="flex flex-col md:items-center md:text-center gap-4 group cursor-default">
-              <div className="w-14 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center group-hover:border-[#f9c602] group-hover:text-[#f9c602] transition-colors duration-300">
+              <div className="w-14 h-14 bg-white/5 border border-[#f9c602] text-[#f9c602] rounded-2xl flex items-center justify-center group-hover:bg-[#f9c602] group-hover:text-[#392f5f] transition-colors duration-300">
                 <Phone className="w-6 h-6" />
               </div>
               <div>
@@ -348,7 +344,7 @@ export function ContactView({ data, banner }: { data?: any; banner?: any }) {
 
             {/* Email */}
             <div className="flex flex-col md:items-center md:text-center gap-4 group cursor-default">
-              <div className="w-14 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center group-hover:border-[#f9c602] group-hover:text-[#f9c602] transition-colors duration-300">
+              <div className="w-14 h-14 bg-white/5 border border-[#f9c602] text-[#f9c602] rounded-2xl flex items-center justify-center group-hover:bg-[#f9c602] group-hover:text-[#392f5f] transition-colors duration-300">
                 <Mail className="w-6 h-6" />
               </div>
               <div>

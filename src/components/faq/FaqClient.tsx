@@ -33,11 +33,21 @@ export function FaqClient({ initialFaqs = [] }: FaqClientProps) {
               initialFaqs.map((faq) => (
                 <div
                   key={faq._id}
-                  className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden cursor-pointer  transition-shadow"
+                  className={`bg-white border rounded-xl overflow-hidden cursor-pointer hover:shadow-md transition-all duration-300 group ${
+                    openId === faq._id
+                      ? "border-[#f9c602]/50 shadow-sm"
+                      : "border-black/10 hover:border-[#f9c602]/50"
+                  }`}
                   onClick={() => toggleFaq(faq._id)}
                 >
                   <div className="p-6 flex items-start justify-between min-h-[104px]">
-                    <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 pr-8">
+                    <h3
+                      className={`text-lg font-bold transition-colors duration-300 pr-8 ${
+                        openId === faq._id
+                          ? "text-[#f9c602]"
+                          : "text-[#392f5f] group-hover:text-[#f9c602]"
+                      }`}
+                    >
                       {faq.question}
                     </h3>
                     <div
@@ -45,7 +55,13 @@ export function FaqClient({ initialFaqs = [] }: FaqClientProps) {
                         openId === faq._id ? "rotate-180" : "rotate-0"
                       }`}
                     >
-                      <ChevronDown className="w-5 h-5 text-gray-500" />
+                      <ChevronDown
+                        className={`w-5 h-5 transition-colors duration-300 ${
+                          openId === faq._id
+                            ? "text-[#f9c602]"
+                            : "text-[#392f5f] group-hover:text-[#f9c602]"
+                        }`}
+                      />
                     </div>
                   </div>
                   <AnimatePresence initial={false}>
@@ -57,7 +73,7 @@ export function FaqClient({ initialFaqs = [] }: FaqClientProps) {
                         transition={{ duration: 0.3, ease: "easeInOut" }}
                         className="overflow-hidden"
                       >
-                        <div className="p-6 pt-0 text-gray-600 dark:text-gray-300 leading-relaxed border-t border-gray-100 dark:border-gray-700/50 mt-2">
+                        <div className="p-6 pt-0 text-gray-600 leading-relaxed border-t border-black/10 mt-2">
                           {faq.answer}
                         </div>
                       </motion.div>

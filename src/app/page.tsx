@@ -25,15 +25,21 @@ export default async function Home() {
   let apiConcerns: any[] = [];
 
   try {
-    const [cmsRes, blogsRes, brandingRes, mainSettingsRes, homeSettingsRes, concernsRes] =
-      await Promise.all([
-        getHomepageCMSPublic(),
-        getBlogsPublic({ status: "active", limit: 4 }),
-        getBrandingSettingsPublic(),
-        getMainSettingsPublic(),
-        getHomeSettingsPublic(),
-        getConcernsPublic(),
-      ]);
+    const [
+      cmsRes,
+      blogsRes,
+      brandingRes,
+      mainSettingsRes,
+      homeSettingsRes,
+      concernsRes,
+    ] = await Promise.all([
+      getHomepageCMSPublic(),
+      getBlogsPublic({ status: "active", limit: 4 }),
+      getBrandingSettingsPublic(),
+      getMainSettingsPublic(),
+      getHomeSettingsPublic(),
+      getConcernsPublic(),
+    ]);
 
     if (cmsRes?.success) {
       cmsData = cmsRes.data;
@@ -75,7 +81,11 @@ export default async function Home() {
         mainSettings={mainSettingsData}
       /> */}
       <AboutSection cmsData={cmsData} mainSettings={mainSettingsData} />
-      <ConcernsSection cmsData={cmsData} branding={brandingData} apiConcerns={apiConcerns} />
+      <ConcernsSection
+        cmsData={cmsData}
+        branding={brandingData}
+        apiConcerns={apiConcerns}
+      />
       <AchievementsSection cmsData={cmsData} mainSettings={mainSettingsData} />
       <TestimonialSection />
       <LatestNews blogs={blogsData} />

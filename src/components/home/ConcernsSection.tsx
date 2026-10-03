@@ -3,7 +3,14 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Building, Laptop, ShoppingBag, Plane, Sprout } from "lucide-react";
+import {
+  ArrowUpRight,
+  Building,
+  Laptop,
+  ShoppingBag,
+  Plane,
+  Sprout,
+} from "lucide-react";
 import { motion } from "framer-motion";
 
 const defaultConcerns = [
@@ -98,7 +105,10 @@ export function ConcernsSection({
       []) as Array<Record<string, unknown>>;
     if (cmsConcerns.length > 0) {
       concerns = cmsConcerns.map((concern: Record<string, unknown>) => {
-        const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+        const iconMap: Record<
+          string,
+          React.ComponentType<{ className?: string }>
+        > = {
           building: Building,
           laptop: Laptop,
           shoppingbag: ShoppingBag,
@@ -130,7 +140,10 @@ export function ConcernsSection({
       items.forEach((item, index) => {
         const rect = item.getBoundingClientRect();
         // If the item is in the middle of the screen
-        if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+        if (
+          rect.top <= window.innerHeight / 2 &&
+          rect.bottom >= window.innerHeight / 2
+        ) {
           active = index;
         }
       });
@@ -147,11 +160,15 @@ export function ConcernsSection({
         {/* Section Intro - Moved to Top */}
         <div className="mb-16 text-center">
           <div className="flex items-center justify-center gap-3 mb-6">
-            <span className="text-[#F9C602] font-bold tracking-widest text-base">&lt; &lt; &lt;</span>
+            <span className="text-[#F9C602] font-bold tracking-widest text-base">
+              &lt; &lt; &lt;
+            </span>
             <span className="text-gray-500 font-semibold tracking-widest uppercase text-[13px]">
               Enterprise Portfolio
             </span>
-            <span className="text-[#F9C602] font-bold tracking-widest text-base">&gt; &gt; &gt;</span>
+            <span className="text-[#F9C602] font-bold tracking-widest text-base">
+              &gt; &gt; &gt;
+            </span>
           </div>
           <h2 className="text-[#392F5F] font-serif font-medium text-3xl md:text-4xl lg:text-[44px] leading-[1.2] tracking-tight">
             Strategic Enterprises
@@ -159,78 +176,77 @@ export function ConcernsSection({
         </div>
 
         <div className="flex flex-col lg:flex-row relative">
-          
           {/* Left Side: Sticky Image Area (Desktop Only) */}
           <div className="hidden lg:block w-1/2 sticky top-24 h-[80vh] p-4 lg:p-8 xl:p-12">
             <div className="relative w-full h-full rounded-[2rem] overflow-hidden shadow-2xl">
-               {concerns.map((concern, idx) => (
-                 <motion.div
-                   key={idx}
-                   className="absolute inset-0 w-full h-full"
-                   initial={{ opacity: 0, scale: 1.05 }}
-                   animate={{ 
-                     opacity: activeIndex === idx ? 1 : 0,
-                     scale: activeIndex === idx ? 1 : 1.05 
-                   }}
-                   transition={{ duration: 0.8, ease: "easeInOut" }}
-                 >
-                   <Image 
-                     src={concern.image} 
-                     alt={concern.title} 
-                     fill 
-                     className="object-cover"
-                     priority={idx === 0} 
-                   />
-                   <div className="absolute inset-0 bg-black/10" />
-                 </motion.div>
-               ))}
+              {concerns.map((concern, idx) => (
+                <motion.div
+                  key={idx}
+                  className="absolute inset-0 w-full h-full"
+                  initial={{ opacity: 0, scale: 1.05 }}
+                  animate={{
+                    opacity: activeIndex === idx ? 1 : 0,
+                    scale: activeIndex === idx ? 1 : 1.05,
+                  }}
+                  transition={{ duration: 0.8, ease: "easeInOut" }}
+                >
+                  <Image
+                    src={concern.image}
+                    alt={concern.title}
+                    fill
+                    className="object-cover"
+                    priority={idx === 0}
+                  />
+                  <div className="absolute inset-0 bg-black/10" />
+                </motion.div>
+              ))}
             </div>
           </div>
 
           {/* Right Side: Scrollable Content List */}
           <div className="w-full lg:w-1/2 flex flex-col px-4 lg:px-12 xl:px-20 border-l border-[#392F5F]/10">
-             
-             {/* Concern Items */}
-             {concerns.map((concern, idx) => (
-               <div 
-                 key={idx} 
-                 className="concern-scroll-item flex flex-col justify-center items-center text-center py-12 lg:py-12 border-b border-[#392F5F]/10 last:border-b-0 min-h-[55vh]"
-               >
-                  <div className="text-lg md:text-xl font-medium tracking-widest text-[#392F5F]/60 mb-8">
-                    0{idx + 1} / 0{concerns.length}
-                  </div>
-                  
-                  <h3 className="text-2xl md:text-3xl font-bold leading-[1.2] mb-10 text-[#392F5F] max-w-md">
-                    {concern.title}
-                  </h3>
-                  
-                  {/* Small Inline Image */}
-                  <div className="relative w-full max-w-sm aspect-[4/3] rounded-2xl overflow-hidden mb-12 shadow-lg">
-                    <Image 
-                      src={concern.image} 
-                      alt={concern.title} 
-                      fill 
-                      className="object-cover" 
-                    />
-                  </div>
+            {/* Concern Items */}
+            {concerns.map((concern, idx) => (
+              <div
+                key={idx}
+                className="concern-scroll-item flex flex-col justify-center items-center text-center py-12 lg:py-12 border-b border-[#392F5F]/10 last:border-b-0 min-h-[55vh]"
+              >
+                <div className="text-lg md:text-xl font-medium tracking-widest text-[#392F5F]/60 mb-8">
+                  0{idx + 1} / 0{concerns.length}
+                </div>
 
-                  <p className="text-[#392F5F]/80 text-base leading-relaxed mb-10 max-w-md">
-                    {concern.description}
-                  </p>
+                <h3 className="text-2xl md:text-3xl font-bold leading-[1.2] mb-10 text-[#392F5F] max-w-md">
+                  {concern.title}
+                </h3>
 
-                  <Link 
-                    href={concern.href} 
-                    className="group inline-flex items-center gap-3 bg-[#F9C602] hover:bg-[#392F5F] text-[#392F5F] hover:text-white px-5 py-2.5 rounded-full w-fit transition-all duration-300"
-                  >
-                     <span className="font-semibold text-sm">Explore Services</span>
-                     <div className="w-6 h-6 bg-[#392F5F]/10 group-hover:bg-white/20 rounded-full flex items-center justify-center text-[#392F5F] group-hover:text-white transition-colors">
-                        <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                     </div>
-                  </Link>
-               </div>
-             ))}
+                {/* Small Inline Image */}
+                <div className="relative w-full max-w-sm aspect-[4/3] rounded-2xl overflow-hidden mb-12 shadow-lg">
+                  <Image
+                    src={concern.image}
+                    alt={concern.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+
+                <p className="text-[#392F5F]/80 text-base leading-relaxed mb-10 max-w-md">
+                  {concern.description}
+                </p>
+
+                <Link
+                  href={concern.href}
+                  className="group inline-flex items-center gap-3 bg-[#F9C602] hover:bg-[#392F5F] text-[#392F5F] hover:text-white px-5 py-2.5 rounded-full w-fit transition-all duration-300"
+                >
+                  <span className="font-semibold text-sm">
+                    Explore Services
+                  </span>
+                  <div className="w-6 h-6 bg-[#392F5F]/10 group-hover:bg-white/20 rounded-full flex items-center justify-center text-[#392F5F] group-hover:text-white transition-colors">
+                    <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </div>
+                </Link>
+              </div>
+            ))}
           </div>
-
         </div>
       </div>
     </section>

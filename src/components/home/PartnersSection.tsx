@@ -26,7 +26,9 @@ export function PartnersSection({
   cmsData?: Record<string, unknown>;
 }) {
   // Dynamic partners from CMS
-  const cmsPartners = (cmsData?.partners || []) as Array<Record<string, unknown>>;
+  const cmsPartners = (cmsData?.partners || []) as Array<
+    Record<string, unknown>
+  >;
   const partners: Partner[] =
     cmsPartners.length > 0
       ? cmsPartners.map((partner: Record<string, unknown>) => ({
@@ -45,28 +47,26 @@ export function PartnersSection({
           transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
         >
           {/* Double array for seamless infinite scrolling */}
-          {[...partners, ...partners].map(
-            (partner, idx) => (
-              <div
-                key={idx}
-                className="group/partner relative flex items-center justify-center px-16 lg:px-20 py-16 lg:py-16 border-r border-[#392F5F]/25 min-w-[350px] cursor-pointer overflow-hidden"
-              >
-                {/* Normal State */}
-                <div className="flex items-center gap-4 transition-all duration-500 ease-out group-hover/partner:-translate-y-10 group-hover/partner:opacity-0">
-                  <span className="text-[#1A1A1A] text-3xl font-medium tracking-tight">
-                    {partner.name}
-                  </span>
-                </div>
-
-                {/* Hover Light State */}
-                <div className="absolute flex items-center gap-4 transition-all duration-500 ease-out translate-y-10 opacity-0 group-hover/partner:translate-y-0 group-hover/partner:opacity-40">
-                  <span className="text-[#1A1A1A] text-3xl font-medium tracking-tight">
-                    {partner.name}
-                  </span>
-                </div>
+          {[...partners, ...partners].map((partner, idx) => (
+            <div
+              key={idx}
+              className="group/partner relative flex items-center justify-center px-16 lg:px-20 py-16 lg:py-16 border-r border-[#392F5F]/25 min-w-[350px] cursor-pointer overflow-hidden"
+            >
+              {/* Normal State */}
+              <div className="flex items-center gap-4 transition-all duration-500 ease-out group-hover/partner:-translate-y-10 group-hover/partner:opacity-0">
+                <span className="text-[#392F5F] text-3xl font-medium tracking-tight">
+                  {partner.name}
+                </span>
               </div>
-            )
-          )}
+
+              {/* Hover Light State */}
+              <div className="absolute flex items-center gap-4 transition-all duration-500 ease-out translate-y-10 opacity-0 group-hover/partner:translate-y-0 group-hover/partner:opacity-40">
+                <span className="text-[#392F5F] text-3xl font-medium tracking-tight">
+                  {partner.name}
+                </span>
+              </div>
+            </div>
+          ))}
         </motion.div>
       </div>
     </section>

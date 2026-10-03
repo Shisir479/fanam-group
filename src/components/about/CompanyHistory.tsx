@@ -68,7 +68,6 @@ const philosophyItems = [
 export function CompanyHistory({ data }: { data: any }) {
   return (
     <section className="relative fanam-section bg-white overflow-hidden py-20 lg:py-28">
-
       <div className="fanam-container relative z-10">
         {/* Header */}
         <div className="flex flex-col items-center text-center mb-16 lg:mb-20">

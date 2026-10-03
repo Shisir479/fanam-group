@@ -65,7 +65,7 @@ export function CompanyProfile({ data }: { data: any }) {
                 <span>&lt;</span>
                 <span>&lt;</span>
               </span>
-              <span>ABOUT FANAM GROUP</span>
+              <span>A B O U T U S</span>
               <span className="flex tracking-tighter">
                 <span>&gt;</span>
                 <span>&gt;</span>
@@ -75,7 +75,7 @@ export function CompanyProfile({ data }: { data: any }) {
 
             {/* Headline */}
             <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#392f5f] leading-[1.2] mb-8">
-              Shaping the Future with Vision & Integrity
+              A Vision Built on Lasting Value
             </h2>
 
             {/* Two Points Side by Side */}
@@ -93,14 +93,22 @@ export function CompanyProfile({ data }: { data: any }) {
             </div>
 
             {/* Narrative text */}
-            <p className="text-gray-700 text-sm md:text-[15px] font-normal leading-relaxed max-w-xl">
-              Fanam Group is a diversified corporate conglomerate committed to
-              shaping the future through innovation, integrity, and operational
-              excellence. With a growing footprint spanning Real Estate,
-              E-Commerce, Travel & Tourism, Media, and emerging industries, we
-              deliver high-value solutions that build enduring legacies and
-              empower communities across Bangladesh and beyond.
-            </p>
+            <div className="text-gray-700 text-sm md:text-[15px] font-normal leading-relaxed max-w-xl space-y-4">
+              <p>
+                Established on 16 September 2017, Fanam Group was founded by a
+                British-Bangladeshi entrepreneur with a vision to build a
+                diversified and sustainable business organization. Today, Fanam
+                Group operates across nine major industries — spanning Real
+                Estate, Construction, Trading, Hotel & Resort, ECommerce, Travel
+                & Tourism, IT & Technology, News & Media, and Industrial
+                Manufacturing.
+              </p>
+              <p>
+                Driven by innovation, excellence and responsible growth, we
+                build businesses that create lasting value for our customers,
+                partners, people and communities.
+              </p>
+            </div>
           </div>
         </div>
       </div>

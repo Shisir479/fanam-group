@@ -34,7 +34,7 @@ export default async function CareersPage() {
       <section className="py-20 bg-white border-t border-black/10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-black mb-4">
+            <h2 className="text-4xl font-extrabold text-[#392f5f] mb-4">
               Why Fanam Group?
             </h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
@@ -59,12 +59,12 @@ export default async function CareersPage() {
             ].map((perk, i) => (
               <div
                 key={i}
-                className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow"
+                className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 text-center hover:shadow-md transition-shadow group"
               >
                 <div className="w-16 h-16 mx-auto bg-[#f9c602]/10 rounded-full flex items-center justify-center mb-6">
                   <CheckCircle2 className="w-8 h-8 text-[#f9c602]" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
+                <h3 className="text-xl font-bold text-[#392f5f] group-hover:text-[#f9c602] mb-3 transition-colors duration-300">
                   {perk.title}
                 </h3>
                 <p className="text-gray-600">{perk.desc}</p>

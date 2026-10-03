@@ -76,11 +76,11 @@ export function InquiryCTA({
             <h2 className="text-white font-serif font-medium text-3xl md:text-4xl lg:text-[44px] leading-tight tracking-tight mb-6">
               {headline}
             </h2>
-            
+
             <p className="text-white/90 text-sm md:text-base leading-relaxed mb-10 max-w-2xl font-light">
               {description}
             </p>
-            
+
             <Link
               href={primaryCTA.href}
               className="group inline-flex items-center justify-center gap-2 bg-[#F9C602] text-[#392F5F] px-8 py-4 rounded-full font-semibold text-sm hover:bg-white hover:text-[#392F5F] transition-all duration-300 active:scale-95 shadow-lg"

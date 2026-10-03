@@ -14,6 +14,7 @@ import { CSRActivities } from "@/components/about/CSRActivities";
 
 import { getAboutPublic } from "@/services/about.service";
 import { getBannerByPageAdmin } from "@/services/banner.service";
+import { InquiryCTA } from "@/components/home/InquiryCTA";
 
 export async function generateMetadata() {
   const res = await getAboutPublic();
@@ -66,7 +67,7 @@ export default async function AboutUsPage() {
       {/* <KeyMilestones /> */}
 
       {/* 8. Corporate History & Philosophy */}
-      <CompanyHistory data={about} />
+      {/* <CompanyHistory data={about} /> */}
 
       {/* 9. Core Principles (Values) */}
       <CoreValues data={about} />
@@ -79,6 +80,7 @@ export default async function AboutUsPage() {
 
       {/* 12. Our Governance */}
       {/* <OurGovernance /> */}
+      <InquiryCTA />
     </main>
   );
 }

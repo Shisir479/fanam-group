@@ -4,7 +4,15 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Trophy, TrendingUp, Users, ArrowUpRight } from "lucide-react";
+import {
+  Trophy,
+  TrendingUp,
+  Users,
+  ArrowUpRight,
+  Calendar,
+  Building2,
+  Globe,
+} from "lucide-react";
 import { Syne } from "next/font/google";
 
 const syne = Syne({ subsets: ["latin"], weight: ["500", "600", "700"] });
@@ -25,11 +33,12 @@ export function AboutSection({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-14 items-center">
           {/* ───────── Left: geometric triangles ───────── */}
           <div className="relative w-full max-w-[540px] mx-auto aspect-[1.15] lg:ml-auto">
-
             {/* Pale beige wedge behind the images */}
             <div
               className="absolute left-[47%] top-[40%] w-[52%] h-[50%] bg-[#F6F5F2] z-0"
-              style={{ clipPath: "polygon(0 100%, 100% 0, 100% 22%, 25% 100%)" }}
+              style={{
+                clipPath: "polygon(0 100%, 100% 0, 100% 22%, 25% 100%)",
+              }}
             />
 
             {/* Small yellow triangle (points right) */}
@@ -37,7 +46,7 @@ export function AboutSection({
               animate={{
                 rotate: [0, 180, 0],
                 opacity: [0.4, 1, 0.4],
-                scale: [0.85, 1.1, 0.85]
+                scale: [0.85, 1.1, 0.85],
               }}
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
               className="absolute left-[19%] top-[35%] w-[12%] h-[15%] z-10 origin-center"
@@ -113,8 +122,8 @@ export function AboutSection({
               >
                 &lt;&lt;&lt;
               </span>
-              <span className="text-gray-500 font-semibold tracking-wide uppercase text-[12px]">
-                Get to know us
+              <span className="text-gray-500 font-semibold tracking-widest uppercase text-[12px]">
+                A B O U T U S
               </span>
               <span
                 className="font-bold tracking-[0.15em] text-[11px]"
@@ -126,78 +135,63 @@ export function AboutSection({
 
             {/* Heading */}
             <h2
-              className={`${syne.className} font-medium text-3xl md:text-4xl leading-[1.15] mb-6`}
-              style={{ color: DARK }}
+              className={`${syne.className} font-bold text-3xl md:text-4xl mb-4`}
+              style={{
+                color: "#392F5F",
+                lineHeight: "normal",
+                paddingBottom: "0.2em",
+              }}
             >
-              We&apos;re Partner of Your Growth
+              A Vision Built on Lasting Value
             </h2>
 
-            <p className="text-gray-500 text-[13px] md:text-sm leading-relaxed mb-10">
-              Fanam Group is a diversified, multi-industry powerhouse united under a gold standard of uncompromising quality. We provide visionary leadership and sustainable development solutions tailored to your business goals.
+            <p className="text-gray-500 text-[13px] md:text-sm leading-relaxed mb-8">
+              Established on 16 September 2017, Fanam Group was founded by a
+              British-Bangladeshi entrepreneur with a vision to build a
+              diversified and sustainable business organization. Today, Fanam
+              Group operates across nine major industries...
             </p>
 
-            {/* Features + floating card */}
-            <div className="flex flex-col sm:flex-row gap-6 mb-12">
-              <div className="flex flex-col flex-1">
-                <div className="flex gap-4 pb-6">
-                  <Trophy
-                    className="w-9 h-9 shrink-0 stroke-[1.25] mt-1"
-                    style={{ color: YELLOW }}
-                  />
-                  <div>
-                    <h4
-                      className={`${syne.className} font-semibold text-[16px] mb-1 pb-1`}
-                      style={{ color: DARK }}
-                    >
-                      Award Winning Group
-                    </h4>
-                    <p className="text-gray-500 text-[12px] leading-relaxed">
-                      Recognized globally for delivering excellence across diverse sectors.
-                    </p>
-                  </div>
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-4 mb-10 border-t border-gray-100 pt-8">
+              <div className="flex flex-col gap-1">
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-5 h-5 text-[#392F5F]" />
+                  <span
+                    className={`${syne.className} text-2xl font-bold text-[#F9C602]`}
+                  >
+                    2017
+                  </span>
                 </div>
-
-                <div className="w-full h-px bg-[#e9e4cf]" />
-
-                <div className="flex gap-4 pt-6">
-                  <TrendingUp
-                    className="w-9 h-9 shrink-0 stroke-[1.25] mt-1"
-                    style={{ color: YELLOW }}
-                  />
-                  <div>
-                    <h4
-                      className={`${syne.className} font-semibold text-[16px] mb-1 pb-1`}
-                      style={{ color: DARK }}
-                    >
-                      Highest Success Rates
-                    </h4>
-                    <p className="text-gray-500 text-[12px] leading-relaxed">
-                      Proven track record of driving sustainable innovation for our partners.
-                    </p>
-                  </div>
-                </div>
+                <span className="text-xs font-bold text-[#06202A] uppercase tracking-wider">
+                  FOUNDED
+                </span>
               </div>
-
-              {/* Floating card: square corners, full height of features */}
-              <div className="flex flex-col items-center justify-center text-center bg-[#F3F2ED] px-4 py-6 sm:w-[120px] shrink-0 sm:self-stretch">
-                <div
-                  className="w-9 h-9 rounded-full flex items-center justify-center mb-3"
-                  style={{ background: YELLOW }}
-                >
-                  <Users className="w-4 h-4" style={{ color: DARK }} />
+              <div className="flex flex-col gap-1 border-l border-gray-100 pl-4">
+                <div className="flex items-center gap-2">
+                  <Building2 className="w-5 h-5 text-[#392F5F]" />
+                  <span
+                    className={`${syne.className} text-2xl font-bold text-[#F9C602]`}
+                  >
+                    9+
+                  </span>
                 </div>
-                <p
-                  className={`${syne.className} font-medium text-[12px] leading-snug`}
-                  style={{ color: DARK }}
-                >
-                  Trusted By
-                  <br />
-                  Global
-                  <br />
-                  Partners
-                  <br />
-                  Worldwide
-                </p>
+                <span className="text-xs font-bold text-[#06202A] uppercase tracking-wider">
+                  SECTORS
+                </span>
+              </div>
+              <div className="flex flex-col gap-1 border-l border-gray-100 pl-4">
+                <div className="flex items-center gap-2">
+                  <Globe className="w-5 h-5 text-[#392F5F]" />
+                  <span
+                    className={`${syne.className} text-xl md:text-2xl font-bold text-[#F9C602] leading-tight`}
+                  >
+                    Global
+                  </span>
+                </div>
+                <span className="text-xs font-bold text-[#06202A] uppercase tracking-wider">
+                  REACH
+                </span>
               </div>
             </div>
 

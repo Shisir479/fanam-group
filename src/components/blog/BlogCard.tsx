@@ -72,7 +72,7 @@ export function BlogCardLight({ post }: { post: any }) {
         </div>
 
         <Link href={`/blog/${post.slug}`} className="inline-block mb-4">
-          <h2 className="text-2xl font-bold text-black leading-[1.3] group-hover:text-[#f9c602] transition-colors duration-300 line-clamp-2">
+          <h2 className="text-2xl font-bold text-[#392f5f] leading-[1.3] group-hover:text-[#f9c602] transition-colors duration-300 line-clamp-2">
             {post.title}
           </h2>
         </Link>
@@ -214,7 +214,7 @@ export function MagazineMainFeature({ post }: { post: any }) {
       <span className="text-[#f9c602] text-[11px] font-bold uppercase tracking-[0.15em] mb-4">
         {tagName}
       </span>
-      <h2 className="text-3xl md:text-5xl font-black text-black leading-[1.1] mb-4  transition-colors">
+      <h2 className="text-3xl md:text-5xl font-black text-[#392f5f] group-hover:text-[#f9c602] leading-[1.1] mb-4 transition-colors duration-300">
         {post.title}
       </h2>
       <p className="text-gray-500 text-sm">{post.date}</p>
@@ -242,7 +242,7 @@ export function MagazineSideFeature({ post }: { post: any }) {
       <span className="text-[#f9c602] text-[10px] font-bold uppercase tracking-[0.15em] mb-2">
         {tagName}
       </span>
-      <h3 className="text-xl font-bold text-black leading-[1.2] mb-2 transition-colors">
+      <h3 className="text-xl font-bold text-[#392f5f] group-hover:text-[#f9c602] leading-[1.2] mb-2 transition-colors duration-300">
         {post.title}
       </h3>
       <p className="text-gray-500 text-xs">{post.date}</p>
@@ -259,7 +259,7 @@ export function MagazineListFeature({ post }: { post: any }) {
       className="group flex items-start gap-4 py-5 border-b border-black/10 last:border-0"
     >
       <div className="flex-1 pr-2">
-        <h4 className="text-sm font-bold text-black leading-[1.3] mb-2  transition-colors line-clamp-3">
+        <h4 className="text-sm font-bold text-[#392f5f] group-hover:text-[#f9c602] leading-[1.3] mb-2 transition-colors duration-300 line-clamp-3">
           {post.title}
         </h4>
         <p className="text-gray-400 text-[11px]">{post.date}</p>
@@ -298,7 +298,7 @@ export function BlogCardCompact({ post }: { post: any }) {
             {tagName}
           </span>
         </div>
-        <h3 className="text-[17px] font-bold text-black leading-snug mb-3 transition-colors line-clamp-3">
+        <h3 className="text-[17px] font-bold text-[#392f5f] group-hover:text-[#f9c602] leading-snug mb-3 transition-colors duration-300 line-clamp-3">
           {post.title}
         </h3>
         <p className="text-gray-500 text-[12px] font-medium mt-auto border-t border-black/10 pt-3 flex items-center gap-2">

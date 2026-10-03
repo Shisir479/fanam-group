@@ -391,7 +391,6 @@ export function Hero({
                 >
                   {/* Tagline */}
                   <div className="inline-flex items-center gap-2 text-white font-medium mb-4">
-                    <Sparkles className="w-4 h-4" />
                     <span>{currentSlide.tagline}</span>
                   </div>
 
@@ -407,7 +406,18 @@ export function Hero({
                     >
                       <span>{currentSlide.ctaPrimary.label}</span>
                       <span className="w-8 h-8 rounded-full bg-[#F9C602] text-[#392F5F] flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1">
-                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
                       </span>
                     </Link>
                   </div>
@@ -457,8 +467,6 @@ export function Hero({
             })}
           </div> */}
         </div>
-
-
       </div>
 
       {/* ─── 4. Floating Social Icons (transparent bordered design) ─── */}
@@ -472,7 +480,7 @@ export function Hero({
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 * idx, duration: 0.5 }}
-            className={`group relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/25 transition-all duration-300 cursor-pointer drop-shadow-md hover:scale-110 text-white ${
+            className={`group relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 hover:bg-white backdrop-blur-xl border border-white/25 transition-all duration-300 cursor-pointer drop-shadow-md hover:scale-110 text-white ${
               item.key === "facebook"
                 ? "hover:text-[#1877F2]"
                 : item.key === "instagram"
@@ -480,10 +488,10 @@ export function Hero({
                   : item.key === "linkedin"
                     ? "hover:text-[#0A66C2]"
                     : item.key === "twitter"
-                      ? "hover:text-gray-300"
+                      ? "hover:text-black"
                       : item.key === "youtube"
                         ? "hover:text-[#FF0000]"
-                        : "hover:text-gray-300"
+                        : "hover:text-black"
             }`}
             aria-label={item.label}
           >

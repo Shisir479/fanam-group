@@ -11,7 +11,7 @@ export default function ConcernDetailsClient({
   concern: ConcernType;
 }) {
   return (
-    <div className="min-h-screen bg-white text-black">
+    <div className="min-h-screen bg-white text-[#392F5F]">
       {/* Hero Section */}
       <div className="relative w-full h-[40vh] min-h-[350px] md:min-h-[350px] flex items-center pt-32 pb-16">
         <div className="absolute inset-0">
@@ -49,7 +49,7 @@ export default function ConcernDetailsClient({
                 href={concern.websiteUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-[#f9c602] text-black px-8 py-3 rounded-full font-bold transition-colors shadow-lg"
+                className="inline-flex items-center gap-2 bg-[#f9c602] text-[#392F5F] px-8 py-3 rounded-full font-bold transition-colors shadow-lg"
               >
                 Visit Official Website
                 <ExternalLink size={20} />
@@ -70,7 +70,9 @@ export default function ConcernDetailsClient({
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl font-bold mb-6 text-black">Overview</h2>
+              <h2 className="text-3xl font-bold mb-6 text-[#392F5F]">
+                Overview
+              </h2>
               <div className="w-16 h-1 bg-[#f9c602] mb-6" />
               <div
                 className="text-lg text-gray-600 leading-relaxed prose prose-lg max-w-none"
@@ -89,7 +91,7 @@ export default function ConcernDetailsClient({
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                <h2 className="text-3xl font-bold mb-6 text-black">
+                <h2 className="text-3xl font-bold mb-6 text-[#392F5F]">
                   Core Operations
                 </h2>
                 <div className="w-16 h-1 bg-[#f9c602] mb-8" />
@@ -103,7 +105,7 @@ export default function ConcernDetailsClient({
                       <div className="w-12 h-12 bg-[#f9c602]/10 rounded-full flex items-center justify-center mb-6">
                         <CheckCircle2 className="w-6 h-6 text-[#f9c602]" />
                       </div>
-                      <h3 className="text-xl font-bold text-black mb-2">
+                      <h3 className="text-xl font-bold text-[#392F5F] mb-2">
                         {feature.title}
                       </h3>
                       <p className="text-gray-600">{feature.description}</p>
@@ -128,7 +130,7 @@ export default function ConcernDetailsClient({
                     className="pt-8 border-t border-black/10 first:border-0 first:pt-0"
                   >
                     <div className="flex items-center justify-between mb-6">
-                      <h2 className="text-3xl font-bold text-black">
+                      <h2 className="text-3xl font-bold text-[#392F5F]">
                         {project.name}
                       </h2>
                       {project.progress !== undefined && (
@@ -197,7 +199,7 @@ export default function ConcernDetailsClient({
             transition={{ duration: 0.6 }}
             className="mt-20 p-10 md:p-14 bg-gray-50 border border-gray-100 rounded-3xl text-center"
           >
-            <h2 className="text-3xl font-bold mb-4 text-black">
+            <h2 className="text-3xl font-bold mb-4 text-[#392F5F]">
               Business Inquiry
             </h2>
             <p className="text-gray-600 text-lg mb-8 max-w-2xl mx-auto">

@@ -118,9 +118,7 @@ const defaultSocialLinks = [
         strokeWidth="1.5"
         className="w-4.5 h-4.5"
       >
-        <rect x="2" y="2" width="20" height="20" rx="5" />
-        <circle cx="12" cy="12" r="5" />
-        <circle cx="17.5" cy="6.5" r="1.25" fill="currentColor" stroke="none" />
+        <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
       </svg>
     ),
   },
@@ -169,7 +167,6 @@ export function Footer({
 
   return (
     <footer className="relative w-full bg-[#392F5F] text-white overflow-hidden">
-
       <div className="container mx-auto px-6 md:px-12 lg:px-16 pt-10 pb-6">
         {/* Main Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6 mb-8">
@@ -251,7 +248,7 @@ export function Footer({
           <div className="lg:col-span-3">
             <h4 className="text-white font-semibold text-lg mb-4">Contact</h4>
 
-            <div className="flex flex-col gap-4 text-gray-300 text-sm">
+            <div className="flex flex-col gap-4 text-gray-300 text-sm [font-family:ui-sans-serif,system-ui]">
               <div className="flex items-start gap-3">
                 <Phone className="w-4 h-4 mt-1 flex-shrink-0" />
                 <div className="flex flex-col gap-1">

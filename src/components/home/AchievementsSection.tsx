@@ -103,11 +103,15 @@ export function AchievementsSection({
         {/* Header */}
         <div className="text-center mb-16 md:mb-24 flex flex-col items-center">
           <div className="flex items-center justify-center gap-3 mb-6">
-            <span className="text-[#F9C602] font-bold tracking-widest text-base">&lt; &lt; &lt;</span>
+            <span className="text-[#F9C602] font-bold tracking-widest text-base">
+              &lt; &lt; &lt;
+            </span>
             <span className="text-gray-500 font-semibold tracking-widest uppercase text-[13px]">
               Milestones
             </span>
-            <span className="text-[#F9C602] font-bold tracking-widest text-base">&gt; &gt; &gt;</span>
+            <span className="text-[#F9C602] font-bold tracking-widest text-base">
+              &gt; &gt; &gt;
+            </span>
           </div>
           <h2 className="text-[#392F5F] font-serif font-medium text-3xl md:text-4xl lg:text-[44px] leading-[1.2] tracking-tight mb-6">
             Legacy of Achievement
@@ -119,7 +123,7 @@ export function AchievementsSection({
           {achievements.map((item) => (
             <div
               key={item.id}
-              className="flex flex-col w-full relative group max-w-[280px] mx-auto lg:max-w-none"
+              className="flex flex-col w-full relative group max-w-[280px] mx-auto lg:max-w-none [font-family:ui-sans-serif,system-ui]"
             >
               {/* Top Half */}
               <div className="w-full aspect-[1.8/1] flex flex-col justify-end">

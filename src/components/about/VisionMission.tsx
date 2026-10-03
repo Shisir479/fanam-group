@@ -1,197 +1,192 @@
 "use client";
 
-import React from "react";
-import {
-  Target,
-  Lightbulb,
-  Compass,
-  Sparkles,
-  ArrowUpRight,
-} from "lucide-react";
+import React, { useEffect, useState, useRef } from "react";
+import { Target, Eye, Rocket } from "lucide-react";
 
 export function VisionMission({ data }: { data: any }) {
-  const missionItems = [
-    {
-      num: "01",
-      title: "Delivering Excellence with Purpose",
-      desc: "To provide high-quality products and services through innovation, integrity, and customer-focused solutions while fostering sustainable growth and long-term success.",
-    },
-    {
-      title: "Creating Value Through Cross-Industry Excellence",
-      num: "02",
-      desc: "Our mission is to deliver exceptional experiences through quality, collaboration, and responsible business practices while driving continuous growth across every industry we serve.",
-    },
-    {
-      title: "Growing Together Through Innovation and Trust",
-      num: "03",
-      desc: "To deliver exceptional products, services, and experiences by embracing innovation, maintaining the highest standards of integrity, and creating long-term value for our customers, employees, partners, and communities.",
-    },
-  ];
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
-  const visionItems = [
-    {
-      num: "01",
-      title: "Shaping a Better Future Through Innovation",
-      desc: "To become a trusted and diversified corporate group by delivering innovative solutions, creating sustainable value, and making a positive impact on businesses, communities, and future generations.",
-    },
-    {
-      title: "Leading with Innovation, Growing with Trust",
-      num: "02",
-      desc: "Our vision is to build a future where innovation, sustainability, and excellence create lasting value for customers, partners, and communities.",
-    },
-    {
-      title: "Inspiring Progress, Creating Lasting Impact",
-      num: "03",
-      desc: "To be recognized as a leading corporate group that transforms industries through innovation, trusted partnerships, and sustainable business practices while creating a better future for generations to come.",
-    },
-  ];
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.3 },
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section className="relative fanam-section bg-white overflow-hidden py-20 lg:py-28">
+    <section
+      ref={sectionRef}
+      className="relative fanam-section bg-gray-50 py-16 lg:py-24 overflow-hidden"
+    >
+      {/* Custom CSS for Tree Animations */}
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+        .tree-line-v { height: 0; transition: height 0.3s ease-out; }
+        .tree-active .tree-line-v { height: 100%; }
+        
+        .tree-line-h-left { transform: scaleX(0); transform-origin: right; transition: transform 0.25s ease-out 0.3s; }
+        .tree-active .tree-line-h-left { transform: scaleX(1); }
 
-      <div className="fanam-container relative z-10">
-        {/* Header Section */}
-        <div className="flex flex-col items-center text-center mb-16 lg:mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f9c602]/15 border border-[#f9c602]/35 text-[#392f5f] text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
-            <Compass className="w-3.5 h-3.5 text-[#392f5f]" />
-            <span>Mission & Vision</span>
+        .tree-line-h-center { transform: scaleX(0); transform-origin: center; transition: transform 0.25s ease-out 0.3s; }
+        .tree-active .tree-line-h-center { transform: scaleX(1); }
+
+        .tree-line-h-right { transform: scaleX(0); transform-origin: left; transition: transform 0.25s ease-out 0.3s; }
+        .tree-active .tree-line-h-right { transform: scaleX(1); }
+        
+        .tree-line-v-drop { height: 0; transition: height 0.25s ease-out 0.55s; }
+        .tree-active .tree-line-v-drop { height: 100%; }
+        
+        .tree-card { opacity: 0; transform: translateY(40px); transition: all 0.4s ease-out; }
+        
+        .tree-active .card-1 { opacity: 1; transform: translateY(0); transition-delay: 0.8s; }
+        .tree-active .card-2 { opacity: 1; transform: translateY(0); transition-delay: 0.95s; }
+        .tree-active .card-3 { opacity: 1; transform: translateY(0); transition-delay: 1.1s; }
+      `,
+        }}
+      />
+
+      <div
+        className={`fanam-container relative z-10 max-w-6xl mx-auto ${isVisible ? "tree-active" : ""}`}
+      >
+        {/* Top Block: Title Box */}
+        <div className="flex justify-center relative z-20">
+          <div className="bg-white border-2 border-[#392f5f] rounded-full py-2 px-10 shadow-[0_8px_30px_rgba(0,0,0,0.08)] relative">
+            <h2 className="font-heading text-2xl md:text-3xl font-bold text-[#392f5f] tracking-widest uppercase text-center">
+              Our Purpose
+            </h2>
           </div>
-
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#392f5f] leading-[1.2] tracking-tight mb-5">
-            Guided by Purpose,{" "}
-            <span className="relative whitespace-nowrap text-[#392f5f]">
-              Driven by Vision
-              <span className="absolute left-0 -bottom-1 w-full h-1 bg-[#f9c602] rounded-full" />
-            </span>
-          </h2>
-
-          <p className="text-gray-600 text-base md:text-lg font-normal leading-relaxed max-w-3xl mx-auto">
-            Guided by a clear strategic vision and an uncompromising mission, we
-            are committed to creating sustainable multi-industry growth,
-            delivering excellence, and building lasting value for all
-            stakeholders.
-          </p>
         </div>
 
-        {/* 2 Grand Cards Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
-          {/* Mission Card (High-Impact Dark Luxury) */}
-          <div className="relative rounded-3xl bg-[#392f5f] text-white p-8 sm:p-10 md:p-12 border border-white/15 shadow-2xl overflow-hidden flex flex-col justify-between group">
+        {/* Tree Connecting Lines (Hidden on mobile) */}
+        <div className="hidden md:flex flex-col items-center w-full relative z-10">
+          {/* Main vertical trunk */}
+          <div className="h-12 w-full flex justify-center">
+            <div className="w-[2px] bg-[#392f5f] tree-line-v" />
+          </div>
 
-            <div>
-              {/* Card Header */}
-              <div className="flex items-center justify-between mb-8 pb-6 border-b border-white/10">
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-[#f9c602] text-[#392f5f] flex items-center justify-center shadow-[0_0_25px_rgba(249,198,2,0.4)]">
-                    <Target className="w-7 h-7" strokeWidth={2.2} />
-                  </div>
-                  <div>
-                    <span className="text-[11px] font-mono text-[#f9c602] uppercase tracking-widest font-semibold block mb-0.5">
-                      Strategic Commitment
-                    </span>
-                    <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white">
-                      Our Mission
-                    </h3>
-                  </div>
-                </div>
+          {/* Horizontal branches & vertical drops perfectly mapped to 3 columns */}
+          <div className="grid grid-cols-3 w-full h-10">
+            {/* Col 1 Lines */}
+            <div className="w-full relative">
+              <div className="w-1/2 h-[2px] bg-[#392f5f] tree-line-h-left absolute right-0 top-0" />
+              <div className="w-[2px] bg-[#392f5f] tree-line-v-drop absolute left-1/2 top-0 -translate-x-1/2" />
+            </div>
+            {/* Col 2 Lines */}
+            <div className="w-full relative">
+              <div className="w-full h-[2px] bg-[#392f5f] tree-line-h-center absolute left-0 top-0" />
+              <div className="w-[2px] bg-[#392f5f] tree-line-v-drop absolute left-1/2 top-0 -translate-x-1/2" />
+            </div>
+            {/* Col 3 Lines */}
+            <div className="w-full relative">
+              <div className="w-1/2 h-[2px] bg-[#392f5f] tree-line-h-right absolute left-0 top-0" />
+              <div className="w-[2px] bg-[#392f5f] tree-line-v-drop absolute left-1/2 top-0 -translate-x-1/2" />
+            </div>
+          </div>
+        </div>
 
-                <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/60 text-xs">
-                  <Sparkles className="w-3.5 h-3.5 text-[#f9c602]" />
-                  <span>Action Driven</span>
-                </div>
-              </div>
-
-              {/* Items List */}
-              <div className="space-y-6">
-                {missionItems.map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-[#f9c602]/40 transition-all duration-300"
-                  >
-                    <div className="flex items-start gap-4">
-                      <span className="w-9 h-9 rounded-xl bg-[#f9c602]/20 border border-[#f9c602]/40 text-[#f9c602] font-mono text-sm font-bold flex items-center justify-center shrink-0">
-                        {item.num}
-                      </span>
-                      <div>
-                        <h4 className="text-base sm:text-lg font-bold text-white mb-1.5 leading-snug">
-                          {item.title}
-                        </h4>
-                        <p className="text-white/70 text-xs sm:text-sm leading-relaxed font-normal">
-                          {item.desc}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+        {/* The 3 Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 mt-8 md:mt-0 relative z-20">
+          {/* Mission */}
+          <div className="px-4 lg:px-6 flex flex-col items-center tree-card card-1 group mt-8 md:mt-0">
+            {/* Icon Circle */}
+            <div className="w-20 h-20 rounded-full bg-white shadow-xl flex items-center justify-center relative z-10 -mb-10 transition-transform duration-300">
+              <div className="w-14 h-14 rounded-full border border-[#f9c602] flex items-center justify-center">
+                <Target className="w-6 h-6 text-[#392f5f]" />
               </div>
             </div>
 
-            {/* Card Footer Tag */}
-            <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between text-xs text-white/50">
-              <span>Fanam Group Corporate Core</span>
-              <span className="text-[#f9c602] font-semibold">
-                Excellence Guaranteed
-              </span>
+            {/* Banner Body */}
+            <div
+              className="w-full bg-gradient-to-b from-[#F9C602] to-[#e6b600] pt-20 pb-16 px-6 sm:px-8 text-center shadow-lg relative"
+              style={{
+                clipPath:
+                  "polygon(0 0, 100% 0, 100% calc(100% - 2rem), 50% 100%, 0 calc(100% - 2rem))",
+              }}
+            >
+              <h3 className="font-heading text-[#392f5f] text-2xl font-bold uppercase tracking-widest mb-4">
+                Mission
+              </h3>
+              <h4 className="text-[#392f5f] font-bold text-[15px] mb-3 leading-snug">
+                Building Sustainable Businesses
+              </h4>
+              <p className="text-[#392f5f]/80 text-sm font-medium leading-relaxed">
+                To build sustainable businesses through innovation, excellence
+                and responsible growth, creating lasting value for our
+                stakeholders.
+              </p>
             </div>
           </div>
 
-          {/* Vision Card (Crisp Alabaster & Gold Luxury) */}
-          <div className="relative rounded-3xl bg-white text-slate-900 p-8 sm:p-10 md:p-12 border-2 border-gray-100 hover:border-[#f9c602]/60 shadow-xl overflow-hidden flex flex-col justify-between group transition-all duration-300">
-
-            <div>
-              {/* Card Header */}
-              <div className="flex items-center justify-between mb-8 pb-6 border-b border-gray-100">
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-[#392f5f] text-[#f9c602] flex items-center justify-center shadow-lg">
-                    <Lightbulb className="w-7 h-7" strokeWidth={2.2} />
-                  </div>
-                  <div>
-                    <span className="text-[11px] font-mono text-slate-500 uppercase tracking-widest font-semibold block mb-0.5">
-                      Long-Term Horizon
-                    </span>
-                    <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#392f5f]">
-                      Our Vision
-                    </h3>
-                  </div>
-                </div>
-
-                <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs">
-                  <Sparkles className="w-3.5 h-3.5 text-[#392f5f]" />
-                  <span>Future Focused</span>
-                </div>
-              </div>
-
-              {/* Items List */}
-              <div className="space-y-6">
-                {visionItems.map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="p-5 rounded-2xl bg-neutral-50 border border-gray-100 hover:border-[#f9c602]/60 transition-all duration-300"
-                  >
-                    <div className="flex items-start gap-4">
-                      <span className="w-9 h-9 rounded-xl bg-[#392f5f] text-[#f9c602] font-mono text-sm font-bold flex items-center justify-center shrink-0">
-                        {item.num}
-                      </span>
-                      <div>
-                        <h4 className="text-base sm:text-lg font-bold text-[#392f5f] mb-1.5 leading-snug">
-                          {item.title}
-                        </h4>
-                        <p className="text-gray-600 text-xs sm:text-sm leading-relaxed font-medium">
-                          {item.desc}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+          {/* Vision */}
+          <div className="px-4 lg:px-6 flex flex-col items-center tree-card card-2 group mt-8 md:mt-0">
+            {/* Icon Circle */}
+            <div className="w-20 h-20 rounded-full bg-white shadow-xl flex items-center justify-center relative z-10 -mb-10 transition-transform duration-300">
+              <div className="w-14 h-14 rounded-full border border-[#f9c602] flex items-center justify-center">
+                <Eye className="w-6 h-6 text-[#f9c602]" />
               </div>
             </div>
 
-            {/* Card Footer Tag */}
-            <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500 font-medium">
-              <span>National & Global Reach</span>
-              <span className="text-[#392f5f] font-bold">
-                Horizon 2030 & Beyond
-              </span>
+            {/* Banner Body */}
+            <div
+              className="w-full bg-gradient-to-b from-[#4a3d7a] to-[#392f5f] pt-20 pb-16 px-6 sm:px-8 text-center shadow-lg relative"
+              style={{
+                clipPath:
+                  "polygon(0 0, 100% 0, 100% calc(100% - 2rem), 50% 100%, 0 calc(100% - 2rem))",
+              }}
+            >
+              <h3 className="font-heading text-white text-2xl font-bold uppercase tracking-widest mb-4">
+                Vision
+              </h3>
+              <h4 className="text-[#f9c602] font-bold text-[15px] mb-3 leading-snug">
+                A Globally Respected Group
+              </h4>
+              <p className="text-white/80 text-sm font-medium leading-relaxed">
+                To become a globally respected and diversified business group,
+                originating from Bangladesh and creating sustainable value
+                across industries.
+              </p>
+            </div>
+          </div>
+
+          {/* Ambition / Values */}
+          <div className="px-4 lg:px-6 flex flex-col items-center tree-card card-3 group mt-8 md:mt-0">
+            {/* Icon Circle */}
+            <div className="w-20 h-20 rounded-full bg-white shadow-xl flex items-center justify-center relative z-10 -mb-10 transition-transform duration-300">
+              <div className="w-14 h-14 rounded-full border border-[#f9c602] flex items-center justify-center">
+                <Rocket className="w-6 h-6 text-[#392f5f]" />
+              </div>
+            </div>
+
+            {/* Banner Body */}
+            <div
+              className="w-full bg-gradient-to-b from-[#2a2245] to-[#1a142c] pt-20 pb-16 px-6 sm:px-8 text-center shadow-lg relative"
+              style={{
+                clipPath:
+                  "polygon(0 0, 100% 0, 100% calc(100% - 2rem), 50% 100%, 0 calc(100% - 2rem))",
+              }}
+            >
+              <h3 className="font-heading text-white text-2xl font-bold uppercase tracking-widest mb-4">
+                Ambition
+              </h3>
+              <h4 className="text-[#f9c602] font-bold text-[15px] mb-3 leading-snug">
+                Future-Ready & Enduring
+              </h4>
+              <p className="text-white/80 text-sm font-medium leading-relaxed">
+                To build strong, future-ready businesses that create lasting
+                value and stand the test of time, founded on trust and
+                excellence.
+              </p>
             </div>
           </div>
         </div>

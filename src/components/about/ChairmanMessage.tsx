@@ -1,123 +1,80 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
-import { Quote, Sparkles, Award, ShieldCheck } from "lucide-react";
+import { Quote } from "lucide-react";
 
 export function ChairmanMessage({ data }: { data: any }) {
   return (
-    <section className="relative fanam-section bg-[#392f5f] text-white overflow-hidden py-20 lg:py-28">
+    <section className="relative fanam-section bg-[#F6F5F2] text-gray-900 py-20 lg:py-28 overflow-hidden">
+      {/* Decorative large quote in background */}
+      <div className="absolute top-10 left-10 md:left-20 text-[#392f5f] opacity-[0.03] pointer-events-none">
+        <Quote className="w-64 h-64 md:w-96 md:h-96" />
+      </div>
 
-      {/* Subtle geometric grid background pattern */}
-      <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
-          backgroundSize: "32px 32px",
-        }}
-      />
+      <div className="fanam-container relative z-10 max-w-4xl mx-auto">
+        <div className="flex flex-col items-center text-center mb-12">
+          {/* Header Badge */}
+          <div className="flex items-center justify-center gap-2 text-[#F9C602] font-bold text-xs sm:text-sm tracking-widest uppercase mb-4">
+            <span className="flex tracking-tighter">
+              <span>&lt;</span>
+              <span>&lt;</span>
+              <span>&lt;</span>
+            </span>
+            <span>MESSAGE FROM THE FOUNDER</span>
+            <span className="flex tracking-tighter">
+              <span>&gt;</span>
+              <span>&gt;</span>
+              <span>&gt;</span>
+            </span>
+          </div>
+          <h2 className="font-heading text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#392f5f] leading-[1.2]">
+            Connecting Bangladesh to Global Standards
+          </h2>
+        </div>
 
-      <div className="fanam-container relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Left Side: Executive Portrait Showcase */}
-          <div className="lg:col-span-5 flex justify-center relative">
-            <div className="relative w-full max-w-[420px]">
-
-              {/* Main Portrait Frame */}
-              <div className="relative aspect-[4/5] rounded-[1.8rem] overflow-hidden border border-white/15 bg-neutral-900 shadow-2xl group">
-                <Image
-                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop"
-                  alt="Chairman Md. Ashraful Islam"
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-
-                {/* Subtle vignette gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-
-                {/* Bottom Card Inside Image */}
-                <div className="absolute bottom-6 left-6 right-6 p-4 rounded-xl bg-[#392f5f] border border-[#f9c602]">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-[#f9c602] flex items-center justify-center text-[#392f5f] shadow-[0_0_15px_rgba(249,198,2,0.4)] shrink-0">
-                      <Award className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h4 className="text-white font-bold text-base tracking-tight">
-                        Md. Ashraful Islam
-                      </h4>
-                      <p className="text-[#f9c602] text-xs font-medium tracking-wide">
-                        Chairman, Fanam Group
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Floating Golden Seal */}
-              <div className="absolute -top-4 -right-4 bg-[#f9c602] text-[#1c1c1c] px-4 py-2 rounded-xl font-bold text-xs shadow-lg flex items-center gap-1.5 border border-white/20">
-                <ShieldCheck className="w-4 h-4 text-[#392f5f]" />
-                <span>Executive Leadership</span>
-              </div>
-            </div>
+        <div className="bg-white p-8 md:p-16 rounded-[2rem] shadow-[0_15px_60px_rgba(57,47,95,0.08)] border border-gray-100/50 relative">
+          {/* Small quote icon */}
+          <div className="absolute -top-6 left-8 md:left-12 text-[#f9c602] bg-white rounded-full p-3 shadow-lg border border-gray-50">
+            <Quote className="w-8 h-8" />
           </div>
 
-          {/* Right Side: Message & Vision */}
-          <div className="lg:col-span-7 flex flex-col justify-center">
-            {/* Header Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f9c602]/15 border border-[#f9c602]/30 text-[#f9c602] text-xs font-bold uppercase tracking-wider mb-6 self-start">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Chairman&apos;s Message</span>
-            </div>
+          <div className="space-y-6 text-gray-600 text-[16px] md:text-lg leading-[1.85] font-medium">
+            <p className="font-bold text-[#392f5f] text-lg md:text-xl pb-2">
+              Dear Partners, Clients and Friends of Fanam Group,
+            </p>
+            <p>
+              When I founded Fanam Group in September 2017, I carried with me a
+              conviction: that Bangladesh deserves world-class businesses built
+              on integrity, driven by innovation, and designed for lasting
+              impact.
+            </p>
+            <p>
+              What began as an entrepreneurial vision has grown into a
+              diversified business platform spanning nine industries. Our
+              journey has been shaped by the trust of our clients, the
+              dedication of our people, and an unwavering commitment to
+              excellence.
+            </p>
+            <p>
+              As a British-Bangladeshi entrepreneur, I stand at the intersection
+              of two great traditions — and I believe Fanam Group has a unique
+              role to play in connecting Bangladesh to global standards of
+              business and opportunity.
+            </p>
+            <p className="font-heading text-[#392f5f] font-bold text-2xl md:text-3xl border-l-4 border-[#f9c602] pl-6 md:pl-8 py-3 my-10 leading-[1.4]">
+              "We are only at the beginning. The best of what Fanam Group will
+              build is yet to come."
+            </p>
+          </div>
 
-            {/* Headline */}
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-white leading-[1.2] tracking-tight mb-6">
-              Leading with Purpose,{" "}
-              <span className="text-[#f9c602]">Building Enduring Trust</span>
-            </h2>
-
-            {/* Large Decorative Quote Icon */}
-            <div className="text-[#f9c602]/25 mb-4">
-              <Quote className="w-12 h-12" />
-            </div>
-
-            {/* Executive Message Content */}
-            <div className="space-y-4 text-white/85 text-base sm:text-lg leading-relaxed font-normal">
-              <p className="italic text-white font-medium border-l-2 border-[#f9c602] pl-4">
-                &ldquo;At Fanam Group, we believe that enduring success is never
-                accidental — it is forged through steadfast integrity, bold
-                innovation, and an unwavering commitment to societal
-                progress.&rdquo;
-              </p>
-              <p>
-                Since our journey began, our north star has been clear: to build
-                enterprises that deliver genuine, quantifiable value to our
-                clients, partners, and the communities we proudly serve.
-              </p>
-              <p>
-                As we continue to expand our footprint across multiple
-                industries, our focus remains firm on sustainable industrial
-                development, ethical corporate governance, and empowering future
-                generations. Together, we are not merely building businesses —
-                we are shaping a resilient legacy for tomorrow.
-              </p>
-            </div>
-
-            {/* Signature & Credentials Block */}
-            <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between flex-wrap gap-4">
-              <div>
-                <h4 className="text-xl sm:text-2xl font-serif font-bold text-[#f9c602]">
-                  Md. Ashraful Islam
-                </h4>
-                <p className="text-white/60 text-sm font-medium mt-0.5">
-                  Chairman, Fanam Group of Companies
-                </p>
-              </div>
-
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/70 text-xs font-mono">
-                <span className="w-2 h-2 rounded-full bg-[#f9c602] animate-pulse" />
-                <span>Strategic Vision 2030</span>
-              </div>
-            </div>
+          {/* Signature block */}
+          <div className="mt-12 pt-8 border-t border-gray-100 flex flex-col items-end text-right">
+            <h4 className="font-heading text-2xl font-bold text-[#392f5f]">
+              Fanam Group Founder
+            </h4>
+            <p className="text-[#f9c602] text-xs sm:text-sm font-bold tracking-widest uppercase mt-2">
+              British-Bangladeshi Entrepreneur
+            </p>
           </div>
         </div>
       </div>

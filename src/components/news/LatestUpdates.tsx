@@ -31,7 +31,7 @@ const NewsImageFeature = ({ news }: { news: News }) => (
           <span>{format(new Date(news.publishDate), "MMM dd, yyyy")}</span>
         )}
       </div>
-      <h3 className="text-2xl lg:text-3xl font-bold text-black mb-4  transition-colors leading-tight tracking-tight">
+      <h3 className="text-2xl lg:text-3xl font-bold text-[#392F5F] mb-4  transition-colors leading-tight tracking-tight">
         {news.title}
       </h3>
       <p className="text-gray-600 text-sm leading-relaxed mb-6 flex-1 line-clamp-3">
@@ -39,7 +39,7 @@ const NewsImageFeature = ({ news }: { news: News }) => (
       </p>
       <div className="flex items-center gap-3 mt-auto">
         <div className="text-xs">
-          <p className="font-bold text-black">
+          <p className="font-bold text-[#392F5F]">
             By {news.author || "Editorial Team"}
           </p>
         </div>
@@ -66,7 +66,7 @@ const NewsSmallImageCard = ({ news }: { news: News }) => (
       )}
     </div>
     <div className="p-3 flex flex-col flex-1 justify-center">
-      <h3 className="text-sm font-bold text-black mb-1 transition-colors leading-tight line-clamp-2">
+      <h3 className="text-sm font-bold text-[#392F5F] mb-1 transition-colors leading-tight line-clamp-2">
         {news.title}
       </h3>
       <div className="flex items-center gap-2 mt-1">
@@ -144,13 +144,13 @@ export default function LatestUpdates({
                         </span>
                       )}
                     </div>
-                    <h3 className="text-lg font-bold text-black mb-3 group-hover:text-[#f9c602] transition-colors line-clamp-2">
+                    <h3 className="text-lg font-bold text-[#392F5F] mb-3 group-hover:text-[#f9c602] transition-colors line-clamp-2">
                       {news.title}
                     </h3>
                     <p className="text-gray-600 mb-5 flex-1 line-clamp-2 text-sm">
                       {news.excerpt}
                     </p>
-                    <span className="inline-flex items-center text-black font-bold group-hover:text-[#f9c602] transition-colors duration-300 text-sm">
+                    <span className="inline-flex items-center text-[#392F5F] font-bold group-hover:text-[#f9c602] transition-colors duration-300 text-sm">
                       Read More
                       <ArrowRight
                         size={16}
@@ -169,7 +169,7 @@ export default function LatestUpdates({
             >
               <button
                 onClick={() => setVisibleCount((prev) => prev + 4)}
-                className=" text-white font-bold py-3 px-8 rounded-full cursor-pointer bg-[#f9c602] hover:text-black transition-colors shadow-md"
+                className=" text-white font-bold py-3 px-8 rounded-full cursor-pointer bg-[#f9c602] hover:text-[#392F5F] transition-colors shadow-md"
               >
                 See More News
               </button>

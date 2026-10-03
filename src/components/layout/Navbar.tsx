@@ -346,13 +346,21 @@ export function Navbar({
     return false;
   };
 
+  const isDetailsPage =
+    (pathname.startsWith("/blog/") && pathname !== "/blog") ||
+    (pathname.startsWith("/news-events/") && pathname !== "/news-events");
+
   const navStyles = isMobileMenuOpen
-    ? "bg-[#0a0a0a]/95 backdrop-blur-xl text-white shadow-sm border-b border-white/10"
+    ? "bg-[#392F5F]/95 backdrop-blur-xl text-white shadow-sm border-b border-white/10"
     : isScrolled
-      ? "bg-[#0a0a0a]/70 backdrop-blur-xl text-white shadow-[0_4px_24px_rgba(0,0,0,0.2)] border-b border-white/10"
-      : "bg-transparent text-white border-b border-transparent";
+      ? "bg-[#392F5F]/80 backdrop-blur-xl text-white shadow-[0_4px_24px_rgba(0,0,0,0.2)] border-b border-white/10"
+      : pathname.includes("gallery") || isDetailsPage
+        ? "bg-[#392F5F] text-white shadow-[0_4px_24px_rgba(0,0,0,0.1)] border-b border-transparent"
+        : "bg-transparent text-white border-b border-transparent";
 
   const mobileHamburgerColor = "bg-white";
+
+  const isSolidAtTop = pathname.includes("gallery") || isDetailsPage;
 
   return (
     <>
@@ -360,9 +368,9 @@ export function Navbar({
         className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500 ease-in-out ${navStyles}`}
         onMouseLeave={handleMegaMenuLeave}
       >
-
-
-        <div className={`container mx-auto px-6 md:px-12 flex items-center justify-between transition-all duration-500 ${isScrolled ? "h-16 md:h-20" : "h-20 md:h-24"}`}>
+        <div
+          className={`container mx-auto px-6 md:px-12 flex items-center justify-between transition-all duration-500 ${isScrolled || isSolidAtTop ? "h-16 md:h-20" : "h-20 md:h-24"}`}
+        >
           {/* Left: Logo */}
           <div className="flex-shrink-0 flex items-center">
             <Link
@@ -481,7 +489,18 @@ export function Navbar({
             >
               Get In Touch
               <span className="w-6 h-6 rounded-full bg-[#F9C602] text-[#392F5F] flex items-center justify-center ml-2 transition-transform duration-300 group-hover:translate-x-1">
-                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
               </span>
             </Link>
 

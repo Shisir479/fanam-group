@@ -122,10 +122,10 @@ export default function CareersClient({ initialJobs }: Props) {
       <section id="openings" className="py-20 bg-white ">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-extrabold text-black mb-4 tracking-tight">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-[#392f5f] mb-4 tracking-tight">
               Join Us
             </h2>
-            <p className="text-xl text-black font-medium uppercase tracking-widest">
+            <p className="text-xl text-[#f9c602] font-bold uppercase tracking-widest">
               Available jobs
             </p>
           </div>
@@ -148,44 +148,44 @@ export default function CareersClient({ initialJobs }: Props) {
                   key={job._id}
                   className="block h-full"
                 >
-                  <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-black/10 border-r-4 border-r-brand-gold flex flex-col h-full p-6 md:p-8 hover:shadow-md transition-shadow">
+                  <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-black/10 border-r-4 border-r-[#f9c602] flex flex-col h-full p-6 md:p-8 hover:shadow-lg transition-all duration-300">
                     {/* Content Area */}
                     {job.company && (
-                      <p className="text-gray-500 text-sm font-bold mb-2">
+                      <p className="text-[#f9c602] text-sm font-bold mb-2 uppercase tracking-widest">
                         {job.company}
                       </p>
                     )}
-                    <h3 className="text-2xl font-extrabold text-black mb-3 leading-tight transition-colors">
+                    <h3 className="text-2xl font-extrabold text-[#392f5f] mb-3 leading-tight transition-colors duration-300">
                       {job.jobTitle}
                     </h3>
 
                     {job.jobSummary && (
-                      <p className="text-gray-600 text-sm line-clamp-3 mb-4 leading-relaxed">
+                      <p className="text-gray-600 text-sm line-clamp-3 mb-4 leading-relaxed transition-colors duration-300">
                         {job.jobSummary}
                       </p>
                     )}
 
                     {job.salary && (
-                      <p className="text-black font-extrabold text-base mb-6">
+                      <p className="text-[#392f5f] font-extrabold text-base mb-6 transition-colors duration-300">
                         Salary : {job.salary}
                       </p>
                     )}
 
                     {/* Bottom Metadata */}
-                    <div className="flex flex-wrap items-center justify-between gap-4 mt-auto pt-4 border-t border-black/10">
+                    <div className="flex flex-wrap items-center justify-between gap-4 mt-auto pt-4 border-t border-black/10 transition-colors duration-300">
                       <div className="flex gap-2">
                         {job.category && (
-                          <span className="bg-white text-gray-600 text-xs font-semibold px-3 py-1.5 rounded-lg border border-black/10">
+                          <span className="bg-gray-50 text-[#392f5f] text-xs font-semibold px-3 py-1.5 rounded-lg border border-black/10 transition-colors duration-300">
                             {job.category}
                           </span>
                         )}
                         {job.employmentType && (
-                          <span className="bg-white text-gray-600 text-xs font-semibold px-3 py-1.5 rounded-lg border border-black/10">
+                          <span className="bg-gray-50 text-[#392f5f] text-xs font-semibold px-3 py-1.5 rounded-lg border border-black/10 transition-colors duration-300">
                             {job.employmentType}
                           </span>
                         )}
                       </div>
-                      <div className="flex items-center gap-1.5 text-gray-600 font-semibold text-sm">
+                      <div className="flex items-center gap-1.5 text-gray-600 font-semibold text-sm transition-colors duration-300">
                         <MapPin className="w-4 h-4 text-[#f9c602]" />{" "}
                         {job.location}
                       </div>
@@ -230,7 +230,7 @@ export default function CareersClient({ initialJobs }: Props) {
                 )}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm text-black mb-2 font-medium">
+                    <label className="block text-sm text-[#392f5f] mb-2 font-bold">
                       Name
                     </label>
                     <input
@@ -239,13 +239,13 @@ export default function CareersClient({ initialJobs }: Props) {
                       onChange={(e) =>
                         setFormData({ ...formData, name: e.target.value })
                       }
-                      className="w-full px-4 py-3.5 rounded-xl border border-black/10 focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition-all text-black font-medium"
+                      className="w-full px-4 py-3.5 rounded-xl border border-black/10 focus:ring-2 focus:ring-[#f9c602] focus:border-[#f9c602] outline-none transition-all text-[#392f5f] font-medium"
                       placeholder="Full name"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm text-black mb-2 font-medium">
+                    <label className="block text-sm text-[#392f5f] mb-2 font-bold">
                       Phone
                     </label>
                     <input
@@ -254,7 +254,7 @@ export default function CareersClient({ initialJobs }: Props) {
                       onChange={(e) =>
                         setFormData({ ...formData, phone: e.target.value })
                       }
-                      className="w-full px-4 py-3.5 rounded-xl border border-black/10 focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition-all text-black font-medium"
+                      className="w-full px-4 py-3.5 rounded-xl border border-black/10 focus:ring-2 focus:ring-[#f9c602] focus:border-[#f9c602] outline-none transition-all text-[#392f5f] font-medium"
                       placeholder="Phone number"
                       required
                     />
@@ -262,7 +262,7 @@ export default function CareersClient({ initialJobs }: Props) {
                 </div>
 
                 <div>
-                  <label className="block text-sm text-black mb-2 font-medium">
+                  <label className="block text-sm text-[#392f5f] mb-2 font-bold">
                     Email
                   </label>
                   <input
@@ -271,14 +271,14 @@ export default function CareersClient({ initialJobs }: Props) {
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
                     }
-                    className="w-full px-4 py-3.5 rounded-xl border border-black/10 focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition-all text-black font-medium"
+                    className="w-full px-4 py-3.5 rounded-xl border border-black/10 focus:ring-2 focus:ring-[#f9c602] focus:border-[#f9c602] outline-none transition-all text-[#392f5f] font-medium"
                     placeholder="Email address"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm text-black mb-2 font-medium">
+                  <label className="block text-sm text-[#392f5f] mb-2 font-bold">
                     Cover Letter (Optional)
                   </label>
                   <textarea
@@ -287,28 +287,28 @@ export default function CareersClient({ initialJobs }: Props) {
                     onChange={(e) =>
                       setFormData({ ...formData, coverLetter: e.target.value })
                     }
-                    className="w-full px-4 py-3.5 rounded-xl border border-black/10 focus:ring-2 focus:ring-brand-gold focus:border-brand-gold outline-none transition-all text-black font-medium resize-none"
+                    className="w-full px-4 py-3.5 rounded-xl border border-black/10 focus:ring-2 focus:ring-[#f9c602] focus:border-[#f9c602] outline-none transition-all text-[#392f5f] font-medium resize-none"
                     placeholder="Tell us about yourself"
                   ></textarea>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2 items-center">
-                  <div className="relative w-full h-[52px] px-4 rounded-xl border border-dashed border-black/10 text-center hover:border-brand-gold transition-colors cursor-pointer flex items-center justify-center gap-2 bg-white/50 overflow-hidden">
+                  <div className="relative w-full h-[52px] px-4 rounded-xl border border-dashed border-[#392f5f]/30 text-center hover:border-[#f9c602] transition-colors cursor-pointer flex items-center justify-center gap-2 bg-white/50 overflow-hidden">
                     <input
                       type="file"
                       accept=".pdf,.doc,.docx"
                       onChange={handleFileChange}
                       className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                     />
-                    <UploadCloud className="w-5 h-5 text-black shrink-0 relative z-0" />
-                    <span className="text-black text-sm font-medium relative z-0 truncate max-w-[80%]">
+                    <UploadCloud className="w-5 h-5 text-[#392f5f] shrink-0 relative z-0" />
+                    <span className="text-[#392f5f] text-sm font-bold relative z-0 truncate max-w-[80%]">
                       {cvFile ? cvFile.name : "Upload CV/Resume"}
                     </span>
                   </div>
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full h-[52px] bg-brand-gold text-black font-bold rounded-xl hover:bg-brand-gold transition-colors text-base shadow-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                    className="w-full h-[52px] bg-[#f9c602] text-[#392f5f] font-black rounded-xl hover:bg-[#392f5f] hover:text-white transition-colors duration-300 text-[15px] tracking-wide shadow-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                   >
                     {submitting ? "Submitting..." : "Submit Application"}
                   </button>

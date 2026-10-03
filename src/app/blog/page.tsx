@@ -136,7 +136,7 @@ export default async function BlogPage({
             {/* Right Column (Latest List) */}
             <div className="lg:col-span-3">
               <div className="mb-6 pb-2 border-b-2 border-black inline-block">
-                <h3 className="text-[13px] font-black uppercase tracking-[0.2em] text-black">
+                <h3 className="text-[13px] font-black uppercase tracking-[0.2em] text-[#392f5f]">
                   Latest
                 </h3>
               </div>
@@ -203,7 +203,7 @@ export default async function BlogPage({
                 </p>
                 <Link
                   href="/blog"
-                  className="mt-8 text-sm font-bold text-black uppercase tracking-widest hover:text-[#f9c602] transition-colors border-b-2 border-[#f9c602] pb-1"
+                  className="mt-8 text-sm font-bold text-[#392f5f] uppercase tracking-widest hover:text-[#f9c602] transition-colors border-b-2 border-[#f9c602] pb-1"
                 >
                   Clear Filters
                 </Link>
