@@ -47,6 +47,7 @@ export default function CreateGalleryClient({
   const { uploadSingle } = useImageUpload();
   const [isUploadingCover, setIsUploadingCover] = useState(false);
   const [isUploadingThumbnail, setIsUploadingThumbnail] = useState(false);
+  const [isSlugEdited, setIsSlugEdited] = useState(false);
 
   // Simple string-to-slug generator
   const generateSlug = (text: string) => {
@@ -64,7 +65,7 @@ export default function CreateGalleryClient({
     setFormData((prev) => ({
       ...prev,
       title,
-      slug: prev.slug || generateSlug(title), // Auto-fill slug if empty
+      slug: isSlugEdited ? prev.slug : generateSlug(title),
     }));
   };
 
@@ -185,7 +186,7 @@ export default function CreateGalleryClient({
                   value={formData.title}
                   onChange={handleTitleChange}
                   className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
-                  placeholder="e.g., Luxury Villa Exterior"
+                  placeholder="e.g., Title"
                 />
               </div>
 
@@ -197,9 +198,10 @@ export default function CreateGalleryClient({
                   type="text"
                   required
                   value={formData.slug}
-                  onChange={(e) =>
-                    setFormData({ ...formData, slug: e.target.value })
-                  }
+                  onChange={(e) => {
+                    setIsSlugEdited(true);
+                    setFormData({ ...formData, slug: e.target.value });
+                  }}
                   className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                   placeholder="luxury-villa-exterior"
                 />

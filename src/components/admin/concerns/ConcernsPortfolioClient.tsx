@@ -67,7 +67,7 @@ export default function ConcernsPortfolioClient({
                   <div className="flex items-center gap-4 mb-4">
                     <div className="h-[2px] w-8 bg-[#f9c602]" />
                     <span className="text-[#f9c602] font-semibold tracking-widest uppercase text-xs">
-                      0{index + 1} &mdash; {concern.slug.replace("-", " ")}
+                      {index < 9 ? `0${index + 1}` : index + 1}
                     </span>
                   </div>
 
@@ -90,18 +90,6 @@ export default function ConcernsPortfolioClient({
                         className="transform group-hover:translate-x-1 transition-transform"
                       />
                     </Link>
-
-                    {concern.websiteUrl && (
-                      <a
-                        href={concern.websiteUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group flex items-center justify-center gap-2 bg-transparent hover:bg-[#392F5F] hover:text-white text-[#392F5F] border border-[#392F5F] px-6 py-3 rounded-full font-medium text-sm tracking-wide transition-all duration-300"
-                      >
-                        Visit Site
-                        <ExternalLink size={18} />
-                      </a>
-                    )}
                   </div>
                 </motion.div>
               </div>

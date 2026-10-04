@@ -348,7 +348,8 @@ export function Navbar({
 
   const isDetailsPage =
     (pathname.startsWith("/blog/") && pathname !== "/blog") ||
-    (pathname.startsWith("/news-events/") && pathname !== "/news-events");
+    (pathname.startsWith("/news-events/") && pathname !== "/news-events") ||
+    (pathname.startsWith("/careers/") && pathname !== "/careers");
 
   const navStyles = isMobileMenuOpen
     ? "bg-[#392F5F]/95 backdrop-blur-xl text-white shadow-sm border-b border-white/10"

@@ -106,8 +106,7 @@ export default function EditConcernClient({
       !formData.name ||
       !formData.slug ||
       !formData.shortDescription ||
-      !formData.longDescription ||
-      !formData.websiteUrl
+      !formData.longDescription
     ) {
       toast.error("Please fill all required fields");
       return;
@@ -213,22 +212,6 @@ export default function EditConcernClient({
                   className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                 />
               </div>
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-300">
-                Website URL *
-              </label>
-              <input
-                type="text"
-                required
-                value={formData.websiteUrl}
-                onChange={(e) =>
-                  setFormData({ ...formData, websiteUrl: e.target.value })
-                }
-                placeholder="https://example.com"
-                className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
-              />
             </div>
 
             <div className="space-y-2">

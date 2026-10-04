@@ -96,7 +96,7 @@ export function CoreValues({ data }: { data: any }) {
                   ${
                     isActive
                       ? "lg:flex-[3.5] bg-[#392f5f] border-[#392f5f] shadow-[0_20px_50px_rgba(57,47,95,0.25)] h-[220px] lg:h-full"
-                      : "lg:flex-1 bg-gray-50 border-gray-100 hover:bg-gray-100 h-[76px] lg:h-full"
+                      : "lg:flex-1 bg-gray-50 border-[#392f5f]/10 hover:border-[#392f5f]/40 hover:bg-gray-100 h-[76px] lg:h-full"
                   }
                 `}
               >
@@ -105,7 +105,7 @@ export function CoreValues({ data }: { data: any }) {
                   {/* Always visible header row */}
                   <div className="flex items-center gap-4 z-10 relative">
                     <div
-                      className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors duration-500 ${isActive ? "bg-[#f9c602] shadow-lg" : "bg-white border border-gray-200"}`}
+                      className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors duration-500 ${isActive ? "bg-[#f9c602]" : "bg-white border border-gray-200"}`}
                     >
                       {React.cloneElement(val.icon as React.ReactElement<any>, {
                         className: `w-5 h-5 transition-colors duration-500 ${isActive ? "text-[#392f5f]" : "text-gray-500"}`,
@@ -143,7 +143,7 @@ export function CoreValues({ data }: { data: any }) {
                   >
                     <div
                       className={`rounded-xl flex items-center justify-center shrink-0 transition-all duration-700 
-                      ${isActive ? "w-14 h-14 bg-[#f9c602] shadow-[0_10px_30px_rgba(249,198,2,0.4)]" : "w-12 h-12 bg-white border border-gray-200"}
+                      ${isActive ? "w-14 h-14 bg-[#f9c602]" : "w-12 h-12 bg-white border border-gray-200"}
                     `}
                     >
                       {React.cloneElement(val.icon as React.ReactElement<any>, {
@@ -168,7 +168,7 @@ export function CoreValues({ data }: { data: any }) {
                       className={`absolute bottom-0 left-0 right-0 flex justify-center transition-all duration-500 ${isActive ? "opacity-0 pointer-events-none" : "opacity-100 delay-200"}`}
                     >
                       <h3
-                        className={`font-heading text-gray-400 group-hover:text-[#392f5f] font-bold text-2xl tracking-widest whitespace-nowrap transition-colors duration-300`}
+                        className={`font-heading text-gray-500 group-hover:text-[#392f5f] font-bold text-2xl tracking-widest whitespace-nowrap transition-colors duration-300`}
                         style={{
                           writingMode: "vertical-rl",
                           transform: "rotate(180deg)",

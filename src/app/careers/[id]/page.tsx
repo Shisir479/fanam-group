@@ -77,7 +77,7 @@ export default async function JobDetailsPage({
                 )}
               </div>
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
+              <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-[#392f5f] mb-6 tracking-tight">
                 {job.jobTitle}
               </h1>
 
@@ -143,15 +143,15 @@ export default async function JobDetailsPage({
             <div className="space-y-8">
               {job.jobSummary && (
                 <div className="prose prose-lg max-w-none text-gray-600">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4 tracking-tight">
+                  <h2 className="font-heading text-2xl font-bold text-[#392f5f] mb-4 tracking-tight">
                     Job Summary
                   </h2>
                   <p className="leading-relaxed">{job.jobSummary}</p>
                 </div>
               )}
 
-              <div className="prose prose-lg max-w-none text-gray-600 prose-headings:text-gray-900 prose-headings:font-bold prose-headings:tracking-tight">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6 tracking-tight">
+              <div className="prose prose-lg max-w-none text-gray-600 prose-headings:text-[#392f5f] prose-headings:font-heading prose-headings:font-bold prose-headings:tracking-tight">
+                <h2 className="font-heading text-2xl font-bold text-[#392f5f] mb-6 tracking-tight">
                   Job Description
                 </h2>
                 <div
@@ -165,7 +165,7 @@ export default async function JobDetailsPage({
               <div className="space-y-10 pt-8 border-t border-gray-200/60">
                 {job.responsibilities && job.responsibilities.length > 0 && (
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6 tracking-tight">
+                    <h2 className="font-heading text-2xl font-bold text-[#392f5f] mb-6 tracking-tight">
                       Key Responsibilities
                     </h2>
                     <ul className="space-y-4">
@@ -183,7 +183,7 @@ export default async function JobDetailsPage({
                 )}
                 {job.skills && job.skills.length > 0 && (
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6 tracking-tight">
+                    <h2 className="font-heading text-2xl font-bold text-[#392f5f] mb-6 tracking-tight">
                       Required Skills
                     </h2>
                     <div className="flex flex-wrap gap-2">
@@ -206,7 +206,7 @@ export default async function JobDetailsPage({
               <div className="space-y-10 pt-8 border-t border-gray-200/60">
                 {job.benefits && job.benefits.length > 0 && (
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6 tracking-tight">
+                    <h2 className="font-heading text-2xl font-bold text-[#392f5f] mb-6 tracking-tight">
                       Perks & Benefits
                     </h2>
                     <ul className="grid sm:grid-cols-2 gap-x-8 gap-y-5">
@@ -223,8 +223,8 @@ export default async function JobDetailsPage({
                   </div>
                 )}
                 {job.additionalInformation && (
-                  <div className="prose prose-lg max-w-none text-gray-600 prose-headings:text-gray-900">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6 tracking-tight">
+                  <div className="prose prose-lg max-w-none text-gray-600 prose-headings:text-[#392f5f] prose-headings:font-heading">
+                    <h2 className="font-heading text-2xl font-bold text-[#392f5f] mb-6 tracking-tight">
                       Additional Information
                     </h2>
                     <div

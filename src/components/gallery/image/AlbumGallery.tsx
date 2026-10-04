@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { FocusCards, FocusCardType } from "@/components/ui/focus-cards";
 
 export interface Album {
   id: string;
@@ -107,36 +108,17 @@ export default function AlbumGallery({ albums = [] }: { albums?: Album[] }) {
     <section className="w-full py-16 md:py-24 bg-white">
       <div className="container mx-auto px-5 md:px-16">
         {/* Albums Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3">
-          {albums.map((album) => (
-            <div
-              key={album.id}
-              className="flex flex-col gap-3 group w-full max-w-[280px]"
-            >
-              <div
-                className="relative aspect-[4/3] w-full overflow-hidden cursor-pointer group"
-                onClick={() => openAlbum(album)}
-              >
-                <Image
-                  src={album.thumbnail}
-                  alt={album.title}
-                  fill
-                  className="object-cover transform-gpu transition-transform duration-1000 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors duration-500 flex items-center justify-center">
-                  <span className="text-white text-[17px] font-bold tracking-wider">
-                    View All
-                  </span>
-                </div>
-              </div>
-              <h3
-                className="text-[14px] font-medium text-gray-700 text-left truncate"
-                title={album.title}
-              >
-                {album.title}
-              </h3>
-            </div>
-          ))}
+        <div className="w-full">
+          {albums.length > 0 && (
+            <FocusCards
+              cards={albums.map((album) => ({
+                title: album.title,
+                src: album.thumbnail,
+                originalData: album,
+              }))}
+              onCardClick={(card) => openAlbum(card.originalData)}
+            />
+          )}
         </div>
       </div>
 

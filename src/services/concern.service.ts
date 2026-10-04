@@ -13,9 +13,10 @@ export interface Project {
   overview: string;
   masterPlanUrl?: string;
   locationMapUrl?: string;
+  websiteUrl?: string;
   features: string[];
   galleryUrls: { _id: string; url: string }[];
-  progress?: number;
+  progress?: "upcoming" | "ongoing" | "complete";
 }
 
 export interface ConcernType {

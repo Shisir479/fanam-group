@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { X } from "lucide-react";
+import { FocusCards, FocusCardType } from "@/components/ui/focus-cards";
 
 export interface Video {
   id: string;
@@ -31,31 +32,17 @@ export default function VideoGallery({ videos = [] }: { videos?: Video[] }) {
   return (
     <section className="w-full py-16 md:py-24 bg-white ">
       <div className="container mx-auto px-5 md:px-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
-          {videos.map((video) => (
-            <div
-              key={video.id}
-              className="flex flex-col gap-4 group cursor-pointer"
-              onClick={() => setActiveVideo(video.videoUrl)}
-            >
-              <div className="relative h-[270px] w-full overflow-hidden">
-                <Image
-                  src={video.thumbnail}
-                  alt={video.title}
-                  fill
-                  className="object-cover transform-gpu transition-transform duration-1000 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors duration-500"></div>
-                <PlayButton />
-              </div>
-              <h3
-                className="text-[17px] md:text-lg font-medium text-gray-900 text-left truncate"
-                title={video.title}
-              >
-                {video.title}
-              </h3>
-            </div>
-          ))}
+        <div className="w-full">
+          {videos.length > 0 && (
+            <FocusCards
+              cards={videos.map((video) => ({
+                title: video.title,
+                src: video.thumbnail,
+                originalData: video,
+              }))}
+              onCardClick={(card) => setActiveVideo(card.originalData.videoUrl)}
+            />
+          )}
         </div>
       </div>
 

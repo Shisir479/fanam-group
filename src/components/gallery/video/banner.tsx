@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
-import { BlockReveal } from "@/components/ui/BlockReveal";
 
 const videos = [
   {
@@ -81,7 +80,7 @@ export default function VideoGalleryBanner() {
           ref={(el) => {
             elementsRef.current[index] = el;
           }}
-          className={`absolute shadow-2xl border-[6px] border-white ${vid.style}`}
+          className={`absolute shadow-2xl border-[6px] border-white rounded-2xl overflow-hidden ${vid.style}`}
         >
           <Image
             src={vid.src}
@@ -106,11 +105,9 @@ export default function VideoGalleryBanner() {
 
       {/* Title */}
       <div className="container mx-auto px-5 md:px-16 relative z-40 pb-12">
-        <BlockReveal color="var(--color-brand-blue)" delay={0.5}>
-          <h1 className="text-white text-3xl md:text-4xl font-extrabold tracking-wider uppercase drop-shadow-[0_4px_10px_rgba(0,0,0,0.6)]">
-            VIDEO GALLERY
-          </h1>
-        </BlockReveal>
+        <h1 className="text-white text-3xl md:text-4xl font-extrabold tracking-wider uppercase drop-shadow-[0_4px_10px_rgba(0,0,0,0.6)]">
+          VIDEO GALLERY
+        </h1>
       </div>
     </div>
   );

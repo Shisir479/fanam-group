@@ -51,9 +51,10 @@ export default function ConcernProjectsClient({
     name: "",
     slug: "",
     overview: "",
-    progress: 0,
+    progress: "upcoming",
     features: [],
     galleryUrls: [],
+    websiteUrl: "",
   });
 
   const [newGalleryFiles, setNewGalleryFiles] = useState<File[]>([]);
@@ -65,9 +66,10 @@ export default function ConcernProjectsClient({
       name: "",
       slug: "",
       overview: "",
-      progress: 0,
+      progress: "upcoming",
       features: [""],
       galleryUrls: [],
+      websiteUrl: "",
     });
     setNewGalleryFiles([]);
     setNewGalleryPreviews([]);
@@ -84,6 +86,7 @@ export default function ConcernProjectsClient({
       progress: p.progress,
       features: p.features?.length ? [...p.features] : [""],
       galleryUrls: p.galleryUrls ? [...p.galleryUrls] : [],
+      websiteUrl: p.websiteUrl || "",
     });
     setNewGalleryFiles([]);
     setNewGalleryPreviews([]);
@@ -156,10 +159,23 @@ export default function ConcernProjectsClient({
     const newProjects = [...projects];
     newProjects.splice(deleteTargetIndex, 1);
 
+    const sanitizedProjects = newProjects.map((p) => {
+      let prog = p.progress as any;
+      if (prog !== "upcoming" && prog !== "ongoing" && prog !== "complete") {
+        const num = Number(prog);
+        if (!isNaN(num)) {
+          prog = num === 0 ? "ongoing" : "complete";
+        } else {
+          prog = "upcoming";
+        }
+      }
+      return { ...p, progress: prog };
+    });
+
     const loadingToast = toast.loading("Deleting project...");
     try {
       const res = await updateConcernBySlugAdmin(initialData.slug, {
-        projects: newProjects,
+        projects: sanitizedProjects,
       });
       if (res.success) {
         setProjects(newProjects);
@@ -178,11 +194,6 @@ export default function ConcernProjectsClient({
   };
 
   const saveProject = async () => {
-    if (!formData.name || !formData.slug || !formData.overview) {
-      toast.error("Please fill required fields (Name, Slug, Overview)");
-      return;
-    }
-
     setIsSubmitting(true);
     const loadingToast = toast.loading("Saving project...");
 
@@ -204,9 +215,10 @@ export default function ConcernProjectsClient({
         name: formData.name!,
         slug: formData.slug!,
         overview: formData.overview!,
-        progress: formData.progress || 0,
+        progress: formData.progress || "upcoming",
         features: cleanedFeatures,
         galleryUrls: uploadedGallery,
+        websiteUrl: formData.websiteUrl || "",
       };
 
       const newProjectsList = [...projects];
@@ -216,9 +228,22 @@ export default function ConcernProjectsClient({
         newProjectsList.push(newProject);
       }
 
+      const sanitizedProjects = newProjectsList.map((p) => {
+        let prog = p.progress as any;
+        if (prog !== "upcoming" && prog !== "ongoing" && prog !== "complete") {
+          const num = Number(prog);
+          if (!isNaN(num)) {
+            prog = num === 0 ? "ongoing" : "complete";
+          } else {
+            prog = "upcoming";
+          }
+        }
+        return { ...p, progress: prog };
+      });
+
       toast.loading("Updating concern...", { id: loadingToast });
       const res = await updateConcernBySlugAdmin(initialData.slug, {
-        projects: newProjectsList,
+        projects: sanitizedProjects,
       });
 
       if (res.success) {
@@ -290,7 +315,15 @@ export default function ConcernProjectsClient({
                   {project.name}
                 </h3>
                 <span className="px-2 py-1 bg-brand-gold/20 text-brand-gold text-xs font-bold rounded whitespace-nowrap shrink-0">
-                  {project.progress}% Complete
+                  <span className="capitalize">
+                    {project.progress !== "upcoming" &&
+                    project.progress !== "ongoing" &&
+                    project.progress !== "complete"
+                      ? Number(project.progress) === 0
+                        ? "ongoing"
+                        : "complete"
+                      : project.progress}
+                  </span>
                 </span>
               </div>
               <p className="text-gray-400 text-sm line-clamp-3 mb-6 flex-1">
@@ -328,7 +361,13 @@ export default function ConcernProjectsClient({
       {/* Project Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-[100] p-4 backdrop-blur-md">
-          <div className="glass-panel rounded-2xl w-full max-w-4xl h-[90vh] flex flex-col border border-white/10 shadow-2xl overflow-hidden">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              saveProject();
+            }}
+            className="glass-panel rounded-2xl w-full max-w-4xl h-[90vh] flex flex-col border border-white/10 shadow-2xl overflow-hidden"
+          >
             <div className="flex justify-between items-center p-6 border-b border-white/10 shrink-0 bg-white/5">
               <h3 className="text-xl font-bold text-white tracking-wide">
                 {editingIndex !== null ? "Edit Project" : "Add New Project"}
@@ -375,19 +414,40 @@ export default function ConcernProjectsClient({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-300">
-                    Progress (%) *
+                    Progress *
                   </label>
-                  <input
-                    type="number"
-                    min="0"
-                    max="100"
+                  <select
                     required
                     value={formData.progress}
                     onChange={(e) =>
                       setFormData({
                         ...formData,
-                        progress: Number(e.target.value),
+                        progress: e.target.value as any,
                       })
+                    }
+                    className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors capitalize"
+                  >
+                    <option className="text-black" value="upcoming">
+                      Upcoming
+                    </option>
+                    <option className="text-black" value="ongoing">
+                      Ongoing
+                    </option>
+                    <option className="text-black" value="complete">
+                      Complete
+                    </option>
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-300">
+                    Website URL
+                  </label>
+                  <input
+                    type="url"
+                    placeholder="https://example.com"
+                    value={formData.websiteUrl || ""}
+                    onChange={(e) =>
+                      setFormData({ ...formData, websiteUrl: e.target.value })
                     }
                     className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-brand-violet transition-colors"
                   />
@@ -522,7 +582,7 @@ export default function ConcernProjectsClient({
                   Cancel
                 </button>
                 <button
-                  onClick={saveProject}
+                  type="submit"
                   disabled={isSubmitting}
                   className="glass-btn flex items-center gap-2 disabled:opacity-50"
                 >
@@ -535,7 +595,7 @@ export default function ConcernProjectsClient({
                 </button>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       )}
 

@@ -480,7 +480,7 @@ export function Hero({
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 * idx, duration: 0.5 }}
-            className={`group relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 hover:bg-white backdrop-blur-xl border border-white/25 transition-all duration-300 cursor-pointer drop-shadow-md hover:scale-110 text-white ${
+            className={`group relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 hover:bg-white backdrop-blur-xl border-2 border-white/50 transition-all duration-300 cursor-pointer drop-shadow-md hover:scale-110 text-white ${
               item.key === "facebook"
                 ? "hover:text-[#1877F2]"
                 : item.key === "instagram"
