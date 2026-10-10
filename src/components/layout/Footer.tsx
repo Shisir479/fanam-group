@@ -185,7 +185,7 @@ export function Footer({
               />
             </Link>
 
-            <p className="text-gray-300 text-sm leading-relaxed mb-6">
+            <p className="text-gray-300 text-base md:text-lg leading-relaxed mb-6">
               Fanam Group is a diversified corporate group committed to
               delivering excellence across Real Estate, E-commerce, Travel &
               Tourism, Media, and emerging business sectors through innovation,
@@ -216,7 +216,7 @@ export function Footer({
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-white text-sm transition-colors duration-300"
+                    className="text-gray-300 hover:text-white text-base md:text-lg transition-colors duration-300"
                   >
                     {link.label}
                   </Link>
@@ -235,7 +235,7 @@ export function Footer({
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-gray-300 hover:text-white text-sm transition-colors duration-300"
+                    className="text-gray-300 hover:text-white text-base md:text-lg transition-colors duration-300"
                   >
                     {link.label}
                   </Link>
@@ -248,7 +248,7 @@ export function Footer({
           <div className="lg:col-span-3">
             <h4 className="text-white font-semibold text-lg mb-4">Contact</h4>
 
-            <div className="flex flex-col gap-4 text-gray-300 text-sm [font-family:ui-sans-serif,system-ui]">
+            <div className="flex flex-col gap-4 text-gray-300 text-base md:text-lg">
               <div className="flex items-start gap-3">
                 <Phone className="w-4 h-4 mt-1 flex-shrink-0" />
                 <div className="flex flex-col gap-1">
@@ -275,7 +275,7 @@ export function Footer({
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-5 border-t border-white/15 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/60">
+        <div className="pt-5 border-t border-white/15 flex flex-col md:flex-row items-center justify-between gap-4 text-sm md:text-base text-white/60">
           <p>
             Copyright &copy; {new Date().getFullYear()} Tech solutions Plex.
           </p>

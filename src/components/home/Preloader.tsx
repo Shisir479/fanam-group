@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 export function Preloader() {
   const [progress, setProgress] = useState(0);
@@ -46,7 +47,7 @@ export function Preloader() {
             y: "-100%",
             transition: { duration: 0.85, ease: [0.76, 0, 0.24, 1] },
           }}
-          className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-gradient-to-br from-[#392F5F] via-[#4A3A7A] to-[#2A2545] text-white select-none pointer-events-auto"
+          className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-gradient-to-br from-[#392F5F]/90 via-[#4A3A7A]/90 to-[#2A2545]/90 text-white select-none pointer-events-auto"
         >
           {/* Brand Gradient Backlight */}
           <div
@@ -67,9 +68,13 @@ export function Preloader() {
             >
               <div className="absolute inset-0 rounded-2xl border border-[#f9c602]/40 rotate-45 animate-[spin_8s_linear_infinite]" />
               <div className="absolute inset-2 rounded-xl border border-white/20 -rotate-45" />
-              <span className="font-serif font-bold text-3xl text-[#f9c602] tracking-wider">
-                F
-              </span>
+              <Image
+                src="/company_logo/logo-mark.svg"
+                alt="Fanam Group"
+                width={43}
+                height={44}
+                className="relative z-10 h-14 w-auto object-contain"
+              />
             </motion.div>
 
             {/* Brand Title */}

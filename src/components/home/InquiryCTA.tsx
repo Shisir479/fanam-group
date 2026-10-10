@@ -59,11 +59,11 @@ export function InquiryCTA({
           transition={{ duration: 0.8 }}
           className="relative w-full rounded-[2rem] overflow-hidden min-h-[400px] flex items-center justify-center py-20 px-6 shadow-xl"
         >
-          {/* Background Image (Abstract Dark Texture) */}
+          {/* Background Image */}
           <div className="absolute inset-0 z-0 ">
             <img
-              src="https://res.cloudinary.com/duqlhfshv/image/upload/v1790834291/6a338ede5cd9b5fc0d916128_cta-background-image_kasqjo.avif"
-              alt="Background"
+              src="/partnering-growth-bg.png"
+              alt=""
               className="w-full h-full object-cover opacity-90 mix-blend-overlay"
             />
           </div>

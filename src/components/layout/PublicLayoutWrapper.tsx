@@ -7,12 +7,19 @@ import { Footer } from "@/components/layout/Footer";
 import { Preloader } from "@/components/home/Preloader";
 import { BackToTop } from "@/components/home/BackToTop";
 
+type BrandingData = {
+  logo?: { url?: string };
+  logoDark?: { url?: string };
+  socialLinks?: Record<string, string>;
+  contact?: { phone?: string; email?: string; whatsappNo?: string };
+};
+
 export function PublicLayoutWrapper({
   children,
   brandingData,
 }: {
   children: React.ReactNode;
-  brandingData?: any;
+  brandingData?: BrandingData;
 }) {
   const pathname = usePathname();
   const isAdmin =

@@ -48,7 +48,7 @@ export function CompanyProfile({ data }: { data: any }) {
             {/* The Image */}
             <div className="relative aspect-[4/3] max-w-[500px] bg-gray-100 overflow-hidden mx-auto lg:mx-0">
               <Image
-                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2070&auto=format&fit=crop"
+                src="/partnering-growth-bg.png"
                 alt="About Fanam Group"
                 fill
                 className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
@@ -93,20 +93,20 @@ export function CompanyProfile({ data }: { data: any }) {
             </div>
 
             {/* Narrative text */}
-            <div className="text-gray-700 text-sm md:text-[15px] font-normal leading-relaxed max-w-xl space-y-4">
+            <div className="text-gray-700 text-base md:text-lg font-normal leading-relaxed text-justify max-w-xl space-y-4">
               <p>
                 Established on 16 September 2017, Fanam Group was founded by a
                 British-Bangladeshi entrepreneur with a vision to build a
-                diversified and sustainable business organization. Today, Fanam
-                Group operates across nine major industries — spanning Real
-                Estate, Construction, Trading, Hotel & Resort, ECommerce, Travel
-                & Tourism, IT & Technology, News & Media, and Industrial
-                Manufacturing.
+                diversified and sustainable business organization. Today,
+                Fanam Group operates across Real Estate, Construction, Trading,
+                Hotel & Resort, ECommerce, Travel & Tourism, IT & Technology,
+                News & Media, and Industrial Manufacturing.
               </p>
               <p>
                 Driven by innovation, excellence and responsible growth, we
                 build businesses that create lasting value for our customers,
-                partners, people and communities.
+                partners, people and communities. We build businesses for today
+                and opportunities for tomorrow.
               </p>
             </div>
           </div>

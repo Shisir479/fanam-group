@@ -5,17 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  Trophy,
-  TrendingUp,
-  Users,
   ArrowUpRight,
   Calendar,
   Building2,
   Globe,
 } from "lucide-react";
-import { Syne } from "next/font/google";
-
-const syne = Syne({ subsets: ["latin"], weight: ["500", "600", "700"] });
 
 const YELLOW = "#F9C602";
 const DARK = "#06202A";
@@ -66,11 +60,11 @@ export function AboutSection({
               style={{ clipPath: "polygon(0 0, 0 100%, 100% 50%)" }}
             >
               <Image
-                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2070&auto=format&fit=crop"
-                alt="Business meeting"
+                src="/about-us-image-new.png"
+                alt="Fanam Group team collaborating on a project"
                 fill
                 sizes="300px"
-                className="object-cover object-[30%_center] grayscale"
+                className="object-cover"
               />
               <div className="absolute inset-0 bg-[#9fc4cf]/25 mix-blend-multiply" />
             </motion.div>
@@ -85,11 +79,11 @@ export function AboutSection({
               style={{ clipPath: "polygon(100% 0, 100% 100%, 0 50%)" }}
             >
               <Image
-                src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop"
-                alt="Team working"
+                src="/about-us-image.png"
+                alt="Fanam Group team shaping the future together"
                 fill
                 sizes="300px"
-                className="object-cover grayscale"
+                className="object-cover"
               />
               <div className="absolute inset-0 bg-[#9fc4cf]/25 mix-blend-multiply" />
             </motion.div>
@@ -135,7 +129,7 @@ export function AboutSection({
 
             {/* Heading */}
             <h2
-              className={`${syne.className} font-bold text-3xl md:text-4xl mb-4`}
+              className="font-bold text-3xl md:text-4xl mb-4"
               style={{
                 color: "#392F5F",
                 lineHeight: "normal",
@@ -145,11 +139,16 @@ export function AboutSection({
               A Vision Built on Lasting Value
             </h2>
 
-            <p className="text-gray-500 text-[13px] md:text-sm leading-relaxed mb-8">
+            <p className="text-gray-500 text-base md:text-lg leading-relaxed text-justify mb-8">
               Established on 16 September 2017, Fanam Group was founded by a
               British-Bangladeshi entrepreneur with a vision to build a
               diversified and sustainable business organization. Today, Fanam
-              Group operates across nine major industries...
+              Group operates across Real Estate, Construction, Trading, Hotel &
+              Resort, ECommerce, Travel & Tourism, IT & Technology, News &
+              Media, and Industrial Manufacturing. Driven by innovation,
+              excellence and responsible growth, we build businesses that create
+              lasting value for our customers, partners, people and communities.
+              We build businesses for today and opportunities for tomorrow.
             </p>
 
             {/* Stats */}
@@ -157,9 +156,7 @@ export function AboutSection({
               <div className="flex flex-col gap-1">
                 <div className="flex items-center gap-2">
                   <Calendar className="w-5 h-5 text-[#392F5F]" />
-                  <span
-                    className={`${syne.className} text-2xl font-bold text-[#F9C602]`}
-                  >
+                  <span className="text-2xl font-bold text-[#F9C602]">
                     2017
                   </span>
                 </div>
@@ -170,9 +167,7 @@ export function AboutSection({
               <div className="flex flex-col gap-1 border-l border-gray-100 pl-4">
                 <div className="flex items-center gap-2">
                   <Building2 className="w-5 h-5 text-[#392F5F]" />
-                  <span
-                    className={`${syne.className} text-2xl font-bold text-[#F9C602]`}
-                  >
+                  <span className="text-2xl font-bold text-[#F9C602]">
                     9+
                   </span>
                 </div>
@@ -183,9 +178,7 @@ export function AboutSection({
               <div className="flex flex-col gap-1 border-l border-gray-100 pl-4">
                 <div className="flex items-center gap-2">
                   <Globe className="w-5 h-5 text-[#392F5F]" />
-                  <span
-                    className={`${syne.className} text-xl md:text-2xl font-bold text-[#F9C602] leading-tight`}
-                  >
+                  <span className="text-xl md:text-2xl font-bold text-[#F9C602] leading-tight">
                     Global
                   </span>
                 </div>

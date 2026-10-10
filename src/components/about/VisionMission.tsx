@@ -123,7 +123,7 @@ export function VisionMission({ data }: { data: any }) {
               <p className="text-[#392f5f]/80 text-sm font-medium leading-relaxed">
                 To build sustainable businesses through innovation, excellence
                 and responsible growth, creating lasting value for our
-                stakeholders.
+                stakeholders and society.
               </p>
             </div>
           </div>
@@ -154,7 +154,7 @@ export function VisionMission({ data }: { data: any }) {
               <p className="text-white/80 text-sm font-medium leading-relaxed">
                 To become a globally respected and diversified business group,
                 originating from Bangladesh and creating sustainable value
-                across industries.
+                across industries and markets.
               </p>
             </div>
           </div>
@@ -184,8 +184,7 @@ export function VisionMission({ data }: { data: any }) {
               </h4>
               <p className="text-white/80 text-sm font-medium leading-relaxed">
                 To build strong, future-ready businesses that create lasting
-                value and stand the test of time, founded on trust and
-                excellence.
+                value and stand the test of time.
               </p>
             </div>
           </div>
