@@ -98,7 +98,10 @@ export default function CreateBlogClient({
     // Transform payload to match what backend expects
     const payload = {
       ...data,
-      coverImage: data.coverImage, // if imageIdKey populated this
+      cover: {
+        _id: data.coverImage,
+        url: data.coverUrl
+      },
       tags: data.tags, // assuming array of one element is fine
     };
 

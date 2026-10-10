@@ -13,7 +13,7 @@ import {
   UploadCloud,
 } from "lucide-react";
 import toast from "react-hot-toast";
-import Link from "next/link";
+
 import { useImageUpload } from "@/hooks/useImageUpload";
 import Image from "next/image";
 import RichTextEditor from "@/components/ui/RichTextEditor";
@@ -30,7 +30,6 @@ export default function CreateConcernClient() {
     slug: "",
     shortDescription: "",
     longDescription: "",
-    websiteUrl: "",
     features: [{ title: "", description: "" }],
     projects: [],
     metaTitle: "",
