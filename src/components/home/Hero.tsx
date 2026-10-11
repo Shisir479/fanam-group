@@ -498,19 +498,7 @@ export function Hero({
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 * idx, duration: 0.5 }}
-            className={`group relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-md bg-white/10 hover:bg-white backdrop-blur-xl border-[3px] transition-all duration-300 cursor-pointer drop-shadow-md hover:scale-110 text-white ${
-              item.key === "facebook"
-                ? "border-[#1877F2] hover:border-white/50 hover:text-[#1877F2]"
-                : item.key === "instagram"
-                  ? "border-[#E1306C] hover:border-white/50 hover:text-[#E1306C]"
-                  : item.key === "linkedin"
-                    ? "border-[#0A66C2] hover:border-white/50 hover:text-[#0A66C2]"
-                    : item.key === "twitter"
-                      ? "border-[#1DA1F2] hover:border-white/50 hover:text-black"
-                      : item.key === "youtube"
-                        ? "border-[#FF0000] hover:border-white/50 hover:text-[#FF0000]"
-                        : "border-white hover:border-white/50 hover:text-black"
-            }`}
+            className="group relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-md bg-white hover:bg-[#F9C602] backdrop-blur-xl border-[3px] border-[#F9C602] hover:border-[#F9C602] transition-all duration-300 cursor-pointer drop-shadow-md hover:scale-110 text-[#392F5F] hover:text-[#392F5F]"
             aria-label={item.label}
           >
             <span className="transition-transform duration-300 group-hover:scale-110">

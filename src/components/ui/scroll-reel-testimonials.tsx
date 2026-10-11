@@ -57,7 +57,7 @@ const DESIGNATION_CLASSES =
   "m-0 text-xs font-normal text-gray-500 mt-1 md:text-sm";
 
 const FEATURED_SHADOW =
-  "0 1.008px 0.705px -0.563px rgba(0,0,0,0.18), 0 2.389px 1.672px -1.125px rgba(0,0,0,0.17), 0 4.357px 3.05px -1.688px rgba(0,0,0,0.17), 0 7.244px 5.07px -2.25px rgba(0,0,0,0.16), 0 11.698px 8.188px -2.813px rgba(0,0,0,0.15), 0 19.148px 13.404px -3.375px rgba(0,0,0,0.13), 0 32.972px 23.08px -3.938px rgba(0,0,0,0.09), 0 60px 42px -4.5px rgba(0,0,0,0.02), inset 0 1px 0 rgba(255,255,255,0.7), inset 0 -1px 0 rgba(0,0,0,0.6)";
+  "0 1.008px 0.705px -0.563px rgba(57,47,95,0.22), 0 2.389px 1.672px -1.125px rgba(57,47,95,0.2), 0 4.357px 3.05px -1.688px rgba(57,47,95,0.2), 0 7.244px 5.07px -2.25px rgba(57,47,95,0.18), 0 11.698px 8.188px -2.813px rgba(57,47,95,0.16), 0 19.148px 13.404px -3.375px rgba(57,47,95,0.14), 0 32.972px 23.08px -3.938px rgba(249,198,2,0.22), 0 60px 42px -4.5px rgba(249,198,2,0.16), inset 0 1px 0 rgba(255,255,255,0.8), inset 0 -1px 0 rgba(57,47,95,0.45)";
 
 function cn(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(" ");
@@ -68,7 +68,7 @@ function Cell() {
   return (
     <div
       aria-hidden="true"
-      className="shrink-0  border border-border bg-gradient-to-b from-secondary to-card blur-[1px] shadow-[0_1px_2px_rgba(0,0,0,0.05),inset_0_2px_0_rgba(255,255,255,1)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.06)]"
+      className="shrink-0 border border-[#F9C602]/25 bg-gradient-to-b from-[#FFFBE5] to-[#FFF3B8] blur-[1px] shadow-[0_5px_14px_rgba(249,198,2,0.2),inset_0_2px_0_rgba(255,255,255,0.9)]"
       style={{ width: CELL, height: CELL }}
     />
   );

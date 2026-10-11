@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import CountUp from "react-countup";
+import { SectionLabel } from "./SectionLabel";
 
 const defaultAchievements = [
   {
@@ -47,14 +48,6 @@ const defaultAchievements = [
   },
 ];
 
-interface Achievement {
-  id: string;
-  stat: string;
-  label: string;
-  image: string;
-  type: "up" | "down";
-}
-
 const parseStat = (statStr: string) => {
   const match = statStr.match(/([\d,\.]+)(.*)/);
   if (match) {
@@ -68,29 +61,27 @@ const parseStat = (statStr: string) => {
 
 export function AchievementsSection({
   cmsData,
-  mainSettings,
 }: {
   cmsData?: Record<string, unknown>;
-  mainSettings?: Record<string, unknown>;
 }) {
-  // Dynamic achievements from CMS or main settings
-  const cmsAchievements = (mainSettings?.achievements ||
-    cmsData?.achievements ||
-    []) as Array<Record<string, unknown>>;
+  // Homepage CMS achievements use the number/title shape from AchievementSchema.
+  const cmsAchievements = (cmsData?.achievements || []) as Array<
+    Record<string, unknown>
+  >;
 
-  // Filter out invalid CMS entries and map valid ones
   const validCmsAchievements = cmsAchievements
-    .map((item: Record<string, unknown>) => ({
-      id: (item._id as string) || (item.id as string) || "",
-      stat: (item.stat as string) || (item.value as string) || "",
-      label: (item.label as string) || "",
-      image:
-        ((item.image as Record<string, unknown>)?.url as string) ||
-        (item.image as string) ||
-        "",
-      type: ((item.type as string) === "down" ? "down" : "up") as "up" | "down",
-    }))
-    .filter((item) => item.id && item.stat && item.label && item.image); // Only keep complete entries
+    .map((item, index) => {
+      const fallback = defaultAchievements[index % defaultAchievements.length];
+
+      return {
+        id: (item._id as string) || `${index + 1}`,
+        stat: (item.number as string) || "",
+        label: (item.title as string) || "",
+        image: fallback.image,
+        type: fallback.type,
+      };
+    })
+    .filter((item) => item.stat && item.label);
 
   const achievements =
     validCmsAchievements.length > 0
@@ -98,20 +89,12 @@ export function AchievementsSection({
       : defaultAchievements;
 
   return (
-    <section className="fanam-section py-16 md:py-20 bg-gradient-to-b from-white via-[#F3F0FA] to-white relative overflow-hidden">
+    <section className="fanam-section py-16 md:py-20 bg-gradient-to-b from-white via-[#F3F0FA] to-white relative overflow-hidden shadow-[0_12px_24px_-20px_rgba(249,198,2,0.34),0_2px_8px_-4px_rgba(57,47,95,0.16)] z-[1]">
       <div className="fanam-container">
         {/* Header */}
         <div className="text-center mb-16 md:mb-24 flex flex-col items-center">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <span className="text-[#F9C602] font-bold tracking-widest text-base">
-              &lt; &lt; &lt;
-            </span>
-            <span className="text-gray-500 font-semibold tracking-widest uppercase text-[13px]">
-              Milestones
-            </span>
-            <span className="text-[#F9C602] font-bold tracking-widest text-base">
-              &gt; &gt; &gt;
-            </span>
+          <div className="mb-6">
+            <SectionLabel>Milestones</SectionLabel>
           </div>
           <h2 className="text-[#392F5F] font-serif font-medium text-3xl md:text-4xl lg:text-[44px] leading-[1.2] tracking-tight mb-6">
             Legacy of Achievement

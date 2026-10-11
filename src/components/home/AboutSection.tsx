@@ -10,6 +10,7 @@ import {
   Building2,
   Globe,
 } from "lucide-react";
+import { SectionLabel } from "./SectionLabel";
 
 const YELLOW = "#F9C602";
 const DARK = "#06202A";
@@ -109,22 +110,8 @@ export function AboutSection({
             className="flex flex-col max-w-[520px]"
           >
             {/* Eyebrow */}
-            <div className="flex items-center gap-2 mb-2">
-              <span
-                className="font-bold tracking-[0.15em] text-[11px]"
-                style={{ color: YELLOW }}
-              >
-                &lt;&lt;&lt;
-              </span>
-              <span className="text-gray-500 font-semibold tracking-widest uppercase text-[12px]">
-                A B O U T U S
-              </span>
-              <span
-                className="font-bold tracking-[0.15em] text-[11px]"
-                style={{ color: YELLOW }}
-              >
-                &gt;&gt;&gt;
-              </span>
+            <div className="mb-3">
+              <SectionLabel>ABOUT US</SectionLabel>
             </div>
 
             {/* Heading */}

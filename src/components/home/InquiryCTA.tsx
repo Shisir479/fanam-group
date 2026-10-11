@@ -69,7 +69,7 @@ export function InquiryCTA({
           </div>
 
           {/* Overlay to ensure text readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/60 z-0" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/80 z-0" />
 
           {/* Content */}
           <div className="relative z-10 flex flex-col items-center text-center max-w-4xl mx-auto">

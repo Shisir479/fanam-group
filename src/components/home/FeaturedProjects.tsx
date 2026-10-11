@@ -4,6 +4,7 @@ import Image from "next/image";
 
 import { useRef, useState, useEffect } from "react";
 import { BlockReveal } from "@/components/ui/BlockReveal";
+import { SectionLabel } from "./SectionLabel";
 import { SharedButton } from "@/components/ui/SharedButton";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
@@ -125,9 +126,7 @@ export function FeaturedProjects({
               color="var(--color-brand-blue)"
               key={`title-${activeTab}`}
             >
-              <div className="flex items-center text-[16px] font-semibold tracking-[0.2em] text-gray-400 uppercase">
-                {currentData.title}
-              </div>
+              <SectionLabel>{currentData.title}</SectionLabel>
             </BlockReveal>
 
             <BlockReveal

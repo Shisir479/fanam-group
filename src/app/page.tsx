@@ -86,7 +86,7 @@ export default async function Home() {
         branding={brandingData}
         apiConcerns={apiConcerns}
       />
-      <AchievementsSection cmsData={cmsData} mainSettings={mainSettingsData} />
+      <AchievementsSection cmsData={cmsData} />
       <TestimonialSection />
       <LatestNews blogs={blogsData} />
       <InquiryCTA mainSettings={mainSettingsData} branding={brandingData} />

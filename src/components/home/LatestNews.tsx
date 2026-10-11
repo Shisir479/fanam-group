@@ -10,6 +10,7 @@ import {
   Clock,
   CornerDownRight,
 } from "lucide-react";
+import { SectionLabel } from "./SectionLabel";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 
@@ -95,16 +96,8 @@ export function LatestNews({ blogs = [] }: { blogs?: any[] }) {
       <div className="fanam-container">
         {/* Header */}
         <div className="flex flex-col items-center text-center mb-16">
-          <div className="flex items-center gap-3 mb-6">
-            <span className="text-[#F9C602] font-bold tracking-widest text-base">
-              &lt; &lt; &lt;
-            </span>
-            <span className="text-gray-500 font-semibold tracking-widest uppercase text-[13px]">
-              Latest News
-            </span>
-            <span className="text-[#F9C602] font-bold tracking-widest text-base">
-              &gt; &gt; &gt;
-            </span>
+          <div className="mb-6">
+            <SectionLabel>Latest News</SectionLabel>
           </div>
           <h2 className="text-[#392F5F] font-serif font-medium text-3xl md:text-4xl lg:text-[44px] leading-[1.2] tracking-tight mb-4">
             Corporate Insights

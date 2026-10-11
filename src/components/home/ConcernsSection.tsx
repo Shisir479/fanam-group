@@ -12,6 +12,7 @@ import {
   Sprout,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { SectionLabel } from "./SectionLabel";
 
 const defaultConcerns = [
   {
@@ -159,16 +160,8 @@ export function ConcernsSection({
       <div className="w-full max-w-[1600px] mx-auto px-4 md:px-8 lg:px-12">
         {/* Section Intro - Moved to Top */}
         <div className="mb-16 text-center">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <span className="text-[#F9C602] font-bold tracking-widest text-base">
-              &lt; &lt; &lt;
-            </span>
-            <span className="text-gray-500 font-semibold tracking-widest uppercase text-[13px]">
-              Enterprise Portfolio
-            </span>
-            <span className="text-[#F9C602] font-bold tracking-widest text-base">
-              &gt; &gt; &gt;
-            </span>
+          <div className="mb-6">
+            <SectionLabel>Enterprise Portfolio</SectionLabel>
           </div>
           <h2 className="text-[#392F5F] font-serif font-medium text-3xl md:text-4xl lg:text-[44px] leading-[1.2] tracking-tight">
             Strategic Enterprises

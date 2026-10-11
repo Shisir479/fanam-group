@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { BlockReveal } from "@/components/ui/BlockReveal";
 import Image from "next/image";
+import { SectionLabel } from "./SectionLabel";
 
 export function GalleryPreview({ data }: { data?: any }) {
   const defaultImages = [
@@ -188,9 +189,7 @@ export function GalleryPreview({ data }: { data?: any }) {
         <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6 relative z-10">
           <div className="flex flex-col gap-4">
             <BlockReveal color="var(--color-brand-blue)">
-              <div className="flex items-center text-[16px] font-semibold tracking-[0.2em] text-white/70 uppercase">
-                {galleryTitle}
-              </div>
+              <SectionLabel dark>{galleryTitle}</SectionLabel>
             </BlockReveal>
             <BlockReveal color="var(--color-brand-blue)" delay={0.2}>
               <h2 className="text-2xl md:text-[34px] font-bold tracking-tight text-white leading-[1.1] uppercase">

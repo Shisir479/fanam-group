@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { BlockReveal } from "@/components/ui/BlockReveal";
 import { ScrollReelTestimonials } from "@/components/ui/scroll-reel-testimonials";
+import { SectionLabel } from "./SectionLabel";
 import {
   getTestimonialsPublic,
   TestimonialType,
@@ -43,16 +44,8 @@ export function TestimonialSection() {
       <div className="container mx-auto px-5 md:px-16 overflow-hidden">
         {/* Header */}
         <div className="mb-16 text-center">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <span className="text-[#F9C602] font-bold tracking-widest text-base">
-              &lt; &lt; &lt;
-            </span>
-            <span className="text-gray-500 font-semibold tracking-widest uppercase text-[13px]">
-              Testimonials
-            </span>
-            <span className="text-[#F9C602] font-bold tracking-widest text-base">
-              &gt; &gt; &gt;
-            </span>
+          <div className="mb-6">
+            <SectionLabel>Testimonials</SectionLabel>
           </div>
           <h2 className="text-[#392F5F] font-serif font-medium text-3xl md:text-4xl lg:text-[44px] leading-[1.2] tracking-tight">
             Trusted By <br className="hidden md:block" /> Industry Leaders
