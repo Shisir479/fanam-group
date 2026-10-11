@@ -370,7 +370,7 @@ export function Navbar({
         onMouseLeave={handleMegaMenuLeave}
       >
         <div
-          className={`container mx-auto px-6 md:px-12 flex items-center justify-between transition-all duration-500 ${isScrolled || isSolidAtTop ? "h-16 md:h-20" : "h-20 md:h-24"}`}
+          className={`container mx-auto px-4 sm:px-6 md:px-12 flex items-center justify-between transition-all duration-500 ${isScrolled || isSolidAtTop ? "h-16 md:h-20" : "h-20 md:h-24"}`}
         >
           {/* Left: Logo */}
           <div className="flex-shrink-0 flex items-center">
@@ -385,7 +385,7 @@ export function Navbar({
                 width={190}
                 height={58}
                 priority
-                className="h-10 md:h-12 object-contain transition-all duration-300"
+                className="h-9 sm:h-10 md:h-12 max-w-[170px] sm:max-w-none object-contain transition-all duration-300"
               />
             </Link>
           </div>
@@ -509,6 +509,9 @@ export function Navbar({
             <button
               className="lg:hidden flex flex-col items-center justify-center w-8 h-8 z-50 relative cursor-pointer"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-navigation-menu"
             >
               <span
                 className={`absolute block w-7 h-[2px] ${mobileHamburgerColor} transition-all duration-300 ease-out ${isMobileMenuOpen ? "rotate-45" : "-translate-y-2"}`}
@@ -526,9 +529,10 @@ export function Navbar({
 
       {/* ─── Mobile Menu Overlay ─── */}
       <div
+        id="mobile-navigation-menu"
         className={`fixed inset-0 top-[76px] bg-white/95 backdrop-blur-md z-40 transition-transform duration-500 ease-in-out lg:hidden ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}
       >
-        <div className="flex flex-col h-full overflow-y-auto px-6 py-8 pb-24">
+        <div className="flex flex-col h-full overflow-y-auto px-4 sm:px-6 py-6 sm:py-8 pb-24">
           <div className="flex flex-col gap-6 text-[#392F5F] font-semibold text-[17px]">
             {navItems.map((item) => {
               if (item.megaMenuKey) {
@@ -585,7 +589,19 @@ export function Navbar({
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-[#392F5F] hover:bg-[#F9C602] hover:text-white transition-all duration-300"
+                  className={`w-10 h-10 rounded-md bg-gray-100 border-[3px] flex items-center justify-center text-[#392F5F] hover:bg-[#F9C602] transition-all duration-300 ${
+                    s.key === "facebook"
+                      ? "border-[#1877F2] hover:text-[#1877F2]"
+                      : s.key === "instagram"
+                        ? "border-[#E1306C] hover:text-[#E1306C]"
+                        : s.key === "linkedin"
+                          ? "border-[#0A66C2] hover:text-[#0A66C2]"
+                          : s.key === "twitter"
+                            ? "border-[#1DA1F2] hover:text-[#1DA1F2]"
+                            : s.key === "youtube"
+                              ? "border-[#FF0000] hover:text-[#FF0000]"
+                              : "border-[#392F5F] hover:text-[#392F5F]"
+                  }`}
                   aria-label={s.label}
                 >
                   {s.icon}

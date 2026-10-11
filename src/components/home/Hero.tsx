@@ -469,6 +469,24 @@ export function Hero({
         </div>
       </div>
 
+      {/* ─── Slide navigation ─── */}
+      <div className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 flex flex-col items-center gap-3">
+        {slides.map((slide, idx) => (
+          <button
+            key={slide.id}
+            type="button"
+            onClick={() => setCurrent(idx)}
+            aria-label={`Go to slide ${idx + 1}`}
+            aria-current={current === idx ? "step" : undefined}
+            className={`rounded-full transition-all duration-300 ${
+              current === idx
+                ? "h-8 w-2 bg-[#F9C602]"
+                : "h-2 w-2 bg-white/50 hover:bg-white"
+            }`}
+          />
+        ))}
+      </div>
+
       {/* ─── 4. Floating Social Icons (transparent bordered design) ─── */}
       <div className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-3 md:gap-4">
         {dynamicSocialLinks.map((item, idx) => (
@@ -480,18 +498,18 @@ export function Hero({
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 * idx, duration: 0.5 }}
-            className={`group relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 hover:bg-white backdrop-blur-xl border-2 border-white/50 transition-all duration-300 cursor-pointer drop-shadow-md hover:scale-110 text-white ${
+            className={`group relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-md bg-white/10 hover:bg-white backdrop-blur-xl border-[3px] transition-all duration-300 cursor-pointer drop-shadow-md hover:scale-110 text-white ${
               item.key === "facebook"
-                ? "hover:text-[#1877F2]"
+                ? "border-[#1877F2] hover:border-white/50 hover:text-[#1877F2]"
                 : item.key === "instagram"
-                  ? "hover:text-[#E1306C]"
+                  ? "border-[#E1306C] hover:border-white/50 hover:text-[#E1306C]"
                   : item.key === "linkedin"
-                    ? "hover:text-[#0A66C2]"
+                    ? "border-[#0A66C2] hover:border-white/50 hover:text-[#0A66C2]"
                     : item.key === "twitter"
-                      ? "hover:text-black"
+                      ? "border-[#1DA1F2] hover:border-white/50 hover:text-black"
                       : item.key === "youtube"
-                        ? "hover:text-[#FF0000]"
-                        : "hover:text-black"
+                        ? "border-[#FF0000] hover:border-white/50 hover:text-[#FF0000]"
+                        : "border-white hover:border-white/50 hover:text-black"
             }`}
             aria-label={item.label}
           >
