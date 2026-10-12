@@ -15,13 +15,29 @@ import { SectionLabel } from "./SectionLabel";
 const YELLOW = "#F9C602";
 const DARK = "#06202A";
 
+type AboutSummary = {
+  companyHeading?: string;
+  companyDescription?: string;
+  companyImage?: { url?: string };
+  heroImage?: { url?: string };
+  experience?: number;
+  timeline?: Array<{ year?: string }>;
+  departments?: Array<unknown>;
+};
+
 export function AboutSection({
   cmsData,
   mainSettings,
+  aboutData,
 }: {
   cmsData?: Record<string, unknown>;
   mainSettings?: Record<string, unknown>;
+  aboutData?: AboutSummary | null;
 }) {
+  const about = aboutData || {};
+  const foundedYear = about.timeline?.[0]?.year || "2017";
+  const sectorCount = about.departments?.length || 0;
+
   return (
     <section className="relative w-full bg-white py-12 md:py-18 overflow-hidden">
       <div className="container mx-auto px-6 md:px-12 max-w-[1400px]">
@@ -61,7 +77,7 @@ export function AboutSection({
               style={{ clipPath: "polygon(0 0, 0 100%, 100% 50%)" }}
             >
               <Image
-                src="/about-us-image-new.png"
+                src={about.companyImage?.url || "/about-us-image-new.png"}
                 alt="Fanam Group team collaborating on a project"
                 fill
                 sizes="300px"
@@ -80,7 +96,7 @@ export function AboutSection({
               style={{ clipPath: "polygon(100% 0, 100% 100%, 0 50%)" }}
             >
               <Image
-                src="/about-us-image.png"
+                src={about.heroImage?.url || "/about-us-image.png"}
                 alt="Fanam Group team shaping the future together"
                 fill
                 sizes="300px"
@@ -123,19 +139,12 @@ export function AboutSection({
                 paddingBottom: "0.2em",
               }}
             >
-              A Vision Built on Lasting Value
+              {about.companyHeading || "Building Businesses. Creating Value. Shaping Tomorrow."}
             </h2>
 
             <p className="text-gray-500 text-base md:text-lg leading-relaxed text-justify mb-8">
-              Established on 16 September 2017, Fanam Group was founded by a
-              British-Bangladeshi entrepreneur with a vision to build a
-              diversified and sustainable business organization. Today, Fanam
-              Group operates across Real Estate, Construction, Trading, Hotel &
-              Resort, ECommerce, Travel & Tourism, IT & Technology, News &
-              Media, and Industrial Manufacturing. Driven by innovation,
-              excellence and responsible growth, we build businesses that create
-              lasting value for our customers, partners, people and communities.
-              We build businesses for today and opportunities for tomorrow.
+              {about.companyDescription ||
+                "Learn more about Fanam Group, our businesses, and the value we create for our stakeholders."}
             </p>
 
             {/* Stats */}
@@ -144,7 +153,7 @@ export function AboutSection({
                 <div className="flex items-center gap-2">
                   <Calendar className="w-5 h-5 text-[#392F5F]" />
                   <span className="text-2xl font-bold text-[#F9C602]">
-                    2017
+                    {foundedYear}
                   </span>
                 </div>
                 <span className="text-xs font-bold text-[#06202A] uppercase tracking-wider">
@@ -155,7 +164,7 @@ export function AboutSection({
                 <div className="flex items-center gap-2">
                   <Building2 className="w-5 h-5 text-[#392F5F]" />
                   <span className="text-2xl font-bold text-[#F9C602]">
-                    9+
+                    {sectorCount}+
                   </span>
                 </div>
                 <span className="text-xs font-bold text-[#06202A] uppercase tracking-wider">
@@ -166,11 +175,11 @@ export function AboutSection({
                 <div className="flex items-center gap-2">
                   <Globe className="w-5 h-5 text-[#392F5F]" />
                   <span className="text-xl md:text-2xl font-bold text-[#F9C602] leading-tight">
-                    Global
+                    {about.experience || 0}+
                   </span>
                 </div>
                 <span className="text-xs font-bold text-[#06202A] uppercase tracking-wider">
-                  REACH
+                  YEARS EXPERIENCE
                 </span>
               </div>
             </div>

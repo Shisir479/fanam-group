@@ -2,21 +2,9 @@
 
 import React from "react";
 import Image from "next/image";
-import { ArrowDownRight } from "lucide-react";
 
 export function CompanyProfile({ data }: { data: any }) {
   if (!data) return null;
-
-  const features = [
-    {
-      title: "Sustainable Long-Term Value",
-      desc: "Creating lasting value for customers, partners, dedicated employees, and national communities.",
-    },
-    {
-      title: "Forward-Thinking Innovation",
-      desc: "Driving progress through modern engineering, digital solutions, and continuous enhancement.",
-    },
-  ];
 
   return (
     <section className="relative fanam-section bg-white overflow-hidden py-12 lg:py-16">
@@ -48,7 +36,7 @@ export function CompanyProfile({ data }: { data: any }) {
             {/* The Image */}
             <div className="relative aspect-[4/3] max-w-[500px] bg-gray-100 overflow-hidden mx-auto lg:mx-0">
               <Image
-                src="/partnering-growth-bg.png"
+                src={data.companyImage?.url || "/partnering-growth-bg.png"}
                 alt="About Fanam Group"
                 fill
                 className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
@@ -75,39 +63,17 @@ export function CompanyProfile({ data }: { data: any }) {
 
             {/* Headline */}
             <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#392f5f] leading-[1.2] mb-8">
-              A Vision Built on Lasting Value
+              {data.companyHeading || data.companyTitle || "About Fanam Group"}
             </h2>
-
-            {/* Two Points Side by Side */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-              {features.map((feature, idx) => (
-                <div key={idx} className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#f9c602] text-[#392f5f] flex items-center justify-center shrink-0 shadow-sm hover:scale-105 transition-transform cursor-pointer">
-                    <ArrowDownRight className="w-4 h-4" strokeWidth={2.5} />
-                  </div>
-                  <h4 className="font-bold text-[#392f5f] leading-tight text-sm">
-                    {feature.title}
-                  </h4>
-                </div>
-              ))}
-            </div>
 
             {/* Narrative text */}
             <div className="text-gray-700 text-base md:text-lg font-normal leading-relaxed text-justify max-w-xl space-y-4">
-              <p>
-                Established on 16 September 2017, Fanam Group was founded by a
-                British-Bangladeshi entrepreneur with a vision to build a
-                diversified and sustainable business organization. Today,
-                Fanam Group operates across Real Estate, Construction, Trading,
-                Hotel & Resort, ECommerce, Travel & Tourism, IT & Technology,
-                News & Media, and Industrial Manufacturing.
-              </p>
-              <p>
-                Driven by innovation, excellence and responsible growth, we
-                build businesses that create lasting value for our customers,
-                partners, people and communities. We build businesses for today
-                and opportunities for tomorrow.
-              </p>
+              {(data.companyDescription || "")
+                .split(/\n+/)
+                .filter(Boolean)
+                .map((paragraph: string, idx: number) => (
+                  <p key={idx}>{paragraph}</p>
+                ))}
             </div>
           </div>
         </div>

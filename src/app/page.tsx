@@ -15,6 +15,7 @@ import {
   getHomeSettingsPublic,
 } from "@/services/settings.service";
 import { getConcernsPublic } from "@/services/concern.service";
+import { getAboutPublic } from "@/services/about.service";
 
 export default async function Home() {
   let cmsData: any = null;
@@ -23,6 +24,7 @@ export default async function Home() {
   let mainSettingsData: any = null;
   let homeSettingsData: any = null;
   let apiConcerns: any[] = [];
+  let aboutData: any = null;
 
   try {
     const [
@@ -32,6 +34,7 @@ export default async function Home() {
       mainSettingsRes,
       homeSettingsRes,
       concernsRes,
+      aboutRes,
     ] = await Promise.all([
       getHomepageCMSPublic(),
       getBlogsPublic({ status: "active", limit: 4 }),
@@ -39,6 +42,7 @@ export default async function Home() {
       getMainSettingsPublic(),
       getHomeSettingsPublic(),
       getConcernsPublic(),
+      getAboutPublic(),
     ]);
 
     if (cmsRes?.success) {
@@ -64,6 +68,10 @@ export default async function Home() {
     if (concernsRes?.success) {
       apiConcerns = concernsRes.data || [];
     }
+
+    if (aboutRes?.success) {
+      aboutData = aboutRes.data;
+    }
   } catch (error) {
     // fallback
   }
@@ -80,7 +88,11 @@ export default async function Home() {
         cmsData={cmsData} 
         mainSettings={mainSettingsData}
       /> */}
-      <AboutSection cmsData={cmsData} mainSettings={mainSettingsData} />
+      <AboutSection
+        cmsData={cmsData}
+        mainSettings={mainSettingsData}
+        aboutData={aboutData}
+      />
       <ConcernsSection
         cmsData={cmsData}
         branding={brandingData}

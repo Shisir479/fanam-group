@@ -21,6 +21,7 @@ export default function EditContactInfoClient({
 
   const [contactInfo, setContactInfo] = useState({
     address: initialData?.contact?.address || "",
+    corporateAddress: initialData?.contact?.corporateAddress || "",
     addressOnMap: initialData?.contact?.addressOnMap || "",
     lat: initialData?.contact?.lat || "23.8103",
     long: initialData?.contact?.long || "90.4125",
@@ -121,7 +122,7 @@ export default function EditContactInfoClient({
 
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-300">
-                Phone Number(s)
+                Head Office Phone Number
               </label>
               <input
                 type="text"
@@ -165,7 +166,7 @@ export default function EditContactInfoClient({
 
           <div className="space-y-2">
             <label className="text-sm font-medium text-gray-300">
-              Physical Address
+              Head Office Address
             </label>
             <textarea
               name="address"
@@ -175,6 +176,20 @@ export default function EditContactInfoClient({
               rows={3}
               className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white outline-none focus:border-brand-violet transition-colors resize-y"
               placeholder="123 Bonedi Estate Blvd,&#10;Gulshan 1, Dhaka 1212"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-gray-300">
+              Corporate Address
+            </label>
+            <textarea
+              name="corporateAddress"
+              value={contactInfo.corporateAddress}
+              onChange={handleChange}
+              rows={3}
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white outline-none focus:border-brand-violet transition-colors resize-y"
+              placeholder="Corporate office address"
             />
           </div>
         </form>

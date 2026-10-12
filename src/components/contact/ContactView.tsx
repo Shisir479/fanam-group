@@ -309,38 +309,58 @@ export function ContactView({ data, banner }: { data?: any; banner?: any }) {
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           className="bg-[#392F5F] rounded-3xl shadow-xl overflow-hidden p-8 md:p-12 text-white relative"
         >
-          <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-6 items-center">
-            {/* Office Location */}
-            <div className="flex flex-col md:items-center md:text-center gap-4 group cursor-default">
-              <div className="w-14 h-14 bg-white/5 border border-[#f9c602] text-[#f9c602] rounded-2xl flex items-center justify-center group-hover:bg-[#f9c602] group-hover:text-[#392f5f] transition-colors duration-300">
-                <MapPin className="w-6 h-6" />
+          <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-6 items-center">
+            {/* Head Office */}
+            {data?.address && (
+              <div className="flex flex-col md:items-center md:text-center gap-4 group cursor-default">
+                <div className="w-14 h-14 bg-white/5 border border-[#f9c602] text-[#f9c602] rounded-2xl flex items-center justify-center group-hover:bg-[#f9c602] group-hover:text-[#392f5f] transition-colors duration-300">
+                  <MapPin className="w-6 h-6" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-white/90 text-sm uppercase tracking-widest mb-2">
+                    Head Office
+                  </h4>
+                  <p className="text-white/70 text-sm leading-relaxed whitespace-pre-line">
+                    {data.address}
+                  </p>
+                </div>
               </div>
-              <div>
-                <h4 className="font-bold text-white/90 text-sm uppercase tracking-widest mb-2">
-                  Corporate Office
-                </h4>
-                <p className="text-white/70 text-sm leading-relaxed whitespace-pre-line">
-                  {data?.address ||
-                    "House #12, Road #34, Gulshan-2\nDhaka-1212, Bangladesh"}
-                </p>
+            )}
+
+            {/* Corporate Office */}
+            {data?.corporateAddress && (
+              <div className="flex flex-col md:items-center md:text-center gap-4 group cursor-default">
+                <div className="w-14 h-14 bg-white/5 border border-[#f9c602] text-[#f9c602] rounded-2xl flex items-center justify-center group-hover:bg-[#f9c602] group-hover:text-[#392f5f] transition-colors duration-300">
+                  <MapPin className="w-6 h-6" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-white/90 text-sm uppercase tracking-widest mb-2">
+                    Corporate Office
+                  </h4>
+                  <p className="text-white/70 text-sm leading-relaxed whitespace-pre-line">
+                    {data.corporateAddress}
+                  </p>
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Hotline */}
-            <div className="flex flex-col md:items-center md:text-center gap-4 group cursor-default">
-              <div className="w-14 h-14 bg-white/5 border border-[#f9c602] text-[#f9c602] rounded-2xl flex items-center justify-center group-hover:bg-[#f9c602] group-hover:text-[#392f5f] transition-colors duration-300">
-                <Phone className="w-6 h-6" />
+            {(data?.phone || data?.whatsappNo) && (
+              <div className="flex flex-col md:items-center md:text-center gap-4 group cursor-default">
+                <div className="w-14 h-14 bg-white/5 border border-[#f9c602] text-[#f9c602] rounded-2xl flex items-center justify-center group-hover:bg-[#f9c602] group-hover:text-[#392f5f] transition-colors duration-300">
+                  <Phone className="w-6 h-6" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-white/90 text-sm uppercase tracking-widest mb-2">
+                    Hotline
+                  </h4>
+                  <div className="text-white/70 text-sm whitespace-pre-line">
+                    {data?.phone && <p>Phone: {data.phone}</p>}
+                    {data?.whatsappNo && <p>WhatsApp: {data.whatsappNo}</p>}
+                  </div>
+                </div>
               </div>
-              <div>
-                <h4 className="font-bold text-white/90 text-sm uppercase tracking-widest mb-2">
-                  Hotline
-                </h4>
-                <p className="text-white/70 text-sm whitespace-pre-line">
-                  {data?.phone || "+880 1711-223344\n+880 1811-223344"}
-                  {data?.whatsappNo ? `\n${data.whatsappNo}` : ""}
-                </p>
-              </div>
-            </div>
+            )}
 
             {/* Email */}
             <div className="flex flex-col md:items-center md:text-center gap-4 group cursor-default">

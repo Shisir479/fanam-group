@@ -11,7 +11,14 @@ type BrandingData = {
   logo?: { url?: string };
   logoDark?: { url?: string };
   socialLinks?: Record<string, string>;
-  contact?: { phone?: string; email?: string; whatsappNo?: string };
+  contact?: {
+    phone?: string;
+    email?: string;
+    whatsappNo?: string;
+    address?: string;
+    corporateAddress?: string;
+    addressOnMap?: string;
+  };
 };
 
 export function PublicLayoutWrapper({

@@ -63,7 +63,7 @@ export function VisionMission({ data }: { data: any }) {
         <div className="flex justify-center relative z-20">
           <div className="bg-white border-2 border-[#392f5f] rounded-full py-2 px-10 shadow-[0_8px_30px_rgba(0,0,0,0.08)] relative">
             <h2 className="font-heading text-2xl md:text-3xl font-bold text-[#392f5f] tracking-widest uppercase text-center">
-              Our Purpose
+              {data?.organizationTitle || "Our Purpose"}
             </h2>
           </div>
         </div>
@@ -115,15 +115,13 @@ export function VisionMission({ data }: { data: any }) {
               }}
             >
               <h3 className="font-heading text-[#392f5f] text-2xl font-bold uppercase tracking-widest mb-4">
-                Mission
+                {data?.missionTitle || "Mission"}
               </h3>
               <h4 className="text-[#392f5f] font-bold text-[15px] mb-3 leading-snug">
-                Building Sustainable Businesses
+                {data?.missionHeading || ""}
               </h4>
               <p className="text-[#392f5f]/80 text-sm font-medium leading-relaxed">
-                To build sustainable businesses through innovation, excellence
-                and responsible growth, creating lasting value for our
-                stakeholders and society.
+                {data?.missionDescription || ""}
               </p>
             </div>
           </div>
@@ -146,15 +144,13 @@ export function VisionMission({ data }: { data: any }) {
               }}
             >
               <h3 className="font-heading text-white text-2xl font-bold uppercase tracking-widest mb-4">
-                Vision
+                {data?.visionTitle || "Vision"}
               </h3>
               <h4 className="text-[#f9c602] font-bold text-[15px] mb-3 leading-snug">
-                A Globally Respected Group
+                {data?.visionHeading || ""}
               </h4>
               <p className="text-white/80 text-sm font-medium leading-relaxed">
-                To become a globally respected and diversified business group,
-                originating from Bangladesh and creating sustainable value
-                across industries and markets.
+                {data?.visionDescription || ""}
               </p>
             </div>
           </div>
@@ -177,14 +173,13 @@ export function VisionMission({ data }: { data: any }) {
               }}
             >
               <h3 className="font-heading text-white text-2xl font-bold uppercase tracking-widest mb-4">
-                Ambition
+                {data?.organizationTitle || "Ambition"}
               </h3>
               <h4 className="text-[#f9c602] font-bold text-[15px] mb-3 leading-snug">
-                Future-Ready & Enduring
+                {data?.organizationHeading || ""}
               </h4>
               <p className="text-white/80 text-sm font-medium leading-relaxed">
-                To build strong, future-ready businesses that create lasting
-                value and stand the test of time.
+                {data?.organizationDescription || ""}
               </p>
             </div>
           </div>

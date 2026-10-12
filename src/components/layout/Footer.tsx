@@ -133,6 +133,7 @@ export function Footer({
     socialLinks?: Record<string, string>;
     contact?: {
       address?: string;
+      corporateAddress?: string;
       addressOnMap?: string;
       email?: string;
       phone?: string;
@@ -147,12 +148,11 @@ export function Footer({
     logoDark?.url || logo?.url || "/company_logo/logo-white.63532709.svg";
 
   // Dynamic contact info with fallbacks
-  const phone = contact?.phone || "+880 1822-94 20 20";
-  const whatsapp = contact?.whatsappNo || "+880 1755-94 20 20";
+  const phone = contact?.phone;
+  const whatsapp = contact?.whatsappNo;
   const email = contact?.email || "info@fanamgroup.com";
-  const address = contact?.address || "House #01, Road #01, Block-A";
-  const addressLine2 =
-    contact?.addressOnMap || "Bashundhara R/A, Dhaka-1229, Bangladesh";
+  const headOfficeAddress = contact?.address;
+  const corporateAddress = contact?.corporateAddress;
 
   // Dynamic social links from branding settings - fully dynamic
   const activeSocialLinks = defaultSocialLinks
@@ -249,27 +249,40 @@ export function Footer({
             <h4 className="text-white font-semibold text-lg mb-4">Contact</h4>
 
             <div className="flex flex-col gap-4 text-gray-300 text-base md:text-lg">
-              <div className="flex items-start gap-3">
-                <Phone className="w-4 h-4 mt-1 flex-shrink-0" />
-                <div className="flex flex-col gap-1">
-                  <span>{phone}</span>
-                  <span>{whatsapp}</span>
+              {(phone || whatsapp) && (
+                <div className="flex items-start gap-3">
+                  <Phone className="w-4 h-4 mt-1 flex-shrink-0" />
+                  <div className="flex flex-col gap-1">
+                    {phone && <span>Phone: {phone}</span>}
+                    {whatsapp && <span>WhatsApp: {whatsapp}</span>}
+                  </div>
                 </div>
-              </div>
+              )}
 
               <div className="flex items-center gap-3">
                 <Mail className="w-4 h-4 flex-shrink-0" />
                 <span>{email}</span>
               </div>
 
-              <div className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 mt-1 flex-shrink-0" />
-                <span>
-                  {address}
-                  <br />
-                  {addressLine2}
-                </span>
-              </div>
+              {headOfficeAddress && (
+                <div className="flex items-start gap-3">
+                  <MapPin className="w-4 h-4 mt-1 flex-shrink-0" />
+                  <span>
+                    <strong className="block text-white">Head Office</strong>
+                    {headOfficeAddress}
+                  </span>
+                </div>
+              )}
+
+              {corporateAddress && (
+                <div className="flex items-start gap-3">
+                  <MapPin className="w-4 h-4 mt-1 flex-shrink-0" />
+                  <span>
+                    <strong className="block text-white">Corporate Office</strong>
+                    {corporateAddress}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
         </div>

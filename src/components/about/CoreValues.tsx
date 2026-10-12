@@ -10,7 +10,7 @@ import {
   Users,
 } from "lucide-react";
 
-const coreValues = [
+const defaultCoreValues = [
   {
     num: "01",
     title: "Integrity",
@@ -49,8 +49,26 @@ const coreValues = [
   },
 ];
 
+type CoreValue = {
+  title: string;
+  num?: string;
+  description?: string;
+  desc?: string;
+  [key: string]: unknown;
+};
+
 export function CoreValues({ data }: { data: any }) {
   const [activeIdx, setActiveIdx] = useState(0);
+  const coreValues = (
+    data?.coreValues?.length ? data.coreValues : defaultCoreValues
+  ).map((value: CoreValue, idx: number) => ({
+    ...value,
+    icon: React.isValidElement(value.icon)
+      ? value.icon
+      : defaultCoreValues[idx]?.icon,
+    num: String(idx + 1).padStart(2, "0"),
+    desc: value.description || value.desc || "",
+  }));
 
   return (
     <section className="relative fanam-section bg-white overflow-hidden py-16 lg:py-20">
@@ -84,7 +102,7 @@ export function CoreValues({ data }: { data: any }) {
 
         {/* The Interactive Accordion */}
         <div className="flex flex-col lg:flex-row w-full gap-3 lg:gap-4 lg:h-[400px]">
-          {coreValues.map((val, idx) => {
+          {coreValues.map((val: CoreValue, idx: number) => {
             const isActive = activeIdx === idx;
 
             return (
