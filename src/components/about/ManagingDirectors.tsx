@@ -2,7 +2,8 @@
 
 import React from "react";
 import Image from "next/image";
-import { Users2, Sparkles } from "lucide-react";
+import { Users2 } from "lucide-react";
+import { SectionLabel } from "@/components/ui/SectionLabel";
 
 const executives = [
   {
@@ -48,9 +49,8 @@ export function ManagingDirectors() {
       <div className="fanam-container relative z-10">
         {/* Header Section */}
         <div className="flex flex-col items-center text-center mb-16 lg:mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f9c602]/15 border border-[#f9c602]/35 text-[#392f5f] text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
-            <Users2 className="w-3.5 h-3.5 text-[#392f5f]" />
-            <span>Executive Leadership</span>
+          <div className="mb-6">
+            <SectionLabel>EXECUTIVE LEADERSHIP</SectionLabel>
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#392f5f] leading-[1.2] tracking-tight mb-5">

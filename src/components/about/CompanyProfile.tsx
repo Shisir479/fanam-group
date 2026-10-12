@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { SectionLabel } from "@/components/ui/SectionLabel";
 
 export function CompanyProfile({ data }: { data: any }) {
   if (!data) return null;
@@ -47,18 +48,8 @@ export function CompanyProfile({ data }: { data: any }) {
           {/* Right: Text Content */}
           <div className="flex flex-col">
             {/* Eyebrow */}
-            <div className="flex items-center gap-2 text-[#F9C602] font-bold text-xs sm:text-sm tracking-widest uppercase mb-4">
-              <span className="flex tracking-tighter">
-                <span>&lt;</span>
-                <span>&lt;</span>
-                <span>&lt;</span>
-              </span>
-              <span>A B O U T U S</span>
-              <span className="flex tracking-tighter">
-                <span>&gt;</span>
-                <span>&gt;</span>
-                <span>&gt;</span>
-              </span>
+            <div className="mb-4">
+              <SectionLabel>ABOUT US</SectionLabel>
             </div>
 
             {/* Headline */}

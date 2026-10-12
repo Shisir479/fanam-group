@@ -10,7 +10,7 @@ import {
   Clock,
   CornerDownRight,
 } from "lucide-react";
-import { SectionLabel } from "./SectionLabel";
+import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 

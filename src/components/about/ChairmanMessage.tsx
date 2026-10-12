@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Quote } from "lucide-react";
+import { SectionLabel } from "@/components/ui/SectionLabel";
 
 export function ChairmanMessage({ data }: { data: any }) {
   return (
@@ -14,18 +15,10 @@ export function ChairmanMessage({ data }: { data: any }) {
       <div className="fanam-container relative z-10 max-w-4xl mx-auto">
         <div className="flex flex-col items-center text-center mb-12">
           {/* Header Badge */}
-          <div className="flex items-center justify-center gap-2 text-[#F9C602] font-bold text-xs sm:text-sm tracking-widest uppercase mb-4">
-            <span className="flex tracking-tighter">
-              <span>&lt;</span>
-              <span>&lt;</span>
-              <span>&lt;</span>
-            </span>
-            <span>{data?.chairmanTitle || "MESSAGE FROM THE FOUNDER"}</span>
-            <span className="flex tracking-tighter">
-              <span>&gt;</span>
-              <span>&gt;</span>
-              <span>&gt;</span>
-            </span>
+          <div className="mb-4">
+            <SectionLabel>
+              {data?.chairmanTitle || "MESSAGE FROM THE FOUNDER"}
+            </SectionLabel>
           </div>
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#392f5f] leading-[1.2]">
             {data?.chairmanHeading || "Message from Fanam Group"}

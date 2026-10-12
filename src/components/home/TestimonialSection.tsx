@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { BlockReveal } from "@/components/ui/BlockReveal";
 import { ScrollReelTestimonials } from "@/components/ui/scroll-reel-testimonials";
-import { SectionLabel } from "./SectionLabel";
+import { SectionLabel } from "@/components/ui/SectionLabel";
 import {
   getTestimonialsPublic,
   TestimonialType,

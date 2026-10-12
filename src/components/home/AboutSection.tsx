@@ -10,7 +10,7 @@ import {
   Building2,
   Globe,
 } from "lucide-react";
-import { SectionLabel } from "./SectionLabel";
+import { SectionLabel } from "@/components/ui/SectionLabel";
 
 const YELLOW = "#F9C602";
 const DARK = "#06202A";

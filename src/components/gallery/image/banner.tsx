@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
+import { SectionLabel } from "@/components/ui/SectionLabel";
 const col1Images = [
   "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1000&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1000&auto=format&fit=crop",
@@ -59,6 +60,9 @@ export default function ImageGalleryBanner() {
       <div className="container mx-auto px-6 md:px-16 w-full h-full flex items-center relative z-10 pt-28 md:pt-36 pb-12">
         {/* Left Side: Premium Typography */}
         <div className="w-full lg:w-1/2 flex flex-col justify-center h-full">
+          <div className="mb-4">
+            <SectionLabel>IMAGE GALLERY</SectionLabel>
+          </div>
           <h1 className="text-4xl md:text-5xl font-bold text-slate-900 uppercase leading-tight tracking-wide mb-2">
             IMAGE GALLERY
           </h1>
@@ -69,7 +73,7 @@ export default function ImageGalleryBanner() {
 
           <p className="text-slate-600 text-sm md:text-lg font-medium leading-relaxed max-w-md">
             Explore the defining moments, groundbreaking projects, and the
-            people behind Fanam Group's continued success.
+            people behind Fanam Group&apos;s continued success.
           </p>
         </div>
       </div>

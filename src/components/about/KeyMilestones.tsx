@@ -7,8 +7,8 @@ import {
   Users,
   TrendingUp,
   Globe,
-  Sparkles,
 } from "lucide-react";
+import { SectionLabel } from "@/components/ui/SectionLabel";
 
 const milestones = [
   {
@@ -61,9 +61,8 @@ export function KeyMilestones() {
       <div className="fanam-container relative z-10">
         {/* Header */}
         <div className="flex flex-col items-center text-center mb-16 lg:mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f9c602]/15 border border-[#f9c602]/30 text-[#f9c602] text-xs font-bold uppercase tracking-wider mb-6">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Key Milestones</span>
+          <div className="mb-6">
+            <SectionLabel dark>KEY MILESTONES</SectionLabel>
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-white leading-[1.2] tracking-tight mb-5">
