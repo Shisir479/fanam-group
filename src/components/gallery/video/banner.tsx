@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
+import { SectionLabel } from "@/components/ui/SectionLabel";
 
 const videos = [
   {
@@ -105,6 +106,9 @@ export default function VideoGalleryBanner() {
 
       {/* Title */}
       <div className="container mx-auto px-5 md:px-16 relative z-40 pb-12">
+        <div className="mb-4">
+          <SectionLabel dark>VIDEO GALLERY</SectionLabel>
+        </div>
         <h1 className="text-white text-3xl md:text-4xl font-extrabold tracking-wider uppercase drop-shadow-[0_4px_10px_rgba(0,0,0,0.6)]">
           VIDEO GALLERY
         </h1>

@@ -12,7 +12,7 @@ import {
   Sprout,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { SectionLabel } from "./SectionLabel";
+import { SectionLabel } from "@/components/ui/SectionLabel";
 
 const defaultConcerns = [
   {

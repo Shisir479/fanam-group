@@ -57,18 +57,36 @@ const DESIGNATION_CLASSES =
   "m-0 text-xs font-normal text-gray-500 mt-1 md:text-sm";
 
 const FEATURED_SHADOW =
-  "0 1.008px 0.705px -0.563px rgba(57,47,95,0.22), 0 2.389px 1.672px -1.125px rgba(57,47,95,0.2), 0 4.357px 3.05px -1.688px rgba(57,47,95,0.2), 0 7.244px 5.07px -2.25px rgba(57,47,95,0.18), 0 11.698px 8.188px -2.813px rgba(57,47,95,0.16), 0 19.148px 13.404px -3.375px rgba(57,47,95,0.14), 0 32.972px 23.08px -3.938px rgba(249,198,2,0.22), 0 60px 42px -4.5px rgba(249,198,2,0.16), inset 0 1px 0 rgba(255,255,255,0.8), inset 0 -1px 0 rgba(57,47,95,0.45)";
+  "0 1px 0.7px -0.56px rgba(6,32,42,0.28), 0 2.4px 1.7px -1.1px rgba(57,47,95,0.24), 0 4.4px 3.1px -1.7px rgba(57,47,95,0.2), 0 7.2px 5.1px -2.25px rgba(6,32,42,0.18), 0 11.7px 8.2px -2.8px rgba(249,198,2,0.2), 0 19.1px 13.4px -3.4px rgba(57,47,95,0.16), 0 33px 23px -3.9px rgba(249,198,2,0.14), 0 60px 42px -4.5px rgba(6,32,42,0.12), inset 0 1px 0 rgba(255,255,255,0.8), inset 0 -1px 0 rgba(57,47,95,0.45)";
 
 function cn(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(" ");
 }
 
 /* Blurred placeholder cell */
-function Cell() {
+function Cell({ tone = "gold" }: { tone?: "gold" | "purple" | "navy" }) {
+  const toneStyles = {
+    gold: {
+      className:
+        "border-[#F9C602]/40 bg-gradient-to-b from-[#FFFBE5] to-[#FFF3B8] shadow-[0_5px_14px_rgba(249,198,2,0.24),inset_0_2px_0_rgba(255,255,255,0.9)]",
+    },
+    purple: {
+      className:
+        "border-[#392F5F]/30 bg-gradient-to-b from-[#FFFBE5] to-[#FFF3B8] shadow-[0_5px_14px_rgba(57,47,95,0.14),inset_0_2px_0_rgba(255,255,255,0.9)]",
+    },
+    navy: {
+      className:
+        "border-[#06202A]/30 bg-gradient-to-b from-[#FFFBE5] to-[#FFF3B8] shadow-[0_5px_14px_rgba(6,32,42,0.14),inset_0_2px_0_rgba(255,255,255,0.9)]",
+    },
+  } as const;
+
   return (
     <div
       aria-hidden="true"
-      className="shrink-0 border border-[#F9C602]/25 bg-gradient-to-b from-[#FFFBE5] to-[#FFF3B8] blur-[1px] shadow-[0_5px_14px_rgba(249,198,2,0.2),inset_0_2px_0_rgba(255,255,255,0.9)]"
+      className={cn(
+        "shrink-0 border blur-[1px]",
+        toneStyles[tone].className,
+      )}
       style={{ width: CELL, height: CELL }}
     />
   );
@@ -261,7 +279,7 @@ export function ScrollReelTestimonials({
             style={colStyle(sideY)}
           >
             {Array.from({ length: sideCellCount }).map((_, i) => (
-              <Cell key={i} />
+              <Cell key={i} tone={i % 2 === 0 ? "gold" : "purple"} />
             ))}
           </div>
 
@@ -278,7 +296,7 @@ export function ScrollReelTestimonials({
                   alt={testimonials[item.i].alt}
                 />
               ) : (
-                <Cell key={i} />
+                <Cell key={i} tone={i % 2 === 0 ? "gold" : "navy"} />
               ),
             )}
           </div>
@@ -289,7 +307,7 @@ export function ScrollReelTestimonials({
             style={colStyle(sideY)}
           >
             {Array.from({ length: sideCellCount }).map((_, i) => (
-              <Cell key={i} />
+              <Cell key={i} tone={i % 2 === 0 ? "gold" : "purple"} />
             ))}
           </div>
         </div>

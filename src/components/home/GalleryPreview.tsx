@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { BlockReveal } from "@/components/ui/BlockReveal";
 import Image from "next/image";
-import { SectionLabel } from "./SectionLabel";
+import { SectionLabel } from "@/components/ui/SectionLabel";
 
 export function GalleryPreview({ data }: { data?: any }) {
   const defaultImages = [

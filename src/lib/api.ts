@@ -43,6 +43,16 @@ export const api = async (endpoint: string, options: FetchOptions = {}) => {
     headers,
   };
 
+  // Cache public reads briefly to reduce repeated API round trips on navigation.
+  const isPublicRead =
+    !token &&
+    (!options.method || options.method.toUpperCase() === "GET") &&
+    !options.cache &&
+    !options.next;
+  if (isPublicRead) {
+    config.next = { revalidate: 60 };
+  }
+
   const response = await fetch(`${BASE_URL}${endpoint}`, config);
 
   let data;

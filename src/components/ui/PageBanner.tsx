@@ -1,12 +1,12 @@
 "use client";
 
 import { ReactNode } from "react";
-import { BlockReveal } from "@/components/ui/BlockReveal";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { Home } from "lucide-react";
+import { SectionLabel } from "./SectionLabel";
 
 interface BreadcrumbItem {
   label: string;
@@ -113,10 +113,15 @@ export function PageBanner({
         <div className="flex-1 flex flex-col items-center justify-center w-full max-w-4xl mx-auto">
           {/* Centered Title */}
           <div className="flex justify-center w-full">
-            <h1 className="text-4xl md:text-5xl font-bold text-white uppercase leading-tight tracking-wide drop-shadow-md mb-2 text-center">
-              {title}
-              {typeof title === "string" && !title.endsWith(".") ? "." : ""}
-            </h1>
+            <div className="flex flex-col items-center">
+              <div className="mb-4">
+                <SectionLabel dark>FANAM GROUP</SectionLabel>
+              </div>
+              <h1 className="text-center text-4xl font-bold uppercase leading-tight tracking-wide text-white drop-shadow-md md:text-5xl">
+                {title}
+                {typeof title === "string" && !title.endsWith(".") ? "." : ""}
+              </h1>
+            </div>
           </div>
 
           {/* Subtitle */}

@@ -10,7 +10,7 @@ import {
   Building2,
   Globe,
 } from "lucide-react";
-import { SectionLabel } from "./SectionLabel";
+import { SectionLabel } from "@/components/ui/SectionLabel";
 
 const YELLOW = "#F9C602";
 const DARK = "#06202A";
@@ -19,6 +19,7 @@ type AboutSummary = {
   companyHeading?: string;
   companyDescription?: string;
   companyImage?: { url?: string };
+  companyImage2?: { url?: string };
   heroImage?: { url?: string };
   experience?: number;
   timeline?: Array<{ year?: string }>;
@@ -96,7 +97,11 @@ export function AboutSection({
               style={{ clipPath: "polygon(100% 0, 100% 100%, 0 50%)" }}
             >
               <Image
-                src={about.heroImage?.url || "/about-us-image.png"}
+                src={
+                  about.companyImage2?.url ||
+                  about.heroImage?.url ||
+                  "/about-us-image.png"
+                }
                 alt="Fanam Group team shaping the future together"
                 fill
                 sizes="300px"

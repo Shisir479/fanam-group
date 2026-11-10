@@ -2,7 +2,8 @@
 
 import React from "react";
 import Image from "next/image";
-import { CheckCircle2, Award, Sparkles, ShieldCheck, Star } from "lucide-react";
+import { CheckCircle2, Sparkles, ShieldCheck, Star } from "lucide-react";
+import { SectionLabel } from "@/components/ui/SectionLabel";
 
 const features = [
   {
@@ -97,9 +98,8 @@ export function WhyChooseUs() {
 
           {/* Right Side: Text & Feature Cards Grid */}
           <div className="lg:col-span-7 flex flex-col">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f9c602]/15 border border-[#f9c602]/35 text-[#392f5f] text-xs font-bold uppercase tracking-wider mb-6 self-start shadow-sm">
-              <Award className="w-3.5 h-3.5 text-[#392f5f]" />
-              <span>Why Choose Us</span>
+            <div className="mb-6">
+              <SectionLabel>WHY CHOOSE US</SectionLabel>
             </div>
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#392f5f] leading-[1.2] tracking-tight mb-6">

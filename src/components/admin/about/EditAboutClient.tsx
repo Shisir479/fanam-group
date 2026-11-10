@@ -51,6 +51,7 @@ export default function EditAboutClient({
   // Image files for upload
   const [heroFile, setHeroFile] = useState<File | null>(null);
   const [companyFile, setCompanyFile] = useState<File | null>(null);
+  const [companyFile2, setCompanyFile2] = useState<File | null>(null);
   const [chairmanFile, setChairmanFile] = useState<File | null>(null);
   const [boardFiles, setBoardFiles] = useState<{ [key: number]: File }>({});
 
@@ -73,6 +74,13 @@ export default function EditAboutClient({
         toast.loading("Uploading Company Image...", { id: toastId });
         const uploadedCompany = await uploadSingle(companyFile, true);
         if (uploadedCompany) payload.companyImage = uploadedCompany;
+      }
+
+      // Upload Second Company Image
+      if (companyFile2) {
+        toast.loading("Uploading Second Company Image...", { id: toastId });
+        const uploadedCompany2 = await uploadSingle(companyFile2, true);
+        if (uploadedCompany2) payload.companyImage2 = uploadedCompany2;
       }
 
       // Upload Chairman Image
@@ -104,6 +112,7 @@ export default function EditAboutClient({
         setBoardFiles({});
         setHeroFile(null);
         setCompanyFile(null);
+        setCompanyFile2(null);
         setChairmanFile(null);
       } else {
         throw new Error(res.message);
@@ -267,6 +276,30 @@ export default function EditAboutClient({
                       : formData.companyImage?.url
                   }
                   alt="Preview"
+                  className="h-32 mt-2 rounded object-cover"
+                />
+              )}
+            </div>
+            <div>
+              <label className="text-sm font-medium text-gray-300">
+                Second Company Image
+              </label>
+              <input
+                type="file"
+                onChange={(e) =>
+                  e.target.files?.[0] && setCompanyFile2(e.target.files[0])
+                }
+                className="w-full mt-2"
+                accept="image/*"
+              />
+              {(companyFile2 || formData.companyImage2?.url) && (
+                <img
+                  src={
+                    companyFile2
+                      ? URL.createObjectURL(companyFile2)
+                      : formData.companyImage2?.url
+                  }
+                  alt="Second company image preview"
                   className="h-32 mt-2 rounded object-cover"
                 />
               )}

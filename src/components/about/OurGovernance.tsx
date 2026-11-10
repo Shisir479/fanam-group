@@ -12,6 +12,7 @@ import {
   CheckCircle2,
   Sparkles,
 } from "lucide-react";
+import { SectionLabel } from "@/components/ui/SectionLabel";
 
 const ethicalPillars = [
   {
@@ -59,9 +60,8 @@ export function OurGovernance() {
       <div className="fanam-container relative z-10">
         {/* Header */}
         <div className="flex flex-col items-center text-center mb-16 lg:mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f9c602]/15 border border-[#f9c602]/35 text-[#392f5f] text-xs font-bold uppercase tracking-wider mb-6 shadow-sm">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#392f5f]" />
-            <span>Corporate Governance</span>
+          <div className="mb-6">
+            <SectionLabel>CORPORATE GOVERNANCE</SectionLabel>
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#392f5f] leading-[1.2] tracking-tight mb-5">

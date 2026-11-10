@@ -9,6 +9,7 @@ import {
   Leaf,
   Users,
 } from "lucide-react";
+import { SectionLabel } from "@/components/ui/SectionLabel";
 
 const defaultCoreValues = [
   {
@@ -79,13 +80,8 @@ export function CoreValues({ data }: { data: any }) {
         {/* Header (Left Aligned for modern look) */}
         <div className="mb-10 lg:mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="max-w-2xl">
-            <div className="flex items-center gap-2 text-[#F9C602] font-bold text-xs sm:text-sm tracking-widest uppercase mb-4">
-              <span className="flex tracking-tighter">
-                <span>&lt;</span>
-                <span>&lt;</span>
-                <span>&lt;</span>
-              </span>
-              <span>CORE VALUES</span>
+            <div className="mb-4">
+              <SectionLabel>CORE VALUES</SectionLabel>
             </div>
 
             <h2 className="font-heading text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#392f5f] leading-[1.1] mb-5">

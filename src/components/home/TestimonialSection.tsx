@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { BlockReveal } from "@/components/ui/BlockReveal";
 import { ScrollReelTestimonials } from "@/components/ui/scroll-reel-testimonials";
-import { SectionLabel } from "./SectionLabel";
+import { SectionLabel } from "@/components/ui/SectionLabel";
 import {
   getTestimonialsPublic,
   TestimonialType,
@@ -40,7 +40,10 @@ export function TestimonialSection() {
   if (testimonials.length === 0) return null;
 
   return (
-    <section className="w-full py-16 md:py-20 bg-white">
+    <section
+      className="w-full py-16 md:py-20 bg-white"
+      style={{ contentVisibility: "auto", containIntrinsicSize: "0 620px" }}
+    >
       <div className="container mx-auto px-5 md:px-16 overflow-hidden">
         {/* Header */}
         <div className="mb-16 text-center">

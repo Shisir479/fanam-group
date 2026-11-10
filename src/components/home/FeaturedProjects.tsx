@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import { useRef, useState, useEffect } from "react";
 import { BlockReveal } from "@/components/ui/BlockReveal";
-import { SectionLabel } from "./SectionLabel";
+import { SectionLabel } from "@/components/ui/SectionLabel";
 import { SharedButton } from "@/components/ui/SharedButton";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
