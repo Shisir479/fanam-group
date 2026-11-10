@@ -2,6 +2,7 @@ import { api } from "@/lib/api";
 
 export const createCrudService = <T, C = Partial<T>, U = Partial<T>>(
   basePath: string,
+  options: { auth?: boolean } = {},
 ) => {
   return {
     getAll: async (params: Record<string, any> = {}) => {
@@ -16,6 +17,7 @@ export const createCrudService = <T, C = Partial<T>, U = Partial<T>>(
 
       const tag = basePath.replace(/^\/+/, "").split("/")[0] || "api";
       return api(endpoint, {
+        auth: options.auth,
         next: { revalidate: 10, tags: [tag] },
       });
     },
@@ -23,6 +25,7 @@ export const createCrudService = <T, C = Partial<T>, U = Partial<T>>(
     getByIdOrSlug: async (idOrSlug: string) => {
       const tag = basePath.replace(/^\/+/, "").split("/")[0] || "api";
       return api(`${basePath}/${idOrSlug}`, {
+        auth: options.auth,
         next: { revalidate: 10, tags: [tag] },
       });
     },

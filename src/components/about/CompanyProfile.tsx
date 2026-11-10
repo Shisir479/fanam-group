@@ -39,6 +39,7 @@ export function CompanyProfile({ data }: { data: any }) {
                 src={data.companyImage?.url || "/partnering-growth-bg.png"}
                 alt="About Fanam Group"
                 fill
+                sizes="(max-width: 1023px) 100vw, 500px"
                 className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
               />
             </div>

@@ -133,6 +133,7 @@ export function LatestNews({ blogs = [] }: { blogs?: any[] }) {
                 src={safeItems[1].image}
                 alt={safeItems[1].title}
                 fill
+                sizes="(max-width: 767px) 100vw, 25vw"
                 className="object-cover transition-transform duration-1000 group-hover:scale-105"
               />
               <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md rounded-full px-4 py-1.5 text-white font-bold text-[10px] tracking-widest z-10 uppercase">
@@ -151,6 +152,7 @@ export function LatestNews({ blogs = [] }: { blogs?: any[] }) {
                 src={safeItems[2].image}
                 alt={safeItems[2].title}
                 fill
+                sizes="(max-width: 767px) 100vw, 25vw"
                 className="object-cover transition-transform duration-1000 group-hover:scale-105"
               />
               <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md rounded-full px-4 py-1.5 text-white font-bold text-[10px] tracking-widest z-10 uppercase">
@@ -203,6 +205,7 @@ export function LatestNews({ blogs = [] }: { blogs?: any[] }) {
                 src={safeItems[5].image}
                 alt={safeItems[5].title}
                 fill
+                sizes="(max-width: 767px) 100vw, 25vw"
                 className="object-cover transition-transform duration-1000 group-hover:scale-105"
               />
               <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md rounded-full px-4 py-1.5 text-white font-bold text-[10px] tracking-widest z-10 uppercase">
@@ -218,6 +221,7 @@ export function LatestNews({ blogs = [] }: { blogs?: any[] }) {
               <Image
                 src="https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?q=80&w=580&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 fill
+                sizes="(max-width: 767px) 100vw, 25vw"
                 className="object-cover absolute inset-0 z-0"
                 alt="View All Insights"
               />

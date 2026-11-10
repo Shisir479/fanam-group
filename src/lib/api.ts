@@ -5,21 +5,25 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
   : "http://localhost:8003/api";
 
 type FetchOptions = RequestInit & {
+  auth?: boolean;
   next?: { revalidate?: number | false; tags?: string[] };
 };
 
 export const api = async (endpoint: string, options: FetchOptions = {}) => {
+  const { auth = true, ...requestOptions } = options;
   let token: string | undefined;
-  if (typeof window !== "undefined") {
-    token = Cookies.get("token");
-  } else {
-    try {
-      const moduleName = "next/headers";
-      const { cookies } = require(moduleName);
-      const cookieStore = await cookies();
-      token = cookieStore.get("token")?.value;
-    } catch (e) {
-      // Ignore
+  if (auth) {
+    if (typeof window !== "undefined") {
+      token = Cookies.get("token");
+    } else {
+      try {
+        const moduleName = "next/headers";
+        const { cookies } = require(moduleName);
+        const cookieStore = await cookies();
+        token = cookieStore.get("token")?.value;
+      } catch (e) {
+        // Ignore
+      }
     }
   }
 
@@ -35,7 +39,7 @@ export const api = async (endpoint: string, options: FetchOptions = {}) => {
   }
 
   const config: RequestInit = {
-    ...options,
+    ...requestOptions,
     headers,
   };
 

@@ -1,4 +1,4 @@
-import { revalidatePage } from "@/app/actions";
+import { revalidateGlobalCache, revalidatePage } from "@/app/actions";
 import { api } from "@/lib/api";
 
 export interface ConcernFeature {
@@ -44,6 +44,7 @@ export const createConcernByAdmin = async (payload: any) => {
     method: "POST",
     body: JSON.stringify(payload),
   });
+  await revalidateGlobalCache("concerns");
   await revalidatePage("/", "layout");
   return res;
 };
@@ -75,12 +76,14 @@ export const updateConcernBySlugAdmin = async (slug: string, payload: any) => {
     method: "PUT",
     body: JSON.stringify(payload),
   });
+  await revalidateGlobalCache("concerns");
   await revalidatePage("/", "layout");
   return res;
 };
 
 export const deleteConcernBySlugAdmin = async (slug: string) => {
   const res = await api(`/admin/concerns/${slug}`, { method: "DELETE" });
+  await revalidateGlobalCache("concerns");
   await revalidatePage("/", "layout");
   return res;
 };
@@ -90,9 +93,17 @@ export const deleteConcernBySlugAdmin = async (slug: string) => {
 // ==========================================================
 
 export const getConcernsPublic = async () => {
-  return await api(`/concerns`, { method: "GET" });
+  return await api(`/concerns`, {
+    method: "GET",
+    auth: false,
+    next: { revalidate: 60, tags: ["concerns"] },
+  });
 };
 
 export const getConcernBySlugPublic = async (slug: string) => {
-  return await api(`/concerns/${slug}`, { method: "GET" });
+  return await api(`/concerns/${slug}`, {
+    method: "GET",
+    auth: false,
+    next: { revalidate: 60, tags: ["concerns"] },
+  });
 };

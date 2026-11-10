@@ -88,6 +88,7 @@ export function CompanyOverview({ data }: { data?: any }) {
                 src={image1}
                 alt="Architecture"
                 fill
+                sizes="(max-width: 767px) 100vw, 25vw"
                 className="object-cover"
               />
             </div>
@@ -97,6 +98,7 @@ export function CompanyOverview({ data }: { data?: any }) {
                   src={image2}
                   alt="Interior"
                   fill
+                  sizes="(max-width: 767px) 50vw, 12.5vw"
                   className="object-cover"
                 />
               </div>
@@ -105,6 +107,7 @@ export function CompanyOverview({ data }: { data?: any }) {
                   src={image3}
                   alt="Design"
                   fill
+                  sizes="(max-width: 767px) 50vw, 12.5vw"
                   className="object-cover"
                 />
               </div>

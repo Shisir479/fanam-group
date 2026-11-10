@@ -379,14 +379,17 @@ export function Navbar({
               className="flex items-center group"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              <Image
-                src={navbarLogo}
-                alt="Company Logo"
-                width={190}
-                height={58}
-                priority
-                className="h-9 sm:h-10 md:h-12 max-w-[170px] sm:max-w-none object-contain transition-all duration-300"
-              />
+              <span className="relative block w-[140px] sm:w-[160px] md:w-[190px] aspect-[190/58]">
+                <Image
+                  src={navbarLogo}
+                  alt="Company Logo"
+                  fill
+                  sizes="(max-width: 639px) 140px, (max-width: 767px) 160px, 190px"
+                  priority
+                  loading="eager"
+                  className="object-contain transition-all duration-300"
+                />
+              </span>
             </Link>
           </div>
 

@@ -90,6 +90,7 @@ export function AwardsRecognition() {
                 src={award.image}
                 alt={award.title}
                 fill
+                sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-85 group-hover:opacity-95"
               />
 

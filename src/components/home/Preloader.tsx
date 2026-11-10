@@ -14,7 +14,7 @@ export function Preloader() {
     const timer = setTimeout(() => {
       setIsLoading(false);
       document.body.style.overflow = "";
-    }, 1600);
+    }, 350);
 
     return () => {
       clearTimeout(timer);
@@ -30,7 +30,7 @@ export function Preloader() {
           initial={{ opacity: 1 }}
           exit={{
             y: "-100%",
-            transition: { duration: 0.85, ease: [0.76, 0, 0.24, 1] },
+            transition: { duration: 0.4, ease: [0.76, 0, 0.24, 1] },
           }}
           className="fixed inset-0 z-[99999] flex items-center justify-center bg-white select-none pointer-events-auto"
         >

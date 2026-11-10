@@ -1,8 +1,11 @@
 import { api } from "@/lib/api";
-import { revalidatePage } from "@/app/actions";
+import { revalidateGlobalCache, revalidatePage } from "@/app/actions";
 
 export const getBrandingSettingsPublic = async () => {
-  return api("/settings/branding");
+  return api("/settings/branding", {
+    auth: false,
+    next: { revalidate: 60, tags: ["public-settings"] },
+  });
 };
 
 export const getBrandingSettingsAdmin = async () => {
@@ -43,13 +46,17 @@ export const updateBrandingSettingsAdmin = async (id: string, data: any) => {
     body: JSON.stringify(data),
   });
   if (res && res.success !== false) {
+    await revalidateGlobalCache("public-settings");
     await revalidatePage("/", "layout");
   }
   return res;
 };
 
 export const getMainSettingsPublic = async () => {
-  return api("/settings/main");
+  return api("/settings/main", {
+    auth: false,
+    next: { revalidate: 60, tags: ["public-settings"] },
+  });
 };
 
 export const getMainSettingsAdmin = async () => {
@@ -62,13 +69,17 @@ export const updateMainSettingsAdmin = async (id: string, data: any) => {
     body: JSON.stringify(data),
   });
   if (res && res.success !== false) {
+    await revalidateGlobalCache("public-settings");
     await revalidatePage("/", "layout");
   }
   return res;
 };
 
 export const getHomeSettingsPublic = async () => {
-  return api("/settings/home");
+  return api("/settings/home", {
+    auth: false,
+    next: { revalidate: 60, tags: ["public-settings"] },
+  });
 };
 
 export const getHomeSettingsAdmin = async () => {

@@ -1,4 +1,4 @@
-import { revalidatePage } from "@/app/actions";
+import { revalidateGlobalCache, revalidatePage } from "@/app/actions";
 import { api } from "@/lib/api";
 
 export const getAboutAdmin = async () => {
@@ -15,7 +15,9 @@ export const updateAboutAdmin = async (payload: any) => {
       method: "PUT",
       body: JSON.stringify(payload),
     });
+    await revalidateGlobalCache("about");
     await revalidatePage("/about", "layout");
+    await revalidatePage("/", "page");
     return res;
   } catch (error: any) {
     if (error.status === 404) {
@@ -23,7 +25,9 @@ export const updateAboutAdmin = async (payload: any) => {
         method: "POST",
         body: JSON.stringify(payload),
       });
+      await revalidateGlobalCache("about");
       await revalidatePage("/about", "layout");
+      await revalidatePage("/", "page");
       return res;
     }
     throw error;
@@ -34,6 +38,8 @@ export const getAboutPublic = async () => {
   try {
     return await api("/about", {
       method: "GET",
+      auth: false,
+      next: { revalidate: 60, tags: ["about"] },
     });
   } catch (error) {
     return { data: null };

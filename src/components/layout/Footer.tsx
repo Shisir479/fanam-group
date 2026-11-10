@@ -176,13 +176,15 @@ export function Footer({
               href="/"
               className="inline-block mb-4 transition-transform hover:opacity-90"
             >
-              <Image
-                src={footerLogo}
-                alt="Fanam Group Logo"
-                width={180}
-                height={55}
-                className="object-contain"
-              />
+              <span className="relative block w-[180px] aspect-[180/55]">
+                <Image
+                  src={footerLogo}
+                  alt="Fanam Group Logo"
+                  fill
+                  sizes="180px"
+                  className="object-contain"
+                />
+              </span>
             </Link>
 
             <p className="text-gray-300 text-base md:text-lg leading-relaxed mb-6">

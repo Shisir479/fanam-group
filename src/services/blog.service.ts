@@ -99,7 +99,7 @@ export const deleteBlogBySlugByAdmin = async (
 // Public Methods
 // ----------------------
 
-const publicBlogCrud = createCrudService<Blog>("/blogs");
+const publicBlogCrud = createCrudService<Blog>("/blogs", { auth: false });
 
 export const getBlogsPublic = (
   params?: Record<string, any>,

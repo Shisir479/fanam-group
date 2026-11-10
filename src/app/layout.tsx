@@ -62,6 +62,9 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 
   return {
+    metadataBase: new URL(
+      process.env.NEXT_PUBLIC_SITE_URL || "https://fanamgroup.com",
+    ),
     title: {
       template: "Fanam Group | %s",
       default: title,

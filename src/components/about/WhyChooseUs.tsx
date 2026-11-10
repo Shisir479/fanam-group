@@ -58,6 +58,7 @@ export function WhyChooseUs() {
                   src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop"
                   alt="Corporate Innovation"
                   fill
+                  sizes="(max-width: 1023px) 88vw, 40vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
@@ -69,6 +70,7 @@ export function WhyChooseUs() {
                   src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2070&auto=format&fit=crop"
                   alt="Team Collaboration"
                   fill
+                  sizes="(max-width: 1023px) 68vw, 32vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>

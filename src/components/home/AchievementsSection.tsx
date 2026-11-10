@@ -115,6 +115,7 @@ export function AchievementsSection({
                     <Image
                       src={item.image}
                       fill
+                      sizes="(max-width: 639px) 280px, (max-width: 1023px) 50vw, 20vw"
                       className="object-cover"
                       alt={item.label}
                     />
@@ -163,6 +164,7 @@ export function AchievementsSection({
                     <Image
                       src={item.image}
                       fill
+                      sizes="(max-width: 639px) 280px, (max-width: 1023px) 50vw, 20vw"
                       className="object-cover"
                       alt={item.label}
                     />

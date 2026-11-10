@@ -187,6 +187,7 @@ export function ConcernsSection({
                     src={concern.image}
                     alt={concern.title}
                     fill
+                    sizes="(min-width: 1024px) 50vw, 100vw"
                     className="object-cover"
                     priority={idx === 0}
                   />
@@ -218,6 +219,7 @@ export function ConcernsSection({
                     src={concern.image}
                     alt={concern.title}
                     fill
+                    sizes="(max-width: 640px) calc(100vw - 2rem), 384px"
                     className="object-cover"
                   />
                 </div>

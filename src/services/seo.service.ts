@@ -1,5 +1,5 @@
 import { api } from "@/lib/api";
-import { revalidatePage } from "@/app/actions";
+import { revalidateGlobalCache, revalidatePage } from "@/app/actions";
 
 export interface SeoSettings {
   _id?: string;
@@ -36,6 +36,7 @@ export const seoService = {
       body: JSON.stringify(data),
     });
     if (res && res.success !== false) {
+      await revalidateGlobalCache("seo-meta");
       await revalidatePage("/", "layout");
     }
     return res;
@@ -47,6 +48,7 @@ export const seoService = {
       body: JSON.stringify(data),
     });
     if (res && res.success !== false) {
+      await revalidateGlobalCache("seo-meta");
       await revalidatePage("/", "layout");
     }
     return res;
@@ -58,6 +60,7 @@ export const seoService = {
       body: JSON.stringify(data),
     });
     if (res && res.success !== false) {
+      await revalidateGlobalCache("seo-meta");
       await revalidatePage("/", "layout");
     }
     return res;
@@ -68,6 +71,7 @@ export const seoService = {
       method: "PATCH",
     });
     if (res && res.success !== false) {
+      await revalidateGlobalCache("seo-meta");
       await revalidatePage("/", "layout");
     }
     return res;
@@ -78,12 +82,16 @@ export const seoService = {
       method: "DELETE",
     });
     if (res && res.success !== false) {
+      await revalidateGlobalCache("seo-meta");
       await revalidatePage("/", "layout");
     }
     return res;
   },
 
   getActiveMetaTags: async () => {
-    return api("/seo/meta-tags");
+    return api("/seo/meta-tags", {
+      auth: false,
+      next: { revalidate: 60, tags: ["seo-meta"] },
+    });
   },
 };

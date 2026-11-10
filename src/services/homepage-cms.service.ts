@@ -1,4 +1,4 @@
-import { revalidatePage } from "@/app/actions";
+import { revalidateGlobalCache, revalidatePage } from "@/app/actions";
 import { api } from "@/lib/api";
 
 export const getHomepageCMSAdmin = async () => {
@@ -15,6 +15,7 @@ export const updateHomepageCMS = async (payload: any) => {
       method: "PUT",
       body: JSON.stringify(payload),
     });
+    await revalidateGlobalCache("homepage-cms");
     await revalidatePage("/", "layout");
     return res;
   } catch (error: any) {
@@ -23,6 +24,7 @@ export const updateHomepageCMS = async (payload: any) => {
         method: "POST",
         body: JSON.stringify(payload),
       });
+      await revalidateGlobalCache("homepage-cms");
       await revalidatePage("/", "layout");
       return res;
     }
@@ -34,6 +36,8 @@ export const getHomepageCMSPublic = async () => {
   try {
     return await api("/homepage-cms", {
       method: "GET",
+      auth: false,
+      next: { revalidate: 60, tags: ["homepage-cms"] },
     });
   } catch (error) {
     return { data: null };

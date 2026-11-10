@@ -315,6 +315,7 @@ export function Hero({
                 sizes="100vw"
                 className="object-cover object-center"
                 priority={current === 0}
+                loading="eager"
               />
             )}
           </motion.div>
