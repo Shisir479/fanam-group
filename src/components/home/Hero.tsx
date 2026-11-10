@@ -3,6 +3,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  cloudinaryImageLoader,
+  isCloudinaryImage,
+} from "@/lib/cloudinary-image-loader";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
@@ -312,6 +316,11 @@ export function Hero({
                 src={currentSlide.image}
                 alt={currentSlide.title}
                 fill
+                loader={
+                  isCloudinaryImage(currentSlide.image)
+                    ? cloudinaryImageLoader
+                    : undefined
+                }
                 sizes="100vw"
                 className="object-cover object-center"
                 priority={current === 0}
