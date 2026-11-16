@@ -1,14 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
+html {
+  font-size: 17px;
+}
+
 body {
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  -webkit-text-stroke: 0.2px currentColor;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.005em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -23,9 +27,10 @@ body {
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: "Cormorant Garamond", serif;
+  --font-sans: var(--font-roboto), Arial, sans-serif;
+  --font-serif: var(--font-roboto), Arial, sans-serif;
   --font-mono: var(--font-geist-mono);
-  --font-heading: "Cinzel", serif;
+  --font-heading: var(--font-roboto), Arial, sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -412,7 +417,7 @@ body {
   gap: 0.5rem;
   padding: 0.46rem 1rem;
   /* Reduced vertical padding */
-  font-size: 0.825rem;
+  font-size: 0.9rem;
   /* Standard text size */
   border-radius: 9999px;
   /* Pill shape */

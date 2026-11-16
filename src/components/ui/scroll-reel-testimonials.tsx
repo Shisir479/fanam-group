@@ -50,11 +50,12 @@ const EASE_INOUT = "cubic-bezier(0.65,0,0.35,1)";
 
 const TITLE_CLASSES =
   "m-0 text-xl font-bold leading-[1.3] text-[#F9C602] md:text-2xl ";
-const QUOTE_CLASSES = "m-0 text-sm font-normal leading-relaxed text-gray-600 ";
+const QUOTE_CLASSES =
+  "m-0 text-base font-normal leading-relaxed text-gray-600 md:text-lg ";
 const AUTHOR_CLASSES =
-  "m-0 text-sm font-bold leading-[1.3] text-black md:text-[15px]";
+  "m-0 text-base font-bold leading-[1.3] text-black";
 const DESIGNATION_CLASSES =
-  "m-0 text-xs font-normal text-gray-500 mt-1 md:text-sm";
+  "m-0 text-sm font-normal text-gray-500 mt-1 md:text-base";
 
 const FEATURED_SHADOW =
   "0 1px 0.7px -0.56px rgba(6,32,42,0.28), 0 2.4px 1.7px -1.1px rgba(57,47,95,0.24), 0 4.4px 3.1px -1.7px rgba(57,47,95,0.2), 0 7.2px 5.1px -2.25px rgba(6,32,42,0.18), 0 11.7px 8.2px -2.8px rgba(249,198,2,0.2), 0 19.1px 13.4px -3.4px rgba(57,47,95,0.16), 0 33px 23px -3.9px rgba(249,198,2,0.14), 0 60px 42px -4.5px rgba(6,32,42,0.12), inset 0 1px 0 rgba(255,255,255,0.8), inset 0 -1px 0 rgba(57,47,95,0.45)";

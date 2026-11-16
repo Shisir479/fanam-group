@@ -3,8 +3,9 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { ConcernType } from "@/services/concern.service";
+import { REAL_ESTATE_PROJECTS } from "@/lib/real-estate-projects";
 
 export default function ConcernsPortfolioClient({
   concerns,
@@ -17,6 +18,9 @@ export default function ConcernsPortfolioClient({
       <div className="flex flex-col gap-16 md:gap-24">
         {concerns?.map((concern, index) => {
           const isEven = index % 2 === 0;
+          const isRealEstate =
+            concern.name.trim().toLowerCase() === "real estate" ||
+            concern.slug.toLowerCase() === "real-estate";
           return (
             <div
               key={concern._id || concern.slug}
@@ -78,6 +82,25 @@ export default function ConcernsPortfolioClient({
                   <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-8 font-light line-clamp-3">
                     {concern.shortDescription}
                   </p>
+
+                  {isRealEstate && (
+                    <div className="mb-8">
+                      <h3 className="mb-3 text-base font-semibold text-[#392F5F]">
+                        Featured Projects
+                      </h3>
+                      <ul className="space-y-2 text-base text-gray-600">
+                        {REAL_ESTATE_PROJECTS.map((project) => (
+                          <li key={project} className="flex items-start gap-3">
+                            <span
+                              aria-hidden="true"
+                              className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#f9c602]"
+                            />
+                            {project}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
 
                   <div className="flex flex-col sm:flex-row gap-4">
                     <Link
